@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class Author extends Migration
+class CreateArtistAliasesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class Author extends Migration
      */
     public function up()
     {
-        Schema::create('authors', function (Blueprint $table) {
+        Schema::create('artist_aliases', function (Blueprint $table) {
             $table->char('id', 26)->primary();
             $table->string('name', 100);
             $table->softDeletes();
@@ -28,6 +28,6 @@ class Author extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('authors');
+        Schema::dropIfExists('author_aliases');
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Media\Models\Author;
+namespace Modules\Media\Models\Artist;
 
 use App\Models\BaseModel;
 
