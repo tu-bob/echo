@@ -5,6 +5,7 @@
     import VueRouter from 'vue-router'
     import SongEditor from "../components/media/music/SongEditor";
     import Media from "../components/media/Media";
+    import ArtistEditor from "../components/media/artist/ArtistEditor";
 
     const routes = [{
             path: '/blog', component: Blog,
@@ -21,10 +22,16 @@
         },
             {
                 path: '/media', component: Media,
-                children: [{
-                    path:'song',
-                    component: SongEditor
-                }]
+                children: [
+                    {
+                        path: 'song',
+                        component: SongEditor
+                    },
+                    {
+                        path: 'artist',
+                        component: ArtistEditor
+                    },
+                ]
             }]
     ;
 
