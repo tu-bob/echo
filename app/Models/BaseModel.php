@@ -1,11 +1,11 @@
 <?php
 
 
-namespace App\Entities;
+namespace App\Models;
 
 
 use Illuminate\Database\Eloquent\Model;
-use Libs\Ulid\HasUlid;
+use App\Libs\Ulid\HasUlid;
 
 class BaseModel  extends Model
 {
