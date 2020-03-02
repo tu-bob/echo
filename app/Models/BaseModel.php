@@ -6,10 +6,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Libs\Ulid\HasUlid;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class BaseModel  extends Model
 {
-    use HasUlid;
+    use HasUlid, SoftDeletes;
 
     /**
      * Indicates if the IDs are auto-incrementing.
