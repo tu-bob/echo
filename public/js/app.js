@@ -2016,7 +2016,8 @@ __webpack_require__.r(__webpack_exports__);
       state: {
         auth: false,
         errors: null
-      }
+      },
+      user: null
     };
   },
   methods: {
@@ -2034,6 +2035,18 @@ __webpack_require__.r(__webpack_exports__);
 
         _this.$router.push('/login');
       });
+    },
+    fetchUser: function fetchUser() {
+      var _this2 = this;
+
+      axios.get('/auth/user').then(function (user) {
+        return _this2.user = user;
+      });
+    }
+  },
+  watch: {
+    'state.auth': function stateAuth() {
+      if (this.state.auth) this.fetchUser();
     }
   }
 });
@@ -76362,7 +76375,27 @@ var render = function() {
                     1
                   )
                 : _c("li", { staticClass: "nav-item dropdown" }, [
-                    _vm._m(3),
+                    _c(
+                      "a",
+                      {
+                        staticClass: "nav-link dropdown-toggle",
+                        attrs: {
+                          id: "navbarDropdown",
+                          href: "#",
+                          role: "button",
+                          "data-toggle": "dropdown",
+                          "aria-haspopup": "true",
+                          "aria-expanded": "false"
+                        }
+                      },
+                      [
+                        _vm.user
+                          ? _c("span", [_vm._v(_vm._s(_vm.user.name))])
+                          : _vm._e(),
+                        _vm._v(" "),
+                        _c("span", { staticClass: "caret" })
+                      ]
+                    ),
                     _vm._v(" "),
                     _c(
                       "div",
@@ -76462,30 +76495,6 @@ var staticRenderFns = [
           "\n                            Медиа\n                            "
         ),
         _c("span", { staticClass: "caret" })
-      ]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "a",
-      {
-        pre: true,
-        attrs: {
-          id: "navbarDropdown",
-          class: "nav-link dropdown-toggle",
-          href: "#",
-          role: "button",
-          "data-toggle": "dropdown",
-          "aria-haspopup": "true",
-          "aria-expanded": "false"
-        }
-      },
-      [
-        _vm._v("\n                            Имя пользователя "),
-        _c("span", { pre: true, attrs: { class: "caret" } })
       ]
     )
   }

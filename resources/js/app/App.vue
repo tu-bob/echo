@@ -52,8 +52,8 @@
 
                         <li class="nav-item dropdown" v-else>
                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
-                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                Имя пользователя <span class="caret"></span>
+                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span v-if="user">{{user.name}}</span> <span class="caret"></span>
                             </a>
 
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
@@ -95,14 +95,15 @@
                 state: {
                     auth: false,
                     errors: null
-                }
+                },
+                user: null
             }
         },
         methods: {
             onAuthenticated() {
                 this.state.auth = true;
             },
-            onValidationFailed(e){
+            onValidationFailed(e) {
                 this.state.errors = e.data.errors;
             },
             logout() {
@@ -111,6 +112,16 @@
                         this.state.auth = false;
                         this.$router.push('/login');
                     });
+            },
+            fetchUser() {
+                axios.get('/auth/user')
+                    .then(user => this.user = user);
+            }
+        },
+        watch: {
+            'state.auth'() {
+                if (this.state.auth)
+                    this.fetchUser();
             }
         }
     }
