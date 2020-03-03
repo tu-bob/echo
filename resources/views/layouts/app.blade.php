@@ -20,15 +20,7 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
-<div id="app">
-    <div class="row">
-        @auth
-            <h4 class="ml-auto">АВТОРИЗОВАН</h4>
-        @else
-            <h4 class="ml-auto">НЕ АВТОРИЗОВАН</h4>
-        @endauth
-    </div>
-
+<div id="app"> 
     <app @auth authorized @endauth ></app>
 </div>
 </body>
