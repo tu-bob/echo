@@ -6,8 +6,25 @@
     import SongEditor from "../components/media/music/SongEditor";
     import Media from "../components/media/Media";
     import ArtistEditor from "../components/media/artist/ArtistEditor";
+    import Login from "../components/auth/Login";
+    import Register from "../components/auth/Register";
 
-    const routes = [{
+    const routes = [
+        {
+            path: '/login', component: Login,
+            path: '/register', component: Register,
+            children: [
+                {
+                    path: 'posts',
+                    component: PostsPage
+                },
+                {
+                    path: 'posts/edit',
+                    component: PostEditor
+                }
+            ]
+        },
+        {
             path: '/blog', component: Blog,
             children: [
                 {
@@ -20,19 +37,19 @@
                 }
             ]
         },
-            {
-                path: '/media', component: Media,
-                children: [
-                    {
-                        path: 'song',
-                        component: SongEditor
-                    },
-                    {
-                        path: 'artist',
-                        component: ArtistEditor
-                    },
-                ]
-            }]
+        {
+            path: '/media', component: Media,
+            children: [
+                {
+                    path: 'song',
+                    component: SongEditor
+                },
+                {
+                    path: 'artist',
+                    component: ArtistEditor
+                },
+            ]
+        }]
     ;
 
     const router = new VueRouter({

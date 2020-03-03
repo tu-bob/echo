@@ -9,7 +9,8 @@ trait HasUlid
 
         static::creating(function ($model) {
             if (! $model->id) {
-                $model->id = \Ulid::generate();
+                $generator = new Ulid();
+                $model->id = $generator->generate();
             }
         });
 

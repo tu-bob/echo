@@ -6,11 +6,11 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use App\Libs\Ulid\HasUlid;
+use Laravel\Airlock\HasApiTokens;
 
 class User extends Authenticatable
 {
-    use HasUlid;
-    use Notifiable;
+    use HasUlid, HasApiTokens, Notifiable;
 
     /**
      * Indicates if the IDs are auto-incrementing.
