@@ -65,6 +65,11 @@
             </div>
         </nav>
         <div class="container mt-5">
+            <div class="alert alert-danger" v-if="state.errors">
+                <ul>
+                    <li v-for="error in state.errors">{{error[0]}}</li>
+                </ul>
+            </div>
             <router-view></router-view>
         </div>
     </div>
@@ -75,6 +80,7 @@
         name: "App",
         created() {
             this.$eventHub.$on('authenticated', this.onAuthenticated)
+            this.$eventHub.$on('validation-failed', this.onValidationFailed)
         },
         mounted() {
             this.state.auth = this.authorized;
@@ -87,7 +93,8 @@
         data() {
             return {
                 state: {
-                    auth: false
+                    auth: false,
+                    errors: null
                 }
             }
         },
@@ -95,11 +102,14 @@
             onAuthenticated() {
                 this.state.auth = true;
             },
+            onValidationFailed(e){
+                this.state.errors = e.data.errors;
+            },
             logout() {
                 axios.post('/auth/logout')
                     .then(response => {
                         this.state.auth = false;
-                    this.$router.push('/login');
+                        this.$router.push('/login');
                     });
             }
         }

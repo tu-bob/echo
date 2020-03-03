@@ -1,4 +1,4 @@
-export function getStoreOrUpdateAction(id, url) {console.log(id);
+export function getStoreOrUpdateAction(id, url) {
     let action = {
         url: url,
         method: 'post'

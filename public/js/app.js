@@ -1992,10 +1992,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "App",
   created: function created() {
     this.$eventHub.$on('authenticated', this.onAuthenticated);
+    this.$eventHub.$on('validation-failed', this.onValidationFailed);
   },
   mounted: function mounted() {
     this.state.auth = this.authorized;
@@ -2008,13 +2014,17 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       state: {
-        auth: false
+        auth: false,
+        errors: null
       }
     };
   },
   methods: {
     onAuthenticated: function onAuthenticated() {
       this.state.auth = true;
+    },
+    onValidationFailed: function onValidationFailed(e) {
+      this.state.errors = e.data.errors;
     },
     logout: function logout() {
       var _this = this;
@@ -76379,7 +76389,26 @@ var render = function() {
       ]
     ),
     _vm._v(" "),
-    _c("div", { staticClass: "container mt-5" }, [_c("router-view")], 1)
+    _c(
+      "div",
+      { staticClass: "container mt-5" },
+      [
+        _vm.state.errors
+          ? _c("div", { staticClass: "alert alert-danger" }, [
+              _c(
+                "ul",
+                _vm._l(_vm.state.errors, function(error) {
+                  return _c("li", [_vm._v(_vm._s(error[0]))])
+                }),
+                0
+              )
+            ])
+          : _vm._e(),
+        _vm._v(" "),
+        _c("router-view")
+      ],
+      1
+    )
   ])
 }
 var staticRenderFns = [
@@ -92561,7 +92590,7 @@ axios.interceptors.response.use(function (response) {
   return response.data;
 }, function (error) {
   if (error.response && error.response.data) {
-    Object(_htmlErrorHandler_js__WEBPACK_IMPORTED_MODULE_0__["handleHtmlError"])(error);
+    Object(_htmlErrorHandler_js__WEBPACK_IMPORTED_MODULE_0__["handleHtmlError"])(error.response);
   }
 
   return Promise.reject(error);
@@ -93382,18 +93411,22 @@ function handleUnauthorized() {
   window.location.href = '/login';
 }
 
+function handleServerValidationError(e) {
+  window.Vue.prototype.$eventHub.$emit('validation-failed', e);
+}
+
 function handleHtmlError(e) {
   switch (e.status) {
-    case '401':
+    case 401:
       handleUnauthorized();
       break;
 
-    case '403':
-      console.log(2);
+    case 422:
+      handleServerValidationError(e);
       break;
 
     default:
-      console.log('unexpected error', e);
+      console.log('unexpected error', e, e.status);
       break;
   }
 }
@@ -93411,7 +93444,6 @@ function handleHtmlError(e) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getStoreOrUpdateAction", function() { return getStoreOrUpdateAction; });
 function getStoreOrUpdateAction(id, url) {
-  console.log(id);
   var action = {
     url: url,
     method: 'post'
