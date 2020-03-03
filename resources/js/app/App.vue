@@ -9,7 +9,7 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse">
-                    <ul class="navbar-nav mr-auto">
+                    <ul class="navbar-nav mr-auto" v-if="state.auth">
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle"
                                href="#"
@@ -97,7 +97,10 @@
             },
             logout() {
                 axios.post('/auth/logout')
-                    .then(response => this.state.auth = false);
+                    .then(response => {
+                        this.state.auth = false;
+                    this.$router.push('/login');
+                    });
             }
         }
     }

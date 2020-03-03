@@ -87,8 +87,7 @@
                 })
                     .then(response => {
                         this.$eventHub.$emit('authenticated');
-                        // this.$router.push(response.data.redirect
-                            console.log(response)
+                        this.$router.push('/')
                     });
             }
         }

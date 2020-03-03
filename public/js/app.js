@@ -2020,7 +2020,9 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       axios.post('/auth/logout').then(function (response) {
-        return _this.state.auth = false;
+        _this.state.auth = false;
+
+        _this.$router.push('/login');
       });
     }
   }
@@ -2188,10 +2190,9 @@ __webpack_require__.r(__webpack_exports__);
         'email': this.email,
         'password': this.password
       }).then(function (response) {
-        _this.$eventHub.$emit('authenticated'); // this.$router.push(response.data.redirect
+        _this.$eventHub.$emit('authenticated');
 
-
-        console.log(response);
+        _this.$router.push('/');
       });
     }
   }
@@ -76241,103 +76242,105 @@ var render = function() {
           _vm._m(0),
           _vm._v(" "),
           _c("div", { staticClass: "collapse navbar-collapse" }, [
-            _c("ul", { staticClass: "navbar-nav mr-auto" }, [
-              _c("li", { staticClass: "nav-item dropdown" }, [
-                _vm._m(1),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  { staticClass: "dropdown-menu" },
-                  [
-                    _c(
-                      "router-link",
-                      {
-                        staticClass: "dropdown-item",
-                        attrs: { to: "/blog/posts" }
-                      },
-                      [_vm._v("Посты")]
-                    ),
+            _vm.state.auth
+              ? _c("ul", { staticClass: "navbar-nav mr-auto" }, [
+                  _c("li", { staticClass: "nav-item dropdown" }, [
+                    _vm._m(1),
                     _vm._v(" "),
                     _c(
-                      "router-link",
-                      {
-                        staticClass: "dropdown-item",
-                        attrs: { to: "/blog/posts/edit" }
-                      },
-                      [_vm._v("Добавить пост")]
+                      "div",
+                      { staticClass: "dropdown-menu" },
+                      [
+                        _c(
+                          "router-link",
+                          {
+                            staticClass: "dropdown-item",
+                            attrs: { to: "/blog/posts" }
+                          },
+                          [_vm._v("Посты")]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "router-link",
+                          {
+                            staticClass: "dropdown-item",
+                            attrs: { to: "/blog/posts/edit" }
+                          },
+                          [_vm._v("Добавить пост")]
+                        )
+                      ],
+                      1
                     )
-                  ],
-                  1
-                )
-              ]),
-              _vm._v(" "),
-              _c("li", { staticClass: "nav-item dropdown" }, [
-                _vm._m(2),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  { staticClass: "dropdown-menu" },
-                  [
-                    _c(
-                      "router-link",
-                      {
-                        staticClass: "dropdown-item",
-                        attrs: { to: "/media/song" }
-                      },
-                      [_vm._v("Артисты")]
-                    ),
+                  ]),
+                  _vm._v(" "),
+                  _c("li", { staticClass: "nav-item dropdown" }, [
+                    _vm._m(2),
                     _vm._v(" "),
                     _c(
-                      "router-link",
-                      {
-                        staticClass: "dropdown-item",
-                        attrs: { to: "/media/song" }
-                      },
-                      [_vm._v("Песни")]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "router-link",
-                      {
-                        staticClass: "dropdown-item",
-                        attrs: { to: "/media/song" }
-                      },
-                      [_vm._v("Альбомы")]
-                    ),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "dropdown-divider" }),
-                    _vm._v(" "),
-                    _c(
-                      "router-link",
-                      {
-                        staticClass: "dropdown-item",
-                        attrs: { to: "/media/artist" }
-                      },
-                      [_vm._v("Добавить артиста")]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "router-link",
-                      {
-                        staticClass: "dropdown-item",
-                        attrs: { to: "/media/song" }
-                      },
-                      [_vm._v("Добавить песню")]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "router-link",
-                      {
-                        staticClass: "dropdown-item",
-                        attrs: { to: "/media/song" }
-                      },
-                      [_vm._v("Добавить альбом")]
+                      "div",
+                      { staticClass: "dropdown-menu" },
+                      [
+                        _c(
+                          "router-link",
+                          {
+                            staticClass: "dropdown-item",
+                            attrs: { to: "/media/song" }
+                          },
+                          [_vm._v("Артисты")]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "router-link",
+                          {
+                            staticClass: "dropdown-item",
+                            attrs: { to: "/media/song" }
+                          },
+                          [_vm._v("Песни")]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "router-link",
+                          {
+                            staticClass: "dropdown-item",
+                            attrs: { to: "/media/song" }
+                          },
+                          [_vm._v("Альбомы")]
+                        ),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "dropdown-divider" }),
+                        _vm._v(" "),
+                        _c(
+                          "router-link",
+                          {
+                            staticClass: "dropdown-item",
+                            attrs: { to: "/media/artist" }
+                          },
+                          [_vm._v("Добавить артиста")]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "router-link",
+                          {
+                            staticClass: "dropdown-item",
+                            attrs: { to: "/media/song" }
+                          },
+                          [_vm._v("Добавить песню")]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "router-link",
+                          {
+                            staticClass: "dropdown-item",
+                            attrs: { to: "/media/song" }
+                          },
+                          [_vm._v("Добавить альбом")]
+                        )
+                      ],
+                      1
                     )
-                  ],
-                  1
-                )
-              ])
-            ]),
+                  ])
+                ])
+              : _vm._e(),
             _vm._v(" "),
             _c("ul", { staticClass: "navbar-nav ml-auto" }, [
               !_vm.state.auth
