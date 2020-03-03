@@ -55,7 +55,7 @@
 
                     <div class="form-group row mb-0">
                         <div class="col-md-8 offset-md-4">
-                            <button type="submit" class="btn btn-primary">
+                            <button type="submit" @click="submit" class="btn btn-primary">
                                 Войти
                             </button>
 
@@ -80,17 +80,16 @@
             }
         },
         methods: {
-            async submit() {
-                try {
-                    const response = axios.post('/login', {
-                        'email': this.email,
-                        'password': this.password
+            submit() {
+                axios.post('/auth/login', {
+                    'email': this.email,
+                    'password': this.password
+                })
+                    .then(response => {
+                        this.$eventHub.$emit('authenticated');
+                        // this.$router.push(response.data.redirect
+                            console.log(response)
                     });
-
-                    this.$router.push(response.data.redirect);
-                } catch (e) {
-
-                }
             }
         }
     }

@@ -1981,13 +1981,49 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "App",
-  mounted: function mounted() {},
-  data: function data() {
-    return {};
+  created: function created() {
+    this.$eventHub.$on('authenticated', this.onAuthenticated);
   },
-  methods: {}
+  mounted: function mounted() {
+    this.state.auth = this.authorized;
+  },
+  props: {
+    authorized: {
+      type: Boolean
+    }
+  },
+  data: function data() {
+    return {
+      state: {
+        auth: false
+      }
+    };
+  },
+  methods: {
+    onAuthenticated: function onAuthenticated() {
+      this.state.auth = true;
+    },
+    logout: function logout() {
+      var _this = this;
+
+      axios.post('/auth/logout').then(function (response) {
+        return _this.state.auth = false;
+      });
+    }
+  }
 });
 
 /***/ }),
@@ -2010,9 +2046,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_media_artist_ArtistEditor__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../components/media/artist/ArtistEditor */ "./resources/js/components/media/artist/ArtistEditor.vue");
 /* harmony import */ var _components_auth_Login__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../components/auth/Login */ "./resources/js/components/auth/Login.vue");
 /* harmony import */ var _components_auth_Register__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../components/auth/Register */ "./resources/js/components/auth/Register.vue");
-var _ref;
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 
 
@@ -2022,17 +2055,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
-
-var routes = [(_ref = {
+var routes = [{
   path: '/login',
   component: _components_auth_Login__WEBPACK_IMPORTED_MODULE_7__["default"]
-}, _defineProperty(_ref, "path", '/register'), _defineProperty(_ref, "component", _components_auth_Register__WEBPACK_IMPORTED_MODULE_8__["default"]), _defineProperty(_ref, "children", [{
-  path: 'posts',
-  component: _components_blog_post_PostsPage__WEBPACK_IMPORTED_MODULE_1__["default"]
 }, {
-  path: 'posts/edit',
-  component: _components_blog_post_PostEditor__WEBPACK_IMPORTED_MODULE_2__["default"]
-}]), _ref), {
+  path: '/register',
+  component: _components_auth_Register__WEBPACK_IMPORTED_MODULE_8__["default"]
+}, {
   path: '/blog',
   component: _components_blog_Blog__WEBPACK_IMPORTED_MODULE_0__["default"],
   children: [{
@@ -2071,14 +2100,6 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_3__["default"]({
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-
-
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-
 //
 //
 //
@@ -2163,28 +2184,15 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     submit: function submit() {
       var _this = this;
 
-      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-        var response;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
-          while (1) {
-            switch (_context.prev = _context.next) {
-              case 0:
-                try {
-                  response = axios.post('/login', {
-                    'email': _this.email,
-                    'password': _this.password
-                  });
+      axios.post('/auth/login', {
+        'email': this.email,
+        'password': this.password
+      }).then(function (response) {
+        _this.$eventHub.$emit('authenticated'); // this.$router.push(response.data.redirect
 
-                  _this.$router.push(response.data.redirect);
-                } catch (e) {}
 
-              case 1:
-              case "end":
-                return _context.stop();
-            }
-          }
-        }, _callee);
-      }))();
+        console.log(response);
+      });
     }
   }
 });
@@ -2321,7 +2329,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   password_confirmation: _this.passwordConfirmation
                 };
                 _context.next = 4;
-                return axios.post('/register', data);
+                return axios.post('/auth/register', data);
 
               case 4:
                 response = _context.sent;
@@ -76224,126 +76232,160 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    { staticClass: "container" },
-    [
-      _c(
-        "nav",
-        { staticClass: "navbar navbar-expand-md navbar-light shadow-sm" },
-        [
-          _c("div", { staticClass: "container" }, [
-            _vm._m(0),
-            _vm._v(" "),
-            _c("div", { staticClass: "collapse navbar-collapse" }, [
-              _c("ul", { staticClass: "navbar-nav mr-auto" }, [
-                _c("li", { staticClass: "nav-item dropdown" }, [
-                  _vm._m(1),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    { staticClass: "dropdown-menu" },
-                    [
-                      _c(
-                        "router-link",
-                        {
-                          staticClass: "dropdown-item",
-                          attrs: { to: "/blog/posts" }
-                        },
-                        [_vm._v("Посты")]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "router-link",
-                        {
-                          staticClass: "dropdown-item",
-                          attrs: { to: "/blog/posts/edit" }
-                        },
-                        [_vm._v("Добавить пост")]
-                      )
-                    ],
-                    1
-                  )
-                ]),
+  return _c("div", [
+    _c(
+      "nav",
+      { staticClass: "navbar navbar-expand-md navbar-light shadow-sm" },
+      [
+        _c("div", { staticClass: "container" }, [
+          _vm._m(0),
+          _vm._v(" "),
+          _c("div", { staticClass: "collapse navbar-collapse" }, [
+            _c("ul", { staticClass: "navbar-nav mr-auto" }, [
+              _c("li", { staticClass: "nav-item dropdown" }, [
+                _vm._m(1),
                 _vm._v(" "),
-                _c("li", { staticClass: "nav-item dropdown" }, [
-                  _vm._m(2),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    { staticClass: "dropdown-menu" },
+                _c(
+                  "div",
+                  { staticClass: "dropdown-menu" },
+                  [
+                    _c(
+                      "router-link",
+                      {
+                        staticClass: "dropdown-item",
+                        attrs: { to: "/blog/posts" }
+                      },
+                      [_vm._v("Посты")]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "router-link",
+                      {
+                        staticClass: "dropdown-item",
+                        attrs: { to: "/blog/posts/edit" }
+                      },
+                      [_vm._v("Добавить пост")]
+                    )
+                  ],
+                  1
+                )
+              ]),
+              _vm._v(" "),
+              _c("li", { staticClass: "nav-item dropdown" }, [
+                _vm._m(2),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "dropdown-menu" },
+                  [
+                    _c(
+                      "router-link",
+                      {
+                        staticClass: "dropdown-item",
+                        attrs: { to: "/media/song" }
+                      },
+                      [_vm._v("Артисты")]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "router-link",
+                      {
+                        staticClass: "dropdown-item",
+                        attrs: { to: "/media/song" }
+                      },
+                      [_vm._v("Песни")]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "router-link",
+                      {
+                        staticClass: "dropdown-item",
+                        attrs: { to: "/media/song" }
+                      },
+                      [_vm._v("Альбомы")]
+                    ),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "dropdown-divider" }),
+                    _vm._v(" "),
+                    _c(
+                      "router-link",
+                      {
+                        staticClass: "dropdown-item",
+                        attrs: { to: "/media/artist" }
+                      },
+                      [_vm._v("Добавить артиста")]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "router-link",
+                      {
+                        staticClass: "dropdown-item",
+                        attrs: { to: "/media/song" }
+                      },
+                      [_vm._v("Добавить песню")]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "router-link",
+                      {
+                        staticClass: "dropdown-item",
+                        attrs: { to: "/media/song" }
+                      },
+                      [_vm._v("Добавить альбом")]
+                    )
+                  ],
+                  1
+                )
+              ])
+            ]),
+            _vm._v(" "),
+            _c("ul", { staticClass: "navbar-nav ml-auto" }, [
+              !_vm.state.auth
+                ? _c(
+                    "li",
+                    { staticClass: "nav-item" },
                     [
                       _c(
                         "router-link",
                         {
                           staticClass: "dropdown-item",
-                          attrs: { to: "/media/song" }
+                          attrs: { to: "/login" }
                         },
-                        [_vm._v("Артисты")]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "router-link",
-                        {
-                          staticClass: "dropdown-item",
-                          attrs: { to: "/media/song" }
-                        },
-                        [_vm._v("Песни")]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "router-link",
-                        {
-                          staticClass: "dropdown-item",
-                          attrs: { to: "/media/song" }
-                        },
-                        [_vm._v("Альбомы")]
-                      ),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "dropdown-divider" }),
-                      _vm._v(" "),
-                      _c(
-                        "router-link",
-                        {
-                          staticClass: "dropdown-item",
-                          attrs: { to: "/media/artist" }
-                        },
-                        [_vm._v("Добавить артиста")]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "router-link",
-                        {
-                          staticClass: "dropdown-item",
-                          attrs: { to: "/media/song" }
-                        },
-                        [_vm._v("Добавить песню")]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "router-link",
-                        {
-                          staticClass: "dropdown-item",
-                          attrs: { to: "/media/song" }
-                        },
-                        [_vm._v("Добавить альбом")]
+                        [_vm._v("Вход")]
                       )
                     ],
                     1
                   )
-                ])
-              ])
+                : _c("li", { staticClass: "nav-item dropdown" }, [
+                    _vm._m(3),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      {
+                        staticClass: "dropdown-menu dropdown-menu-right",
+                        attrs: { "aria-labelledby": "navbarDropdown" }
+                      },
+                      [
+                        _c(
+                          "a",
+                          {
+                            staticClass: "dropdown-item",
+                            attrs: { href: "#" },
+                            on: { click: _vm.logout }
+                          },
+                          [_vm._v(" Выйти из системы ")]
+                        )
+                      ]
+                    )
+                  ])
             ])
           ])
-        ]
-      ),
-      _vm._v(" "),
-      _c("br"),
-      _vm._v(" "),
-      _c("router-view")
-    ],
-    1
-  )
+        ])
+      ]
+    ),
+    _vm._v(" "),
+    _c("div", { staticClass: "container mt-5" }, [_c("router-view")], 1)
+  ])
 }
 var staticRenderFns = [
   function() {
@@ -76396,6 +76438,30 @@ var staticRenderFns = [
           "\n                            Медиа\n                            "
         ),
         _c("span", { staticClass: "caret" })
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "a",
+      {
+        pre: true,
+        attrs: {
+          id: "navbarDropdown",
+          class: "nav-link dropdown-toggle",
+          href: "#",
+          role: "button",
+          "data-toggle": "dropdown",
+          "aria-haspopup": "true",
+          "aria-expanded": "false"
+        }
+      },
+      [
+        _vm._v("\n                            Имя пользователя "),
+        _c("span", { pre: true, attrs: { class: "caret" } })
       ]
     )
   }
@@ -76512,7 +76578,29 @@ var render = function() {
           _vm._v(" "),
           _vm._m(0),
           _vm._v(" "),
-          _vm._m(1)
+          _c("div", { staticClass: "form-group row mb-0" }, [
+            _c("div", { staticClass: "col-md-8 offset-md-4" }, [
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-primary",
+                  attrs: { type: "submit" },
+                  on: { click: _vm.submit }
+                },
+                [
+                  _vm._v(
+                    "\n                            Войти\n                        "
+                  )
+                ]
+              ),
+              _vm._v(" "),
+              _c("a", { staticClass: "btn btn-link", attrs: { href: "#" } }, [
+                _vm._v(
+                  "\n                            Забыли пароль?\n                        "
+                )
+              ])
+            ])
+          ])
         ])
       ])
     ])
@@ -76539,30 +76627,6 @@ var staticRenderFns = [
                 "\n                                Запомнить меня\n                            "
               )
             ]
-          )
-        ])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-group row mb-0" }, [
-      _c("div", { staticClass: "col-md-8 offset-md-4" }, [
-        _c(
-          "button",
-          { staticClass: "btn btn-primary", attrs: { type: "submit" } },
-          [
-            _vm._v(
-              "\n                            Войти\n                        "
-            )
-          ]
-        ),
-        _vm._v(" "),
-        _c("a", { staticClass: "btn btn-link", attrs: { href: "#" } }, [
-          _vm._v(
-            "\n                            Забыли пароль?\n                        "
           )
         ])
       ])
@@ -92318,6 +92382,7 @@ var VueRouter = __webpack_require__(/*! vue-router */ "./node_modules/vue-router
 window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
 window.Vue.use(BootstrapVue);
 window.Vue.use(VueRouter);
+window.Vue.prototype.$eventHub = new Vue();
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
@@ -92328,6 +92393,7 @@ window.Vue.use(VueRouter);
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
+Vue.component('App', __webpack_require__(/*! ./app/App.vue */ "./resources/js/app/App.vue")["default"]);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -92336,10 +92402,8 @@ window.Vue.use(VueRouter);
 
 var app = new Vue({
   el: '#app',
-  router: router,
-  render: function render(h) {
-    return h(App);
-  }
+  router: router // render: h => h(App)
+
 });
 
 /***/ }),
@@ -92467,15 +92531,20 @@ __webpack_require__.r(__webpack_exports__);
 /*!***********************************!*\
   !*** ./resources/js/bootstrap.js ***!
   \***********************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _htmlErrorHandler_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./htmlErrorHandler.js */ "./resources/js/htmlErrorHandler.js");
 window._ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
 /**
  * We'll load jQuery and the Bootstrap jQuery plugin which provides support
  * for JavaScript based Bootstrap features such as modals and tabs. This
  * code may be modified to fit the specific needs of your application.
  */
+
+
 
 try {
   window.Popper = __webpack_require__(/*! popper.js */ "./node_modules/popper.js/dist/esm/popper.js")["default"];
@@ -92492,6 +92561,16 @@ try {
 
 window.axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+window.axios.defaults.withCredentials = true;
+axios.interceptors.response.use(function (response) {
+  return response.data;
+}, function (error) {
+  if (error.response && error.response.data) {
+    Object(_htmlErrorHandler_js__WEBPACK_IMPORTED_MODULE_0__["handleHtmlError"])(error);
+  }
+
+  return Promise.reject(error);
+});
 /**
  * Echo exposes an expressive API for subscribing to channels and listening
  * for events that are broadcast by Laravel. Echo and event broadcasting
@@ -93291,6 +93370,38 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SongEditor_vue_vue_type_template_id_3ef55482_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
+
+/***/ }),
+
+/***/ "./resources/js/htmlErrorHandler.js":
+/*!******************************************!*\
+  !*** ./resources/js/htmlErrorHandler.js ***!
+  \******************************************/
+/*! exports provided: handleHtmlError */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "handleHtmlError", function() { return handleHtmlError; });
+function handleUnauthorized() {
+  window.location.href = '/login';
+}
+
+function handleHtmlError(e) {
+  switch (e.status) {
+    case '401':
+      handleUnauthorized();
+      break;
+
+    case '403':
+      console.log(2);
+      break;
+
+    default:
+      console.log('unexpected error', e);
+      break;
+  }
+}
 
 /***/ }),
 

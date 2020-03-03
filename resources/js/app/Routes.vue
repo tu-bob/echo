@@ -10,46 +10,45 @@
     import Register from "../components/auth/Register";
 
     const routes = [
-        {
-            path: '/login', component: Login,
-            path: '/register', component: Register,
-            children: [
-                {
-                    path: 'posts',
-                    component: PostsPage
-                },
-                {
-                    path: 'posts/edit',
-                    component: PostEditor
-                }
-            ]
-        },
-        {
-            path: '/blog', component: Blog,
-            children: [
-                {
-                    path: 'posts',
-                    component: PostsPage
-                },
-                {
-                    path: 'posts/edit',
-                    component: PostEditor
-                }
-            ]
-        },
-        {
-            path: '/media', component: Media,
-            children: [
-                {
-                    path: 'song',
-                    component: SongEditor
-                },
-                {
-                    path: 'artist',
-                    component: ArtistEditor
-                },
-            ]
-        }]
+            {
+                path: '/login', component: Login
+            },
+            {
+                path: '/register', component: Register
+            }
+            ,
+            {
+                path: '/blog', component:
+                Blog,
+                children:
+                    [
+                        {
+                            path: 'posts',
+                            component: PostsPage
+                        },
+                        {
+                            path: 'posts/edit',
+                            component: PostEditor
+                        }
+                    ]
+            }
+            ,
+            {
+                path: '/media', component:
+                Media,
+                children:
+                    [
+                        {
+                            path: 'song',
+                            component: SongEditor
+                        },
+                        {
+                            path: 'artist',
+                            component: ArtistEditor
+                        },
+                    ]
+            }
+        ]
     ;
 
     const router = new VueRouter({

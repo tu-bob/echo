@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <div>
         <nav class="navbar navbar-expand-md navbar-light shadow-sm">
             <div class="container">
                 <button class="navbar-toggler"
@@ -42,32 +42,64 @@
                             </div>
                         </li>
                     </ul>
+
+                    <ul class="navbar-nav ml-auto">
+                        <!-- Authentication Links -->
+
+                        <li class="nav-item" v-if="!state.auth">
+                            <router-link to="/login" class="dropdown-item">Вход</router-link>
+                        </li>
+
+                        <li class="nav-item dropdown" v-else>
+                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
+                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                Имя пользователя <span class="caret"></span>
+                            </a>
+
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="#" @click="logout"> Выйти из системы </a>
+                            </div>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </nav>
-        <!--        <nav class="navbar navbar-expand-lg navbar-light bg-light">-->
-        <!--            <div class="collapse navbar-collapse">-->
-        <!--                <div class="navbar-nav">-->
-        <!--                    <router-link to="/blog/posts" class="nav-item nav-link">Home</router-link>-->
-        <!--                    <router-link to="/blog/posts/edit" class="nav-item nav-link">Blog</router-link>-->
-        <!--                    <router-link to="/media/song" class="nav-item nav-link">Media</router-link>-->
-        <!--                </div>-->
-        <!--            </div>-->
-        <!--        </nav>-->
-        <br/>
-        <router-view></router-view>
+        <div class="container mt-5">
+            <router-view></router-view>
+        </div>
     </div>
 </template>
 
 <script>
     export default {
         name: "App",
+        created() {
+            this.$eventHub.$on('authenticated', this.onAuthenticated)
+        },
         mounted() {
+            this.state.auth = this.authorized;
+        },
+        props: {
+            authorized: {
+                type: Boolean
+            }
         },
         data() {
-            return {}
+            return {
+                state: {
+                    auth: false
+                }
+            }
         },
-        methods: {}
+        methods: {
+            onAuthenticated() {
+                this.state.auth = true;
+            },
+            logout() {
+                axios.post('/auth/logout')
+                    .then(response => this.state.auth = false);
+            }
+        }
     }
 </script>
 

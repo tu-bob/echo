@@ -104,7 +104,7 @@
                         password_confirmation: this.passwordConfirmation
                     };
 
-                    const response = await axios.post('/register', data);
+                    const response = await axios.post('/auth/register', data);
                 } catch (e) {
 
                 }

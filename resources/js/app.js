@@ -16,6 +16,8 @@ window.Vue = require('vue');
 window.Vue.use(BootstrapVue);
 window.Vue.use(VueRouter);
 
+window.Vue.prototype.$eventHub = new Vue();
+
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
@@ -26,6 +28,8 @@ window.Vue.use(VueRouter);
 
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
+Vue.component('App', require('./app/App.vue').default);
+
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -36,5 +40,5 @@ window.Vue.use(VueRouter);
 const app = new Vue({
     el: '#app',
     router: router,
-    render: h => h(App)
+    // render: h => h(App)
 });
