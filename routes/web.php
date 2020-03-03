@@ -22,12 +22,14 @@ use Illuminate\Support\Facades\Route;
 //
 //Route::get('/home', 'HomeController@index')->name('home');
 
-Route::prefix('auth')->group(function(){
+Route::prefix('auth')->group(function () {
     Route::post('login', 'Auth\LoginController@login');
     Route::middleware('auth')->post('logout', 'Auth\LoginController@logout');
     Route::post('register', 'Auth\RegisterController@register');
 });
 
-Route::get('{any}', function () {
-    return view('layouts/app');
-})->where('any', '.*');
+Route::prefix('app')->group(function () {
+    Route::get('{any}', function () {
+        return view('layouts/app');
+    })->where('any', '.*');
+});

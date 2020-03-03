@@ -2080,13 +2080,14 @@ var routes = [{
     path: 'song',
     component: _components_media_music_SongEditor__WEBPACK_IMPORTED_MODULE_4__["default"]
   }, {
-    path: 'artist',
+    path: 'artist/:id?',
     component: _components_media_artist_ArtistEditor__WEBPACK_IMPORTED_MODULE_6__["default"]
   }]
 }];
 var router = new vue_router__WEBPACK_IMPORTED_MODULE_3__["default"]({
   history: true,
   mode: 'history',
+  base: '/app/',
   routes: routes
 });
 /* harmony default export */ __webpack_exports__["default"] = (router);
@@ -2499,6 +2500,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _main_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../main.js */ "./resources/js/main.js");
 //
 //
 //
@@ -2522,8 +2524,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "ArtistEditor",
+  created: function created() {
+    if (this.$route.params.id) this.fetchData();
+  },
   data: function data() {
     return {
       artist: {
@@ -2534,12 +2540,32 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     submit: function submit() {
+      var _this$$route, _this$$route$params;
+
       var data = {
         name: this.artist.name,
         aliases: this.aliases
       };
-      axios.post('/media/artist', data).then(function (response) {
+      var action = Object(_main_js__WEBPACK_IMPORTED_MODULE_0__["getStoreOrUpdateAction"])((_this$$route = this.$route) === null || _this$$route === void 0 ? void 0 : (_this$$route$params = _this$$route.params) === null || _this$$route$params === void 0 ? void 0 : _this$$route$params.id, '/media/artist/');
+      axios({
+        method: action.method,
+        url: action.url,
+        data: data
+      }).then(function (response) {
         console.log(response);
+      });
+    },
+    fetchData: function fetchData() {
+      var _this = this;
+
+      axios.get("/media/artist/".concat(this.$route.params.id)).then(function (response) {
+        return _this.setData(response);
+      });
+    },
+    setData: function setData(data) {
+      this.artist = data;
+      this.aliases = data.aliases.map(function (alias) {
+        return alias.name;
       });
     }
   }
@@ -93370,6 +93396,33 @@ function handleHtmlError(e) {
       console.log('unexpected error', e);
       break;
   }
+}
+
+/***/ }),
+
+/***/ "./resources/js/main.js":
+/*!******************************!*\
+  !*** ./resources/js/main.js ***!
+  \******************************/
+/*! exports provided: getStoreOrUpdateAction */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getStoreOrUpdateAction", function() { return getStoreOrUpdateAction; });
+function getStoreOrUpdateAction(id, url) {
+  console.log(id);
+  var action = {
+    url: url,
+    method: 'post'
+  };
+
+  if (id) {
+    action.url += id;
+    action.method = 'put';
+  }
+
+  return action;
 }
 
 /***/ }),

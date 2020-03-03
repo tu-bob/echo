@@ -43,7 +43,7 @@
                             component: SongEditor
                         },
                         {
-                            path: 'artist',
+                            path: 'artist/:id?',
                             component: ArtistEditor
                         },
                     ]
@@ -54,6 +54,7 @@
     const router = new VueRouter({
         history: true,
         mode: 'history',
+        base: '/app/',
         routes,
     });
 

@@ -22,8 +22,14 @@
 </template>
 
 <script>
+    import {getStoreOrUpdateAction} from '../../../main.js'
+
     export default {
         name: "ArtistEditor",
+        created() {
+            if (this.$route.params.id)
+                this.fetchData();
+        },
         data() {
             return {
                 artist: {
@@ -39,10 +45,26 @@
                     aliases: this.aliases
                 };
 
-                axios.post('/media/artist', data)
+                let action = getStoreOrUpdateAction(this.$route?.params?.id, '/media/artist/');
+
+                axios({
+                    method: action.method,
+                    url: action.url,
+                    data: data
+                })
                     .then(response => {
                         console.log(response);
                     });
+            },
+            fetchData() {
+                axios.get(`/media/artist/${this.$route.params.id}`)
+                    .then(response => this.setData(response))
+            },
+            setData(data) {
+                this.artist = data;
+                this.aliases = data.aliases.map(function (alias) {
+                    return alias.name;
+                })
             }
         }
     }
