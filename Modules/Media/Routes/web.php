@@ -12,5 +12,10 @@
 */
 
 Route::prefix('media')->group(function() {
-    Route::get('/', 'MediaController@index');
+
+    Route::prefix('artist')->group(function (){
+        Route::post('/', 'ArtistController@store');
+        Route::put('/{artist}', 'ArtistController@update');
+    });
+
 });

@@ -33,17 +33,16 @@
             }
         },
         methods: {
-            async submit() {
-                try {
-                    let data = {
-                        name: this.artist.name,
-                        aliases: this.aliases
-                    };
+            submit() {
+                let data = {
+                    name: this.artist.name,
+                    aliases: this.aliases
+                };
 
-                    const response = await axios.get('/media/artist/store');
-                } catch (e) {
-                    console.log(e);
-                }
+                axios.post('/media/artist', data)
+                    .then(response => {
+                        console.log(response);
+                    });
             }
         }
     }

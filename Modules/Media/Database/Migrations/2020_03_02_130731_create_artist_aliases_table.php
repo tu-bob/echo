@@ -15,7 +15,8 @@ class CreateArtistAliasesTable extends Migration
     {
         Schema::create('artist_aliases', function (Blueprint $table) {
             $table->char('id', 26)->primary();
-            $table->string('name', 100);
+            $table->char('artist_id', 26)->index();
+            $table->string('name', 100)->unique();
             $table->softDeletes();
             $table->timestamps();
         });

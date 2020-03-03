@@ -22,4 +22,6 @@ class BaseModel  extends Model
     public static $snakeAttributes = false;
 
     protected $casts = ['id' => 'string'];
+
+    protected $guarded = [];
 }
