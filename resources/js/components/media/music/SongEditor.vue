@@ -1,8 +1,8 @@
 <template>
     <div>
         <div class="form-group">
-            <label for="song">Выберите песню</label>
-            <input type="file" id="song" class="form-control" @change="getMetaData">
+            <label>Выберите песню</label>
+            <input type="file" class="form-control" @change="getMetaData">
         </div>
         <div class="form-group">
             <label>Название</label>
@@ -117,8 +117,8 @@
                 this.$refs.artistSearch.options = [];
             },
 
-            getMetaData() {
-                parseBlob($('#song')[0].files[0])
+            getMetaData(e) {
+                parseBlob(e.target.files[0])
                     .then(metadata => {
                         console.log(metadata);
                         this.fillData(metadata)
@@ -129,7 +129,7 @@
             },
             getArtist(name) {
                 axios.get(`/media/artist/alias/filter?name=${name}`)
-                    .then(aliases => {console.log(aliases)
+                    .then(aliases => {
                         if (aliases && aliases.length > 0)
                             this.onArtistSelected(aliases[0]);
                         else
