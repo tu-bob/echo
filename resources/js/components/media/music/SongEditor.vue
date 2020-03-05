@@ -4,7 +4,7 @@
             <b-form-file
                 v-model="file"
                 :state="Boolean(file)"
-                accept=".mp3, .wag, .ogg"
+                accept="audio/mpeg, audio/ogg, audio/wav"
                 placeholder="Выберите файл или перетащите его сюда..."
                 drop-placeholder="Перетащите файл сюда..."
                 browse-text="Обзор"
@@ -134,7 +134,7 @@
                     .then(metadata => {
                         this.fillData(metadata)
                     })
-                    .catch(err => { 
+                    .catch(err => {
                     });
             },
             getArtist(name) {
