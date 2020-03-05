@@ -1,4 +1,6 @@
 {
     "Blog": true,
-    "Media": true
+    "Media": true,
+    "Migration": true,
+    "CreateGenresTable": true
 }
