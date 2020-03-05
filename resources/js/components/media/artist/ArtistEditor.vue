@@ -53,7 +53,7 @@
                     data: data
                 })
                     .then(response => {
-                        console.log(response);
+                        this.$router.go()
                     });
             },
             fetchData() {

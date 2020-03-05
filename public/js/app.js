@@ -2563,7 +2563,9 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     submit: function submit() {
-      var _this$$route, _this$$route$params;
+      var _this$$route,
+          _this$$route$params,
+          _this = this;
 
       var data = {
         name: this.artist.name,
@@ -2575,14 +2577,14 @@ __webpack_require__.r(__webpack_exports__);
         url: action.url,
         data: data
       }).then(function (response) {
-        console.log(response);
+        _this.$router.go();
       });
     },
     fetchData: function fetchData() {
-      var _this = this;
+      var _this2 = this;
 
       axios.get("/media/artist/".concat(this.$route.params.id)).then(function (response) {
-        return _this.setData(response);
+        return _this2.setData(response);
       });
     },
     setData: function setData(data) {
