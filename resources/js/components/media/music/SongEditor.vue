@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="col-md-8">
         <div class="form-group" v-if="!Boolean(providedFile)">
             <b-form-file
                 v-model="file"
@@ -64,9 +64,10 @@
         </div>
         <div>
             <select v-model="song.genres" multiple class="form-control">
-                <option v-for="genre in genres" :value="genre" :key="genre.id">{{genre.name}}</option>
+                <option v-for="genre in genres" :value="genre" :key="genre.id">{{genre.name}} {{genre.local_name}}
+                </option>
             </select>
-            <div class="mt-3">Selected: <strong v-for="genre in song.genres">{{ genre.name }} </strong></div>
+            <div class="my-3">Selected: <strong v-for="genre in song.genres">{{ genre.name }} </strong></div>
         </div>
         <div class="form-group">
             <label>Лэйбл</label>
@@ -80,6 +81,7 @@
     import {parseBlob} from 'music-metadata-browser';
     import {validateAudio} from '../../../util/validators.js'
     import {fetchGenres, fetchArtistAliasesByName} from '../../../util/apiCalls.js'
+    import * as ss from 'string-similarity';
 
     export default {
         name: "SongEditor",
@@ -134,7 +136,7 @@
             getMetaData() {
                 parseBlob(this.file)
                     .then(metadata => {
-                        // console.log(metadata)
+                        console.log(metadata)
                         this.fillData(metadata)
                     })
                     .catch(err => {
@@ -164,6 +166,34 @@
                     for (let i = 0; i < meta.common.artists.length; i++) {
                         this.fetchArtist(meta.common.artists[i]);
                     }
+
+                if (meta.common.genre) {
+                    for (let j = 0; j < meta.common.genre.length; j++) {
+                        let genreName = meta.common.genre[j].replace(/[^a-zA-Z]/g, '').toUpperCase();
+                        let bestMatch = {score: 0, genre: null};
+
+                        for (let k = 0; k < this.genres.length; k = k + 1) {
+                            let enScore = ss.compareTwoStrings(
+                                genreName,
+                                this.genres[k].name.replace(/[^a-zA-Z]/g, '').toUpperCase()
+                            );
+
+                            let ruScore = ss.compareTwoStrings(
+                                genreName,
+                                this.genres[k].local_name.replace(/[^\u0410-\u042F\u0430-\u044F]/g, '').toUpperCase()
+                            );
+
+                            let score = enScore > ruScore ? enScore : ruScore;
+
+                            if (score > bestMatch.score) {
+                                bestMatch.score = score;
+                                bestMatch.genre = this.genres[k];
+                            }
+                        }
+
+                        this.song.genres.push(bestMatch.genre);
+                    }
+                }
             }
         },
     }

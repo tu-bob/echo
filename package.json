@@ -26,6 +26,7 @@
     "dependencies": {
         "bootstrap-vue": "^2.5.0",
         "music-metadata-browser": "^2.0.4",
+        "string-similarity": "^4.0.1",
         "summernote": "^0.8.16",
         "vue-router": "^3.1.6",
         "vuetify": "^2.2.15"
