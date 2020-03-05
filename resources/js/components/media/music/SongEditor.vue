@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="form-group">
+        <div class="form-group" v-if="!Boolean(providedFile)">
             <b-form-file
                 v-model="file"
                 :state="Boolean(file)"
@@ -77,37 +77,32 @@
     import SuggestionInput from "../../common/inputs/SuggestionInput";
     import {parseBlob} from 'music-metadata-browser';
     import {validateAudio} from '../../../util/validators.js'
+    import {fetchGenres, fetchArtistAliasesByName} from '../../../util/apiCalls.js'
 
     export default {
         name: "SongEditor",
         components: {SuggestionInput},
+        props: {
+            providedFile: {
+                type: Object,
+                default: null
+            }
+        },
+        created() {
+            fetchGenres().then(genres => this.genres = genres);
+        },
         data() {
             return {
                 artistAliases: [],
                 missedArtists: [],
-                file: null,
+                file: this.providedFile,
+                genres: [],
                 song: {
                     title: null,
                     year: null,
                     genre: null,
                     length: null,
                     artistAliases: []
-
-
-//album
-// name:null,
-// type:null,
-// artist:null,
-// cover:null,
-// alt:null,
-// released:null,
-// recorded:null,
-// venue:null,
-// studio:null,
-// genre:null,
-// length:null,
-// label:null,
-// producer:null,
                 }
             }
         },
@@ -134,19 +129,20 @@
             getMetaData() {
                 parseBlob(this.file)
                     .then(metadata => {
+                        // console.log(metadata)
                         this.fillData(metadata)
                     })
-                    .catch(err => {console.log(err)
+                    .catch(err => {
+                        console.log(err)
                     });
             },
-            getArtist(name) {
-                axios.get(`/media/artist/alias/filter?name=${name}`)
-                    .then(aliases => {
-                        if (aliases && aliases.length > 0)
-                            this.onArtistSelected(aliases[0]);
-                        else
-                            this.missedArtists.push(name);
-                    })
+            fetchArtist(name) {
+                fetchArtistAliasesByName(name).then(aliases => {
+                    if (aliases && aliases.length > 0)
+                        this.onArtistSelected(aliases[0]);
+                    else
+                        this.missedArtists.push(name);
+                })
             },
             fillData(meta) {
                 this.song.title = meta.common.title;
@@ -161,7 +157,7 @@
 
                 if (meta.common.artists)
                     for (let i = 0; i < meta.common.artists.length; i++) {
-                        this.getArtist(meta.common.artists[i]);
+                        this.fetchArtist(meta.common.artists[i]);
                     }
             }
         },
