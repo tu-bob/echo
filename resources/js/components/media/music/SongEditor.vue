@@ -5,13 +5,13 @@
             <input type="text" class="form-control" v-model="song.title">
         </div>
         <div>
-            <b-form-tags v-model="artists" no-outer-focus class="mb-2">
+            <b-form-tags v-model="artistAliases" no-outer-focus class="mb-2">
                 <template v-slot="{ tags, inputAttrs, inputHandlers, addTag, removeTag }">
                     <b-input-group aria-controls="my-custom-tags-list">
                         <suggestion-input displayPropertyName="name"
                                           ref="artistSearch"
                                           @selected="onArtistSelected"
-                                          action-url="/media/artist/find?name="></suggestion-input>
+                                          action-url="/media/artist/alias/filter?name="></suggestion-input>
                     </b-input-group>
                     <ul
                         id="my-custom-tags-list"
@@ -37,7 +37,7 @@
                                 variant="link"
                                 size="sm"
                                 :aria-controls="`my-custom-tags-tag_${tag.replace(/\s/g, '_')}_`"
-                            >remove
+                            >&times;
                             </b-button>
                         </b-card>
                     </ul>
@@ -67,13 +67,13 @@
         components: {SuggestionInput},
         data() {
             return {
-                artists: [],
+                artistAliases: [],
                 song: {
                     title: null,
                     year: null,
                     genre: null,
                     length: null,
-                    artists: []
+                    artistAliases: []
 
 
 //album
@@ -95,11 +95,17 @@
         },
         methods: {
             onArtistSelected(artist) {
-                this.song.artists.push(artist);
-                this.artists.push(artist.name);
+                if (artist) {
+                    let exists = this.song.artistAliases.find((alias) => alias.id === artist.id);
+                    if (!exists) {
+                        this.song.artistAliases.push(artist);
+                        this.artistAliases.push(artist.name);
+                    }
+                }
+
                 this.$refs.artistSearch.query = '';
                 this.$refs.artistSearch.options = [];
-            }
+            },
         }
     }
 </script>

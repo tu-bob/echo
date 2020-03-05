@@ -2846,13 +2846,13 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      artists: [],
+      artistAliases: [],
       song: {
         title: null,
         year: null,
         genre: null,
         length: null,
-        artists: [] //album
+        artistAliases: [] //album
         // name:null,
         // type:null,
         // artist:null,
@@ -2872,8 +2872,17 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     onArtistSelected: function onArtistSelected(artist) {
-      this.song.artists.push(artist);
-      this.artists.push(artist.name);
+      if (artist) {
+        var exists = this.song.artistAliases.find(function (alias) {
+          return alias.id === artist.id;
+        });
+
+        if (!exists) {
+          this.song.artistAliases.push(artist);
+          this.artistAliases.push(artist.name);
+        }
+      }
+
       this.$refs.artistSearch.query = '';
       this.$refs.artistSearch.options = [];
     }
@@ -77444,7 +77453,7 @@ var render = function() {
                         ref: "artistSearch",
                         attrs: {
                           displayPropertyName: "name",
-                          "action-url": "/media/artist/find?name="
+                          "action-url": "/media/artist/alias/filter?name="
                         },
                         on: { selected: _vm.onArtistSelected }
                       })
@@ -77498,7 +77507,7 @@ var render = function() {
                                 }
                               }
                             },
-                            [_vm._v("remove\n                        ")]
+                            [_vm._v("×\n                        ")]
                           )
                         ],
                         1
@@ -77511,11 +77520,11 @@ var render = function() {
             }
           ]),
           model: {
-            value: _vm.artists,
+            value: _vm.artistAliases,
             callback: function($$v) {
-              _vm.artists = $$v
+              _vm.artistAliases = $$v
             },
-            expression: "artists"
+            expression: "artistAliases"
           }
         })
       ],

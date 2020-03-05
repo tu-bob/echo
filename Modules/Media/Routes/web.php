@@ -16,13 +16,13 @@ Route::prefix('media')->group(function() {
     Route::prefix('artist')->group(function (){
 
         Route::prefix('alias')->group(function (){
-            Route::get('/filter', '/Artist/ArtistAliasController@filter');
+            Route::get('/filter', 'Artist\ArtistAliasController@filter');
         });
 
-        Route::post('/', '/Artist/ArtistController@store');
-        Route::put('/{artist}', '/Artist/ArtistController@update');
+        Route::post('/', 'Artist\ArtistController@store');
+        Route::put('/{artist}', 'Artist\ArtistController@update');
 //        Route::get('/find', 'ArtistController@findArtist');
-        Route::get('/{artist}', '/Artist/ArtistController@getArtist');
+        Route::get('/{artist}', 'Artist\ArtistController@getArtist');
     });
 
 });
