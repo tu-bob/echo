@@ -30,6 +30,10 @@ Route::prefix('media')->group(function () {
         Route::prefix('genre')->group(function () {
             Route::get('/', 'Music\GenreController@all');
         });
+
+        Route::prefix('song')->group(function () {
+            Route::post('/', 'Music\SongController@store');
+        });
     });
 
 });
