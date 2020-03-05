@@ -32,7 +32,7 @@ axios.interceptors.response.use(response => {
     if (error.response && error.response.data) {
         handleHtmlError(error.response);
     }
-    return Promise.reject(error);
+    // return Promise.reject(error);
 });
 
 /**
