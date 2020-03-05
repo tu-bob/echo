@@ -29,6 +29,9 @@
 </template>
 
 <script>
+    const CancelToken = axios.CancelToken;
+    let source;
+
     export default {
         created() {
             if (this.providedQuery) {
@@ -157,9 +160,16 @@
                 }, 150);
             },
             fetchData() {
+                // if (source) {
+                //     source.cancel();
+                // }
+                //
+                // source = CancelToken.source();
+
                 if (this.query)
                     axios.get(this.actionUrl + this.query)
                         .then(response => this.options = response)
+                        .catch();
             }
         }
     }

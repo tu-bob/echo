@@ -2488,6 +2488,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+var CancelToken = axios.CancelToken;
+var source;
 /* harmony default export */ __webpack_exports__["default"] = ({
   created: function created() {
     if (this.providedQuery) {
@@ -2609,9 +2611,14 @@ __webpack_require__.r(__webpack_exports__);
     fetchData: function fetchData() {
       var _this2 = this;
 
+      // if (source) {
+      //     source.cancel();
+      // }
+      //
+      // source = CancelToken.source();
       if (this.query) axios.get(this.actionUrl + this.query).then(function (response) {
         return _this2.options = response;
-      });
+      })["catch"]();
     }
   }
 });
