@@ -69,7 +69,7 @@ class ArtistController extends Controller
     }
 
     private $rules = [
-        'name' => 'required|string',
-        'aliases' => 'nullable|array'
+        'name' => 'required|string|unique:artists,name',
+        'aliases.*' => 'nullable|string|unique:artist_aliases,name'
     ];
 }
