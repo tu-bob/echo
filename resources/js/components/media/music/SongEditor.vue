@@ -1,6 +1,10 @@
 <template>
     <div>
         <div class="form-group">
+            <label for="song">Выберите песню</label>
+            <input type="file" id="song" class="form-control" @change="getMetaData">
+        </div>
+        <div class="form-group">
             <label>Название</label>
             <input type="text" class="form-control" v-model="song.title">
         </div>
@@ -53,14 +57,15 @@
             <input type="text" class="form-control" v-model="song.genre">
         </div>
         <div class="form-group">
-            <label>Длина</label>
-            <input type="text" class="form-control" v-model="song.length">
+            <label>Лэйбел</label>
+            <input type="text" class="form-control" v-model="song.label">
         </div>
     </div>
 </template>
 
 <script>
     import SuggestionInput from "../../common/inputs/SuggestionInput";
+    import {parseBlob} from 'music-metadata-browser';
 
     export default {
         name: "SongEditor",
@@ -106,7 +111,29 @@
                 this.$refs.artistSearch.query = '';
                 this.$refs.artistSearch.options = [];
             },
-        }
+
+            getMetaData() {
+                parseBlob($('#song')[0].files[0])
+                    .then(metadata => {
+                        console.log(metadata);
+                        this.fillData(metadata)
+                    })
+                    .catch(err => {
+                        console.error(err.message);
+                    });
+            },
+            fillData(meta) {
+                this.song.title = meta.common.title;
+                this.song.year = meta.common.year;
+                this.song.label = meta.common.label;
+                this.song.bitrate = meta.bitrate;
+                this.song.sampleRate = meta.sampleRate;
+                this.song.container = meta.container;
+                this.song.numberOfChannels = meta.numberOfChannels;
+                this.song.duration = meta.duration;
+                this.song.lossless = meta.lossless;
+            }
+        },
     }
 </script>
 
