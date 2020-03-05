@@ -16,6 +16,6 @@ class MediaDatabaseSeeder extends Seeder
     {
         Model::unguard();
 
-        // $this->call("OthersTableSeeder");
+         $this->call(GenresTableSeeder::class);
     }
 }
