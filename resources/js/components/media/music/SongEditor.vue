@@ -1,8 +1,14 @@
 <template>
     <div>
         <div class="form-group">
-            <label>Выберите песню</label>
-            <input type="file" class="form-control" @change="getMetaData">
+            <b-form-file
+                v-model="file"
+                :state="Boolean(file)"
+                accept=".mp3, .wag, .ogg"
+                placeholder="Выберите файл или перетащите его сюда..."
+                drop-placeholder="Перетащите файл сюда..."
+                browse-text="Обзор"
+            ></b-form-file>
         </div>
         <div class="form-group">
             <label>Название</label>
@@ -78,6 +84,7 @@
             return {
                 artistAliases: [],
                 missedArtists: [],
+                file: null,
                 song: {
                     title: null,
                     year: null,
@@ -103,6 +110,12 @@
                 }
             }
         },
+        watch: {
+            file() {
+                if (this.file)
+                    this.getMetaData();
+            }
+        },
         methods: {
             onArtistSelected(artist) {
                 if (artist) {
@@ -116,15 +129,12 @@
                 this.$refs.artistSearch.query = '';
                 this.$refs.artistSearch.options = [];
             },
-
-            getMetaData(e) {
-                parseBlob(e.target.files[0])
+            getMetaData() {
+                parseBlob(this.file)
                     .then(metadata => {
-                        console.log(metadata);
                         this.fillData(metadata)
                     })
-                    .catch(err => {
-                        console.error(err.message);
+                    .catch(err => { 
                     });
             },
             getArtist(name) {
