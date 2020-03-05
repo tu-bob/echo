@@ -4,7 +4,7 @@
             <b-form-file
                 v-model="file"
                 :state="Boolean(file)"
-                accept="audio/mpeg, audio/ogg, audio/wav"
+                accept=".mp3, .ogg, .wav"
                 placeholder="Выберите файл или перетащите его сюда..."
                 drop-placeholder="Перетащите файл сюда..."
                 browse-text="Обзор"
@@ -76,6 +76,7 @@
 <script>
     import SuggestionInput from "../../common/inputs/SuggestionInput";
     import {parseBlob} from 'music-metadata-browser';
+    import {validateAudio} from '../../../util/validators.js'
 
     export default {
         name: "SongEditor",
@@ -112,8 +113,9 @@
         },
         watch: {
             file() {
-                if (this.file)
+                if (this.file && validateAudio(this.file))
                     this.getMetaData();
+                else this.file = null;
             }
         },
         methods: {
@@ -134,7 +136,7 @@
                     .then(metadata => {
                         this.fillData(metadata)
                     })
-                    .catch(err => {
+                    .catch(err => {console.log(err)
                     });
             },
             getArtist(name) {
