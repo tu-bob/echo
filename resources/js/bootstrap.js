@@ -5,7 +5,7 @@ window._ = require('lodash');
  * for JavaScript based Bootstrap features such as modals and tabs. This
  * code may be modified to fit the specific needs of your application.
  */
-import {handleHtmlError} from './htmlErrorHandler.js';
+import {handleHtmlError} from './util/htmlErrorHandler.js';
 
 try {
     window.Popper = require('popper.js').default;
