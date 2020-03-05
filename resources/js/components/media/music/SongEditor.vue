@@ -10,6 +10,9 @@
                 browse-text="Обзор"
             ></b-form-file>
         </div>
+        <div class="alert alert-info" v-if="file">
+            <span>{{song.bitrate / 1000}} kbs | {{song.sampleRate}} | {{song.container}} | {{Math.round(song.duration / 60 *100) / 100}}</span>
+        </div>
         <div class="form-group">
             <label>Название</label>
             <input type="text" class="form-control" v-model="song.title" autofocus>
@@ -155,12 +158,12 @@
                 this.song.title = meta.common.title;
                 this.song.year = meta.common.year;
                 this.song.label = meta.common.label;
-                this.song.bitrate = meta.bitrate;
-                this.song.sampleRate = meta.sampleRate;
-                this.song.container = meta.container;
-                this.song.numberOfChannels = meta.numberOfChannels;
-                this.song.duration = meta.duration;
-                this.song.lossless = meta.lossless;
+                this.song.bitrate = meta.format.bitrate;
+                this.song.sampleRate = meta.format.sampleRate;
+                this.song.container = meta.format.container;
+                this.song.numberOfChannels = meta.format.numberOfChannels;
+                this.song.duration = meta.format.duration;
+                this.song.lossless = meta.format.lossless;
 
                 if (meta.common.artists)
                     for (let i = 0; i < meta.common.artists.length; i++) {
