@@ -76,6 +76,8 @@
             <label>Лэйбл</label>
             <input type="text" class="form-control" v-model="song.label">
         </div>
+
+        <button class="btn btn-primary" @click="submit">Сохранить</button>
     </div>
 </template>
 
@@ -161,10 +163,29 @@
                         this.missedArtists.push(name);
                 })
             },
+            submit() {
+                let data = new FormData();
+                data.append('id', this.song.id);
+                data.append('file', this.file, this.file.name);
+                data.append('title', this.song.title);
+                data.append('year', String(this.song.year));
+                data.append('label', this.song.label);
+
+                for (let i = 0; i < this.song.artistAliases.length; i++) {
+                    data.append('artistAliases[]', this.song.artistAliases[i].id);
+                }
+
+                for (let i = 0; i < this.song.genres.length; i++) {
+                    data.append('genres[]', this.song.genres[i].id);
+                }
+
+                axios.post('/media/music/song', data)
+                // .then(this.$router.go());
+            },
             fillData(meta) {
                 this.song.title = meta.common.title;
                 this.song.year = meta.common.year;
-                this.song.label = meta.common.label;
+                this.song.label = meta.common.label[0];
                 this.song.bitrate = meta.format.bitrate;
                 this.song.sampleRate = meta.format.sampleRate;
                 this.song.container = meta.format.container;
