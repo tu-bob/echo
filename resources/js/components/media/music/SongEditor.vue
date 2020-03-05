@@ -9,6 +9,7 @@
             <input type="text" class="form-control" v-model="song.title">
         </div>
         <div>
+            <label>Исполнители</label>
             <b-form-tags v-model="artistAliases" no-outer-focus class="mb-2">
                 <template v-slot="{ tags, inputAttrs, inputHandlers, addTag, removeTag }">
                     <b-input-group aria-controls="my-custom-tags-list">
@@ -47,6 +48,9 @@
                     </ul>
                 </template>
             </b-form-tags>
+            <span v-if="missedArtists.length > 0" class="small">Исполнители не найдены:
+                <b v-for="artist in missedArtists">{{artist}}</b>
+            </span>
         </div>
         <div class="form-group">
             <label>Год</label>
@@ -57,7 +61,7 @@
             <input type="text" class="form-control" v-model="song.genre">
         </div>
         <div class="form-group">
-            <label>Лэйбел</label>
+            <label>Лэйбл</label>
             <input type="text" class="form-control" v-model="song.label">
         </div>
     </div>
@@ -73,6 +77,7 @@
         data() {
             return {
                 artistAliases: [],
+                missedArtists: [],
                 song: {
                     title: null,
                     year: null,
@@ -122,6 +127,15 @@
                         console.error(err.message);
                     });
             },
+            getArtist(name) {
+                axios.get(`/media/artist/alias/filter?name=${name}`)
+                    .then(aliases => {console.log(aliases)
+                        if (aliases && aliases.length > 0)
+                            this.onArtistSelected(aliases[0]);
+                        else
+                            this.missedArtists.push(name);
+                    })
+            },
             fillData(meta) {
                 this.song.title = meta.common.title;
                 this.song.year = meta.common.year;
@@ -132,6 +146,11 @@
                 this.song.numberOfChannels = meta.numberOfChannels;
                 this.song.duration = meta.duration;
                 this.song.lossless = meta.lossless;
+
+                if (meta.common.artists)
+                    for (let i = 0; i < meta.common.artists.length; i++) {
+                        this.getArtist(meta.common.artists[i]);
+                    }
             }
         },
     }

@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Modules\Media\Http\Controllers;
+namespace Modules\Media\Http\Controllers\Artist;
 
 
 use App\Http\Controllers\Controller;
