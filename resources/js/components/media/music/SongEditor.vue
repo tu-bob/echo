@@ -12,7 +12,7 @@
         </div>
         <div class="form-group">
             <label>Название</label>
-            <input type="text" class="form-control" v-model="song.title">
+            <input type="text" class="form-control" v-model="song.title" autofocus>
         </div>
         <div>
             <label>Исполнители</label>
@@ -62,9 +62,11 @@
             <label>Год</label>
             <input type="text" class="form-control" v-model="song.year">
         </div>
-        <div class="form-group">
-            <label>Жанр</label>
-            <input type="text" class="form-control" v-model="song.genre">
+        <div>
+            <select v-model="song.genres" multiple class="form-control">
+                <option v-for="genre in genres" :value="genre" :key="genre.id">{{genre.name}}</option>
+            </select>
+            <div class="mt-3">Selected: <strong v-for="genre in song.genres">{{ genre.name }} </strong></div>
         </div>
         <div class="form-group">
             <label>Лэйбл</label>
@@ -89,7 +91,10 @@
             }
         },
         created() {
-            fetchGenres().then(genres => this.genres = genres);
+            fetchGenres().then(genres => {
+                if (genres)
+                    this.genres = genres
+            });
         },
         data() {
             return {
@@ -100,7 +105,7 @@
                 song: {
                     title: null,
                     year: null,
-                    genre: null,
+                    genres: [],
                     length: null,
                     artistAliases: []
                 }
