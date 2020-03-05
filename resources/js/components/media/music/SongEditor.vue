@@ -112,7 +112,14 @@
                     year: null,
                     genres: [],
                     length: null,
-                    artistAliases: []
+                    artistAliases: [],
+                    label: null,
+                    bitrate: null,
+                    sampleRate: null,
+                    container: null,
+                    numberOfChannels: null,
+                    lossless: null,
+                    duration: null
                 }
             }
         },
