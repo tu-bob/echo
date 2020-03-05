@@ -17,7 +17,7 @@ class ArtistController extends Controller
     public function store()
     {
         $data = request()->validate($this->rules);
-        $artist = Artist::create(["name" => $data['name']]);
+        $artist = Artist::create();
 
         $this->createAliases($artist, $data['aliases']);
 
@@ -27,8 +27,6 @@ class ArtistController extends Controller
     public function update(Artist $artist)
     {
         $data = request()->validate($this->rules);
-        $artist->update(['name' => $data['name']]);
-
         $aliases = array();
 
         $deletedAliases = $artist->aliases->filter(function ($alias) use ($data) {
@@ -68,8 +66,13 @@ class ArtistController extends Controller
         return $artist;
     }
 
+//    public function findArtist()
+//    {
+//        return Artist::where('name', 'like', '%' . request()->get('name') . '%')->get();
+//    }
+
     private $rules = [
-        'name' => 'required|string|unique:artists,name',
-        'aliases.*' => 'nullable|string|unique:artist_aliases,name'
+        'aliases' => 'required|array',
+        'aliases.*' => 'string|unique:artist_aliases,name'
     ];
 }

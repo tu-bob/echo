@@ -77336,37 +77336,11 @@ var render = function() {
   return _c("div", { staticClass: "col-md-6" }, [
     _c("h4", [_vm._v("Добавить артиста")]),
     _vm._v(" "),
-    _c("div", { staticClass: "form-group" }, [
-      _c("label", [_vm._v("Название")]),
-      _vm._v(" "),
-      _c("input", {
-        directives: [
-          {
-            name: "model",
-            rawName: "v-model",
-            value: _vm.artist.name,
-            expression: "artist.name"
-          }
-        ],
-        staticClass: "form-control",
-        attrs: { type: "text" },
-        domProps: { value: _vm.artist.name },
-        on: {
-          input: function($event) {
-            if ($event.target.composing) {
-              return
-            }
-            _vm.$set(_vm.artist, "name", $event.target.value)
-          }
-        }
-      })
-    ]),
-    _vm._v(" "),
     _c(
       "div",
       { staticClass: "form-group" },
       [
-        _c("label", [_vm._v("Синонимы")]),
+        _c("label", [_vm._v("Имя или псевдонимы")]),
         _vm._v(" "),
         _c("b-form-tags", {
           staticClass: "mb-2",

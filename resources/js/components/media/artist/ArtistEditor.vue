@@ -1,12 +1,12 @@
 <template>
     <div class="col-md-6">
         <h4>Добавить артиста</h4>
+<!--        <div class="form-group">-->
+<!--            <label>Название</label>-->
+<!--            <input type="text" class="form-control" v-model="artist.name">-->
+<!--        </div>-->
         <div class="form-group">
-            <label>Название</label>
-            <input type="text" class="form-control" v-model="artist.name">
-        </div>
-        <div class="form-group">
-            <label>Синонимы</label>
+            <label>Имя или псевдонимы</label>
             <b-form-tags input-id="tags-basic"
                          v-model="aliases"
                          class="mb-2"

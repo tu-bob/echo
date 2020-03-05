@@ -15,7 +15,6 @@ class CreateArtistsTable extends Migration
     {
         Schema::create('artists', function (Blueprint $table) {
             $table->char('id', 26)->primary();
-            $table->string('name', 100)->unique();
             $table->softDeletes();
             $table->timestamps();
         });
