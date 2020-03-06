@@ -166,7 +166,7 @@
                 //
                 // source = CancelToken.source();
 
-                if (this.query)
+                if (this.query && this.query.length > 2)
                     axios.get(this.actionUrl + this.query)
                         .then(response => this.options = response)
                         .catch();
