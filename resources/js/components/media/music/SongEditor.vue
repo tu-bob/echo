@@ -48,41 +48,41 @@
                     </b-button>
                 </b-card>
             </ul>
-<!--            <b-form-tags v-model="artistAliases" no-outer-focus class="mb-2">-->
-<!--                <template v-slot="{ tags, inputAttrs, inputHandlers, addTag, removeTag }">-->
-<!--                    <b-input-group aria-controls="my-custom-tags-list">-->
+            <!--            <b-form-tags v-model="artistAliases" no-outer-focus class="mb-2">-->
+            <!--                <template v-slot="{ tags, inputAttrs, inputHandlers, addTag, removeTag }">-->
+            <!--                    <b-input-group aria-controls="my-custom-tags-list">-->
 
-<!--                    </b-input-group>-->
-<!--                    <ul-->
-<!--                        id="my-custom-tags-list"-->
-<!--                        class="list-unstyled d-inline-flex flex-wrap mb-0"-->
-<!--                        aria-live="polite"-->
-<!--                        aria-atomic="false"-->
-<!--                        aria-relevant="additions removals"-->
-<!--                    >-->
-<!--                        &lt;!&ndash; Always use the tag value as the :key, not the index! &ndash;&gt;-->
-<!--                        &lt;!&ndash; Otherwise screen readers will not read the tag-->
-<!--                             additions and removals correctly &ndash;&gt;-->
-<!--                        <b-card-->
-<!--                            v-for="tag in tags"-->
-<!--                            :key="tag"-->
-<!--                            :id="`my-custom-tags-tag_${tag.replace(/\s/g, '_')}_`"-->
-<!--                            tag="li"-->
-<!--                            class="mt-1 mr-1"-->
-<!--                            body-class="py-1 pr-2 text-nowrap"-->
-<!--                        >-->
-<!--                            <strong>{{ tag }}</strong>-->
-<!--                            <b-button-->
-<!--                                @click="removeArtistAlias(tag)"-->
-<!--                                variant="link"-->
-<!--                                size="sm"-->
-<!--                                :aria-controls="`my-custom-tags-tag_${tag.replace(/\s/g, '_')}_`"-->
-<!--                            >&times;-->
-<!--                            </b-button>-->
-<!--                        </b-card>-->
-<!--                    </ul>-->
-<!--                </template>-->
-<!--            </b-form-tags>-->
+            <!--                    </b-input-group>-->
+            <!--                    <ul-->
+            <!--                        id="my-custom-tags-list"-->
+            <!--                        class="list-unstyled d-inline-flex flex-wrap mb-0"-->
+            <!--                        aria-live="polite"-->
+            <!--                        aria-atomic="false"-->
+            <!--                        aria-relevant="additions removals"-->
+            <!--                    >-->
+            <!--                        &lt;!&ndash; Always use the tag value as the :key, not the index! &ndash;&gt;-->
+            <!--                        &lt;!&ndash; Otherwise screen readers will not read the tag-->
+            <!--                             additions and removals correctly &ndash;&gt;-->
+            <!--                        <b-card-->
+            <!--                            v-for="tag in tags"-->
+            <!--                            :key="tag"-->
+            <!--                            :id="`my-custom-tags-tag_${tag.replace(/\s/g, '_')}_`"-->
+            <!--                            tag="li"-->
+            <!--                            class="mt-1 mr-1"-->
+            <!--                            body-class="py-1 pr-2 text-nowrap"-->
+            <!--                        >-->
+            <!--                            <strong>{{ tag }}</strong>-->
+            <!--                            <b-button-->
+            <!--                                @click="removeArtistAlias(tag)"-->
+            <!--                                variant="link"-->
+            <!--                                size="sm"-->
+            <!--                                :aria-controls="`my-custom-tags-tag_${tag.replace(/\s/g, '_')}_`"-->
+            <!--                            >&times;-->
+            <!--                            </b-button>-->
+            <!--                        </b-card>-->
+            <!--                    </ul>-->
+            <!--                </template>-->
+            <!--            </b-form-tags>-->
             <span v-if="missedArtists.length > 0" class="small">Исполнители не найдены:
                 <b v-for="artist in missedArtists">{{artist}}</b>
             </span>
@@ -91,13 +91,41 @@
             <label>Год</label>
             <input type="text" class="form-control" v-model="song.year">
         </div>
-        <div>
-            <select v-model="song.genres" multiple class="form-control">
-                <option v-for="genre in genres" :value="genre" :key="genre.id">{{genre.name}} {{genre.local_name}}
-                </option>
-            </select>
-            <div class="my-3">Выбранные жанры: <strong v-for="genre in song.genres">{{ genre.name }} </strong></div>
+
+        <div class="form-group">
+           <label>Жанры</label>
+            <suggestion-input displayPropertyName="name"
+                              ref="genreSearch"
+                              @selected="onGenreSelected"
+                              :providedOptions="genres"
+                              searchPropertyName="name">
+            </suggestion-input>
+            <ul
+                class="list-unstyled d-inline-flex flex-wrap mb-0"
+                aria-live="polite"
+                aria-atomic="false"
+                aria-relevant="additions removals"
+            >
+                <b-card
+                    v-for="genre in song.genres"
+                    :key="genre.id"
+                    :id="`genresTagList_${genre.name.replace(/\s/g, '_')}_`"
+                    tag="li"
+                    class="mt-1 mr-1 bg-warning"
+                    body-class="py-1 pr-2 text-nowrap"
+                >
+                    <strong>{{ genre.name }}</strong>
+                    <b-button
+                        @click="removeGenre(genre.id)"
+                        variant="link"
+                        size="sm"
+                        :aria-controls="`genresTagList__${genre.name.replace(/\s/g, '_')}_`"
+                    >&times;
+                    </b-button>
+                </b-card>
+            </ul>
         </div>
+
         <div class="form-group">
             <label>Альбомы</label>
             <suggestion-input displayPropertyName="title"
@@ -165,7 +193,7 @@
             return {
                 artistAliases: [],
                 missedArtists: [],
-                albumTags:[],
+                albumTags: [],
                 missedAlbums: [],
                 mp3File: this.providedFile,
                 genres: [],
@@ -214,6 +242,17 @@
 
                 this.$refs.albumSearch.query = '';
                 this.$refs.albumSearch.options = [];
+            },
+            onGenreSelected(genre) {
+                if (genre) {
+                    let exists = this.song.genres.find((item) => item.id === genre.id);
+                    if (!exists) {
+                        this.song.genres.push(genre);
+                    }
+                }
+
+                this.$refs.genreSearch.query = '';
+                this.$refs.genreSearch.options = [];
             },
             getMetaData() {
                 parseBlob(this.mp3File)
@@ -268,6 +307,9 @@
             removeAlbum(title) {
                 this.song.albums = this.song.albums.filter(album => album.title !== title);
                 this.albumTags = this.albumTags.filter(tag => tag !== title);
+            },
+            removeGenre(id) {
+                this.song.genres = this.song.genres.filter(genre => genre.id !== id);
             },
             fillData(meta) {
                 this.song.title = meta.common.title;
