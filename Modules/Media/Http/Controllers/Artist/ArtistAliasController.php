@@ -13,7 +13,7 @@ class ArtistAliasController extends Controller
     public function filter()
     {
         $aliases = ArtistAlias::all();
-        $finder = new DiceBestMatchFinder('ldpl', $aliases->all(), 'name');
+        $finder = new DiceBestMatchFinder(request()->get('name'), $aliases->all(), 'name');
         $matches = $finder->findBestMatches(0.5);
 
         return array_map(function ($match) {
