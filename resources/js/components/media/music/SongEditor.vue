@@ -73,12 +73,39 @@
             <div class="my-3">Выбранные жанры: <strong v-for="genre in song.genres">{{ genre.name }} </strong></div>
         </div>
         <div>
-            <label>Альбом</label>
+            <label>Альбомы</label>
             <suggestion-input displayPropertyName="title"
                               ref="albumSearch"
                               @selected="onAlbumSelected"
-                              action-url="/media/album/filter?title=">
+                              action-url="/media/music/album/filter?title=">
             </suggestion-input>
+            <ul
+                class="list-unstyled d-inline-flex flex-wrap mb-0"
+                aria-live="polite"
+                aria-atomic="false"
+                aria-relevant="additions removals"
+            >
+                <!-- Always use the tag value as the :key, not the index! -->
+                <!-- Otherwise screen readers will not read the tag
+                     additions and removals correctly -->
+                <b-card
+                    v-for="tag in albumTags"
+                    :key="tag"
+                    :id="`albumsTagList_${tag.replace(/\s/g, '_')}_`"
+                    tag="li"
+                    class="mt-1 mr-1"
+                    body-class="py-1 pr-2 text-nowrap"
+                >
+                    <strong>{{ tag }}</strong>
+                    <b-button
+                        @click="removeAlbum(tag)"
+                        variant="link"
+                        size="sm"
+                        :aria-controls="`albumsTagList__${tag.replace(/\s/g, '_')}_`"
+                    >&times;
+                    </b-button>
+                </b-card>
+            </ul>
         </div>
         <div class="form-group">
             <label>Лэйбл</label>
@@ -93,7 +120,7 @@
     import SuggestionInput from "../../common/inputs/SuggestionInput";
     import {parseBlob} from 'music-metadata-browser';
     import {validateAudio} from '../../../util/validators.js'
-    import {fetchGenres, fetchArtistAliasesByName} from '../../../util/apiCalls.js'
+    import {fetchGenres, fetchArtistAliasesByName, fetchFilteredAlbums} from '../../../api/mediaApi.js'
     import * as ss from 'string-similarity';
 
     export default {
@@ -115,6 +142,8 @@
             return {
                 artistAliases: [],
                 missedArtists: [],
+                albumTags:[],
+                missedAlbums: [],
                 mp3File: this.providedFile,
                 genres: [],
                 song: {
@@ -123,7 +152,7 @@
                     genres: [],
                     length: null,
                     artistAliases: [],
-                    album: null,
+                    albums: [],
                     label: null,
                     bitrate: null,
                     sampleRate: null,
@@ -156,12 +185,17 @@
             },
             onAlbumSelected(album) {
                 if (album) {
-                    this.song.album = album;
+                    this.song.albums.push(album);
+                    this.albumTags.push(album.title);
                 }
+
+                this.$refs.albumSearch.query = '';
+                this.$refs.albumSearch.options = [];
             },
             getMetaData() {
                 parseBlob(this.mp3File)
                     .then(metadata => {
+                        console.log(metadata)
                         this.fillData(metadata)
                     })
                     .catch(err => {
@@ -175,6 +209,15 @@
                     else
                         this.missedArtists.push(name);
                 })
+            },
+            fetchAlbum(title) {
+                fetchFilteredAlbums({'title': title})
+                    .then(albums => {
+                        if (albums && albums.length > 0)
+                            this.onAlbumSelected(albums[0]);
+                        else
+                            this.missedAlbum = title;
+                    })
             },
             submit() {
                 let data = new FormData();
@@ -199,6 +242,10 @@
                 this.song.artistAliases = this.song.artistAliases.filter(alias => alias.name !== name);
                 this.artistAliases = this.artistAliases.filter(alias => alias !== name);
             },
+            removeAlbum(title) {
+                this.song.albums = this.song.albums.filter(album => album.title !== title);
+                this.albumTags = this.albumTags.filter(tag => tag !== title);
+            },
             fillData(meta) {
                 this.song.title = meta.common.title;
                 this.song.year = meta.common.year;
@@ -214,6 +261,9 @@
                     for (let i = 0; i < meta.common.artists.length; i++) {
                         this.fetchArtist(meta.common.artists[i]);
                     }
+
+                if (meta.common.album)
+                    this.fetchAlbum(meta.common.album);
 
                 if (meta.common.genre) {
                     for (let j = 0; j < meta.common.genre.length; j++) {
