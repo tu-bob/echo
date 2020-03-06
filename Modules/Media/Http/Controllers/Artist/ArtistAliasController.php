@@ -14,7 +14,7 @@ class ArtistAliasController extends Controller
     {
         $aliases = ArtistAlias::all();
         $finder = new DiceBestMatchFinder(request()->get('name'), $aliases->all(), 'name');
-        $matches = $finder->findBestMatches(0.5);
+        $matches = $finder->findBestMatches($this->stringMatchMinRate);
 
         return array_map(function ($match) {
             return $match->entity;
