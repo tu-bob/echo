@@ -4,7 +4,7 @@
             <b-form-file
                 v-model="file"
                 :state="Boolean(file)"
-                accept=".mp3, .ogg, .wav"
+                accept=".mp3"
                 placeholder="Выберите файл или перетащите его сюда..."
                 drop-placeholder="Перетащите файл сюда..."
                 browse-text="Обзор"
@@ -47,7 +47,7 @@
                         >
                             <strong>{{ tag }}</strong>
                             <b-button
-                                @click="removeTag(tag)"
+                                @click="removeArtistAlias(tag)"
                                 variant="link"
                                 size="sm"
                                 :aria-controls="`my-custom-tags-tag_${tag.replace(/\s/g, '_')}_`"
@@ -148,7 +148,6 @@
             getMetaData() {
                 parseBlob(this.file)
                     .then(metadata => {
-                        console.log(metadata)
                         this.fillData(metadata)
                     })
                     .catch(err => {
@@ -181,6 +180,10 @@
 
                 axios.post('/media/music/song', data)
                 // .then(this.$router.go());
+            },
+            removeArtistAlias(name) {
+                this.song.artistAliases = this.song.artistAliases.filter(alias => alias.name !== name);
+                this.artistAliases = this.artistAliases.filter(alias => alias !== name);
             },
             fillData(meta) {
                 this.song.title = meta.common.title;
