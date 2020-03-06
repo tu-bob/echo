@@ -21,7 +21,8 @@
                  @click.stop.prevent="onOptionSelected(option)"
                  class="dropdown-item"
                  v-bind:property="option"
-                 v-for="(option, index) in options">
+                 v-for="(option, index) in options"
+                 :key="option[keyPropertyName]">
                 {{option[displayPropertyName]}}
             </div>
         </div>
@@ -52,6 +53,7 @@
             actionUrl: String,
             placeholder: String,
             displayPropertyName: String,
+            searchPropertyName: String,
             keyPropertyName: {
                 type: String,
                 default: 'id'
@@ -89,7 +91,10 @@
                 this.options = this.providedOptions
             },
             query() {
-                this.fetchData();
+                if (this.actionUrl)
+                    this.fetchData();
+                else
+                    this.filterData();
             }
         },
         methods: {
@@ -170,6 +175,17 @@
                     axios.get(this.actionUrl + this.query)
                         .then(response => this.options = response)
                         .catch();
+            },
+            filterData() {
+                if (this.query) {
+                    this.options = this.providedOptions
+                        .filter(option => option[this.searchPropertyName]
+                            .replace(/[^a-zA-Z]/g, '')
+                            .toUpperCase()
+                            .includes(this.query.replace(/[^a-zA-Z]/g, '').toUpperCase()))
+                } else {
+                    this.options = this.providedOptions;
+                }
             }
         }
     }
