@@ -31,19 +31,19 @@
                 aria-relevant="additions removals"
             >
                 <b-card
-                    v-for="tag in artistAliases"
-                    :key="tag"
-                    :id="`artistAliasesTagList_${tag.replace(/\s/g, '_')}_`"
+                    v-for="artistAlias in song.artistAliases"
+                    :key="artistAlias.id"
+                    :id="`artistAliasesTagList_${artistAlias.name.replace(/\s/g, '_')}_`"
                     tag="li"
                     class="mt-1 mr-1 bg-warning"
                     body-class="py-1 pr-2 text-nowrap"
                 >
-                    <strong>{{ tag }}</strong>
+                    <strong>{{ artistAlias.name }}</strong>
                     <b-button
-                        @click="removeArtistAlias(tag)"
+                        @click="removeArtistAlias(artistAlias.id)"
                         variant="link"
                         size="sm"
-                        :aria-controls="`artistAliasesTagList__${tag.replace(/\s/g, '_')}_`"
+                        :aria-controls="`artistAliasesTagList__${artistAlias.name.replace(/\s/g, '_')}_`"
                     >&times;
                     </b-button>
                 </b-card>
@@ -75,7 +75,7 @@
                 <b-card
                     v-for="genre in song.genres"
                     :key="genre.id"
-                    :id="`genresTagList_${genre.name.replace(/\s/g, '_')}_`"
+                    :id="`genresTagList_${genre.id.replace(/\s/g, '_')}_`"
                     tag="li"
                     class="mt-1 mr-1 bg-warning"
                     body-class="py-1 pr-2 text-nowrap"
@@ -85,7 +85,7 @@
                         @click="removeGenre(genre.id)"
                         variant="link"
                         size="sm"
-                        :aria-controls="`genresTagList__${genre.name.replace(/\s/g, '_')}_`"
+                        :aria-controls="`genresTagList__${genre.id.replace(/\s/g, '_')}_`"
                     >&times;
                     </b-button>
                 </b-card>
@@ -108,7 +108,7 @@
                 <b-card
                     v-for="album in song.albums"
                     :key="album.id"
-                    :id="`albumsTagList_${album.title.replace(/\s/g, '_')}_`"
+                    :id="`albumsTagList_${album.id.replace(/\s/g, '_')}_`"
                     tag="li"
                     class="mt-1 mr-1 bg-warning"
                     body-class="py-1 pr-2 text-nowrap"
@@ -118,7 +118,7 @@
                         @click="removeAlbum(album.id)"
                         variant="link"
                         size="sm"
-                        :aria-controls="`albumsTagList__${album.title.replace(/\s/g, '_')}_`"
+                        :aria-controls="`albumsTagList__${album.id.replace(/\s/g, '_')}_`"
                     >&times;
                     </b-button>
                 </b-card>
@@ -157,7 +157,6 @@
         },
         data() {
             return {
-                artistAliases: [],
                 missedArtists: [],
                 missedAlbums: [],
                 mp3File: this.providedFile,
@@ -192,7 +191,6 @@
                     let exists = this.song.artistAliases.find((alias) => alias.id === artist.id);
                     if (!exists) {
                         this.song.artistAliases.push(artist);
-                        this.artistAliases.push(artist.name);
                     }
                 }
 
@@ -264,9 +262,8 @@
                 axios.post('/media/music/song', data)
                 // .then(this.$router.go());
             },
-            removeArtistAlias(name) {
-                this.song.artistAliases = this.song.artistAliases.filter(alias => alias.name !== name);
-                this.artistAliases = this.artistAliases.filter(alias => alias !== name);
+            removeArtistAlias(id) {
+                this.song.artistAliases = this.song.artistAliases.filter(alias => alias.id !== id);
             },
             removeAlbum(id) {
                 this.song.albums = this.song.albums.filter(album => album.id !== id);
