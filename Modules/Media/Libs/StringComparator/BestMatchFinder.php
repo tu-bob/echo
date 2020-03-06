@@ -4,7 +4,6 @@
 namespace Modules\Media\Libs\StringComparator;
 
 
-use Illuminate\Database\Eloquent\Model;
 use Modules\Media\Libs\StringComparators\Models\BestMatch;
 
 abstract class BestMatchFinder
@@ -39,6 +38,34 @@ abstract class BestMatchFinder
 
         return $this->bestMatch;
     }
+
+    public function compMatches($a, $b)
+    {
+        if ($a->score == $b->score) {
+            return 0;
+        }
+        return ($a->score > $b->score) ? -1 : 1;
+    }
+
+    /**
+     * @param $rate
+     * @return array BestMatch
+     */
+    public function findBestMatches($rate)
+    {
+        $bestMatches = [];
+
+        foreach ($this->options as $option) {
+            $score = $this->compare(mb_strtoupper($this->needle), mb_strtoupper($option[$this->key]));
+            if ($score >= $rate) {
+                $bestMatches[] = new BestMatch($score, $option);
+            }
+        }
+
+        usort($bestMatches, array(BestMatchFinder::class, 'compMatches'));
+        return $bestMatches;
+    }
+
 
     /**
      * @param $needle
