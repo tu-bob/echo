@@ -48,41 +48,7 @@
                     </b-button>
                 </b-card>
             </ul>
-            <!--            <b-form-tags v-model="artistAliases" no-outer-focus class="mb-2">-->
-            <!--                <template v-slot="{ tags, inputAttrs, inputHandlers, addTag, removeTag }">-->
-            <!--                    <b-input-group aria-controls="my-custom-tags-list">-->
 
-            <!--                    </b-input-group>-->
-            <!--                    <ul-->
-            <!--                        id="my-custom-tags-list"-->
-            <!--                        class="list-unstyled d-inline-flex flex-wrap mb-0"-->
-            <!--                        aria-live="polite"-->
-            <!--                        aria-atomic="false"-->
-            <!--                        aria-relevant="additions removals"-->
-            <!--                    >-->
-            <!--                        &lt;!&ndash; Always use the tag value as the :key, not the index! &ndash;&gt;-->
-            <!--                        &lt;!&ndash; Otherwise screen readers will not read the tag-->
-            <!--                             additions and removals correctly &ndash;&gt;-->
-            <!--                        <b-card-->
-            <!--                            v-for="tag in tags"-->
-            <!--                            :key="tag"-->
-            <!--                            :id="`my-custom-tags-tag_${tag.replace(/\s/g, '_')}_`"-->
-            <!--                            tag="li"-->
-            <!--                            class="mt-1 mr-1"-->
-            <!--                            body-class="py-1 pr-2 text-nowrap"-->
-            <!--                        >-->
-            <!--                            <strong>{{ tag }}</strong>-->
-            <!--                            <b-button-->
-            <!--                                @click="removeArtistAlias(tag)"-->
-            <!--                                variant="link"-->
-            <!--                                size="sm"-->
-            <!--                                :aria-controls="`my-custom-tags-tag_${tag.replace(/\s/g, '_')}_`"-->
-            <!--                            >&times;-->
-            <!--                            </b-button>-->
-            <!--                        </b-card>-->
-            <!--                    </ul>-->
-            <!--                </template>-->
-            <!--            </b-form-tags>-->
             <span v-if="missedArtists.length > 0" class="small">Исполнители не найдены:
                 <b v-for="artist in missedArtists">{{artist}}</b>
             </span>
@@ -140,19 +106,19 @@
                 aria-relevant="additions removals"
             >
                 <b-card
-                    v-for="tag in albumTags"
-                    :key="tag"
-                    :id="`albumsTagList_${tag.replace(/\s/g, '_')}_`"
+                    v-for="album in song.albums"
+                    :key="album.id"
+                    :id="`albumsTagList_${album.title.replace(/\s/g, '_')}_`"
                     tag="li"
                     class="mt-1 mr-1 bg-warning"
                     body-class="py-1 pr-2 text-nowrap"
                 >
-                    <strong>{{ tag }}</strong>
+                    <strong>{{ album.title }}</strong>
                     <b-button
-                        @click="removeAlbum(tag)"
+                        @click="removeAlbum(album.id)"
                         variant="link"
                         size="sm"
-                        :aria-controls="`albumsTagList__${tag.replace(/\s/g, '_')}_`"
+                        :aria-controls="`albumsTagList__${album.title.replace(/\s/g, '_')}_`"
                     >&times;
                     </b-button>
                 </b-card>
@@ -193,7 +159,6 @@
             return {
                 artistAliases: [],
                 missedArtists: [],
-                albumTags: [],
                 missedAlbums: [],
                 mp3File: this.providedFile,
                 genres: [],
@@ -237,7 +202,6 @@
             onAlbumSelected(album) {
                 if (album) {
                     this.song.albums.push(album);
-                    this.albumTags.push(album.title);
                 }
 
                 this.$refs.albumSearch.query = '';
@@ -304,9 +268,8 @@
                 this.song.artistAliases = this.song.artistAliases.filter(alias => alias.name !== name);
                 this.artistAliases = this.artistAliases.filter(alias => alias !== name);
             },
-            removeAlbum(title) {
-                this.song.albums = this.song.albums.filter(album => album.title !== title);
-                this.albumTags = this.albumTags.filter(tag => tag !== title);
+            removeAlbum(id) {
+                this.song.albums = this.song.albums.filter(album => album.id !== id);
             },
             removeGenre(id) {
                 this.song.genres = this.song.genres.filter(genre => genre.id !== id);
