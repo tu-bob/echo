@@ -17,7 +17,7 @@ class SongRequest extends FormRequest
     {
         return [
             'id' => 'nullable|string',
-            'mp3File' => 'nullable|file',
+            'mp3File' => 'nullable|file|mimetypes:audio/mpeg',
             'title' => 'required|string',
             'year' => 'required|string',
             'label' => 'nullable|string',
