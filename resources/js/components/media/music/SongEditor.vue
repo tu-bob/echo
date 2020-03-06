@@ -2,15 +2,15 @@
     <div class="col-md-8">
         <div class="form-group" v-if="!Boolean(providedFile)">
             <b-form-file
-                v-model="file"
-                :state="Boolean(file)"
+                v-model="mp3File"
+                :state="Boolean(mp3File)"
                 accept=".mp3"
                 placeholder="Выберите файл или перетащите его сюда..."
                 drop-placeholder="Перетащите файл сюда..."
                 browse-text="Обзор"
             ></b-form-file>
         </div>
-        <div class="alert alert-info" v-if="file">
+        <div class="alert alert-info" v-if="mp3File">
             <span>{{song.bitrate / 1000}} kbs | {{song.sampleRate}} | {{song.container}} | {{Math.round(song.duration / 60 *100) / 100}}</span>
         </div>
         <div class="form-group">
@@ -107,7 +107,7 @@
             return {
                 artistAliases: [],
                 missedArtists: [],
-                file: this.providedFile,
+                mp3File: this.providedFile,
                 genres: [],
                 song: {
                     title: null,
@@ -126,10 +126,10 @@
             }
         },
         watch: {
-            file() {
-                if (this.file && validateAudio(this.file))
+            mp3File() {
+                if (this.mp3File && validateAudio(this.mp3File))
                     this.getMetaData();
-                else this.file = null;
+                else this.mp3File = null;
             }
         },
         methods: {
@@ -146,7 +146,7 @@
                 this.$refs.artistSearch.options = [];
             },
             getMetaData() {
-                parseBlob(this.file)
+                parseBlob(this.mp3File)
                     .then(metadata => {
                         this.fillData(metadata)
                     })
@@ -165,7 +165,7 @@
             submit() {
                 let data = new FormData();
                 data.append('id', this.song.id);
-                data.append('file', this.file, this.file.name);
+                data.append('mp3File', this.mp3File, this.mp3File.name);
                 data.append('title', this.song.title);
                 data.append('year', String(this.song.year));
                 data.append('label', this.song.label);
