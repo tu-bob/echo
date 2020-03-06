@@ -16,8 +16,17 @@ class MusicAlbumsTableSeeder extends Seeder
      */
     public function run()
     {
-        MusicAlbum::create([
-            'title' => 'Parachutes'
-        ]);
+        $albums = [
+            'Parachutes',
+            'Parachutes Jap',
+            'Parachutes Japanese',
+            'Japanese',
+        ];
+
+        foreach ($albums as $album) {
+            MusicAlbum::create([
+                'title' => $album
+            ]);
+        }
     }
 }

@@ -18,6 +18,7 @@ class CreateMusicAlbumsTable extends Migration
             $table->char('title', 50)->unique();
 
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
