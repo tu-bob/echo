@@ -17,46 +17,72 @@
             <label>Название</label>
             <input type="text" class="form-control" v-model="song.title" autofocus>
         </div>
-        <div>
+        <div class="form-group">
             <label>Исполнители</label>
-            <b-form-tags v-model="artistAliases" no-outer-focus class="mb-2">
-                <template v-slot="{ tags, inputAttrs, inputHandlers, addTag, removeTag }">
-                    <b-input-group aria-controls="my-custom-tags-list">
-                        <suggestion-input displayPropertyName="name"
-                                          ref="artistSearch"
-                                          @selected="onArtistSelected"
-                                          action-url="/media/artist/alias/filter?name="></suggestion-input>
-                    </b-input-group>
-                    <ul
-                        id="my-custom-tags-list"
-                        class="list-unstyled d-inline-flex flex-wrap mb-0"
-                        aria-live="polite"
-                        aria-atomic="false"
-                        aria-relevant="additions removals"
-                    >
-                        <!-- Always use the tag value as the :key, not the index! -->
-                        <!-- Otherwise screen readers will not read the tag
-                             additions and removals correctly -->
-                        <b-card
-                            v-for="tag in tags"
-                            :key="tag"
-                            :id="`my-custom-tags-tag_${tag.replace(/\s/g, '_')}_`"
-                            tag="li"
-                            class="mt-1 mr-1"
-                            body-class="py-1 pr-2 text-nowrap"
-                        >
-                            <strong>{{ tag }}</strong>
-                            <b-button
-                                @click="removeArtistAlias(tag)"
-                                variant="link"
-                                size="sm"
-                                :aria-controls="`my-custom-tags-tag_${tag.replace(/\s/g, '_')}_`"
-                            >&times;
-                            </b-button>
-                        </b-card>
-                    </ul>
-                </template>
-            </b-form-tags>
+            <suggestion-input displayPropertyName="name"
+                              ref="artistSearch"
+                              @selected="onArtistSelected"
+                              action-url="/media/artist/alias/filter?name=">
+            </suggestion-input>
+            <ul
+                class="list-unstyled d-inline-flex flex-wrap mb-0"
+                aria-live="polite"
+                aria-atomic="false"
+                aria-relevant="additions removals"
+            >
+                <b-card
+                    v-for="tag in artistAliases"
+                    :key="tag"
+                    :id="`artistAliasesTagList_${tag.replace(/\s/g, '_')}_`"
+                    tag="li"
+                    class="mt-1 mr-1"
+                    body-class="py-1 pr-2 text-nowrap"
+                >
+                    <strong>{{ tag }}</strong>
+                    <b-button
+                        @click="removeArtistAlias(tag)"
+                        variant="link"
+                        size="sm"
+                        :aria-controls="`artistAliasesTagList__${tag.replace(/\s/g, '_')}_`"
+                    >&times;
+                    </b-button>
+                </b-card>
+            </ul>
+<!--            <b-form-tags v-model="artistAliases" no-outer-focus class="mb-2">-->
+<!--                <template v-slot="{ tags, inputAttrs, inputHandlers, addTag, removeTag }">-->
+<!--                    <b-input-group aria-controls="my-custom-tags-list">-->
+
+<!--                    </b-input-group>-->
+<!--                    <ul-->
+<!--                        id="my-custom-tags-list"-->
+<!--                        class="list-unstyled d-inline-flex flex-wrap mb-0"-->
+<!--                        aria-live="polite"-->
+<!--                        aria-atomic="false"-->
+<!--                        aria-relevant="additions removals"-->
+<!--                    >-->
+<!--                        &lt;!&ndash; Always use the tag value as the :key, not the index! &ndash;&gt;-->
+<!--                        &lt;!&ndash; Otherwise screen readers will not read the tag-->
+<!--                             additions and removals correctly &ndash;&gt;-->
+<!--                        <b-card-->
+<!--                            v-for="tag in tags"-->
+<!--                            :key="tag"-->
+<!--                            :id="`my-custom-tags-tag_${tag.replace(/\s/g, '_')}_`"-->
+<!--                            tag="li"-->
+<!--                            class="mt-1 mr-1"-->
+<!--                            body-class="py-1 pr-2 text-nowrap"-->
+<!--                        >-->
+<!--                            <strong>{{ tag }}</strong>-->
+<!--                            <b-button-->
+<!--                                @click="removeArtistAlias(tag)"-->
+<!--                                variant="link"-->
+<!--                                size="sm"-->
+<!--                                :aria-controls="`my-custom-tags-tag_${tag.replace(/\s/g, '_')}_`"-->
+<!--                            >&times;-->
+<!--                            </b-button>-->
+<!--                        </b-card>-->
+<!--                    </ul>-->
+<!--                </template>-->
+<!--            </b-form-tags>-->
             <span v-if="missedArtists.length > 0" class="small">Исполнители не найдены:
                 <b v-for="artist in missedArtists">{{artist}}</b>
             </span>
@@ -72,7 +98,7 @@
             </select>
             <div class="my-3">Выбранные жанры: <strong v-for="genre in song.genres">{{ genre.name }} </strong></div>
         </div>
-        <div>
+        <div class="form-group">
             <label>Альбомы</label>
             <suggestion-input displayPropertyName="title"
                               ref="albumSearch"
@@ -85,9 +111,6 @@
                 aria-atomic="false"
                 aria-relevant="additions removals"
             >
-                <!-- Always use the tag value as the :key, not the index! -->
-                <!-- Otherwise screen readers will not read the tag
-                     additions and removals correctly -->
                 <b-card
                     v-for="tag in albumTags"
                     :key="tag"
