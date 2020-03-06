@@ -70,7 +70,15 @@
                 <option v-for="genre in genres" :value="genre" :key="genre.id">{{genre.name}} {{genre.local_name}}
                 </option>
             </select>
-            <div class="my-3">Selected: <strong v-for="genre in song.genres">{{ genre.name }} </strong></div>
+            <div class="my-3">Выбранные жанры: <strong v-for="genre in song.genres">{{ genre.name }} </strong></div>
+        </div>
+        <div>
+            <label>Альбом</label>
+            <suggestion-input displayPropertyName="title"
+                              ref="albumSearch"
+                              @selected="onAlbumSelected"
+                              action-url="/media/album/filter?title=">
+            </suggestion-input>
         </div>
         <div class="form-group">
             <label>Лэйбл</label>
@@ -115,6 +123,7 @@
                     genres: [],
                     length: null,
                     artistAliases: [],
+                    album: null,
                     label: null,
                     bitrate: null,
                     sampleRate: null,
@@ -144,6 +153,11 @@
 
                 this.$refs.artistSearch.query = '';
                 this.$refs.artistSearch.options = [];
+            },
+            onAlbumSelected(album) {
+                if (album) {
+                    this.song.album = album;
+                }
             },
             getMetaData() {
                 parseBlob(this.mp3File)
