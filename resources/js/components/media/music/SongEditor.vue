@@ -35,7 +35,7 @@
                     :key="tag"
                     :id="`artistAliasesTagList_${tag.replace(/\s/g, '_')}_`"
                     tag="li"
-                    class="mt-1 mr-1"
+                    class="mt-1 mr-1 bg-warning"
                     body-class="py-1 pr-2 text-nowrap"
                 >
                     <strong>{{ tag }}</strong>
@@ -116,7 +116,7 @@
                     :key="tag"
                     :id="`albumsTagList_${tag.replace(/\s/g, '_')}_`"
                     tag="li"
-                    class="mt-1 mr-1"
+                    class="mt-1 mr-1 bg-warning"
                     body-class="py-1 pr-2 text-nowrap"
                 >
                     <strong>{{ tag }}</strong>
