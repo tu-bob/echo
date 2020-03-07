@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Modules\Media\Libs\Request\MetaDataEditor;
+namespace Modules\Media\Libs\Request\MetaDataEditor\FileRequest;
 
 
 use Modules\Media\Models\Music\AudioFile;
