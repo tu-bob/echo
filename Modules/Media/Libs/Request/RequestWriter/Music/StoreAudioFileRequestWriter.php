@@ -8,7 +8,9 @@ use Illuminate\Http\UploadedFile;
 use Modules\Media\Libs\Request\FileRequest\Saver\FileSaver;
 use Modules\Media\Libs\Request\MetaDataEditor\FileRequest\AudioFileMetaData;
 use Modules\Media\Libs\Request\RequestWriter\RequestWriter;
+use Modules\Media\Models\Artist\ArtistAlias;
 use Modules\Media\Models\Music\AudioFile;
+use Modules\Media\Models\Music\Genre;
 
 class StoreAudioFileRequestWriter extends RequestWriter
 {
@@ -20,19 +22,10 @@ class StoreAudioFileRequestWriter extends RequestWriter
 
     private array $tags;
 
-    public function __construct(UploadedFile $file, array $tags)
-    {
-        parent::__construct();
-
-        $this->file = $file;
-        $this->audioFile = new AudioFile(['path' => $file->path()]);
-        $this->tags = $tags;
-
-        $this->metaDataEditor = new AudioFileMetaData($this->audioFile, $tags);
-    }
-
     public function write()
     {
+        $this->init();
+
         $this->updateTags();
 
         $this->saveFileOrGetExisting();
@@ -40,13 +33,50 @@ class StoreAudioFileRequestWriter extends RequestWriter
         return $this->audioFile;
     }
 
-    function updateTags()
+    private function init()
+    {
+        $this->prepareTags();
+        $this->file = $this->request['mp3File'];
+        $this->audioFile = new AudioFile(['path' => $this->file->path()]);
+        $this->metaDataEditor = new AudioFileMetaData($this->audioFile, $this->tags);
+    }
+
+    private function prepareTags()
+    {
+        $aliases = ArtistAlias::whereIn('id', $this->request['artistAliases'])
+            ->get()
+            ->map(function ($alias) {
+                return $alias->name;
+            })
+            ->all();
+
+        $this->tags = [
+            'title' => $this->request['title'],
+            'artist' => $aliases,
+//            'album' => 'In the garden',
+            'band' => $aliases[0],
+            'publisher' => $this->request['label'],
+            'genre' => Genre::whereIn('id', $this->request['genres'])
+                ->get()
+                ->map(function ($genre) {
+                    return $genre->name;
+                })
+                ->all(),
+            'year' => $this->request['year'],
+            'url_artist' => 'echo.tj'
+//            'track_number' => $request->track_number[$key],
+//            'bpm'          => $request->bpm[$key],
+//            'initial_key'  => $request->initial_key[$key],
+        ];
+    }
+
+    private function updateTags()
     {
         $this->metaDataEditor->mergeTags();
         $this->metaDataEditor->writeTags();
     }
 
-    public function saveFileOrGetExisting()
+    private function saveFileOrGetExisting()
     {
         $saver = new FileSaver($this->file, 'music', AudioFile::class);
         $this->audioFile = $saver->findOrCreateFile();
