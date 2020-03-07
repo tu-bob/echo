@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\Libs\Helpers;
+namespace App\Libs\Helpers\StringHelpers;
 
 
 class CamelCaseConverter

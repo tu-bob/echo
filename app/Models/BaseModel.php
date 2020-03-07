@@ -4,12 +4,12 @@
 namespace App\Models;
 
 
-use App\Libs\Helpers\CamelCaseConverter;
+use App\Libs\Helpers\StringHelpers\CamelCaseConverter;
 use Illuminate\Database\Eloquent\Model;
 use App\Libs\Ulid\HasUlid;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class BaseModel  extends Model
+class BaseModel extends Model
 {
     use HasUlid, SoftDeletes;
 
