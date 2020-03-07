@@ -19,6 +19,7 @@ class CreateSongsTable extends Migration
             $table->char('title', 40);
             $table->char('year', 5);
             $table->char('label', 50)->nullable();
+            $table->text('lyrics')->nullable();
             $table->unsignedInteger('bitrate');
             $table->unsignedInteger('sample_rate');
             $table->unsignedDouble('compression_ratio');

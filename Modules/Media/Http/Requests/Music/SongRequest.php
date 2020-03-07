@@ -23,7 +23,8 @@ class SongRequest extends FormRequest
             'label' => 'nullable|string',
             'artistAliases' => 'required|array',
             'artistAliases.*' => 'required|exists:artist_aliases,id',
-            'genres.*' => 'required|exists:genres,id'
+            'genres.*' => 'required|exists:genres,id',
+            'lyrics' => 'nullable|string',
         ];
     }
 }
