@@ -152,6 +152,7 @@
     import {validateAudio} from '../../../util/validators.js'
     import {fetchArtistAliasesByName, fetchFilteredAlbums, fetchGenres} from '../../../api/mediaApi.js'
     import * as ss from 'string-similarity';
+    import {invokeErrorResetRequested} from "../../../events";
 
     export default {
         name: "SongEditor",
@@ -276,7 +277,12 @@
                 }
 
                 axios.post('/media/music/song', data)
-                    .then(this.clearForm(true));
+                    .then(response => this.clearForm(true))
+                    .catch(e => {
+                        console.log('catchd')
+                    })
+
+
             },
             removeArtistAlias(id) {
                 this.song.artistAliases = this.song.artistAliases.filter(alias => alias.id !== id);
@@ -355,9 +361,11 @@
                 this.missedAlbums = [];
                 this.missedArtists = [];
 
-                if (removeFile){
+                if (removeFile) {
                     this.$refs['mp3FileInput'].reset()
                 }
+
+                invokeErrorResetRequested();
             }
         },
     }

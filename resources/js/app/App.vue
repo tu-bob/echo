@@ -82,11 +82,16 @@
     export default {
         name: "App",
         created() {
-            this.$eventHub.$on('authenticated', this.onAuthenticated)
-            this.$eventHub.$on('validation-failed', this.onValidationFailed)
-        },
-        mounted() {
             this.state.auth = this.authorized;
+
+            this.$eventHub.$on('authenticated', this.onAuthenticated);
+            this.$eventHub.$on('validation-failed', this.onValidationFailed);
+            this.$eventHub.$on('error-reset-requested', this.onErrorResetRequested);
+        },
+        beforeDestroy() {
+            this.$eventHub.$off('authenticated');
+            this.$eventHub.$off('validation-failed');
+            this.$eventHub.$off('error-reset-requested');
         },
         props: {
             authorized: {
@@ -108,6 +113,9 @@
             },
             onValidationFailed(e) {
                 this.state.errors = e.data.errors;
+            },
+            onErrorResetRequested(e) {
+                this.state.errors = null;
             },
             logout() {
                 axios.post('/auth/logout')
