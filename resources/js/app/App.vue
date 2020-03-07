@@ -119,12 +119,18 @@
             fetchUser() {
                 axios.get('/auth/user')
                     .then(user => this.user = user);
+            },
+            resetLayout() {
+                this.errors = null;
             }
         },
         watch: {
             'state.auth'() {
                 if (this.state.auth)
                     this.fetchUser();
+            },
+            $route() {
+                this.resetLayout();
             }
         }
     }
