@@ -177,7 +177,7 @@
                         .catch();
             },
             filterData() {
-                if (this.query) {
+                if (this.query && this.query.length > 0) {
                     this.options = this.providedOptions
                         .filter(option => option[this.searchPropertyName]
                             .replace(/[^a-zA-Z]/g, '')
