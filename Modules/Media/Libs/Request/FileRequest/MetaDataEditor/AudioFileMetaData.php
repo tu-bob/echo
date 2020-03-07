@@ -24,7 +24,9 @@ class AudioFileMetaData
         foreach ($this->file->tags as $key => $value) {
             if (!isset($this->tags[$key])) {
                 $this->tags[$key] = implode(' / ', $value);
-            }
+            } elseif (is_array($this->tags[$key]))
+                $this->tags[$key] = implode(' / ', $this->tags[$key]);
+
         }
 
         return $this->tags;
