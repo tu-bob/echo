@@ -4,17 +4,11 @@
 namespace Modules\Media\Models\Music;
 
 
-class AudioFile
+use App\Models\BaseModel;
+
+class AudioFile extends BaseModel
 {
-
-    public $path;
-
     public $tags;
-
-    public function __construct($path = null)
-    {
-        $this->path = $path;
-    }
 
     /**
      * Analyze the file to read the tags and store them

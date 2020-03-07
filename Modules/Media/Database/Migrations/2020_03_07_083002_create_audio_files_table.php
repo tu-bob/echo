@@ -17,6 +17,8 @@ class CreateAudioFilesTable extends Migration
             $table->char('id', 26)->primary();
             $table->string('path');
             $table->string('filename');
+            $table->string('mime_type');
+            $table->char('extension', 10);
             $table->string('hash')->unique();
             $table->softDeletes();
             $table->timestamps();
