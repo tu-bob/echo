@@ -42,6 +42,7 @@
                     <b-button
                         @click="removeArtistAlias(artistAlias.id)"
                         variant="link"
+                        class="text-decoration-none"
                         size="sm"
                         :aria-controls="`artistAliasesTagList__${artistAlias.name.replace(/\s/g, '_')}_`"
                     >&times;
@@ -84,6 +85,7 @@
                     <b-button
                         @click="removeGenre(genre.id)"
                         variant="link"
+                        class="text-decoration-none"
                         size="sm"
                         :aria-controls="`genresTagList__${genre.id.replace(/\s/g, '_')}_`"
                     >&times;
@@ -117,6 +119,7 @@
                     <b-button
                         @click="removeAlbum(album.id)"
                         variant="link"
+                        class="text-decoration-none"
                         size="sm"
                         :aria-controls="`albumsTagList__${album.id.replace(/\s/g, '_')}_`"
                     >&times;
