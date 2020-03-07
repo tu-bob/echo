@@ -129,6 +129,15 @@
             <input type="text" class="form-control" v-model="song.label">
         </div>
 
+        <div class="form-group">
+            <label>Текст песни</label>
+            <b-form-textarea
+                v-model="song.lyrics"
+                rows="5"
+                max-rows="15"
+            ></b-form-textarea>
+        </div>
+
         <button class="btn btn-primary" @click="submit">Сохранить</button>
     </div>
 </template>
@@ -164,6 +173,7 @@
                 song: {
                     id: null,
                     title: null,
+                    lyrics: null,
                     year: null,
                     genres: [],
                     length: null,
@@ -252,6 +262,7 @@
                 data.append('title', this.song.title);
                 data.append('year', String(this.song.year));
                 data.append('label', this.song.label);
+                data.append('lyrics', this.song.lyrics);
 
                 for (let i = 0; i < this.song.artistAliases.length; i++) {
                     data.append('artistAliases[]', this.song.artistAliases[i].id);

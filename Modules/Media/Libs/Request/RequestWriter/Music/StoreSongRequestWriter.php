@@ -46,6 +46,7 @@ class StoreSongRequestWriter extends RequestWriter
             'title' => $this->request['title'],
             'year' => $this->request['year'],
             'label' => $this->request['label'],
+            'lyrics' => $this->request['lyrics'],
             'bitrate' => $this->extractedInfo['audio']['bitrate'],
             'sample_rate' => $this->extractedInfo['audio']['sample_rate'],
             'compression_ratio' => $this->extractedInfo['audio']['compression_ratio'],
