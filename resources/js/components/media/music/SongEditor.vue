@@ -224,8 +224,7 @@
                     }
                 }
 
-                this.$refs.genreSearch.query = '';
-                this.$refs.genreSearch.options = [];
+                this.$refs.genreSearch.query = ''; 
             },
             getMetaData() {
                 parseBlob(this.mp3File)
