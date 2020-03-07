@@ -6,7 +6,7 @@
                autofocus
                class="form-control col-md-12"
                data-toggle="dropdown"
-               id="query"
+               :id="queryInputId"
                name="query"
                type="text"
                v-bind:placeholder="placeholder"
@@ -30,6 +30,8 @@
 </template>
 
 <script>
+    import {generateId} from "../../../main";
+
     const CancelToken = axios.CancelToken;
     let source;
 
@@ -78,6 +80,7 @@
         data() {
             return {
                 query: '',
+                queryInputId: generateId(),
                 options: [],
                 activeOptionIndex: 0,
                 showOptions: false
@@ -123,7 +126,7 @@
                 if (this.searchInputChange)
                     this.searchInputChange(this.query);
 
-                $('#query').blur();
+                $('#' + this.queryInputId).blur();
             },
             onKeyDown(e) {
                 switch (e.keyCode) {
@@ -177,7 +180,7 @@
                         .catch();
             },
             filterData() {
-                if (this.query && this.query.length > 0) {
+                if (this.query) {
                     this.options = this.providedOptions
                         .filter(option => option[this.searchPropertyName]
                             .replace(/[^a-zA-Z]/g, '')
