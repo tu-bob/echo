@@ -224,16 +224,14 @@
                     }
                 }
 
-                this.$refs.genreSearch.query = ''; 
+                this.$refs.genreSearch.query = '';
             },
             getMetaData() {
                 parseBlob(this.mp3File)
                     .then(metadata => {
-                        console.log(metadata)
                         this.fillData(metadata)
                     })
                     .catch(err => {
-                        console.log(err)
                     });
             },
             fetchArtist(name) {

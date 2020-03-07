@@ -11,5 +11,5 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
-    protected float $stringMatchMinRate = 0.25;
+    protected float $stringMatchMinRate = 0.20;
 }
