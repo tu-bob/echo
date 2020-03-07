@@ -65,11 +65,14 @@
             </div>
         </nav>
         <div class="container mt-5">
-            <div class="alert alert-danger" v-if="state.errors">
+            <b-alert :show="state.errors"
+                     class="mb-5"
+                     variant="danger"
+                     dismissible>
                 <ul>
                     <li v-for="error in state.errors">{{error[0]}}</li>
                 </ul>
-            </div>
+            </b-alert>
             <router-view></router-view>
         </div>
     </div>
