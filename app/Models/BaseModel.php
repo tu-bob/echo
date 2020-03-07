@@ -4,15 +4,15 @@
 namespace App\Models;
 
 
-use App\Libs\Helpers\StringHelpers\CamelCaseConverter;
-use Illuminate\Database\Eloquent\Model;
 use App\Libs\Ulid\HasUlid;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class BaseModel extends Model
 {
     use HasUlid, SoftDeletes;
 
+    public static $snakeAttributes = false;
     /**
      * Indicates if the IDs are auto-incrementing.
      *
@@ -20,19 +20,7 @@ class BaseModel extends Model
      */
     public $incrementing = false;
 
-    public static $snakeAttributes = false;
-
     protected $casts = ['id' => 'string'];
 
     protected $guarded = [];
-
-    public function getAttribute($key)
-    {
-        return parent::getAttribute(CamelCaseConverter::convertCamelToSnakeCase($key));
-    }
-
-    public function setAttribute($key, $value)
-    {
-        return parent::setAttribute(CamelCaseConverter::convertCamelToSnakeCase($key), $value);
-    }
 }

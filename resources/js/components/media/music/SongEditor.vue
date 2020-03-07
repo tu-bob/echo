@@ -59,7 +59,7 @@
         </div>
 
         <div class="form-group">
-           <label>Жанры</label>
+            <label>Жанры</label>
             <suggestion-input displayPropertyName="name"
                               ref="genreSearch"
                               @selected="onGenreSelected"
@@ -137,7 +137,7 @@
     import SuggestionInput from "../../common/inputs/SuggestionInput";
     import {parseBlob} from 'music-metadata-browser';
     import {validateAudio} from '../../../util/validators.js'
-    import {fetchGenres, fetchArtistAliasesByName, fetchFilteredAlbums} from '../../../api/mediaApi.js'
+    import {fetchArtistAliasesByName, fetchFilteredAlbums, fetchGenres} from '../../../api/mediaApi.js'
     import * as ss from 'string-similarity';
 
     export default {
@@ -162,6 +162,7 @@
                 mp3File: this.providedFile,
                 genres: [],
                 song: {
+                    id: null,
                     title: null,
                     year: null,
                     genres: [],
@@ -245,7 +246,8 @@
             },
             submit() {
                 let data = new FormData();
-                data.append('id', this.song.id);
+                if (this.song.id)
+                    data.append('id', this.song.id);
                 data.append('mp3File', this.mp3File, this.mp3File.name);
                 data.append('title', this.song.title);
                 data.append('year', String(this.song.year));
