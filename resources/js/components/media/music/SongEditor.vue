@@ -4,6 +4,7 @@
             <b-form-file
                 v-model="mp3File"
                 :state="Boolean(mp3File)"
+                ref="mp3FileInput"
                 accept=".mp3"
                 placeholder="Выберите файл или перетащите его сюда..."
                 drop-placeholder="Перетащите файл сюда..."
@@ -194,6 +195,7 @@
         },
         watch: {
             mp3File() {
+                this.clearForm();
                 if (this.mp3File && validateAudio(this.mp3File))
                     this.getMetaData();
                 else this.mp3File = null;
@@ -208,16 +210,16 @@
                     }
                 }
 
-                this.$refs.artistSearch.query = '';
-                this.$refs.artistSearch.options = [];
+                this.$refs['artistSearch'].query = '';
+                this.$refs['artistSearch'].options = [];
             },
             onAlbumSelected(album) {
                 if (album) {
                     this.song.albums.push(album);
                 }
 
-                this.$refs.albumSearch.query = '';
-                this.$refs.albumSearch.options = [];
+                this.$refs['albumSearch'].query = '';
+                this.$refs['albumSearch'].options = [];
             },
             onGenreSelected(genre) {
                 if (genre) {
@@ -227,11 +229,12 @@
                     }
                 }
 
-                this.$refs.genreSearch.query = '';
+                this.$refs['genreSearch'].query = '';
             },
             getMetaData() {
                 parseBlob(this.mp3File)
                     .then(metadata => {
+                        console.log(metadata);
                         this.fillData(metadata)
                     })
                     .catch(err => {
@@ -273,7 +276,7 @@
                 }
 
                 axios.post('/media/music/song', data)
-                // .then(this.$router.go());
+                    .then(this.clearForm(true));
             },
             removeArtistAlias(id) {
                 this.song.artistAliases = this.song.artistAliases.filter(alias => alias.id !== id);
@@ -329,6 +332,31 @@
 
                         this.song.genres.push(bestMatch.genre);
                     }
+                }
+            },
+            clearForm(removeFile = false) {
+                this.song = {
+                    id: null,
+                    title: null,
+                    lyrics: null,
+                    year: null,
+                    genres: [],
+                    length: null,
+                    artistAliases: [],
+                    albums: [],
+                    label: null,
+                    bitrate: null,
+                    sampleRate: null,
+                    container: null,
+                    numberOfChannels: null,
+                    lossless: null,
+                    duration: null
+                };
+                this.missedAlbums = [];
+                this.missedArtists = [];
+
+                if (removeFile){
+                    this.$refs['mp3FileInput'].reset()
                 }
             }
         },

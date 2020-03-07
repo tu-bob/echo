@@ -13,7 +13,8 @@ class ArtistsTableSeeder extends Seeder
     {
         $artistData = [
             ['Coldplay'],
-            ['Далер Назаров', 'Daler Nazarov']
+            ['Далер Назаров', 'Daler Nazarov'],
+            ['Ed Sheeran']
         ];
 
         foreach ($artistData as $artistAliases){
