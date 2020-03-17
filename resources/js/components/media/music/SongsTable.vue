@@ -9,6 +9,10 @@
             <template v-slot:artistAliases="{item}">
                 <span v-for="alias in item.artistAliases">{{alias.name}};</span>
             </template>
+
+            <template v-slot:edit="{item}">
+                <a :href="`/app/media/song/${item.id}`"><img class="icon-btn-sm" src="/icons/svg/edit.svg"></a>
+            </template>
         </table-card>
     </div>
 </template>
@@ -40,6 +44,10 @@
                     {
                         key: "artistAliases",
                         label: "Исполнители"
+                    },
+                    {
+                        key: "edit",
+                        label: ""
                     }
                 ]
             }

@@ -44,7 +44,7 @@
                             component: SongsTable
                         },
                         {
-                            path: 'song',
+                            path: 'song/:id?',
                             component: SongEditor
                         },
                         {
