@@ -18,9 +18,12 @@ class StoreSongRequestWriter extends RequestWriter
 
     public function write()
     {
-        $this->extractFileInfo();
+        if (isset($this->request['mp3File'])) {
+            dd($this->request['mp3File']);
+            $this->extractFileInfo();
 
-        $this->saveAudioFile();
+            $this->saveAudioFile();
+        }
 
         $data = $this->prepareData();
 
@@ -43,35 +46,44 @@ class StoreSongRequestWriter extends RequestWriter
 
     private function prepareData()
     {
-        return [
-            'audio_file_id' => $this->audioFile->id,
+        $data = [
             'title' => $this->request['title'],
             'year' => $this->request['year'],
             'label' => $this->request['label'],
             'lyrics' => $this->request['lyrics'],
-            'bitrate' => $this->extractedInfo['audio']['bitrate'],
-            'sample_rate' => $this->extractedInfo['audio']['sample_rate'],
-            'compression_ratio' => $this->extractedInfo['audio']['compression_ratio'],
-            'channels' => $this->extractedInfo['audio']['channels'],
-            'channel_mode' => $this->extractedInfo['audio']['channelmode'],
-            'encoder_options' => $this->extractedInfo['audio']['encoder_options'],
-            'codec' => $this->extractedInfo['audio']['codec'],
-            'encoder' => $this->extractedInfo['audio']['encoder'],
-            'lossless' => $this->extractedInfo['audio']['lossless'] ? 1 : 0,
-            'size' => $this->extractedInfo['filesize'],
-            'playtime_seconds' => $this->extractedInfo['playtime_seconds'],
-            'extension' => $this->extractedInfo['fileformat'],
             'uploaded_by_id' => auth()->user()->id
         ];
+
+        if (isset($this->audioFile))
+            $data['audio_file_id'] = $this->audioFile->id;
+
+        $extracted = [];
+        if (isset($this->extractedInfo)) {
+            $extracted = [
+                'bitrate' => $this->extractedInfo['audio']['bitrate'],
+                'sample_rate' => $this->extractedInfo['audio']['sample_rate'],
+                'compression_ratio' => $this->extractedInfo['audio']['compression_ratio'],
+                'channels' => $this->extractedInfo['audio']['channels'],
+                'channel_mode' => $this->extractedInfo['audio']['channelmode'],
+                'encoder_options' => $this->extractedInfo['audio']['encoder_options'],
+                'codec' => $this->extractedInfo['audio']['codec'],
+                'encoder' => $this->extractedInfo['audio']['encoder'],
+                'lossless' => $this->extractedInfo['audio']['lossless'] ? 1 : 0,
+                'size' => $this->extractedInfo['filesize'],
+                'playtime_seconds' => $this->extractedInfo['playtime_seconds'],
+                'extension' => $this->extractedInfo['fileformat']
+            ];
+        }
+
+        return array_merge($data, $extracted);
     }
 
     private function createOrUpdate($data)
     {
-        if (isset($this->request['id']))
-            $this->song = Song::where('id', $this->request['id'])
-                ->update($data)
-                ->get();
-        else
+        if (isset($this->request['id'])) {
+            $this->song = Song::findOrFail($this->request['id']);
+            $this->song->update($data);
+        } else
             $this->song = Song::create($data);
     }
 
@@ -81,7 +93,8 @@ class StoreSongRequestWriter extends RequestWriter
         $genres = isset($this->request['genres']) ? $this->request['genres'] : [];
         $albums = isset($this->request['albums']) ? $this->request['albums'] : [];
 
-        $this->song->audioFile()->associate($this->audioFile);
+        if (isset($this->audioFile))
+            $this->song->audioFile()->associate($this->audioFile);
         $this->song->artistAliases()->sync($aliases);
         $this->song->genres()->sync($genres);
         $this->song->albums()->sync($albums);
