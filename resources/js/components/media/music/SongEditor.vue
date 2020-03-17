@@ -273,7 +273,7 @@
                 let data = new FormData();
                 if (this.song.id)
                     data.append('id', this.song.id);
-                if(this.mp3File)
+                if (this.mp3File)
                     data.append('mp3File', this.mp3File, this.mp3File.name);
                 data.append('title', this.song.title);
                 data.append('year', String(this.song.year));
@@ -293,7 +293,10 @@
                 }
 
                 axios.post('/media/music/song', data)
-                    .then(response => this.clearForm(true))
+                    .then(response => {
+                        this.clearForm(true);
+                        this.$router.replace('/media/song')
+                    })
                     .catch(
                         //TODO
                     );
