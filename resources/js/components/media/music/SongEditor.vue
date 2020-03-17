@@ -16,7 +16,7 @@
                 {{song.sample_rate}} |
                 <span v-if="song.container">{{song.container}} |</span>
                 <span v-if="song.encoder">{{song.encoder}} |</span>
-                {{Math.round(song.playtime_seconds / L60 *100) / 100}}</span>
+                {{Math.round(song.playtime_seconds / 60 *100) / 100}}</span>
         </div>
         <div class="form-group">
             <label>Название</label>
