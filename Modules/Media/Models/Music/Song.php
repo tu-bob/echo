@@ -10,6 +10,10 @@ use Modules\Shared\Models\Pivots\BasePivot;
 
 class Song extends BaseModel
 {
+    protected $casts = [
+        'lyrics' => 'string'
+    ];
+
     public function audioFile()
     {
         return $this->belongsTo(AudioFile::class);
