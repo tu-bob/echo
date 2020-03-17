@@ -35,6 +35,7 @@ Route::prefix('media')->group(function () {
         Route::prefix('song')->group(function () {
             Route::post('/', 'Music\SongController@store');
             Route::get('/list', 'Music\SongController@getSongs');
+            Route::get('/{song}', 'Music\SongController@getSong');
         });
 
         Route::prefix('album')->group(function () {

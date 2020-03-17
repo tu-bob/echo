@@ -24,4 +24,8 @@ class SongController extends Controller
         $query = Song::where('uploaded_by_id', auth()->user()->id)->with('artistAliases');
         return $this->callGetOrPaginate($query);
     }
+
+    public function getSong($song){
+        return Song::with(['artistAliases', 'genres', 'albums'])->findOrFail($song);
+    }
 }

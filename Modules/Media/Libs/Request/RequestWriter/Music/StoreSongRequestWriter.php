@@ -77,8 +77,14 @@ class StoreSongRequestWriter extends RequestWriter
 
     private function manageRelations()
     {
+        $aliases = isset($this->request['artistAliases']) ? $this->request['artistAliases'] : [];
+        $genres = isset($this->request['genres']) ? $this->request['genres'] : [];
+        $albums = isset($this->request['albums']) ? $this->request['albums'] : [];
+
         $this->song->audioFile()->associate($this->audioFile);
-        $this->song->artistAliases()->sync($this->request['artistAliases']);
+        $this->song->artistAliases()->sync($aliases);
+        $this->song->genres()->sync($genres);
+        $this->song->albums()->sync($albums);
     }
 
 }
