@@ -20,7 +20,7 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
-<div id="app"> 
+<div id="app">
     <app @auth authorized @endauth ></app>
 </div>
 </body>
