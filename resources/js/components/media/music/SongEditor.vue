@@ -352,8 +352,9 @@
                                 bestMatch.genre = this.genres[k];
                             }
                         }
-
-                        this.song.genres.push(bestMatch.genre);
+                        let existing = this.song.genres.find(genre => bestMatch.genre.id === genre.id);
+                        if (!existing)
+                            this.song.genres.push(bestMatch.genre);
                     }
                 }
             },
