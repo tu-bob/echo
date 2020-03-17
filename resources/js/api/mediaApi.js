@@ -12,4 +12,8 @@ export async function fetchFilteredAlbums(params) {
     return axios.get('/media/music/album/filter?' + kvpToQueryParam(params));
 }
 
+export async function fetchSong(id) {
+    return axios.get(`/media/music/song/${id}`);
+}
+
 

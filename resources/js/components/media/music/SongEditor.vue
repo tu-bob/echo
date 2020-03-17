@@ -150,7 +150,7 @@
     import SuggestionInput from "../../common/inputs/SuggestionInput";
     import {parseBlob} from 'music-metadata-browser';
     import {validateAudio} from '../../../util/validators.js'
-    import {fetchArtistAliasesByName, fetchFilteredAlbums, fetchGenres} from '../../../api/mediaApi.js'
+    import {fetchArtistAliasesByName, fetchFilteredAlbums, fetchGenres, fetchSong} from '../../../api/mediaApi.js'
     import * as ss from 'string-similarity';
     import {invokeErrorResetRequested} from "../../../events";
 
@@ -166,7 +166,9 @@
         created() {
             fetchGenres().then(genres => {
                 if (genres)
-                    this.genres = genres
+                    this.genres = genres;
+                if (this.$route.params.id)
+                    this.fetchSong(this.$route.params.id);
             });
         },
         data() {
@@ -238,8 +240,9 @@
                         console.log(metadata);
                         this.fillData(metadata)
                     })
-                    .catch(err => {
-                    });
+                    .catch(
+                        //TODO
+                    );
             },
             fetchArtist(name) {
                 fetchArtistAliasesByName(name).then(aliases => {
@@ -258,6 +261,14 @@
                             this.missedAlbum = title;
                     })
             },
+            fetchSong(id) {
+                fetchSong(id).then(song => {
+                    this.song = song;
+                })
+                    .catch(
+                        //TODO
+                    );
+            },
             submit() {
                 let data = new FormData();
                 if (this.song.id)
@@ -272,17 +283,19 @@
                     data.append('artistAliases[]', this.song.artistAliases[i].id);
                 }
 
-                for (let i = 0; i < this.song.genres.length; i++) {
-                    data.append('genres[]', this.song.genres[i].id);
+                for (let j = 0; j < this.song.genres.length; j++) {
+                    data.append('genres[]', this.song.genres[j].id);
+                }
+
+                for (let k = 0; k < this.song.albums.length; k++) { 
+                    data.append('albums[]', this.song.albums[k].id);
                 }
 
                 axios.post('/media/music/song', data)
                     .then(response => this.clearForm(true))
-                    .catch(e => {
-                        console.log('catchd')
-                    })
-
-
+                    .catch(
+                        //TODO
+                    );
             },
             removeArtistAlias(id) {
                 this.song.artistAliases = this.song.artistAliases.filter(alias => alias.id !== id);

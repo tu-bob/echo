@@ -21,4 +21,18 @@ class Song extends BaseModel
             ->using(BasePivot::class)
             ->withTimestamps();
     }
+
+    public function genres()
+    {
+        return $this->belongsToMany(Genre::class)
+            ->using(BasePivot::class)
+            ->withTimestamps();
+    }
+
+    public function albums()
+    {
+        return $this->belongsToMany(MusicAlbum::class)
+            ->using(BasePivot::class)
+            ->withTimestamps();
+    }
 }
