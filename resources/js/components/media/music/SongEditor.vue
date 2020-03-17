@@ -222,7 +222,9 @@
             },
             onAlbumSelected(album) {
                 if (album) {
-                    this.song.albums.push(album);
+                    let exists = this.song.albums.find((item) => item.id === album.id);
+                    if (!exists)
+                        this.song.albums.push(album);
                 }
 
                 this.$refs['albumSearch'].query = '';
