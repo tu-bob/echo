@@ -16,6 +16,8 @@ class CreateSongsTable extends Migration
         Schema::create('songs', function (Blueprint $table) {
             $table->char('id', 26)->primary();
             $table->char('audio_file_id', 26)->index();
+            $table->char('uploaded_by_id', 26)->index();
+            $table->char('deleted_by_id', 26)->nullable()->index();
             $table->char('title', 40);
             $table->char('year', 5);
             $table->char('label', 50)->nullable();

@@ -8,6 +8,7 @@
     import ArtistEditor from "../components/media/artist/ArtistEditor";
     import Login from "../components/auth/Login";
     import Register from "../components/auth/Register";
+    import SongsTable from "../components/media/music/SongsTable";
 
     const routes = [
             {
@@ -38,6 +39,10 @@
                 Media,
                 children:
                     [
+                        {
+                            path: 'songs',
+                            component: SongsTable
+                        },
                         {
                             path: 'song',
                             component: SongEditor
