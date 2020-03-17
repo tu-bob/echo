@@ -11,8 +11,12 @@
                 browse-text="Обзор"
             ></b-form-file>
         </div>
-        <div class="alert alert-info" v-if="mp3File">
-            <span>{{song.bitrate / 1000}} kbs | {{song.sampleRate}} | {{song.container}} | {{Math.round(song.duration / 60 *100) / 100}}</span>
+        <div class="alert alert-info" v-if="song.bitrate">
+            <span>{{song.bitrate / 1000}} kbs |
+                {{song.sample_rate}} |
+                <span v-if="song.container">{{song.container}} |</span>
+                <span v-if="song.encoder">{{song.encoder}} |</span>
+                {{Math.round(song.playtime_seconds / L60 *100) / 100}}</span>
         </div>
         <div class="form-group">
             <label>Название</label>
@@ -188,11 +192,11 @@
                     albums: [],
                     label: null,
                     bitrate: null,
-                    sampleRate: null,
+                    sample_rate: null,
                     container: null,
                     numberOfChannels: null,
                     lossless: null,
-                    duration: null
+                    playtime_seconds: null
                 }
             }
         },
@@ -315,10 +319,10 @@
                 this.song.year = meta.common.year;
                 this.song.label = meta.common.label[0];
                 this.song.bitrate = meta.format.bitrate;
-                this.song.sampleRate = meta.format.sampleRate;
+                this.song.sample_rate = meta.format.sampleRate;
                 this.song.container = meta.format.container;
                 this.song.numberOfChannels = meta.format.numberOfChannels;
-                this.song.duration = meta.format.duration;
+                this.song.playtime_seconds = meta.format.duration;
                 this.song.lossless = meta.format.lossless;
 
                 if (meta.common.artists)
@@ -370,11 +374,11 @@
                     albums: [],
                     label: null,
                     bitrate: null,
-                    sampleRate: null,
+                    sample_rate: null,
                     container: null,
                     numberOfChannels: null,
                     lossless: null,
-                    duration: null
+                    playtime_seconds: null
                 };
                 this.missedAlbums = [];
                 this.missedArtists = [];
