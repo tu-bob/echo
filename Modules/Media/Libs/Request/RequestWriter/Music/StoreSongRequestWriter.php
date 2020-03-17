@@ -18,8 +18,7 @@ class StoreSongRequestWriter extends RequestWriter
 
     public function write()
     {
-        if (isset($this->request['mp3File'])) {
-            dd($this->request['mp3File']);
+        if (isset($this->request['mp3File'])) { 
             $this->extractFileInfo();
 
             $this->saveAudioFile();

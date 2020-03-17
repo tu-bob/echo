@@ -198,7 +198,7 @@
         },
         watch: {
             mp3File() {
-                this.clearForm();
+                // this.clearForm();
                 if (this.mp3File && validateAudio(this.mp3File))
                     this.getMetaData();
                 else this.mp3File = null;
