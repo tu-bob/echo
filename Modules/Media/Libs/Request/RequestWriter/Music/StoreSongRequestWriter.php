@@ -25,6 +25,8 @@ class StoreSongRequestWriter extends RequestWriter
         $data = $this->prepareData();
 
         $this->createOrUpdate($data);
+
+        $this->manageRelations();
     }
 
     private function extractFileInfo()
@@ -58,7 +60,8 @@ class StoreSongRequestWriter extends RequestWriter
             'lossless' => $this->extractedInfo['audio']['lossless'] ? 1 : 0,
             'size' => $this->extractedInfo['filesize'],
             'playtime_seconds' => $this->extractedInfo['playtime_seconds'],
-            'extension' => $this->extractedInfo['fileformat']
+            'extension' => $this->extractedInfo['fileformat'],
+            'uploaded_by_id' => auth()->user()->id
         ];
     }
 
@@ -74,7 +77,8 @@ class StoreSongRequestWriter extends RequestWriter
 
     private function manageRelations()
     {
-        $this->song->file()->associate($this->audioFile);
+        $this->song->audioFile()->associate($this->audioFile);
+        $this->song->artistAliases()->sync($this->request['artistAliases']);
     }
 
 }

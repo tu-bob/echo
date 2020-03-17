@@ -11,6 +11,8 @@
 |
 */
 
+use Illuminate\Support\Facades\Route;
+
 Route::prefix('media')->group(function () {
 
     Route::prefix('artist')->group(function () {
@@ -21,7 +23,6 @@ Route::prefix('media')->group(function () {
 
         Route::post('/', 'Artist\ArtistController@store');
         Route::put('/{artist}', 'Artist\ArtistController@update');
-//        Route::get('/find', 'ArtistController@findArtist');
         Route::get('/{artist}', 'Artist\ArtistController@getArtist');
     });
 
@@ -33,6 +34,7 @@ Route::prefix('media')->group(function () {
 
         Route::prefix('song')->group(function () {
             Route::post('/', 'Music\SongController@store');
+            Route::get('/list', 'Music\SongController@getSongs');
         });
 
         Route::prefix('album')->group(function () {
