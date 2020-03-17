@@ -273,7 +273,8 @@
                 let data = new FormData();
                 if (this.song.id)
                     data.append('id', this.song.id);
-                data.append('mp3File', this.mp3File, this.mp3File.name);
+                if(this.mp3File)
+                    data.append('mp3File', this.mp3File, this.mp3File.name);
                 data.append('title', this.song.title);
                 data.append('year', String(this.song.year));
                 data.append('label', this.song.label);
@@ -287,7 +288,7 @@
                     data.append('genres[]', this.song.genres[j].id);
                 }
 
-                for (let k = 0; k < this.song.albums.length; k++) { 
+                for (let k = 0; k < this.song.albums.length; k++) {
                     data.append('albums[]', this.song.albums[k].id);
                 }
 
