@@ -30,6 +30,8 @@ class StoreMusicAlbumRequestWriter extends RequestWriter
         $data = $this->prepareData();
 
         $this->createOrUpdate($data);
+
+        $this->manageRelations();
     }
 
     public function prepareData()
@@ -50,5 +52,12 @@ class StoreMusicAlbumRequestWriter extends RequestWriter
     {
         $saver = new FileSaver($this->file, 'images/covers', ImageFile::class);
         $this->imageFile = $saver->findOrCreateFile();
+    }
+
+    private function manageRelations()
+    {
+        $songs = isset($this->request['songs']) ? $this->request['songs'] : [];
+
+        $this->entity->songs()->sync($songs);
     }
 }
