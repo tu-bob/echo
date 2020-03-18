@@ -9,6 +9,7 @@
     import Login from "../components/auth/Login";
     import Register from "../components/auth/Register";
     import SongsTable from "../components/media/music/SongsTable";
+    import AlbumEditor from "../components/media/album/AlbumEditor";
 
     const routes = [
             {
@@ -50,6 +51,10 @@
                         {
                             path: 'artist/:id?',
                             component: ArtistEditor
+                        },
+                        {
+                            path: 'album/:id?',
+                            component: AlbumEditor
                         },
                     ]
             }
