@@ -58,7 +58,7 @@ class StoreSongRequestWriter extends RequestWriter
 
         if (isset($this->request['lyrics']))
             $data['lyrics'] = $this->request['lyrics'];
-        
+
         if (isset($this->audioFile))
             $data['audio_file_id'] = $this->audioFile->id;
 
@@ -86,10 +86,10 @@ class StoreSongRequestWriter extends RequestWriter
 //    private function createOrUpdate($data)
 //    {
 //        if (isset($this->request['id'])) {
-//            $this->song = Song::findOrFail($this->request['id']);
-//            $this->song->update($data);
+//            $this->entity = Song::findOrFail($this->request['id']);
+//            $this->entity->update($data);
 //        } else
-//            $this->song = Song::create($data);
+//            $this->entity = Song::create($data);
 //    }
 
     private function manageRelations()
@@ -99,10 +99,10 @@ class StoreSongRequestWriter extends RequestWriter
         $albums = isset($this->request['albums']) ? $this->request['albums'] : [];
 
         if (isset($this->audioFile))
-            $this->song->audioFile()->associate($this->audioFile);
-        $this->song->artistAliases()->sync($aliases);
-        $this->song->genres()->sync($genres);
-        $this->song->albums()->sync($albums);
+            $this->entity->audioFile()->associate($this->audioFile);
+        $this->entity->artistAliases()->sync($aliases);
+        $this->entity->genres()->sync($genres);
+        $this->entity->albums()->sync($albums);
     }
 
 }
