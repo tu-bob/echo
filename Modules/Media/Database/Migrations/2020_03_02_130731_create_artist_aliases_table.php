@@ -17,8 +17,8 @@ class CreateArtistAliasesTable extends Migration
             $table->char('id', 26)->primary();
             $table->char('artist_id', 26)->index();
             $table->string('name', 100)->unique();
-            $table->softDeletes();
-            $table->timestamps();
+
+            $table->commonFields();
         });
     }
 

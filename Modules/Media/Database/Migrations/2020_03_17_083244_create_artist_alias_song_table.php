@@ -18,7 +18,7 @@ class CreateArtistAliasSongTable extends Migration
             $table->char('artist_alias_id', 26)->index();
             $table->char('song_id', 26)->index();
 
-            $table->timestamps();
+            $table->commonFields();
         });
     }
 

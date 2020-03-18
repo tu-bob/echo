@@ -18,8 +18,8 @@ class CreateGenresTable extends Migration
             $table->char('name', '30');
             $table->char('local_name', '30');
             $table->smallInteger('code');
-            $table->softDeletes();
-            $table->timestamps();
+
+            $table->commonFields();
         });
     }
 

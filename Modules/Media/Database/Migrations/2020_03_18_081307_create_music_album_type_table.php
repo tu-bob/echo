@@ -18,8 +18,7 @@ class CreateMusicAlbumTypeTable extends Migration
             $table->char('name', 255)->unique();
             $table->char('local_name', 255)->nullable()->unique();
 
-            $table->timestamps();
-            $table->softDeletes();
+            $table->commonFields();
         });
     }
 

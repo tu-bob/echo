@@ -7,10 +7,11 @@ namespace Modules\Shared\Models;
 use App\Libs\Ulid\HasUlid;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Modules\Shared\Libs\Userstamps\Userstamps;
 
 class BaseModel extends Model
 {
-    use HasUlid, SoftDeletes;
+    use HasUlid, SoftDeletes, Userstamps;
 
     public static $snakeAttributes = false;
     /**
