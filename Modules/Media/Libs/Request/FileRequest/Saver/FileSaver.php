@@ -30,11 +30,11 @@ class FileSaver
     function findOrCreateFile()
     {
         $this->hash = hash('sha256', file_get_contents($this->file->path()));
-        $existingFile = $this->entityClass::where('hash', $this->hash)->first();
-        if ($existingFile)
-            return $existingFile;
-        else
-            return $this->createFile();
+//        $existingFile = $this->entityClass::where('hash', $this->hash)->first();
+//        if ($existingFile)
+//            return $existingFile;
+//        else
+        return $this->createFile();
     }
 
     function createFile()
