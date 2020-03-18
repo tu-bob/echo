@@ -1,9 +1,12 @@
 <template>
     <div>
         <table-card :items="songs"
-                    :fields="fields">
+                    :fields="fields"
+                    :columnsToHide="columnsToHide">
             <template #header>
-                <span>Список загруженных песен</span>
+                <slot name="header">
+                    <span>Список загруженных песен</span>
+                </slot>
             </template>
 
             <template v-slot:artistAliases="{item}">
@@ -11,7 +14,15 @@
             </template>
 
             <template v-slot:edit="{item}">
-                <a :href="`/app/media/song/${item.id}`"><img class="icon-btn-sm" src="/icons/svg/edit.svg"></a>
+                <a :href="`/app/media/song/${item.id}`">
+                    <img class="icon-btn-sm" src="/icons/svg/edit.svg">
+                </a>
+            </template>
+
+            <template v-slot:delete="{item}">
+                <slot name="delete" v-bind:song="item">
+                    --
+                </slot>
             </template>
         </table-card>
     </div>
@@ -23,11 +34,26 @@
     export default {
         name: "SongsTable",
         created() {
-            this.fetchSongs();
+            if (!this.preventFetch)
+                this.fetchSongs();
+        },
+        props: {
+            columnsToHide: {
+                type: Array,
+                default: () => ['delete']
+            },
+            providedSongs: {
+                type: Array,
+                default: () => []
+            },
+            preventFetch: {
+                type: Boolean,
+                default: false
+            }
         },
         data() {
             return {
-                songs: [],
+                songs: this.providedSongs,
                 fields: [
                     {
                         key: "title",
@@ -48,6 +74,10 @@
                     {
                         key: "edit",
                         label: ""
+                    },
+                    {
+                        key: "delete",
+                        label: ""
                     }
                 ]
             }
@@ -59,10 +89,14 @@
                     .catch();
             }
         },
+        watch: {
+            providedSongs() {
+                this.songs = this.providedSongs;
+            }
+        },
         components: {
             TableCard
-        }
-        ,
+        },
     }
 </script>
 

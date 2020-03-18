@@ -10,7 +10,7 @@
 
         <b-table :borderless="borderless"
                  :busy="isBusy"
-                 :fields="fields"
+                 :fields="tableFields"
                  :fixed="fixed"
                  :items="items"
                  :primary-key="primaryKey"
@@ -72,19 +72,14 @@
         name: "TableCard",
         mixins: [TableCardProps],
         mounted() {
-            console.log(this);
-            for (let i = 0; i < this.$parent.$slots; i++) {
-                console.log(this.$parent.$slots[i])
-            }
-
-            for (let i = 0; i < this.$parent.$scopedSlots; i++) {
-                console.log(this.$parent.$scopedSlots[i])
-            }
+            if (this.columnsToHide)
+                this.hideColumns();
         },
-        props: {
-            customCells: {
-                type: Array,
-                default: () => ['artistAliases']
+        data() {
+            return {
+                tableFields: this.fields,
+                selected: [],
+                selectAll: false
             }
         },
         methods: {
@@ -113,9 +108,12 @@
             concatCellKey(key) {
                 return `cell(${key})`;
             },
-            show(slot) {
-                console.log(slot)
-                return 2;
+            hideColumns() {
+                for (let i = 0; i < this.columnsToHide.length; i++) {
+                    this.tableFields = this.tableFields.filter(field =>
+                        field.key !== this.columnsToHide[i]
+                    )
+                }
             }
         },
         watch: {
@@ -125,12 +123,12 @@
                 } else this.selected = [];
 
                 return this.$emit('itemsSelected', this.selected);
-            }
-        },
-        data() {
-            return {
-                selected: [],
-                selectAll: false
+            },
+            fields() {
+                this.tableFields = this.fields;
+            },
+            columnsToHide() {
+                this.hideColumns();
             }
         },
     }
