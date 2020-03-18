@@ -49,9 +49,9 @@
         <div class="form-group mt-4">
             <label>Обложка альбома</label>
             <b-form-file
-                v-model="coverFile"
-                :state="Boolean(coverFile)"
-                ref="coverFileInput"
+                v-model="albumCoverFile"
+                :state="Boolean(albumCoverFile)"
+                ref="albumCoverFileInput"
                 accept="image/jpeg, image/png"
                 placeholder="Выберите картинку или перетащите ее сюда..."
                 drop-placeholder="Перетащите обложку сюда..."
@@ -77,7 +77,7 @@
         },
         data() {
             return {
-                coverFile:null,
+                albumCoverFile: null,
                 albumTypes: [],
                 album: {
                     title: null,
@@ -114,7 +114,33 @@
                 return str;
             },
             submit() {
+                let data = new FormData();
+                if (this.album.id)
+                    data.append('id', this.album.id);
+                if (this.albumCoverFile)
+                    data.append('albumCoverFile', this.albumCoverFile, this.albumCoverFile.name);
+                data.append('title', this.album.title);
+                data.append('year', String(this.album.year));
 
+                for (let i = 0; i < this.album.songs.length; i++) {
+                    data.append('songs[]', this.album.songs[i].id);
+                }
+
+                axios.post('/media/music/album', data)
+                    .then(response => {
+                        this.clearForm();
+                        this.$router.replace('/media/album')
+                    })
+                    .catch(
+                        //TODO
+                    );
+            },
+            clearForm() {
+                this.album.title = null;
+                this.album.type = null;
+                this.album.year = null;
+                this.album.songs = [];
+                this.$refs['albumCoverFileInput'].reset();
             }
         }
     }

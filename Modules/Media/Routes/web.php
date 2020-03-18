@@ -40,7 +40,7 @@ Route::prefix('media')->group(function () {
         });
 
         Route::prefix('album')->group(function () {
-            Route::post('/', 'Music\SongController@store');
+            Route::post('/', 'Music\MusicAlbumController@store');
             Route::get('/filter', 'Music\MusicAlbumController@filter');
             Route::get('/types', 'Music\MusicAlbumController@getAlbumTypes');
         });

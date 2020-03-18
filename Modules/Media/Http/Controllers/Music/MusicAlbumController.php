@@ -4,6 +4,8 @@
 namespace Modules\Media\Http\Controllers\Music;
 
 
+use Modules\Media\Http\Requests\Music\MusicAlbumRequest;
+use Modules\Media\Libs\Request\RequestWriter\Music\StoreMusicAlbumRequestWriter;
 use Modules\Media\Libs\StringComparator\DiceBestMatchFinder;
 use Modules\Media\Models\Music\MusicAlbum;
 use Modules\Media\Models\Music\MusicAlbumType;
@@ -11,6 +13,12 @@ use Modules\Shared\Http\Controllers\BaseController;
 
 class MusicAlbumController extends BaseController
 {
+    public function store(MusicAlbumRequest $request)
+    {
+        $writer = new StoreMusicAlbumRequestWriter($request->all());
+        $writer->write();
+    }
+
     public function filter()
     {
         $aliases = MusicAlbum::all();

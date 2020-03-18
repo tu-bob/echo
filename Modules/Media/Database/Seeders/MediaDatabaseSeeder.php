@@ -18,7 +18,7 @@ class MediaDatabaseSeeder extends Seeder
 
         $this->call(ArtistsTableSeeder::class);
         $this->call(GenresTableSeeder::class);
-        $this->call(MusicAlbumsTableSeeder::class);
         $this->call(MusicAlbumTypeTableSeeder::class);
+        $this->call(MusicAlbumsTableSeeder::class);
     }
 }
