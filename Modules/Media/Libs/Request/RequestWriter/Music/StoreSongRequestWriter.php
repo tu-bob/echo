@@ -18,7 +18,7 @@ class StoreSongRequestWriter extends RequestWriter
 
     public function __construct($request = null)
     {
-        parent::__construct( $request,Song::class);
+        parent::__construct($request, Song::class);
     }
 
     public function write()
@@ -53,10 +53,12 @@ class StoreSongRequestWriter extends RequestWriter
         $data = [
             'title' => $this->request['title'],
             'year' => $this->request['year'],
-            'label' => $this->request['label'],
-            'lyrics' => $this->request['lyrics']
+            'label' => $this->request['label']
         ];
 
+        if (isset($this->request['lyrics']))
+            $data['lyrics'] = $this->request['lyrics'];
+        
         if (isset($this->audioFile))
             $data['audio_file_id'] = $this->audioFile->id;
 
