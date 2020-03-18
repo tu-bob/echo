@@ -7,6 +7,7 @@ namespace Modules\Media\Libs\Request\RequestWriter\Music;
 use Illuminate\Http\UploadedFile;
 use Modules\Media\Libs\Request\FileRequest\Saver\FileSaver;
 use Modules\Media\Models\Music\ImageFile;
+use Modules\Media\Models\Music\MusicAlbum;
 use Modules\Shared\Http\Requests\RequestWriter;
 
 class StoreMusicAlbumRequestWriter extends RequestWriter
@@ -15,14 +16,38 @@ class StoreMusicAlbumRequestWriter extends RequestWriter
 
     private UploadedFile $file;
 
-    function write()
+    public function __construct($request = null, $entity = null)
     {
-        // TODO: Implement write() method.
+        parent::__construct($request, MusicAlbum::class);
+        $this->file = $request['albumCoverFile'];
     }
 
-    public function createOrUpdateAlbum(){}
+    function write()
+    {
+        if (isset($this->request['albumCoverFile']))
+            $this->saveFile();
 
-    public function saveFile(){
+        $data = $this->prepareData();
+
+        $this->createOrUpdate($data);
+    }
+
+    public function prepareData()
+    {
+        $data = [
+            'music_album_type_id' => $this->request['type'],
+            'title' => $this->request['title'],
+            'year' => $this->request['year']
+        ];
+
+        if (isset($this->imageFile))
+            $data['image_file_id'] = $this->imageFile->id;
+
+        return $data;
+    }
+
+    public function saveFile()
+    {
         $saver = new FileSaver($this->file, 'images/covers', ImageFile::class, auth()->id());
         $this->imageFile = $saver->findOrCreateFile();
     }

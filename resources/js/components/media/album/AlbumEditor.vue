@@ -121,6 +121,7 @@
                     data.append('albumCoverFile', this.albumCoverFile, this.albumCoverFile.name);
                 data.append('title', this.album.title);
                 data.append('year', String(this.album.year));
+                data.append('type', String(this.album.type.id));
 
                 for (let i = 0; i < this.album.songs.length; i++) {
                     data.append('songs[]', this.album.songs[i].id);
