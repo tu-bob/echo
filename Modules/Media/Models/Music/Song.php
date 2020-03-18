@@ -4,8 +4,8 @@
 namespace Modules\Media\Models\Music;
 
 
-use App\Models\BaseModel;
 use Modules\Media\Models\Artist\ArtistAlias;
+use Modules\Shared\Models\BaseModel;
 use Modules\Shared\Models\Pivots\BasePivot;
 
 class Song extends BaseModel

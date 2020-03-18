@@ -4,11 +4,9 @@
 namespace Modules\Media\Models\Music;
 
 
-
-
 use Modules\Shared\Models\BaseModel;
 
-class Genre extends BaseModel
+class MusicAlbumType extends BaseModel
 {
 
 }
