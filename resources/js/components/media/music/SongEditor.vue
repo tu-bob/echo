@@ -282,7 +282,8 @@
                 data.append('title', this.song.title);
                 data.append('year', String(this.song.year));
                 data.append('label', this.song.label);
-                data.append('lyrics', this.song.lyrics);
+                if (this.song.lyrics)
+                    data.append('lyrics', this.song.lyrics);
 
                 for (let i = 0; i < this.song.artistAliases.length; i++) {
                     data.append('artistAliases[]', this.song.artistAliases[i].id);
