@@ -4,15 +4,10 @@
 namespace Modules\Media\Http\Requests\Music;
 
 
-use Illuminate\Foundation\Http\FormRequest;
+use Modules\Shared\Http\Requests\BaseFormRequest;
 
-class SongRequest extends FormRequest
+class SongRequest extends BaseFormRequest
 {
-    public function authorize()
-    {
-        return true;
-    }
-
     public function rules()
     {
         return [

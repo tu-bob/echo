@@ -4,9 +4,9 @@
 namespace Modules\Media\Libs\Request\RequestWriter\Music;
 
 
-use Modules\Media\Libs\Request\RequestWriter\RequestWriter;
 use Modules\Media\Models\Music\AudioFile;
 use Modules\Media\Models\Music\Song;
+use Modules\Shared\Http\Requests\RequestWriter;
 
 class StoreSongRequestWriter extends RequestWriter
 {
@@ -15,6 +15,11 @@ class StoreSongRequestWriter extends RequestWriter
     protected AudioFile $audioFile;
 
     protected array $extractedInfo;
+
+    public function __construct($request = null)
+    {
+        parent::__construct( $request,Song::class);
+    }
 
     public function write()
     {
@@ -50,7 +55,7 @@ class StoreSongRequestWriter extends RequestWriter
             'year' => $this->request['year'],
             'label' => $this->request['label'],
             'lyrics' => $this->request['lyrics'],
-            'uploaded_by_id' => auth()->user()->id
+            'uploaded_by_id' => auth()->id()
         ];
 
         if (isset($this->audioFile))
@@ -77,14 +82,14 @@ class StoreSongRequestWriter extends RequestWriter
         return array_merge($data, $extracted);
     }
 
-    private function createOrUpdate($data)
-    {
-        if (isset($this->request['id'])) {
-            $this->song = Song::findOrFail($this->request['id']);
-            $this->song->update($data);
-        } else
-            $this->song = Song::create($data);
-    }
+//    private function createOrUpdate($data)
+//    {
+//        if (isset($this->request['id'])) {
+//            $this->song = Song::findOrFail($this->request['id']);
+//            $this->song->update($data);
+//        } else
+//            $this->song = Song::create($data);
+//    }
 
     private function manageRelations()
     {

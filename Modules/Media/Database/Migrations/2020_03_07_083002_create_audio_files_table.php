@@ -15,11 +15,12 @@ class CreateAudioFilesTable extends Migration
     {
         Schema::create('audio_files', function (Blueprint $table) {
             $table->char('id', 26)->primary();
+            $table->char('uploaded_by_id', 26)->index();
             $table->string('path');
             $table->string('filename');
             $table->string('mime_type');
             $table->char('extension', 10);
-            $table->string('hash')->unique();
+            $table->string('hash');
             $table->softDeletes();
             $table->timestamps();
         });

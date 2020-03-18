@@ -6,6 +6,7 @@ namespace Modules\Media\Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Modules\Media\Models\Music\MusicAlbum;
+use Modules\Media\Models\Music\MusicAlbumType;
 
 class MusicAlbumsTableSeeder extends Seeder
 {
@@ -25,7 +26,9 @@ class MusicAlbumsTableSeeder extends Seeder
 
         foreach ($albums as $album) {
             MusicAlbum::create([
-                'title' => $album
+                'title' => $album,
+                'music_album_type_id' => MusicAlbumType::where('name', 'Album musical')->first()->id,
+                'year' => '2018'
             ]);
         }
     }
