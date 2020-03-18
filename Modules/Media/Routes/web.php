@@ -35,12 +35,14 @@ Route::prefix('media')->group(function () {
         Route::prefix('song')->group(function () {
             Route::post('/', 'Music\SongController@store');
             Route::get('/list', 'Music\SongController@getSongs');
+            Route::get('/find/{info}', 'Music\SongController@findSongsByInfo');
             Route::get('/{song}', 'Music\SongController@getSong');
         });
 
         Route::prefix('album')->group(function () {
             Route::post('/', 'Music\SongController@store');
             Route::get('/filter', 'Music\MusicAlbumController@filter');
+            Route::get('/types', 'Music\MusicAlbumController@getAlbumTypes');
         });
     });
 

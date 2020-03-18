@@ -23,7 +23,13 @@ class SongController extends BaseController
         return $this->callGetOrPaginate($query);
     }
 
-    public function getSong($song){
+    public function getSong($song)
+    {
         return Song::with(['artistAliases', 'genres', 'albums'])->findOrFail($song);
+    }
+
+    public function findSongsByInfo($info)
+    {
+        return Song::where('title', 'like', '%' . $info . '%')->get();
     }
 }

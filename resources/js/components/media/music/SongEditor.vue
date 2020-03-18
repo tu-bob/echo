@@ -151,7 +151,6 @@
 </template>
 
 <script>
-    import SuggestionInput from "../../common/inputs/SuggestionInput";
     import {parseBlob} from 'music-metadata-browser';
     import {validateAudio} from '../../../util/validators.js'
     import {fetchArtistAliasesByName, fetchFilteredAlbums, fetchGenres, fetchSong} from '../../../api/mediaApi.js'
@@ -160,7 +159,6 @@
 
     export default {
         name: "SongEditor",
-        components: {SuggestionInput},
         props: {
             providedFile: {
                 type: Object,

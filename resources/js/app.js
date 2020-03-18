@@ -29,7 +29,7 @@ window.Vue.prototype.$eventHub = new Vue();
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 Vue.component('App', require('./app/App.vue').default);
-
+Vue.component('SuggestionInput', require('./components/common/inputs/SuggestionInput.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

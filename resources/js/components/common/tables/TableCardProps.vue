@@ -58,6 +58,9 @@
             hover: {
                 type: Boolean,
                 default: false
+            },
+            columnsToHide: {
+                type: Array
             }
         },
     }
