@@ -4,6 +4,7 @@
 namespace Modules\Media\Http\Controllers\Music;
 
 
+use Illuminate\Database\Eloquent\Builder;
 use Modules\Media\Http\Requests\Music\SongRequest;
 use Modules\Media\Libs\Request\RequestWriter\Music\StoreSongRequestWriter;
 use Modules\Media\Models\Music\Song;
@@ -30,6 +31,11 @@ class SongController extends BaseController
 
     public function findSongsByInfo($info)
     {
-        return Song::where('title', 'like', '%' . $info . '%')->get();
+        return Song::with('artistAliases')
+            ->where('title', 'like', '%' . $info . '%')
+            ->orWhereHas('artistAliases', function (Builder $query) use ($info) {
+                $query->where('name', 'like', '%' . $info . '%');
+            })
+            ->get();
     }
 }
