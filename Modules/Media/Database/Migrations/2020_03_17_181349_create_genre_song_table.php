@@ -18,7 +18,7 @@ class CreateGenreSongTable extends Migration
             $table->char('genre_id', 26)->index();
             $table->char('song_id', 26)->index();
 
-            $table->commonFields();
+            $table->timestamps();
         });
     }
 

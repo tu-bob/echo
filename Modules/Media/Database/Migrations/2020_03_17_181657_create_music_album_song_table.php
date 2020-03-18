@@ -18,7 +18,7 @@ class CreateMusicAlbumSongTable extends Migration
             $table->char('music_album_id', 26)->index();
             $table->char('song_id', 26)->index();
 
-            $table->commonFields();
+            $table->timestamps();
         });
     }
 
