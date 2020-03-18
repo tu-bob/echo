@@ -4,10 +4,10 @@
 namespace Modules\Media\Http\Controllers\Music;
 
 
-use App\Http\Controllers\Controller;
 use Modules\Media\Models\Music\Genre;
+use Modules\Shared\Http\Controllers\BaseController;
 
-class GenreController extends Controller
+class GenreController extends BaseController
 {
     public function all()
     {

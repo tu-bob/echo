@@ -4,14 +4,12 @@
 namespace Modules\Media\Http\Controllers\Music;
 
 
-use App\Http\Controllers\Controller;
 use Modules\Media\Http\Requests\Music\SongRequest;
-use Modules\Media\Libs\Request\RequestWriter\Music\StoreAudioFileRequestWriter;
 use Modules\Media\Libs\Request\RequestWriter\Music\StoreSongRequestWriter;
-use Modules\Media\Models\Music\AudioFile;
 use Modules\Media\Models\Music\Song;
+use Modules\Shared\Http\Controllers\BaseController;
 
-class SongController extends Controller
+class SongController extends BaseController
 {
     public function store(SongRequest $request)
     {

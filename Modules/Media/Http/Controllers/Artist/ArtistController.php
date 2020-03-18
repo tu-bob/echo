@@ -3,11 +3,10 @@
 
 namespace Modules\Media\Http\Controllers\Artist;
 
-
-use App\Http\Controllers\Controller;
 use Modules\Media\Models\Artist\Artist;
+use Modules\Shared\Http\Controllers\BaseController;
 
-class ArtistController extends Controller
+class ArtistController extends BaseController
 {
     public function __construct()
     {

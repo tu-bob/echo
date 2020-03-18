@@ -4,11 +4,12 @@
 namespace Modules\Media\Http\Controllers\Music;
 
 
-use App\Http\Controllers\Controller;
 use Modules\Media\Libs\StringComparator\DiceBestMatchFinder;
 use Modules\Media\Models\Music\MusicAlbum;
+use Modules\Media\Models\Music\MusicAlbumType;
+use Modules\Shared\Http\Controllers\BaseController;
 
-class MusicAlbumController extends Controller
+class MusicAlbumController extends BaseController
 {
     public function filter()
     {
@@ -19,5 +20,10 @@ class MusicAlbumController extends Controller
         return array_map(function ($match) {
             return $match->entity;
         }, $matches);
+    }
+
+    public function getAlbumTypes()
+    {
+        return MusicAlbumType::all();
     }
 }
