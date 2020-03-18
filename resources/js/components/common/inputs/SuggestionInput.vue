@@ -23,7 +23,7 @@
                  v-bind:property="option"
                  v-for="(option, index) in options"
                  :key="option[keyPropertyName]">
-                {{option[displayPropertyName]}}
+                {{formatOptions(option)}}
             </div>
         </div>
     </div>
@@ -67,6 +67,9 @@
             searchInputChange: {
                 type: Function,
                 required: false
+            },
+            optionFormatter: {
+                type: Function
             },
             // optionSelected: {
             //     type: Function,
@@ -178,6 +181,7 @@
                     axios.get(this.actionUrl + this.query)
                         .then(response => this.options = response)
                         .catch();
+                else this.options = [];
             },
             filterData() {
                 if (this.query) {
@@ -189,6 +193,12 @@
                 } else {
                     this.options = this.providedOptions;
                 }
+            },
+            formatOptions(option) {
+                if (this.optionFormatter)
+                    return this.optionFormatter(option);
+                else
+                    return option[this.displayPropertyName];
             }
         }
     }
