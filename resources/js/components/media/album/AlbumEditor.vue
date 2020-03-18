@@ -28,7 +28,7 @@
                 </suggestion-input>
             </div>
         </div>
-        <div class="row">
+        <div class="row mt-2">
             <songs-table class='col-12'
                          :provided-songs="album.songs"
                          :columnsToHide="['edit']"
@@ -44,6 +44,10 @@
                     </a>
                 </template>
             </songs-table>
+        </div>
+
+        <div class="row mt-4">
+            <button class="mx-auto btn btn-primary" @click="submit">Сохранить</button>
         </div>
     </div>
 </template>
@@ -76,7 +80,7 @@
                 )
                     .catch();
             },
-            removeSong(song) { 
+            removeSong(song) {
                 this.album.songs = this.album.songs.filter(item => item.id !== song.id);
             },
             onSongSelected(song) {
@@ -94,6 +98,9 @@
                 let str = option.title + ' - ';
                 option.artistAliases.forEach(alias => str += option.artistAliases[0].name + '; ');
                 return str;
+            },
+            submit() {
+                
             }
         }
     }
