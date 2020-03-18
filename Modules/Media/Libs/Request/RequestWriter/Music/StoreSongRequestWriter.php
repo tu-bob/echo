@@ -54,8 +54,7 @@ class StoreSongRequestWriter extends RequestWriter
             'title' => $this->request['title'],
             'year' => $this->request['year'],
             'label' => $this->request['label'],
-            'lyrics' => $this->request['lyrics'],
-            'uploaded_by_id' => auth()->id()
+            'lyrics' => $this->request['lyrics']
         ];
 
         if (isset($this->audioFile))
