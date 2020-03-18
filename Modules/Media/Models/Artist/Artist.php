@@ -2,7 +2,8 @@
 
 namespace Modules\Media\Models\Artist;
 
-use App\Models\BaseModel;
+
+use Modules\Shared\Models\BaseModel;
 
 class Artist extends BaseModel
 {

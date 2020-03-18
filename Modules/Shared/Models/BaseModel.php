@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\Models;
+namespace Modules\Shared\Models;
 
 
 use App\Libs\Ulid\HasUlid;

@@ -4,7 +4,9 @@
 namespace Modules\Media\Models\Music;
 
 
-use App\Models\BaseModel;
+
+
+use Modules\Shared\Models\BaseModel;
 
 class AudioFile extends BaseModel
 {
