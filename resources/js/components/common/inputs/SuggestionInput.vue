@@ -2,7 +2,7 @@
     <div class="dropdown">
         <input @click.stop.prevent.capture
                @keydown="onKeyDown"
-               autocomplete="query"
+               autocomplete="off"
                autofocus
                class="form-control col-md-12"
                data-toggle="dropdown"
