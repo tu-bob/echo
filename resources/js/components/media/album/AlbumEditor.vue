@@ -46,6 +46,19 @@
             </songs-table>
         </div>
 
+        <div class="form-group mt-4">
+            <label>Обложка альбома</label>
+            <b-form-file
+                v-model="coverFile"
+                :state="Boolean(coverFile)"
+                ref="coverFileInput"
+                accept="image/jpeg, image/png"
+                placeholder="Выберите картинку или перетащите ее сюда..."
+                drop-placeholder="Перетащите обложку сюда..."
+                browse-text="Обзор"
+            ></b-form-file>
+        </div>
+
         <div class="row mt-4">
             <button class="mx-auto btn btn-primary" @click="submit">Сохранить</button>
         </div>
@@ -64,6 +77,7 @@
         },
         data() {
             return {
+                coverFile:null,
                 albumTypes: [],
                 album: {
                     title: null,
@@ -100,7 +114,7 @@
                 return str;
             },
             submit() {
-                
+
             }
         }
     }
