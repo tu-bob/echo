@@ -42,7 +42,7 @@ class FileSaver
         $entity = new $this->entityClass();
         $entity->hash = $this->hash;
         $entity->mime_type = $this->file->getMimeType();
-        $entity->extension = $this->file->getClientOriginalExtension(); 
+        $entity->extension = $this->file->getClientOriginalExtension();
 
         $path = $this->dirPath . '/' . RandomStringGenerator::generate(3);
 
