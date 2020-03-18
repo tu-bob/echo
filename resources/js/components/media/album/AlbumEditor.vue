@@ -23,6 +23,7 @@
                 <suggestion-input displayPropertyName="title"
                                   ref="songSearch"
                                   @selected="onSongSelected"
+                                  :optionFormatter="optionFormatter"
                                   action-url="/media/music/song/find/">
                 </suggestion-input>
             </div>
@@ -89,6 +90,11 @@
 
                 this.$refs['songSearch'].query = '';
                 this.$refs['songSearch'].options = [];
+            },
+            optionFormatter(option) {
+                let str = option.title + ' - ';
+                option.artistAliases.forEach(alias => str += option.artistAliases[0].name + '; ');
+                return str;
             }
         }
     }
