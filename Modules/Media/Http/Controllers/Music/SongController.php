@@ -20,7 +20,7 @@ class SongController extends BaseController
 
     public function getSongs()
     {
-        $query = Song::where('uploaded_by_id', auth()->user()->id)->with('artistAliases');
+        $query = Song::where('created_by_id', auth()->user()->id)->with('artistAliases');
         return $this->callGetOrPaginate($query);
     }
 
