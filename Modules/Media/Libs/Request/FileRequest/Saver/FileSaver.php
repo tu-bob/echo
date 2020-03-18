@@ -19,15 +19,12 @@ class FileSaver
 
     private string $entityClass;
 
-    private string $userId;
 
-
-    public function __construct(UploadedFile $file, string $dirPath, string $entityClass, string $userId)
+    public function __construct(UploadedFile $file, string $dirPath, string $entityClass)
     {
         $this->file = $file;
         $this->dirPath = $dirPath;
         $this->entityClass = $entityClass;
-        $this->userId = $userId;
     }
 
     function findOrCreateFile()
@@ -45,8 +42,7 @@ class FileSaver
         $entity = new $this->entityClass();
         $entity->hash = $this->hash;
         $entity->mime_type = $this->file->getMimeType();
-        $entity->extension = $this->file->getClientOriginalExtension();
-        $entity->uploaded_by_id = $this->userId;
+        $entity->extension = $this->file->getClientOriginalExtension(); 
 
         $path = $this->dirPath . '/' . RandomStringGenerator::generate(3);
 
