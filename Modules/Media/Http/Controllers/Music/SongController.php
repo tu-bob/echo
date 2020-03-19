@@ -5,6 +5,7 @@ namespace Modules\Media\Http\Controllers\Music;
 
 
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\Storage;
 use Modules\Media\Http\Requests\Music\SongRequest;
 use Modules\Media\Libs\Request\RequestWriter\Music\StoreSongRequestWriter;
 use Modules\Media\Models\Music\Song;
@@ -27,6 +28,12 @@ class SongController extends BaseController
     public function getSong($song)
     {
         return Song::with(['artistAliases', 'genres', 'albums'])->findOrFail($song);
+    }
+
+    public function getAudioFile($song)
+    {
+        $file = Song::findOrFail($song)->audioFile;
+        return Storage::get($file->path);
     }
 
     public function findSongsByInfo($info)
