@@ -16,6 +16,10 @@ export async function fetchSong(id) {
     return axios.get(`/media/music/song/${id}`);
 }
 
+export async function fetchAlbum(id) {
+    return axios.get(`/media/music/album/${id}`);
+}
+
 export async function fetchAlbumTypes() {
     return axios.get('/media/music/album/types');
 }

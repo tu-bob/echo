@@ -40,4 +40,9 @@ class MusicAlbumController extends BaseController
         $query = MusicAlbum::where('created_by_id', auth()->user()->id);
         return $this->callGetOrPaginate($query);
     }
+
+    public function getAlbum($album)
+    {
+        return MusicAlbum::with(['songs', 'type'])->findOrFail($album);
+    }
 }
