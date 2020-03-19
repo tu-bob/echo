@@ -1,9 +1,9 @@
 <template>
-    <div id="summernote"></div>
+    <div :id="id"></div>
 </template>
 
 <script>
-    import {uploadFiles} from "../../../main";
+    import {generateId, uploadFiles} from "../../../main";
 
     require('summernote/dist/summernote-bs4.min.js');
     require('summernote/dist/summernote-bs4.min.css');
@@ -27,6 +27,7 @@
         },
         data() {
             return {
+                id: generateId(),
                 options: {
                     lang: this.lang,
                     height: this.height,
@@ -52,10 +53,16 @@
                     console.log(vue.imageUploadUrl)
                     if (!vue.imageUploadUrl)
                         return;
-                    uploadFiles(files, vue.imageUploadUrl, 'images').catch(e => console.log(e));
+                    uploadFiles(files, vue.imageUploadUrl, 'images')
+                        .then(response => {
+                            for (let i = 0; i < response.length; i++) {
+                                $('#' + vue.id).summernote('insertImage', `/media/image/blog/${response[i].id}`);
+                            }
+                        })
+                        .catch(e => console.log(e));
                 }
             };
-            $('#summernote').summernote(this.options);
+            $('#' + this.id).summernote(this.options);
         },
     }
 </script>
