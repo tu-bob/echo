@@ -79,6 +79,6 @@ class StoreAudioFileRequestWriter extends RequestWriter
     private function saveFileOrGetExisting()
     {
         $saver = new FileSaver($this->file, 'music', AudioFile::class);
-        $this->audioFile = $saver->findOrCreateFile();
+        $this->audioFile = $saver->saveFile();
     }
 }
