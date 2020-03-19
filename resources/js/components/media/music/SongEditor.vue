@@ -1,16 +1,24 @@
 <template>
-    <div class="col-md-8">
-        <div class="form-group" v-if="!Boolean(providedFile)">
-            <b-form-file
-                v-model="mp3File"
-                :state="Boolean(mp3File)"
-                ref="mp3FileInput"
-                accept=".mp3"
-                placeholder="Выберите файл или перетащите его сюда..."
-                drop-placeholder="Перетащите файл сюда..."
-                browse-text="Обзор"
-            ></b-form-file>
+    <div>
+        <div class="row">
+            <div class="align-items-end col-md-6 form-group" v-if="!Boolean(providedFile)">
+                <label>Файл</label>
+                <b-form-file
+                    v-model="mp3File"
+                    :state="Boolean(audioSrc) || Boolean(mp3File)"
+                    ref="mp3FileInput"
+                    accept=".mp3"
+                    placeholder="Выберите файл или перетащите его сюда..."
+                    drop-placeholder="Перетащите файл сюда..."
+                    browse-text="Обзор"
+                ></b-form-file>
+            </div>
+            <div class="align-items-end col-md-6">
+                <audio class="mt-md-4" controlsList="nodownload" :src="audioSrc" controls></audio>
+            </div>
         </div>
+
+
         <div class="alert alert-info" v-if="song.bitrate">
             <span>{{song.bitrate / 1000}} kbs |
                 {{song.sample_rate}} |
@@ -391,6 +399,14 @@
                 invokeErrorResetRequested();
             }
         },
+        computed: {
+            audioSrc() {
+                if(this.mp3File)
+                    return  URL.createObjectURL(this.mp3File);
+                if (this.song.id)
+                    return `/media/music/song/${this.song.id}/audio`
+            }
+        }
     }
 </script>
 
