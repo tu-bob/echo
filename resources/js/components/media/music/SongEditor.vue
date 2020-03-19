@@ -13,8 +13,8 @@
                     browse-text="Обзор"
                 ></b-form-file>
             </div>
-            <div class="align-items-end col-md-6">
-                <audio class="mt-md-4" controlsList="nodownload" :src="audioSrc" controls></audio>
+            <div class="row ml-1 col-md-6">
+                <audio class="mt-md-4 mx-auto" controlsList="nodownload" :src="audioSrc" controls></audio>
             </div>
         </div>
 
@@ -393,6 +393,7 @@
                 this.missedArtists = [];
 
                 if (removeFile) {
+                    this.mp3File = null;
                     this.$refs['mp3FileInput'].reset()
                 }
 
@@ -401,10 +402,10 @@
         },
         computed: {
             audioSrc() {
-                if(this.mp3File)
-                    return  URL.createObjectURL(this.mp3File);
+                if (this.mp3File)
+                    return URL.createObjectURL(this.mp3File);
                 if (this.song.id)
-                    return `/media/music/song/${this.song.id}/audio`
+                    return `/media/music/song/${this.song.id}/audio`;
             }
         }
     }
