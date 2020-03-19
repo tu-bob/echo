@@ -61,12 +61,17 @@
                 ></b-form-file>
             </div>
             <div class="col-md-2">
-                <b-img thumbnail 
+                <b-img thumbnail
                        fluid
-                       v-bind="{width: 100, height: 100, class: 'm1' }"
-                       src="/media/music/album/01e3qffc2cpwfhjc60gx28qq21/cover" :alt="album.name + ' cover'"></b-img>
+                       width="100"
+                       height="100"
+                       :src="imageSrc"
+                       :blank="!Boolean(imageSrc)"
+                       :alt="album.name + ' cover'"
+                ></b-img>
             </div>
         </div>
+
         <div class="row mt-4">
             <button class="mx-auto btn btn-primary" @click="submit">Сохранить</button>
         </div>
@@ -156,7 +161,17 @@
                 this.album.type = null;
                 this.album.year = null;
                 this.album.songs = [];
+                this.album.id = null;
+                this.albumCoverFile = null;
                 this.$refs['albumCoverFileInput'].reset();
+            }
+        },
+        computed: {
+            imageSrc() {
+                if (this.albumCoverFile) {
+                    return  URL.createObjectURL(this.albumCoverFile);
+                } else if (this.album.id)
+                    return `/media/music/album/${this.album.id}/cover`;
             }
         }
     }
