@@ -52,7 +52,7 @@
                 <label>Обложка альбома</label>
                 <b-form-file
                     v-model="albumCoverFile"
-                    :state="Boolean(albumCoverFile)"
+                    :state="Boolean(imageSrc) || Boolean(albumCoverFile)"
                     ref="albumCoverFileInput"
                     accept="image/jpeg, image/png"
                     placeholder="Выберите картинку или перетащите ее сюда..."
