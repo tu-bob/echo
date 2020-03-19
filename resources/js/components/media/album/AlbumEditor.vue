@@ -67,7 +67,7 @@
 </template>
 
 <script>
-    import {fetchAlbumTypes} from "../../../api/mediaApi";
+    import {fetchAlbum, fetchAlbumTypes} from "../../../api/mediaApi";
     import SongsTable from "../music/SongsTable";
 
     export default {
@@ -75,6 +75,8 @@
         components: {SongsTable},
         created() {
             this.fetchAlbumTypes();
+            if (this.$route.params.id)
+                this.fetchAlbum(this.$route.params.id);
         },
         data() {
             return {
@@ -136,6 +138,11 @@
                     .catch(
                         //TODO
                     );
+            },
+            fetchAlbum(id) {
+                fetchAlbum(id).then(album => {
+                    this.album = album;
+                }).catch();
             },
             clearForm() {
                 this.album.title = null;

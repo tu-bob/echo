@@ -16,6 +16,11 @@ class MusicAlbum extends BaseModel
             ->withTimestamps();
     }
 
+    public function type()
+    {
+        return $this->belongsTo(MusicAlbumType::class, 'music_album_type_id');
+    }
+
     public function cover()
     {
         return $this->belongsTo(ImageFile::class, 'image_file_id');

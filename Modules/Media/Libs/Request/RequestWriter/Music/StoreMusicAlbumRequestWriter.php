@@ -14,12 +14,9 @@ class StoreMusicAlbumRequestWriter extends RequestWriter
 {
     private ImageFile $imageFile;
 
-    private UploadedFile $file;
-
     public function __construct($request = null, $entity = null)
     {
         parent::__construct($request, MusicAlbum::class);
-        $this->file = $request['albumCoverFile'];
     }
 
     function write()
@@ -50,7 +47,7 @@ class StoreMusicAlbumRequestWriter extends RequestWriter
 
     public function saveFile()
     {
-        $saver = new FileSaver($this->file, 'images/covers', ImageFile::class);
+        $saver = new FileSaver($this->request['albumCoverFile'], 'images/covers', ImageFile::class);
         $this->imageFile = $saver->findOrCreateFile();
     }
 
