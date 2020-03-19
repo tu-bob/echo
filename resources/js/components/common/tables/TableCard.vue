@@ -12,16 +12,14 @@
                  :busy="isBusy"
                  :fields="tableFields"
                  :fixed="fixed"
-                 :items="items"
+                 :items="tableItems"
                  :primary-key="primaryKey"
                  :responsive="responsive"
                  :select-mode="selectMode"
                  :selectable="selectable"
                  :striped="striped"
                  :hover="hover"
-                 :tbody-tr-class="setRowClass? setRowClass:rowClass"
-                 small
-                 @row-clicked="onRowClick">
+                 small>
 
             <template v-slot:table-busy>
                 <div class="text-center text-info my-2">
@@ -74,37 +72,40 @@
         mounted() {
             if (this.columnsToHide)
                 this.hideColumns();
+            if (this.url)
+                this.fetch()
         },
         data() {
             return {
                 tableFields: this.fields,
-                selected: [],
-                selectAll: false
+                tableItems: this.items
+                // selected: [],
+                // selectAll: false
             }
         },
         methods: {
-            onRowClick(item) {
-                if (!this.selectable)
-                    return;
-                if (this.isSelected(item)) {
-                    this.selected = this.selected.filter(function (stored) {
-                        return stored.id !== item.id
-                    })
-                } else {
-                    this.selected.push(item)
-                }
-
-                return this.$emit('itemsSelected', this.selected);
-            },
-            isSelected(item) {
-                return this.selected.find(function (selected) {
-                    return selected.id === item.id;
-                });
-            },
-            rowClass(item, type) {
-                if (!item) return;
-                if (this.isSelected(item)) return this.selectedRowClass
-            },
+            // onRowClick(item) {
+            //     if (!this.selectable)
+            //         return;
+            //     if (this.isSelected(item)) {
+            //         this.selected = this.selected.filter(function (stored) {
+            //             return stored.id !== item.id
+            //         })
+            //     } else {
+            //         this.selected.push(item)
+            //     }
+            //
+            //     return this.$emit('itemsSelected', this.selected);
+            // },
+            // isSelected(item) {
+            //     return this.selected.find(function (selected) {
+            //         return selected.id === item.id;
+            //     });
+            // },
+            // rowClass(item, type) {
+            //     if (!item) return;
+            //     if (this.isSelected(item)) return this.selectedRowClass
+            // },
             concatCellKey(key) {
                 return `cell(${key})`;
             },
@@ -114,15 +115,24 @@
                         field.key !== this.columnsToHide[i]
                     )
                 }
+            },
+            fetch() {
+                if (this.url)
+                    axios.get(this.url)
+                        .then(songs => this.tableItems = songs)
+                        .catch();
             }
         },
         watch: {
-            selectAll() {
-                if (this.selectAll) {
-                    this.selected = this.items;
-                } else this.selected = [];
-
-                return this.$emit('itemsSelected', this.selected);
+            // selectAll() {
+            //     if (this.selectAll) {
+            //         this.selected = this.items;
+            //     } else this.selected = [];
+            //
+            //     return this.$emit('itemsSelected', this.selected);
+            // },
+            items() {
+                this.tableItems = this.items;
             },
             fields() {
                 this.tableFields = this.fields;

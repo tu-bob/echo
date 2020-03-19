@@ -32,6 +32,7 @@
             <songs-table class='col-12'
                          :provided-songs="album.songs"
                          :columnsToHide="['edit']"
+                         :url="null"
                          @song-delete-request="removeSong"
                          preventFetch>
                 <template #header>
@@ -94,7 +95,7 @@
                 )
                     .catch();
             },
-            removeSong(song) {
+            removeSong(song) {console.log(this.album.songs, song)
                 this.album.songs = this.album.songs.filter(item => item.id !== song.id);
             },
             onSongSelected(song) {

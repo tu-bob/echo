@@ -2,6 +2,7 @@
     <div>
         <table-card :items="songs"
                     :fields="fields"
+                    :url="url"
                     :columnsToHide="columnsToHide">
             <template #header>
                 <slot name="header">
@@ -34,8 +35,6 @@
     export default {
         name: "SongsTable",
         created() {
-            if (!this.preventFetch)
-                this.fetchSongs();
         },
         props: {
             columnsToHide: {
@@ -46,9 +45,9 @@
                 type: Array,
                 default: () => []
             },
-            preventFetch: {
-                type: Boolean,
-                default: false
+            url: {
+                type: String,
+                default: '/media/music/song/list'
             }
         },
         data() {
@@ -80,13 +79,6 @@
                         label: ""
                     }
                 ]
-            }
-        },
-        methods: {
-            fetchSongs() {
-                axios.get('/media/music/song/list')
-                    .then(songs => this.songs = songs)
-                    .catch();
             }
         },
         watch: {

@@ -6,6 +6,9 @@
                 type: Array,
                 required: true
             },
+            url: {
+                type: String
+            },
             fields: {
                 required: true
             },
