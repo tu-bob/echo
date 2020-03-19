@@ -3,6 +3,7 @@
 
 namespace Modules\Media\Http\Controllers\Artist;
 
+use Illuminate\Validation\Rule;
 use Modules\Media\Models\Artist\Artist;
 use Modules\Shared\Http\Controllers\BaseController;
 
@@ -15,7 +16,7 @@ class ArtistController extends BaseController
 
     public function store()
     {
-        $data = request()->validate($this->rules);
+        $data = request()->validate($this->rules());
         $artist = Artist::create();
 
         $this->createAliases($artist, $data['aliases']);
@@ -25,7 +26,7 @@ class ArtistController extends BaseController
 
     public function update(Artist $artist)
     {
-        $data = request()->validate($this->rules);
+        $data = request()->validate($this->rules());
         $aliases = array();
 
         $deletedAliases = $artist->aliases->filter(function ($alias) use ($data) {
@@ -65,13 +66,24 @@ class ArtistController extends BaseController
         return $artist;
     }
 
-//    public function findArtist()
-//    {
-//        return Artist::where('name', 'like', '%' . request()->get('name') . '%')->get();
-//    }
+    public function getArtists()
+    {
+        $query = Artist::latest();
+        return $this->callGetOrPaginate($query);
+    }
 
-    private $rules = [
-        'aliases' => 'required|array',
-        'aliases.*' => 'string|unique:artist_aliases,name'
-    ];
+    private function rules()
+    {
+        return [
+            'id' => 'nullable|string',
+            'aliases' => 'required|array',
+            'aliases.*' => [
+                'required',
+                'string',
+                Rule::unique('artist_aliases', 'name')->where(function ($query) {
+                    return $query->where('artist_id', '!=', request()->get('id'));
+                })
+            ]
+        ];
+    }
 }
