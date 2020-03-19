@@ -4,6 +4,11 @@
             <label>Заголовок</label>
             <input class="form-control" v-model="post.title"/>
         </div>
+        <div class="container">
+            <image-uploader v-model="previewImage">
+
+            </image-uploader>
+        </div>
         <div class="form-group mx-3">
             <label>Автор</label>
             <input class="form-control" v-model="post.title"/>
@@ -24,12 +29,14 @@
 
 <script>
     import Summernote from "../../common/summernote/Summernote";
+    import ImageUploader from "../../common/inputs/ImageUploader";
 
     export default {
         name: "PostEditor",
-        components: {Summernote},
+        components: {ImageUploader, Summernote},
         data() {
             return {
+                previewImage: null,
                 post: {
                     title: null,
                     author: null,

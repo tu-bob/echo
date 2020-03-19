@@ -47,29 +47,35 @@
             </songs-table>
         </div>
 
-        <div class="row form-group mt-4">
-            <div class="col-md-10">
-                <label>Обложка альбома</label>
-                <b-form-file
-                    v-model="albumCoverFile"
-                    :state="Boolean(imageSrc) || Boolean(albumCoverFile)"
-                    ref="albumCoverFileInput"
-                    accept="image/jpeg, image/png"
-                    placeholder="Выберите картинку или перетащите ее сюда..."
-                    drop-placeholder="Перетащите обложку сюда..."
-                    browse-text="Обзор"
-                ></b-form-file>
-            </div>
-            <div class="col-md-2">
-                <b-img thumbnail
-                       fluid
-                       width="100"
-                       height="100"
-                       :src="imageSrc"
-                       :blank="!Boolean(imageSrc)"
-                       :alt="album.name + ' cover'"
-                ></b-img>
-            </div>
+        <!--        <div class="row form-group mt-4">-->
+        <!--            <div class="col-md-10">-->
+        <!--                <label>Обложка альбома</label>-->
+        <!--                <b-form-file-->
+        <!--                    v-model="albumCoverFile"-->
+        <!--                    :state="Boolean(imageSrc) || Boolean(albumCoverFile)"-->
+        <!--                    ref="albumCoverFileInput"-->
+        <!--                    accept="image/jpeg, image/png"-->
+        <!--                    placeholder="Выберите картинку или перетащите ее сюда..."-->
+        <!--                    drop-placeholder="Перетащите обложку сюда..."-->
+        <!--                    browse-text="Обзор"-->
+        <!--                ></b-form-file>-->
+        <!--            </div>-->
+        <!--            <div class="col-md-2">-->
+        <!--                <b-img thumbnail-->
+        <!--                       fluid-->
+        <!--                       width="100"-->
+        <!--                       height="100"-->
+        <!--                       :src="imageSrc"-->
+        <!--                       :blank="!Boolean(imageSrc)"-->
+        <!--                       :alt="album.name + ' cover'"-->
+        <!--                ></b-img>-->
+        <!--            </div>-->
+        <!--        </div>-->
+
+        <div>
+            <image-uploader v-model="albumCoverFile" :src="coverUrl" :alt="album.name + ' cover'">
+
+            </image-uploader>
         </div>
 
         <div class="row mt-4">
@@ -81,10 +87,11 @@
 <script>
     import {fetchAlbum, fetchAlbumTypes} from "../../../api/mediaApi";
     import SongsTable from "../music/SongsTable";
+    import ImageUploader from "../../common/inputs/ImageUploader";
 
     export default {
         name: "AlbumEditor",
-        components: {SongsTable},
+        components: {ImageUploader, SongsTable},
         created() {
             this.fetchAlbumTypes();
             if (this.$route.params.id)
@@ -167,10 +174,8 @@
             }
         },
         computed: {
-            imageSrc() {
-                if (this.albumCoverFile) {
-                    return  URL.createObjectURL(this.albumCoverFile);
-                } else if (this.album.id)
+            coverUrl() {
+                if (this.album.id)
                     return `/media/music/album/${this.album.id}/cover`;
             }
         }
