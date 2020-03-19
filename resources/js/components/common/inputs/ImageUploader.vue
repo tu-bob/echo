@@ -17,7 +17,7 @@
                 browse-text="Обзор"
             ></b-form-file>
         </div>
-        <div class="col-md-2">
+        <div class="col-md-2 my-3 my-md-0">
             <b-img thumbnail
                    fluid
                    width="100"
