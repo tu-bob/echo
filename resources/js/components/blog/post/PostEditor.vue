@@ -6,7 +6,9 @@
         </div>
         <div class="container">
             <image-uploader v-model="previewImage">
-
+                <template #header>
+                    Фото превью
+                </template>
             </image-uploader>
         </div>
         <div class="form-group mx-3">

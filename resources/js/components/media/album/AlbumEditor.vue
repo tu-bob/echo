@@ -74,7 +74,9 @@
 
         <div>
             <image-uploader v-model="albumCoverFile" :src="coverUrl" :alt="album.name + ' cover'">
-
+                <template #header>
+                    Обложка альбома
+                </template>
             </image-uploader>
         </div>
 
