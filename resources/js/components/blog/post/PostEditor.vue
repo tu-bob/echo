@@ -9,7 +9,7 @@
             <input class="form-control" v-model="post.title"/>
         </div>
         <div class="col-12 mb-4">
-            <summernote></summernote>
+            <summernote imageUploadUrl="/media/image/many"></summernote>
         </div>
         <div class="form-group mx-3">
             <label>Ссылка на источник</label>
