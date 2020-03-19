@@ -95,7 +95,7 @@
                 )
                     .catch();
             },
-            removeSong(song) {console.log(this.album.songs, song)
+            removeSong(song) {
                 this.album.songs = this.album.songs.filter(item => item.id !== song.id);
             },
             onSongSelected(song) {

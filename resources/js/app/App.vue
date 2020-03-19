@@ -32,9 +32,9 @@
                                 <span class="caret"></span>
                             </a>
                             <div class="dropdown-menu">
-                                <router-link to="/media/song" class="dropdown-item">Артисты</router-link>
+                                <router-link to="/media/albums" class="dropdown-item">Артисты</router-link>
                                 <router-link to="/media/songs" class="dropdown-item">Песни</router-link>
-                                <router-link to="/media/song" class="dropdown-item">Альбомы</router-link>
+                                <router-link to="/media/albums" class="dropdown-item">Альбомы</router-link>
                                 <div class="dropdown-divider"></div>
                                 <router-link to="/media/artist" class="dropdown-item">Добавить артиста</router-link>
                                 <router-link to="/media/song" class="dropdown-item">Добавить песню</router-link>
