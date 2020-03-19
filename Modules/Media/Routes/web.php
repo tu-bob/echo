@@ -22,6 +22,7 @@ Route::prefix('media')->group(function () {
         });
 
         Route::post('/', 'Artist\ArtistController@store');
+        Route::get('/list', 'Artist\ArtistController@getArtists');
         Route::put('/{artist}', 'Artist\ArtistController@update');
         Route::get('/{artist}', 'Artist\ArtistController@getArtist');
     });

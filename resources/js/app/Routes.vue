@@ -11,6 +11,7 @@
     import SongsTable from "../components/media/music/SongsTable";
     import AlbumEditor from "../components/media/album/AlbumEditor";
     import AlbumsTable from "../components/media/album/AlbumsTable";
+    import ArtistsTable from "../components/media/artist/ArtistsTable";
 
     const routes = [
             {
@@ -48,6 +49,10 @@
                         {
                             path: 'song/:id?',
                             component: SongEditor
+                        },
+                        {
+                            path: 'artists',
+                            component: ArtistsTable
                         },
                         {
                             path: 'artist/:id?',

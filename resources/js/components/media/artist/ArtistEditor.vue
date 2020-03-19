@@ -1,10 +1,10 @@
 <template>
     <div class="col-md-6">
         <h4>Добавить артиста</h4>
-<!--        <div class="form-group">-->
-<!--            <label>Название</label>-->
-<!--            <input type="text" class="form-control" v-model="artist.name">-->
-<!--        </div>-->
+        <!--        <div class="form-group">-->
+        <!--            <label>Название</label>-->
+        <!--            <input type="text" class="form-control" v-model="artist.name">-->
+        <!--        </div>-->
         <div class="form-group">
             <label>Имя или псевдонимы</label>
             <b-form-tags input-id="tags-basic"
@@ -12,6 +12,7 @@
                          class="mb-2"
                          size="lg"
                          tag-variant="warning"
+                         placeholder="Добавьте имя или псевдоним"
                          tag-pills
                          add-button-text="Добавить"
                          separator=";"
@@ -41,6 +42,7 @@
         methods: {
             submit() {
                 let data = {
+                    id: this.$route?.params?.id,
                     name: this.artist.name,
                     aliases: this.aliases
                 };
