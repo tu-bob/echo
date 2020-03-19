@@ -4,11 +4,9 @@
 namespace Modules\Media\Models\Music;
 
 
+use Modules\Shared\Models\FileModel;
 
-
-use Modules\Shared\Models\BaseModel;
-
-class AudioFile extends BaseModel
+class AudioFile extends FileModel
 {
     public $tags;
 
