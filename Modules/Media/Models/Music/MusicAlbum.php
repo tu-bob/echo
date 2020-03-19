@@ -4,6 +4,7 @@
 namespace Modules\Media\Models\Music;
 
 
+use Modules\Media\Models\Image\ImageFile;
 use Modules\Shared\Models\BaseModel;
 use Modules\Shared\Models\Pivots\BasePivot;
 
