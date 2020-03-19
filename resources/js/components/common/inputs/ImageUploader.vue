@@ -1,7 +1,12 @@
 <template>
     <div class="row my-4">
         <div class="col-md-10">
-            <label>Обложка альбома</label>
+            <label>
+                <slot name="header">
+                   Выберите файл
+                </slot>
+            </label>
+
             <b-form-file
                 v-bind:value="value"
                 v-on:change="onChange"
