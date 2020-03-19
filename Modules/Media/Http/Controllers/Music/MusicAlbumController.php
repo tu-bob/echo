@@ -4,6 +4,7 @@
 namespace Modules\Media\Http\Controllers\Music;
 
 
+use Illuminate\Support\Facades\Storage;
 use Modules\Media\Http\Requests\Music\MusicAlbumRequest;
 use Modules\Media\Libs\Request\RequestWriter\Music\StoreMusicAlbumRequestWriter;
 use Modules\Media\Libs\StringComparator\DiceBestMatchFinder;
@@ -44,5 +45,11 @@ class MusicAlbumController extends BaseController
     public function getAlbum($album)
     {
         return MusicAlbum::with(['songs', 'type'])->findOrFail($album);
+    }
+
+    public function getCover($album)
+    {
+        $cover = MusicAlbum::findOrFail($album)->cover;
+        return Storage::get($cover->path);
     }
 }
