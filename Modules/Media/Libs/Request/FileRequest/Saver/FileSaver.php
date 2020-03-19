@@ -6,6 +6,7 @@ namespace Modules\Media\Libs\Request\FileRequest\Saver;
 
 use App\Libs\Helpers\StringHelpers\RandomStringGenerator;
 use App\Libs\Ulid\Ulid;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 
@@ -25,19 +26,24 @@ class FileSaver
         $this->file = $file;
         $this->dirPath = $dirPath;
         $this->entityClass = $entityClass;
+        $this->hash = hash('sha256', file_get_contents($file->path()));
     }
 
-    function findOrCreateFile()
+    public function findOrSaveFile(\Closure $closure = null)
     {
-        $this->hash = hash('sha256', file_get_contents($this->file->path()));
-//        $existingFile = $this->entityClass::where('hash', $this->hash)->first();
-//        if ($existingFile)
-//            return $existingFile;
-//        else
-        return $this->createFile();
+        $query = $this->entityClass::where('hash', $this->hash);
+
+        if ($closure)
+            $query = $closure($query);
+
+        $existingFile = $query->first();
+        if ($existingFile)
+            return $existingFile;
+        else
+            return $this->saveFile();
     }
 
-    function createFile()
+    public function saveFile()
     {
         $entity = new $this->entityClass();
         $entity->hash = $this->hash;
@@ -54,7 +60,7 @@ class FileSaver
         return $entity;
     }
 
-    public function createFileName($path)
+    private function createFileName($path)
     {
         $generator = new Ulid();
         $fileName = $generator->generate() . '.' . $this->file->getClientOriginalExtension();
