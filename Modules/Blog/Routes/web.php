@@ -19,4 +19,8 @@ Route::prefix('blog')->group(function () {
         Route::get('/list', 'Post\PostController@getPosts');
         Route::get('/{post}', 'Post\PostController@getPost');
     });
+
+    Route::prefix('author')->group(function () {
+        Route::get('/filter', 'Author\AuthorController@filter');
+    });
 });
