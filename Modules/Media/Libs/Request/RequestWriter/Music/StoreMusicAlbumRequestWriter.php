@@ -33,13 +33,13 @@ class StoreMusicAlbumRequestWriter extends RequestWriter
     public function prepareData()
     {
         $data = [
-            'music_album_type_id' => $this->request['type'],
+            'type_id' => $this->request['type'],
             'title' => $this->request['title'],
             'year' => $this->request['year']
         ];
 
         if (isset($this->imageFile))
-            $data['image_file_id'] = $this->imageFile->id;
+            $data['cover_id'] = $this->imageFile->id;
 
         return $data;
     }
