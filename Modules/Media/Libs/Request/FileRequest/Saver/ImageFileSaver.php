@@ -6,6 +6,7 @@ namespace Modules\Media\Libs\Request\FileRequest\Saver;
 
 use Illuminate\Http\UploadedFile;
 use Modules\Media\Models\Image\ImageFile;
+use Modules\Media\Models\Image\ImageFileDirProvider;
 
 class ImageFileSaver
 {
@@ -23,22 +24,23 @@ class ImageFileSaver
      */
     public function saveFile()
     {
-        $dirPath = $this->getDirPath();
+        $dirProvider = new ImageFileDirProvider($this->type);
+        $dirPath = $dirProvider->getDirectory();
         $saver = new FileSaver($this->file, $dirPath, ImageFile::class);
         return $saver->findOrSaveFile(function ($query) use ($dirPath) {
             return $query->where('path', 'like', $dirPath . '%');
         });
     }
 
-    private function getDirPath()
-    {
-        switch ($this->type) {
-            case 'blog':
-                return 'images/blog';
-            case 'albumCover':
-                return 'images/cover';
-            default:
-                return 'images/public';
-        }
-    }
+//    private function getDirPath()
+//    {
+//        switch ($this->type) {
+//            case 'blog':
+//                return 'images/blog';
+//            case 'albumCover':
+//                return 'images/cover';
+//            default:
+//                return 'images/public';
+//        }
+//    }
 }

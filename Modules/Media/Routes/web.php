@@ -29,7 +29,7 @@ Route::prefix('media')->group(function () {
 
     Route::prefix('image')->group(function () {
         Route::post('/many', 'Image\ImageController@storeMany');
-        Route::get('/{dir}/{image}', 'Image\ImageController@getImage');
+        Route::get('/{image}/{type}', 'Image\ImageController@getImage');
     });
 
     Route::prefix('music')->group(function () {

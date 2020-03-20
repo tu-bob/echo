@@ -4,9 +4,8 @@
 namespace Modules\Media\Http\Controllers\Image;
 
 
-use Illuminate\Support\Facades\Storage;
 use Modules\Media\Libs\Request\FileRequest\Saver\ImageFileSaver;
-use Modules\Media\Models\Image\ImageFile;
+use Modules\Media\Models\Image\ImageFileProvider;
 use Modules\Shared\Http\Controllers\BaseController;
 
 class ImageController extends BaseController
@@ -30,10 +29,9 @@ class ImageController extends BaseController
         return $images;
     }
 
-    //TODO validate dir
-    public function getImage($dir, $image)
+    public function getImage($image, $type)
     {
-        $image = ImageFile::where('path', 'like', 'images/' . $dir . '%')->findOrFail($image);
-        return Storage::get($image->path);
+        $provider = new ImageFileProvider($type);
+        return $provider->getFile($image);
     }
 }
