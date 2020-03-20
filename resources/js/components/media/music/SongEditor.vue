@@ -161,7 +161,7 @@
 <script>
     import {parseBlob} from 'music-metadata-browser';
     import {validateAudio} from '../../../util/validators.js'
-    import {fetchArtistAliasesByName, fetchFilteredAlbums, fetchGenres, fetchSong} from '../../../api/mediaApi.js'
+    import {fetchArtistAliasesByName, fetchFilteredAlbums, fetchGenres, fetchSong} from '../../../api/admin/mediaApi.js'
     import * as ss from 'string-similarity';
     import {invokeErrorResetRequested} from "../../../events";
 
