@@ -4,6 +4,7 @@
 namespace Modules\Blog\Http\Requests\RequestWriters;
 
 
+use Illuminate\Support\Str;
 use Modules\Blog\Models\Author\Author;
 use Modules\Media\Libs\Request\FileRequest\Saver\ImageFileSaver;
 use Modules\Media\Models\Image\ImageFile;
@@ -30,11 +31,12 @@ class PostRequestWriter extends RequestWriter
     {
         $data = [
             'title' => $this->request['title'],
+            'slug' => Str::slug($this->request['title']),
             'author_id' => Author::firstOrCreate(['name' => $this->request['author']])->id,
             'annotation' => $this->request['annotation'],
             'article' => $this->request['article'],
             'reference' => $this->request['reference'],
-            'ref_name' => $this->request['ref_name']
+            'ref_name' => $this->request['ref_name'],
         ];
 
         if (isset($this->previewImage))
