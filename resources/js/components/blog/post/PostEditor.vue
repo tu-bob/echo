@@ -5,7 +5,7 @@
             <input class="form-control" v-model="post.title"/>
         </div>
         <div class="container">
-            <image-uploader v-model="previewImage">
+            <image-uploader v-model="previewImage" :src="previewImageUrl" :alt="post.title">
                 <template #header>
                     Фото превью
                 </template>
@@ -21,7 +21,7 @@
         </div>
         <div class="col-12 my-4">
             <label>Статья</label>
-            <summernote v-model="post.article" imageUploadUrl="/media/image/many"></summernote>
+            <summernote ref="articleEditor" v-model="post.article" imageUploadUrl="/media/image/many"></summernote>
         </div>
 
         <div class="row mx-3">
@@ -45,10 +45,15 @@
 <script>
     import Summernote from "../../common/summernote/Summernote";
     import ImageUploader from "../../common/inputs/ImageUploader";
+    import {fetchPost} from "../../../api/admin/blogApi";
 
     export default {
         name: "PostEditor",
         components: {ImageUploader, Summernote},
+        created() {
+            if (this.$route.params.id)
+                this.fetchPost(this.$route.params.id);
+        },
         data() {
             return {
                 previewImage: null,
@@ -65,17 +70,34 @@
         methods: {
             submit() {
                 let data = new FormData();
+                if (this.post.id)
+                    data.append('id', this.post.id);
+
                 data.append('title', this.post.title);
                 data.append('author', this.post.author);
                 data.append('annotation', this.post.annotation);
                 data.append('article', this.post.article);
                 data.append('reference', this.post.reference);
                 data.append('ref_name', this.post.ref_name);
-                data.append('previewImage', this.previewImage, this.previewImage.name);
+
+                if (this.previewImage)
+                    data.append('previewImage', this.previewImage, this.previewImage.name);
 
                 axios.post('/blog/post', data);
+            },
+            fetchPost(id) {
+                fetchPost(id).then(post => {
+                    this.post = post;
+                    this.$refs['articleEditor'].innerHtml(post.article);
+                }).catch();
             }
         },
+        computed: {
+            previewImageUrl() {
+                if (this.post.previewImage)
+                    return `/media/image/${this.post.previewImage.id}/blog`;
+            }
+        }
     }
 </script>
 

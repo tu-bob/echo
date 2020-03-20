@@ -1,5 +1,5 @@
 <template>
-    <textarea :id="id" :value="value"></textarea>
+    <textarea :id="id"></textarea>
 </template>
 
 <script>
@@ -70,10 +70,10 @@
             };
             $('#' + this.id).summernote(this.options);
         },
-        watch: {
-            // value() {
-            //     $('#' + this.id).summernote("code", this.value)
-            // }
+        methods: {
+            innerHtml(data) {
+                $('#' + this.id).summernote('code', data);
+            }
         }
     }
 </script>
