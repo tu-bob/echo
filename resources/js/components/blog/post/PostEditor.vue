@@ -13,7 +13,12 @@
         </div>
         <div class="form-group mx-3">
             <label>Автор</label>
-            <input class="form-control" v-model="post.author"/>
+            <!--            <input class="form-control" v-model="post.author"/>-->
+            <suggestion-input displayPropertyName="name"
+                              ref="authorSearch"
+                              @selected="onAuthorSelected"
+                              action-url="/blog/author/filter?name=">
+            </suggestion-input>
         </div>
         <div class="form-group mx-3">
             <label>Анотация</label>
@@ -90,6 +95,9 @@
                     this.post = post;
                     this.$refs['articleEditor'].innerHtml(post.article);
                 }).catch();
+            },
+            onAuthorSelected(author) {
+                this.post.author = author;
             }
         },
         computed: {
