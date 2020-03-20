@@ -18,6 +18,9 @@ class ImageFileSaver
         $this->type = $type;
     }
 
+    /**
+     * @return ImageFile
+     */
     public function saveFile()
     {
         $dirPath = $this->getDirPath();
