@@ -16,4 +16,10 @@ class PostController extends BaseController
         $writer = new PostRequestWriter($request->all(), Post::class);
         return $writer->write();
     }
+
+    public function getPosts()
+    {
+        $query = Post::where('created_by_id', auth()->id());
+        return $this->callGetOrPaginate($query);
+    }
 }

@@ -1,6 +1,5 @@
 <script>
     import Blog from "../components/blog/Blog";
-    import PostsPage from "../components/blog/post/PostsPage";
     import PostEditor from "../components/blog/post/PostEditor";
     import VueRouter from 'vue-router'
     import SongEditor from "../components/media/music/SongEditor";
@@ -12,6 +11,7 @@
     import AlbumEditor from "../components/media/album/AlbumEditor";
     import AlbumsTable from "../components/media/album/AlbumsTable";
     import ArtistsTable from "../components/media/artist/ArtistsTable";
+    import PostsTable from "../components/blog/post/PostsTable";
 
     const routes = [
             {
@@ -28,10 +28,10 @@
                     [
                         {
                             path: 'posts',
-                            component: PostsPage
+                            component: PostsTable
                         },
                         {
-                            path: 'posts/edit',
+                            path: 'post/:id?',
                             component: PostEditor
                         }
                     ]
