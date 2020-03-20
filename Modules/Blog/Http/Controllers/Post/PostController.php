@@ -22,4 +22,9 @@ class PostController extends BaseController
         $query = Post::where('created_by_id', auth()->id());
         return $this->callGetOrPaginate($query);
     }
+
+    public function getPost($post)
+    {
+        return Post::with('previewImage')->findOrFail($post);
+    }
 }

@@ -1,4 +1,4 @@
-import {kvpToQueryParam} from "../util/stringHelper";
+import {kvpToQueryParam} from "../../util/stringHelper";
 
 export async function fetchGenres() {
     return axios.get('/media/music/genre')
