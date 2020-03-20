@@ -18,8 +18,6 @@ abstract class RequestWriter
         $this->entityClass = $entityClass;
     }
 
-    abstract function write();
-
     protected function createOrUpdate($data)
     {
         if (isset($this->request['id'])) {

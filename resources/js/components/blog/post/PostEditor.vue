@@ -64,14 +64,14 @@
         },
         methods: {
             submit() {
-                let data = {
-                    title: this.post.title,
-                    author: this.post.author,
-                    annotation: this.post.annotation,
-                    article: this.post.article,
-                    reference: this.post.reference,
-                    ref_name: this.post.ref_name
-                };
+                let data = new FormData();
+                data.append('title', this.post.title);
+                data.append('author', this.post.author);
+                data.append('annotation', this.post.annotation);
+                data.append('article', this.post.article);
+                data.append('reference', this.post.reference);
+                data.append('ref_name', this.post.ref_name);
+                data.append('previewImage', this.previewImage, this.previewImage.name);
 
                 axios.post('/blog/post', data);
             }
