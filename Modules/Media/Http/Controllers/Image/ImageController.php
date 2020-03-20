@@ -4,7 +4,7 @@
 namespace Modules\Media\Http\Controllers\Image;
 
 
-use Illuminate\Support\Facades\Storage; 
+use Illuminate\Support\Facades\Storage;
 use Modules\Media\Libs\Request\FileRequest\Saver\ImageFileSaver;
 use Modules\Media\Models\Image\ImageFile;
 use Modules\Shared\Http\Controllers\BaseController;
