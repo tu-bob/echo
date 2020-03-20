@@ -4,7 +4,7 @@
 namespace Modules\Media\Libs\Request\RequestWriter\Music;
 
 
-use Modules\Media\Libs\Request\FileRequest\Saver\FileSaver;
+use Modules\Media\Libs\Request\FileRequest\Saver\ImageFileSaver;
 use Modules\Media\Models\Image\ImageFile;
 use Modules\Media\Models\Music\MusicAlbum;
 use Modules\Shared\Http\Requests\RequestWriter;
@@ -46,10 +46,8 @@ class StoreMusicAlbumRequestWriter extends RequestWriter
 
     public function saveFile()
     {
-        $saver = new FileSaver($this->request['albumCoverFile'], 'images/covers', ImageFile::class);
-        $this->imageFile = $saver->findOrSaveFile(function ($query) {
-            return $query->where('path', 'like', 'images/covers%');
-        });
+        $saver = new ImageFileSaver($this->request['albumCoverFile'], 'albumCover');
+        $this->imageFile = $saver->saveFile();
     }
 
     private function manageRelations()
