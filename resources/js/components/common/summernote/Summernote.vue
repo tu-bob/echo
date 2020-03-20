@@ -59,7 +59,7 @@
                     uploadFiles(files, vue.imageUploadUrl, 'images')
                         .then(response => {
                             for (let i = 0; i < response.length; i++) {
-                                $('#' + vue.id).summernote('insertImage', `/media/image/blog/${response[i].id}`);
+                                $('#' + vue.id).summernote('insertImage', `/media/image/${response[i].id}/blog`);
                             }
                         })
                         .catch(e => console.log(e));

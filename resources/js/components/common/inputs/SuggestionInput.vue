@@ -78,6 +78,9 @@
             queryIsFirstOption: {
                 type: Boolean,
                 default: false
+            },
+            preventFetching: {
+                default: 0
             }
         },
         data() {
@@ -116,12 +119,10 @@
                         return index === this.activeOptionIndex
                     })
                 }
-                if (option === 'undefined')
+                if (!option) {
                     option = this.options[0];
-
-                this.activeOptionIndex = 0;
-
-                if (option)
+                    this.activeOptionIndex = 0;
+                } else
                     this.query = option[this.displayPropertyName];
 
                 this.$emit('selected', option);
@@ -171,6 +172,10 @@
                 }, 150);
             },
             fetchData() {
+                if(this.preventFetching > 0){
+                    this.preventFetching--;
+                    return;
+                }
                 // if (source) {
                 //     source.cancel();
                 // }

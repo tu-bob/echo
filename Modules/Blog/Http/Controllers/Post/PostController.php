@@ -25,6 +25,6 @@ class PostController extends BaseController
 
     public function getPost($post)
     {
-        return Post::with('previewImage')->findOrFail($post);
+        return Post::with('previewImage', 'author')->findOrFail($post);
     }
 }

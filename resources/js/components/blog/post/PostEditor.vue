@@ -16,7 +16,9 @@
             <!--            <input class="form-control" v-model="post.author"/>-->
             <suggestion-input displayPropertyName="name"
                               queryIsFirstOption
+                              :providedQuery="post.author.name"
                               ref="authorSearch"
+                              preventFetching="1"
                               @selected="onAuthorSelected"
                               action-url="/blog/author/filter?name=">
             </suggestion-input>
@@ -67,7 +69,9 @@
                     title: null,
                     annotation: null,
                     article: null,
-                    author: null,
+                    author: {
+                        name: null
+                    },
                     reference: null,
                     ref_name: null
                 }
@@ -80,7 +84,7 @@
                     data.append('id', this.post.id);
 
                 data.append('title', this.post.title);
-                data.append('author', this.post.author);
+                data.append('author', this.post.author.name);
                 data.append('annotation', this.post.annotation);
                 data.append('article', this.post.article);
                 data.append('reference', this.post.reference);
