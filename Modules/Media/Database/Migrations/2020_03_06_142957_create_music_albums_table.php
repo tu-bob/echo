@@ -15,8 +15,8 @@ class CreateMusicAlbumsTable extends Migration
     {
         Schema::create('music_albums', function (Blueprint $table) {
             $table->char('id', 26)->primary();
-            $table->char('music_album_type_id', 26)->index();
-            $table->char('image_file_id', 26)->index()->nullable();
+            $table->char('type_id', 26)->index();
+            $table->char('cover_id', 26)->index()->nullable();
 
             $table->char('title', 50);
             $table->char('year', 5);

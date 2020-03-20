@@ -39,7 +39,7 @@ class PostRequestWriter extends RequestWriter
 
         if (isset($this->previewImage))
             $data['preview_image_id'] = $this->previewImage->id;
-        
+
         return $data;
     }
 

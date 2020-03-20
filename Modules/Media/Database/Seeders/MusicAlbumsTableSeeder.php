@@ -27,7 +27,7 @@ class MusicAlbumsTableSeeder extends Seeder
         foreach ($albums as $album) {
             MusicAlbum::create([
                 'title' => $album,
-                'music_album_type_id' => MusicAlbumType::where('name', 'Album musical')->first()->id,
+                'type_id' => MusicAlbumType::where('name', 'Album musical')->first()->id,
                 'year' => '2018'
             ]);
         }

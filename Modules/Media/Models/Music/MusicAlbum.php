@@ -19,11 +19,11 @@ class MusicAlbum extends BaseModel
 
     public function type()
     {
-        return $this->belongsTo(MusicAlbumType::class, 'music_album_type_id');
+        return $this->belongsTo(MusicAlbumType::class);
     }
 
     public function cover()
     {
-        return $this->belongsTo(ImageFile::class, 'image_file_id');
+        return $this->belongsTo(ImageFile::class);
     }
 }
