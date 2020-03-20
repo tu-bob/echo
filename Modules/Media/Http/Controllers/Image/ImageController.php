@@ -4,8 +4,8 @@
 namespace Modules\Media\Http\Controllers\Image;
 
 
-use Illuminate\Support\Facades\Storage;
-use Modules\Media\Libs\Request\FileRequest\Saver\FileSaver;
+use Illuminate\Support\Facades\Storage; 
+use Modules\Media\Libs\Request\FileRequest\Saver\ImageFileSaver;
 use Modules\Media\Models\Image\ImageFile;
 use Modules\Shared\Http\Controllers\BaseController;
 
@@ -23,10 +23,8 @@ class ImageController extends BaseController
         $images = [];
 
         foreach ($data['images'] as $file) {
-            $saver = new FileSaver($file, 'images/blog', ImageFile::class);
-            $images[] = $saver->findOrSaveFile(function ($query) {
-                return $query->where('path', 'like', 'images/blog%');
-            });
+            $saver = new ImageFileSaver($file, 'blog');
+            $images[] = $saver->saveFile();
         }
 
         return $images;
