@@ -13,17 +13,30 @@
         </div>
         <div class="form-group mx-3">
             <label>Автор</label>
-            <input class="form-control" v-model="post.title"/>
-        </div>
-        <div class="col-12 mb-4">
-            <summernote imageUploadUrl="/media/image/many"></summernote>
+            <input class="form-control" v-model="post.author"/>
         </div>
         <div class="form-group mx-3">
-            <label>Ссылка на источник</label>
-            <input class="form-control" v-model="post.reference"/>
+            <label>Анотация</label>
+            <textarea class="form-control" v-model="post.annotation"/>
         </div>
+        <div class="col-12 my-4">
+            <label>Статья</label>
+            <summernote v-model="post.article" imageUploadUrl="/media/image/many"></summernote>
+        </div>
+
+        <div class="row mx-3">
+            <div class="form-group col-md-4">
+                <label>Название источника</label>
+                <input class="form-control" v-model="post.ref_name"/>
+            </div>
+            <div class="form-group col-md-8">
+                <label>Ссылка на источник</label>
+                <input class="form-control" v-model="post.reference"/>
+            </div>
+        </div>
+
         <div class="col-12 text-center">
-            <button class="btn btn-primary">Сохранить</button>
+            <button class="btn btn-primary" @click="submit">Сохранить</button>
         </div>
     </div>
 
@@ -41,11 +54,28 @@
                 previewImage: null,
                 post: {
                     title: null,
+                    annotation: null,
+                    article: null,
                     author: null,
-                    reference: null
+                    reference: null,
+                    ref_name: null
                 }
             }
-        }
+        },
+        methods: {
+            submit() {
+                let data = {
+                    title: this.post.title,
+                    author: this.post.author,
+                    annotation: this.post.annotation,
+                    article: this.post.article,
+                    reference: this.post.reference,
+                    ref_name: this.post.ref_name
+                };
+
+                axios.post('/blog/post', data);
+            }
+        },
     }
 </script>
 

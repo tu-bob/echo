@@ -11,8 +11,10 @@
 |
 */
 
-Route::prefix('blog')->group(function() {
-    Route::get('/', function (){
-        return 2;
+use Illuminate\Support\Facades\Route;
+
+Route::prefix('blog')->group(function () {
+    Route::prefix('post')->group(function () {
+        Route::post('/', 'Post\PostController@store');
     });
 });
