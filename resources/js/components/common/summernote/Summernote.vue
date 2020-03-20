@@ -1,5 +1,5 @@
 <template>
-    <div :id="id"></div>
+    <textarea :id="id" :value="value"></textarea>
 </template>
 
 <script>
@@ -11,6 +11,9 @@
     export default {
         name: "Summernote",
         props: {
+            value: {
+                require: true
+            },
             lang: {
                 type: String,
                 default: 'ru-RU'
@@ -60,10 +63,18 @@
                             }
                         })
                         .catch(e => console.log(e));
+                },
+                onChange: function (article) {
+                    vue.$emit('input', article)
                 }
             };
             $('#' + this.id).summernote(this.options);
         },
+        watch: {
+            // value() {
+            //     $('#' + this.id).summernote("code", this.value)
+            // }
+        }
     }
 </script>
 
