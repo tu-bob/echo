@@ -71,13 +71,13 @@
             optionFormatter: {
                 type: Function
             },
-            // optionSelected: {
-            //     type: Function,
-            //     required: false
-            // },
             providedQuery: {
                 type: String,
                 required: false
+            },
+            queryIsFirstOption: {
+                type: Boolean,
+                default: false
             }
         },
         data() {
@@ -179,9 +179,16 @@
 
                 if (this.query && this.query.length > 2)
                     axios.get(this.actionUrl + this.query)
-                        .then(response => this.options = response)
+                        .then(response => this.setOptions(response))
                         .catch();
-                else this.options = [];
+                else this.setOptions([])
+            },
+            setOptions(options) {
+                if (this.queryIsFirstOption && this.query) {
+                    let option = {id: null};
+                    option[this.displayPropertyName] = this.query;
+                    this.options = [option, ...options];
+                } else this.options = options;
             },
             filterData() {
                 if (this.query) {

@@ -15,6 +15,7 @@
             <label>Автор</label>
             <!--            <input class="form-control" v-model="post.author"/>-->
             <suggestion-input displayPropertyName="name"
+                              queryIsFirstOption
                               ref="authorSearch"
                               @selected="onAuthorSelected"
                               action-url="/blog/author/filter?name=">
