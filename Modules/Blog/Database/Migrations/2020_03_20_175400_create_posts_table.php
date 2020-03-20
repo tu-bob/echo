@@ -21,8 +21,8 @@ class CreatePostsTable extends Migration
             $table->string('title');
             $table->string('annotation', 300);
             $table->text('article');
-            $table->string('reference', 255);
-            $table->string('ref_name', 255);
+            $table->string('reference', 255)->nullable();
+            $table->string('ref_name', 255)->nullable();
 
             $table->commonFields();
         });
