@@ -87,8 +87,10 @@
                 data.append('author', this.post.author.name);
                 data.append('annotation', this.post.annotation);
                 data.append('article', this.post.article);
-                data.append('reference', this.post.reference);
-                data.append('ref_name', this.post.ref_name);
+                if (this.post.reference)
+                    data.append('reference', this.post.reference);
+                if (this.post.ref_name)
+                    data.append('ref_name', this.post.ref_name);
 
                 if (this.previewImage)
                     data.append('previewImage', this.previewImage, this.previewImage.name);
