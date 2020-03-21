@@ -23,7 +23,7 @@
 </template>
 
 <script>
-    import {getStoreOrUpdateAction} from '../../../main.js'
+    import {getStoreOrUpdateAction} from '../../../../main.js'
 
     export default {
         name: "ArtistEditor",
