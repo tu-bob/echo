@@ -1,78 +1,65 @@
 <script>
-    import BlogAdminView from "../components/admin/blog/BlogAdminView";
-    import PostEditor from "../components/admin/blog/post/PostEditor";
     import VueRouter from 'vue-router'
-    import SongEditor from "../components/admin/media/music/SongEditor";
-    import ArtistEditor from "../components/admin/media/artist/ArtistEditor";
-    import Login from "../components/auth/Login";
-    import Register from "../components/auth/Register";
-    import SongsTable from "../components/admin/media/music/SongsTable";
-    import AlbumEditor from "../components/admin/media/album/AlbumEditor";
-    import AlbumsTable from "../components/admin/media/album/AlbumsTable";
-    import ArtistsTable from "../components/admin/media/artist/ArtistsTable";
-    import PostsTable from "../components/admin/blog/post/PostsTable";
-    import AdminMediaView from "../components/admin/media/AdminMediaView";
-
 
     const routes = [
             {
-                path: '/login', component: Login
+                path: '/login', component: () => import('../components/auth/Login')
             },
             {
-                path: '/register', component: Register
+                path: '/register', component: () => import('../components/auth/Register')
             }
             ,
             {
-                path: '/admin/blog', component:
-                BlogAdminView,
+                path: '/admin/blog',
+                component: () => import('../components/admin/blog/BlogAdminView'),
                 children:
                     [
                         {
                             name: 'posts-table',
                             path: 'posts',
-                            component: PostsTable
+                            component: () => import('../components/admin/blog/post/PostsTable')
                         },
                         {
                             name: 'post-editor',
                             path: 'post/:id?',
-                            component: PostEditor
+                            component: () => import('../components/admin/blog/post/PostEditor')
                         }
                     ]
             },
             {
-                path: '/admin/media', component:
-                AdminMediaView,
+                path: '/admin/media',
+                component: () => import('../components/admin/media/AdminMediaView'),
                 children:
                     [
                         {
                             name: 'songs-table',
                             path: 'songs',
-                            component: SongsTable
+                            component: () => import('../components/admin/media/music/SongsTable')
                         },
                         {
                             name: 'song-editor',
                             path: 'song/:id?',
-                            component: SongEditor
+                            component: () => import('../components/admin/media/music/SongEditor')
                         },
                         {
                             name: 'artists-table',
                             path: 'artists',
-                            component: ArtistsTable
+                            component: () => import('../components/admin/media/artist/ArtistsTable')
                         },
                         {
                             name: 'artist-editor',
                             path: 'artist/:id?',
-                            component: ArtistEditor
+                            component: () => import('../components/admin/media/artist/ArtistEditor')
                         },
                         {
                             name: 'albums-table',
                             path: 'albums',
-                            component: AlbumsTable
+                            component: () => import('../components/admin/media/album/AlbumsTable')
                         },
                         {
                             name: 'album-editor',
                             path: 'album/:id?',
-                            component: AlbumEditor
+                            component: () => import('../components/admin/media/album/AlbumEditor')
                         }
                     ]
             }
@@ -85,11 +72,6 @@
         base: '/app/',
         routes,
     });
-
-    router.beforeEach((to, from, next) => {
-        console.log(to, from, next);
-        next();
-    })
 
     export default router
 </script>
