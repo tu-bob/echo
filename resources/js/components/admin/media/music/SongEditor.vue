@@ -162,10 +162,10 @@
 
 <script>
     import {parseBlob} from 'music-metadata-browser';
-    import {validateAudio} from '../../../util/validators.js'
-    import {fetchArtistAliasesByName, fetchFilteredAlbums, fetchGenres, fetchSong} from '../../../api/admin/mediaApi.js'
+    import {validateAudio} from '../../../../util/validators.js'
+    import {fetchArtistAliasesByName, fetchFilteredAlbums, fetchGenres, fetchSong} from '../../../../api/admin/mediaApi.js'
     import * as ss from 'string-similarity';
-    import {invokeErrorResetRequested} from "../../../events";
+    import {invokeErrorResetRequested} from "../../../../events";
 
     export default {
         name: "SongEditor",

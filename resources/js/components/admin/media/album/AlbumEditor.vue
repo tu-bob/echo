@@ -87,9 +87,9 @@
 </template>
 
 <script>
-    import {fetchAlbum, fetchAlbumTypes} from "../../../api/admin/mediaApi";
+    import {fetchAlbum, fetchAlbumTypes} from "../../../../api/admin/mediaApi";
     import SongsTable from "../music/SongsTable";
-    import ImageUploader from "../../common/inputs/ImageUploader";
+    import ImageUploader from "../../../common/inputs/ImageUploader";
 
     export default {
         name: "AlbumEditor",

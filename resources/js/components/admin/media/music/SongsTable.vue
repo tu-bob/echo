@@ -15,7 +15,7 @@
             </template>
 
             <template v-slot:edit="{item}">
-                <a :href="`/app/media/song/${item.id}`">
+                <a href="#" @click.prevent="$router.push({ name: 'song-editor', params: { id: item.id }})">
                     <img class="icon-btn-sm" src="/icons/svg/edit.svg">
                 </a>
             </template>
@@ -30,7 +30,7 @@
 </template>
 
 <script>
-    import TableCard from "../../common/tables/TableCard";
+    import TableCard from "../../../common/tables/TableCard";
 
     export default {
         name: "SongsTable",

@@ -11,7 +11,7 @@
             </template>
 
             <template v-slot:edit="{item}">
-                <a :href="`/app/media/album/${item.id}`">
+                <a href="#" @click.prevent="$router.push({ name: 'album-editor', params: { id: item.id }})">
                     <img class="icon-btn-sm" src="/icons/svg/edit.svg">
                 </a>
             </template>
@@ -26,7 +26,7 @@
 </template>
 
 <script>
-    import TableCard from "../../common/tables/TableCard";
+    import TableCard from "../../../common/tables/TableCard";
 
     export default {
         name: "AlbumsTable",
