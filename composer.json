@@ -14,8 +14,8 @@
         "fruitcake/laravel-cors": "^1.0",
         "guzzlehttp/guzzle": "^6.3",
         "james-heinrich/getid3": "^1.9",
-        "laravel/airlock": "^0.2.1",
         "laravel/framework": "^7.0",
+        "laravel/sanctum": "^2.0",
         "laravel/tinker": "^2.0",
         "laravel/ui": "~2.0",
         "nwidart/laravel-modules": "^6.2"

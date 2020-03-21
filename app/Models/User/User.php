@@ -2,11 +2,11 @@
 
 namespace App\Models\User;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
+
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use App\Libs\Ulid\HasUlid;
-use Laravel\Airlock\HasApiTokens;
+use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
