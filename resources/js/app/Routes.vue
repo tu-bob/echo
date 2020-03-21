@@ -1,6 +1,6 @@
 <script>
-    import Blog from "../components/blog/Blog";
-    import PostEditor from "../components/blog/post/PostEditor";
+    import BlogAdminView from "../components/admin/blog/BlogAdminView";
+    import PostEditor from "../components/admin/blog/post/PostEditor";
     import VueRouter from 'vue-router'
     import SongEditor from "../components/media/music/SongEditor";
     import Media from "../components/media/Media";
@@ -11,7 +11,7 @@
     import AlbumEditor from "../components/media/album/AlbumEditor";
     import AlbumsTable from "../components/media/album/AlbumsTable";
     import ArtistsTable from "../components/media/artist/ArtistsTable";
-    import PostsTable from "../components/blog/post/PostsTable";
+    import PostsTable from "../components/admin/blog/post/PostsTable";
 
     const routes = [
             {
@@ -22,21 +22,22 @@
             }
             ,
             {
-                path: '/blog', component:
-                Blog,
+                path: '/admin/blog', component:
+                BlogAdminView,
                 children:
                     [
                         {
+                            name: 'posts-table',
                             path: 'posts',
                             component: PostsTable
                         },
                         {
+                            name: 'post-editor',
                             path: 'post/:id?',
                             component: PostEditor
                         }
                     ]
-            }
-            ,
+            },
             {
                 path: '/media', component:
                 Media,
@@ -77,6 +78,11 @@
         base: '/app/',
         routes,
     });
+
+    router.beforeEach((to, from, next) => {
+        console.log(to, from, next);
+        next();
+    })
 
     export default router
 </script>

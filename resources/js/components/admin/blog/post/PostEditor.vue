@@ -51,9 +51,9 @@
 </template>
 
 <script>
-    import Summernote from "../../common/summernote/Summernote";
-    import ImageUploader from "../../common/inputs/ImageUploader";
-    import {fetchPost} from "../../../api/admin/blogApi";
+    import Summernote from "../../../common/summernote/Summernote";
+    import ImageUploader from "../../../common/inputs/ImageUploader";
+    import {fetchPost} from "../../../../api/admin/blogApi";
 
     export default {
         name: "PostEditor",
