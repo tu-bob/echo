@@ -26,9 +26,15 @@
                 <span v-if="song.encoder">{{song.encoder}} |</span>
                 {{Math.round(song.playtime_seconds / 60 *100) / 100}}</span>
         </div>
-        <div class="form-group">
-            <label>Название</label>
-            <input type="text" class="form-control" v-model="song.title" autofocus>
+        <div class="row">
+            <div class="form-group col-md-8">
+                <label>Название</label>
+                <input type="text" class="form-control" v-model="song.title" autofocus>
+            </div>
+            <div class="form-group col-md-4 ">
+                <label>Год</label>
+                <input type="text" class="form-control" v-model="song.year">
+            </div>
         </div>
         <div class="form-group">
             <label>Исполнители</label>
@@ -66,10 +72,6 @@
             <span v-if="missedArtists.length > 0" class="small">Исполнители не найдены:
                 <b v-for="artist in missedArtists">{{artist}}</b>
             </span>
-        </div>
-        <div class="form-group">
-            <label>Год</label>
-            <input type="text" class="form-control" v-model="song.year">
         </div>
 
         <div class="form-group">
