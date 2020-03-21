@@ -38,8 +38,8 @@ class PostRequestWriter extends RequestWriter
             'author_id' => Author::firstOrCreate(['name' => $this->request['author']])->id,
             'annotation' => $this->request['annotation'],
             'article' => $purifier->cleanHtml($this->request['article']),
-            'reference' => $this->request['reference'],
-            'ref_name' => $this->request['ref_name'],
+            'reference' => isset($this->request['reference']) ? $this->request['reference'] : null,
+            'ref_name' => isset($this->request['ref_name']) ? $this->request['ref_name'] : null
         ];
 
         if (isset($this->previewImage))
