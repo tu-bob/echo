@@ -1,10 +1,13 @@
 <template>
-    <router-view></router-view>
+    <div>
+        <router-view></router-view>
+    </div>
+
 </template>
 
 <script>
     export default {
-        name: "Blog"
+        name: "BlogAdminView"
     }
 </script>
 

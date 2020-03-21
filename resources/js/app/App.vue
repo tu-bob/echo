@@ -19,8 +19,8 @@
                                 <span class="caret"></span>
                             </a>
                             <div class="dropdown-menu">
-                                <router-link to="/blog/posts" class="dropdown-item">Посты</router-link>
-                                <router-link to="/blog/post" class="dropdown-item">Добавить пост</router-link>
+                                <router-link :to="{name: 'posts-table'}" class="dropdown-item">Посты</router-link>
+                                <router-link :to="{name: 'post-editor'}" class="dropdown-item">Добавить пост</router-link>
                             </div>
                         </li>
                         <li class="nav-item dropdown">
