@@ -83,6 +83,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Login",
+  props: {
+    redirectUrl: {
+      type: String
+    }
+  },
   data: function data() {
     return {
       email: null,
@@ -91,9 +96,15 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     submit: function submit() {
+      var _this = this;
+
       this.$store.dispatch('LOG_IN', {
         email: this.email,
         password: this.password
+      }).then(function (_) {
+        if (_this.redirectUrl) _this.$router.push(_this.redirectUrl);else _this.$router.push({
+          name: 'home'
+        });
       });
     } //     axios.post('/auth/login', {
     //         'email': this.email,
