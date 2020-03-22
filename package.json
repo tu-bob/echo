@@ -29,6 +29,7 @@
         "string-similarity": "^4.0.1",
         "summernote": "^0.8.16",
         "vue-router": "^3.1.6",
-        "vuetify": "^2.2.15"
+        "vuetify": "^2.2.15",
+        "vuex": "^3.1.3"
     }
 }

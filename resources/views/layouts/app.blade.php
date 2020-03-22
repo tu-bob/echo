@@ -21,7 +21,7 @@
 </head>
 <body>
 <div id="app">
-    <app @auth authorized @endauth ></app>
+    <app @auth :user="{{auth()->user()}}" @endauth ></app>
 </div>
 </body>
 </html>
