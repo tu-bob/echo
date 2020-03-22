@@ -81,15 +81,20 @@
         },
         methods: {
             submit() {
-                axios.post('/auth/login', {
-                    'email': this.email,
-                    'password': this.password
+                this.$store.dispatch('LOG_IN', {
+                    email: this.email,
+                    password: this.password
                 })
-                    .then(response => {
-                        this.$eventHub.$emit('authenticated');
-                        this.$router.push('/')
-                    });
             }
+            //     axios.post('/auth/login', {
+            //         'email': this.email,
+            //         'password': this.password
+            //     })
+            //         .then(response => {
+            //             this.$eventHub.$emit('authenticated');
+            //             this.$router.push('/')
+            //         });
+            // }
         }
     }
 </script>

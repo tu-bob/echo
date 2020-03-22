@@ -91,17 +91,20 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     submit: function submit() {
-      var _this = this;
-
-      axios.post('/auth/login', {
-        'email': this.email,
-        'password': this.password
-      }).then(function (response) {
-        _this.$eventHub.$emit('authenticated');
-
-        _this.$router.push('/');
+      this.$store.dispatch('LOG_IN', {
+        email: this.email,
+        password: this.password
       });
-    }
+    } //     axios.post('/auth/login', {
+    //         'email': this.email,
+    //         'password': this.password
+    //     })
+    //         .then(response => {
+    //             this.$eventHub.$emit('authenticated');
+    //             this.$router.push('/')
+    //         });
+    // }
+
   }
 });
 

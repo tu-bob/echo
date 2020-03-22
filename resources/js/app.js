@@ -3,10 +3,11 @@
  * includes Vue and other libraries. It is a great starting point when
  * building robust, powerful web applications using Vue and Laravel.
  */
+import {store} from './store';
 
 require('./bootstrap');
 
-let App =  require('./app/App.vue').default;
+let App = require('./app/App.vue').default;
 let router = require('./app/Routes.vue').default;
 
 let BootstrapVue = require('bootstrap-vue').default;
@@ -39,6 +40,7 @@ Vue.component('SuggestionInput', require('./components/common/inputs/SuggestionI
 
 const app = new Vue({
     el: '#app',
-    router: router,
+    router,
+    store
     // render: h => h(App)
 });
