@@ -3,10 +3,16 @@
 
     const routes = [
             {
+                name: 'login',
                 path: '/login', component: () => import('../components/auth/Login')
             },
             {
+                name: 'register',
                 path: '/register', component: () => import('../components/auth/Register')
+            },
+            {
+                name: 'home',
+                path: '/', component: () => import('../components/public/home/Home')
             }
             ,
             {

@@ -73,6 +73,11 @@
 <script>
     export default {
         name: "Login",
+        props: {
+            redirectUrl: {
+                type: String
+            }
+        },
         data() {
             return {
                 email: null,
@@ -85,6 +90,12 @@
                     email: this.email,
                     password: this.password
                 })
+                    .then(_ => {
+                        if (this.redirectUrl)
+                            this.$router.push(this.redirectUrl);
+                        else
+                            this.$router.push({name: 'home'})
+                    })
             }
             //     axios.post('/auth/login', {
             //         'email': this.email,

@@ -2166,14 +2166,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue_router__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue-router */ "./node_modules/vue-router/dist/vue-router.esm.js");
 
 var routes = [{
+  name: 'login',
   path: '/login',
   component: function component() {
     return __webpack_require__.e(/*! import() */ 3).then(__webpack_require__.bind(null, /*! ../components/auth/Login */ "./resources/js/components/auth/Login.vue"));
   }
 }, {
+  name: 'register',
   path: '/register',
   component: function component() {
     return __webpack_require__.e(/*! import() */ 17).then(__webpack_require__.bind(null, /*! ../components/auth/Register */ "./resources/js/components/auth/Register.vue"));
+  }
+}, {
+  name: 'home',
+  path: '/',
+  component: function component() {
+    return __webpack_require__.e(/*! import() */ 8).then(__webpack_require__.bind(null, /*! ../components/public/home/Home */ "./resources/js/components/public/home/Home.vue"));
   }
 }, {
   path: '/admin/blog',
