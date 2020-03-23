@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="row bg-dark">
-            <b-navbar toggleable="sm" class="col-4 col-md-4 pl-4" type="dark" variant="dark">
+            <b-navbar toggleable="sm" class="col-4 col-md-4 pl-4" :type="NAV_TYPE" :variant="NAV_VARIANT">
                 <b-navbar-toggle target="mainNavBar"></b-navbar-toggle>
                 <b-collapse is-nav id="mainNavBar">
                     <b-navbar-nav>
@@ -28,11 +28,20 @@
             <div class="col-1 col-md-4"></div>
             <div class="col-7 col-md-4 py-2 pr-4 row">
 
-                <router-link v-if="!AUTHENTICATED" class="ml-auto btn btn-dark" :to="{name: 'login'}">Вход
+                <router-link v-if="!AUTHENTICATED" class="ml-auto" :class="DEFAULT_BUTTON_CLASSES"
+                             :to="{name: 'login'}">Вход
                 </router-link>
-                <b-dropdown v-else class="ml-auto" variant="dark" right :text="AUTH_USER.name" >
-                    <b-dropdown-item @click="logout">Выйти из профиля</b-dropdown-item>
-                </b-dropdown>
+                <div v-else class="dropdown ml-auto">
+                    <button class="btn dropdown-toggle"
+                            :class="DEFAULT_BUTTON_CLASSES"
+                            type="button"
+                            id="profileMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        {{AUTH_USER.name}}
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="profileMenu">
+                        <a class="dropdown-item" href="#" @click="logout">Выйти</a>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="container mt-5">
@@ -79,7 +88,11 @@
         computed: {
             ...mapGetters([
                 'AUTHENTICATED',
-                'AUTH_USER'
+                'AUTH_USER',
+                'NAV_TYPE',
+                'NAV_VARIANT',
+                'DROPDOWN_VARIANT',
+                'DEFAULT_BUTTON_CLASSES'
             ])
         }
     }

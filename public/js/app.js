@@ -2093,6 +2093,15 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "App",
@@ -2121,7 +2130,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       });
     }
   },
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])(['AUTHENTICATED', 'AUTH_USER']))
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])(['AUTHENTICATED', 'AUTH_USER', 'NAV_TYPE', 'NAV_VARIANT', 'DROPDOWN_VARIANT', 'DEFAULT_BUTTON_CLASSES']))
 });
 
 /***/ }),
@@ -75376,7 +75385,11 @@ var render = function() {
           "b-navbar",
           {
             staticClass: "col-4 col-md-4 pl-4",
-            attrs: { toggleable: "sm", type: "dark", variant: "dark" }
+            attrs: {
+              toggleable: "sm",
+              type: _vm.NAV_TYPE,
+              variant: _vm.NAV_VARIANT
+            }
           },
           [
             _c("b-navbar-toggle", { attrs: { target: "mainNavBar" } }),
@@ -75477,28 +75490,54 @@ var render = function() {
               ? _c(
                   "router-link",
                   {
-                    staticClass: "ml-auto btn btn-dark",
+                    staticClass: "ml-auto",
+                    class: _vm.DEFAULT_BUTTON_CLASSES,
                     attrs: { to: { name: "login" } }
                   },
                   [_vm._v("Вход\n            ")]
                 )
-              : _c(
-                  "b-dropdown",
-                  {
-                    staticClass: "ml-auto",
-                    attrs: {
-                      variant: "dark",
-                      right: "",
-                      text: _vm.AUTH_USER.name
-                    }
-                  },
-                  [
-                    _c("b-dropdown-item", { on: { click: _vm.logout } }, [
-                      _vm._v("Выйти из профиля")
-                    ])
-                  ],
-                  1
-                )
+              : _c("div", { staticClass: "dropdown ml-auto" }, [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn dropdown-toggle",
+                      class: _vm.DEFAULT_BUTTON_CLASSES,
+                      attrs: {
+                        type: "button",
+                        id: "profileMenu",
+                        "data-toggle": "dropdown",
+                        "aria-haspopup": "true",
+                        "aria-expanded": "false"
+                      }
+                    },
+                    [
+                      _vm._v(
+                        "\n                    " +
+                          _vm._s(_vm.AUTH_USER.name) +
+                          "\n                "
+                      )
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass: "dropdown-menu dropdown-menu-right",
+                      attrs: { "aria-labelledby": "profileMenu" }
+                    },
+                    [
+                      _c(
+                        "a",
+                        {
+                          staticClass: "dropdown-item",
+                          attrs: { href: "#" },
+                          on: { click: _vm.logout }
+                        },
+                        [_vm._v("Выйти")]
+                      )
+                    ]
+                  )
+                ])
           ],
           1
         )
@@ -92153,6 +92192,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 /* harmony import */ var _modules_auth__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/auth */ "./resources/js/store/modules/auth.js");
+/* harmony import */ var _modules_ui__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules/ui */ "./resources/js/store/modules/ui.js");
+
 
 
 
@@ -92163,7 +92204,8 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
   mutations: {},
   actions: {},
   modules: {
-    auth: _modules_auth__WEBPACK_IMPORTED_MODULE_2__["default"]
+    auth: _modules_auth__WEBPACK_IMPORTED_MODULE_2__["default"],
+    ui: _modules_ui__WEBPACK_IMPORTED_MODULE_3__["default"]
   }
 });
 
@@ -92288,6 +92330,55 @@ var actions = {
     return FETCH_USER;
   }()
 };
+/* harmony default export */ __webpack_exports__["default"] = ({
+  state: state,
+  getters: getters,
+  mutations: mutations,
+  actions: actions
+});
+
+/***/ }),
+
+/***/ "./resources/js/store/modules/ui.js":
+/*!******************************************!*\
+  !*** ./resources/js/store/modules/ui.js ***!
+  \******************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _api_authApi__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../api/authApi */ "./resources/js/api/authApi.js");
+
+var state = {
+  mode: 'dark'
+};
+var getters = {
+  NAV_TYPE: function NAV_TYPE(state) {
+    return 'dark';
+  },
+  NAV_VARIANT: function NAV_VARIANT(state) {
+    return 'dark';
+  },
+  DROPDOWN_VARIANT: function DROPDOWN_VARIANT(state) {
+    return 'dark';
+  },
+  DEFAULT_BUTTON_CLASSES: function DEFAULT_BUTTON_CLASSES(state) {
+    return {
+      'btn': true,
+      'btn-dark': true,
+      'btn-text-white': true
+    };
+  },
+  DROPDOWN_CLASSES: function DROPDOWN_CLASSES(state) {
+    return {};
+  },
+  DROPDOWN_ITEM_CLASSES: function DROPDOWN_ITEM_CLASSES(state) {
+    return {};
+  }
+};
+var mutations = {};
+var actions = {};
 /* harmony default export */ __webpack_exports__["default"] = ({
   state: state,
   getters: getters,
