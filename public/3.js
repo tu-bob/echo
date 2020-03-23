@@ -106,16 +106,7 @@ __webpack_require__.r(__webpack_exports__);
           name: 'home'
         });
       });
-    } //     axios.post('/auth/login', {
-    //         'email': this.email,
-    //         'password': this.password
-    //     })
-    //         .then(response => {
-    //             this.$eventHub.$emit('authenticated');
-    //             this.$router.push('/')
-    //         });
-    // }
-
+    }
   }
 });
 

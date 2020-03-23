@@ -87,7 +87,7 @@
 </template>
 
 <script>
-    import {fetchAlbum, fetchAlbumTypes} from "../../../../api/admin/mediaApi";
+    import {fetchAlbum, fetchAlbumTypes} from "../../../../api/mediaApi";
     import SongsTable from "../music/SongsTable";
     import ImageUploader from "../../../common/inputs/ImageUploader";
 

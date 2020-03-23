@@ -9,7 +9,7 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _api_admin_mediaApi__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../api/admin/mediaApi */ "./resources/js/api/admin/mediaApi.js");
+/* harmony import */ var _api_mediaApi__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../api/mediaApi */ "./resources/js/api/mediaApi.js");
 /* harmony import */ var _music_SongsTable__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../music/SongsTable */ "./resources/js/components/admin/media/music/SongsTable.vue");
 /* harmony import */ var _common_inputs_ImageUploader__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../common/inputs/ImageUploader */ "./resources/js/components/common/inputs/ImageUploader.vue");
 //
@@ -129,7 +129,7 @@ __webpack_require__.r(__webpack_exports__);
     fetchAlbumTypes: function fetchAlbumTypes() {
       var _this = this;
 
-      Object(_api_admin_mediaApi__WEBPACK_IMPORTED_MODULE_0__["fetchAlbumTypes"])().then(function (types) {
+      Object(_api_mediaApi__WEBPACK_IMPORTED_MODULE_0__["fetchAlbumTypes"])().then(function (types) {
         return _this.albumTypes = types;
       })["catch"]();
     },
@@ -182,7 +182,7 @@ __webpack_require__.r(__webpack_exports__);
     fetchAlbum: function fetchAlbum(id) {
       var _this3 = this;
 
-      Object(_api_admin_mediaApi__WEBPACK_IMPORTED_MODULE_0__["fetchAlbum"])(id).then(function (album) {
+      Object(_api_mediaApi__WEBPACK_IMPORTED_MODULE_0__["fetchAlbum"])(id).then(function (album) {
         _this3.album = album;
       })["catch"]();
     },
@@ -586,10 +586,10 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./resources/js/api/admin/mediaApi.js":
-/*!********************************************!*\
-  !*** ./resources/js/api/admin/mediaApi.js ***!
-  \********************************************/
+/***/ "./resources/js/api/mediaApi.js":
+/*!**************************************!*\
+  !*** ./resources/js/api/mediaApi.js ***!
+  \**************************************/
 /*! exports provided: fetchGenres, fetchArtistAliasesByName, fetchFilteredAlbums, fetchSong, fetchAlbum, fetchAlbumTypes */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -603,7 +603,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchAlbumTypes", function() { return fetchAlbumTypes; });
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _util_stringHelper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../util/stringHelper */ "./resources/js/util/stringHelper.js");
+/* harmony import */ var _util_stringHelper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../util/stringHelper */ "./resources/js/util/stringHelper.js");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }

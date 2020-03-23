@@ -1,9 +1,11 @@
 <script>
     import VueRouter from 'vue-router'
+    import {store} from '../store';
 
     const routes = [
             {
                 name: 'login',
+                props: (route) => ({redirectUrl: route.query.redirectUrl}),
                 path: '/login', component: () => import('../components/auth/Login')
             },
             {
@@ -18,6 +20,7 @@
             {
                 path: '/admin/blog',
                 component: () => import('../components/admin/blog/BlogAdminView'),
+                meta: {requiresAuth: true},
                 children:
                     [
                         {
@@ -35,6 +38,7 @@
             {
                 path: '/admin/media',
                 component: () => import('../components/admin/media/AdminMediaView'),
+                meta: {requiresAuth: true},
                 children:
                     [
                         {
@@ -76,8 +80,24 @@
         history: true,
         mode: 'history',
         base: '/app/',
-        routes,
+        routes
     });
 
+    router.beforeEach(async (to, from, next) => {
+            if (to.matched.some(record => record.meta.requiresAuth)) {
+                if (store.getters.AUTHENTICATED) {
+                    next();
+                } else {
+                    try {
+                        await store.dispatch('FETCH_USER');
+                        next();
+                    } catch (e) {
+                        next();
+                    }
+                }
+            } else
+                next();
+        }
+    );
     export default router
 </script>
