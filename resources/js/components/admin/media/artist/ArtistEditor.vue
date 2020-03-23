@@ -1,24 +1,25 @@
 <template>
-    <div class="col-md-6">
-        <h4>Добавить артиста</h4>
-        <!--        <div class="form-group">-->
-        <!--            <label>Название</label>-->
-        <!--            <input type="text" class="form-control" v-model="artist.name">-->
-        <!--        </div>-->
-        <div class="form-group">
-            <label>Имя или псевдонимы</label>
-            <b-form-tags input-id="tags-basic"
-                         v-model="aliases"
-                         class="mb-2"
-                         size="lg"
-                         tag-variant="warning"
-                         placeholder="Добавьте имя или псевдоним"
-                         tag-pills
-                         add-button-text="Добавить"
-                         separator=";"
-            ></b-form-tags>
+    <div class="card">
+        <div class="card-header">Редактир исполнителей</div>
+        <div class="card-body">
+            <div class="form-group">
+                <label>Имя или псевдонимы</label>
+                <b-form-tags input-id="tags-basic"
+                             v-model="aliases"
+                             class="mb-2"
+                             size="lg"
+                             tag-variant="warning"
+                             placeholder="Добавьте имя или псевдоним"
+                             tag-pills
+                             add-button-text="Добавить"
+                             separator=";"
+                ></b-form-tags>
+            </div>
         </div>
-        <button class="btn btn-primary" @click="submit">Сохранить</button>
+        <div class="card-footer">
+            <button class="btn btn-primary" @click="submit">Сохранить</button>
+        </div>
+
     </div>
 </template>
 

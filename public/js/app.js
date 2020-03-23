@@ -2219,7 +2219,7 @@ var routes = [{
 }, {
   path: '/admin/media',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 10).then(__webpack_require__.bind(null, /*! ../components/admin/media/AdminMediaView */ "./resources/js/components/admin/media/AdminMediaView.vue"));
+    return __webpack_require__.e(/*! import() */ 19).then(__webpack_require__.bind(null, /*! ../components/admin/media/MediaAdminView */ "./resources/js/components/admin/media/MediaAdminView.vue"));
   },
   meta: {
     requiresAuth: true

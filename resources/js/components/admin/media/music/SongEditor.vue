@@ -1,162 +1,168 @@
 <template>
-    <div>
-        <div class="row">
-            <div class="align-items-end col-md-6 form-group" v-if="!Boolean(providedFile)">
-                <label>Файл</label>
-                <b-form-file
-                    v-model="mp3File"
-                    :state="Boolean(audioSrc) || Boolean(mp3File)"
-                    ref="mp3FileInput"
-                    accept=".mp3"
-                    placeholder="Выберите файл или перетащите его сюда..."
-                    drop-placeholder="Перетащите файл сюда..."
-                    browse-text="Обзор"
-                ></b-form-file>
-            </div>
-            <div class="row ml-1 col-md-6">
-                <audio class="mt-md-4 mx-auto" controlsList="nodownload" :src="audioSrc" controls></audio>
-            </div>
+    <div class="card mb-5">
+        <div class="card-header">
+            Загрузка песни
         </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="align-items-end col-md-6 form-group" v-if="!Boolean(providedFile)">
+                    <label>Файл</label>
+                    <b-form-file
+                        v-model="mp3File"
+                        :state="Boolean(audioSrc) || Boolean(mp3File)"
+                        ref="mp3FileInput"
+                        accept=".mp3"
+                        placeholder="Выберите файл или перетащите его сюда..."
+                        drop-placeholder="Перетащите файл сюда..."
+                        browse-text="Обзор"
+                    ></b-form-file>
+                </div>
+                <div class="row ml-1 col-md-6">
+                    <audio class="mt-md-4 mx-auto" controlsList="nodownload" :src="audioSrc" controls></audio>
+                </div>
+            </div>
 
-
-        <div class="alert alert-info" v-if="song.bitrate">
+            <div class="alert alert-info" v-if="song.bitrate">
             <span>{{song.bitrate / 1000}} kbs |
                 {{song.sample_rate}} |
                 <span v-if="song.container">{{song.container}} |</span>
                 <span v-if="song.encoder">{{song.encoder}} |</span>
                 {{Math.round(song.playtime_seconds / 60 *100) / 100}}</span>
-        </div>
-        <div class="row">
-            <div class="form-group col-md-8">
-                <label>Название</label>
-                <input type="text" class="form-control" v-model="song.title" autofocus>
             </div>
-            <div class="form-group col-md-4 ">
-                <label>Год</label>
-                <input type="text" class="form-control" v-model="song.year">
+            <div class="row">
+                <div class="form-group col-md-8">
+                    <label>Название</label>
+                    <input type="text" class="form-control" v-model="song.title" autofocus>
+                </div>
+                <div class="form-group col-md-4 ">
+                    <label>Год</label>
+                    <input type="text" class="form-control" v-model="song.year">
+                </div>
             </div>
-        </div>
-        <div class="form-group">
-            <label>Исполнители</label>
-            <suggestion-input displayPropertyName="name"
-                              ref="artistSearch"
-                              @selected="onArtistSelected"
-                              action-url="/media/artist/alias/filter?name=">
-            </suggestion-input>
-            <ul
-                class="list-unstyled d-inline-flex flex-wrap mb-0"
-                aria-live="polite"
-                aria-atomic="false"
-                aria-relevant="additions removals"
-            >
-                <b-card
-                    v-for="artistAlias in song.artistAliases"
-                    :key="artistAlias.id"
-                    :id="`artistAliasesTagList_${artistAlias.name.replace(/\s/g, '_')}_`"
-                    tag="li"
-                    class="mt-1 mr-1 bg-warning"
-                    body-class="py-1 pr-2 text-nowrap"
+            <div class="form-group">
+                <label>Исполнители</label>
+                <suggestion-input displayPropertyName="name"
+                                  ref="artistSearch"
+                                  @selected="onArtistSelected"
+                                  action-url="/media/artist/alias/filter?name=">
+                </suggestion-input>
+                <ul
+                    class="list-unstyled d-inline-flex flex-wrap mb-0"
+                    aria-live="polite"
+                    aria-atomic="false"
+                    aria-relevant="additions removals"
                 >
-                    <strong>{{ artistAlias.name }}</strong>
-                    <b-button
-                        @click="removeArtistAlias(artistAlias.id)"
-                        variant="link"
-                        class="text-decoration-none"
-                        size="sm"
-                        :aria-controls="`artistAliasesTagList__${artistAlias.name.replace(/\s/g, '_')}_`"
-                    >&times;
-                    </b-button>
-                </b-card>
-            </ul>
+                    <b-card
+                        v-for="artistAlias in song.artistAliases"
+                        :key="artistAlias.id"
+                        :id="`artistAliasesTagList_${artistAlias.name.replace(/\s/g, '_')}_`"
+                        tag="li"
+                        class="mt-1 mr-1 bg-warning"
+                        body-class="py-1 pr-2 text-nowrap"
+                    >
+                        <strong>{{ artistAlias.name }}</strong>
+                        <b-button
+                            @click="removeArtistAlias(artistAlias.id)"
+                            variant="link"
+                            class="text-decoration-none"
+                            size="sm"
+                            :aria-controls="`artistAliasesTagList__${artistAlias.name.replace(/\s/g, '_')}_`"
+                        >&times;
+                        </b-button>
+                    </b-card>
+                </ul>
 
-            <span v-if="missedArtists.length > 0" class="small">Исполнители не найдены:
+                <span v-if="missedArtists.length > 0" class="small">Исполнители не найдены:
                 <b v-for="artist in missedArtists">{{artist}}</b>
             </span>
-        </div>
+            </div>
 
-        <div class="form-group">
-            <label>Жанры</label>
-            <suggestion-input displayPropertyName="name"
-                              ref="genreSearch"
-                              @selected="onGenreSelected"
-                              :providedOptions="genres"
-                              searchPropertyName="name">
-            </suggestion-input>
-            <ul
-                class="list-unstyled d-inline-flex flex-wrap mb-0"
-                aria-live="polite"
-                aria-atomic="false"
-                aria-relevant="additions removals"
-            >
-                <b-card
-                    v-for="genre in song.genres"
-                    :key="genre.id"
-                    :id="`genresTagList_${genre.id.replace(/\s/g, '_')}_`"
-                    tag="li"
-                    class="mt-1 mr-1 bg-warning"
-                    body-class="py-1 pr-2 text-nowrap"
+            <div class="form-group">
+                <label>Жанры</label>
+                <suggestion-input displayPropertyName="name"
+                                  ref="genreSearch"
+                                  @selected="onGenreSelected"
+                                  :providedOptions="genres"
+                                  searchPropertyName="name">
+                </suggestion-input>
+                <ul
+                    class="list-unstyled d-inline-flex flex-wrap mb-0"
+                    aria-live="polite"
+                    aria-atomic="false"
+                    aria-relevant="additions removals"
                 >
-                    <strong>{{ genre.name }}</strong>
-                    <b-button
-                        @click="removeGenre(genre.id)"
-                        variant="link"
-                        class="text-decoration-none"
-                        size="sm"
-                        :aria-controls="`genresTagList__${genre.id.replace(/\s/g, '_')}_`"
-                    >&times;
-                    </b-button>
-                </b-card>
-            </ul>
-        </div>
+                    <b-card
+                        v-for="genre in song.genres"
+                        :key="genre.id"
+                        :id="`genresTagList_${genre.id.replace(/\s/g, '_')}_`"
+                        tag="li"
+                        class="mt-1 mr-1 bg-warning"
+                        body-class="py-1 pr-2 text-nowrap"
+                    >
+                        <strong>{{ genre.name }}</strong>
+                        <b-button
+                            @click="removeGenre(genre.id)"
+                            variant="link"
+                            class="text-decoration-none"
+                            size="sm"
+                            :aria-controls="`genresTagList__${genre.id.replace(/\s/g, '_')}_`"
+                        >&times;
+                        </b-button>
+                    </b-card>
+                </ul>
+            </div>
 
-        <div class="form-group">
-            <label>Альбомы</label>
-            <suggestion-input displayPropertyName="title"
-                              ref="albumSearch"
-                              @selected="onAlbumSelected"
-                              action-url="/media/music/album/filter?title=">
-            </suggestion-input>
-            <ul
-                class="list-unstyled d-inline-flex flex-wrap mb-0"
-                aria-live="polite"
-                aria-atomic="false"
-                aria-relevant="additions removals"
-            >
-                <b-card
-                    v-for="album in song.albums"
-                    :key="album.id"
-                    :id="`albumsTagList_${album.id.replace(/\s/g, '_')}_`"
-                    tag="li"
-                    class="mt-1 mr-1 bg-warning"
-                    body-class="py-1 pr-2 text-nowrap"
+            <div class="form-group">
+                <label>Альбомы</label>
+                <suggestion-input displayPropertyName="title"
+                                  ref="albumSearch"
+                                  @selected="onAlbumSelected"
+                                  action-url="/media/music/album/filter?title=">
+                </suggestion-input>
+                <ul
+                    class="list-unstyled d-inline-flex flex-wrap mb-0"
+                    aria-live="polite"
+                    aria-atomic="false"
+                    aria-relevant="additions removals"
                 >
-                    <strong>{{ album.title }}</strong>
-                    <b-button
-                        @click="removeAlbum(album.id)"
-                        variant="link"
-                        class="text-decoration-none"
-                        size="sm"
-                        :aria-controls="`albumsTagList__${album.id.replace(/\s/g, '_')}_`"
-                    >&times;
-                    </b-button>
-                </b-card>
-            </ul>
+                    <b-card
+                        v-for="album in song.albums"
+                        :key="album.id"
+                        :id="`albumsTagList_${album.id.replace(/\s/g, '_')}_`"
+                        tag="li"
+                        class="mt-1 mr-1 bg-warning"
+                        body-class="py-1 pr-2 text-nowrap"
+                    >
+                        <strong>{{ album.title }}</strong>
+                        <b-button
+                            @click="removeAlbum(album.id)"
+                            variant="link"
+                            class="text-decoration-none"
+                            size="sm"
+                            :aria-controls="`albumsTagList__${album.id.replace(/\s/g, '_')}_`"
+                        >&times;
+                        </b-button>
+                    </b-card>
+                </ul>
+            </div>
+            <div class="form-group">
+                <label>Лэйбл</label>
+                <input type="text" class="form-control" v-model="song.label">
+            </div>
+
+            <div class="form-group">
+                <label>Текст песни</label>
+                <b-form-textarea
+                    v-model="song.lyrics"
+                    rows="5"
+                    max-rows="15"
+                ></b-form-textarea>
+            </div>
         </div>
-        <div class="form-group">
-            <label>Лэйбл</label>
-            <input type="text" class="form-control" v-model="song.label">
+        <div class="card-footer">
+            <button class="btn btn-primary" @click="submit">Сохранить</button>
         </div>
 
-        <div class="form-group">
-            <label>Текст песни</label>
-            <b-form-textarea
-                v-model="song.lyrics"
-                rows="5"
-                max-rows="15"
-            ></b-form-textarea>
-        </div>
-
-        <button class="btn btn-primary" @click="submit">Сохранить</button>
     </div>
 </template>
 

@@ -12,6 +12,10 @@
   color: rgba(255, 255, 255, 0.75) !important;
 }
 
+.bg-laravel {
+  background-color: #f8fafc !important;
+}
+
 /*
  * Container style
  */

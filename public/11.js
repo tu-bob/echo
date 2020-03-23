@@ -34,6 +34,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "ArtistEditor",
@@ -103,43 +104,49 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "col-md-6" }, [
-    _c("h4", [_vm._v("Добавить артиста")]),
+  return _c("div", { staticClass: "card" }, [
+    _c("div", { staticClass: "card-header" }, [
+      _vm._v("Редактир исполнителей")
+    ]),
     _vm._v(" "),
-    _c(
-      "div",
-      { staticClass: "form-group" },
-      [
-        _c("label", [_vm._v("Имя или псевдонимы")]),
-        _vm._v(" "),
-        _c("b-form-tags", {
-          staticClass: "mb-2",
-          attrs: {
-            "input-id": "tags-basic",
-            size: "lg",
-            "tag-variant": "warning",
-            placeholder: "Добавьте имя или псевдоним",
-            "tag-pills": "",
-            "add-button-text": "Добавить",
-            separator: ";"
-          },
-          model: {
-            value: _vm.aliases,
-            callback: function($$v) {
-              _vm.aliases = $$v
+    _c("div", { staticClass: "card-body" }, [
+      _c(
+        "div",
+        { staticClass: "form-group" },
+        [
+          _c("label", [_vm._v("Имя или псевдонимы")]),
+          _vm._v(" "),
+          _c("b-form-tags", {
+            staticClass: "mb-2",
+            attrs: {
+              "input-id": "tags-basic",
+              size: "lg",
+              "tag-variant": "warning",
+              placeholder: "Добавьте имя или псевдоним",
+              "tag-pills": "",
+              "add-button-text": "Добавить",
+              separator: ";"
             },
-            expression: "aliases"
-          }
-        })
-      ],
-      1
-    ),
+            model: {
+              value: _vm.aliases,
+              callback: function($$v) {
+                _vm.aliases = $$v
+              },
+              expression: "aliases"
+            }
+          })
+        ],
+        1
+      )
+    ]),
     _vm._v(" "),
-    _c(
-      "button",
-      { staticClass: "btn btn-primary", on: { click: _vm.submit } },
-      [_vm._v("Сохранить")]
-    )
+    _c("div", { staticClass: "card-footer" }, [
+      _c(
+        "button",
+        { staticClass: "btn btn-primary", on: { click: _vm.submit } },
+        [_vm._v("Сохранить")]
+      )
+    ])
   ])
 }
 var staticRenderFns = []
