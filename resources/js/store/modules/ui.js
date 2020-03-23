@@ -5,26 +5,23 @@ const state = {
 };
 const getters = {
     NAV_TYPE: state => {
-        return 'dark'
+        return state.mode
     },
     NAV_VARIANT: state => {
-        return 'dark'
+        return state.mode
+    },
+    AVATAR_VARIANT: state => {
+        return 'secondary'
     },
     DROPDOWN_VARIANT: state => {
-        return 'dark'
+        return state.mode
     },
     DEFAULT_BUTTON_CLASSES: state => {
         return {
-            'btn':true,
+            'btn': true,
             'btn-dark': true,
             'btn-text-white': true
         }
-    },
-    DROPDOWN_CLASSES: state => {
-        return {};
-    },
-    DROPDOWN_ITEM_CLASSES: state => {
-        return {};
     }
 };
 const mutations = {};

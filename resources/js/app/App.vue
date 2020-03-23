@@ -31,17 +31,20 @@
                 <router-link v-if="!AUTHENTICATED" class="ml-auto" :class="DEFAULT_BUTTON_CLASSES"
                              :to="{name: 'login'}">Вход
                 </router-link>
-                <div v-else class="dropdown ml-auto">
-                    <button class="btn dropdown-toggle"
-                            :class="DEFAULT_BUTTON_CLASSES"
-                            type="button"
-                            id="profileMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        {{AUTH_USER.name}}
-                    </button>
-                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="profileMenu">
-                        <a class="dropdown-item" href="#" @click="logout">Выйти</a>
+                <template v-else>
+                    <b-avatar class="ml-auto" :variant="AVATAR_VARIANT"></b-avatar>
+                    <div class="dropdown">
+                        <button class="btn dropdown-toggle"
+                                :class="DEFAULT_BUTTON_CLASSES"
+                                type="button"
+                                id="profileMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            {{AUTH_USER.name}}
+                        </button>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="profileMenu">
+                            <a class="dropdown-item" href="#" @click="logout">Выйти</a>
+                        </div>
                     </div>
-                </div>
+                </template>
             </div>
         </div>
         <div class="container mt-5">
@@ -88,10 +91,10 @@
         computed: {
             ...mapGetters([
                 'AUTHENTICATED',
+                'AVATAR_VARIANT',
                 'AUTH_USER',
                 'NAV_TYPE',
                 'NAV_VARIANT',
-                'DROPDOWN_VARIANT',
                 'DEFAULT_BUTTON_CLASSES'
             ])
         }
