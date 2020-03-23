@@ -41,12 +41,16 @@ export function movingBorder() {
 
     moveToActive($('.moving-border .m-item .active').parents('.m-item'));
 
+    $(window).on('resize', function(){
+        moveToActive($('.moving-border .m-item .active').parents('.m-item'));
+    });
+
     $(document).on({
         mouseenter: function (event) {
             moveToActive($(this));
         },
         mouseleave: function () {
             moveToActive($('.moving-border .m-item .active').parents('.m-item'));
-        },
+        }
     }, '.moving-border .m-item');
 }
