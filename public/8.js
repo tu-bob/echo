@@ -10,8 +10,7 @@
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var perfect_scrollbar__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! perfect-scrollbar */ "./node_modules/perfect-scrollbar/dist/perfect-scrollbar.esm.js");
-function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
+/* harmony import */ var _main__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../main */ "./resources/js/main.js");
 //
 //
 //
@@ -64,46 +63,15 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 //
 //
 
-var adonisObj = {};
-jQuery(document).ready(function ($) {
-  adonisObj.movingBorder = function () {
-    adonisObj.movingBorder.active = function (el) {
-      if (_typeof(el) === 'object' && el.length > 0) {
-        el.each(function () {
-          var width = $(this).width();
-          var left = $(this).position().left;
-          $(this).parents('.moving-border').next('.border-hr').css({
-            'width': width + 'px',
-            'margin-left': left + 'px'
-          });
-        });
-      }
-    };
 
-    adonisObj.movingBorder.active($('.moving-border .active .m-item'));
-    $(document).on({
-      mouseenter: function mouseenter(event) {
-        adonisObj.movingBorder.active($(this));
-      },
-      mouseleave: function mouseleave() {
-        var activeItem = typeof $(this).parents('.moving-border').children('.active').children('a') === 'undefined' ? null : $(this).parents('.moving-border').children('.active').children('a');
-
-        if (activeItem) {
-          adonisObj.movingBorder.active($(this).parent().siblings('.active').children('a'));
-        }
-      }
-    }, '.moving-border .m-item');
-  };
-
-  adonisObj.movingBorder();
-});
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Home",
   mounted: function mounted() {
-    var container = document.querySelector('#nav-horizontal');
+    var container = document.querySelector('#horizontal-nav');
     var ps = new perfect_scrollbar__WEBPACK_IMPORTED_MODULE_0__["default"](container, {
       useBothWheelAxes: true
     });
+    Object(_main__WEBPACK_IMPORTED_MODULE_1__["movingBorder"])();
   }
 });
 
@@ -121,7 +89,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "\n.wrapper[data-v-a0211c58] {\n    width: 100%;\n    border-radius: 5px;\n    background-color: transparent !important;\n    position: relative;\n}\n.listst[data-v-a0211c58] {\n    display: flex;\n    justify-content: space-between;\n    flex-wrap: nowrap;\n    list-style: none;\n}\n.tab-custom[data-v-a0211c58] {\n    margin: 0;\n    position: static;\n    flex-basis: 0;\n    flex-grow: 1;\n    flex-wrap: nowrap;\n    max-width: 100%;\n    text-align: center;\n    background: #343a40 !important;\n    border-right: 1px solid #000;\n    white-space: nowrap;\n    font-size: 1.125rem;\n    line-height: 1.6;\n    color: #b8babc;\n}\n\n/*.tab-custom:after {*/\n/*    content: '';*/\n/*    height: 50%;*/\n/*    width: 1px;*/\n/*}*/\n\n/*.tab-custom .nav-link {*/\n/*    color: #b8babc !important*/\n/*}*/\n.tab-custom a[data-v-a0211c58] {\n    padding: 1rem 2rem;\n    position: relative;\n    color: #b8babc;\n    transition: color 0.2s ease;\n    background-color: transparent;\n    text-align: center;\n    white-space: nowrap;\n    font-size: 1.125rem;\n}\n.tab-custom .active span[data-v-a0211c58] {\n    z-index: 2;\n    color: #ffffff;\n    position: relative;\n    line-height: 0;\n    display: inline-block;\n    height: auto;\n}\n.tab-custom .active[data-v-a0211c58]:before {\n    height: 100%;\n    opacity: 1;\n}\n.tab-custom .active[data-v-a0211c58] :focus {\n    outline: none;\n}\n.tab-custom a[data-v-a0211c58]::before {\n    content: '';\n    width: 100%;\n    position: absolute;\n    left: 0;\n    top: 0;\n    display: block;\n    height: 0;\n    opacity: 0;\n    background: #91a5f4;\n    background: linear-gradient(135deg, #91a5f4 0%, #b08cf9 86%);\n    transition: all 0.4s ease-in-out;\n}\n.menu-icon[data-v-a0211c58] {\n    color: #fff;\n    position: relative;\n    z-index: 2;\n    line-height: 0;\n    display: inline-block;\n    vertical-align: middle;\n    height: auto;\n    padding-right: 1rem !important;\n}\n.menu-icon svg[data-v-a0211c58] {\n    width: 20px;\n    max-height: 22px;\n    fill: currentColor;\n    height: auto;\n    overflow: hidden;\n    color: #fff;\n}\n.moving-border[data-v-a0211c58] {\n    position: relative;\n}\n.moving-border .m-item[data-v-a0211c58] {\n    position: relative;\n}\nhr.border-hr[data-v-a0211c58] {\n    margin: 0;\n    height: 3px;\n    bottom: 0;\n    border: 0;\n    width: 0;\n    position: absolute;\n    transition: 0.3s ease-in-out;\n    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#91a5f4+0,b08cf9+86 */\n    background: #91a5f4;\n    /* Old browsers */\n    /* FF3.6-15 */\n    /* Chrome10-25,Safari5.1-6 */\n    background: linear-gradient(135deg, #91a5f4 0%, #b08cf9 86%);\n    /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */\n    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#91a5f4', endColorstr='#b08cf9', GradientType=1);\n    /* IE6-9 fallback on horizontal gradient */\n}\n", ""]);
+exports.push([module.i, "\n.horizontal-nav-wrapper[data-v-a0211c58] {\n    width: 100%;\n    border-radius: 5px;\n    background-color: transparent !important;\n    position: relative;\n}\n.horizontal-scroll-list[data-v-a0211c58] {\n    display: flex;\n    justify-content: space-between;\n    flex-wrap: nowrap;\n    list-style: none;\n}\n.horizontal-nav-menu-item[data-v-a0211c58] {\n    margin: 0;\n    position: static;\n    flex-basis: 0;\n    flex-grow: 1;\n    flex-wrap: nowrap;\n    max-width: 100%;\n    text-align: center;\n    background: #343a40 !important;\n    border-right: 1px solid #000;\n    white-space: nowrap;\n    font-size: 1.125rem;\n    line-height: 1.6;\n    color: #b8babc;\n}\n\n/*.horizontal-nav-menu-item:after {*/\n/*    content: '';*/\n/*    height: 50%;*/\n/*    width: 1px;*/\n/*}*/\n\n/*.horizontal-nav-menu-item .nav-link {*/\n/*    color: #b8babc !important*/\n/*}*/\n.horizontal-nav-menu-item a[data-v-a0211c58] {\n    padding: 1rem 2rem;\n    position: relative;\n    color: #b8babc;\n    transition: color 0.2s ease;\n    background-color: transparent;\n    text-align: center;\n    white-space: nowrap;\n    font-size: 1.125rem;\n}\n.horizontal-nav-menu-item .active span[data-v-a0211c58] {\n    z-index: 2;\n    color: #ffffff;\n    position: relative;\n    line-height: 0;\n    display: inline-block;\n    height: auto;\n}\n.horizontal-nav-menu-item .active[data-v-a0211c58]:before {\n    height: 100%;\n    opacity: 1;\n}\n.horizontal-nav-menu-item .active[data-v-a0211c58] :focus {\n    outline: none;\n}\n.horizontal-nav-menu-item a[data-v-a0211c58]::before {\n    content: '';\n    width: 100%;\n    position: absolute;\n    left: 0;\n    top: 0;\n    display: block;\n    height: 0;\n    opacity: 0;\n    background: #91a5f4;\n    background: linear-gradient(135deg, #91a5f4 0%, #b08cf9 86%);\n    transition: all 0.4s ease-in-out;\n}\n.menu-icon[data-v-a0211c58] {\n    color: #fff;\n    position: relative;\n    z-index: 2;\n    line-height: 0;\n    display: inline-block;\n    vertical-align: middle;\n    height: auto;\n    padding-right: 1rem !important;\n}\n.menu-icon svg[data-v-a0211c58] {\n    width: 20px;\n    max-height: 22px;\n    fill: currentColor;\n    height: auto;\n    overflow: hidden;\n    color: #fff;\n}\n.moving-border[data-v-a0211c58] {\n    position: relative;\n}\n.moving-border .m-item[data-v-a0211c58] {\n    position: relative;\n}\nhr.border-hr[data-v-a0211c58] {\n    margin: 0;\n    height: 3px;\n    bottom: 0;\n    border: 0;\n    width: 0;\n    position: absolute;\n    transition: 0.3s ease-in-out;\n    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#91a5f4+0,b08cf9+86 */\n    background: #91a5f4;\n    /* Old browsers */\n    /* FF3.6-15 */\n    /* Chrome10-25,Safari5.1-6 */\n    background: linear-gradient(135deg, #91a5f4 0%, #b08cf9 86%);\n    /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */\n    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#91a5f4', endColorstr='#b08cf9', GradientType=1);\n    /* IE6-9 fallback on horizontal gradient */\n}\n", ""]);
 
 // exports
 
@@ -176,16 +144,19 @@ var render = function() {
   return _c("div", [
     _c(
       "div",
-      { staticClass: "wrapper scroll-x ps", attrs: { id: "nav-horizontal" } },
+      {
+        staticClass: "horizontal-nav-wrapper scroll-x ps",
+        attrs: { id: "horizontal-nav" }
+      },
       [
         _c(
           "ul",
-          { staticClass: "listst m-0 p-0 moving-border" },
+          { staticClass: "horizontal-scroll-list m-0 p-0 moving-border" },
           [
             _c(
               "b-nav-item",
               {
-                staticClass: "tab-custom m-item",
+                staticClass: "horizontal-nav-menu-item m-item",
                 attrs: { href: "#", exact: "", "exact-active-class": "active" }
               },
               [
@@ -232,7 +203,7 @@ var render = function() {
             _c(
               "b-nav-item",
               {
-                staticClass: "tab-custom m-item",
+                staticClass: "horizontal-nav-menu-item m-item",
                 attrs: {
                   to: { name: "news" },
                   exact: "",
@@ -306,7 +277,7 @@ var render = function() {
             _c(
               "b-nav-item",
               {
-                staticClass: "tab-custom m-item",
+                staticClass: "horizontal-nav-menu-item m-item",
                 attrs: {
                   to: { name: "new-music" },
                   exact: "",
@@ -349,7 +320,7 @@ var render = function() {
             _c(
               "b-nav-item",
               {
-                staticClass: "tab-custom m-item",
+                staticClass: "horizontal-nav-menu-item m-item",
                 attrs: { href: "#", exact: "", "exact-active-class": "active" }
               },
               [_c("span", [_vm._v("Хахаха")])]
@@ -358,7 +329,7 @@ var render = function() {
             _c(
               "b-nav-item",
               {
-                staticClass: "tab-custom m-item",
+                staticClass: "horizontal-nav-menu-item m-item",
                 attrs: { href: "#", exact: "", "exact-active-class": "active" }
               },
               [_c("span", [_vm._v("Хахаха")])]

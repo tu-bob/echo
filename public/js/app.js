@@ -95114,7 +95114,7 @@ __webpack_require__.r(__webpack_exports__);
 /*!******************************!*\
   !*** ./resources/js/main.js ***!
   \******************************/
-/*! exports provided: getStoreOrUpdateAction, generateId, uploadFiles */
+/*! exports provided: getStoreOrUpdateAction, generateId, uploadFiles, movingBorder */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -95122,6 +95122,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getStoreOrUpdateAction", function() { return getStoreOrUpdateAction; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "generateId", function() { return generateId; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "uploadFiles", function() { return uploadFiles; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "movingBorder", function() { return movingBorder; });
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
 function getStoreOrUpdateAction(id, url) {
   var action = {
     url: url,
@@ -95147,6 +95150,30 @@ function uploadFiles(files, uploadUrl) {
   }
 
   return axios.post(uploadUrl, data);
+}
+function movingBorder() {
+  var moveToActive = function moveToActive(el) {
+    if (_typeof(el) === 'object' && el.length > 0) {
+      el.each(function () {
+        var width = $(this).width();
+        var left = $(this).position().left;
+        $(this).parents('.moving-border').next('.border-hr').css({
+          'width': width + 'px',
+          'margin-left': left + 'px'
+        });
+      });
+    }
+  };
+
+  moveToActive($('.moving-border .m-item .active').parents('.m-item'));
+  $(document).on({
+    mouseenter: function mouseenter(event) {
+      moveToActive($(this));
+    },
+    mouseleave: function mouseleave() {
+      moveToActive($('.moving-border .m-item .active').parents('.m-item'));
+    }
+  }, '.moving-border .m-item');
 }
 
 /***/ }),
