@@ -78451,7 +78451,7 @@ var render = function() {
                 )
               : [
                   _c("b-avatar", {
-                    staticClass: "ml-auto",
+                    staticClass: "ml-auto mr-3",
                     attrs: { variant: _vm.AVATAR_VARIANT }
                   }),
                   _vm._v(" "),
