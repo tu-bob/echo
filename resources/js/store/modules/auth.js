@@ -31,6 +31,7 @@ const actions = {
     },
     LOG_OUT: async (context, payload) => {
         return axios.post('/auth/logout')
+            .catch(e => Promise.reject(e))
             .then(_ => {
                 context.commit('SET_AUTH_USER', null)
             });
@@ -38,9 +39,9 @@ const actions = {
     FETCH_USER: async (context, payload) => {
         return fetchUser()
             .then(user => context.commit('SET_AUTH_USER', user))
-            .catch(error => {
+            .catch(e => {
                 context.commit('SET_AUTH_USER', null);
-                return Promise.reject(error);
+                return Promise.reject(e);
             })
     }
 };
