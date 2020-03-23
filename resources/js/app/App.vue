@@ -47,7 +47,7 @@
                 </template>
             </div>
         </div>
-        <div class="container mt-5">
+        <div class="mt-5">
             <!--            <b-alert :show="state.errors"-->
             <!--                     class="mb-5"-->
             <!--                     variant="danger"-->
