@@ -64,6 +64,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 
 
 
@@ -295,179 +298,187 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _c("div", { staticClass: "form-group mx-3" }, [
-      _c("label", [_vm._v("Заголовок")]),
-      _vm._v(" "),
-      _c("input", {
-        directives: [
-          {
-            name: "model",
-            rawName: "v-model",
-            value: _vm.post.title,
-            expression: "post.title"
-          }
-        ],
-        staticClass: "form-control",
-        domProps: { value: _vm.post.title },
-        on: {
-          input: function($event) {
-            if ($event.target.composing) {
-              return
-            }
-            _vm.$set(_vm.post, "title", $event.target.value)
-          }
-        }
-      })
-    ]),
+  return _c("div", { staticClass: "card mb-5" }, [
+    _c("div", { staticClass: "card-header" }, [_vm._v("Редактор постов")]),
     _vm._v(" "),
-    _c(
-      "div",
-      { staticClass: "container" },
-      [
-        _c("image-uploader", {
-          attrs: { src: _vm.previewImageUrl, alt: _vm.post.title },
-          scopedSlots: _vm._u([
-            {
-              key: "header",
-              fn: function() {
-                return [_vm._v("\n                Фото превью\n            ")]
-              },
-              proxy: true
-            }
-          ]),
-          model: {
-            value: _vm.previewImage,
-            callback: function($$v) {
-              _vm.previewImage = $$v
-            },
-            expression: "previewImage"
-          }
-        })
-      ],
-      1
-    ),
-    _vm._v(" "),
-    _c(
-      "div",
-      { staticClass: "form-group mx-3" },
-      [
-        _c("label", [_vm._v("Автор")]),
-        _vm._v(" "),
-        _c("suggestion-input", {
-          ref: "authorSearch",
-          attrs: {
-            displayPropertyName: "name",
-            queryIsFirstOption: "",
-            providedQuery: _vm.post.author.name,
-            preventFetching: "1",
-            "action-url": "/blog/author/filter?name="
-          },
-          on: { selected: _vm.onAuthorSelected }
-        })
-      ],
-      1
-    ),
-    _vm._v(" "),
-    _c("div", { staticClass: "form-group mx-3" }, [
-      _c("label", [_vm._v("Анотация")]),
-      _vm._v(" "),
-      _c("textarea", {
-        directives: [
-          {
-            name: "model",
-            rawName: "v-model",
-            value: _vm.post.annotation,
-            expression: "post.annotation"
-          }
-        ],
-        staticClass: "form-control",
-        domProps: { value: _vm.post.annotation },
-        on: {
-          input: function($event) {
-            if ($event.target.composing) {
-              return
-            }
-            _vm.$set(_vm.post, "annotation", $event.target.value)
-          }
-        }
-      })
-    ]),
-    _vm._v(" "),
-    _c(
-      "div",
-      { staticClass: "col-12 my-4" },
-      [
-        _c("label", [_vm._v("Статья")]),
-        _vm._v(" "),
-        _c("summernote", {
-          ref: "articleEditor",
-          attrs: { imageUploadUrl: "/media/image/many" },
-          model: {
-            value: _vm.post.article,
-            callback: function($$v) {
-              _vm.$set(_vm.post, "article", $$v)
-            },
-            expression: "post.article"
-          }
-        })
-      ],
-      1
-    ),
-    _vm._v(" "),
-    _c("div", { staticClass: "row mx-3" }, [
-      _c("div", { staticClass: "form-group col-md-4" }, [
-        _c("label", [_vm._v("Название источника")]),
+    _c("div", { staticClass: "card-body" }, [
+      _c("div", { staticClass: "form-group mx-3" }, [
+        _c("label", [_vm._v("Заголовок")]),
         _vm._v(" "),
         _c("input", {
           directives: [
             {
               name: "model",
               rawName: "v-model",
-              value: _vm.post.ref_name,
-              expression: "post.ref_name"
+              value: _vm.post.title,
+              expression: "post.title"
             }
           ],
           staticClass: "form-control",
-          domProps: { value: _vm.post.ref_name },
+          domProps: { value: _vm.post.title },
           on: {
             input: function($event) {
               if ($event.target.composing) {
                 return
               }
-              _vm.$set(_vm.post, "ref_name", $event.target.value)
+              _vm.$set(_vm.post, "title", $event.target.value)
             }
           }
         })
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "form-group col-md-8" }, [
-        _c("label", [_vm._v("Ссылка на источник")]),
+      _c(
+        "div",
+        { staticClass: "container" },
+        [
+          _c("image-uploader", {
+            attrs: { src: _vm.previewImageUrl, alt: _vm.post.title },
+            scopedSlots: _vm._u([
+              {
+                key: "header",
+                fn: function() {
+                  return [
+                    _vm._v(
+                      "\n                    Фото превью\n                "
+                    )
+                  ]
+                },
+                proxy: true
+              }
+            ]),
+            model: {
+              value: _vm.previewImage,
+              callback: function($$v) {
+                _vm.previewImage = $$v
+              },
+              expression: "previewImage"
+            }
+          })
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "form-group mx-3" },
+        [
+          _c("label", [_vm._v("Автор")]),
+          _vm._v(" "),
+          _c("suggestion-input", {
+            ref: "authorSearch",
+            attrs: {
+              displayPropertyName: "name",
+              queryIsFirstOption: "",
+              providedQuery: _vm.post.author.name,
+              preventFetching: "1",
+              "action-url": "/blog/author/filter?name="
+            },
+            on: { selected: _vm.onAuthorSelected }
+          })
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c("div", { staticClass: "form-group mx-3" }, [
+        _c("label", [_vm._v("Анотация")]),
         _vm._v(" "),
-        _c("input", {
+        _c("textarea", {
           directives: [
             {
               name: "model",
               rawName: "v-model",
-              value: _vm.post.reference,
-              expression: "post.reference"
+              value: _vm.post.annotation,
+              expression: "post.annotation"
             }
           ],
           staticClass: "form-control",
-          domProps: { value: _vm.post.reference },
+          domProps: { value: _vm.post.annotation },
           on: {
             input: function($event) {
               if ($event.target.composing) {
                 return
               }
-              _vm.$set(_vm.post, "reference", $event.target.value)
+              _vm.$set(_vm.post, "annotation", $event.target.value)
             }
           }
         })
+      ]),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "col-12 my-4" },
+        [
+          _c("label", [_vm._v("Статья")]),
+          _vm._v(" "),
+          _c("summernote", {
+            ref: "articleEditor",
+            attrs: { imageUploadUrl: "/media/image/many" },
+            model: {
+              value: _vm.post.article,
+              callback: function($$v) {
+                _vm.$set(_vm.post, "article", $$v)
+              },
+              expression: "post.article"
+            }
+          })
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c("div", { staticClass: "row mx-3" }, [
+        _c("div", { staticClass: "form-group col-md-4" }, [
+          _c("label", [_vm._v("Название источника")]),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.post.ref_name,
+                expression: "post.ref_name"
+              }
+            ],
+            staticClass: "form-control",
+            domProps: { value: _vm.post.ref_name },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.$set(_vm.post, "ref_name", $event.target.value)
+              }
+            }
+          })
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "form-group col-md-8" }, [
+          _c("label", [_vm._v("Ссылка на источник")]),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.post.reference,
+                expression: "post.reference"
+              }
+            ],
+            staticClass: "form-control",
+            domProps: { value: _vm.post.reference },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.$set(_vm.post, "reference", $event.target.value)
+              }
+            }
+          })
+        ])
       ])
     ]),
     _vm._v(" "),
-    _c("div", { staticClass: "col-12 text-center" }, [
+    _c("div", { staticClass: "card-footer" }, [
       _c(
         "button",
         { staticClass: "btn btn-primary", on: { click: _vm.submit } },

@@ -1,49 +1,52 @@
 <template>
-    <div>
-        <div class="form-group mx-3">
-            <label>Заголовок</label>
-            <input class="form-control" v-model="post.title"/>
-        </div>
-        <div class="container">
-            <image-uploader v-model="previewImage" :src="previewImageUrl" :alt="post.title">
-                <template #header>
-                    Фото превью
-                </template>
-            </image-uploader>
-        </div>
-        <div class="form-group mx-3">
-            <label>Автор</label>
-            <!--            <input class="form-control" v-model="post.author"/>-->
-            <suggestion-input displayPropertyName="name"
-                              queryIsFirstOption
-                              :providedQuery="post.author.name"
-                              ref="authorSearch"
-                              preventFetching="1"
-                              @selected="onAuthorSelected"
-                              action-url="/blog/author/filter?name=">
-            </suggestion-input>
-        </div>
-        <div class="form-group mx-3">
-            <label>Анотация</label>
-            <textarea class="form-control" v-model="post.annotation"/>
-        </div>
-        <div class="col-12 my-4">
-            <label>Статья</label>
-            <summernote ref="articleEditor" v-model="post.article" imageUploadUrl="/media/image/many"></summernote>
+    <div class="card mb-5">
+        <div class="card-header">Редактор постов</div>
+        <div class="card-body">
+            <div class="form-group mx-3">
+                <label>Заголовок</label>
+                <input class="form-control" v-model="post.title"/>
+            </div>
+            <div class="container">
+                <image-uploader v-model="previewImage" :src="previewImageUrl" :alt="post.title">
+                    <template #header>
+                        Фото превью
+                    </template>
+                </image-uploader>
+            </div>
+            <div class="form-group mx-3">
+                <label>Автор</label>
+                <!--            <input class="form-control" v-model="post.author"/>-->
+                <suggestion-input displayPropertyName="name"
+                                  queryIsFirstOption
+                                  :providedQuery="post.author.name"
+                                  ref="authorSearch"
+                                  preventFetching="1"
+                                  @selected="onAuthorSelected"
+                                  action-url="/blog/author/filter?name=">
+                </suggestion-input>
+            </div>
+            <div class="form-group mx-3">
+                <label>Анотация</label>
+                <textarea class="form-control" v-model="post.annotation"/>
+            </div>
+            <div class="col-12 my-4">
+                <label>Статья</label>
+                <summernote ref="articleEditor" v-model="post.article" imageUploadUrl="/media/image/many"></summernote>
+            </div>
+
+            <div class="row mx-3">
+                <div class="form-group col-md-4">
+                    <label>Название источника</label>
+                    <input class="form-control" v-model="post.ref_name"/>
+                </div>
+                <div class="form-group col-md-8">
+                    <label>Ссылка на источник</label>
+                    <input class="form-control" v-model="post.reference"/>
+                </div>
+            </div>
         </div>
 
-        <div class="row mx-3">
-            <div class="form-group col-md-4">
-                <label>Название источника</label>
-                <input class="form-control" v-model="post.ref_name"/>
-            </div>
-            <div class="form-group col-md-8">
-                <label>Ссылка на источник</label>
-                <input class="form-control" v-model="post.reference"/>
-            </div>
-        </div>
-
-        <div class="col-12 text-center">
+        <div class="card-footer">
             <button class="btn btn-primary" @click="submit">Сохранить</button>
         </div>
     </div>

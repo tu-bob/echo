@@ -48,7 +48,7 @@
             },
             {
                 path: '/admin/media',
-                component: () => import('../components/admin/media/AdminMediaView'),
+                component: () => import('../components/admin/media/MediaAdminView'),
                 meta: {requiresAuth: true},
                 children:
                     [

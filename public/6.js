@@ -80,26 +80,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 
@@ -291,214 +271,226 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "container" }, [
-    _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "form-group col-md-5" }, [
-        _c("label", [_vm._v("Название альбома")]),
-        _vm._v(" "),
-        _c("input", {
-          directives: [
-            {
-              name: "model",
-              rawName: "v-model",
-              value: _vm.album.title,
-              expression: "album.title"
-            }
-          ],
-          staticClass: "form-control",
-          attrs: { type: "text", autocapitalize: "words", autofocus: "" },
-          domProps: { value: _vm.album.title },
-          on: {
-            input: function($event) {
-              if ($event.target.composing) {
-                return
-              }
-              _vm.$set(_vm.album, "title", $event.target.value)
-            }
-          }
-        })
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "form-group col-md-5" }, [
-        _c("label", [_vm._v("Тип")]),
-        _vm._v(" "),
-        _c(
-          "select",
-          {
+  return _c("div", { staticClass: "card mb-5" }, [
+    _c("div", { staticClass: "card-header" }, [
+      _vm._v("\n        Редактор альбомов\n    ")
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "card-body" }, [
+      _c("div", { staticClass: "row" }, [
+        _c("div", { staticClass: "form-group col-md-5" }, [
+          _c("label", [_vm._v("Название альбома")]),
+          _vm._v(" "),
+          _c("input", {
             directives: [
               {
                 name: "model",
                 rawName: "v-model",
-                value: _vm.album.type,
-                expression: "album.type"
+                value: _vm.album.title,
+                expression: "album.title"
               }
             ],
             staticClass: "form-control",
+            attrs: { type: "text", autocapitalize: "words", autofocus: "" },
+            domProps: { value: _vm.album.title },
             on: {
-              change: function($event) {
-                var $$selectedVal = Array.prototype.filter
-                  .call($event.target.options, function(o) {
-                    return o.selected
-                  })
-                  .map(function(o) {
-                    var val = "_value" in o ? o._value : o.value
-                    return val
-                  })
-                _vm.$set(
-                  _vm.album,
-                  "type",
-                  $event.target.multiple ? $$selectedVal : $$selectedVal[0]
-                )
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.$set(_vm.album, "title", $event.target.value)
               }
             }
-          },
+          })
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "form-group col-md-5" }, [
+          _c("label", [_vm._v("Тип")]),
+          _vm._v(" "),
+          _c(
+            "select",
+            {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.album.type,
+                  expression: "album.type"
+                }
+              ],
+              staticClass: "form-control",
+              on: {
+                change: function($event) {
+                  var $$selectedVal = Array.prototype.filter
+                    .call($event.target.options, function(o) {
+                      return o.selected
+                    })
+                    .map(function(o) {
+                      var val = "_value" in o ? o._value : o.value
+                      return val
+                    })
+                  _vm.$set(
+                    _vm.album,
+                    "type",
+                    $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+                  )
+                }
+              }
+            },
+            [
+              _c(
+                "option",
+                { attrs: { disabled: "" }, domProps: { value: null } },
+                [_vm._v("Выберите тип альбома")]
+              ),
+              _vm._v(" "),
+              _vm._l(_vm.albumTypes, function(type) {
+                return _c("option", { domProps: { value: type } }, [
+                  _vm._v(_vm._s(type.name))
+                ])
+              })
+            ],
+            2
+          )
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "form-group col-md-2" }, [
+          _c("label", [_vm._v("Год")]),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.album.year,
+                expression: "album.year"
+              }
+            ],
+            staticClass: "form-control",
+            attrs: { type: "text" },
+            domProps: { value: _vm.album.year },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.$set(_vm.album, "year", $event.target.value)
+              }
+            }
+          })
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "row" }, [
+        _c(
+          "div",
+          { staticClass: "form-group col-12" },
           [
-            _c(
-              "option",
-              { attrs: { disabled: "" }, domProps: { value: null } },
-              [_vm._v("Выберите тип альбома")]
-            ),
+            _c("label", [_vm._v("Песни")]),
             _vm._v(" "),
-            _vm._l(_vm.albumTypes, function(type) {
-              return _c("option", { domProps: { value: type } }, [
-                _vm._v(_vm._s(type.name))
-              ])
+            _c("suggestion-input", {
+              ref: "songSearch",
+              attrs: {
+                displayPropertyName: "title",
+                optionFormatter: _vm.optionFormatter,
+                "action-url": "/media/music/song/find/"
+              },
+              on: { selected: _vm.onSongSelected }
             })
           ],
-          2
+          1
         )
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "form-group col-md-2" }, [
-        _c("label", [_vm._v("Год")]),
-        _vm._v(" "),
-        _c("input", {
-          directives: [
-            {
-              name: "model",
-              rawName: "v-model",
-              value: _vm.album.year,
-              expression: "album.year"
-            }
-          ],
-          staticClass: "form-control",
-          attrs: { type: "text" },
-          domProps: { value: _vm.album.year },
-          on: {
-            input: function($event) {
-              if ($event.target.composing) {
-                return
-              }
-              _vm.$set(_vm.album, "year", $event.target.value)
-            }
-          }
-        })
-      ])
-    ]),
-    _vm._v(" "),
-    _c("div", { staticClass: "row" }, [
       _c(
         "div",
-        { staticClass: "form-group col-12" },
+        { staticClass: "row mt-2" },
         [
-          _c("label", [_vm._v("Песни")]),
-          _vm._v(" "),
-          _c("suggestion-input", {
-            ref: "songSearch",
+          _c("songs-table", {
+            staticClass: "col-12",
             attrs: {
-              displayPropertyName: "title",
-              optionFormatter: _vm.optionFormatter,
-              "action-url": "/media/music/song/find/"
+              "provided-songs": _vm.album.songs,
+              columnsToHide: ["edit"],
+              url: null,
+              preventFetch: ""
             },
-            on: { selected: _vm.onSongSelected }
+            on: { "song-delete-request": _vm.removeSong },
+            scopedSlots: _vm._u([
+              {
+                key: "header",
+                fn: function() {
+                  return [
+                    _vm._v(
+                      "\n                    Песни альбома\n                "
+                    )
+                  ]
+                },
+                proxy: true
+              },
+              {
+                key: "delete",
+                fn: function(ref) {
+                  var song = ref.song
+                  return [
+                    _c(
+                      "a",
+                      {
+                        attrs: { href: "#" },
+                        on: {
+                          click: function($event) {
+                            $event.preventDefault()
+                            return _vm.removeSong(song)
+                          }
+                        }
+                      },
+                      [
+                        _c("img", {
+                          staticClass: "icon-btn-sm",
+                          attrs: { src: "/icons/svg/delete.svg" }
+                        })
+                      ]
+                    )
+                  ]
+                }
+              }
+            ])
+          })
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        [
+          _c("image-uploader", {
+            attrs: { src: _vm.coverUrl, alt: _vm.album.name + " cover" },
+            scopedSlots: _vm._u([
+              {
+                key: "header",
+                fn: function() {
+                  return [
+                    _vm._v(
+                      "\n                    Обложка альбома\n                "
+                    )
+                  ]
+                },
+                proxy: true
+              }
+            ]),
+            model: {
+              value: _vm.albumCoverFile,
+              callback: function($$v) {
+                _vm.albumCoverFile = $$v
+              },
+              expression: "albumCoverFile"
+            }
           })
         ],
         1
       )
     ]),
     _vm._v(" "),
-    _c(
-      "div",
-      { staticClass: "row mt-2" },
-      [
-        _c("songs-table", {
-          staticClass: "col-12",
-          attrs: {
-            "provided-songs": _vm.album.songs,
-            columnsToHide: ["edit"],
-            url: null,
-            preventFetch: ""
-          },
-          on: { "song-delete-request": _vm.removeSong },
-          scopedSlots: _vm._u([
-            {
-              key: "header",
-              fn: function() {
-                return [_vm._v("\n                Песни альбома\n            ")]
-              },
-              proxy: true
-            },
-            {
-              key: "delete",
-              fn: function(ref) {
-                var song = ref.song
-                return [
-                  _c(
-                    "a",
-                    {
-                      attrs: { href: "#" },
-                      on: {
-                        click: function($event) {
-                          $event.preventDefault()
-                          return _vm.removeSong(song)
-                        }
-                      }
-                    },
-                    [
-                      _c("img", {
-                        staticClass: "icon-btn-sm",
-                        attrs: { src: "/icons/svg/delete.svg" }
-                      })
-                    ]
-                  )
-                ]
-              }
-            }
-          ])
-        })
-      ],
-      1
-    ),
-    _vm._v(" "),
-    _c(
-      "div",
-      [
-        _c("image-uploader", {
-          attrs: { src: _vm.coverUrl, alt: _vm.album.name + " cover" },
-          scopedSlots: _vm._u([
-            {
-              key: "header",
-              fn: function() {
-                return [
-                  _vm._v("\n                Обложка альбома\n            ")
-                ]
-              },
-              proxy: true
-            }
-          ]),
-          model: {
-            value: _vm.albumCoverFile,
-            callback: function($$v) {
-              _vm.albumCoverFile = $$v
-            },
-            expression: "albumCoverFile"
-          }
-        })
-      ],
-      1
-    ),
-    _vm._v(" "),
-    _c("div", { staticClass: "row mt-4" }, [
+    _c("div", { staticClass: "card-footer" }, [
       _c(
         "button",
         { staticClass: "mx-auto btn btn-primary", on: { click: _vm.submit } },

@@ -1,5 +1,7 @@
 <template>
-    <router-view></router-view>
+    <div class="bg-laravel container mb-5 p-0">
+        <router-view></router-view>
+    </div>
 </template>
 
 <script>

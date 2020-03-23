@@ -178,6 +178,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 
 
@@ -448,398 +454,412 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _c("div", { staticClass: "row" }, [
-      !Boolean(_vm.providedFile)
-        ? _c(
-            "div",
-            { staticClass: "align-items-end col-md-6 form-group" },
-            [
-              _c("label", [_vm._v("Файл")]),
-              _vm._v(" "),
-              _c("b-form-file", {
-                ref: "mp3FileInput",
-                attrs: {
-                  state: Boolean(_vm.audioSrc) || Boolean(_vm.mp3File),
-                  accept: ".mp3",
-                  placeholder: "Выберите файл или перетащите его сюда...",
-                  "drop-placeholder": "Перетащите файл сюда...",
-                  "browse-text": "Обзор"
-                },
-                model: {
-                  value: _vm.mp3File,
-                  callback: function($$v) {
-                    _vm.mp3File = $$v
-                  },
-                  expression: "mp3File"
-                }
-              })
-            ],
-            1
-          )
-        : _vm._e(),
-      _vm._v(" "),
-      _c("div", { staticClass: "row ml-1 col-md-6" }, [
-        _c("audio", {
-          staticClass: "mt-md-4 mx-auto",
-          attrs: { controlsList: "nodownload", src: _vm.audioSrc, controls: "" }
-        })
-      ])
+  return _c("div", { staticClass: "card mb-5" }, [
+    _c("div", { staticClass: "card-header" }, [
+      _vm._v("\n        Загрузка песни\n    ")
     ]),
     _vm._v(" "),
-    _vm.song.bitrate
-      ? _c("div", { staticClass: "alert alert-info" }, [
-          _c("span", [
-            _vm._v(
-              _vm._s(_vm.song.bitrate / 1000) +
-                " kbs |\n            " +
-                _vm._s(_vm.song.sample_rate) +
-                " |\n            "
-            ),
-            _vm.song.container
-              ? _c("span", [_vm._v(_vm._s(_vm.song.container) + " |")])
-              : _vm._e(),
-            _vm._v(" "),
-            _vm.song.encoder
-              ? _c("span", [_vm._v(_vm._s(_vm.song.encoder) + " |")])
-              : _vm._e(),
-            _vm._v(
-              "\n            " +
-                _vm._s(Math.round((_vm.song.playtime_seconds / 60) * 100) / 100)
+    _c("div", { staticClass: "card-body" }, [
+      _c("div", { staticClass: "row" }, [
+        !Boolean(_vm.providedFile)
+          ? _c(
+              "div",
+              { staticClass: "align-items-end col-md-6 form-group" },
+              [
+                _c("label", [_vm._v("Файл")]),
+                _vm._v(" "),
+                _c("b-form-file", {
+                  ref: "mp3FileInput",
+                  attrs: {
+                    state: Boolean(_vm.audioSrc) || Boolean(_vm.mp3File),
+                    accept: ".mp3",
+                    placeholder: "Выберите файл или перетащите его сюда...",
+                    "drop-placeholder": "Перетащите файл сюда...",
+                    "browse-text": "Обзор"
+                  },
+                  model: {
+                    value: _vm.mp3File,
+                    callback: function($$v) {
+                      _vm.mp3File = $$v
+                    },
+                    expression: "mp3File"
+                  }
+                })
+              ],
+              1
             )
-          ])
+          : _vm._e(),
+        _vm._v(" "),
+        _c("div", { staticClass: "row ml-1 col-md-6" }, [
+          _c("audio", {
+            staticClass: "mt-md-4 mx-auto",
+            attrs: {
+              controlsList: "nodownload",
+              src: _vm.audioSrc,
+              controls: ""
+            }
+          })
         ])
-      : _vm._e(),
-    _vm._v(" "),
-    _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "form-group col-md-8" }, [
-        _c("label", [_vm._v("Название")]),
+      ]),
+      _vm._v(" "),
+      _vm.song.bitrate
+        ? _c("div", { staticClass: "alert alert-info" }, [
+            _c("span", [
+              _vm._v(
+                _vm._s(_vm.song.bitrate / 1000) +
+                  " kbs |\n            " +
+                  _vm._s(_vm.song.sample_rate) +
+                  " |\n            "
+              ),
+              _vm.song.container
+                ? _c("span", [_vm._v(_vm._s(_vm.song.container) + " |")])
+                : _vm._e(),
+              _vm._v(" "),
+              _vm.song.encoder
+                ? _c("span", [_vm._v(_vm._s(_vm.song.encoder) + " |")])
+                : _vm._e(),
+              _vm._v(
+                "\n            " +
+                  _vm._s(
+                    Math.round((_vm.song.playtime_seconds / 60) * 100) / 100
+                  )
+              )
+            ])
+          ])
+        : _vm._e(),
+      _vm._v(" "),
+      _c("div", { staticClass: "row" }, [
+        _c("div", { staticClass: "form-group col-md-8" }, [
+          _c("label", [_vm._v("Название")]),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.song.title,
+                expression: "song.title"
+              }
+            ],
+            staticClass: "form-control",
+            attrs: { type: "text", autofocus: "" },
+            domProps: { value: _vm.song.title },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.$set(_vm.song, "title", $event.target.value)
+              }
+            }
+          })
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "form-group col-md-4 " }, [
+          _c("label", [_vm._v("Год")]),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.song.year,
+                expression: "song.year"
+              }
+            ],
+            staticClass: "form-control",
+            attrs: { type: "text" },
+            domProps: { value: _vm.song.year },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.$set(_vm.song, "year", $event.target.value)
+              }
+            }
+          })
+        ])
+      ]),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "form-group" },
+        [
+          _c("label", [_vm._v("Исполнители")]),
+          _vm._v(" "),
+          _c("suggestion-input", {
+            ref: "artistSearch",
+            attrs: {
+              displayPropertyName: "name",
+              "action-url": "/media/artist/alias/filter?name="
+            },
+            on: { selected: _vm.onArtistSelected }
+          }),
+          _vm._v(" "),
+          _c(
+            "ul",
+            {
+              staticClass: "list-unstyled d-inline-flex flex-wrap mb-0",
+              attrs: {
+                "aria-live": "polite",
+                "aria-atomic": "false",
+                "aria-relevant": "additions removals"
+              }
+            },
+            _vm._l(_vm.song.artistAliases, function(artistAlias) {
+              return _c(
+                "b-card",
+                {
+                  key: artistAlias.id,
+                  staticClass: "mt-1 mr-1 bg-warning",
+                  attrs: {
+                    id:
+                      "artistAliasesTagList_" +
+                      artistAlias.name.replace(/\s/g, "_") +
+                      "_",
+                    tag: "li",
+                    "body-class": "py-1 pr-2 text-nowrap"
+                  }
+                },
+                [
+                  _c("strong", [_vm._v(_vm._s(artistAlias.name))]),
+                  _vm._v(" "),
+                  _c(
+                    "b-button",
+                    {
+                      staticClass: "text-decoration-none",
+                      attrs: {
+                        variant: "link",
+                        size: "sm",
+                        "aria-controls":
+                          "artistAliasesTagList__" +
+                          artistAlias.name.replace(/\s/g, "_") +
+                          "_"
+                      },
+                      on: {
+                        click: function($event) {
+                          return _vm.removeArtistAlias(artistAlias.id)
+                        }
+                      }
+                    },
+                    [_vm._v("×\n                    ")]
+                  )
+                ],
+                1
+              )
+            }),
+            1
+          ),
+          _vm._v(" "),
+          _vm.missedArtists.length > 0
+            ? _c(
+                "span",
+                { staticClass: "small" },
+                [
+                  _vm._v("Исполнители не найдены:\n            "),
+                  _vm._l(_vm.missedArtists, function(artist) {
+                    return _c("b", [_vm._v(_vm._s(artist))])
+                  })
+                ],
+                2
+              )
+            : _vm._e()
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "form-group" },
+        [
+          _c("label", [_vm._v("Жанры")]),
+          _vm._v(" "),
+          _c("suggestion-input", {
+            ref: "genreSearch",
+            attrs: {
+              displayPropertyName: "name",
+              providedOptions: _vm.genres,
+              searchPropertyName: "name"
+            },
+            on: { selected: _vm.onGenreSelected }
+          }),
+          _vm._v(" "),
+          _c(
+            "ul",
+            {
+              staticClass: "list-unstyled d-inline-flex flex-wrap mb-0",
+              attrs: {
+                "aria-live": "polite",
+                "aria-atomic": "false",
+                "aria-relevant": "additions removals"
+              }
+            },
+            _vm._l(_vm.song.genres, function(genre) {
+              return _c(
+                "b-card",
+                {
+                  key: genre.id,
+                  staticClass: "mt-1 mr-1 bg-warning",
+                  attrs: {
+                    id: "genresTagList_" + genre.id.replace(/\s/g, "_") + "_",
+                    tag: "li",
+                    "body-class": "py-1 pr-2 text-nowrap"
+                  }
+                },
+                [
+                  _c("strong", [_vm._v(_vm._s(genre.name))]),
+                  _vm._v(" "),
+                  _c(
+                    "b-button",
+                    {
+                      staticClass: "text-decoration-none",
+                      attrs: {
+                        variant: "link",
+                        size: "sm",
+                        "aria-controls":
+                          "genresTagList__" + genre.id.replace(/\s/g, "_") + "_"
+                      },
+                      on: {
+                        click: function($event) {
+                          return _vm.removeGenre(genre.id)
+                        }
+                      }
+                    },
+                    [_vm._v("×\n                    ")]
+                  )
+                ],
+                1
+              )
+            }),
+            1
+          )
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "form-group" },
+        [
+          _c("label", [_vm._v("Альбомы")]),
+          _vm._v(" "),
+          _c("suggestion-input", {
+            ref: "albumSearch",
+            attrs: {
+              displayPropertyName: "title",
+              "action-url": "/media/music/album/filter?title="
+            },
+            on: { selected: _vm.onAlbumSelected }
+          }),
+          _vm._v(" "),
+          _c(
+            "ul",
+            {
+              staticClass: "list-unstyled d-inline-flex flex-wrap mb-0",
+              attrs: {
+                "aria-live": "polite",
+                "aria-atomic": "false",
+                "aria-relevant": "additions removals"
+              }
+            },
+            _vm._l(_vm.song.albums, function(album) {
+              return _c(
+                "b-card",
+                {
+                  key: album.id,
+                  staticClass: "mt-1 mr-1 bg-warning",
+                  attrs: {
+                    id: "albumsTagList_" + album.id.replace(/\s/g, "_") + "_",
+                    tag: "li",
+                    "body-class": "py-1 pr-2 text-nowrap"
+                  }
+                },
+                [
+                  _c("strong", [_vm._v(_vm._s(album.title))]),
+                  _vm._v(" "),
+                  _c(
+                    "b-button",
+                    {
+                      staticClass: "text-decoration-none",
+                      attrs: {
+                        variant: "link",
+                        size: "sm",
+                        "aria-controls":
+                          "albumsTagList__" + album.id.replace(/\s/g, "_") + "_"
+                      },
+                      on: {
+                        click: function($event) {
+                          return _vm.removeAlbum(album.id)
+                        }
+                      }
+                    },
+                    [_vm._v("×\n                    ")]
+                  )
+                ],
+                1
+              )
+            }),
+            1
+          )
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c("div", { staticClass: "form-group" }, [
+        _c("label", [_vm._v("Лэйбл")]),
         _vm._v(" "),
         _c("input", {
           directives: [
             {
               name: "model",
               rawName: "v-model",
-              value: _vm.song.title,
-              expression: "song.title"
+              value: _vm.song.label,
+              expression: "song.label"
             }
           ],
           staticClass: "form-control",
-          attrs: { type: "text", autofocus: "" },
-          domProps: { value: _vm.song.title },
+          attrs: { type: "text" },
+          domProps: { value: _vm.song.label },
           on: {
             input: function($event) {
               if ($event.target.composing) {
                 return
               }
-              _vm.$set(_vm.song, "title", $event.target.value)
+              _vm.$set(_vm.song, "label", $event.target.value)
             }
           }
         })
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "form-group col-md-4 " }, [
-        _c("label", [_vm._v("Год")]),
-        _vm._v(" "),
-        _c("input", {
-          directives: [
-            {
-              name: "model",
-              rawName: "v-model",
-              value: _vm.song.year,
-              expression: "song.year"
-            }
-          ],
-          staticClass: "form-control",
-          attrs: { type: "text" },
-          domProps: { value: _vm.song.year },
-          on: {
-            input: function($event) {
-              if ($event.target.composing) {
-                return
-              }
-              _vm.$set(_vm.song, "year", $event.target.value)
-            }
-          }
-        })
-      ])
-    ]),
-    _vm._v(" "),
-    _c(
-      "div",
-      { staticClass: "form-group" },
-      [
-        _c("label", [_vm._v("Исполнители")]),
-        _vm._v(" "),
-        _c("suggestion-input", {
-          ref: "artistSearch",
-          attrs: {
-            displayPropertyName: "name",
-            "action-url": "/media/artist/alias/filter?name="
-          },
-          on: { selected: _vm.onArtistSelected }
-        }),
-        _vm._v(" "),
-        _c(
-          "ul",
-          {
-            staticClass: "list-unstyled d-inline-flex flex-wrap mb-0",
-            attrs: {
-              "aria-live": "polite",
-              "aria-atomic": "false",
-              "aria-relevant": "additions removals"
-            }
-          },
-          _vm._l(_vm.song.artistAliases, function(artistAlias) {
-            return _c(
-              "b-card",
-              {
-                key: artistAlias.id,
-                staticClass: "mt-1 mr-1 bg-warning",
-                attrs: {
-                  id:
-                    "artistAliasesTagList_" +
-                    artistAlias.name.replace(/\s/g, "_") +
-                    "_",
-                  tag: "li",
-                  "body-class": "py-1 pr-2 text-nowrap"
-                }
+      _c(
+        "div",
+        { staticClass: "form-group" },
+        [
+          _c("label", [_vm._v("Текст песни")]),
+          _vm._v(" "),
+          _c("b-form-textarea", {
+            attrs: { rows: "5", "max-rows": "15" },
+            model: {
+              value: _vm.song.lyrics,
+              callback: function($$v) {
+                _vm.$set(_vm.song, "lyrics", $$v)
               },
-              [
-                _c("strong", [_vm._v(_vm._s(artistAlias.name))]),
-                _vm._v(" "),
-                _c(
-                  "b-button",
-                  {
-                    staticClass: "text-decoration-none",
-                    attrs: {
-                      variant: "link",
-                      size: "sm",
-                      "aria-controls":
-                        "artistAliasesTagList__" +
-                        artistAlias.name.replace(/\s/g, "_") +
-                        "_"
-                    },
-                    on: {
-                      click: function($event) {
-                        return _vm.removeArtistAlias(artistAlias.id)
-                      }
-                    }
-                  },
-                  [_vm._v("×\n                ")]
-                )
-              ],
-              1
-            )
-          }),
-          1
-        ),
-        _vm._v(" "),
-        _vm.missedArtists.length > 0
-          ? _c(
-              "span",
-              { staticClass: "small" },
-              [
-                _vm._v("Исполнители не найдены:\n            "),
-                _vm._l(_vm.missedArtists, function(artist) {
-                  return _c("b", [_vm._v(_vm._s(artist))])
-                })
-              ],
-              2
-            )
-          : _vm._e()
-      ],
-      1
-    ),
-    _vm._v(" "),
-    _c(
-      "div",
-      { staticClass: "form-group" },
-      [
-        _c("label", [_vm._v("Жанры")]),
-        _vm._v(" "),
-        _c("suggestion-input", {
-          ref: "genreSearch",
-          attrs: {
-            displayPropertyName: "name",
-            providedOptions: _vm.genres,
-            searchPropertyName: "name"
-          },
-          on: { selected: _vm.onGenreSelected }
-        }),
-        _vm._v(" "),
-        _c(
-          "ul",
-          {
-            staticClass: "list-unstyled d-inline-flex flex-wrap mb-0",
-            attrs: {
-              "aria-live": "polite",
-              "aria-atomic": "false",
-              "aria-relevant": "additions removals"
+              expression: "song.lyrics"
             }
-          },
-          _vm._l(_vm.song.genres, function(genre) {
-            return _c(
-              "b-card",
-              {
-                key: genre.id,
-                staticClass: "mt-1 mr-1 bg-warning",
-                attrs: {
-                  id: "genresTagList_" + genre.id.replace(/\s/g, "_") + "_",
-                  tag: "li",
-                  "body-class": "py-1 pr-2 text-nowrap"
-                }
-              },
-              [
-                _c("strong", [_vm._v(_vm._s(genre.name))]),
-                _vm._v(" "),
-                _c(
-                  "b-button",
-                  {
-                    staticClass: "text-decoration-none",
-                    attrs: {
-                      variant: "link",
-                      size: "sm",
-                      "aria-controls":
-                        "genresTagList__" + genre.id.replace(/\s/g, "_") + "_"
-                    },
-                    on: {
-                      click: function($event) {
-                        return _vm.removeGenre(genre.id)
-                      }
-                    }
-                  },
-                  [_vm._v("×\n                ")]
-                )
-              ],
-              1
-            )
-          }),
-          1
-        )
-      ],
-      1
-    ),
-    _vm._v(" "),
-    _c(
-      "div",
-      { staticClass: "form-group" },
-      [
-        _c("label", [_vm._v("Альбомы")]),
-        _vm._v(" "),
-        _c("suggestion-input", {
-          ref: "albumSearch",
-          attrs: {
-            displayPropertyName: "title",
-            "action-url": "/media/music/album/filter?title="
-          },
-          on: { selected: _vm.onAlbumSelected }
-        }),
-        _vm._v(" "),
-        _c(
-          "ul",
-          {
-            staticClass: "list-unstyled d-inline-flex flex-wrap mb-0",
-            attrs: {
-              "aria-live": "polite",
-              "aria-atomic": "false",
-              "aria-relevant": "additions removals"
-            }
-          },
-          _vm._l(_vm.song.albums, function(album) {
-            return _c(
-              "b-card",
-              {
-                key: album.id,
-                staticClass: "mt-1 mr-1 bg-warning",
-                attrs: {
-                  id: "albumsTagList_" + album.id.replace(/\s/g, "_") + "_",
-                  tag: "li",
-                  "body-class": "py-1 pr-2 text-nowrap"
-                }
-              },
-              [
-                _c("strong", [_vm._v(_vm._s(album.title))]),
-                _vm._v(" "),
-                _c(
-                  "b-button",
-                  {
-                    staticClass: "text-decoration-none",
-                    attrs: {
-                      variant: "link",
-                      size: "sm",
-                      "aria-controls":
-                        "albumsTagList__" + album.id.replace(/\s/g, "_") + "_"
-                    },
-                    on: {
-                      click: function($event) {
-                        return _vm.removeAlbum(album.id)
-                      }
-                    }
-                  },
-                  [_vm._v("×\n                ")]
-                )
-              ],
-              1
-            )
-          }),
-          1
-        )
-      ],
-      1
-    ),
-    _vm._v(" "),
-    _c("div", { staticClass: "form-group" }, [
-      _c("label", [_vm._v("Лэйбл")]),
-      _vm._v(" "),
-      _c("input", {
-        directives: [
-          {
-            name: "model",
-            rawName: "v-model",
-            value: _vm.song.label,
-            expression: "song.label"
-          }
+          })
         ],
-        staticClass: "form-control",
-        attrs: { type: "text" },
-        domProps: { value: _vm.song.label },
-        on: {
-          input: function($event) {
-            if ($event.target.composing) {
-              return
-            }
-            _vm.$set(_vm.song, "label", $event.target.value)
-          }
-        }
-      })
+        1
+      )
     ]),
     _vm._v(" "),
-    _c(
-      "div",
-      { staticClass: "form-group" },
-      [
-        _c("label", [_vm._v("Текст песни")]),
-        _vm._v(" "),
-        _c("b-form-textarea", {
-          attrs: { rows: "5", "max-rows": "15" },
-          model: {
-            value: _vm.song.lyrics,
-            callback: function($$v) {
-              _vm.$set(_vm.song, "lyrics", $$v)
-            },
-            expression: "song.lyrics"
-          }
-        })
-      ],
-      1
-    ),
-    _vm._v(" "),
-    _c(
-      "button",
-      { staticClass: "btn btn-primary", on: { click: _vm.submit } },
-      [_vm._v("Сохранить")]
-    )
+    _c("div", { staticClass: "card-footer" }, [
+      _c(
+        "button",
+        { staticClass: "btn btn-primary", on: { click: _vm.submit } },
+        [_vm._v("Сохранить")]
+      )
+    ])
   ])
 }
 var staticRenderFns = []
