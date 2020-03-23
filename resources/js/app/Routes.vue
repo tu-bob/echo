@@ -14,8 +14,15 @@
             },
             {
                 name: 'home',
-                path: '/', component: () => import('../components/public/home/Home'),
+                path: '/',
+                redirect: {name: 'overview'},
+                component: () => import('../components/public/home/HomeViewer'),
                 children: [
+                    {
+                        name: 'overview',
+                        path: 'overview',
+                        component: () => import('../components/public/home/overview/Overview')
+                    },
                     {
                         name: 'news',
                         path: 'news',

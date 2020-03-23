@@ -3,7 +3,7 @@
 
         <div id="horizontal-nav" class="horizontal-nav-wrapper scroll-x ps">
             <ul class="horizontal-scroll-list m-0 p-0 moving-border">
-                <b-nav-item class="horizontal-nav-menu-item m-item" href="#" exact exact-active-class="active">
+                <b-nav-item class="horizontal-nav-menu-item m-item" :to="{name:'overview'}"  exact exact-active-class="active">
                 <span class="menu-icon">
                     <svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 15"><defs></defs><g><g
                         id="overviews_icon" class="cls-1"><g
