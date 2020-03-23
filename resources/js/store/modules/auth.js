@@ -24,8 +24,7 @@ const actions = {
             'email': payload.email,
             'password': payload.password
         })
-            .then(response => {
-                console.log(response)
+            .then(response => { 
                 context.commit('SET_AUTH_USER', response)
             });
     },
