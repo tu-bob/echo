@@ -32,7 +32,7 @@
                              :to="{name: 'login'}">Вход
                 </router-link>
                 <template v-else>
-                    <b-avatar class="ml-auto" :variant="AVATAR_VARIANT"></b-avatar>
+                    <b-avatar class="ml-auto mr-3" :variant="AVATAR_VARIANT"></b-avatar>
                     <div class="dropdown">
                         <button class="btn dropdown-toggle"
                                 :class="DEFAULT_BUTTON_CLASSES"
