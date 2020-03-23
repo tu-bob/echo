@@ -2093,40 +2093,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "App",
@@ -2190,24 +2156,24 @@ var routes = [{
   },
   path: '/login',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 3).then(__webpack_require__.bind(null, /*! ../components/auth/Login */ "./resources/js/components/auth/Login.vue"));
+    return __webpack_require__.e(/*! import() */ 12).then(__webpack_require__.bind(null, /*! ../components/auth/Login */ "./resources/js/components/auth/Login.vue"));
   }
 }, {
   name: 'register',
   path: '/register',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 17).then(__webpack_require__.bind(null, /*! ../components/auth/Register */ "./resources/js/components/auth/Register.vue"));
+    return __webpack_require__.e(/*! import() */ 13).then(__webpack_require__.bind(null, /*! ../components/auth/Register */ "./resources/js/components/auth/Register.vue"));
   }
 }, {
   name: 'home',
   path: '/',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 8).then(__webpack_require__.bind(null, /*! ../components/public/home/Home */ "./resources/js/components/public/home/Home.vue"));
+    return __webpack_require__.e(/*! import() */ 14).then(__webpack_require__.bind(null, /*! ../components/public/home/Home */ "./resources/js/components/public/home/Home.vue"));
   }
 }, {
   path: '/admin/blog',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 5).then(__webpack_require__.bind(null, /*! ../components/admin/blog/BlogAdminView */ "./resources/js/components/admin/blog/BlogAdminView.vue"));
+    return __webpack_require__.e(/*! import() */ 9).then(__webpack_require__.bind(null, /*! ../components/admin/blog/BlogAdminView */ "./resources/js/components/admin/blog/BlogAdminView.vue"));
   },
   meta: {
     requiresAuth: true
@@ -2216,19 +2182,19 @@ var routes = [{
     name: 'posts-table',
     path: 'posts',
     component: function component() {
-      return __webpack_require__.e(/*! import() */ 0).then(__webpack_require__.bind(null, /*! ../components/admin/blog/post/PostsTable */ "./resources/js/components/admin/blog/post/PostsTable.vue"));
+      return __webpack_require__.e(/*! import() */ 3).then(__webpack_require__.bind(null, /*! ../components/admin/blog/post/PostsTable */ "./resources/js/components/admin/blog/post/PostsTable.vue"));
     }
   }, {
     name: 'post-editor',
     path: 'post/:id?',
     component: function component() {
-      return Promise.all(/*! import() */[__webpack_require__.e(4), __webpack_require__.e(1)]).then(__webpack_require__.bind(null, /*! ../components/admin/blog/post/PostEditor */ "./resources/js/components/admin/blog/post/PostEditor.vue"));
+      return Promise.all(/*! import() */[__webpack_require__.e(8), __webpack_require__.e(2)]).then(__webpack_require__.bind(null, /*! ../components/admin/blog/post/PostEditor */ "./resources/js/components/admin/blog/post/PostEditor.vue"));
     }
   }]
 }, {
   path: '/admin/media',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 13).then(__webpack_require__.bind(null, /*! ../components/admin/media/AdminMediaView */ "./resources/js/components/admin/media/AdminMediaView.vue"));
+    return __webpack_require__.e(/*! import() */ 10).then(__webpack_require__.bind(null, /*! ../components/admin/media/AdminMediaView */ "./resources/js/components/admin/media/AdminMediaView.vue"));
   },
   meta: {
     requiresAuth: true
@@ -2237,37 +2203,37 @@ var routes = [{
     name: 'songs-table',
     path: 'songs',
     component: function component() {
-      return __webpack_require__.e(/*! import() */ 6).then(__webpack_require__.bind(null, /*! ../components/admin/media/music/SongsTable */ "./resources/js/components/admin/media/music/SongsTable.vue"));
+      return __webpack_require__.e(/*! import() */ 0).then(__webpack_require__.bind(null, /*! ../components/admin/media/music/SongsTable */ "./resources/js/components/admin/media/music/SongsTable.vue"));
     }
   }, {
     name: 'song-editor',
     path: 'song/:id?',
     component: function component() {
-      return Promise.all(/*! import() */[__webpack_require__.e(16), __webpack_require__.e(7)]).then(__webpack_require__.bind(null, /*! ../components/admin/media/music/SongEditor */ "./resources/js/components/admin/media/music/SongEditor.vue"));
+      return Promise.all(/*! import() */[__webpack_require__.e(1), __webpack_require__.e(7)]).then(__webpack_require__.bind(null, /*! ../components/admin/media/music/SongEditor */ "./resources/js/components/admin/media/music/SongEditor.vue"));
     }
   }, {
     name: 'artists-table',
     path: 'artists',
     component: function component() {
-      return __webpack_require__.e(/*! import() */ 10).then(__webpack_require__.bind(null, /*! ../components/admin/media/artist/ArtistsTable */ "./resources/js/components/admin/media/artist/ArtistsTable.vue"));
+      return __webpack_require__.e(/*! import() */ 5).then(__webpack_require__.bind(null, /*! ../components/admin/media/artist/ArtistsTable */ "./resources/js/components/admin/media/artist/ArtistsTable.vue"));
     }
   }, {
     name: 'artist-editor',
     path: 'artist/:id?',
     component: function component() {
-      return __webpack_require__.e(/*! import() */ 14).then(__webpack_require__.bind(null, /*! ../components/admin/media/artist/ArtistEditor */ "./resources/js/components/admin/media/artist/ArtistEditor.vue"));
+      return __webpack_require__.e(/*! import() */ 11).then(__webpack_require__.bind(null, /*! ../components/admin/media/artist/ArtistEditor */ "./resources/js/components/admin/media/artist/ArtistEditor.vue"));
     }
   }, {
     name: 'albums-table',
     path: 'albums',
     component: function component() {
-      return __webpack_require__.e(/*! import() */ 9).then(__webpack_require__.bind(null, /*! ../components/admin/media/album/AlbumsTable */ "./resources/js/components/admin/media/album/AlbumsTable.vue"));
+      return __webpack_require__.e(/*! import() */ 4).then(__webpack_require__.bind(null, /*! ../components/admin/media/album/AlbumsTable */ "./resources/js/components/admin/media/album/AlbumsTable.vue"));
     }
   }, {
     name: 'album-editor',
     path: 'album/:id?',
     component: function component() {
-      return Promise.all(/*! import() */[__webpack_require__.e(6), __webpack_require__.e(2)]).then(__webpack_require__.bind(null, /*! ../components/admin/media/album/AlbumEditor */ "./resources/js/components/admin/media/album/AlbumEditor.vue"));
+      return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(6)]).then(__webpack_require__.bind(null, /*! ../components/admin/media/album/AlbumEditor */ "./resources/js/components/admin/media/album/AlbumEditor.vue"));
     }
   }]
 }];
@@ -75403,252 +75369,147 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", [
     _c(
-      "nav",
-      { staticClass: "navbar navbar-expand-md navbar-light shadow-sm" },
+      "div",
+      { staticClass: "row bg-dark" },
       [
-        _c("div", { staticClass: "container" }, [
-          _vm._m(0),
-          _vm._v(" "),
-          _c("div", { staticClass: "collapse navbar-collapse" }, [
-            _vm.AUTHENTICATED
-              ? _c("ul", { staticClass: "navbar-nav mr-auto" }, [
-                  _c("li", { staticClass: "nav-item dropdown" }, [
-                    _vm._m(1),
+        _c(
+          "b-navbar",
+          {
+            staticClass: "col-4 col-md-4 pl-4",
+            attrs: { toggleable: "sm", type: "dark", variant: "dark" }
+          },
+          [
+            _c("b-navbar-toggle", { attrs: { target: "mainNavBar" } }),
+            _vm._v(" "),
+            _c(
+              "b-collapse",
+              { attrs: { "is-nav": "", id: "mainNavBar" } },
+              [
+                _c(
+                  "b-navbar-nav",
+                  [
+                    _c("b-nav-item", { attrs: { to: { name: "home" } } }, [
+                      _vm._v("Home")
+                    ]),
                     _vm._v(" "),
                     _c(
-                      "div",
-                      { staticClass: "dropdown-menu" },
+                      "b-nav-item-dropdown",
+                      { attrs: { text: "Блог", left: "" } },
                       [
                         _c(
-                          "router-link",
-                          {
-                            staticClass: "dropdown-item",
-                            attrs: { to: { name: "posts-table" } }
-                          },
+                          "b-dropdown-item",
+                          { attrs: { to: { name: "posts-table" } } },
                           [_vm._v("Посты")]
                         ),
                         _vm._v(" "),
                         _c(
-                          "router-link",
-                          {
-                            staticClass: "dropdown-item",
-                            attrs: { to: { name: "post-editor" } }
-                          },
-                          [
-                            _vm._v(
-                              "Добавить пост\n                            "
-                            )
-                          ]
+                          "b-dropdown-item",
+                          { attrs: { to: { name: "post-editor" } } },
+                          [_vm._v("Добавить пост")]
                         )
                       ],
                       1
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("li", { staticClass: "nav-item dropdown" }, [
-                    _vm._m(2),
+                    ),
                     _vm._v(" "),
                     _c(
-                      "div",
-                      { staticClass: "dropdown-menu" },
+                      "b-nav-item-dropdown",
+                      { attrs: { text: "Медиа", left: "" } },
                       [
                         _c(
-                          "router-link",
-                          {
-                            staticClass: "dropdown-item",
-                            attrs: { to: { name: "artists-table" } }
-                          },
-                          [_vm._v("Исполнители\n                            ")]
+                          "b-dropdown-item",
+                          { attrs: { to: { name: "artists-table" } } },
+                          [_vm._v("Исполнители")]
                         ),
                         _vm._v(" "),
                         _c(
-                          "router-link",
-                          {
-                            staticClass: "dropdown-item",
-                            attrs: { to: { name: "songs-table" } }
-                          },
+                          "b-dropdown-item",
+                          { attrs: { to: { name: "artist-editor" } } },
+                          [_vm._v("Добавить исполнителя")]
+                        ),
+                        _vm._v(" "),
+                        _c("b-dropdown-divider"),
+                        _vm._v(" "),
+                        _c(
+                          "b-dropdown-item",
+                          { attrs: { to: { name: "songs-table" } } },
                           [_vm._v("Песни")]
                         ),
                         _vm._v(" "),
                         _c(
-                          "router-link",
-                          {
-                            staticClass: "dropdown-item",
-                            attrs: { to: { name: "albums-table" } }
-                          },
+                          "b-dropdown-item",
+                          { attrs: { to: { name: "song-editor" } } },
+                          [_vm._v("Добавить песню")]
+                        ),
+                        _vm._v(" "),
+                        _c("b-dropdown-divider"),
+                        _vm._v(" "),
+                        _c(
+                          "b-dropdown-item",
+                          { attrs: { to: { name: "albums-table" } } },
                           [_vm._v("Альбомы")]
                         ),
                         _vm._v(" "),
-                        _c("div", { staticClass: "dropdown-divider" }),
-                        _vm._v(" "),
                         _c(
-                          "router-link",
-                          {
-                            staticClass: "dropdown-item",
-                            attrs: { to: { name: "artist-editor" } }
-                          },
-                          [
-                            _vm._v(
-                              "Добавить артиста\n                            "
-                            )
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "router-link",
-                          {
-                            staticClass: "dropdown-item",
-                            attrs: { to: { name: "song-editor" } }
-                          },
-                          [
-                            _vm._v(
-                              "Добавить песню\n                            "
-                            )
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "router-link",
-                          {
-                            staticClass: "dropdown-item",
-                            attrs: { to: { name: "album-editor" } }
-                          },
-                          [
-                            _vm._v(
-                              "Добавить альбом\n                            "
-                            )
-                          ]
+                          "b-dropdown-item",
+                          { attrs: { to: { name: "album-editor" } } },
+                          [_vm._v("Добавить альбом")]
                         )
                       ],
                       1
                     )
-                  ])
-                ])
-              : _vm._e(),
-            _vm._v(" "),
-            _c("ul", { staticClass: "navbar-nav ml-auto" }, [
-              !_vm.AUTHENTICATED
-                ? _c(
-                    "li",
-                    { staticClass: "nav-item" },
-                    [
-                      _c(
-                        "router-link",
-                        {
-                          staticClass: "dropdown-item",
-                          attrs: { to: "/login" }
-                        },
-                        [_vm._v("Вход")]
-                      )
-                    ],
-                    1
-                  )
-                : _c("li", { staticClass: "nav-item dropdown" }, [
-                    _c(
-                      "a",
-                      {
-                        staticClass: "nav-link dropdown-toggle",
-                        attrs: {
-                          id: "navbarDropdown",
-                          href: "#",
-                          role: "button",
-                          "data-toggle": "dropdown",
-                          "aria-haspopup": "true",
-                          "aria-expanded": "false"
-                        }
-                      },
-                      [
-                        _vm.AUTHENTICATED
-                          ? _c("span", [_vm._v(_vm._s(_vm.AUTH_USER.name))])
-                          : _vm._e(),
-                        _vm._v(" "),
-                        _c("span", { staticClass: "caret" })
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      {
-                        staticClass: "dropdown-menu dropdown-menu-right",
-                        attrs: { "aria-labelledby": "navbarDropdown" }
-                      },
-                      [
-                        _c(
-                          "a",
-                          {
-                            staticClass: "dropdown-item",
-                            attrs: { href: "#" },
-                            on: { click: _vm.logout }
-                          },
-                          [_vm._v(" Выйти из системы ")]
-                        )
-                      ]
-                    )
-                  ])
-            ])
-          ])
-        ])
-      ]
+                  ],
+                  1
+                )
+              ],
+              1
+            )
+          ],
+          1
+        ),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-1 col-md-4" }),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "col-7 col-md-4 py-2 pr-4 row" },
+          [
+            !_vm.AUTHENTICATED
+              ? _c(
+                  "router-link",
+                  {
+                    staticClass: "ml-auto btn btn-dark",
+                    attrs: { to: { name: "login" } }
+                  },
+                  [_vm._v("Вход\n            ")]
+                )
+              : _c(
+                  "b-dropdown",
+                  {
+                    staticClass: "ml-auto",
+                    attrs: {
+                      variant: "dark",
+                      right: "",
+                      text: _vm.AUTH_USER.name
+                    }
+                  },
+                  [
+                    _c("b-dropdown-item", { on: { click: _vm.logout } }, [
+                      _vm._v("Выйти из профиля")
+                    ])
+                  ],
+                  1
+                )
+          ],
+          1
+        )
+      ],
+      1
     ),
     _vm._v(" "),
     _c("div", { staticClass: "container mt-5" }, [_c("router-view")], 1)
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "button",
-      {
-        staticClass: "navbar-toggler",
-        attrs: {
-          type: "button",
-          "data-toggle": "collapse",
-          "data-target": "#navbarSupportedContent"
-        }
-      },
-      [_c("span", { staticClass: "navbar-toggler-icon" })]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "a",
-      {
-        staticClass: "nav-link dropdown-toggle",
-        attrs: { href: "#", role: "button", "data-toggle": "dropdown" }
-      },
-      [
-        _vm._v(
-          "\n                            Блог\n                            "
-        ),
-        _c("span", { staticClass: "caret" })
-      ]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "a",
-      {
-        staticClass: "nav-link dropdown-toggle",
-        attrs: { href: "#", role: "button", "data-toggle": "dropdown" }
-      },
-      [
-        _vm._v(
-          "\n                            Медиа\n                            "
-        ),
-        _c("span", { staticClass: "caret" })
-      ]
-    )
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -92356,7 +92217,6 @@ var actions = {
                 'email': payload.email,
                 'password': payload.password
               }).then(function (response) {
-                console.log(response);
                 context.commit('SET_AUTH_USER', response);
               }));
 
