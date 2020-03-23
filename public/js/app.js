@@ -2180,8 +2180,21 @@ var routes = [{
   name: 'home',
   path: '/',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 14).then(__webpack_require__.bind(null, /*! ../components/public/home/Home */ "./resources/js/components/public/home/Home.vue"));
-  }
+    return Promise.all(/*! import() */[__webpack_require__.e(14), __webpack_require__.e(18), __webpack_require__.e(8)]).then(__webpack_require__.bind(null, /*! ../components/public/home/Home */ "./resources/js/components/public/home/Home.vue"));
+  },
+  children: [{
+    name: 'news',
+    path: 'news',
+    component: function component() {
+      return __webpack_require__.e(/*! import() */ 16).then(__webpack_require__.bind(null, /*! ../components/public/news/News */ "./resources/js/components/public/news/News.vue"));
+    }
+  }, {
+    name: 'new-music',
+    path: 'music/new',
+    component: function component() {
+      return __webpack_require__.e(/*! import() */ 15).then(__webpack_require__.bind(null, /*! ../components/public/music/NewMusic */ "./resources/js/components/public/music/NewMusic.vue"));
+    }
+  }]
 }, {
   path: '/admin/blog',
   component: function component() {
@@ -2200,7 +2213,7 @@ var routes = [{
     name: 'post-editor',
     path: 'post/:id?',
     component: function component() {
-      return Promise.all(/*! import() */[__webpack_require__.e(8), __webpack_require__.e(2)]).then(__webpack_require__.bind(null, /*! ../components/admin/blog/post/PostEditor */ "./resources/js/components/admin/blog/post/PostEditor.vue"));
+      return Promise.all(/*! import() */[__webpack_require__.e(14), __webpack_require__.e(2), __webpack_require__.e(17)]).then(__webpack_require__.bind(null, /*! ../components/admin/blog/post/PostEditor */ "./resources/js/components/admin/blog/post/PostEditor.vue"));
     }
   }]
 }, {
@@ -78505,7 +78518,7 @@ var render = function() {
       1
     ),
     _vm._v(" "),
-    _c("div", { staticClass: "container mt-5" }, [_c("router-view")], 1)
+    _c("div", { staticClass: "mt-5" }, [_c("router-view")], 1)
   ])
 }
 var staticRenderFns = []

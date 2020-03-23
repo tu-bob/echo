@@ -14,9 +14,20 @@
             },
             {
                 name: 'home',
-                path: '/', component: () => import('../components/public/home/Home')
-            }
-            ,
+                path: '/', component: () => import('../components/public/home/Home'),
+                children: [
+                    {
+                        name: 'news',
+                        path: 'news',
+                        component: () => import('../components/public/news/News')
+                    },
+                    {
+                        name: 'new-music',
+                        path: 'music/new',
+                        component: () => import('../components/public/music/NewMusic')
+                    }
+                ]
+            },
             {
                 path: '/admin/blog',
                 component: () => import('../components/admin/blog/BlogAdminView'),
