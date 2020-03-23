@@ -103,7 +103,11 @@
         },
         methods: {
             logout() {
-                this.$store.dispatch('LOG_OUT');
+                this.$store.dispatch('LOG_OUT')
+                    .then(_ => {
+                        if (this.$route.matched.some(record => record.meta.requiresAuth))
+                            this.$router.push({name: 'home'})
+                    });
             },
         },
         computed: {

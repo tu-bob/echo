@@ -2144,7 +2144,15 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   },
   methods: {
     logout: function logout() {
-      this.$store.dispatch('LOG_OUT');
+      var _this = this;
+
+      this.$store.dispatch('LOG_OUT').then(function (_) {
+        if (_this.$route.matched.some(function (record) {
+          return record.meta.requiresAuth;
+        })) _this.$router.push({
+          name: 'home'
+        });
+      });
     }
   },
   computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])(['AUTHENTICATED', 'AUTH_USER']))
@@ -92372,7 +92380,9 @@ var actions = {
         while (1) {
           switch (_context2.prev = _context2.next) {
             case 0:
-              return _context2.abrupt("return", axios.post('/auth/logout').then(function (_) {
+              return _context2.abrupt("return", axios.post('/auth/logout')["catch"](function (e) {
+                return Promise.reject(e);
+              }).then(function (_) {
                 context.commit('SET_AUTH_USER', null);
               }));
 
@@ -92398,9 +92408,9 @@ var actions = {
             case 0:
               return _context3.abrupt("return", Object(_api_authApi__WEBPACK_IMPORTED_MODULE_1__["fetchUser"])().then(function (user) {
                 return context.commit('SET_AUTH_USER', user);
-              })["catch"](function (error) {
+              })["catch"](function (e) {
                 context.commit('SET_AUTH_USER', null);
-                return Promise.reject(error);
+                return Promise.reject(e);
               }));
 
             case 1:
