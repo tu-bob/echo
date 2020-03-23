@@ -95175,6 +95175,9 @@ function movingBorder() {
   };
 
   moveToActive($('.moving-border .m-item .active').parents('.m-item'));
+  $(window).on('resize', function () {
+    moveToActive($('.moving-border .m-item .active').parents('.m-item'));
+  });
   $(document).on({
     mouseenter: function mouseenter(event) {
       moveToActive($(this));
