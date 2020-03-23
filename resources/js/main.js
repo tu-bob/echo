@@ -24,3 +24,29 @@ export function uploadFiles(files, uploadUrl, name = 'files') {
 
     return axios.post(uploadUrl, data)
 }
+
+export function movingBorder() {
+    let moveToActive = function (el) {
+        if (typeof el === 'object' && el.length > 0) {
+            el.each(function () {
+                let width = $(this).width();
+                let left = $(this).position().left;
+                $(this).parents('.moving-border').next('.border-hr').css({
+                    'width': width + 'px',
+                    'margin-left': left + 'px',
+                });
+            });
+        }
+    }
+
+    moveToActive($('.moving-border .m-item .active').parents('.m-item'));
+
+    $(document).on({
+        mouseenter: function (event) {
+            moveToActive($(this));
+        },
+        mouseleave: function () {
+            moveToActive($('.moving-border .m-item .active').parents('.m-item'));
+        },
+    }, '.moving-border .m-item');
+}
