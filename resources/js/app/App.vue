@@ -1,74 +1,40 @@
 <template>
     <div>
-        <nav class="navbar navbar-expand-md navbar-light shadow-sm">
-            <div class="container">
-                <button class="navbar-toggler"
-                        type="button"
-                        data-toggle="collapse"
-                        data-target="#navbarSupportedContent">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse">
-                    <ul class="navbar-nav mr-auto" v-if="AUTHENTICATED">
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle"
-                               href="#"
-                               role="button"
-                               data-toggle="dropdown">
-                                Блог
-                                <span class="caret"></span>
-                            </a>
-                            <div class="dropdown-menu">
-                                <router-link :to="{name: 'posts-table'}" class="dropdown-item">Посты</router-link>
-                                <router-link :to="{name: 'post-editor'}" class="dropdown-item">Добавить пост
-                                </router-link>
-                            </div>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle"
-                               href="#"
-                               role="button"
-                               data-toggle="dropdown">
-                                Медиа
-                                <span class="caret"></span>
-                            </a>
-                            <div class="dropdown-menu">
-                                <router-link :to="{name: 'artists-table'}" class="dropdown-item">Исполнители
-                                </router-link>
-                                <router-link :to="{name: 'songs-table'}" class="dropdown-item">Песни</router-link>
-                                <router-link :to="{name: 'albums-table'}" class="dropdown-item">Альбомы</router-link>
-                                <div class="dropdown-divider"></div>
-                                <router-link :to="{name: 'artist-editor'}" class="dropdown-item">Добавить артиста
-                                </router-link>
-                                <router-link :to="{name: 'song-editor'}" class="dropdown-item">Добавить песню
-                                </router-link>
-                                <router-link :to="{name: 'album-editor'}" class="dropdown-item">Добавить альбом
-                                </router-link>
-                            </div>
-                        </li>
-                    </ul>
+        <div class="row bg-dark">
+            <b-navbar toggleable="sm" class="col-4 col-md-4 pl-4" type="dark" variant="dark">
+                <b-navbar-toggle target="mainNavBar"></b-navbar-toggle>
+                <b-collapse is-nav id="mainNavBar">
+                    <b-navbar-nav>
+                        <b-nav-item :to="{name: 'home'}">Home</b-nav-item>
 
-                    <ul class="navbar-nav ml-auto">
-                        <!-- Authentication Links -->
+                        <b-nav-item-dropdown text="Блог" left>
+                            <b-dropdown-item :to="{name: 'posts-table'}">Посты</b-dropdown-item>
+                            <b-dropdown-item :to="{name: 'post-editor'}">Добавить пост</b-dropdown-item>
+                        </b-nav-item-dropdown>
 
-                        <li class="nav-item" v-if="!AUTHENTICATED">
-                            <router-link to="/login" class="dropdown-item">Вход</router-link>
-                        </li>
+                        <b-nav-item-dropdown text="Медиа" left>
+                            <b-dropdown-item :to="{name: 'artists-table'}">Исполнители</b-dropdown-item>
+                            <b-dropdown-item :to="{name: 'artist-editor'}">Добавить исполнителя</b-dropdown-item>
+                            <b-dropdown-divider></b-dropdown-divider>
+                            <b-dropdown-item :to="{name: 'songs-table'}">Песни</b-dropdown-item>
+                            <b-dropdown-item :to="{name: 'song-editor'}">Добавить песню</b-dropdown-item>
+                            <b-dropdown-divider></b-dropdown-divider>
+                            <b-dropdown-item :to="{name: 'albums-table'}">Альбомы</b-dropdown-item>
+                            <b-dropdown-item :to="{name: 'album-editor'}">Добавить альбом</b-dropdown-item>
+                        </b-nav-item-dropdown>
+                    </b-navbar-nav>
+                </b-collapse>
+            </b-navbar>
+            <div class="col-1 col-md-4"></div>
+            <div class="col-7 col-md-4 py-2 pr-4 row">
 
-                        <li class="nav-item dropdown" v-else>
-                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
-                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span v-if="AUTHENTICATED">{{AUTH_USER.name}}</span> <span class="caret"></span>
-                            </a>
-
-                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="#" @click="logout"> Выйти из системы </a>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
+                <router-link v-if="!AUTHENTICATED" class="ml-auto btn btn-dark" :to="{name: 'login'}">Вход
+                </router-link>
+                <b-dropdown v-else class="ml-auto" variant="dark" right :text="AUTH_USER.name" >
+                    <b-dropdown-item @click="logout">Выйти из профиля</b-dropdown-item>
+                </b-dropdown>
             </div>
-        </nav>
+        </div>
         <div class="container mt-5">
             <!--            <b-alert :show="state.errors"-->
             <!--                     class="mb-5"-->
