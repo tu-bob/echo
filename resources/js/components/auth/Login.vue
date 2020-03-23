@@ -97,15 +97,6 @@
                             this.$router.push({name: 'home'})
                     })
             }
-            //     axios.post('/auth/login', {
-            //         'email': this.email,
-            //         'password': this.password
-            //     })
-            //         .then(response => {
-            //             this.$eventHub.$emit('authenticated');
-            //             this.$router.push('/')
-            //         });
-            // }
         }
     }
 </script>

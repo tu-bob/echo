@@ -53,7 +53,7 @@
 <script>
     import Summernote from "../../../common/summernote/Summernote";
     import ImageUploader from "../../../common/inputs/ImageUploader";
-    import {fetchPost} from "../../../../api/admin/blogApi";
+    import {fetchPost} from "../../../../api/blogApi";
 
     export default {
         name: "PostEditor",

@@ -1,5 +1,10 @@
 function handleUnauthorized() {
-    window.location.href = '/login';
+    app.$router.push({
+        name: 'login',
+        query: {
+            redirectUrl: window.location.pathname.slice(4, window.location.pathname.length)
+        }
+    })
 }
 
 function handleServerValidationError(e) {

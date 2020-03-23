@@ -11,7 +11,7 @@
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _common_summernote_Summernote__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../common/summernote/Summernote */ "./resources/js/components/common/summernote/Summernote.vue");
 /* harmony import */ var _common_inputs_ImageUploader__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../common/inputs/ImageUploader */ "./resources/js/components/common/inputs/ImageUploader.vue");
-/* harmony import */ var _api_admin_blogApi__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../api/admin/blogApi */ "./resources/js/api/admin/blogApi.js");
+/* harmony import */ var _api_blogApi__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../api/blogApi */ "./resources/js/api/blogApi.js");
 //
 //
 //
@@ -107,7 +107,7 @@ __webpack_require__.r(__webpack_exports__);
     fetchPost: function fetchPost(id) {
       var _this = this;
 
-      Object(_api_admin_blogApi__WEBPACK_IMPORTED_MODULE_2__["fetchPost"])(id).then(function (post) {
+      Object(_api_blogApi__WEBPACK_IMPORTED_MODULE_2__["fetchPost"])(id).then(function (post) {
         _this.post = post;
 
         _this.$refs['articleEditor'].innerHtml(post.article);
@@ -579,10 +579,10 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./resources/js/api/admin/blogApi.js":
-/*!*******************************************!*\
-  !*** ./resources/js/api/admin/blogApi.js ***!
-  \*******************************************/
+/***/ "./resources/js/api/blogApi.js":
+/*!*************************************!*\
+  !*** ./resources/js/api/blogApi.js ***!
+  \*************************************/
 /*! exports provided: fetchPost */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 

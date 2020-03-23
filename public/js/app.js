@@ -2131,9 +2131,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "App",
   created: function created() {
-    if (this.user) this.$store.commit('SET_AUTH_USER', this.user); // this.$eventHub.$on('authenticated', this.onAuthenticated);
-    // this.$eventHub.$on('validation-failed', this.onValidationFailed);
-    // this.$eventHub.$on('error-reset-requested', this.onErrorResetRequested);
+    if (this.user) this.$store.commit('SET_AUTH_USER', this.user);
   },
   beforeDestroy: function beforeDestroy() {
     this.$eventHub.$off('error-reset-requested');
@@ -2149,7 +2147,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       this.$store.dispatch('LOG_OUT');
     }
   },
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])(['AUTHENTICATED']))
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])(['AUTHENTICATED', 'AUTH_USER']))
 });
 
 /***/ }),
@@ -2163,10 +2161,25 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var vue_router__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue-router */ "./node_modules/vue-router/dist/vue-router.esm.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var vue_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-router */ "./node_modules/vue-router/dist/vue-router.esm.js");
+/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../store */ "./resources/js/store/index.js");
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+
 
 var routes = [{
   name: 'login',
+  props: function props(route) {
+    return {
+      redirectUrl: route.query.redirectUrl
+    };
+  },
   path: '/login',
   component: function component() {
     return __webpack_require__.e(/*! import() */ 3).then(__webpack_require__.bind(null, /*! ../components/auth/Login */ "./resources/js/components/auth/Login.vue"));
@@ -2188,6 +2201,9 @@ var routes = [{
   component: function component() {
     return __webpack_require__.e(/*! import() */ 5).then(__webpack_require__.bind(null, /*! ../components/admin/blog/BlogAdminView */ "./resources/js/components/admin/blog/BlogAdminView.vue"));
   },
+  meta: {
+    requiresAuth: true
+  },
   children: [{
     name: 'posts-table',
     path: 'posts',
@@ -2205,6 +2221,9 @@ var routes = [{
   path: '/admin/media',
   component: function component() {
     return __webpack_require__.e(/*! import() */ 13).then(__webpack_require__.bind(null, /*! ../components/admin/media/AdminMediaView */ "./resources/js/components/admin/media/AdminMediaView.vue"));
+  },
+  meta: {
+    requiresAuth: true
   },
   children: [{
     name: 'songs-table',
@@ -2244,12 +2263,68 @@ var routes = [{
     }
   }]
 }];
-var router = new vue_router__WEBPACK_IMPORTED_MODULE_0__["default"]({
+var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
   history: true,
   mode: 'history',
   base: '/app/',
   routes: routes
 });
+router.beforeEach( /*#__PURE__*/function () {
+  var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(to, from, next) {
+    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+      while (1) {
+        switch (_context.prev = _context.next) {
+          case 0:
+            if (!to.matched.some(function (record) {
+              return record.meta.requiresAuth;
+            })) {
+              _context.next = 16;
+              break;
+            }
+
+            if (!_store__WEBPACK_IMPORTED_MODULE_2__["store"].getters.AUTHENTICATED) {
+              _context.next = 5;
+              break;
+            }
+
+            next();
+            _context.next = 14;
+            break;
+
+          case 5:
+            _context.prev = 5;
+            _context.next = 8;
+            return _store__WEBPACK_IMPORTED_MODULE_2__["store"].dispatch('FETCH_USER');
+
+          case 8:
+            next();
+            _context.next = 14;
+            break;
+
+          case 11:
+            _context.prev = 11;
+            _context.t0 = _context["catch"](5);
+            next();
+
+          case 14:
+            _context.next = 17;
+            break;
+
+          case 16:
+            next();
+
+          case 17:
+          case "end":
+            return _context.stop();
+        }
+      }
+    }, _callee, null, [[5, 11]]);
+  }));
+
+  return function (_x, _x2, _x3) {
+    return _ref.apply(this, arguments);
+  };
+}());
 /* harmony default export */ __webpack_exports__["default"] = (router);
 
 /***/ }),
@@ -75353,7 +75428,7 @@ var render = function() {
                           },
                           [
                             _vm._v(
-                              "Добавить пост\n                                "
+                              "Добавить пост\n                            "
                             )
                           ]
                         )
@@ -75375,11 +75450,7 @@ var render = function() {
                             staticClass: "dropdown-item",
                             attrs: { to: { name: "artists-table" } }
                           },
-                          [
-                            _vm._v(
-                              "Исполнители\n                                "
-                            )
-                          ]
+                          [_vm._v("Исполнители\n                            ")]
                         ),
                         _vm._v(" "),
                         _c(
@@ -75410,7 +75481,7 @@ var render = function() {
                           },
                           [
                             _vm._v(
-                              "Добавить артиста\n                                "
+                              "Добавить артиста\n                            "
                             )
                           ]
                         ),
@@ -75423,7 +75494,7 @@ var render = function() {
                           },
                           [
                             _vm._v(
-                              "Добавить песню\n                                "
+                              "Добавить песню\n                            "
                             )
                           ]
                         ),
@@ -75436,7 +75507,7 @@ var render = function() {
                           },
                           [
                             _vm._v(
-                              "Добавить альбом\n                                "
+                              "Добавить альбом\n                            "
                             )
                           ]
                         )
@@ -75479,8 +75550,8 @@ var render = function() {
                         }
                       },
                       [
-                        _vm.user
-                          ? _c("span", [_vm._v(_vm._s(_vm.user.name))])
+                        _vm.AUTHENTICATED
+                          ? _c("span", [_vm._v(_vm._s(_vm.AUTH_USER.name))])
                           : _vm._e(),
                         _vm._v(" "),
                         _c("span", { staticClass: "caret" })
@@ -75545,7 +75616,7 @@ var staticRenderFns = [
       },
       [
         _vm._v(
-          "\n                                Блог\n                                "
+          "\n                            Блог\n                            "
         ),
         _c("span", { staticClass: "caret" })
       ]
@@ -75563,7 +75634,7 @@ var staticRenderFns = [
       },
       [
         _vm._v(
-          "\n                                Медиа\n                                "
+          "\n                            Медиа\n                            "
         ),
         _c("span", { staticClass: "caret" })
       ]
@@ -91836,6 +91907,22 @@ module.exports = function(module) {
 
 /***/ }),
 
+/***/ "./resources/js/api/authApi.js":
+/*!*************************************!*\
+  !*** ./resources/js/api/authApi.js ***!
+  \*************************************/
+/*! exports provided: fetchUser */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchUser", function() { return fetchUser; });
+function fetchUser() {
+  return axios.get('/auth/user');
+}
+
+/***/ }),
+
 /***/ "./resources/js/app.js":
 /*!*****************************!*\
   !*** ./resources/js/app.js ***!
@@ -91885,7 +91972,7 @@ Vue.component('SuggestionInput', __webpack_require__(/*! ./components/common/inp
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-var app = new Vue({
+window.app = new Vue({
   el: '#app',
   router: router,
   store: _store__WEBPACK_IMPORTED_MODULE_0__["store"] // render: h => h(App)
@@ -92224,11 +92311,13 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _api_authApi__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../api/authApi */ "./resources/js/api/authApi.js");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 
 var state = {
   auth: {
@@ -92238,6 +92327,9 @@ var state = {
 var getters = {
   AUTHENTICATED: function AUTHENTICATED(state) {
     return Boolean(state.auth.user);
+  },
+  AUTH_USER: function AUTH_USER(state) {
+    return state.auth.user;
   }
 };
 var mutations = {
@@ -92252,12 +92344,13 @@ var actions = {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
-              axios.post('/auth/login', {
+              return _context.abrupt("return", axios.post('/auth/login', {
                 'email': payload.email,
                 'password': payload.password
               }).then(function (response) {
+                console.log(response);
                 context.commit('SET_AUTH_USER', response);
-              });
+              }));
 
             case 1:
             case "end":
@@ -92279,9 +92372,9 @@ var actions = {
         while (1) {
           switch (_context2.prev = _context2.next) {
             case 0:
-              axios.post('/auth/logout').then(function (_) {
+              return _context2.abrupt("return", axios.post('/auth/logout').then(function (_) {
                 context.commit('SET_AUTH_USER', null);
-              });
+              }));
 
             case 1:
             case "end":
@@ -92296,6 +92389,33 @@ var actions = {
     }
 
     return LOG_OUT;
+  }(),
+  FETCH_USER: function () {
+    var _FETCH_USER = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3(context, payload) {
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
+        while (1) {
+          switch (_context3.prev = _context3.next) {
+            case 0:
+              return _context3.abrupt("return", Object(_api_authApi__WEBPACK_IMPORTED_MODULE_1__["fetchUser"])().then(function (user) {
+                return context.commit('SET_AUTH_USER', user);
+              })["catch"](function (error) {
+                context.commit('SET_AUTH_USER', null);
+                return Promise.reject(error);
+              }));
+
+            case 1:
+            case "end":
+              return _context3.stop();
+          }
+        }
+      }, _callee3);
+    }));
+
+    function FETCH_USER(_x5, _x6) {
+      return _FETCH_USER.apply(this, arguments);
+    }
+
+    return FETCH_USER;
   }()
 };
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -92318,7 +92438,12 @@ var actions = {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "handleHtmlError", function() { return handleHtmlError; });
 function handleUnauthorized() {
-  window.location.href = '/login';
+  app.$router.push({
+    name: 'login',
+    query: {
+      redirectUrl: window.location.pathname.slice(4, window.location.pathname.length)
+    }
+  });
 }
 
 function handleServerValidationError(e) {

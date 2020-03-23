@@ -38,7 +38,7 @@ Vue.component('SuggestionInput', require('./components/common/inputs/SuggestionI
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-const app = new Vue({
+window.app = new Vue({
     el: '#app',
     router,
     store

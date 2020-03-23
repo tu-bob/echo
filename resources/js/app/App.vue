@@ -58,7 +58,7 @@
                         <li class="nav-item dropdown" v-else>
                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span v-if="user">{{user.name}}</span> <span class="caret"></span>
+                                <span v-if="AUTHENTICATED">{{AUTH_USER.name}}</span> <span class="caret"></span>
                             </a>
 
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
@@ -70,14 +70,14 @@
             </div>
         </nav>
         <div class="container mt-5">
-<!--            <b-alert :show="state.errors"-->
-<!--                     class="mb-5"-->
-<!--                     variant="danger"-->
-<!--                     dismissible>-->
-<!--                <ul>-->
-<!--                    <li v-for="error in state.errors">{{error[0]}}</li>-->
-<!--                </ul>-->
-<!--            </b-alert>-->
+            <!--            <b-alert :show="state.errors"-->
+            <!--                     class="mb-5"-->
+            <!--                     variant="danger"-->
+            <!--                     dismissible>-->
+            <!--                <ul>-->
+            <!--                    <li v-for="error in state.errors">{{error[0]}}</li>-->
+            <!--                </ul>-->
+            <!--            </b-alert>-->
             <router-view></router-view>
         </div>
     </div>
@@ -91,9 +91,6 @@
         created() {
             if (this.user)
                 this.$store.commit('SET_AUTH_USER', this.user);
-            // this.$eventHub.$on('authenticated', this.onAuthenticated);
-            // this.$eventHub.$on('validation-failed', this.onValidationFailed);
-            // this.$eventHub.$on('error-reset-requested', this.onErrorResetRequested);
         },
         beforeDestroy() {
             this.$eventHub.$off('error-reset-requested');
@@ -111,7 +108,8 @@
         },
         computed: {
             ...mapGetters([
-                'AUTHENTICATED'
+                'AUTHENTICATED',
+                'AUTH_USER'
             ])
         }
     }

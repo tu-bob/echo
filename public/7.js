@@ -12,7 +12,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var music_metadata_browser__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! music-metadata-browser */ "./node_modules/music-metadata-browser/lib/index.js");
 /* harmony import */ var music_metadata_browser__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(music_metadata_browser__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _util_validators_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../util/validators.js */ "./resources/js/util/validators.js");
-/* harmony import */ var _api_admin_mediaApi_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../api/admin/mediaApi.js */ "./resources/js/api/admin/mediaApi.js");
+/* harmony import */ var _api_mediaApi_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../api/mediaApi.js */ "./resources/js/api/mediaApi.js");
 /* harmony import */ var string_similarity__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! string-similarity */ "./node_modules/string-similarity/src/index.js");
 /* harmony import */ var string_similarity__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(string_similarity__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var _events__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../../events */ "./resources/js/events.js");
@@ -194,7 +194,7 @@ __webpack_require__.r(__webpack_exports__);
   created: function created() {
     var _this = this;
 
-    Object(_api_admin_mediaApi_js__WEBPACK_IMPORTED_MODULE_2__["fetchGenres"])().then(function (genres) {
+    Object(_api_mediaApi_js__WEBPACK_IMPORTED_MODULE_2__["fetchGenres"])().then(function (genres) {
       if (genres) _this.genres = genres;
       if (_this.$route.params.id) _this.fetchSong(_this.$route.params.id);
     });
@@ -281,14 +281,14 @@ __webpack_require__.r(__webpack_exports__);
     fetchArtist: function fetchArtist(name) {
       var _this3 = this;
 
-      Object(_api_admin_mediaApi_js__WEBPACK_IMPORTED_MODULE_2__["fetchArtistAliasesByName"])(name).then(function (aliases) {
+      Object(_api_mediaApi_js__WEBPACK_IMPORTED_MODULE_2__["fetchArtistAliasesByName"])(name).then(function (aliases) {
         if (aliases && aliases.length > 0) _this3.onArtistSelected(aliases[0]);else _this3.missedArtists.push(name);
       });
     },
     fetchAlbum: function fetchAlbum(title) {
       var _this4 = this;
 
-      Object(_api_admin_mediaApi_js__WEBPACK_IMPORTED_MODULE_2__["fetchFilteredAlbums"])({
+      Object(_api_mediaApi_js__WEBPACK_IMPORTED_MODULE_2__["fetchFilteredAlbums"])({
         'title': title
       }).then(function (albums) {
         if (albums && albums.length > 0) _this4.onAlbumSelected(albums[0]);else _this4.missedAlbum = title;
@@ -297,7 +297,7 @@ __webpack_require__.r(__webpack_exports__);
     fetchSong: function fetchSong(id) {
       var _this5 = this;
 
-      Object(_api_admin_mediaApi_js__WEBPACK_IMPORTED_MODULE_2__["fetchSong"])(id).then(function (song) {
+      Object(_api_mediaApi_js__WEBPACK_IMPORTED_MODULE_2__["fetchSong"])(id).then(function (song) {
         _this5.song = song;
       })["catch"]();
     },
@@ -849,10 +849,10 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./resources/js/api/admin/mediaApi.js":
-/*!********************************************!*\
-  !*** ./resources/js/api/admin/mediaApi.js ***!
-  \********************************************/
+/***/ "./resources/js/api/mediaApi.js":
+/*!**************************************!*\
+  !*** ./resources/js/api/mediaApi.js ***!
+  \**************************************/
 /*! exports provided: fetchGenres, fetchArtistAliasesByName, fetchFilteredAlbums, fetchSong, fetchAlbum, fetchAlbumTypes */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -866,7 +866,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchAlbumTypes", function() { return fetchAlbumTypes; });
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _util_stringHelper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../util/stringHelper */ "./resources/js/util/stringHelper.js");
+/* harmony import */ var _util_stringHelper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../util/stringHelper */ "./resources/js/util/stringHelper.js");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
