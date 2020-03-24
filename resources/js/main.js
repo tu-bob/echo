@@ -25,6 +25,14 @@ export function uploadFiles(files, uploadUrl, name = 'files') {
     return axios.post(uploadUrl, data)
 }
 
+export function setLaravelBackground() {
+    $('body').addClass('bg-laravel')
+}
+
+export function removeLaravelBackground() {
+    $('body').removeClass('bg-laravel')
+}
+
 export function movingBorder() {
     let moveToActive = function (el) {
         if (typeof el === 'object' && el.length > 0) {
@@ -41,7 +49,7 @@ export function movingBorder() {
 
     moveToActive($('.moving-border .m-item .active').parents('.m-item'));
 
-    $(window).on('resize', function(){
+    $(window).on('resize', function () {
         moveToActive($('.moving-border .m-item .active').parents('.m-item'));
     });
 

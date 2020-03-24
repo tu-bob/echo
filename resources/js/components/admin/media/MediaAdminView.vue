@@ -5,8 +5,16 @@
 </template>
 
 <script>
+    import {removeLaravelBackground, setLaravelBackground} from "../../../main";
+
     export default {
-        name: "AdminMediaView"
+        name: "AdminMediaView",
+        created() {
+            setLaravelBackground()
+        },
+        destroyed() {
+            removeLaravelBackground()
+        }
     }
 </script>
 
