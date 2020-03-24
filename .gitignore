@@ -12,3 +12,5 @@ npm-debug.log
 yarn-error.log
 /.idea/
 /Modules/Blog/node_modules/
+/public/images/
+/resources/js/img/
