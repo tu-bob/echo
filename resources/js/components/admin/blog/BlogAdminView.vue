@@ -1,13 +1,21 @@
 <template>
-    <div class="bg-laravel p-0 mb-5 container">
+    <div class="bg-laravel p-0 container">
         <router-view></router-view>
     </div>
 
 </template>
 
 <script>
+    import {removeLaravelBackground, setLaravelBackground} from "../../../main";
+
     export default {
-        name: "BlogAdminView"
+        name: "BlogAdminView",
+        created() {
+            setLaravelBackground()
+        },
+        destroyed() {
+            removeLaravelBackground()
+        }
     }
 </script>
 

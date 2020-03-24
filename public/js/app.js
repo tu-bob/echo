@@ -2168,13 +2168,13 @@ var routes = [{
   },
   path: '/login',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 12).then(__webpack_require__.bind(null, /*! ../components/auth/Login */ "./resources/js/components/auth/Login.vue"));
+    return __webpack_require__.e(/*! import() */ 13).then(__webpack_require__.bind(null, /*! ../components/auth/Login */ "./resources/js/components/auth/Login.vue"));
   }
 }, {
   name: 'register',
   path: '/register',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 13).then(__webpack_require__.bind(null, /*! ../components/auth/Register */ "./resources/js/components/auth/Register.vue"));
+    return __webpack_require__.e(/*! import() */ 14).then(__webpack_require__.bind(null, /*! ../components/auth/Register */ "./resources/js/components/auth/Register.vue"));
   }
 }, {
   name: 'home',
@@ -2183,31 +2183,31 @@ var routes = [{
     name: 'overview'
   },
   component: function component() {
-    return Promise.all(/*! import() */[__webpack_require__.e(14), __webpack_require__.e(20), __webpack_require__.e(8)]).then(__webpack_require__.bind(null, /*! ../components/public/home/HomeViewer */ "./resources/js/components/public/home/HomeViewer.vue"));
+    return Promise.all(/*! import() */[__webpack_require__.e(18), __webpack_require__.e(8), __webpack_require__.e(20)]).then(__webpack_require__.bind(null, /*! ../components/public/home/HomeViewer */ "./resources/js/components/public/home/HomeViewer.vue"));
   },
   children: [{
     name: 'overview',
     path: 'overview',
     component: function component() {
-      return __webpack_require__.e(/*! import() */ 18).then(__webpack_require__.bind(null, /*! ../components/public/home/overview/Overview */ "./resources/js/components/public/home/overview/Overview.vue"));
+      return __webpack_require__.e(/*! import() */ 15).then(__webpack_require__.bind(null, /*! ../components/public/home/overview/Overview */ "./resources/js/components/public/home/overview/Overview.vue"));
     }
   }, {
     name: 'news',
     path: 'news',
     component: function component() {
-      return __webpack_require__.e(/*! import() */ 16).then(__webpack_require__.bind(null, /*! ../components/public/news/News */ "./resources/js/components/public/news/News.vue"));
+      return __webpack_require__.e(/*! import() */ 17).then(__webpack_require__.bind(null, /*! ../components/public/news/News */ "./resources/js/components/public/news/News.vue"));
     }
   }, {
     name: 'new-music',
     path: 'music/new',
     component: function component() {
-      return __webpack_require__.e(/*! import() */ 15).then(__webpack_require__.bind(null, /*! ../components/public/music/NewMusic */ "./resources/js/components/public/music/NewMusic.vue"));
+      return __webpack_require__.e(/*! import() */ 16).then(__webpack_require__.bind(null, /*! ../components/public/music/NewMusic */ "./resources/js/components/public/music/NewMusic.vue"));
     }
   }]
 }, {
   path: '/admin/blog',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 9).then(__webpack_require__.bind(null, /*! ../components/admin/blog/BlogAdminView */ "./resources/js/components/admin/blog/BlogAdminView.vue"));
+    return __webpack_require__.e(/*! import() */ 10).then(__webpack_require__.bind(null, /*! ../components/admin/blog/BlogAdminView */ "./resources/js/components/admin/blog/BlogAdminView.vue"));
   },
   meta: {
     requiresAuth: true
@@ -2222,13 +2222,13 @@ var routes = [{
     name: 'post-editor',
     path: 'post/:id?',
     component: function component() {
-      return Promise.all(/*! import() */[__webpack_require__.e(14), __webpack_require__.e(2), __webpack_require__.e(17)]).then(__webpack_require__.bind(null, /*! ../components/admin/blog/post/PostEditor */ "./resources/js/components/admin/blog/post/PostEditor.vue"));
+      return Promise.all(/*! import() */[__webpack_require__.e(18), __webpack_require__.e(2), __webpack_require__.e(19)]).then(__webpack_require__.bind(null, /*! ../components/admin/blog/post/PostEditor */ "./resources/js/components/admin/blog/post/PostEditor.vue"));
     }
   }]
 }, {
   path: '/admin/media',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 19).then(__webpack_require__.bind(null, /*! ../components/admin/media/MediaAdminView */ "./resources/js/components/admin/media/MediaAdminView.vue"));
+    return __webpack_require__.e(/*! import() */ 11).then(__webpack_require__.bind(null, /*! ../components/admin/media/MediaAdminView */ "./resources/js/components/admin/media/MediaAdminView.vue"));
   },
   meta: {
     requiresAuth: true
@@ -2255,7 +2255,7 @@ var routes = [{
     name: 'artist-editor',
     path: 'artist/:id?',
     component: function component() {
-      return __webpack_require__.e(/*! import() */ 11).then(__webpack_require__.bind(null, /*! ../components/admin/media/artist/ArtistEditor */ "./resources/js/components/admin/media/artist/ArtistEditor.vue"));
+      return __webpack_require__.e(/*! import() */ 12).then(__webpack_require__.bind(null, /*! ../components/admin/media/artist/ArtistEditor */ "./resources/js/components/admin/media/artist/ArtistEditor.vue"));
     }
   }, {
     name: 'albums-table',
@@ -95123,7 +95123,7 @@ __webpack_require__.r(__webpack_exports__);
 /*!******************************!*\
   !*** ./resources/js/main.js ***!
   \******************************/
-/*! exports provided: getStoreOrUpdateAction, generateId, uploadFiles, movingBorder */
+/*! exports provided: getStoreOrUpdateAction, generateId, uploadFiles, setLaravelBackground, removeLaravelBackground, movingBorder */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -95131,6 +95131,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getStoreOrUpdateAction", function() { return getStoreOrUpdateAction; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "generateId", function() { return generateId; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "uploadFiles", function() { return uploadFiles; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setLaravelBackground", function() { return setLaravelBackground; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "removeLaravelBackground", function() { return removeLaravelBackground; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "movingBorder", function() { return movingBorder; });
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
@@ -95159,6 +95161,12 @@ function uploadFiles(files, uploadUrl) {
   }
 
   return axios.post(uploadUrl, data);
+}
+function setLaravelBackground() {
+  $('body').addClass('bg-laravel');
+}
+function removeLaravelBackground() {
+  $('body').removeClass('bg-laravel');
 }
 function movingBorder() {
   var moveToActive = function moveToActive(el) {
