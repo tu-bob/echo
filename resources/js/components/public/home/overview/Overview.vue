@@ -8,7 +8,7 @@
 </template>
 
 <script>
-    import SongsCarousel from "../../../common/music/song/SongsCarousel";
+    import SongsCarousel from "../../../common/music/song/SongsСarousel";
     import AlbumsViewer from "../../../common/music/album/AlbumsViewer";
 
     export default {
