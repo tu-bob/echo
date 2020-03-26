@@ -349,7 +349,7 @@ var render = function() {
       ]
     ),
     _vm._v(" "),
-    _c("div", { staticClass: "container py-4" }, [_c("router-view")], 1)
+    _c("div", { staticClass: "py-5" }, [_c("router-view")], 1)
   ])
 }
 var staticRenderFns = []

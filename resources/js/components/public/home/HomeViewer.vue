@@ -39,7 +39,7 @@
         </div>
 
 
-        <div class="container py-4">
+        <div class="py-5">
             <!-- Child route gets rendered in <router-view> or <nuxt-child> -->
             <router-view></router-view>
             <!-- Or if using Nuxt.js
