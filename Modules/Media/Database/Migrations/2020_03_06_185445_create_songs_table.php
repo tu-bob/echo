@@ -32,6 +32,10 @@ class CreateSongsTable extends Migration
             $table->unsignedBigInteger('size');
             $table->unsignedInteger('playtime_seconds');
             $table->char('extension', 10);
+            
+            $table->unsignedBigInteger('download_count')->default(0);
+            $table->unsignedBigInteger('play_count')->default(0);
+
 
             $table->commonFields();
         });
