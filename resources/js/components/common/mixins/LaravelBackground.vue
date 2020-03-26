@@ -1,13 +1,13 @@
 <script>
-    import {removeLaravelBackground, setLaravelBackground} from "../../../main";
+    import {removeLaravelTheme, setLaravelTheme} from "../../../main";
 
     export default {
         name: "LaravelBackground",
         mounted() {
-            setLaravelBackground()
+            setLaravelTheme()
         },
         beforeDestroy() {
-            removeLaravelBackground()
+            removeLaravelTheme()
         }
     }
 </script>

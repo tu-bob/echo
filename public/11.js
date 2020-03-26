@@ -39,10 +39,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "LaravelBackground",
   mounted: function mounted() {
-    Object(_main__WEBPACK_IMPORTED_MODULE_0__["setLaravelBackground"])();
+    Object(_main__WEBPACK_IMPORTED_MODULE_0__["setLaravelTheme"])();
   },
   beforeDestroy: function beforeDestroy() {
-    Object(_main__WEBPACK_IMPORTED_MODULE_0__["removeLaravelBackground"])();
+    Object(_main__WEBPACK_IMPORTED_MODULE_0__["removeLaravelTheme"])();
   }
 });
 
