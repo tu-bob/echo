@@ -6,16 +6,11 @@
 </template>
 
 <script>
-    import {removeLaravelBackground, setLaravelBackground} from "../../../main";
+    import LaravelBackground from "../../common/mixins/LaravelBackground";
 
     export default {
         name: "BlogAdminView",
-        created() {
-            setLaravelBackground()
-        },
-        destroyed() {
-            removeLaravelBackground()
-        }
+        mixins: [LaravelBackground]
     }
 </script>
 
