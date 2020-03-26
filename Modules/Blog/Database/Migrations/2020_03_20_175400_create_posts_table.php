@@ -24,6 +24,8 @@ class CreatePostsTable extends Migration
             $table->string('reference', 255)->nullable();
             $table->string('ref_name', 255)->nullable();
 
+            $table->unsignedBigInteger('view_count')->default(0);
+
             $table->commonFields();
         });
     }
