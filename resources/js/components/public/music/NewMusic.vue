@@ -1,10 +1,18 @@
 <template>
-    <div>New Music is here</div>
+    <div class="container">
+        <songs-list>
+
+        </songs-list>
+    </div>
 </template>
 
 <script>
+
+    import SongsList from "../../common/music/song/SongsList";
+
     export default {
-        name: "NewMusic"
+        name: "NewMusic",
+        components: {SongsList}
     }
 </script>
 

@@ -1,1356 +1,1235 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[9],{
 
-/***/ "./node_modules/perfect-scrollbar/dist/perfect-scrollbar.esm.js":
-/*!**********************************************************************!*\
-  !*** ./node_modules/perfect-scrollbar/dist/perfect-scrollbar.esm.js ***!
-  \**********************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/admin/media/music/SongEditor.vue?vue&type=script&lang=js&":
+/*!***************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/admin/media/music/SongEditor.vue?vue&type=script&lang=js& ***!
+  \***************************************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/*!
- * perfect-scrollbar v1.5.0
- * Copyright 2020 Hyunje Jun, MDBootstrap and Contributors
- * Licensed under MIT
- */
+/* harmony import */ var music_metadata_browser__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! music-metadata-browser */ "./node_modules/music-metadata-browser/lib/index.js");
+/* harmony import */ var music_metadata_browser__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(music_metadata_browser__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _util_validators_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../util/validators.js */ "./resources/js/util/validators.js");
+/* harmony import */ var _api_mediaApi_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../api/mediaApi.js */ "./resources/js/api/mediaApi.js");
+/* harmony import */ var string_similarity__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! string-similarity */ "./node_modules/string-similarity/src/index.js");
+/* harmony import */ var string_similarity__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(string_similarity__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _events__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../../events */ "./resources/js/events.js");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
-function get(element) {
-  return getComputedStyle(element);
-}
 
-function set(element, obj) {
-  for (var key in obj) {
-    var val = obj[key];
-    if (typeof val === 'number') {
-      val = val + "px";
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: "SongEditor",
+  props: {
+    providedFile: {
+      type: Object,
+      "default": null
     }
-    element.style[key] = val;
-  }
-  return element;
-}
-
-function div(className) {
-  var div = document.createElement('div');
-  div.className = className;
-  return div;
-}
-
-var elMatches =
-  typeof Element !== 'undefined' &&
-  (Element.prototype.matches ||
-    Element.prototype.webkitMatchesSelector ||
-    Element.prototype.mozMatchesSelector ||
-    Element.prototype.msMatchesSelector);
-
-function matches(element, query) {
-  if (!elMatches) {
-    throw new Error('No element matching method supported');
-  }
-
-  return elMatches.call(element, query);
-}
-
-function remove(element) {
-  if (element.remove) {
-    element.remove();
-  } else {
-    if (element.parentNode) {
-      element.parentNode.removeChild(element);
-    }
-  }
-}
-
-function queryChildren(element, selector) {
-  return Array.prototype.filter.call(element.children, function (child) { return matches(child, selector); }
-  );
-}
-
-var cls = {
-  main: 'ps',
-  rtl: 'ps__rtl',
-  element: {
-    thumb: function (x) { return ("ps__thumb-" + x); },
-    rail: function (x) { return ("ps__rail-" + x); },
-    consuming: 'ps__child--consume',
   },
-  state: {
-    focus: 'ps--focus',
-    clicking: 'ps--clicking',
-    active: function (x) { return ("ps--active-" + x); },
-    scrolling: function (x) { return ("ps--scrolling-" + x); },
+  created: function created() {
+    var _this = this;
+
+    Object(_api_mediaApi_js__WEBPACK_IMPORTED_MODULE_2__["fetchGenres"])().then(function (genres) {
+      if (genres) _this.genres = genres;
+      if (_this.$route.params.id) _this.fetchSong(_this.$route.params.id);
+    });
   },
-};
-
-/*
- * Helper methods
- */
-var scrollingClassTimeout = { x: null, y: null };
-
-function addScrollingClass(i, x) {
-  var classList = i.element.classList;
-  var className = cls.state.scrolling(x);
-
-  if (classList.contains(className)) {
-    clearTimeout(scrollingClassTimeout[x]);
-  } else {
-    classList.add(className);
-  }
-}
-
-function removeScrollingClass(i, x) {
-  scrollingClassTimeout[x] = setTimeout(
-    function () { return i.isAlive && i.element.classList.remove(cls.state.scrolling(x)); },
-    i.settings.scrollingThreshold
-  );
-}
-
-function setScrollingClassInstantly(i, x) {
-  addScrollingClass(i, x);
-  removeScrollingClass(i, x);
-}
-
-var EventElement = function EventElement(element) {
-  this.element = element;
-  this.handlers = {};
-};
-
-var prototypeAccessors = { isEmpty: { configurable: true } };
-
-EventElement.prototype.bind = function bind (eventName, handler) {
-  if (typeof this.handlers[eventName] === 'undefined') {
-    this.handlers[eventName] = [];
-  }
-  this.handlers[eventName].push(handler);
-  this.element.addEventListener(eventName, handler, false);
-};
-
-EventElement.prototype.unbind = function unbind (eventName, target) {
-    var this$1 = this;
-
-  this.handlers[eventName] = this.handlers[eventName].filter(function (handler) {
-    if (target && handler !== target) {
-      return true;
-    }
-    this$1.element.removeEventListener(eventName, handler, false);
-    return false;
-  });
-};
-
-EventElement.prototype.unbindAll = function unbindAll () {
-  for (var name in this.handlers) {
-    this.unbind(name);
-  }
-};
-
-prototypeAccessors.isEmpty.get = function () {
-    var this$1 = this;
-
-  return Object.keys(this.handlers).every(
-    function (key) { return this$1.handlers[key].length === 0; }
-  );
-};
-
-Object.defineProperties( EventElement.prototype, prototypeAccessors );
-
-var EventManager = function EventManager() {
-  this.eventElements = [];
-};
-
-EventManager.prototype.eventElement = function eventElement (element) {
-  var ee = this.eventElements.filter(function (ee) { return ee.element === element; })[0];
-  if (!ee) {
-    ee = new EventElement(element);
-    this.eventElements.push(ee);
-  }
-  return ee;
-};
-
-EventManager.prototype.bind = function bind (element, eventName, handler) {
-  this.eventElement(element).bind(eventName, handler);
-};
-
-EventManager.prototype.unbind = function unbind (element, eventName, handler) {
-  var ee = this.eventElement(element);
-  ee.unbind(eventName, handler);
-
-  if (ee.isEmpty) {
-    // remove
-    this.eventElements.splice(this.eventElements.indexOf(ee), 1);
-  }
-};
-
-EventManager.prototype.unbindAll = function unbindAll () {
-  this.eventElements.forEach(function (e) { return e.unbindAll(); });
-  this.eventElements = [];
-};
-
-EventManager.prototype.once = function once (element, eventName, handler) {
-  var ee = this.eventElement(element);
-  var onceHandler = function (evt) {
-    ee.unbind(eventName, onceHandler);
-    handler(evt);
-  };
-  ee.bind(eventName, onceHandler);
-};
-
-function createEvent(name) {
-  if (typeof window.CustomEvent === 'function') {
-    return new CustomEvent(name);
-  } else {
-    var evt = document.createEvent('CustomEvent');
-    evt.initCustomEvent(name, false, false, undefined);
-    return evt;
-  }
-}
-
-function processScrollDiff(
-  i,
-  axis,
-  diff,
-  useScrollingClass,
-  forceFireReachEvent
-) {
-  if ( useScrollingClass === void 0 ) useScrollingClass = true;
-  if ( forceFireReachEvent === void 0 ) forceFireReachEvent = false;
-
-  var fields;
-  if (axis === 'top') {
-    fields = [
-      'contentHeight',
-      'containerHeight',
-      'scrollTop',
-      'y',
-      'up',
-      'down' ];
-  } else if (axis === 'left') {
-    fields = [
-      'contentWidth',
-      'containerWidth',
-      'scrollLeft',
-      'x',
-      'left',
-      'right' ];
-  } else {
-    throw new Error('A proper axis should be provided');
-  }
-
-  processScrollDiff$1(i, diff, fields, useScrollingClass, forceFireReachEvent);
-}
-
-function processScrollDiff$1(
-  i,
-  diff,
-  ref,
-  useScrollingClass,
-  forceFireReachEvent
-) {
-  var contentHeight = ref[0];
-  var containerHeight = ref[1];
-  var scrollTop = ref[2];
-  var y = ref[3];
-  var up = ref[4];
-  var down = ref[5];
-  if ( useScrollingClass === void 0 ) useScrollingClass = true;
-  if ( forceFireReachEvent === void 0 ) forceFireReachEvent = false;
-
-  var element = i.element;
-
-  // reset reach
-  i.reach[y] = null;
-
-  // 1 for subpixel rounding
-  if (element[scrollTop] < 1) {
-    i.reach[y] = 'start';
-  }
-
-  // 1 for subpixel rounding
-  if (element[scrollTop] > i[contentHeight] - i[containerHeight] - 1) {
-    i.reach[y] = 'end';
-  }
-
-  if (diff) {
-    element.dispatchEvent(createEvent(("ps-scroll-" + y)));
-
-    if (diff < 0) {
-      element.dispatchEvent(createEvent(("ps-scroll-" + up)));
-    } else if (diff > 0) {
-      element.dispatchEvent(createEvent(("ps-scroll-" + down)));
-    }
-
-    if (useScrollingClass) {
-      setScrollingClassInstantly(i, y);
-    }
-  }
-
-  if (i.reach[y] && (diff || forceFireReachEvent)) {
-    element.dispatchEvent(createEvent(("ps-" + y + "-reach-" + (i.reach[y]))));
-  }
-}
-
-function toInt(x) {
-  return parseInt(x, 10) || 0;
-}
-
-function isEditable(el) {
-  return (
-    matches(el, 'input,[contenteditable]') ||
-    matches(el, 'select,[contenteditable]') ||
-    matches(el, 'textarea,[contenteditable]') ||
-    matches(el, 'button,[contenteditable]')
-  );
-}
-
-function outerWidth(element) {
-  var styles = get(element);
-  return (
-    toInt(styles.width) +
-    toInt(styles.paddingLeft) +
-    toInt(styles.paddingRight) +
-    toInt(styles.borderLeftWidth) +
-    toInt(styles.borderRightWidth)
-  );
-}
-
-var env = {
-  isWebKit:
-    typeof document !== 'undefined' &&
-    'WebkitAppearance' in document.documentElement.style,
-  supportsTouch:
-    typeof window !== 'undefined' &&
-    ('ontouchstart' in window ||
-      ('maxTouchPoints' in window.navigator &&
-        window.navigator.maxTouchPoints > 0) ||
-      (window.DocumentTouch && document instanceof window.DocumentTouch)),
-  supportsIePointer:
-    typeof navigator !== 'undefined' && navigator.msMaxTouchPoints,
-  isChrome:
-    typeof navigator !== 'undefined' &&
-    /Chrome/i.test(navigator && navigator.userAgent),
-};
-
-function updateGeometry(i) {
-  var element = i.element;
-  var roundedScrollTop = Math.floor(element.scrollTop);
-  var rect = element.getBoundingClientRect();
-
-  i.containerWidth = Math.ceil(rect.width);
-  i.containerHeight = Math.ceil(rect.height);
-  i.contentWidth = element.scrollWidth;
-  i.contentHeight = element.scrollHeight;
-
-  if (!element.contains(i.scrollbarXRail)) {
-    // clean up and append
-    queryChildren(element, cls.element.rail('x')).forEach(function (el) { return remove(el); }
-    );
-    element.appendChild(i.scrollbarXRail);
-  }
-  if (!element.contains(i.scrollbarYRail)) {
-    // clean up and append
-    queryChildren(element, cls.element.rail('y')).forEach(function (el) { return remove(el); }
-    );
-    element.appendChild(i.scrollbarYRail);
-  }
-
-  if (
-    !i.settings.suppressScrollX &&
-    i.containerWidth + i.settings.scrollXMarginOffset < i.contentWidth
-  ) {
-    i.scrollbarXActive = true;
-    i.railXWidth = i.containerWidth - i.railXMarginWidth;
-    i.railXRatio = i.containerWidth / i.railXWidth;
-    i.scrollbarXWidth = getThumbSize(
-      i,
-      toInt((i.railXWidth * i.containerWidth) / i.contentWidth)
-    );
-    i.scrollbarXLeft = toInt(
-      ((i.negativeScrollAdjustment + element.scrollLeft) *
-        (i.railXWidth - i.scrollbarXWidth)) /
-        (i.contentWidth - i.containerWidth)
-    );
-  } else {
-    i.scrollbarXActive = false;
-  }
-
-  if (
-    !i.settings.suppressScrollY &&
-    i.containerHeight + i.settings.scrollYMarginOffset < i.contentHeight
-  ) {
-    i.scrollbarYActive = true;
-    i.railYHeight = i.containerHeight - i.railYMarginHeight;
-    i.railYRatio = i.containerHeight / i.railYHeight;
-    i.scrollbarYHeight = getThumbSize(
-      i,
-      toInt((i.railYHeight * i.containerHeight) / i.contentHeight)
-    );
-    i.scrollbarYTop = toInt(
-      (roundedScrollTop * (i.railYHeight - i.scrollbarYHeight)) /
-        (i.contentHeight - i.containerHeight)
-    );
-  } else {
-    i.scrollbarYActive = false;
-  }
-
-  if (i.scrollbarXLeft >= i.railXWidth - i.scrollbarXWidth) {
-    i.scrollbarXLeft = i.railXWidth - i.scrollbarXWidth;
-  }
-  if (i.scrollbarYTop >= i.railYHeight - i.scrollbarYHeight) {
-    i.scrollbarYTop = i.railYHeight - i.scrollbarYHeight;
-  }
-
-  updateCss(element, i);
-
-  if (i.scrollbarXActive) {
-    element.classList.add(cls.state.active('x'));
-  } else {
-    element.classList.remove(cls.state.active('x'));
-    i.scrollbarXWidth = 0;
-    i.scrollbarXLeft = 0;
-    element.scrollLeft = i.isRtl === true ? i.contentWidth : 0;
-  }
-  if (i.scrollbarYActive) {
-    element.classList.add(cls.state.active('y'));
-  } else {
-    element.classList.remove(cls.state.active('y'));
-    i.scrollbarYHeight = 0;
-    i.scrollbarYTop = 0;
-    element.scrollTop = 0;
-  }
-}
-
-function getThumbSize(i, thumbSize) {
-  if (i.settings.minScrollbarLength) {
-    thumbSize = Math.max(thumbSize, i.settings.minScrollbarLength);
-  }
-  if (i.settings.maxScrollbarLength) {
-    thumbSize = Math.min(thumbSize, i.settings.maxScrollbarLength);
-  }
-  return thumbSize;
-}
-
-function updateCss(element, i) {
-  var xRailOffset = { width: i.railXWidth };
-  var roundedScrollTop = Math.floor(element.scrollTop);
-
-  if (i.isRtl) {
-    xRailOffset.left =
-      i.negativeScrollAdjustment +
-      element.scrollLeft +
-      i.containerWidth -
-      i.contentWidth;
-  } else {
-    xRailOffset.left = element.scrollLeft;
-  }
-  if (i.isScrollbarXUsingBottom) {
-    xRailOffset.bottom = i.scrollbarXBottom - roundedScrollTop;
-  } else {
-    xRailOffset.top = i.scrollbarXTop + roundedScrollTop;
-  }
-  set(i.scrollbarXRail, xRailOffset);
-
-  var yRailOffset = { top: roundedScrollTop, height: i.railYHeight };
-  if (i.isScrollbarYUsingRight) {
-    if (i.isRtl) {
-      yRailOffset.right =
-        i.contentWidth -
-        (i.negativeScrollAdjustment + element.scrollLeft) -
-        i.scrollbarYRight -
-        i.scrollbarYOuterWidth -
-        9;
-    } else {
-      yRailOffset.right = i.scrollbarYRight - element.scrollLeft;
-    }
-  } else {
-    if (i.isRtl) {
-      yRailOffset.left =
-        i.negativeScrollAdjustment +
-        element.scrollLeft +
-        i.containerWidth * 2 -
-        i.contentWidth -
-        i.scrollbarYLeft -
-        i.scrollbarYOuterWidth;
-    } else {
-      yRailOffset.left = i.scrollbarYLeft + element.scrollLeft;
-    }
-  }
-  set(i.scrollbarYRail, yRailOffset);
-
-  set(i.scrollbarX, {
-    left: i.scrollbarXLeft,
-    width: i.scrollbarXWidth - i.railBorderXWidth,
-  });
-  set(i.scrollbarY, {
-    top: i.scrollbarYTop,
-    height: i.scrollbarYHeight - i.railBorderYWidth,
-  });
-}
-
-function clickRail(i) {
-  var element = i.element;
-
-  i.event.bind(i.scrollbarY, 'mousedown', function (e) { return e.stopPropagation(); });
-  i.event.bind(i.scrollbarYRail, 'mousedown', function (e) {
-    var positionTop =
-      e.pageY -
-      window.pageYOffset -
-      i.scrollbarYRail.getBoundingClientRect().top;
-    var direction = positionTop > i.scrollbarYTop ? 1 : -1;
-
-    i.element.scrollTop += direction * i.containerHeight;
-    updateGeometry(i);
-
-    e.stopPropagation();
-  });
-
-  i.event.bind(i.scrollbarX, 'mousedown', function (e) { return e.stopPropagation(); });
-  i.event.bind(i.scrollbarXRail, 'mousedown', function (e) {
-    var positionLeft =
-      e.pageX -
-      window.pageXOffset -
-      i.scrollbarXRail.getBoundingClientRect().left;
-    var direction = positionLeft > i.scrollbarXLeft ? 1 : -1;
-
-    i.element.scrollLeft += direction * i.containerWidth;
-    updateGeometry(i);
-
-    e.stopPropagation();
-  });
-}
-
-function dragThumb(i) {
-  bindMouseScrollHandler(i, [
-    'containerWidth',
-    'contentWidth',
-    'pageX',
-    'railXWidth',
-    'scrollbarX',
-    'scrollbarXWidth',
-    'scrollLeft',
-    'x',
-    'scrollbarXRail' ]);
-  bindMouseScrollHandler(i, [
-    'containerHeight',
-    'contentHeight',
-    'pageY',
-    'railYHeight',
-    'scrollbarY',
-    'scrollbarYHeight',
-    'scrollTop',
-    'y',
-    'scrollbarYRail' ]);
-}
-
-function bindMouseScrollHandler(
-  i,
-  ref
-) {
-  var containerHeight = ref[0];
-  var contentHeight = ref[1];
-  var pageY = ref[2];
-  var railYHeight = ref[3];
-  var scrollbarY = ref[4];
-  var scrollbarYHeight = ref[5];
-  var scrollTop = ref[6];
-  var y = ref[7];
-  var scrollbarYRail = ref[8];
-
-  var element = i.element;
-
-  var startingScrollTop = null;
-  var startingMousePageY = null;
-  var scrollBy = null;
-
-  function mouseMoveHandler(e) {
-    if (e.touches && e.touches[0]) {
-      e[pageY] = e.touches[0].pageY;
-    }
-    element[scrollTop] =
-      startingScrollTop + scrollBy * (e[pageY] - startingMousePageY);
-    addScrollingClass(i, y);
-    updateGeometry(i);
-
-    e.stopPropagation();
-    e.preventDefault();
-  }
-
-  function mouseUpHandler() {
-    removeScrollingClass(i, y);
-    i[scrollbarYRail].classList.remove(cls.state.clicking);
-    i.event.unbind(i.ownerDocument, 'mousemove', mouseMoveHandler);
-  }
-
-  function bindMoves(e, touchMode) {
-    startingScrollTop = element[scrollTop];
-    if (touchMode && e.touches) {
-      e[pageY] = e.touches[0].pageY;
-    }
-    startingMousePageY = e[pageY];
-    scrollBy =
-      (i[contentHeight] - i[containerHeight]) /
-      (i[railYHeight] - i[scrollbarYHeight]);
-    if (!touchMode) {
-      i.event.bind(i.ownerDocument, 'mousemove', mouseMoveHandler);
-      i.event.once(i.ownerDocument, 'mouseup', mouseUpHandler);
-      e.preventDefault();
-    } else {
-      i.event.bind(i.ownerDocument, 'touchmove', mouseMoveHandler);
-    }
-
-    i[scrollbarYRail].classList.add(cls.state.clicking);
-
-    e.stopPropagation();
-  }
-
-  i.event.bind(i[scrollbarY], 'mousedown', function (e) {
-    bindMoves(e);
-  });
-  i.event.bind(i[scrollbarY], 'touchstart', function (e) {
-    bindMoves(e, true);
-  });
-}
-
-function keyboard(i) {
-  var element = i.element;
-
-  var elementHovered = function () { return matches(element, ':hover'); };
-  var scrollbarFocused = function () { return matches(i.scrollbarX, ':focus') || matches(i.scrollbarY, ':focus'); };
-
-  function shouldPreventDefault(deltaX, deltaY) {
-    var scrollTop = Math.floor(element.scrollTop);
-    if (deltaX === 0) {
-      if (!i.scrollbarYActive) {
-        return false;
+  data: function data() {
+    return {
+      missedArtists: [],
+      missedAlbums: [],
+      mp3File: this.providedFile,
+      genres: [],
+      song: {
+        id: null,
+        title: null,
+        lyrics: null,
+        year: null,
+        genres: [],
+        length: null,
+        artistAliases: [],
+        albums: [],
+        label: null,
+        bitrate: null,
+        sample_rate: null,
+        container: null,
+        numberOfChannels: null,
+        lossless: null,
+        playtime_seconds: null
       }
-      if (
-        (scrollTop === 0 && deltaY > 0) ||
-        (scrollTop >= i.contentHeight - i.containerHeight && deltaY < 0)
-      ) {
-        return !i.settings.wheelPropagation;
-      }
+    };
+  },
+  watch: {
+    mp3File: function mp3File() {
+      // this.clearForm();
+      if (this.mp3File && Object(_util_validators_js__WEBPACK_IMPORTED_MODULE_1__["validateAudio"])(this.mp3File)) this.getMetaData();else this.mp3File = null;
     }
+  },
+  methods: {
+    onArtistSelected: function onArtistSelected(artist) {
+      if (artist) {
+        var exists = this.song.artistAliases.find(function (alias) {
+          return alias.id === artist.id;
+        });
 
-    var scrollLeft = element.scrollLeft;
-    if (deltaY === 0) {
-      if (!i.scrollbarXActive) {
-        return false;
-      }
-      if (
-        (scrollLeft === 0 && deltaX < 0) ||
-        (scrollLeft >= i.contentWidth - i.containerWidth && deltaX > 0)
-      ) {
-        return !i.settings.wheelPropagation;
-      }
-    }
-    return true;
-  }
-
-  i.event.bind(i.ownerDocument, 'keydown', function (e) {
-    if (
-      (e.isDefaultPrevented && e.isDefaultPrevented()) ||
-      e.defaultPrevented
-    ) {
-      return;
-    }
-
-    if (!elementHovered() && !scrollbarFocused()) {
-      return;
-    }
-
-    var activeElement = document.activeElement
-      ? document.activeElement
-      : i.ownerDocument.activeElement;
-    if (activeElement) {
-      if (activeElement.tagName === 'IFRAME') {
-        activeElement = activeElement.contentDocument.activeElement;
-      } else {
-        // go deeper if element is a webcomponent
-        while (activeElement.shadowRoot) {
-          activeElement = activeElement.shadowRoot.activeElement;
+        if (!exists) {
+          this.song.artistAliases.push(artist);
         }
       }
-      if (isEditable(activeElement)) {
-        return;
-      }
-    }
 
-    var deltaX = 0;
-    var deltaY = 0;
-
-    switch (e.which) {
-      case 37: // left
-        if (e.metaKey) {
-          deltaX = -i.contentWidth;
-        } else if (e.altKey) {
-          deltaX = -i.containerWidth;
-        } else {
-          deltaX = -30;
-        }
-        break;
-      case 38: // up
-        if (e.metaKey) {
-          deltaY = i.contentHeight;
-        } else if (e.altKey) {
-          deltaY = i.containerHeight;
-        } else {
-          deltaY = 30;
-        }
-        break;
-      case 39: // right
-        if (e.metaKey) {
-          deltaX = i.contentWidth;
-        } else if (e.altKey) {
-          deltaX = i.containerWidth;
-        } else {
-          deltaX = 30;
-        }
-        break;
-      case 40: // down
-        if (e.metaKey) {
-          deltaY = -i.contentHeight;
-        } else if (e.altKey) {
-          deltaY = -i.containerHeight;
-        } else {
-          deltaY = -30;
-        }
-        break;
-      case 32: // space bar
-        if (e.shiftKey) {
-          deltaY = i.containerHeight;
-        } else {
-          deltaY = -i.containerHeight;
-        }
-        break;
-      case 33: // page up
-        deltaY = i.containerHeight;
-        break;
-      case 34: // page down
-        deltaY = -i.containerHeight;
-        break;
-      case 36: // home
-        deltaY = i.contentHeight;
-        break;
-      case 35: // end
-        deltaY = -i.contentHeight;
-        break;
-      default:
-        return;
-    }
-
-    if (i.settings.suppressScrollX && deltaX !== 0) {
-      return;
-    }
-    if (i.settings.suppressScrollY && deltaY !== 0) {
-      return;
-    }
-
-    element.scrollTop -= deltaY;
-    element.scrollLeft += deltaX;
-    updateGeometry(i);
-
-    if (shouldPreventDefault(deltaX, deltaY)) {
-      e.preventDefault();
-    }
-  });
-}
-
-function wheel(i) {
-  var element = i.element;
-
-  function shouldPreventDefault(deltaX, deltaY) {
-    var roundedScrollTop = Math.floor(element.scrollTop);
-    var isTop = element.scrollTop === 0;
-    var isBottom =
-      roundedScrollTop + element.offsetHeight === element.scrollHeight;
-    var isLeft = element.scrollLeft === 0;
-    var isRight =
-      element.scrollLeft + element.offsetWidth === element.scrollWidth;
-
-    var hitsBound;
-
-    // pick axis with primary direction
-    if (Math.abs(deltaY) > Math.abs(deltaX)) {
-      hitsBound = isTop || isBottom;
-    } else {
-      hitsBound = isLeft || isRight;
-    }
-
-    return hitsBound ? !i.settings.wheelPropagation : true;
-  }
-
-  function getDeltaFromEvent(e) {
-    var deltaX = e.deltaX;
-    var deltaY = -1 * e.deltaY;
-
-    if (typeof deltaX === 'undefined' || typeof deltaY === 'undefined') {
-      // OS X Safari
-      deltaX = (-1 * e.wheelDeltaX) / 6;
-      deltaY = e.wheelDeltaY / 6;
-    }
-
-    if (e.deltaMode && e.deltaMode === 1) {
-      // Firefox in deltaMode 1: Line scrolling
-      deltaX *= 10;
-      deltaY *= 10;
-    }
-
-    if (deltaX !== deltaX && deltaY !== deltaY /* NaN checks */) {
-      // IE in some mouse drivers
-      deltaX = 0;
-      deltaY = e.wheelDelta;
-    }
-
-    if (e.shiftKey) {
-      // reverse axis with shift key
-      return [-deltaY, -deltaX];
-    }
-    return [deltaX, deltaY];
-  }
-
-  function shouldBeConsumedByChild(target, deltaX, deltaY) {
-    // FIXME: this is a workaround for <select> issue in FF and IE #571
-    if (!env.isWebKit && element.querySelector('select:focus')) {
-      return true;
-    }
-
-    if (!element.contains(target)) {
-      return false;
-    }
-
-    var cursor = target;
-
-    while (cursor && cursor !== element) {
-      if (cursor.classList.contains(cls.element.consuming)) {
-        return true;
+      this.$refs['artistSearch'].query = '';
+      this.$refs['artistSearch'].options = [];
+    },
+    onAlbumSelected: function onAlbumSelected(album) {
+      if (album) {
+        var exists = this.song.albums.find(function (item) {
+          return item.id === album.id;
+        });
+        if (!exists) this.song.albums.push(album);
       }
 
-      var style = get(cursor);
+      this.$refs['albumSearch'].query = '';
+      this.$refs['albumSearch'].options = [];
+    },
+    onGenreSelected: function onGenreSelected(genre) {
+      if (genre) {
+        var exists = this.song.genres.find(function (item) {
+          return item.id === genre.id;
+        });
 
-      // if deltaY && vertical scrollable
-      if (deltaY && style.overflowY.match(/(scroll|auto)/)) {
-        var maxScrollTop = cursor.scrollHeight - cursor.clientHeight;
-        if (maxScrollTop > 0) {
-          if (
-            (cursor.scrollTop > 0 && deltaY < 0) ||
-            (cursor.scrollTop < maxScrollTop && deltaY > 0)
-          ) {
-            return true;
+        if (!exists) {
+          this.song.genres.push(genre);
+        }
+      }
+
+      this.$refs['genreSearch'].query = '';
+    },
+    getMetaData: function getMetaData() {
+      var _this2 = this;
+
+      Object(music_metadata_browser__WEBPACK_IMPORTED_MODULE_0__["parseBlob"])(this.mp3File).then(function (metadata) {
+        console.log(metadata);
+
+        _this2.fillData(metadata);
+      })["catch"]();
+    },
+    fetchArtist: function fetchArtist(name) {
+      var _this3 = this;
+
+      Object(_api_mediaApi_js__WEBPACK_IMPORTED_MODULE_2__["fetchArtistAliasesByName"])(name).then(function (aliases) {
+        if (aliases && aliases.length > 0) _this3.onArtistSelected(aliases[0]);else _this3.missedArtists.push(name);
+      });
+    },
+    fetchAlbum: function fetchAlbum(title) {
+      var _this4 = this;
+
+      Object(_api_mediaApi_js__WEBPACK_IMPORTED_MODULE_2__["fetchFilteredAlbums"])({
+        'title': title
+      }).then(function (albums) {
+        if (albums && albums.length > 0) _this4.onAlbumSelected(albums[0]);else _this4.missedAlbum = title;
+      });
+    },
+    fetchSong: function fetchSong(id) {
+      var _this5 = this;
+
+      Object(_api_mediaApi_js__WEBPACK_IMPORTED_MODULE_2__["fetchSong"])(id).then(function (song) {
+        _this5.song = song;
+      })["catch"]();
+    },
+    submit: function submit() {
+      var _this6 = this;
+
+      var data = new FormData();
+      if (this.song.id) data.append('id', this.song.id);
+      if (this.mp3File) data.append('mp3File', this.mp3File, this.mp3File.name);
+      data.append('title', this.song.title);
+      data.append('year', String(this.song.year));
+      if (this.song.label) data.append('label', this.song.label);
+      if (this.song.lyrics) data.append('lyrics', this.song.lyrics);
+
+      for (var i = 0; i < this.song.artistAliases.length; i++) {
+        data.append('artistAliases[]', this.song.artistAliases[i].id);
+      }
+
+      for (var j = 0; j < this.song.genres.length; j++) {
+        data.append('genres[]', this.song.genres[j].id);
+      }
+
+      for (var k = 0; k < this.song.albums.length; k++) {
+        data.append('albums[]', this.song.albums[k].id);
+      }
+
+      axios.post('/media/music/song', data).then(function (response) {
+        _this6.clearForm(true);
+
+        _this6.$router.replace('/media/song');
+      })["catch"]();
+    },
+    removeArtistAlias: function removeArtistAlias(id) {
+      this.song.artistAliases = this.song.artistAliases.filter(function (alias) {
+        return alias.id !== id;
+      });
+    },
+    removeAlbum: function removeAlbum(id) {
+      this.song.albums = this.song.albums.filter(function (album) {
+        return album.id !== id;
+      });
+    },
+    removeGenre: function removeGenre(id) {
+      this.song.genres = this.song.genres.filter(function (genre) {
+        return genre.id !== id;
+      });
+    },
+    fillData: function fillData(meta) {
+      var _this7 = this;
+
+      this.song.title = meta.common.title;
+      this.song.year = meta.common.year;
+      if (meta.common.label && meta.common.label.length > 0) this.song.label = meta.common.label[0];
+      this.song.bitrate = meta.format.bitrate;
+      this.song.sample_rate = meta.format.sampleRate;
+      this.song.container = meta.format.container;
+      this.song.numberOfChannels = meta.format.numberOfChannels;
+      this.song.playtime_seconds = meta.format.duration;
+      this.song.lossless = meta.format.lossless;
+      if (meta.common.artists) for (var i = 0; i < meta.common.artists.length; i++) {
+        this.fetchArtist(meta.common.artists[i]);
+      }
+      if (meta.common.album) this.fetchAlbum(meta.common.album);
+
+      if (meta.common.genre) {
+        var _loop = function _loop(j) {
+          var genreName = meta.common.genre[j].replace(/[^a-zA-Z]/g, '').toUpperCase();
+          var bestMatch = {
+            score: 0,
+            genre: null
+          };
+
+          for (var k = 0; k < _this7.genres.length; k = k + 1) {
+            var enScore = string_similarity__WEBPACK_IMPORTED_MODULE_3__["compareTwoStrings"](genreName, _this7.genres[k].name.replace(/[^a-zA-Z]/g, '').toUpperCase());
+            var ruScore = string_similarity__WEBPACK_IMPORTED_MODULE_3__["compareTwoStrings"](genreName, _this7.genres[k].local_name.replace(/[^\u0410-\u042F\u0430-\u044F]/g, '').toUpperCase());
+            var score = enScore > ruScore ? enScore : ruScore;
+
+            if (score > bestMatch.score) {
+              bestMatch.score = score;
+              bestMatch.genre = _this7.genres[k];
+            }
           }
+
+          var existing = _this7.song.genres.find(function (genre) {
+            return bestMatch.genre.id === genre.id;
+          });
+
+          if (!existing) _this7.song.genres.push(bestMatch.genre);
+        };
+
+        for (var j = 0; j < meta.common.genre.length; j++) {
+          _loop(j);
         }
       }
-      // if deltaX && horizontal scrollable
-      if (deltaX && style.overflowX.match(/(scroll|auto)/)) {
-        var maxScrollLeft = cursor.scrollWidth - cursor.clientWidth;
-        if (maxScrollLeft > 0) {
-          if (
-            (cursor.scrollLeft > 0 && deltaX < 0) ||
-            (cursor.scrollLeft < maxScrollLeft && deltaX > 0)
-          ) {
-            return true;
+    },
+    clearForm: function clearForm() {
+      var removeFile = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
+      this.song = {
+        id: null,
+        title: null,
+        lyrics: null,
+        year: null,
+        genres: [],
+        length: null,
+        artistAliases: [],
+        albums: [],
+        label: null,
+        bitrate: null,
+        sample_rate: null,
+        container: null,
+        numberOfChannels: null,
+        lossless: null,
+        playtime_seconds: null
+      };
+      this.missedAlbums = [];
+      this.missedArtists = [];
+
+      if (removeFile) {
+        this.mp3File = null;
+        this.$refs['mp3FileInput'].reset();
+      }
+
+      Object(_events__WEBPACK_IMPORTED_MODULE_4__["invokeErrorResetRequested"])();
+    }
+  },
+  computed: {
+    audioSrc: function audioSrc() {
+      if (this.mp3File) return URL.createObjectURL(this.mp3File);
+      if (this.song.id) return "/media/music/song/".concat(this.song.id, "/audio");
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/admin/media/music/SongEditor.vue?vue&type=template&id=3b8ea902&scoped=true&":
+/*!*******************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/admin/media/music/SongEditor.vue?vue&type=template&id=3b8ea902&scoped=true& ***!
+  \*******************************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "card mb-5" }, [
+    _c("div", { staticClass: "card-header" }, [
+      _vm._v("\n        Загрузка песни\n    ")
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "card-body" }, [
+      _c("div", { staticClass: "row" }, [
+        !Boolean(_vm.providedFile)
+          ? _c(
+              "div",
+              { staticClass: "align-items-end col-md-6 form-group" },
+              [
+                _c("label", [_vm._v("Файл")]),
+                _vm._v(" "),
+                _c("b-form-file", {
+                  ref: "mp3FileInput",
+                  attrs: {
+                    state: Boolean(_vm.audioSrc) || Boolean(_vm.mp3File),
+                    accept: ".mp3",
+                    placeholder: "Выберите файл или перетащите его сюда...",
+                    "drop-placeholder": "Перетащите файл сюда...",
+                    "browse-text": "Обзор"
+                  },
+                  model: {
+                    value: _vm.mp3File,
+                    callback: function($$v) {
+                      _vm.mp3File = $$v
+                    },
+                    expression: "mp3File"
+                  }
+                })
+              ],
+              1
+            )
+          : _vm._e(),
+        _vm._v(" "),
+        _c("div", { staticClass: "row ml-1 col-md-6" }, [
+          _c("audio", {
+            staticClass: "mt-md-4 mx-auto",
+            attrs: {
+              controlsList: "nodownload",
+              src: _vm.audioSrc,
+              controls: ""
+            }
+          })
+        ])
+      ]),
+      _vm._v(" "),
+      _vm.song.bitrate
+        ? _c("div", { staticClass: "alert alert-info" }, [
+            _c("span", [
+              _vm._v(
+                _vm._s(_vm.song.bitrate / 1000) +
+                  " kbs |\n            " +
+                  _vm._s(_vm.song.sample_rate) +
+                  " |\n            "
+              ),
+              _vm.song.container
+                ? _c("span", [_vm._v(_vm._s(_vm.song.container) + " |")])
+                : _vm._e(),
+              _vm._v(" "),
+              _vm.song.encoder
+                ? _c("span", [_vm._v(_vm._s(_vm.song.encoder) + " |")])
+                : _vm._e(),
+              _vm._v(
+                "\n            " +
+                  _vm._s(
+                    Math.round((_vm.song.playtime_seconds / 60) * 100) / 100
+                  )
+              )
+            ])
+          ])
+        : _vm._e(),
+      _vm._v(" "),
+      _c("div", { staticClass: "row" }, [
+        _c("div", { staticClass: "form-group col-md-8" }, [
+          _c("label", [_vm._v("Название")]),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.song.title,
+                expression: "song.title"
+              }
+            ],
+            staticClass: "form-control",
+            attrs: { type: "text", autofocus: "" },
+            domProps: { value: _vm.song.title },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.$set(_vm.song, "title", $event.target.value)
+              }
+            }
+          })
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "form-group col-md-4 " }, [
+          _c("label", [_vm._v("Год")]),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.song.year,
+                expression: "song.year"
+              }
+            ],
+            staticClass: "form-control",
+            attrs: { type: "text" },
+            domProps: { value: _vm.song.year },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.$set(_vm.song, "year", $event.target.value)
+              }
+            }
+          })
+        ])
+      ]),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "form-group" },
+        [
+          _c("label", [_vm._v("Исполнители")]),
+          _vm._v(" "),
+          _c("suggestion-input", {
+            ref: "artistSearch",
+            attrs: {
+              displayPropertyName: "name",
+              "action-url": "/media/artist/alias/filter?name="
+            },
+            on: { selected: _vm.onArtistSelected }
+          }),
+          _vm._v(" "),
+          _c(
+            "ul",
+            {
+              staticClass: "list-unstyled d-inline-flex flex-wrap mb-0",
+              attrs: {
+                "aria-live": "polite",
+                "aria-atomic": "false",
+                "aria-relevant": "additions removals"
+              }
+            },
+            _vm._l(_vm.song.artistAliases, function(artistAlias) {
+              return _c(
+                "b-card",
+                {
+                  key: artistAlias.id,
+                  staticClass: "mt-1 mr-1 bg-warning",
+                  attrs: {
+                    id:
+                      "artistAliasesTagList_" +
+                      artistAlias.name.replace(/\s/g, "_") +
+                      "_",
+                    tag: "li",
+                    "body-class": "py-1 pr-2 text-nowrap"
+                  }
+                },
+                [
+                  _c("strong", [_vm._v(_vm._s(artistAlias.name))]),
+                  _vm._v(" "),
+                  _c(
+                    "b-button",
+                    {
+                      staticClass: "text-decoration-none",
+                      attrs: {
+                        variant: "link",
+                        size: "sm",
+                        "aria-controls":
+                          "artistAliasesTagList__" +
+                          artistAlias.name.replace(/\s/g, "_") +
+                          "_"
+                      },
+                      on: {
+                        click: function($event) {
+                          return _vm.removeArtistAlias(artistAlias.id)
+                        }
+                      }
+                    },
+                    [_vm._v("×\n                    ")]
+                  )
+                ],
+                1
+              )
+            }),
+            1
+          ),
+          _vm._v(" "),
+          _vm.missedArtists.length > 0
+            ? _c(
+                "span",
+                { staticClass: "small" },
+                [
+                  _vm._v("Исполнители не найдены:\n            "),
+                  _vm._l(_vm.missedArtists, function(artist) {
+                    return _c("b", [_vm._v(_vm._s(artist))])
+                  })
+                ],
+                2
+              )
+            : _vm._e()
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "form-group" },
+        [
+          _c("label", [_vm._v("Жанры")]),
+          _vm._v(" "),
+          _c("suggestion-input", {
+            ref: "genreSearch",
+            attrs: {
+              displayPropertyName: "name",
+              providedOptions: _vm.genres,
+              searchPropertyName: "name"
+            },
+            on: { selected: _vm.onGenreSelected }
+          }),
+          _vm._v(" "),
+          _c(
+            "ul",
+            {
+              staticClass: "list-unstyled d-inline-flex flex-wrap mb-0",
+              attrs: {
+                "aria-live": "polite",
+                "aria-atomic": "false",
+                "aria-relevant": "additions removals"
+              }
+            },
+            _vm._l(_vm.song.genres, function(genre) {
+              return _c(
+                "b-card",
+                {
+                  key: genre.id,
+                  staticClass: "mt-1 mr-1 bg-warning",
+                  attrs: {
+                    id: "genresTagList_" + genre.id.replace(/\s/g, "_") + "_",
+                    tag: "li",
+                    "body-class": "py-1 pr-2 text-nowrap"
+                  }
+                },
+                [
+                  _c("strong", [_vm._v(_vm._s(genre.name))]),
+                  _vm._v(" "),
+                  _c(
+                    "b-button",
+                    {
+                      staticClass: "text-decoration-none",
+                      attrs: {
+                        variant: "link",
+                        size: "sm",
+                        "aria-controls":
+                          "genresTagList__" + genre.id.replace(/\s/g, "_") + "_"
+                      },
+                      on: {
+                        click: function($event) {
+                          return _vm.removeGenre(genre.id)
+                        }
+                      }
+                    },
+                    [_vm._v("×\n                    ")]
+                  )
+                ],
+                1
+              )
+            }),
+            1
+          )
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "form-group" },
+        [
+          _c("label", [_vm._v("Альбомы")]),
+          _vm._v(" "),
+          _c("suggestion-input", {
+            ref: "albumSearch",
+            attrs: {
+              displayPropertyName: "title",
+              "action-url": "/media/music/album/filter?title="
+            },
+            on: { selected: _vm.onAlbumSelected }
+          }),
+          _vm._v(" "),
+          _c(
+            "ul",
+            {
+              staticClass: "list-unstyled d-inline-flex flex-wrap mb-0",
+              attrs: {
+                "aria-live": "polite",
+                "aria-atomic": "false",
+                "aria-relevant": "additions removals"
+              }
+            },
+            _vm._l(_vm.song.albums, function(album) {
+              return _c(
+                "b-card",
+                {
+                  key: album.id,
+                  staticClass: "mt-1 mr-1 bg-warning",
+                  attrs: {
+                    id: "albumsTagList_" + album.id.replace(/\s/g, "_") + "_",
+                    tag: "li",
+                    "body-class": "py-1 pr-2 text-nowrap"
+                  }
+                },
+                [
+                  _c("strong", [_vm._v(_vm._s(album.title))]),
+                  _vm._v(" "),
+                  _c(
+                    "b-button",
+                    {
+                      staticClass: "text-decoration-none",
+                      attrs: {
+                        variant: "link",
+                        size: "sm",
+                        "aria-controls":
+                          "albumsTagList__" + album.id.replace(/\s/g, "_") + "_"
+                      },
+                      on: {
+                        click: function($event) {
+                          return _vm.removeAlbum(album.id)
+                        }
+                      }
+                    },
+                    [_vm._v("×\n                    ")]
+                  )
+                ],
+                1
+              )
+            }),
+            1
+          )
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c("div", { staticClass: "form-group" }, [
+        _c("label", [_vm._v("Лэйбл")]),
+        _vm._v(" "),
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.song.label,
+              expression: "song.label"
+            }
+          ],
+          staticClass: "form-control",
+          attrs: { type: "text" },
+          domProps: { value: _vm.song.label },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.$set(_vm.song, "label", $event.target.value)
+            }
           }
-        }
-      }
+        })
+      ]),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "form-group" },
+        [
+          _c("label", [_vm._v("Текст песни")]),
+          _vm._v(" "),
+          _c("b-form-textarea", {
+            attrs: { rows: "5", "max-rows": "15" },
+            model: {
+              value: _vm.song.lyrics,
+              callback: function($$v) {
+                _vm.$set(_vm.song, "lyrics", $$v)
+              },
+              expression: "song.lyrics"
+            }
+          })
+        ],
+        1
+      )
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "card-footer" }, [
+      _c(
+        "button",
+        { staticClass: "btn btn-primary", on: { click: _vm.submit } },
+        [_vm._v("Сохранить")]
+      )
+    ])
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
 
-      cursor = cursor.parentNode;
-    }
 
-    return false;
-  }
 
-  function mousewheelHandler(e) {
-    var ref = getDeltaFromEvent(e);
-    var deltaX = ref[0];
-    var deltaY = ref[1];
+/***/ }),
 
-    if (shouldBeConsumedByChild(e.target, deltaX, deltaY)) {
-      return;
-    }
+/***/ "./resources/js/api/mediaApi.js":
+/*!**************************************!*\
+  !*** ./resources/js/api/mediaApi.js ***!
+  \**************************************/
+/*! exports provided: fetchGenres, fetchArtistAliasesByName, fetchFilteredAlbums, fetchSong, fetchAlbum, fetchAlbumTypes, fetchSongs */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-    var shouldPrevent = false;
-    if (!i.settings.useBothWheelAxes) {
-      // deltaX will only be used for horizontal scrolling and deltaY will
-      // only be used for vertical scrolling - this is the default
-      element.scrollTop -= deltaY * i.settings.wheelSpeed;
-      element.scrollLeft += deltaX * i.settings.wheelSpeed;
-    } else if (i.scrollbarYActive && !i.scrollbarXActive) {
-      // only vertical scrollbar is active and useBothWheelAxes option is
-      // active, so let's scroll vertical bar using both mouse wheel axes
-      if (deltaY) {
-        element.scrollTop -= deltaY * i.settings.wheelSpeed;
-      } else {
-        element.scrollTop += deltaX * i.settings.wheelSpeed;
-      }
-      shouldPrevent = true;
-    } else if (i.scrollbarXActive && !i.scrollbarYActive) {
-      // useBothWheelAxes and only horizontal bar is active, so use both
-      // wheel axes for horizontal bar
-      if (deltaX) {
-        element.scrollLeft += deltaX * i.settings.wheelSpeed;
-      } else {
-        element.scrollLeft -= deltaY * i.settings.wheelSpeed;
-      }
-      shouldPrevent = true;
-    }
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchGenres", function() { return fetchGenres; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchArtistAliasesByName", function() { return fetchArtistAliasesByName; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchFilteredAlbums", function() { return fetchFilteredAlbums; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchSong", function() { return fetchSong; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchAlbum", function() { return fetchAlbum; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchAlbumTypes", function() { return fetchAlbumTypes; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchSongs", function() { return fetchSongs; });
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _util_stringHelper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../util/stringHelper */ "./resources/js/util/stringHelper.js");
 
-    updateGeometry(i);
 
-    shouldPrevent = shouldPrevent || shouldPreventDefault(deltaX, deltaY);
-    if (shouldPrevent && !e.ctrlKey) {
-      e.stopPropagation();
-      e.preventDefault();
-    }
-  }
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
-  if (typeof window.onwheel !== 'undefined') {
-    i.event.bind(element, 'wheel', mousewheelHandler);
-  } else if (typeof window.onmousewheel !== 'undefined') {
-    i.event.bind(element, 'mousewheel', mousewheelHandler);
-  }
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+
+function fetchGenres() {
+  return _fetchGenres.apply(this, arguments);
 }
 
-function touch(i) {
-  if (!env.supportsTouch && !env.supportsIePointer) {
-    return;
-  }
+function _fetchGenres() {
+  _fetchGenres = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+      while (1) {
+        switch (_context.prev = _context.next) {
+          case 0:
+            return _context.abrupt("return", axios.get('/media/music/genre'));
 
-  var element = i.element;
-
-  function shouldPrevent(deltaX, deltaY) {
-    var scrollTop = Math.floor(element.scrollTop);
-    var scrollLeft = element.scrollLeft;
-    var magnitudeX = Math.abs(deltaX);
-    var magnitudeY = Math.abs(deltaY);
-
-    if (magnitudeY > magnitudeX) {
-      // user is perhaps trying to swipe up/down the page
-
-      if (
-        (deltaY < 0 && scrollTop === i.contentHeight - i.containerHeight) ||
-        (deltaY > 0 && scrollTop === 0)
-      ) {
-        // set prevent for mobile Chrome refresh
-        return window.scrollY === 0 && deltaY > 0 && env.isChrome;
-      }
-    } else if (magnitudeX > magnitudeY) {
-      // user is perhaps trying to swipe left/right across the page
-
-      if (
-        (deltaX < 0 && scrollLeft === i.contentWidth - i.containerWidth) ||
-        (deltaX > 0 && scrollLeft === 0)
-      ) {
-        return true;
-      }
-    }
-
-    return true;
-  }
-
-  function applyTouchMove(differenceX, differenceY) {
-    element.scrollTop -= differenceY;
-    element.scrollLeft -= differenceX;
-
-    updateGeometry(i);
-  }
-
-  var startOffset = {};
-  var startTime = 0;
-  var speed = {};
-  var easingLoop = null;
-
-  function getTouch(e) {
-    if (e.targetTouches) {
-      return e.targetTouches[0];
-    } else {
-      // Maybe IE pointer
-      return e;
-    }
-  }
-
-  function shouldHandle(e) {
-    if (e.pointerType && e.pointerType === 'pen' && e.buttons === 0) {
-      return false;
-    }
-    if (e.targetTouches && e.targetTouches.length === 1) {
-      return true;
-    }
-    if (
-      e.pointerType &&
-      e.pointerType !== 'mouse' &&
-      e.pointerType !== e.MSPOINTER_TYPE_MOUSE
-    ) {
-      return true;
-    }
-    return false;
-  }
-
-  function touchStart(e) {
-    if (!shouldHandle(e)) {
-      return;
-    }
-
-    var touch = getTouch(e);
-
-    startOffset.pageX = touch.pageX;
-    startOffset.pageY = touch.pageY;
-
-    startTime = new Date().getTime();
-
-    if (easingLoop !== null) {
-      clearInterval(easingLoop);
-    }
-  }
-
-  function shouldBeConsumedByChild(target, deltaX, deltaY) {
-    if (!element.contains(target)) {
-      return false;
-    }
-
-    var cursor = target;
-
-    while (cursor && cursor !== element) {
-      if (cursor.classList.contains(cls.element.consuming)) {
-        return true;
-      }
-
-      var style = get(cursor);
-
-      // if deltaY && vertical scrollable
-      if (deltaY && style.overflowY.match(/(scroll|auto)/)) {
-        var maxScrollTop = cursor.scrollHeight - cursor.clientHeight;
-        if (maxScrollTop > 0) {
-          if (
-            (cursor.scrollTop > 0 && deltaY < 0) ||
-            (cursor.scrollTop < maxScrollTop && deltaY > 0)
-          ) {
-            return true;
-          }
+          case 1:
+          case "end":
+            return _context.stop();
         }
       }
-      // if deltaX && horizontal scrollable
-      if (deltaX && style.overflowX.match(/(scroll|auto)/)) {
-        var maxScrollLeft = cursor.scrollWidth - cursor.clientWidth;
-        if (maxScrollLeft > 0) {
-          if (
-            (cursor.scrollLeft > 0 && deltaX < 0) ||
-            (cursor.scrollLeft < maxScrollLeft && deltaX > 0)
-          ) {
-            return true;
-          }
-        }
-      }
-
-      cursor = cursor.parentNode;
-    }
-
-    return false;
-  }
-
-  function touchMove(e) {
-    if (shouldHandle(e)) {
-      var touch = getTouch(e);
-
-      var currentOffset = { pageX: touch.pageX, pageY: touch.pageY };
-
-      var differenceX = currentOffset.pageX - startOffset.pageX;
-      var differenceY = currentOffset.pageY - startOffset.pageY;
-
-      if (shouldBeConsumedByChild(e.target, differenceX, differenceY)) {
-        return;
-      }
-
-      applyTouchMove(differenceX, differenceY);
-      startOffset = currentOffset;
-
-      var currentTime = new Date().getTime();
-
-      var timeGap = currentTime - startTime;
-      if (timeGap > 0) {
-        speed.x = differenceX / timeGap;
-        speed.y = differenceY / timeGap;
-        startTime = currentTime;
-      }
-
-      if (shouldPrevent(differenceX, differenceY)) {
-        e.preventDefault();
-      }
-    }
-  }
-  function touchEnd() {
-    if (i.settings.swipeEasing) {
-      clearInterval(easingLoop);
-      easingLoop = setInterval(function() {
-        if (i.isInitialized) {
-          clearInterval(easingLoop);
-          return;
-        }
-
-        if (!speed.x && !speed.y) {
-          clearInterval(easingLoop);
-          return;
-        }
-
-        if (Math.abs(speed.x) < 0.01 && Math.abs(speed.y) < 0.01) {
-          clearInterval(easingLoop);
-          return;
-        }
-
-        applyTouchMove(speed.x * 30, speed.y * 30);
-
-        speed.x *= 0.8;
-        speed.y *= 0.8;
-      }, 10);
-    }
-  }
-
-  if (env.supportsTouch) {
-    i.event.bind(element, 'touchstart', touchStart);
-    i.event.bind(element, 'touchmove', touchMove);
-    i.event.bind(element, 'touchend', touchEnd);
-  } else if (env.supportsIePointer) {
-    if (window.PointerEvent) {
-      i.event.bind(element, 'pointerdown', touchStart);
-      i.event.bind(element, 'pointermove', touchMove);
-      i.event.bind(element, 'pointerup', touchEnd);
-    } else if (window.MSPointerEvent) {
-      i.event.bind(element, 'MSPointerDown', touchStart);
-      i.event.bind(element, 'MSPointerMove', touchMove);
-      i.event.bind(element, 'MSPointerUp', touchEnd);
-    }
-  }
+    }, _callee);
+  }));
+  return _fetchGenres.apply(this, arguments);
 }
 
-var defaultSettings = function () { return ({
-  handlers: ['click-rail', 'drag-thumb', 'keyboard', 'wheel', 'touch'],
-  maxScrollbarLength: null,
-  minScrollbarLength: null,
-  scrollingThreshold: 1000,
-  scrollXMarginOffset: 0,
-  scrollYMarginOffset: 0,
-  suppressScrollX: false,
-  suppressScrollY: false,
-  swipeEasing: true,
-  useBothWheelAxes: false,
-  wheelPropagation: true,
-  wheelSpeed: 1,
-}); };
+function fetchArtistAliasesByName(_x) {
+  return _fetchArtistAliasesByName.apply(this, arguments);
+}
 
-var handlers = {
-  'click-rail': clickRail,
-  'drag-thumb': dragThumb,
-  keyboard: keyboard,
-  wheel: wheel,
-  touch: touch,
-};
+function _fetchArtistAliasesByName() {
+  _fetchArtistAliasesByName = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2(name) {
+    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+      while (1) {
+        switch (_context2.prev = _context2.next) {
+          case 0:
+            return _context2.abrupt("return", axios.get("/media/artist/alias/filter?name=".concat(name)));
 
-var PerfectScrollbar = function PerfectScrollbar(element, userSettings) {
-  var this$1 = this;
-  if ( userSettings === void 0 ) userSettings = {};
+          case 1:
+          case "end":
+            return _context2.stop();
+        }
+      }
+    }, _callee2);
+  }));
+  return _fetchArtistAliasesByName.apply(this, arguments);
+}
 
-  if (typeof element === 'string') {
-    element = document.querySelector(element);
+function fetchFilteredAlbums(_x2) {
+  return _fetchFilteredAlbums.apply(this, arguments);
+}
+
+function _fetchFilteredAlbums() {
+  _fetchFilteredAlbums = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3(filters) {
+    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
+      while (1) {
+        switch (_context3.prev = _context3.next) {
+          case 0:
+            return _context3.abrupt("return", axios.get('/media/music/album/filter?' + Object(_util_stringHelper__WEBPACK_IMPORTED_MODULE_1__["kvpToQueryParam"])(filters)));
+
+          case 1:
+          case "end":
+            return _context3.stop();
+        }
+      }
+    }, _callee3);
+  }));
+  return _fetchFilteredAlbums.apply(this, arguments);
+}
+
+function fetchSong(_x3) {
+  return _fetchSong.apply(this, arguments);
+}
+
+function _fetchSong() {
+  _fetchSong = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4(id) {
+    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee4$(_context4) {
+      while (1) {
+        switch (_context4.prev = _context4.next) {
+          case 0:
+            return _context4.abrupt("return", axios.get("/media/music/song/".concat(id)));
+
+          case 1:
+          case "end":
+            return _context4.stop();
+        }
+      }
+    }, _callee4);
+  }));
+  return _fetchSong.apply(this, arguments);
+}
+
+function fetchAlbum(_x4) {
+  return _fetchAlbum.apply(this, arguments);
+}
+
+function _fetchAlbum() {
+  _fetchAlbum = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee5(id) {
+    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee5$(_context5) {
+      while (1) {
+        switch (_context5.prev = _context5.next) {
+          case 0:
+            return _context5.abrupt("return", axios.get("/media/music/album/".concat(id)));
+
+          case 1:
+          case "end":
+            return _context5.stop();
+        }
+      }
+    }, _callee5);
+  }));
+  return _fetchAlbum.apply(this, arguments);
+}
+
+function fetchAlbumTypes() {
+  return _fetchAlbumTypes.apply(this, arguments);
+} //Music
+
+function _fetchAlbumTypes() {
+  _fetchAlbumTypes = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee6() {
+    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee6$(_context6) {
+      while (1) {
+        switch (_context6.prev = _context6.next) {
+          case 0:
+            return _context6.abrupt("return", axios.get('/media/music/album/types'));
+
+          case 1:
+          case "end":
+            return _context6.stop();
+        }
+      }
+    }, _callee6);
+  }));
+  return _fetchAlbumTypes.apply(this, arguments);
+}
+
+function fetchSongs(_x5) {
+  return _fetchSongs.apply(this, arguments);
+}
+
+function _fetchSongs() {
+  _fetchSongs = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee7(filters) {
+    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee7$(_context7) {
+      while (1) {
+        switch (_context7.prev = _context7.next) {
+          case 0:
+            return _context7.abrupt("return", axios.get('/media/music/song/list?' + Object(_util_stringHelper__WEBPACK_IMPORTED_MODULE_1__["kvpToQueryParam"])(filters)));
+
+          case 1:
+          case "end":
+            return _context7.stop();
+        }
+      }
+    }, _callee7);
+  }));
+  return _fetchSongs.apply(this, arguments);
+}
+
+/***/ }),
+
+/***/ "./resources/js/components/admin/media/music/SongEditor.vue":
+/*!******************************************************************!*\
+  !*** ./resources/js/components/admin/media/music/SongEditor.vue ***!
+  \******************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _SongEditor_vue_vue_type_template_id_3b8ea902_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./SongEditor.vue?vue&type=template&id=3b8ea902&scoped=true& */ "./resources/js/components/admin/media/music/SongEditor.vue?vue&type=template&id=3b8ea902&scoped=true&");
+/* harmony import */ var _SongEditor_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./SongEditor.vue?vue&type=script&lang=js& */ "./resources/js/components/admin/media/music/SongEditor.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _SongEditor_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _SongEditor_vue_vue_type_template_id_3b8ea902_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _SongEditor_vue_vue_type_template_id_3b8ea902_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  "3b8ea902",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/admin/media/music/SongEditor.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/admin/media/music/SongEditor.vue?vue&type=script&lang=js&":
+/*!*******************************************************************************************!*\
+  !*** ./resources/js/components/admin/media/music/SongEditor.vue?vue&type=script&lang=js& ***!
+  \*******************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SongEditor_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./SongEditor.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/admin/media/music/SongEditor.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SongEditor_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/admin/media/music/SongEditor.vue?vue&type=template&id=3b8ea902&scoped=true&":
+/*!*************************************************************************************************************!*\
+  !*** ./resources/js/components/admin/media/music/SongEditor.vue?vue&type=template&id=3b8ea902&scoped=true& ***!
+  \*************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SongEditor_vue_vue_type_template_id_3b8ea902_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./SongEditor.vue?vue&type=template&id=3b8ea902&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/admin/media/music/SongEditor.vue?vue&type=template&id=3b8ea902&scoped=true&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SongEditor_vue_vue_type_template_id_3b8ea902_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SongEditor_vue_vue_type_template_id_3b8ea902_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/events.js":
+/*!********************************!*\
+  !*** ./resources/js/events.js ***!
+  \********************************/
+/*! exports provided: invokeErrorResetRequested */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "invokeErrorResetRequested", function() { return invokeErrorResetRequested; });
+function invokeErrorResetRequested() {
+  window.Vue.prototype.$eventHub.$emit('error-reset-requested');
+}
+
+/***/ }),
+
+/***/ "./resources/js/util/math.js":
+/*!***********************************!*\
+  !*** ./resources/js/util/math.js ***!
+  \***********************************/
+/*! exports provided: divideAdnRoundToInt */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "divideAdnRoundToInt", function() { return divideAdnRoundToInt; });
+function divideAdnRoundToInt(val, by) {
+  return (val - val % by) / by;
+}
+
+/***/ }),
+
+/***/ "./resources/js/util/stringHelper.js":
+/*!*******************************************!*\
+  !*** ./resources/js/util/stringHelper.js ***!
+  \*******************************************/
+/*! exports provided: kvpToQueryParam, concatStrings, secondsToFormattedMinutes */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "kvpToQueryParam", function() { return kvpToQueryParam; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "concatStrings", function() { return concatStrings; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "secondsToFormattedMinutes", function() { return secondsToFormattedMinutes; });
+/* harmony import */ var _math__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./math */ "./resources/js/util/math.js");
+
+function kvpToQueryParam(kvArray) {
+  var query = '';
+
+  for (var key in kvArray) {
+    query += "".concat(key, "=").concat(kvArray[key], "&");
   }
 
-  if (!element || !element.nodeName) {
-    throw new Error('no element is specified to initialize PerfectScrollbar');
+  return query;
+}
+function concatStrings(array, delimiter) {
+  var result = '';
+
+  for (var i = 0; i < array.length; i++) {
+    result += array[i];
+    if (i < array.length - 1) result += delimiter + ' ';
   }
 
-  this.element = element;
+  return result;
+}
+function secondsToFormattedMinutes(second) {
+  var sec = second % 60;
+  var result = "".concat(Object(_math__WEBPACK_IMPORTED_MODULE_0__["divideAdnRoundToInt"])(second, 60), ":").concat(sec);
+  if (sec < 10) result += '0';
+  return result;
+}
 
-  element.classList.add(cls.main);
+/***/ }),
 
-  this.settings = defaultSettings();
-  for (var key in userSettings) {
-    this.settings[key] = userSettings[key];
-  }
+/***/ "./resources/js/util/validators.js":
+/*!*****************************************!*\
+  !*** ./resources/js/util/validators.js ***!
+  \*****************************************/
+/*! exports provided: validateAudio */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-  this.containerWidth = null;
-  this.containerHeight = null;
-  this.contentWidth = null;
-  this.contentHeight = null;
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "validateAudio", function() { return validateAudio; });
+function validateAudio(file) {
+  var types = /(\.|\/)(mp3|ogg|wav)$/i;
+  return types.test(file.type) || types.test(file.name);
+}
 
-  var focus = function () { return element.classList.add(cls.state.focus); };
-  var blur = function () { return element.classList.remove(cls.state.focus); };
+/***/ }),
 
-  this.isRtl = get(element).direction === 'rtl';
-  if (this.isRtl === true) {
-    element.classList.add(cls.rtl);
-  }
-  this.isNegativeScroll = (function () {
-    var originalScrollLeft = element.scrollLeft;
-    var result = null;
-    element.scrollLeft = -1;
-    result = element.scrollLeft < 0;
-    element.scrollLeft = originalScrollLeft;
-    return result;
-  })();
-  this.negativeScrollAdjustment = this.isNegativeScroll
-    ? element.scrollWidth - element.clientWidth
-    : 0;
-  this.event = new EventManager();
-  this.ownerDocument = element.ownerDocument || document;
+/***/ 1:
+/*!**********************!*\
+  !*** util (ignored) ***!
+  \**********************/
+/*! no static exports found */
+/***/ (function(module, exports) {
 
-  this.scrollbarXRail = div(cls.element.rail('x'));
-  element.appendChild(this.scrollbarXRail);
-  this.scrollbarX = div(cls.element.thumb('x'));
-  this.scrollbarXRail.appendChild(this.scrollbarX);
-  this.scrollbarX.setAttribute('tabindex', 0);
-  this.event.bind(this.scrollbarX, 'focus', focus);
-  this.event.bind(this.scrollbarX, 'blur', blur);
-  this.scrollbarXActive = null;
-  this.scrollbarXWidth = null;
-  this.scrollbarXLeft = null;
-  var railXStyle = get(this.scrollbarXRail);
-  this.scrollbarXBottom = parseInt(railXStyle.bottom, 10);
-  if (isNaN(this.scrollbarXBottom)) {
-    this.isScrollbarXUsingBottom = false;
-    this.scrollbarXTop = toInt(railXStyle.top);
-  } else {
-    this.isScrollbarXUsingBottom = true;
-  }
-  this.railBorderXWidth =
-    toInt(railXStyle.borderLeftWidth) + toInt(railXStyle.borderRightWidth);
-  // Set rail to display:block to calculate margins
-  set(this.scrollbarXRail, { display: 'block' });
-  this.railXMarginWidth =
-    toInt(railXStyle.marginLeft) + toInt(railXStyle.marginRight);
-  set(this.scrollbarXRail, { display: '' });
-  this.railXWidth = null;
-  this.railXRatio = null;
+/* (ignored) */
 
-  this.scrollbarYRail = div(cls.element.rail('y'));
-  element.appendChild(this.scrollbarYRail);
-  this.scrollbarY = div(cls.element.thumb('y'));
-  this.scrollbarYRail.appendChild(this.scrollbarY);
-  this.scrollbarY.setAttribute('tabindex', 0);
-  this.event.bind(this.scrollbarY, 'focus', focus);
-  this.event.bind(this.scrollbarY, 'blur', blur);
-  this.scrollbarYActive = null;
-  this.scrollbarYHeight = null;
-  this.scrollbarYTop = null;
-  var railYStyle = get(this.scrollbarYRail);
-  this.scrollbarYRight = parseInt(railYStyle.right, 10);
-  if (isNaN(this.scrollbarYRight)) {
-    this.isScrollbarYUsingRight = false;
-    this.scrollbarYLeft = toInt(railYStyle.left);
-  } else {
-    this.isScrollbarYUsingRight = true;
-  }
-  this.scrollbarYOuterWidth = this.isRtl ? outerWidth(this.scrollbarY) : null;
-  this.railBorderYWidth =
-    toInt(railYStyle.borderTopWidth) + toInt(railYStyle.borderBottomWidth);
-  set(this.scrollbarYRail, { display: 'block' });
-  this.railYMarginHeight =
-    toInt(railYStyle.marginTop) + toInt(railYStyle.marginBottom);
-  set(this.scrollbarYRail, { display: '' });
-  this.railYHeight = null;
-  this.railYRatio = null;
+/***/ }),
 
-  this.reach = {
-    x:
-      element.scrollLeft <= 0
-        ? 'start'
-        : element.scrollLeft >= this.contentWidth - this.containerWidth
-        ? 'end'
-        : null,
-    y:
-      element.scrollTop <= 0
-        ? 'start'
-        : element.scrollTop >= this.contentHeight - this.containerHeight
-        ? 'end'
-        : null,
-  };
+/***/ 2:
+/*!**********************!*\
+  !*** util (ignored) ***!
+  \**********************/
+/*! no static exports found */
+/***/ (function(module, exports) {
 
-  this.isAlive = true;
-
-  this.settings.handlers.forEach(function (handlerName) { return handlers[handlerName](this$1); });
-
-  this.lastScrollTop = Math.floor(element.scrollTop); // for onScroll only
-  this.lastScrollLeft = element.scrollLeft; // for onScroll only
-  this.event.bind(this.element, 'scroll', function (e) { return this$1.onScroll(e); });
-  updateGeometry(this);
-};
-
-PerfectScrollbar.prototype.update = function update () {
-  if (!this.isAlive) {
-    return;
-  }
-
-  // Recalcuate negative scrollLeft adjustment
-  this.negativeScrollAdjustment = this.isNegativeScroll
-    ? this.element.scrollWidth - this.element.clientWidth
-    : 0;
-
-  // Recalculate rail margins
-  set(this.scrollbarXRail, { display: 'block' });
-  set(this.scrollbarYRail, { display: 'block' });
-  this.railXMarginWidth =
-    toInt(get(this.scrollbarXRail).marginLeft) +
-    toInt(get(this.scrollbarXRail).marginRight);
-  this.railYMarginHeight =
-    toInt(get(this.scrollbarYRail).marginTop) +
-    toInt(get(this.scrollbarYRail).marginBottom);
-
-  // Hide scrollbars not to affect scrollWidth and scrollHeight
-  set(this.scrollbarXRail, { display: 'none' });
-  set(this.scrollbarYRail, { display: 'none' });
-
-  updateGeometry(this);
-
-  processScrollDiff(this, 'top', 0, false, true);
-  processScrollDiff(this, 'left', 0, false, true);
-
-  set(this.scrollbarXRail, { display: '' });
-  set(this.scrollbarYRail, { display: '' });
-};
-
-PerfectScrollbar.prototype.onScroll = function onScroll (e) {
-  if (!this.isAlive) {
-    return;
-  }
-
-  updateGeometry(this);
-  processScrollDiff(this, 'top', this.element.scrollTop - this.lastScrollTop);
-  processScrollDiff(
-    this,
-    'left',
-    this.element.scrollLeft - this.lastScrollLeft
-  );
-
-  this.lastScrollTop = Math.floor(this.element.scrollTop);
-  this.lastScrollLeft = this.element.scrollLeft;
-};
-
-PerfectScrollbar.prototype.destroy = function destroy () {
-  if (!this.isAlive) {
-    return;
-  }
-
-  this.event.unbindAll();
-  remove(this.scrollbarX);
-  remove(this.scrollbarY);
-  remove(this.scrollbarXRail);
-  remove(this.scrollbarYRail);
-  this.removePsClasses();
-
-  // unset elements
-  this.element = null;
-  this.scrollbarX = null;
-  this.scrollbarY = null;
-  this.scrollbarXRail = null;
-  this.scrollbarYRail = null;
-
-  this.isAlive = false;
-};
-
-PerfectScrollbar.prototype.removePsClasses = function removePsClasses () {
-  this.element.className = this.element.className
-    .split(' ')
-    .filter(function (name) { return !name.match(/^ps([-_].+|)$/); })
-    .join(' ');
-};
-
-/* harmony default export */ __webpack_exports__["default"] = (PerfectScrollbar);
-//# sourceMappingURL=perfect-scrollbar.esm.js.map
-
+/* (ignored) */
 
 /***/ })
 
