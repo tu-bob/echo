@@ -14,6 +14,22 @@ class Song extends BaseModel
         'lyrics' => 'string'
     ];
 
+    protected $hidden = [
+        'channel_mode',
+        'channels',
+        'codec',
+        'compression_ratio',
+        'created_at',
+        'created_by_id',
+        'deleted_at',
+        'deleted_by_id',
+        'encoder_options',
+        'lossless',
+        'size',
+        'updated_at',
+        'updated_by_id'
+    ];
+
     public function audioFile()
     {
         return $this->belongsTo(AudioFile::class);
