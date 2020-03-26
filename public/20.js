@@ -69,6 +69,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _util_stringHelper__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../util/stringHelper */ "./resources/js/util/stringHelper.js");
 //
 //
 //
@@ -85,12 +86,32 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "SongCard",
   props: {
+    song: {
+      type: Object,
+      required: true
+    },
     thumbnail: {
       type: String,
       "default": 'https://picsum.photos/1024/400/?image=41'
+    }
+  },
+  computed: {
+    aliases: function aliases() {
+      return Object(_util_stringHelper__WEBPACK_IMPORTED_MODULE_0__["concatStrings"])(this.song.artistAliases.map(function (alias) {
+        return alias.name;
+      }), ';');
+    },
+    duration: function duration() {
+      return Object(_util_stringHelper__WEBPACK_IMPORTED_MODULE_0__["secondsToFormattedMinutes"])(this.song.playtime_seconds);
     }
   }
 });
@@ -213,7 +234,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, "\n.thumb[data-v-3528e31c] {\n    -o-object-fit: cover;\n       object-fit: cover;\n    width: 50px !important;\n    height: 50px;\n}\n.info-wrapper[data-v-3528e31c] {\n    padding-left: 15px;\n    padding-top: 7px;\n}\n", ""]);
+exports.push([module.i, "\n.thumb[data-v-3528e31c] {\n    -o-object-fit: cover;\n       object-fit: cover;\n    width: 50px !important;\n    height: 50px;\n}\n", ""]);
 
 // exports
 
@@ -384,24 +405,25 @@ var render = function() {
           attrs: { src: _vm.thumbnail, rounded: "" }
         }),
         _vm._v(" "),
-        _vm._m(0)
+        _c("div", { staticClass: "ml-2 mt-2 row col" }, [
+          _c("div", [
+            _c("h6", { staticClass: "mb-0" }, [_vm._v(_vm._s(_vm.song.title))]),
+            _vm._v(" "),
+            _c("span", { staticClass: "text-muted" }, [
+              _vm._v(_vm._s(_vm.aliases) + " ")
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "ml-auto row" }, [
+            _c("span", [_vm._v(_vm._s(_vm.duration))])
+          ])
+        ])
       ],
       1
     )
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "info-wrapper" }, [
-      _c("h6", { staticClass: "mb-0" }, [_vm._v("The separation")]),
-      _vm._v(" "),
-      _c("span", { staticClass: "text-muted" }, [_vm._v("Rachel Platten")])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -915,6 +937,64 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Overview_vue_vue_type_template_id_b3c3642c___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
+
+/***/ }),
+
+/***/ "./resources/js/util/math.js":
+/*!***********************************!*\
+  !*** ./resources/js/util/math.js ***!
+  \***********************************/
+/*! exports provided: divideAdnRoundToInt */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "divideAdnRoundToInt", function() { return divideAdnRoundToInt; });
+function divideAdnRoundToInt(val, by) {
+  return (val - val % by) / by;
+}
+
+/***/ }),
+
+/***/ "./resources/js/util/stringHelper.js":
+/*!*******************************************!*\
+  !*** ./resources/js/util/stringHelper.js ***!
+  \*******************************************/
+/*! exports provided: kvpToQueryParam, concatStrings, secondsToFormattedMinutes */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "kvpToQueryParam", function() { return kvpToQueryParam; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "concatStrings", function() { return concatStrings; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "secondsToFormattedMinutes", function() { return secondsToFormattedMinutes; });
+/* harmony import */ var _math__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./math */ "./resources/js/util/math.js");
+
+function kvpToQueryParam(kvArray) {
+  var query = '';
+
+  for (var key in kvArray) {
+    query += "".concat(key, "=").concat(kvArray[key], "&");
+  }
+
+  return query;
+}
+function concatStrings(array, delimiter) {
+  var result = '';
+
+  for (var i = 0; i < array.length; i++) {
+    result += array[i];
+    if (i < array.length - 1) result += delimiter + ' ';
+  }
+
+  return result;
+}
+function secondsToFormattedMinutes(second) {
+  var sec = second % 60;
+  var result = "".concat(Object(_math__WEBPACK_IMPORTED_MODULE_0__["divideAdnRoundToInt"])(second, 60), ":").concat(sec);
+  if (sec < 10) result += '0';
+  return result;
+}
 
 /***/ })
 

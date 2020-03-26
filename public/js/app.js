@@ -2168,13 +2168,13 @@ var routes = [{
   },
   path: '/login',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 14).then(__webpack_require__.bind(null, /*! ../components/auth/Login */ "./resources/js/components/auth/Login.vue"));
+    return __webpack_require__.e(/*! import() */ 16).then(__webpack_require__.bind(null, /*! ../components/auth/Login */ "./resources/js/components/auth/Login.vue"));
   }
 }, {
   name: 'register',
   path: '/register',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 15).then(__webpack_require__.bind(null, /*! ../components/auth/Register */ "./resources/js/components/auth/Register.vue"));
+    return __webpack_require__.e(/*! import() */ 17).then(__webpack_require__.bind(null, /*! ../components/auth/Register */ "./resources/js/components/auth/Register.vue"));
   }
 }, {
   name: 'home',
@@ -2183,25 +2183,25 @@ var routes = [{
     name: 'overview'
   },
   component: function component() {
-    return Promise.all(/*! import() */[__webpack_require__.e(10), __webpack_require__.e(9), __webpack_require__.e(22)]).then(__webpack_require__.bind(null, /*! ../components/public/home/HomeViewer */ "./resources/js/components/public/home/HomeViewer.vue"));
+    return Promise.all(/*! import() */[__webpack_require__.e(18), __webpack_require__.e(13), __webpack_require__.e(23)]).then(__webpack_require__.bind(null, /*! ../components/public/home/HomeViewer */ "./resources/js/components/public/home/HomeViewer.vue"));
   },
   children: [{
     name: 'overview',
     path: 'overview',
     component: function component() {
-      return Promise.all(/*! import() */[__webpack_require__.e(10), __webpack_require__.e(2), __webpack_require__.e(20)]).then(__webpack_require__.bind(null, /*! ../components/public/home/overview/Overview */ "./resources/js/components/public/home/overview/Overview.vue"));
+      return Promise.all(/*! import() */[__webpack_require__.e(18), __webpack_require__.e(2), __webpack_require__.e(20)]).then(__webpack_require__.bind(null, /*! ../components/public/home/overview/Overview */ "./resources/js/components/public/home/overview/Overview.vue"));
     }
   }, {
     name: 'news',
     path: 'news',
     component: function component() {
-      return __webpack_require__.e(/*! import() */ 17).then(__webpack_require__.bind(null, /*! ../components/public/news/News */ "./resources/js/components/public/news/News.vue"));
+      return __webpack_require__.e(/*! import() */ 10).then(__webpack_require__.bind(null, /*! ../components/public/news/News */ "./resources/js/components/public/news/News.vue"));
     }
   }, {
     name: 'new-music',
     path: 'music/new',
     component: function component() {
-      return __webpack_require__.e(/*! import() */ 16).then(__webpack_require__.bind(null, /*! ../components/public/music/NewMusic */ "./resources/js/components/public/music/NewMusic.vue"));
+      return Promise.all(/*! import() */[__webpack_require__.e(18), __webpack_require__.e(22)]).then(__webpack_require__.bind(null, /*! ../components/public/music/NewMusic */ "./resources/js/components/public/music/NewMusic.vue"));
     }
   }]
 }, {
@@ -2222,7 +2222,7 @@ var routes = [{
     name: 'post-editor',
     path: 'post/:id?',
     component: function component() {
-      return Promise.all(/*! import() */[__webpack_require__.e(10), __webpack_require__.e(3), __webpack_require__.e(21)]).then(__webpack_require__.bind(null, /*! ../components/admin/blog/post/PostEditor */ "./resources/js/components/admin/blog/post/PostEditor.vue"));
+      return Promise.all(/*! import() */[__webpack_require__.e(18), __webpack_require__.e(3), __webpack_require__.e(21)]).then(__webpack_require__.bind(null, /*! ../components/admin/blog/post/PostEditor */ "./resources/js/components/admin/blog/post/PostEditor.vue"));
     }
   }]
 }, {
@@ -2237,13 +2237,13 @@ var routes = [{
     name: 'songs-table',
     path: 'songs',
     component: function component() {
-      return __webpack_require__.e(/*! import() */ 0).then(__webpack_require__.bind(null, /*! ../components/admin/media/music/SongsTable */ "./resources/js/components/admin/media/music/SongsTable.vue"));
+      return __webpack_require__.e(/*! import() */ 8).then(__webpack_require__.bind(null, /*! ../components/admin/media/music/SongsTable */ "./resources/js/components/admin/media/music/SongsTable.vue"));
     }
   }, {
     name: 'song-editor',
     path: 'song/:id?',
     component: function component() {
-      return Promise.all(/*! import() */[__webpack_require__.e(1), __webpack_require__.e(8)]).then(__webpack_require__.bind(null, /*! ../components/admin/media/music/SongEditor */ "./resources/js/components/admin/media/music/SongEditor.vue"));
+      return Promise.all(/*! import() */[__webpack_require__.e(1), __webpack_require__.e(9)]).then(__webpack_require__.bind(null, /*! ../components/admin/media/music/SongEditor */ "./resources/js/components/admin/media/music/SongEditor.vue"));
     }
   }, {
     name: 'artists-table',
@@ -2255,7 +2255,7 @@ var routes = [{
     name: 'artist-editor',
     path: 'artist/:id?',
     component: function component() {
-      return __webpack_require__.e(/*! import() */ 13).then(__webpack_require__.bind(null, /*! ../components/admin/media/artist/ArtistEditor */ "./resources/js/components/admin/media/artist/ArtistEditor.vue"));
+      return __webpack_require__.e(/*! import() */ 15).then(__webpack_require__.bind(null, /*! ../components/admin/media/artist/ArtistEditor */ "./resources/js/components/admin/media/artist/ArtistEditor.vue"));
     }
   }, {
     name: 'albums-table',
@@ -2267,7 +2267,7 @@ var routes = [{
     name: 'album-editor',
     path: 'album/:id?',
     component: function component() {
-      return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(7)]).then(__webpack_require__.bind(null, /*! ../components/admin/media/album/AlbumEditor */ "./resources/js/components/admin/media/album/AlbumEditor.vue"));
+      return Promise.all(/*! import() */[__webpack_require__.e(8), __webpack_require__.e(0)]).then(__webpack_require__.bind(null, /*! ../components/admin/media/album/AlbumEditor */ "./resources/js/components/admin/media/album/AlbumEditor.vue"));
     }
   }]
 }];

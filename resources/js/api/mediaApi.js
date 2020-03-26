@@ -8,8 +8,8 @@ export async function fetchArtistAliasesByName(name) {
     return axios.get(`/media/artist/alias/filter?name=${name}`);
 }
 
-export async function fetchFilteredAlbums(params) {
-    return axios.get('/media/music/album/filter?' + kvpToQueryParam(params));
+export async function fetchFilteredAlbums(filters) {
+    return axios.get('/media/music/album/filter?' + kvpToQueryParam(filters));
 }
 
 export async function fetchSong(id) {
@@ -24,4 +24,7 @@ export async function fetchAlbumTypes() {
     return axios.get('/media/music/album/types');
 }
 
-
+//Music
+export async function fetchSongs(filters) {
+    return axios.get('/media/music/song/list?' + kvpToQueryParam(filters));
+}
