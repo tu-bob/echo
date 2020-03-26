@@ -1901,39 +1901,39 @@ tr.border-bottom-0 td, tr.border-bottom-0 th {
         margin-top: 2.5rem;
         opacity: 1; } }
 /* Dropdwon */
-.dropdown-menu {
-    min-width: 13rem;
-    -webkit-animation-duration: 0.2s;
-    -moz-animation-duration: 0.2s;
-    -o-animation-duration: 0.2s;
-    animation-duration: 0.2s; }
-.dropdown-menu.show {
-    animation-name: menuAnimeIn; }
+/*.dropdown-menu {*/
+/*    min-width: 13rem;*/
+/*    -webkit-animation-duration: 0.2s;*/
+/*    -moz-animation-duration: 0.2s;*/
+/*    -o-animation-duration: 0.2s;*/
+/*    animation-duration: 0.2s; }*/
+/*.dropdown-menu.show {*/
+/*    animation-name: menuAnimeIn; }*/
 
-.dropdown-item {
-    white-space: normal;
-    padding: 0.3rem 1.5rem;
-    font-size: 0.8125rem;
-    color: #2a2824; }
-.dropdown-item:hover {
-    color: #b08cf9;
-    background: transparent; }
-.dropdown-item.active, .dropdown-item:active {
-    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#91a5f4+0,b08cf9+86 */
-    background: #91a5f4;
-    /* Old browsers */
-    background: -moz-linear-gradient(-45deg, #91a5f4 0%, #b08cf9 86%);
-    /* FF3.6-15 */
-    background: -webkit-linear-gradient(-45deg, #91a5f4 0%, #b08cf9 86%);
-    /* Chrome10-25,Safari5.1-6 */
-    background: linear-gradient(135deg, #91a5f4 0%, #b08cf9 86%);
-    /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#91a5f4', endColorstr='#b08cf9',GradientType=1 );
-    /* IE6-9 fallback on horizontal gradient */
-    color: #2a2824 !important; }
+/*.dropdown-item {*/
+/*    white-space: normal;*/
+/*    padding: 0.3rem 1.5rem;*/
+/*    font-size: 0.8125rem;*/
+/*    color: #2a2824; }*/
+/*.dropdown-item:hover {*/
+/*    color: #b08cf9;*/
+/*    background: transparent; }*/
+/*.dropdown-item.active, .dropdown-item:active {*/
+/*    !* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#91a5f4+0,b08cf9+86 *!*/
+/*    background: #91a5f4;*/
+/*    !* Old browsers *!*/
+/*    background: -moz-linear-gradient(-45deg, #91a5f4 0%, #b08cf9 86%);*/
+/*    !* FF3.6-15 *!*/
+/*    background: -webkit-linear-gradient(-45deg, #91a5f4 0%, #b08cf9 86%);*/
+/*    !* Chrome10-25,Safari5.1-6 *!*/
+/*    background: linear-gradient(135deg, #91a5f4 0%, #b08cf9 86%);*/
+/*    !* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ *!*/
+/*    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#91a5f4', endColorstr='#b08cf9',GradientType=1 );*/
+/*    !* IE6-9 fallback on horizontal gradient *!*/
+/*    color: #2a2824 !important; }*/
 
-.dropdown-lg {
-    min-width: 320px; }
+/*.dropdown-lg {*/
+/*    min-width: 320px; }*/
 
 /* Pagination start */
 .pagination .page-item .page-link {
@@ -2070,8 +2070,8 @@ body.off-canvas-overlay-on .off-canvas-overlay {
 .bg-current-color {
     background-color: currentcolor; }
 
-.dropdown-menu {
-    font-size: 0.8125rem; }
+/*.dropdown-menu {*/
+/*    font-size: 0.8125rem; }*/
 
 @media (min-width: 768px) {
     .d-shadow, .h-d-shadow {
@@ -2803,35 +2803,35 @@ a.reverse:hover {
     color: #91a5f4; }
 .navbar .navbar-nav > li.active > a, .navbar .navbar-nav > li.menu-item.active > a {
     color: #91a5f4; }
-.navbar .navbar-nav .dropdown-menu {
-    padding-left: 1rem;
-    padding-right: 1rem; }
-.navbar .navbar-nav .dropdown-menu li.menu-item a {
-    display: block;
-    color: #151412;
-    font-weight: 400;
-    font-size: 0.8125rem;
-    padding: 0.3rem 0;
-    letter-spacing: 0.5px;
-    border-bottom: 1px solid #eeeeee; }
-.navbar .navbar-nav .dropdown-menu li.menu-item a:hover, .navbar .navbar-nav .dropdown-menu li.menu-item a:active, .navbar .navbar-nav .dropdown-menu li.menu-item a.active {
-    color: #91a5f4; }
-.navbar .navbar-nav .dropdown-menu li.menu-item:last-child a {
-    border-bottom: 0; }
-.navbar .navbar-nav > li:first-child > a.nav-link {
-    padding-left: 0; }
-.navbar .navbar-nav > li:last-child > a.nav-link {
-    padding-right: 0; }
-.navbar .navbar-nav .dropdown-mega-menu {
-    width: auto; }
-.navbar .navbar-nav .dropdown-mega-menu li.menu-item a {
-    display: block;
-    color: #5e5d5a;
-    font-weight: 400;
-    font-size: 0.8125rem;
-    padding: 0.3rem 0;
-    letter-spacing: 0.5px;
-    border-bottom: 1px solid #eeeeee; }
+/*.navbar .navbar-nav .dropdown-menu {*/
+/*    padding-left: 1rem;*/
+/*    padding-right: 1rem; }*/
+/*.navbar .navbar-nav .dropdown-menu li.menu-item a {*/
+/*    display: block;*/
+/*    color: #151412;*/
+/*    font-weight: 400;*/
+/*    font-size: 0.8125rem;*/
+/*    padding: 0.3rem 0;*/
+/*    letter-spacing: 0.5px;*/
+/*    border-bottom: 1px solid #eeeeee; }*/
+/*.navbar .navbar-nav .dropdown-menu li.menu-item a:hover, .navbar .navbar-nav .dropdown-menu li.menu-item a:active, .navbar .navbar-nav .dropdown-menu li.menu-item a.active {*/
+/*    color: #91a5f4; }*/
+/*.navbar .navbar-nav .dropdown-menu li.menu-item:last-child a {*/
+/*    border-bottom: 0; }*/
+/*.navbar .navbar-nav > li:first-child > a.nav-link {*/
+/*    padding-left: 0; }*/
+/*.navbar .navbar-nav > li:last-child > a.nav-link {*/
+/*    padding-right: 0; }*/
+/*.navbar .navbar-nav .dropdown-mega-menu {*/
+/*    width: auto; }*/
+/*.navbar .navbar-nav .dropdown-mega-menu li.menu-item a {*/
+/*    display: block;*/
+/*    color: #5e5d5a;*/
+/*    font-weight: 400;*/
+/*    font-size: 0.8125rem;*/
+/*    padding: 0.3rem 0;*/
+/*    letter-spacing: 0.5px;*/
+/*    border-bottom: 1px solid #eeeeee; }*/
 .navbar .navbar-nav .dropdown-mega-menu li.menu-item a:hover, .navbar .navbar-nav .dropdown-mega-menu li.menu-item a:active, .navbar .navbar-nav .dropdown-mega-menu li.menu-item a.active {
     color: #b08cf9;
     background: none; }
@@ -3397,52 +3397,52 @@ hr.border-hr {
 .title-box .sub-title {
     line-height: 1; }
 
-input:focus {
-    outline: none;
-    box-shadow: none; }
+/*input:focus {*/
+/*    outline: none;*/
+/*    box-shadow: none; }*/
 
-.color-variable::-webkit-input-placeholder {
-    /* Chrome/Opera/Safari */
-    color: currentColor; }
+/*.color-variable::-webkit-input-placeholder {*/
+/*    !* Chrome/Opera/Safari *!*/
+/*    color: currentColor; }*/
 
-.color-variable::-moz-placeholder {
-    /* Firefox 19+ */
-    color: currentColor; }
+/*.color-variable::-moz-placeholder {*/
+/*    !* Firefox 19+ *!*/
+/*    color: currentColor; }*/
 
-.color-variable:-ms-input-placeholder {
-    /* IE 10+ */
-    color: currentColor; }
+/*.color-variable:-ms-input-placeholder {*/
+/*    !* IE 10+ *!*/
+/*    color: currentColor; }*/
 
-.color-variable:-moz-placeholder {
-    /* Firefox 18- */
-    color: currentColor; }
+/*.color-variable:-moz-placeholder {*/
+/*    !* Firefox 18- *!*/
+/*    color: currentColor; }*/
 
-input[type=checkbox], input[type=radio] {
-    vertical-align: middle; }
+/*input[type=checkbox], input[type=radio] {*/
+/*    vertical-align: middle; }*/
 
-label {
-    margin: 0 0 0.6rem 0; }
+/*label {*/
+/*    margin: 0 0 0.6rem 0; }*/
 
-.form-control {
-    display: block;
-    width: 100%;
-    padding: 12px 12px;
-    font-size: 0.875rem;
-    line-height: 1.5;
-    color: #7d7d7d;
-    background-color: #f1f3f9;
-    background-clip: padding-box;
-    border: 1px solid transparent; }
-.form-control:focus {
-    border-color: #b08cf9;
-    outline: none;
-    box-shadow: none; }
+/*.form-control {*/
+/*    display: block;*/
+/*    width: 100%;*/
+/*    padding: 12px 12px;*/
+/*    font-size: 0.875rem;*/
+/*    line-height: 1.5;*/
+/*    color: #7d7d7d;*/
+/*    background-color: #f1f3f9;*/
+/*    background-clip: padding-box;*/
+/*    border: 1px solid transparent; }*/
+/*.form-control:focus {*/
+/*    border-color: #b08cf9;*/
+/*    outline: none;*/
+/*    box-shadow: none; }*/
 
-select.form-control:not([size]):not([multiple]) {
-    height: 45px; }
-select.form-control:focus::-ms-value {
-    color: #7d7d7d;
-    background-color: #f1f3f9; }
+/*select.form-control:not([size]):not([multiple]) {*/
+/*    height: 45px; }*/
+/*select.form-control:focus::-ms-value {*/
+/*    color: #7d7d7d;*/
+/*    background-color: #f1f3f9; }*/
 
 .adonis-checkbox .label, .adonis-radio .label {
     position: relative; }
@@ -3675,379 +3675,379 @@ select.form-control:focus::-ms-value {
     width: 60px;
     height: 60px; }
 
-.btn-light {
-    border: none;
-    position: relative;
-    cursor: pointer;
-    color: #a1a1a1;
-    background-color: transparent;
-    transition: all 0.3s; }
-.btn-light a, .btn-light p, .btn-light span {
-    color: #a1a1a1; }
-.btn-light::before {
-    -webkit-box-shadow: 0 0 0 1px none inset;
-    box-shadow: 0 0 0 1px none inset;
-    background-color: #ebf4f5;
-    content: "";
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    opacity: 0;
-    z-index: -1;
-    transition: opacity 0.3s;
-    opacity: 1; }
-.btn-light::after {
-    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#91a5f4+0,b08cf9+86 */
-    background: #91a5f4;
-    /* Old browsers */
-    background: -moz-linear-gradient(-45deg, #91a5f4 0%, #b08cf9 86%);
-    /* FF3.6-15 */
-    background: -webkit-linear-gradient(-45deg, #91a5f4 0%, #b08cf9 86%);
-    /* Chrome10-25,Safari5.1-6 */
-    background: linear-gradient(135deg, #91a5f4 0%, #b08cf9 86%);
-    /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#91a5f4', endColorstr='#b08cf9',GradientType=1 );
-    /* IE6-9 fallback on horizontal gradient */
-    content: "";
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    opacity: 0;
-    z-index: -1;
-    transition: opacity 0.3s; }
-.btn-light:hover, .btn-light:not([disabled]):not(.disabled):active, .btn-light:focus {
-    -webkit-box-shadow: 0 0 0 1px none inset;
-    box-shadow: 0 0 0 1px none inset;
-    color: #ffffff !important;
-    background-color: transparent; }
-.btn-light:hover a, .btn-light:hover p, .btn-light:hover span, .btn-light:not([disabled]):not(.disabled):active a, .btn-light:not([disabled]):not(.disabled):active p, .btn-light:not([disabled]):not(.disabled):active span, .btn-light:focus a, .btn-light:focus p, .btn-light:focus span {
-    color: #ffffff !important; }
-.btn-light:hover::before, .btn-light:not([disabled]):not(.disabled):active::before, .btn-light:focus::before {
-    opacity: 0; }
-.btn-light:hover::after, .btn-light:not([disabled]):not(.disabled):active::after, .btn-light:focus::after {
-    opacity: 1; }
+/*.btn-light {*/
+/*    border: none;*/
+/*    position: relative;*/
+/*    cursor: pointer;*/
+/*    color: #a1a1a1;*/
+/*    background-color: transparent;*/
+/*    transition: all 0.3s; }*/
+/*.btn-light a, .btn-light p, .btn-light span {*/
+/*    color: #a1a1a1; }*/
+/*.btn-light::before {*/
+/*    -webkit-box-shadow: 0 0 0 1px none inset;*/
+/*    box-shadow: 0 0 0 1px none inset;*/
+/*    background-color: #ebf4f5;*/
+/*    content: "";*/
+/*    position: absolute;*/
+/*    width: 100%;*/
+/*    height: 100%;*/
+/*    top: 0;*/
+/*    left: 0;*/
+/*    opacity: 0;*/
+/*    z-index: -1;*/
+/*    transition: opacity 0.3s;*/
+/*    opacity: 1; }*/
+/*.btn-light::after {*/
+/*    !* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#91a5f4+0,b08cf9+86 *!*/
+/*    background: #91a5f4;*/
+/*    !* Old browsers *!*/
+/*    background: -moz-linear-gradient(-45deg, #91a5f4 0%, #b08cf9 86%);*/
+/*    !* FF3.6-15 *!*/
+/*    background: -webkit-linear-gradient(-45deg, #91a5f4 0%, #b08cf9 86%);*/
+/*    !* Chrome10-25,Safari5.1-6 *!*/
+/*    background: linear-gradient(135deg, #91a5f4 0%, #b08cf9 86%);*/
+/*    !* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ *!*/
+/*    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#91a5f4', endColorstr='#b08cf9',GradientType=1 );*/
+/*    !* IE6-9 fallback on horizontal gradient *!*/
+/*    content: "";*/
+/*    position: absolute;*/
+/*    width: 100%;*/
+/*    height: 100%;*/
+/*    top: 0;*/
+/*    left: 0;*/
+/*    opacity: 0;*/
+/*    z-index: -1;*/
+/*    transition: opacity 0.3s; }*/
+/*.btn-light:hover, .btn-light:not([disabled]):not(.disabled):active, .btn-light:focus {*/
+/*    -webkit-box-shadow: 0 0 0 1px none inset;*/
+/*    box-shadow: 0 0 0 1px none inset;*/
+/*    color: #ffffff !important;*/
+/*    background-color: transparent; }*/
+/*.btn-light:hover a, .btn-light:hover p, .btn-light:hover span, .btn-light:not([disabled]):not(.disabled):active a, .btn-light:not([disabled]):not(.disabled):active p, .btn-light:not([disabled]):not(.disabled):active span, .btn-light:focus a, .btn-light:focus p, .btn-light:focus span {*/
+/*    color: #ffffff !important; }*/
+/*.btn-light:hover::before, .btn-light:not([disabled]):not(.disabled):active::before, .btn-light:focus::before {*/
+/*    opacity: 0; }*/
+/*.btn-light:hover::after, .btn-light:not([disabled]):not(.disabled):active::after, .btn-light:focus::after {*/
+/*    opacity: 1; }*/
 
-.btn-primary {
-    border: none;
-    position: relative;
-    cursor: pointer;
-    color: #fff;
-    background-color: transparent;
-    transition: all 0.3s; }
-.btn-primary a, .btn-primary p, .btn-primary span {
-    color: #fff; }
-.btn-primary::before {
-    -webkit-box-shadow: 0 0 0 1px none inset;
-    box-shadow: 0 0 0 1px none inset;
-    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#91a5f4+0,b08cf9+86 */
-    background: #91a5f4;
-    /* Old browsers */
-    background: -moz-linear-gradient(-45deg, #91a5f4 0%, #b08cf9 86%);
-    /* FF3.6-15 */
-    background: -webkit-linear-gradient(-45deg, #91a5f4 0%, #b08cf9 86%);
-    /* Chrome10-25,Safari5.1-6 */
-    background: linear-gradient(135deg, #91a5f4 0%, #b08cf9 86%);
-    /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#91a5f4', endColorstr='#b08cf9',GradientType=1 );
-    /* IE6-9 fallback on horizontal gradient */
-    content: "";
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    opacity: 0;
-    z-index: -1;
-    transition: opacity 0.3s;
-    opacity: 1; }
-.btn-primary::after {
-    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#91a5f4+0,b08cf9+86 */
-    background: #7A8BF4;
-    /* Old browsers */
-    background: -moz-linear-gradient(-45deg, #91a5f4 0%, #b08cf9 86%);
-    /* FF3.6-15 */
-    background: -webkit-linear-gradient(-45deg, #91a5f4 0%, #b08cf9 86%);
-    /* Chrome10-25,Safari5.1-6 */
-    background: linear-gradient(135deg, #7b8ff4 0%, #b08cf9 86%);
-    /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#91a5f4', endColorstr='#b08cf9',GradientType=1 );
-    /* IE6-9 fallback on horizontal gradient */
-    content: "";
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    opacity: 0;
-    z-index: -1;
-    transition: opacity 0.3s; }
-.btn-primary:hover, .btn-primary:not([disabled]):not(.disabled):active, .btn-primary:focus {
-    -webkit-box-shadow: 0 0 0 1px none inset;
-    box-shadow: 0 0 0 1px none inset;
-    color: #fff !important;
-    background-color: transparent; }
-.btn-primary:hover a, .btn-primary:hover p, .btn-primary:hover span, .btn-primary:not([disabled]):not(.disabled):active a, .btn-primary:not([disabled]):not(.disabled):active p, .btn-primary:not([disabled]):not(.disabled):active span, .btn-primary:focus a, .btn-primary:focus p, .btn-primary:focus span {
-    color: #fff !important; }
-.btn-primary:hover::before, .btn-primary:not([disabled]):not(.disabled):active::before, .btn-primary:focus::before {
-    opacity: 0; }
-.btn-primary:hover::after, .btn-primary:not([disabled]):not(.disabled):active::after, .btn-primary:focus::after {
-    opacity: 1; }
+/*.btn-primary {*/
+/*    border: none;*/
+/*    position: relative;*/
+/*    cursor: pointer;*/
+/*    color: #fff;*/
+/*    background-color: transparent;*/
+/*    transition: all 0.3s; }*/
+/*.btn-primary a, .btn-primary p, .btn-primary span {*/
+/*    color: #fff; }*/
+/*.btn-primary::before {*/
+/*    -webkit-box-shadow: 0 0 0 1px none inset;*/
+/*    box-shadow: 0 0 0 1px none inset;*/
+/*    !* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#91a5f4+0,b08cf9+86 *!*/
+/*    background: #91a5f4;*/
+/*    !* Old browsers *!*/
+/*    background: -moz-linear-gradient(-45deg, #91a5f4 0%, #b08cf9 86%);*/
+/*    !* FF3.6-15 *!*/
+/*    background: -webkit-linear-gradient(-45deg, #91a5f4 0%, #b08cf9 86%);*/
+/*    !* Chrome10-25,Safari5.1-6 *!*/
+/*    background: linear-gradient(135deg, #91a5f4 0%, #b08cf9 86%);*/
+/*    !* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ *!*/
+/*    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#91a5f4', endColorstr='#b08cf9',GradientType=1 );*/
+/*    !* IE6-9 fallback on horizontal gradient *!*/
+/*    content: "";*/
+/*    position: absolute;*/
+/*    width: 100%;*/
+/*    height: 100%;*/
+/*    top: 0;*/
+/*    left: 0;*/
+/*    opacity: 0;*/
+/*    z-index: -1;*/
+/*    transition: opacity 0.3s;*/
+/*    opacity: 1; }*/
+/*.btn-primary::after {*/
+/*    !* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#91a5f4+0,b08cf9+86 *!*/
+/*    background: #7A8BF4;*/
+/*    !* Old browsers *!*/
+/*    background: -moz-linear-gradient(-45deg, #91a5f4 0%, #b08cf9 86%);*/
+/*    !* FF3.6-15 *!*/
+/*    background: -webkit-linear-gradient(-45deg, #91a5f4 0%, #b08cf9 86%);*/
+/*    !* Chrome10-25,Safari5.1-6 *!*/
+/*    background: linear-gradient(135deg, #7b8ff4 0%, #b08cf9 86%);*/
+/*    !* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ *!*/
+/*    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#91a5f4', endColorstr='#b08cf9',GradientType=1 );*/
+/*    !* IE6-9 fallback on horizontal gradient *!*/
+/*    content: "";*/
+/*    position: absolute;*/
+/*    width: 100%;*/
+/*    height: 100%;*/
+/*    top: 0;*/
+/*    left: 0;*/
+/*    opacity: 0;*/
+/*    z-index: -1;*/
+/*    transition: opacity 0.3s; }*/
+/*.btn-primary:hover, .btn-primary:not([disabled]):not(.disabled):active, .btn-primary:focus {*/
+/*    -webkit-box-shadow: 0 0 0 1px none inset;*/
+/*    box-shadow: 0 0 0 1px none inset;*/
+/*    color: #fff !important;*/
+/*    background-color: transparent; }*/
+/*.btn-primary:hover a, .btn-primary:hover p, .btn-primary:hover span, .btn-primary:not([disabled]):not(.disabled):active a, .btn-primary:not([disabled]):not(.disabled):active p, .btn-primary:not([disabled]):not(.disabled):active span, .btn-primary:focus a, .btn-primary:focus p, .btn-primary:focus span {*/
+/*    color: #fff !important; }*/
+/*.btn-primary:hover::before, .btn-primary:not([disabled]):not(.disabled):active::before, .btn-primary:focus::before {*/
+/*    opacity: 0; }*/
+/*.btn-primary:hover::after, .btn-primary:not([disabled]):not(.disabled):active::after, .btn-primary:focus::after {*/
+/*    opacity: 1; }*/
 
-.btn-secondary {
-    border: none;
-    position: relative;
-    cursor: pointer;
-    color: #555555;
-    background-color: transparent;
-    transition: all 0.3s; }
-.btn-secondary a, .btn-secondary p, .btn-secondary span {
-    color: #555555; }
-.btn-secondary::before {
-    -webkit-box-shadow: 0 0 0 1px none inset;
-    box-shadow: 0 0 0 1px none inset;
-    background-color: #e1e1e1;
-    content: "";
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    opacity: 0;
-    z-index: -1;
-    transition: opacity 0.3s;
-    opacity: 1; }
-.btn-secondary::after {
-    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#91a5f4+0,b08cf9+86 */
-    background: #91a5f4;
-    /* Old browsers */
-    background: -moz-linear-gradient(-45deg, #91a5f4 0%, #b08cf9 86%);
-    /* FF3.6-15 */
-    background: -webkit-linear-gradient(-45deg, #91a5f4 0%, #b08cf9 86%);
-    /* Chrome10-25,Safari5.1-6 */
-    background: linear-gradient(135deg, #91a5f4 0%, #b08cf9 86%);
-    /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#91a5f4', endColorstr='#b08cf9',GradientType=1 );
-    /* IE6-9 fallback on horizontal gradient */
-    content: "";
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    opacity: 0;
-    z-index: -1;
-    transition: opacity 0.3s; }
-.btn-secondary:hover, .btn-secondary:not([disabled]):not(.disabled):active, .btn-secondary:focus {
-    -webkit-box-shadow: 0 0 0 1px none inset;
-    box-shadow: 0 0 0 1px none inset;
-    color: #FFFFFF !important;
-    background-color: transparent; }
-.btn-secondary:hover a, .btn-secondary:hover p, .btn-secondary:hover span, .btn-secondary:not([disabled]):not(.disabled):active a, .btn-secondary:not([disabled]):not(.disabled):active p, .btn-secondary:not([disabled]):not(.disabled):active span, .btn-secondary:focus a, .btn-secondary:focus p, .btn-secondary:focus span {
-    color: #FFFFFF !important; }
-.btn-secondary:hover::before, .btn-secondary:not([disabled]):not(.disabled):active::before, .btn-secondary:focus::before {
-    opacity: 0; }
-.btn-secondary:hover::after, .btn-secondary:not([disabled]):not(.disabled):active::after, .btn-secondary:focus::after {
-    opacity: 1; }
+/*.btn-secondary {*/
+/*    border: none;*/
+/*    position: relative;*/
+/*    cursor: pointer;*/
+/*    color: #555555;*/
+/*    background-color: transparent;*/
+/*    transition: all 0.3s; }*/
+/*.btn-secondary a, .btn-secondary p, .btn-secondary span {*/
+/*    color: #555555; }*/
+/*.btn-secondary::before {*/
+/*    -webkit-box-shadow: 0 0 0 1px none inset;*/
+/*    box-shadow: 0 0 0 1px none inset;*/
+/*    background-color: #e1e1e1;*/
+/*    content: "";*/
+/*    position: absolute;*/
+/*    width: 100%;*/
+/*    height: 100%;*/
+/*    top: 0;*/
+/*    left: 0;*/
+/*    opacity: 0;*/
+/*    z-index: -1;*/
+/*    transition: opacity 0.3s;*/
+/*    opacity: 1; }*/
+/*.btn-secondary::after {*/
+/*    !* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#91a5f4+0,b08cf9+86 *!*/
+/*    background: #91a5f4;*/
+/*    !* Old browsers *!*/
+/*    background: -moz-linear-gradient(-45deg, #91a5f4 0%, #b08cf9 86%);*/
+/*    !* FF3.6-15 *!*/
+/*    background: -webkit-linear-gradient(-45deg, #91a5f4 0%, #b08cf9 86%);*/
+/*    !* Chrome10-25,Safari5.1-6 *!*/
+/*    background: linear-gradient(135deg, #91a5f4 0%, #b08cf9 86%);*/
+/*    !* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ *!*/
+/*    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#91a5f4', endColorstr='#b08cf9',GradientType=1 );*/
+/*    !* IE6-9 fallback on horizontal gradient *!*/
+/*    content: "";*/
+/*    position: absolute;*/
+/*    width: 100%;*/
+/*    height: 100%;*/
+/*    top: 0;*/
+/*    left: 0;*/
+/*    opacity: 0;*/
+/*    z-index: -1;*/
+/*    transition: opacity 0.3s; }*/
+/*.btn-secondary:hover, .btn-secondary:not([disabled]):not(.disabled):active, .btn-secondary:focus {*/
+/*    -webkit-box-shadow: 0 0 0 1px none inset;*/
+/*    box-shadow: 0 0 0 1px none inset;*/
+/*    color: #FFFFFF !important;*/
+/*    background-color: transparent; }*/
+/*.btn-secondary:hover a, .btn-secondary:hover p, .btn-secondary:hover span, .btn-secondary:not([disabled]):not(.disabled):active a, .btn-secondary:not([disabled]):not(.disabled):active p, .btn-secondary:not([disabled]):not(.disabled):active span, .btn-secondary:focus a, .btn-secondary:focus p, .btn-secondary:focus span {*/
+/*    color: #FFFFFF !important; }*/
+/*.btn-secondary:hover::before, .btn-secondary:not([disabled]):not(.disabled):active::before, .btn-secondary:focus::before {*/
+/*    opacity: 0; }*/
+/*.btn-secondary:hover::after, .btn-secondary:not([disabled]):not(.disabled):active::after, .btn-secondary:focus::after {*/
+/*    opacity: 1; }*/
 
-.btn-outline {
-    border: none;
-    position: relative;
-    cursor: pointer;
-    color: #b8babc;
-    background-color: transparent;
-    transition: all 0.3s; }
-.btn-outline a, .btn-outline p, .btn-outline span {
-    color: #b8babc; }
-.btn-outline::before {
-    -webkit-box-shadow: 0 0 0 1px #5e5d5a inset;
-    box-shadow: 0 0 0 1px #5e5d5a inset;
-    background-color: transparent;
-    content: "";
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    opacity: 0;
-    z-index: -1;
-    transition: opacity 0.3s;
-    opacity: 1; }
-.btn-outline::after {
-    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#91a5f4+0,b08cf9+86 */
-    background: #91a5f4;
-    /* Old browsers */
-    background: -moz-linear-gradient(-45deg, #91a5f4 0%, #b08cf9 86%);
-    /* FF3.6-15 */
-    background: -webkit-linear-gradient(-45deg, #91a5f4 0%, #b08cf9 86%);
-    /* Chrome10-25,Safari5.1-6 */
-    background: linear-gradient(135deg, #91a5f4 0%, #b08cf9 86%);
-    /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#91a5f4', endColorstr='#b08cf9',GradientType=1 );
-    /* IE6-9 fallback on horizontal gradient */
-    content: "";
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    opacity: 0;
-    z-index: -1;
-    transition: opacity 0.3s; }
-.btn-outline:hover, .btn-outline:not([disabled]):not(.disabled):active, .btn-outline:focus {
-    -webkit-box-shadow: 0 0 0 1px #5e5d5a inset;
-    box-shadow: 0 0 0 1px #5e5d5a inset;
-    color: #ffffff !important;
-    background-color: transparent; }
-.btn-outline:hover a, .btn-outline:hover p, .btn-outline:hover span, .btn-outline:not([disabled]):not(.disabled):active a, .btn-outline:not([disabled]):not(.disabled):active p, .btn-outline:not([disabled]):not(.disabled):active span, .btn-outline:focus a, .btn-outline:focus p, .btn-outline:focus span {
-    color: #ffffff !important; }
-.btn-outline:hover::before, .btn-outline:not([disabled]):not(.disabled):active::before, .btn-outline:focus::before {
-    opacity: 0; }
-.btn-outline:hover::after, .btn-outline:not([disabled]):not(.disabled):active::after, .btn-outline:focus::after {
-    opacity: 1; }
+/*.btn-outline {*/
+/*    border: none;*/
+/*    position: relative;*/
+/*    cursor: pointer;*/
+/*    color: #b8babc;*/
+/*    background-color: transparent;*/
+/*    transition: all 0.3s; }*/
+/*.btn-outline a, .btn-outline p, .btn-outline span {*/
+/*    color: #b8babc; }*/
+/*.btn-outline::before {*/
+/*    -webkit-box-shadow: 0 0 0 1px #5e5d5a inset;*/
+/*    box-shadow: 0 0 0 1px #5e5d5a inset;*/
+/*    background-color: transparent;*/
+/*    content: "";*/
+/*    position: absolute;*/
+/*    width: 100%;*/
+/*    height: 100%;*/
+/*    top: 0;*/
+/*    left: 0;*/
+/*    opacity: 0;*/
+/*    z-index: -1;*/
+/*    transition: opacity 0.3s;*/
+/*    opacity: 1; }*/
+/*.btn-outline::after {*/
+/*    !* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#91a5f4+0,b08cf9+86 *!*/
+/*    background: #91a5f4;*/
+/*    !* Old browsers *!*/
+/*    background: -moz-linear-gradient(-45deg, #91a5f4 0%, #b08cf9 86%);*/
+/*    !* FF3.6-15 *!*/
+/*    background: -webkit-linear-gradient(-45deg, #91a5f4 0%, #b08cf9 86%);*/
+/*    !* Chrome10-25,Safari5.1-6 *!*/
+/*    background: linear-gradient(135deg, #91a5f4 0%, #b08cf9 86%);*/
+/*    !* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ *!*/
+/*    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#91a5f4', endColorstr='#b08cf9',GradientType=1 );*/
+/*    !* IE6-9 fallback on horizontal gradient *!*/
+/*    content: "";*/
+/*    position: absolute;*/
+/*    width: 100%;*/
+/*    height: 100%;*/
+/*    top: 0;*/
+/*    left: 0;*/
+/*    opacity: 0;*/
+/*    z-index: -1;*/
+/*    transition: opacity 0.3s; }*/
+/*.btn-outline:hover, .btn-outline:not([disabled]):not(.disabled):active, .btn-outline:focus {*/
+/*    -webkit-box-shadow: 0 0 0 1px #5e5d5a inset;*/
+/*    box-shadow: 0 0 0 1px #5e5d5a inset;*/
+/*    color: #ffffff !important;*/
+/*    background-color: transparent; }*/
+/*.btn-outline:hover a, .btn-outline:hover p, .btn-outline:hover span, .btn-outline:not([disabled]):not(.disabled):active a, .btn-outline:not([disabled]):not(.disabled):active p, .btn-outline:not([disabled]):not(.disabled):active span, .btn-outline:focus a, .btn-outline:focus p, .btn-outline:focus span {*/
+/*    color: #ffffff !important; }*/
+/*.btn-outline:hover::before, .btn-outline:not([disabled]):not(.disabled):active::before, .btn-outline:focus::before {*/
+/*    opacity: 0; }*/
+/*.btn-outline:hover::after, .btn-outline:not([disabled]):not(.disabled):active::after, .btn-outline:focus::after {*/
+/*    opacity: 1; }*/
 
-.btn-transparent {
-    border: none;
-    position: relative;
-    cursor: pointer;
-    color: #a1a1a1;
-    background-color: transparent;
-    transition: all 0.3s; }
-.btn-transparent a, .btn-transparent p, .btn-transparent span {
-    color: #a1a1a1; }
-.btn-transparent::before {
-    -webkit-box-shadow: 0 0 0 1px none inset;
-    box-shadow: 0 0 0 1px none inset;
-    background-color: transparent;
-    content: "";
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    opacity: 0;
-    z-index: -1;
-    transition: opacity 0.3s;
-    opacity: 1; }
-.btn-transparent::after {
-    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#91a5f4+0,b08cf9+86 */
-    background: #91a5f4;
-    /* Old browsers */
-    background: -moz-linear-gradient(-45deg, #91a5f4 0%, #b08cf9 86%);
-    /* FF3.6-15 */
-    background: -webkit-linear-gradient(-45deg, #91a5f4 0%, #b08cf9 86%);
-    /* Chrome10-25,Safari5.1-6 */
-    background: linear-gradient(135deg, #91a5f4 0%, #b08cf9 86%);
-    /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#91a5f4', endColorstr='#b08cf9',GradientType=1 );
-    /* IE6-9 fallback on horizontal gradient */
-    content: "";
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    opacity: 0;
-    z-index: -1;
-    transition: opacity 0.3s; }
-.btn-transparent:hover, .btn-transparent:not([disabled]):not(.disabled):active, .btn-transparent:focus {
-    -webkit-box-shadow: 0 0 0 1px none inset;
-    box-shadow: 0 0 0 1px none inset;
-    color: #ffffff !important;
-    background-color: transparent; }
-.btn-transparent:hover a, .btn-transparent:hover p, .btn-transparent:hover span, .btn-transparent:not([disabled]):not(.disabled):active a, .btn-transparent:not([disabled]):not(.disabled):active p, .btn-transparent:not([disabled]):not(.disabled):active span, .btn-transparent:focus a, .btn-transparent:focus p, .btn-transparent:focus span {
-    color: #ffffff !important; }
-.btn-transparent:hover::before, .btn-transparent:not([disabled]):not(.disabled):active::before, .btn-transparent:focus::before {
-    opacity: 0; }
-.btn-transparent:hover::after, .btn-transparent:not([disabled]):not(.disabled):active::after, .btn-transparent:focus::after {
-    opacity: 1; }
+/*.btn-transparent {*/
+/*    border: none;*/
+/*    position: relative;*/
+/*    cursor: pointer;*/
+/*    color: #a1a1a1;*/
+/*    background-color: transparent;*/
+/*    transition: all 0.3s; }*/
+/*.btn-transparent a, .btn-transparent p, .btn-transparent span {*/
+/*    color: #a1a1a1; }*/
+/*.btn-transparent::before {*/
+/*    -webkit-box-shadow: 0 0 0 1px none inset;*/
+/*    box-shadow: 0 0 0 1px none inset;*/
+/*    background-color: transparent;*/
+/*    content: "";*/
+/*    position: absolute;*/
+/*    width: 100%;*/
+/*    height: 100%;*/
+/*    top: 0;*/
+/*    left: 0;*/
+/*    opacity: 0;*/
+/*    z-index: -1;*/
+/*    transition: opacity 0.3s;*/
+/*    opacity: 1; }*/
+/*.btn-transparent::after {*/
+/*    !* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#91a5f4+0,b08cf9+86 *!*/
+/*    background: #91a5f4;*/
+/*    !* Old browsers *!*/
+/*    background: -moz-linear-gradient(-45deg, #91a5f4 0%, #b08cf9 86%);*/
+/*    !* FF3.6-15 *!*/
+/*    background: -webkit-linear-gradient(-45deg, #91a5f4 0%, #b08cf9 86%);*/
+/*    !* Chrome10-25,Safari5.1-6 *!*/
+/*    background: linear-gradient(135deg, #91a5f4 0%, #b08cf9 86%);*/
+/*    !* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ *!*/
+/*    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#91a5f4', endColorstr='#b08cf9',GradientType=1 );*/
+/*    !* IE6-9 fallback on horizontal gradient *!*/
+/*    content: "";*/
+/*    position: absolute;*/
+/*    width: 100%;*/
+/*    height: 100%;*/
+/*    top: 0;*/
+/*    left: 0;*/
+/*    opacity: 0;*/
+/*    z-index: -1;*/
+/*    transition: opacity 0.3s; }*/
+/*.btn-transparent:hover, .btn-transparent:not([disabled]):not(.disabled):active, .btn-transparent:focus {*/
+/*    -webkit-box-shadow: 0 0 0 1px none inset;*/
+/*    box-shadow: 0 0 0 1px none inset;*/
+/*    color: #ffffff !important;*/
+/*    background-color: transparent; }*/
+/*.btn-transparent:hover a, .btn-transparent:hover p, .btn-transparent:hover span, .btn-transparent:not([disabled]):not(.disabled):active a, .btn-transparent:not([disabled]):not(.disabled):active p, .btn-transparent:not([disabled]):not(.disabled):active span, .btn-transparent:focus a, .btn-transparent:focus p, .btn-transparent:focus span {*/
+/*    color: #ffffff !important; }*/
+/*.btn-transparent:hover::before, .btn-transparent:not([disabled]):not(.disabled):active::before, .btn-transparent:focus::before {*/
+/*    opacity: 0; }*/
+/*.btn-transparent:hover::after, .btn-transparent:not([disabled]):not(.disabled):active::after, .btn-transparent:focus::after {*/
+/*    opacity: 1; }*/
 
-.btn-blank {
-    background: transparent; }
+/*.btn-blank {*/
+/*    background: transparent; }*/
 
-.btn-transparent .dark {
-    color: #151412; }
-.btn-transparent span {
-    color: #8e9194; }
-.btn-transparent:hover span, .btn-transparent:not([disabled]):not(.disabled):active span, .btn-transparent:focus span {
-    color: #fff; }
+/*.btn-transparent .dark {*/
+/*    color: #151412; }*/
+/*.btn-transparent span {*/
+/*    color: #8e9194; }*/
+/*.btn-transparent:hover span, .btn-transparent:not([disabled]):not(.disabled):active span, .btn-transparent:focus span {*/
+/*    color: #fff; }*/
 
-.btn-group-sm > .btn {
-    padding: .16rem .5rem;
-    border-radius: 0.15rem;
-    font-size: 0.75rem; }
+/*.btn-group-sm > .btn {*/
+/*    padding: .16rem .5rem;*/
+/*    border-radius: 0.15rem;*/
+/*    font-size: 0.75rem; }*/
 
-.btn-outline-secondary.focus, .btn-outline-secondary:focus, .btn-outline-secondary:not([disabled]):not(.disabled).active, .btn-outline-secondary:not([disabled]):not(.disabled):active, .show > .btn-outline-secondary.dropdown-toggle {
-    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#91a5f4+0,b08cf9+86 */
-    background: #91a5f4;
-    /* Old browsers */
-    background: -moz-linear-gradient(-45deg, #91a5f4 0%, #b08cf9 86%);
-    /* FF3.6-15 */
-    background: -webkit-linear-gradient(-45deg, #91a5f4 0%, #b08cf9 86%);
-    /* Chrome10-25,Safari5.1-6 */
-    background: linear-gradient(135deg, #91a5f4 0%, #b08cf9 86%);
-    /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#91a5f4', endColorstr='#b08cf9',GradientType=1 );
-    /* IE6-9 fallback on horizontal gradient */
-    border-color: transparent;
-    box-shadow: none;
-    color: #fff; }
+/*.btn-outline-secondary.focus, .btn-outline-secondary:focus, .btn-outline-secondary:not([disabled]):not(.disabled).active, .btn-outline-secondary:not([disabled]):not(.disabled):active, .show > .btn-outline-secondary.dropdown-toggle {*/
+/*    !* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#91a5f4+0,b08cf9+86 *!*/
+/*    background: #91a5f4;*/
+/*    !* Old browsers *!*/
+/*    background: -moz-linear-gradient(-45deg, #91a5f4 0%, #b08cf9 86%);*/
+/*    !* FF3.6-15 *!*/
+/*    background: -webkit-linear-gradient(-45deg, #91a5f4 0%, #b08cf9 86%);*/
+/*    !* Chrome10-25,Safari5.1-6 *!*/
+/*    background: linear-gradient(135deg, #91a5f4 0%, #b08cf9 86%);*/
+/*    !* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ *!*/
+/*    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#91a5f4', endColorstr='#b08cf9',GradientType=1 );*/
+/*    !* IE6-9 fallback on horizontal gradient *!*/
+/*    border-color: transparent;*/
+/*    box-shadow: none;*/
+/*    color: #fff; }*/
 
-.btn-outline-secondary {
-    color: #a1a1a1;
-    border-color: #e1e1e1; }
-.btn-outline-secondary:hover {
-    border-color: transparent; }
+/*.btn-outline-secondary {*/
+/*    color: #a1a1a1;*/
+/*    border-color: #e1e1e1; }*/
+/*.btn-outline-secondary:hover {*/
+/*    border-color: transparent; }*/
 
 .lt-side-btn {
     text-align: left; }
 .lt-side-btn.gradient-adonis-hover:hover {
     color: #ffffff; }
 
-.input-group .form-control {
-    border: 1px solid #ced4da; }
-.input-group .input-group-text {
-    padding: .375rem .75rem;
-    background-color: #e9ecef;
-    border: 1px solid #ced4da;
-    height: 100%;
-    align-items: center;
-    display: inline-flex; }
-.input-group .input-group-text.right-edge {
-    border-top-left-radius: 0;
-    border-bottom-left-radius: 0;
-    border-top-right-radius: 3px;
-    border-bottom-right-radius: 3px;
-    border-left: 0; }
+/*.input-group .form-control {*/
+/*    border: 1px solid #ced4da; }*/
+/*.input-group .input-group-text {*/
+/*    padding: .375rem .75rem;*/
+/*    background-color: #e9ecef;*/
+/*    border: 1px solid #ced4da;*/
+/*    height: 100%;*/
+/*    align-items: center;*/
+/*    display: inline-flex; }*/
+/*.input-group .input-group-text.right-edge {*/
+/*    border-top-left-radius: 0;*/
+/*    border-bottom-left-radius: 0;*/
+/*    border-top-right-radius: 3px;*/
+/*    border-bottom-right-radius: 3px;*/
+/*    border-left: 0; }*/
 
-.round-btn {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%; }
-.round-btn::before, .round-btn::after {
-    border-radius: 50%; }
-.round-btn.gradient-adonis-hover:hover {
-    color: #FFFFFF; }
-.round-btn.gradient-adonis-hover:hover p {
-    color: #FFFFFF !important; }
+/*.round-btn {*/
+/*    display: flex;*/
+/*    flex-direction: column;*/
+/*    align-items: center;*/
+/*    justify-content: center;*/
+/*    border-radius: 50%; }*/
+/*.round-btn::before, .round-btn::after {*/
+/*    border-radius: 50%; }*/
+/*.round-btn.gradient-adonis-hover:hover {*/
+/*    color: #FFFFFF; }*/
+/*.round-btn.gradient-adonis-hover:hover p {*/
+/*    color: #FFFFFF !important; }*/
 
-.btn-close-round {
-    width: 46px;
-    height: 46px;
-    line-height: 46px;
-    border-radius: 50%;
-    background: #ebebeb;
-    text-align: center;
-    border: none; }
+/*.btn-close-round {*/
+/*    width: 46px;*/
+/*    height: 46px;*/
+/*    line-height: 46px;*/
+/*    border-radius: 50%;*/
+/*    background: #ebebeb;*/
+/*    text-align: center;*/
+/*    border: none; }*/
 
-/* color */
-.btn-primary:not(:disabled):not(.disabled).active:focus, .btn-primary:not(:disabled):not(.disabled):active:focus, .show > .btn-primary.dropdown-toggle:focus {
-    box-shadow: none; }
+/*!* color *!*/
+/*.btn-primary:not(:disabled):not(.disabled).active:focus, .btn-primary:not(:disabled):not(.disabled):active:focus, .show > .btn-primary.dropdown-toggle:focus {*/
+/*    box-shadow: none; }*/
 
 @-webkit-keyframes adonisShadowOut {
     from {

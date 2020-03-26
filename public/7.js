@@ -226,6 +226,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "ImageUploader",
   props: {
@@ -556,6 +557,7 @@ var render = function() {
       { staticClass: "col-md-2 my-3 my-md-0" },
       [
         _c("b-img", {
+          staticClass: "bg-laravel",
           attrs: {
             thumbnail: "",
             fluid: "",
