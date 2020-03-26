@@ -1,6 +1,6 @@
 <template>
     <div class="container pb-3">
-        <div class="row w-100" style="color:white">
+        <div class="row w-100 text-white">
             <b-img class="bg-laravel thumb"
                    :src="thumbnail"
                    rounded
