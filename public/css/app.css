@@ -16,6 +16,20 @@
   background-color: #f8fafc !important;
 }
 
+.object-fit-contain {
+  -o-object-fit: contain;
+     object-fit: contain;
+}
+
+.object-fit-cover {
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.text-light-grey {
+  color: #b8babc;
+}
+
 /*
  * Container style
  */
