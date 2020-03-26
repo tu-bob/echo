@@ -22,6 +22,7 @@
                    fluid
                    width="100"
                    height="100"
+                   class="bg-laravel"
                    :src="imageSrc"
                    :blank="!Boolean(imageSrc)"
                    :alt="alt"
