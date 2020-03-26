@@ -3,7 +3,7 @@
 </template>
 
 <script>
-    import SongsOwl from "./SongsСarousel";
+    import SongsOwl from "../../../common/music/song/SongsСarousel";
 
     export default {
         name: "Overview",

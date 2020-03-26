@@ -150,7 +150,7 @@ __webpack_require__.r(__webpack_exports__);
       data.append('type', String(this.album.type.id));
 
       for (var i = 0; i < this.album.songs.length; i++) {
-        data.append('songs[]', this.album.songs[i].id);
+        data.append('song[]', this.album.songs[i].id);
       }
 
       axios.post('/media/music/album', data).then(function (response) {
