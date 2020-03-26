@@ -315,7 +315,7 @@ __webpack_require__.r(__webpack_exports__);
       if (this.mp3File) data.append('mp3File', this.mp3File, this.mp3File.name);
       data.append('title', this.song.title);
       data.append('year', String(this.song.year));
-      data.append('label', this.song.label);
+      if (this.song.label) data.append('label', this.song.label);
       if (this.song.lyrics) data.append('lyrics', this.song.lyrics);
 
       for (var i = 0; i < this.song.artistAliases.length; i++) {
@@ -356,7 +356,7 @@ __webpack_require__.r(__webpack_exports__);
 
       this.song.title = meta.common.title;
       this.song.year = meta.common.year;
-      this.song.label = meta.common.label[0];
+      if (meta.common.label && meta.common.label.length > 0) this.song.label = meta.common.label[0];
       this.song.bitrate = meta.format.bitrate;
       this.song.sample_rate = meta.format.sampleRate;
       this.song.container = meta.format.container;

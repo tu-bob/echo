@@ -297,7 +297,8 @@
                     data.append('mp3File', this.mp3File, this.mp3File.name);
                 data.append('title', this.song.title);
                 data.append('year', String(this.song.year));
-                data.append('label', this.song.label);
+                if (this.song.label)
+                    data.append('label', this.song.label);
                 if (this.song.lyrics)
                     data.append('lyrics', this.song.lyrics);
 
@@ -334,7 +335,8 @@
             fillData(meta) {
                 this.song.title = meta.common.title;
                 this.song.year = meta.common.year;
-                this.song.label = meta.common.label[0];
+                if (meta.common.label && meta.common.label.length > 0)
+                    this.song.label = meta.common.label[0];
                 this.song.bitrate = meta.format.bitrate;
                 this.song.sample_rate = meta.format.sampleRate;
                 this.song.container = meta.format.container;
