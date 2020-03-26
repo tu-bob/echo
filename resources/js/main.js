@@ -25,12 +25,16 @@ export function uploadFiles(files, uploadUrl, name = 'files') {
     return axios.post(uploadUrl, data)
 }
 
-export function setLaravelBackground() {
-    $('body').addClass('bg-laravel')
+export function setLaravelTheme() {
+    let body = $('body');
+    body.addClass('bg-laravel');
+    body.addClass('text-dark');
 }
 
-export function removeLaravelBackground() {
-    $('body').removeClass('bg-laravel')
+export function removeLaravelTheme() {
+    let body = $('body');
+    body.removeClass('bg-laravel');
+    body.removeClass('text-dark');
 }
 
 export function movingBorder() {

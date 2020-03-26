@@ -95123,7 +95123,7 @@ __webpack_require__.r(__webpack_exports__);
 /*!******************************!*\
   !*** ./resources/js/main.js ***!
   \******************************/
-/*! exports provided: getStoreOrUpdateAction, generateId, uploadFiles, setLaravelBackground, removeLaravelBackground, movingBorder */
+/*! exports provided: getStoreOrUpdateAction, generateId, uploadFiles, setLaravelTheme, removeLaravelTheme, movingBorder */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -95131,8 +95131,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getStoreOrUpdateAction", function() { return getStoreOrUpdateAction; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "generateId", function() { return generateId; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "uploadFiles", function() { return uploadFiles; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setLaravelBackground", function() { return setLaravelBackground; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "removeLaravelBackground", function() { return removeLaravelBackground; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setLaravelTheme", function() { return setLaravelTheme; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "removeLaravelTheme", function() { return removeLaravelTheme; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "movingBorder", function() { return movingBorder; });
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
@@ -95162,11 +95162,15 @@ function uploadFiles(files, uploadUrl) {
 
   return axios.post(uploadUrl, data);
 }
-function setLaravelBackground() {
-  $('body').addClass('bg-laravel');
+function setLaravelTheme() {
+  var body = $('body');
+  body.addClass('bg-laravel');
+  body.addClass('text-dark');
 }
-function removeLaravelBackground() {
-  $('body').removeClass('bg-laravel');
+function removeLaravelTheme() {
+  var body = $('body');
+  body.removeClass('bg-laravel');
+  body.removeClass('text-dark');
 }
 function movingBorder() {
   var moveToActive = function moveToActive(el) {
