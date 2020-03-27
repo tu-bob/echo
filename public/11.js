@@ -16,6 +16,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "PostReader",
@@ -61,7 +66,16 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [_vm._v("\n    post " + _vm._s(_vm.post) + "\n")])
+  return _c("article", [
+    _c("section", [
+      _c("h1", [_vm._v(_vm._s(_vm.post.title))]),
+      _vm._v(" "),
+      _c("h2", { staticClass: "text-muted" }, [
+        _vm._v(_vm._s(_vm.post.annotation))
+      ])
+    ]),
+    _vm._v("\n\n    post " + _vm._s(_vm.post) + "\n")
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
