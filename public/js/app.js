@@ -2205,6 +2205,13 @@ var routes = [{
     }
   }]
 }, {
+  name: 'post-reader',
+  path: '/blog/post/:id',
+  props: true,
+  component: function component() {
+    return __webpack_require__.e(/*! import() */ 11).then(__webpack_require__.bind(null, /*! ../components/public/blog/PostReader */ "./resources/js/components/public/blog/PostReader.vue"));
+  }
+}, {
   path: '/admin/blog',
   component: function component() {
     return __webpack_require__.e(/*! import() */ 12).then(__webpack_require__.bind(null, /*! ../components/admin/blog/BlogAdminView */ "./resources/js/components/admin/blog/BlogAdminView.vue"));
