@@ -2209,7 +2209,7 @@ var routes = [{
   path: '/blog/post/:id',
   props: true,
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 11).then(__webpack_require__.bind(null, /*! ../components/public/blog/PostReader */ "./resources/js/components/public/blog/PostReader.vue"));
+    return Promise.all(/*! import() */[__webpack_require__.e(19), __webpack_require__.e(15)]).then(__webpack_require__.bind(null, /*! ../components/public/blog/PostReader */ "./resources/js/components/public/blog/PostReader.vue"));
   }
 }, {
   path: '/admin/blog',
