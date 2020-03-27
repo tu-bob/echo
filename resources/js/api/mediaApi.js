@@ -28,3 +28,11 @@ export async function fetchAlbumTypes() {
 export async function fetchSongs(filters) {
     return axios.get('/media/music/song/list?' + kvpToQueryParam(filters));
 }
+
+export function getAlbumCoverUrl(id) {
+    return `/media/music/album/${id}/cover`;
+}
+
+export function getSongIconUrl(id) {
+    return `/media/music/song/${id}/icon`;
+}

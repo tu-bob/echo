@@ -43,6 +43,7 @@ Route::prefix('media')->group(function () {
             Route::get('/list', 'Music\SongController@getSongs');
             Route::get('/find/{info}', 'Music\SongController@findSongsByInfo');
             Route::get('/{song}/audio', 'Music\SongController@getAudioFile');
+            Route::get('/{song}/icon', 'Music\SongController@getIcon');
             Route::get('/{song}', 'Music\SongController@getSong');
         });
 

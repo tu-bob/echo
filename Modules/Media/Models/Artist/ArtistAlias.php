@@ -7,7 +7,7 @@ use Modules\Shared\Models\BaseModel;
 
 class ArtistAlias extends BaseModel
 {
-    protected $hidden = [ 
+    protected $hidden = [
         'created_at',
         'created_by_id',
         'deleted_at',

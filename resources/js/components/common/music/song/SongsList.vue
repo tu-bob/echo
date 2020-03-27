@@ -1,6 +1,6 @@
 <template>
     <div>
-        <song-card v-for="song in songs" :song="song"></song-card>
+        <song-card v-for="song in songs" :song="song" :key="song.id"></song-card>
     </div>
 </template>
 

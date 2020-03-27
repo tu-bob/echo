@@ -23,4 +23,9 @@ class BaseController extends Controller
         else
             return $query->get();
     }
+
+    protected function pagination()
+    {
+        return request()->get('paginate') ? request()->get('paginate') : 10;
+    }
 }

@@ -873,7 +873,7 @@ render._withStripped = true
 /*!**************************************!*\
   !*** ./resources/js/api/mediaApi.js ***!
   \**************************************/
-/*! exports provided: fetchGenres, fetchArtistAliasesByName, fetchFilteredAlbums, fetchSong, fetchAlbum, fetchAlbumTypes, fetchSongs */
+/*! exports provided: fetchGenres, fetchArtistAliasesByName, fetchFilteredAlbums, fetchSong, fetchAlbum, fetchAlbumTypes, fetchSongs, getAlbumCoverUrl, getSongIconUrl */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -885,6 +885,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchAlbum", function() { return fetchAlbum; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchAlbumTypes", function() { return fetchAlbumTypes; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchSongs", function() { return fetchSongs; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getAlbumCoverUrl", function() { return getAlbumCoverUrl; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getSongIconUrl", function() { return getSongIconUrl; });
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _util_stringHelper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../util/stringHelper */ "./resources/js/util/stringHelper.js");
@@ -1047,6 +1049,13 @@ function _fetchSongs() {
     }, _callee7);
   }));
   return _fetchSongs.apply(this, arguments);
+}
+
+function getAlbumCoverUrl(id) {
+  return "/media/music/album/".concat(id, "/cover");
+}
+function getSongIconUrl(id) {
+  return "/media/music/song/".concat(id, "/icon");
 }
 
 /***/ }),
