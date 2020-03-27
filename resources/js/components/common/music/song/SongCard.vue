@@ -8,12 +8,12 @@
                     <span class="text-muted">{{aliases}} </span>
                 </div>
                 <div class="ml-auto row">
+                    <span class="pr-4 text-muted">{{song.bitrate / 1000}} кбит/с</span>
                     <span>{{duration}}</span>
                 </div>
             </div>
         </div>
     </div>
-
 </template>
 
 <script>

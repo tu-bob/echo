@@ -148,6 +148,10 @@ var render = function() {
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "ml-auto row" }, [
+          _c("span", { staticClass: "pr-4 text-muted" }, [
+            _vm._v(_vm._s(_vm.song.bitrate / 1000) + " кбит/с")
+          ]),
+          _vm._v(" "),
           _c("span", [_vm._v(_vm._s(_vm.duration))])
         ])
       ])
