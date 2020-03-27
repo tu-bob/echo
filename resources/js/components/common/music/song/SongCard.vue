@@ -1,10 +1,7 @@
 <template>
     <div class="container pb-3">
         <div class="row w-100 text-white">
-            <b-img class="bg-laravel thumb"
-                   :src="thumbnail"
-                   rounded
-            ></b-img>
+            <img :src="coverUrl" class="thumb" @error="onImageError">
             <div class="ml-2 mt-2 row col">
                 <div>
                     <h6 class="mb-0">{{song.title}}</h6>
@@ -21,6 +18,7 @@
 
 <script>
     import {concatStrings, secondsToFormattedMinutes} from '../../../../util/stringHelper'
+    import {getAlbumCoverUrl, getSongIconUrl} from "../../../../api/mediaApi";
 
     export default {
         name: "SongCard",
@@ -34,12 +32,21 @@
                 default: 'https://picsum.photos/1024/400/?image=41'
             }
         },
+        methods: {
+            onImageError(e) {
+                e.target.src = "/icons/svg/music.svg";
+                $(e.target).addClass('p-1');
+            }
+        },
         computed: {
             aliases() {
                 return concatStrings(this.song.artistAliases.map(alias => alias.name), ';');
             },
-            duration(){
+            duration() {
                 return secondsToFormattedMinutes(this.song.playtime_seconds)
+            },
+            coverUrl() {
+                return getSongIconUrl(this.song.id)
             }
         }
     }

@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Storage;
 use Modules\Media\Http\Filters\Media\SongFilter;
 use Modules\Media\Http\Requests\Music\SongRequest;
 use Modules\Media\Libs\Request\RequestWriter\Music\StoreSongRequestWriter;
+use Modules\Media\Models\Music\MusicAlbum;
 use Modules\Media\Models\Music\Song;
 use Modules\Shared\Http\Controllers\BaseController;
 
@@ -42,9 +43,23 @@ class SongController extends BaseController
     {
         return Song::with('artistAliases')
             ->where('title', 'like', '%' . $info . '%')
-            ->orWhereHas('artistAliases', function (Builder $query) use ($info) {
+            ->orWhereHas('artistAliases', function ($query) use ($info) {
                 $query->where('name', 'like', '%' . $info . '%');
             })
             ->get();
+    }
+
+    public function getIcon($song)
+    {
+        $album = MusicAlbum::with('cover')
+            ->whereHas('cover')
+            ->whereHas('songs', function (Builder $query) use ($song) {
+                $query->where('song_id', $song);
+            })
+            ->first();
+
+        if ($album)
+            return Storage::get($album->cover->path);
+        return null;
     }
 }

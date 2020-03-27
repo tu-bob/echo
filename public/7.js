@@ -1,15 +1,21 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[7],{
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/common/music/song/SongCard.vue?vue&type=script&lang=js&":
-/*!*************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/common/music/song/SongCard.vue?vue&type=script&lang=js& ***!
-  \*************************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/admin/media/album/AlbumsTable.vue?vue&type=script&lang=js&":
+/*!****************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/admin/media/album/AlbumsTable.vue?vue&type=script&lang=js& ***!
+  \****************************************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _util_stringHelper__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../util/stringHelper */ "./resources/js/util/stringHelper.js");
+/* harmony import */ var _common_tables_TableCard__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../common/tables/TableCard */ "./resources/js/components/common/tables/TableCard.vue");
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -33,105 +39,122 @@ __webpack_require__.r(__webpack_exports__);
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: "SongCard",
+  name: "AlbumsTable",
+  created: function created() {},
   props: {
-    song: {
-      type: Object,
-      required: true
+    columnsToHide: {
+      type: Array,
+      "default": function _default() {
+        return ['delete'];
+      }
     },
-    thumbnail: {
+    data: {
+      type: Array,
+      "default": function _default() {
+        return [];
+      }
+    },
+    url: {
       type: String,
-      "default": 'https://picsum.photos/1024/400/?image=41'
+      "default": '/media/music/album/list'
     }
-  },
-  computed: {
-    aliases: function aliases() {
-      return Object(_util_stringHelper__WEBPACK_IMPORTED_MODULE_0__["concatStrings"])(this.song.artistAliases.map(function (alias) {
-        return alias.name;
-      }), ';');
-    },
-    duration: function duration() {
-      return Object(_util_stringHelper__WEBPACK_IMPORTED_MODULE_0__["secondsToFormattedMinutes"])(this.song.playtime_seconds);
-    }
-  }
-});
-
-/***/ }),
-
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/common/music/song/SongsList.vue?vue&type=script&lang=js&":
-/*!**************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/common/music/song/SongsList.vue?vue&type=script&lang=js& ***!
-  \**************************************************************************************************************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _api_mediaApi__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../api/mediaApi */ "./resources/js/api/mediaApi.js");
-/* harmony import */ var _SongCard__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./SongCard */ "./resources/js/components/common/music/song/SongCard.vue");
-function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
-
-function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
-
-function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
-
-function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
-
-//
-//
-//
-//
-//
-//
-
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-  name: "SongsList",
-  components: {
-    SongCard: _SongCard__WEBPACK_IMPORTED_MODULE_1__["default"]
-  },
-  created: function created() {
-    this.fetchSongs();
   },
   data: function data() {
     return {
-      paginator: null,
-      songs: []
+      albums: this.data,
+      fields: [{
+        key: "title",
+        label: "Название"
+      }, {
+        key: "year",
+        label: "Год"
+      }, {
+        key: "edit",
+        label: ""
+      }, {
+        key: "delete",
+        label: ""
+      }]
     };
   },
-  methods: {
-    fetchSongs: function fetchSongs() {
-      var _this = this;
-
-      var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
-
-      Object(_api_mediaApi__WEBPACK_IMPORTED_MODULE_0__["fetchSongs"])({
-        order: 'latest',
-        page: page,
-        paginate: 15
-      }).then(function (response) {
-        var _this$songs;
-
-        _this.paginator = response;
-
-        (_this$songs = _this.songs).push.apply(_this$songs, _toConsumableArray(response.data));
-      })["catch"]();
+  watch: {
+    data: function data() {
+      this.albums = this.data;
     }
+  },
+  components: {
+    TableCard: _common_tables_TableCard__WEBPACK_IMPORTED_MODULE_0__["default"]
   }
 });
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/public/music/NewMusic.vue?vue&type=script&lang=js&":
-/*!********************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/public/music/NewMusic.vue?vue&type=script&lang=js& ***!
-  \********************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/common/tables/TableCard.vue?vue&type=script&lang=js&":
+/*!**********************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/common/tables/TableCard.vue?vue&type=script&lang=js& ***!
+  \**********************************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _common_music_song_SongsList__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../common/music/song/SongsList */ "./resources/js/components/common/music/song/SongsList.vue");
+/* harmony import */ var _TableCardProps_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./TableCardProps.vue */ "./resources/js/components/common/tables/TableCardProps.vue");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -142,117 +165,173 @@ __webpack_require__.r(__webpack_exports__);
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: "NewMusic",
-  components: {
-    SongsList: _common_music_song_SongsList__WEBPACK_IMPORTED_MODULE_0__["default"]
+  name: "TableCard",
+  mixins: [_TableCardProps_vue__WEBPACK_IMPORTED_MODULE_0__["default"]],
+  mounted: function mounted() {
+    if (this.columnsToHide) this.hideColumns();
+    if (this.url) this.fetch();
+  },
+  data: function data() {
+    return {
+      tableFields: this.fields,
+      tableItems: this.items // selected: [],
+      // selectAll: false
+
+    };
+  },
+  methods: {
+    // onRowClick(item) {
+    //     if (!this.selectable)
+    //         return;
+    //     if (this.isSelected(item)) {
+    //         this.selected = this.selected.filter(function (stored) {
+    //             return stored.id !== item.id
+    //         })
+    //     } else {
+    //         this.selected.push(item)
+    //     }
+    //
+    //     return this.$emit('itemsSelected', this.selected);
+    // },
+    // isSelected(item) {
+    //     return this.selected.find(function (selected) {
+    //         return selected.id === item.id;
+    //     });
+    // },
+    // rowClass(item, type) {
+    //     if (!item) return;
+    //     if (this.isSelected(item)) return this.selectedRowClass
+    // },
+    concatCellKey: function concatCellKey(key) {
+      return "cell(".concat(key, ")");
+    },
+    hideColumns: function hideColumns() {
+      var _this = this;
+
+      var _loop = function _loop(i) {
+        _this.tableFields = _this.tableFields.filter(function (field) {
+          return field.key !== _this.columnsToHide[i];
+        });
+      };
+
+      for (var i = 0; i < this.columnsToHide.length; i++) {
+        _loop(i);
+      }
+    },
+    fetch: function fetch() {
+      var _this2 = this;
+
+      if (this.url) axios.get(this.url).then(function (songs) {
+        return _this2.tableItems = songs;
+      })["catch"]();
+    }
+  },
+  watch: {
+    // selectAll() {
+    //     if (this.selectAll) {
+    //         this.selected = this.items;
+    //     } else this.selected = [];
+    //
+    //     return this.$emit('itemsSelected', this.selected);
+    // },
+    items: function items() {
+      this.tableItems = this.items;
+    },
+    fields: function fields() {
+      this.tableFields = this.fields;
+    },
+    columnsToHide: function columnsToHide() {
+      this.hideColumns();
+    }
   }
 });
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/common/music/song/SongCard.vue?vue&type=style&index=0&id=3528e31c&scoped=true&lang=css&":
-/*!********************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/common/music/song/SongCard.vue?vue&type=style&index=0&id=3528e31c&scoped=true&lang=css& ***!
-  \********************************************************************************************************************************************************************************************************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(/*! ../../../../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
-// imports
-
-
-// module
-exports.push([module.i, "\n.thumb[data-v-3528e31c] {\n    -o-object-fit: cover;\n       object-fit: cover;\n    width: 50px !important;\n    height: 50px;\n}\n", ""]);
-
-// exports
-
-
-/***/ }),
-
-/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/common/music/song/SongCard.vue?vue&type=style&index=0&id=3528e31c&scoped=true&lang=css&":
-/*!************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/common/music/song/SongCard.vue?vue&type=style&index=0&id=3528e31c&scoped=true&lang=css& ***!
-  \************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-
-var content = __webpack_require__(/*! !../../../../../../node_modules/css-loader??ref--6-1!../../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../../node_modules/postcss-loader/src??ref--6-2!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./SongCard.vue?vue&type=style&index=0&id=3528e31c&scoped=true&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/common/music/song/SongCard.vue?vue&type=style&index=0&id=3528e31c&scoped=true&lang=css&");
-
-if(typeof content === 'string') content = [[module.i, content, '']];
-
-var transform;
-var insertInto;
-
-
-
-var options = {"hmr":true}
-
-options.transform = transform
-options.insertInto = undefined;
-
-var update = __webpack_require__(/*! ../../../../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
-
-if(content.locals) module.exports = content.locals;
-
-if(false) {}
-
-/***/ }),
-
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/common/music/song/SongCard.vue?vue&type=template&id=3528e31c&scoped=true&":
-/*!*****************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/common/music/song/SongCard.vue?vue&type=template&id=3528e31c&scoped=true& ***!
-  \*****************************************************************************************************************************************************************************************************************************************/
-/*! exports provided: render, staticRenderFns */
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/common/tables/TableCardProps.vue?vue&type=script&lang=js&":
+/*!***************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/common/tables/TableCardProps.vue?vue&type=script&lang=js& ***!
+  \***************************************************************************************************************************************************************************************/
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "container pb-3" }, [
-    _c(
-      "div",
-      { staticClass: "row w-100 text-white" },
-      [
-        _c("b-img", {
-          staticClass: "bg-laravel thumb",
-          attrs: { src: _vm.thumbnail, rounded: "" }
-        }),
-        _vm._v(" "),
-        _c("div", { staticClass: "ml-2 mt-2 row col" }, [
-          _c("div", [
-            _c("h6", { staticClass: "mb-0" }, [_vm._v(_vm._s(_vm.song.title))]),
-            _vm._v(" "),
-            _c("span", { staticClass: "text-muted" }, [
-              _vm._v(_vm._s(_vm.aliases) + " ")
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "ml-auto row" }, [
-            _c("span", [_vm._v(_vm._s(_vm.duration))])
-          ])
-        ])
-      ],
-      1
-    )
-  ])
-}
-var staticRenderFns = []
-render._withStripped = true
-
-
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: "TableCardProps",
+  props: {
+    items: {
+      type: Array,
+      required: true
+    },
+    url: {
+      type: String
+    },
+    fields: {
+      required: true
+    },
+    setRowClass: {
+      type: Function
+    },
+    tableHeight: {
+      type: String
+    },
+    primaryKey: {
+      type: String,
+      "default": 'id'
+    },
+    isBusy: {
+      type: Boolean,
+      "default": false
+    },
+    selectable: {
+      type: Boolean,
+      "default": false
+    },
+    selectMode: {
+      type: String,
+      "default": 'single'
+    },
+    striped: {
+      type: Boolean,
+      "default": false
+    },
+    borderless: {
+      type: Boolean,
+      "default": false
+    },
+    responsive: {
+      type: Boolean,
+      "default": false
+    },
+    fixed: {
+      type: Boolean,
+      "default": false
+    },
+    selectedRowClass: {
+      type: String,
+      "default": 'table-success'
+    },
+    checkedClass: {
+      type: String,
+      "default": 'text-success'
+    },
+    hover: {
+      type: Boolean,
+      "default": false
+    },
+    columnsToHide: {
+      type: Array
+    }
+  }
+});
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/common/music/song/SongsList.vue?vue&type=template&id=0eec1216&scoped=true&":
-/*!******************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/common/music/song/SongsList.vue?vue&type=template&id=0eec1216&scoped=true& ***!
-  \******************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/admin/media/album/AlbumsTable.vue?vue&type=template&id=73cd7ca4&scoped=true&":
+/*!********************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/admin/media/album/AlbumsTable.vue?vue&type=template&id=73cd7ca4&scoped=true& ***!
+  \********************************************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -266,9 +345,73 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    _vm._l(_vm.songs, function(song) {
-      return _c("song-card", { attrs: { song: song } })
-    }),
+    [
+      _c("table-card", {
+        attrs: {
+          items: _vm.albums,
+          fields: _vm.fields,
+          url: _vm.url,
+          columnsToHide: _vm.columnsToHide
+        },
+        scopedSlots: _vm._u(
+          [
+            {
+              key: "header",
+              fn: function() {
+                return [
+                  _vm._t("header", [_c("span", [_vm._v("Список альбомов")])])
+                ]
+              },
+              proxy: true
+            },
+            {
+              key: "edit",
+              fn: function(ref) {
+                var item = ref.item
+                return [
+                  _c(
+                    "a",
+                    {
+                      attrs: { href: "#" },
+                      on: {
+                        click: function($event) {
+                          $event.preventDefault()
+                          return _vm.$router.push({
+                            name: "album-editor",
+                            params: { id: item.id }
+                          })
+                        }
+                      }
+                    },
+                    [
+                      _c("img", {
+                        staticClass: "icon-btn-sm",
+                        attrs: { src: "/icons/svg/edit.svg" }
+                      })
+                    ]
+                  )
+                ]
+              }
+            },
+            {
+              key: "delete",
+              fn: function(ref) {
+                var item = ref.item
+                return [
+                  _vm._t(
+                    "delete",
+                    [_vm._v("\n                --\n            ")],
+                    { song: item }
+                  )
+                ]
+              }
+            }
+          ],
+          null,
+          true
+        )
+      })
+    ],
     1
   )
 }
@@ -279,10 +422,10 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/public/music/NewMusic.vue?vue&type=template&id=384f344c&scoped=true&":
-/*!************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/public/music/NewMusic.vue?vue&type=template&id=384f344c&scoped=true& ***!
-  \************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/common/tables/TableCard.vue?vue&type=template&id=c777b846&":
+/*!**************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/common/tables/TableCard.vue?vue&type=template&id=c777b846& ***!
+  \**************************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -294,7 +437,68 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "container" }, [_c("songs-list")], 1)
+  return _c(
+    "div",
+    { staticClass: "card" },
+    [
+      _c("div", { staticClass: "card-header" }, [
+        _c(
+          "div",
+          { staticClass: "row align-items-baseline" },
+          [_vm._t("header")],
+          2
+        )
+      ]),
+      _vm._v(" "),
+      _c("b-table", {
+        attrs: {
+          borderless: _vm.borderless,
+          busy: _vm.isBusy,
+          fields: _vm.tableFields,
+          fixed: _vm.fixed,
+          items: _vm.tableItems,
+          "primary-key": _vm.primaryKey,
+          responsive: _vm.responsive,
+          "select-mode": _vm.selectMode,
+          selectable: _vm.selectable,
+          striped: _vm.striped,
+          hover: _vm.hover,
+          small: ""
+        },
+        scopedSlots: _vm._u(
+          [
+            {
+              key: "table-busy",
+              fn: function() {
+                return [
+                  _c(
+                    "div",
+                    { staticClass: "text-center text-info my-2" },
+                    [_c("b-spinner", { staticClass: "align-middle" })],
+                    1
+                  )
+                ]
+              },
+              proxy: true
+            },
+            _vm._l(_vm.$scopedSlots, function(_, key) {
+              return {
+                key: _vm.concatCellKey(key),
+                fn: function(data) {
+                  return [_vm._t(key, null, null, data)]
+                }
+              }
+            })
+          ],
+          null,
+          true
+        )
+      }),
+      _vm._v(" "),
+      _vm._t("footer")
+    ],
+    2
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -303,104 +507,17 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./resources/js/components/common/music/song/SongCard.vue":
-/*!****************************************************************!*\
-  !*** ./resources/js/components/common/music/song/SongCard.vue ***!
-  \****************************************************************/
+/***/ "./resources/js/components/admin/media/album/AlbumsTable.vue":
+/*!*******************************************************************!*\
+  !*** ./resources/js/components/admin/media/album/AlbumsTable.vue ***!
+  \*******************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _SongCard_vue_vue_type_template_id_3528e31c_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./SongCard.vue?vue&type=template&id=3528e31c&scoped=true& */ "./resources/js/components/common/music/song/SongCard.vue?vue&type=template&id=3528e31c&scoped=true&");
-/* harmony import */ var _SongCard_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./SongCard.vue?vue&type=script&lang=js& */ "./resources/js/components/common/music/song/SongCard.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _SongCard_vue_vue_type_style_index_0_id_3528e31c_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./SongCard.vue?vue&type=style&index=0&id=3528e31c&scoped=true&lang=css& */ "./resources/js/components/common/music/song/SongCard.vue?vue&type=style&index=0&id=3528e31c&scoped=true&lang=css&");
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
-
-
-
-
-
-
-/* normalize component */
-
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
-  _SongCard_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _SongCard_vue_vue_type_template_id_3528e31c_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _SongCard_vue_vue_type_template_id_3528e31c_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
-  false,
-  null,
-  "3528e31c",
-  null
-  
-)
-
-/* hot reload */
-if (false) { var api; }
-component.options.__file = "resources/js/components/common/music/song/SongCard.vue"
-/* harmony default export */ __webpack_exports__["default"] = (component.exports);
-
-/***/ }),
-
-/***/ "./resources/js/components/common/music/song/SongCard.vue?vue&type=script&lang=js&":
-/*!*****************************************************************************************!*\
-  !*** ./resources/js/components/common/music/song/SongCard.vue?vue&type=script&lang=js& ***!
-  \*****************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SongCard_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./SongCard.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/common/music/song/SongCard.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SongCard_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
-
-/***/ }),
-
-/***/ "./resources/js/components/common/music/song/SongCard.vue?vue&type=style&index=0&id=3528e31c&scoped=true&lang=css&":
-/*!*************************************************************************************************************************!*\
-  !*** ./resources/js/components/common/music/song/SongCard.vue?vue&type=style&index=0&id=3528e31c&scoped=true&lang=css& ***!
-  \*************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_SongCard_vue_vue_type_style_index_0_id_3528e31c_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/style-loader!../../../../../../node_modules/css-loader??ref--6-1!../../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../../node_modules/postcss-loader/src??ref--6-2!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./SongCard.vue?vue&type=style&index=0&id=3528e31c&scoped=true&lang=css& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/common/music/song/SongCard.vue?vue&type=style&index=0&id=3528e31c&scoped=true&lang=css&");
-/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_SongCard_vue_vue_type_style_index_0_id_3528e31c_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_SongCard_vue_vue_type_style_index_0_id_3528e31c_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__);
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_SongCard_vue_vue_type_style_index_0_id_3528e31c_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_SongCard_vue_vue_type_style_index_0_id_3528e31c_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
- /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_SongCard_vue_vue_type_style_index_0_id_3528e31c_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
-
-/***/ }),
-
-/***/ "./resources/js/components/common/music/song/SongCard.vue?vue&type=template&id=3528e31c&scoped=true&":
-/*!***********************************************************************************************************!*\
-  !*** ./resources/js/components/common/music/song/SongCard.vue?vue&type=template&id=3528e31c&scoped=true& ***!
-  \***********************************************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SongCard_vue_vue_type_template_id_3528e31c_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./SongCard.vue?vue&type=template&id=3528e31c&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/common/music/song/SongCard.vue?vue&type=template&id=3528e31c&scoped=true&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SongCard_vue_vue_type_template_id_3528e31c_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SongCard_vue_vue_type_template_id_3528e31c_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
-
-
-
-/***/ }),
-
-/***/ "./resources/js/components/common/music/song/SongsList.vue":
-/*!*****************************************************************!*\
-  !*** ./resources/js/components/common/music/song/SongsList.vue ***!
-  \*****************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _SongsList_vue_vue_type_template_id_0eec1216_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./SongsList.vue?vue&type=template&id=0eec1216&scoped=true& */ "./resources/js/components/common/music/song/SongsList.vue?vue&type=template&id=0eec1216&scoped=true&");
-/* harmony import */ var _SongsList_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./SongsList.vue?vue&type=script&lang=js& */ "./resources/js/components/common/music/song/SongsList.vue?vue&type=script&lang=js&");
+/* harmony import */ var _AlbumsTable_vue_vue_type_template_id_73cd7ca4_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./AlbumsTable.vue?vue&type=template&id=73cd7ca4&scoped=true& */ "./resources/js/components/admin/media/album/AlbumsTable.vue?vue&type=template&id=73cd7ca4&scoped=true&");
+/* harmony import */ var _AlbumsTable_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./AlbumsTable.vue?vue&type=script&lang=js& */ "./resources/js/components/admin/media/album/AlbumsTable.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -410,66 +527,66 @@ __webpack_require__.r(__webpack_exports__);
 /* normalize component */
 
 var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _SongsList_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _SongsList_vue_vue_type_template_id_0eec1216_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _SongsList_vue_vue_type_template_id_0eec1216_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  _AlbumsTable_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _AlbumsTable_vue_vue_type_template_id_73cd7ca4_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _AlbumsTable_vue_vue_type_template_id_73cd7ca4_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
-  "0eec1216",
+  "73cd7ca4",
   null
   
 )
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/js/components/common/music/song/SongsList.vue"
+component.options.__file = "resources/js/components/admin/media/album/AlbumsTable.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
 
-/***/ "./resources/js/components/common/music/song/SongsList.vue?vue&type=script&lang=js&":
-/*!******************************************************************************************!*\
-  !*** ./resources/js/components/common/music/song/SongsList.vue?vue&type=script&lang=js& ***!
-  \******************************************************************************************/
+/***/ "./resources/js/components/admin/media/album/AlbumsTable.vue?vue&type=script&lang=js&":
+/*!********************************************************************************************!*\
+  !*** ./resources/js/components/admin/media/album/AlbumsTable.vue?vue&type=script&lang=js& ***!
+  \********************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SongsList_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./SongsList.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/common/music/song/SongsList.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SongsList_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AlbumsTable_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./AlbumsTable.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/admin/media/album/AlbumsTable.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AlbumsTable_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
-/***/ "./resources/js/components/common/music/song/SongsList.vue?vue&type=template&id=0eec1216&scoped=true&":
-/*!************************************************************************************************************!*\
-  !*** ./resources/js/components/common/music/song/SongsList.vue?vue&type=template&id=0eec1216&scoped=true& ***!
-  \************************************************************************************************************/
+/***/ "./resources/js/components/admin/media/album/AlbumsTable.vue?vue&type=template&id=73cd7ca4&scoped=true&":
+/*!**************************************************************************************************************!*\
+  !*** ./resources/js/components/admin/media/album/AlbumsTable.vue?vue&type=template&id=73cd7ca4&scoped=true& ***!
+  \**************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SongsList_vue_vue_type_template_id_0eec1216_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./SongsList.vue?vue&type=template&id=0eec1216&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/common/music/song/SongsList.vue?vue&type=template&id=0eec1216&scoped=true&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SongsList_vue_vue_type_template_id_0eec1216_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AlbumsTable_vue_vue_type_template_id_73cd7ca4_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./AlbumsTable.vue?vue&type=template&id=73cd7ca4&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/admin/media/album/AlbumsTable.vue?vue&type=template&id=73cd7ca4&scoped=true&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AlbumsTable_vue_vue_type_template_id_73cd7ca4_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SongsList_vue_vue_type_template_id_0eec1216_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AlbumsTable_vue_vue_type_template_id_73cd7ca4_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
 /***/ }),
 
-/***/ "./resources/js/components/public/music/NewMusic.vue":
-/*!***********************************************************!*\
-  !*** ./resources/js/components/public/music/NewMusic.vue ***!
-  \***********************************************************/
+/***/ "./resources/js/components/common/tables/TableCard.vue":
+/*!*************************************************************!*\
+  !*** ./resources/js/components/common/tables/TableCard.vue ***!
+  \*************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _NewMusic_vue_vue_type_template_id_384f344c_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./NewMusic.vue?vue&type=template&id=384f344c&scoped=true& */ "./resources/js/components/public/music/NewMusic.vue?vue&type=template&id=384f344c&scoped=true&");
-/* harmony import */ var _NewMusic_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./NewMusic.vue?vue&type=script&lang=js& */ "./resources/js/components/public/music/NewMusic.vue?vue&type=script&lang=js&");
+/* harmony import */ var _TableCard_vue_vue_type_template_id_c777b846___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./TableCard.vue?vue&type=template&id=c777b846& */ "./resources/js/components/common/tables/TableCard.vue?vue&type=template&id=c777b846&");
+/* harmony import */ var _TableCard_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./TableCard.vue?vue&type=script&lang=js& */ "./resources/js/components/common/tables/TableCard.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -479,52 +596,102 @@ __webpack_require__.r(__webpack_exports__);
 /* normalize component */
 
 var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _NewMusic_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _NewMusic_vue_vue_type_template_id_384f344c_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _NewMusic_vue_vue_type_template_id_384f344c_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  _TableCard_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _TableCard_vue_vue_type_template_id_c777b846___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _TableCard_vue_vue_type_template_id_c777b846___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
-  "384f344c",
+  null,
   null
   
 )
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/js/components/public/music/NewMusic.vue"
+component.options.__file = "resources/js/components/common/tables/TableCard.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
 
-/***/ "./resources/js/components/public/music/NewMusic.vue?vue&type=script&lang=js&":
-/*!************************************************************************************!*\
-  !*** ./resources/js/components/public/music/NewMusic.vue?vue&type=script&lang=js& ***!
-  \************************************************************************************/
+/***/ "./resources/js/components/common/tables/TableCard.vue?vue&type=script&lang=js&":
+/*!**************************************************************************************!*\
+  !*** ./resources/js/components/common/tables/TableCard.vue?vue&type=script&lang=js& ***!
+  \**************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_NewMusic_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./NewMusic.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/public/music/NewMusic.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_NewMusic_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_TableCard_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./TableCard.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/common/tables/TableCard.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_TableCard_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
-/***/ "./resources/js/components/public/music/NewMusic.vue?vue&type=template&id=384f344c&scoped=true&":
-/*!******************************************************************************************************!*\
-  !*** ./resources/js/components/public/music/NewMusic.vue?vue&type=template&id=384f344c&scoped=true& ***!
-  \******************************************************************************************************/
+/***/ "./resources/js/components/common/tables/TableCard.vue?vue&type=template&id=c777b846&":
+/*!********************************************************************************************!*\
+  !*** ./resources/js/components/common/tables/TableCard.vue?vue&type=template&id=c777b846& ***!
+  \********************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_NewMusic_vue_vue_type_template_id_384f344c_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./NewMusic.vue?vue&type=template&id=384f344c&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/public/music/NewMusic.vue?vue&type=template&id=384f344c&scoped=true&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_NewMusic_vue_vue_type_template_id_384f344c_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TableCard_vue_vue_type_template_id_c777b846___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./TableCard.vue?vue&type=template&id=c777b846& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/common/tables/TableCard.vue?vue&type=template&id=c777b846&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TableCard_vue_vue_type_template_id_c777b846___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_NewMusic_vue_vue_type_template_id_384f344c_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TableCard_vue_vue_type_template_id_c777b846___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
+
+/***/ }),
+
+/***/ "./resources/js/components/common/tables/TableCardProps.vue":
+/*!******************************************************************!*\
+  !*** ./resources/js/components/common/tables/TableCardProps.vue ***!
+  \******************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _TableCardProps_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./TableCardProps.vue?vue&type=script&lang=js& */ "./resources/js/components/common/tables/TableCardProps.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+var render, staticRenderFns
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_1__["default"])(
+  _TableCardProps_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"],
+  render,
+  staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/common/tables/TableCardProps.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/common/tables/TableCardProps.vue?vue&type=script&lang=js&":
+/*!*******************************************************************************************!*\
+  !*** ./resources/js/components/common/tables/TableCardProps.vue?vue&type=script&lang=js& ***!
+  \*******************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_TableCardProps_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./TableCardProps.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/common/tables/TableCardProps.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_TableCardProps_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ })
 

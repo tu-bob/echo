@@ -1,6 +1,6 @@
 <template>
     <div>
-        <songs-carousel></songs-carousel>
+<!--        <songs-carousel></songs-carousel>-->
         <hr>
         <albums-viewer></albums-viewer>
     </div>
