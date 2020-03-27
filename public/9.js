@@ -873,7 +873,7 @@ render._withStripped = true
 /*!**************************************!*\
   !*** ./resources/js/api/mediaApi.js ***!
   \**************************************/
-/*! exports provided: fetchGenres, fetchArtistAliasesByName, fetchFilteredAlbums, fetchSong, fetchAlbum, fetchAlbumTypes, fetchSongs, getAlbumCoverUrl, getSongIconUrl */
+/*! exports provided: fetchGenres, fetchArtistAliasesByName, fetchFilteredAlbums, fetchSong, fetchAlbum, fetchAlbumTypes, fetchSongs, getAlbumCoverUrl, getSongIconUrl, getBlogImage, getImageUrl */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -887,6 +887,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchSongs", function() { return fetchSongs; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getAlbumCoverUrl", function() { return getAlbumCoverUrl; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getSongIconUrl", function() { return getSongIconUrl; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getBlogImage", function() { return getBlogImage; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getImageUrl", function() { return getImageUrl; });
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _util_stringHelper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../util/stringHelper */ "./resources/js/util/stringHelper.js");
@@ -1056,6 +1058,12 @@ function getAlbumCoverUrl(id) {
 }
 function getSongIconUrl(id) {
   return "/media/music/song/".concat(id, "/icon");
+}
+function getBlogImage(image) {
+  return getImageUrl(image, 'blog');
+}
+function getImageUrl(image, type) {
+  return "/media/image/".concat(image, "/").concat(type);
 }
 
 /***/ }),

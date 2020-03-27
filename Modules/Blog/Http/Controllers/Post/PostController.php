@@ -4,6 +4,7 @@
 namespace Modules\Blog\Http\Controllers\Post;
 
 
+use Modules\Blog\Http\Filters\PostFilter;
 use Modules\Blog\Http\Requests\RequestWriters\PostRequestWriter;
 use Modules\Blog\Http\Requests\StorePostRequest;
 use Modules\Blog\Models\Post\Post;
@@ -19,8 +20,9 @@ class PostController extends BaseController
 
     public function getPosts()
     {
-        $query = Post::where('created_by_id', auth()->id());
-        return $this->callGetOrPaginate($query);
+        $query = Post::with('previewImage', 'author');
+        $filter = new PostFilter(request()->all(), $query);
+        return $this->callGetOrPaginate($filter->filter());
     }
 
     public function getPost($post)

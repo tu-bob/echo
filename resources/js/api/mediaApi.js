@@ -36,3 +36,11 @@ export function getAlbumCoverUrl(id) {
 export function getSongIconUrl(id) {
     return `/media/music/song/${id}/icon`;
 }
+
+export function getBlogImage(image) {
+    return getImageUrl(image, 'blog')
+}
+
+export function getImageUrl(image, type) {
+    return `/media/image/${image}/${type}`;
+}
