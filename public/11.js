@@ -110,7 +110,7 @@ var render = function() {
   return _c(
     "div",
     _vm._l(_vm.songs, function(song) {
-      return _c("song-card", { attrs: { song: song } })
+      return _c("song-card", { key: song.id, attrs: { song: song } })
     }),
     1
   )

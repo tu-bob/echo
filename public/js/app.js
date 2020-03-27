@@ -2195,7 +2195,7 @@ var routes = [{
     name: 'news',
     path: 'news',
     component: function component() {
-      return __webpack_require__.e(/*! import() */ 10).then(__webpack_require__.bind(null, /*! ../components/public/news/News */ "./resources/js/components/public/news/News.vue"));
+      return __webpack_require__.e(/*! import() */ 5).then(__webpack_require__.bind(null, /*! ../components/public/news/News */ "./resources/js/components/public/news/News.vue"));
     }
   }, {
     name: 'new-music',
@@ -2216,7 +2216,7 @@ var routes = [{
     name: 'posts-table',
     path: 'posts',
     component: function component() {
-      return __webpack_require__.e(/*! import() */ 5).then(__webpack_require__.bind(null, /*! ../components/admin/blog/post/PostsTable */ "./resources/js/components/admin/blog/post/PostsTable.vue"));
+      return __webpack_require__.e(/*! import() */ 6).then(__webpack_require__.bind(null, /*! ../components/admin/blog/post/PostsTable */ "./resources/js/components/admin/blog/post/PostsTable.vue"));
     }
   }, {
     name: 'post-editor',
@@ -2243,13 +2243,13 @@ var routes = [{
     name: 'song-editor',
     path: 'song/:id?',
     component: function component() {
-      return Promise.all(/*! import() */[__webpack_require__.e(2), __webpack_require__.e(9)]).then(__webpack_require__.bind(null, /*! ../components/admin/media/music/SongEditor */ "./resources/js/components/admin/media/music/SongEditor.vue"));
+      return Promise.all(/*! import() */[__webpack_require__.e(2), __webpack_require__.e(10)]).then(__webpack_require__.bind(null, /*! ../components/admin/media/music/SongEditor */ "./resources/js/components/admin/media/music/SongEditor.vue"));
     }
   }, {
     name: 'artists-table',
     path: 'artists',
     component: function component() {
-      return __webpack_require__.e(/*! import() */ 8).then(__webpack_require__.bind(null, /*! ../components/admin/media/artist/ArtistsTable */ "./resources/js/components/admin/media/artist/ArtistsTable.vue"));
+      return __webpack_require__.e(/*! import() */ 9).then(__webpack_require__.bind(null, /*! ../components/admin/media/artist/ArtistsTable */ "./resources/js/components/admin/media/artist/ArtistsTable.vue"));
     }
   }, {
     name: 'artist-editor',
@@ -2261,13 +2261,13 @@ var routes = [{
     name: 'albums-table',
     path: 'albums',
     component: function component() {
-      return __webpack_require__.e(/*! import() */ 7).then(__webpack_require__.bind(null, /*! ../components/admin/media/album/AlbumsTable */ "./resources/js/components/admin/media/album/AlbumsTable.vue"));
+      return __webpack_require__.e(/*! import() */ 8).then(__webpack_require__.bind(null, /*! ../components/admin/media/album/AlbumsTable */ "./resources/js/components/admin/media/album/AlbumsTable.vue"));
     }
   }, {
     name: 'album-editor',
     path: 'album/:id?',
     component: function component() {
-      return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(6)]).then(__webpack_require__.bind(null, /*! ../components/admin/media/album/AlbumEditor */ "./resources/js/components/admin/media/album/AlbumEditor.vue"));
+      return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(7)]).then(__webpack_require__.bind(null, /*! ../components/admin/media/album/AlbumEditor */ "./resources/js/components/admin/media/album/AlbumEditor.vue"));
     }
   }]
 }];

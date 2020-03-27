@@ -67,6 +67,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -77,12 +85,15 @@ __webpack_require__.r(__webpack_exports__);
     Summernote: _common_summernote_Summernote__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
   created: function created() {
+    this.fetchCategories();
     if (this.$route.params.id) this.fetchPost(this.$route.params.id);
   },
   data: function data() {
     return {
       previewImage: null,
+      categories: [],
       post: {
+        category: null,
         title: null,
         annotation: null,
         article: null,
@@ -102,6 +113,7 @@ __webpack_require__.r(__webpack_exports__);
       data.append('author', this.post.author.name);
       data.append('annotation', this.post.annotation);
       data.append('article', this.post.article);
+      if (this.post.category) data.append('category', this.post.category.id);
       if (this.post.reference) data.append('reference', this.post.reference);
       if (this.post.ref_name) data.append('ref_name', this.post.ref_name);
       if (this.previewImage) data.append('previewImage', this.previewImage, this.previewImage.name);
@@ -114,6 +126,13 @@ __webpack_require__.r(__webpack_exports__);
         _this.post = post;
 
         _this.$refs['articleEditor'].innerHtml(post.article);
+      })["catch"]();
+    },
+    fetchCategories: function fetchCategories() {
+      var _this2 = this;
+
+      Object(_api_blogApi__WEBPACK_IMPORTED_MODULE_2__["fetchCategories"])().then(function (response) {
+        return _this2.categories = response;
       })["catch"]();
     },
     onAuthorSelected: function onAuthorSelected(author) {
@@ -359,6 +378,58 @@ var render = function() {
         1
       ),
       _vm._v(" "),
+      _c("div", { staticClass: "form-group mx-3" }, [
+        _c("label", [_vm._v("Категория")]),
+        _vm._v(" "),
+        _c(
+          "select",
+          {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.post.category,
+                expression: "post.category"
+              }
+            ],
+            staticClass: "form-control custom-select",
+            on: {
+              change: function($event) {
+                var $$selectedVal = Array.prototype.filter
+                  .call($event.target.options, function(o) {
+                    return o.selected
+                  })
+                  .map(function(o) {
+                    var val = "_value" in o ? o._value : o.value
+                    return val
+                  })
+                _vm.$set(
+                  _vm.post,
+                  "category",
+                  $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+                )
+              }
+            }
+          },
+          [
+            _c(
+              "option",
+              { attrs: { disabled: "" }, domProps: { value: null } },
+              [_vm._v("-- Выберите категорию --")]
+            ),
+            _vm._v(" "),
+            _vm._l(_vm.categories, function(category) {
+              return _c(
+                "option",
+                { key: category.id, domProps: { value: category } },
+                [_vm._v(_vm._s(category.name) + "\n                ")]
+              )
+            })
+          ],
+          2
+        )
+      ]),
+      _vm._v(" "),
       _c(
         "div",
         { staticClass: "form-group mx-3" },
@@ -596,11 +667,12 @@ render._withStripped = true
 /*!*************************************!*\
   !*** ./resources/js/api/blogApi.js ***!
   \*************************************/
-/*! exports provided: fetchPost, fetchPosts */
+/*! exports provided: fetchCategories, fetchPost, fetchPosts */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchCategories", function() { return fetchCategories; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchPost", function() { return fetchPost; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchPosts", function() { return fetchPosts; });
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
@@ -613,17 +685,17 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
 
-function fetchPost(_x) {
-  return _fetchPost.apply(this, arguments);
+function fetchCategories() {
+  return _fetchCategories.apply(this, arguments);
 }
 
-function _fetchPost() {
-  _fetchPost = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(id) {
+function _fetchCategories() {
+  _fetchCategories = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
     return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
-            return _context.abrupt("return", axios.get("/blog/post/".concat(id)));
+            return _context.abrupt("return", axios.get("/blog/category/list"));
 
           case 1:
           case "end":
@@ -631,6 +703,28 @@ function _fetchPost() {
         }
       }
     }, _callee);
+  }));
+  return _fetchCategories.apply(this, arguments);
+}
+
+function fetchPost(_x) {
+  return _fetchPost.apply(this, arguments);
+}
+
+function _fetchPost() {
+  _fetchPost = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2(id) {
+    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+      while (1) {
+        switch (_context2.prev = _context2.next) {
+          case 0:
+            return _context2.abrupt("return", axios.get("/blog/post/".concat(id)));
+
+          case 1:
+          case "end":
+            return _context2.stop();
+        }
+      }
+    }, _callee2);
   }));
   return _fetchPost.apply(this, arguments);
 }
@@ -640,19 +734,19 @@ function fetchPosts(_x2) {
 }
 
 function _fetchPosts() {
-  _fetchPosts = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2(filters) {
-    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+  _fetchPosts = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3(filters) {
+    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
       while (1) {
-        switch (_context2.prev = _context2.next) {
+        switch (_context3.prev = _context3.next) {
           case 0:
-            return _context2.abrupt("return", axios.get('/blog/post/list?' + Object(_util_stringHelper__WEBPACK_IMPORTED_MODULE_1__["kvpToQueryParam"])(filters)));
+            return _context3.abrupt("return", axios.get('/blog/post/list?' + Object(_util_stringHelper__WEBPACK_IMPORTED_MODULE_1__["kvpToQueryParam"])(filters)));
 
           case 1:
           case "end":
-            return _context2.stop();
+            return _context3.stop();
         }
       }
-    }, _callee2);
+    }, _callee3);
   }));
   return _fetchPosts.apply(this, arguments);
 }

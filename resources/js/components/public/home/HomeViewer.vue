@@ -39,7 +39,6 @@
             <hr class="border-hr" style="width: 159.66px; margin-left: 0px;">
         </div>
 
-
         <div class="py-5">
             <router-view></router-view>
         </div>

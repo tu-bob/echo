@@ -6,13 +6,13 @@ namespace Modules\Blog\Http\Controllers\Post;
 
 use Modules\Blog\Http\Filters\PostFilter;
 use Modules\Blog\Http\Requests\RequestWriters\PostRequestWriter;
-use Modules\Blog\Http\Requests\StorePostRequest;
+use Modules\Blog\Http\Requests\PostRequest;
 use Modules\Blog\Models\Post\Post;
 use Modules\Shared\Http\Controllers\BaseController;
 
 class PostController extends BaseController
 {
-    public function store(StorePostRequest $request)
+    public function store(PostRequest $request)
     {
         $writer = new PostRequestWriter($request->all(), Post::class);
         return $writer->write();
@@ -27,6 +27,6 @@ class PostController extends BaseController
 
     public function getPost($post)
     {
-        return Post::with('previewImage', 'author')->findOrFail($post);
+        return Post::with('previewImage', 'author','category')->findOrFail($post);
     }
 }

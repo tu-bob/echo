@@ -14,6 +14,14 @@
                 </image-uploader>
             </div>
             <div class="form-group mx-3">
+                <label>Категория</label>
+                <select class="form-control custom-select" v-model="post.category">
+                    <option :value="null" disabled>-- Выберите категорию --</option>
+                    <option v-for="category in categories" :value="category" :key="category.id">{{category.name}}
+                    </option>
+                </select>
+            </div>
+            <div class="form-group mx-3">
                 <label>Автор</label>
                 <!--            <input class="form-control" v-model="post.author"/>-->
                 <suggestion-input displayPropertyName="name"
@@ -56,19 +64,22 @@
 <script>
     import Summernote from "../../../common/summernote/Summernote";
     import ImageUploader from "../../../common/inputs/ImageUploader";
-    import {fetchPost} from "../../../../api/blogApi";
+    import {fetchCategories, fetchPost} from "../../../../api/blogApi";
 
     export default {
         name: "PostEditor",
         components: {ImageUploader, Summernote},
         created() {
+            this.fetchCategories();
             if (this.$route.params.id)
                 this.fetchPost(this.$route.params.id);
         },
         data() {
             return {
                 previewImage: null,
+                categories: [],
                 post: {
+                    category: null,
                     title: null,
                     annotation: null,
                     article: null,
@@ -90,6 +101,8 @@
                 data.append('author', this.post.author.name);
                 data.append('annotation', this.post.annotation);
                 data.append('article', this.post.article);
+                if (this.post.category)
+                    data.append('category', this.post.category.id);
                 if (this.post.reference)
                     data.append('reference', this.post.reference);
                 if (this.post.ref_name)
@@ -105,6 +118,11 @@
                     this.post = post;
                     this.$refs['articleEditor'].innerHtml(post.article);
                 }).catch();
+            },
+            fetchCategories() {
+                fetchCategories()
+                    .then(response => this.categories = response)
+                    .catch()
             },
             onAuthorSelected(author) {
                 this.post.author = author;
