@@ -17,6 +17,7 @@ class CreatePostsTable extends Migration
             $table->char('id', 26)->primary();
             $table->char('author_id', 26)->index();
             $table->char('preview_image_id', 26)->nullable();
+            $table->char('post_category_id', 26);
             $table->string('slug')->index();
             $table->string('title');
             $table->string('annotation', 300);

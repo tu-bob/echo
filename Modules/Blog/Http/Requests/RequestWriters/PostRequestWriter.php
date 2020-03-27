@@ -27,6 +27,7 @@ class PostRequestWriter extends RequestWriter
 
         return $this->entity;
     }
+
     //TODO check article
     private function prepareData()
     {
@@ -37,6 +38,7 @@ class PostRequestWriter extends RequestWriter
             'slug' => Str::slug($this->request['title']),
             'author_id' => Author::firstOrCreate(['name' => $this->request['author']])->id,
             'annotation' => $this->request['annotation'],
+            'post_category_id' => $this->request['category'],
 //            'article' => $purifier->cleanHtml($this->request['article']),
             'article' => $this->request['article'],
             'reference' => isset($this->request['reference']) ? $this->request['reference'] : null,

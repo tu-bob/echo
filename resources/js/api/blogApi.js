@@ -1,5 +1,9 @@
 import {kvpToQueryParam} from "../util/stringHelper";
 
+export async function fetchCategories() {
+    return axios.get(`/blog/category/list`);
+}
+
 export async function fetchPost(id) {
     return axios.get(`/blog/post/${id}`)
 }

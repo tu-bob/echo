@@ -10,12 +10,18 @@ use Modules\Shared\Models\BaseModel;
 
 class Post extends BaseModel
 {
-    public function author(){
+    public function author()
+    {
         return $this->belongsTo(Author::class);
     }
 
     public function previewImage()
     {
         return $this->belongsTo(ImageFile::class);
+    }
+
+    public function category()
+    {
+        return $this->belongsTo(PostCategory::class, 'post_category_id');
     }
 }

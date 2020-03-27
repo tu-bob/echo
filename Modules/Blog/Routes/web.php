@@ -20,6 +20,10 @@ Route::prefix('blog')->group(function () {
         Route::get('/{post}', 'Post\PostController@getPost');
     });
 
+    Route::prefix('category')->group(function () {
+        Route::get('/list', 'Category\PostCategoryController@getCategories');
+    });
+
     Route::prefix('author')->group(function () {
         Route::get('/filter', 'Author\AuthorController@filter');
     });
