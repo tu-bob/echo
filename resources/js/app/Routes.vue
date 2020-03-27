@@ -36,6 +36,12 @@
                 ]
             },
             {
+                name: 'post-reader',
+                path: '/blog/post/:id',
+                props: true,
+                component: () => import('../components/public/blog/PostReader'),
+            },
+            {
                 path: '/admin/blog',
                 component: () => import('../components/admin/blog/BlogAdminView'),
                 meta: {requiresAuth: true},

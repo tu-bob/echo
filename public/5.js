@@ -28,6 +28,16 @@ __webpack_require__.r(__webpack_exports__);
       required: true
     }
   },
+  methods: {
+    navigate: function navigate() {
+      this.$router.push({
+        name: 'post-reader',
+        params: {
+          id: this.post.id
+        }
+      });
+    }
+  },
   computed: {
     previewImageSrc: function previewImageSrc() {
       return Object(_api_mediaApi__WEBPACK_IMPORTED_MODULE_0__["getBlogImage"])(this.post.previewImage.id);
@@ -145,7 +155,10 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { staticClass: "card bg-transparent text-light-grey" },
+    {
+      staticClass: "card bg-transparent text-light-grey",
+      on: { click: _vm.navigate }
+    },
     [
       _c("b-img", {
         staticClass: "object-fit-contain w-100 card-img-top pb-4",
