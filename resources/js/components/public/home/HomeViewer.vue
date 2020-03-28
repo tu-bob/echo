@@ -18,7 +18,7 @@
                     <span class="">Новости</span>
                 </b-nav-item>
                 <b-nav-item class="horizontal-nav-menu-item m-item"
-                            :to="{name:'new-music'}"
+                            :to="{name:'music'}"
                             exact
                             exact-active-class="active">
                 <span class="menu-icon">

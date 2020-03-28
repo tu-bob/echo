@@ -11,7 +11,7 @@
     import SongsList from "../../common/music/song/SongsList";
 
     export default {
-        name: "NewMusic",
+        name: "MusicView",
         components: {SongsList}
     }
 </script>

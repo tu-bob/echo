@@ -2198,10 +2198,10 @@ var routes = [{
       return __webpack_require__.e(/*! import() */ 5).then(__webpack_require__.bind(null, /*! ../components/public/news/News */ "./resources/js/components/public/news/News.vue"));
     }
   }, {
-    name: 'new-music',
-    path: 'music/new',
+    name: 'music',
+    path: 'music',
     component: function component() {
-      return Promise.all(/*! import() */[__webpack_require__.e(20), __webpack_require__.e(3), __webpack_require__.e(25)]).then(__webpack_require__.bind(null, /*! ../components/public/music/NewMusic */ "./resources/js/components/public/music/NewMusic.vue"));
+      return Promise.all(/*! import() */[__webpack_require__.e(20), __webpack_require__.e(3), __webpack_require__.e(12)]).then(__webpack_require__.bind(null, /*! ../components/public/music/MusicView */ "./resources/js/components/public/music/MusicView.vue"));
     }
   }]
 }, {
