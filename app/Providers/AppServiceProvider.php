@@ -31,6 +31,7 @@ class AppServiceProvider extends ServiceProvider
         });
 
         Blueprint::macro('commonFields', function () {
+            $this->char('id', 26)->primary();
             $this->timestamps();
             $this->softDeletes();
             $this->userStamp();

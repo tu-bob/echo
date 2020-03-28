@@ -14,8 +14,9 @@ class CreateSongsTable extends Migration
     public function up()
     {
         Schema::create('songs', function (Blueprint $table) {
-            $table->char('id', 26)->primary();
             $table->char('audio_file_id', 26)->index();
+            $table->char('clip_id', 26)->index()->nullable();
+
             $table->char('title', 40);
             $table->char('year', 5);
             $table->char('label', 50)->nullable();

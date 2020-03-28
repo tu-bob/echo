@@ -30,7 +30,7 @@ class SongController extends BaseController
 
     public function getSong($song)
     {
-        return Song::with(['artistAliases', 'genres', 'albums'])->findOrFail($song);
+        return Song::with(['artistAliases', 'genres', 'albums', 'clip'])->findOrFail($song);
     }
 
     public function getAudioFile($song)

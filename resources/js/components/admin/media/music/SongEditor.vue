@@ -18,7 +18,8 @@
                     ></b-form-file>
                 </div>
                 <div class="row ml-1 col-md-6">
-                    <audio ref="songEditorPlayer" class="mt-md-4 mx-auto" controlsList="nodownload" :src="audioSrc" controls></audio>
+                    <audio ref="songEditorPlayer" class="mt-md-4 mx-auto" controlsList="nodownload" :src="audioSrc"
+                           controls></audio>
                 </div>
             </div>
 
@@ -166,6 +167,11 @@
                     max-rows="15"
                 ></b-form-textarea>
             </div>
+
+            <div class="form-group">
+                <label>Ссылка на клип (YouTube)</label>
+                <input class="form-control" v-model="song.clip.src" type="url">
+            </div>
         </div>
         <div class="card-footer">
             <button class="btn btn-primary" @click="submit">Сохранить</button>
@@ -210,6 +216,7 @@
                 song: {
                     id: null,
                     title: null,
+                    clip: {src: null},
                     lyrics: null,
                     year: null,
                     genres: [],
@@ -296,6 +303,8 @@
             fetchSong(id) {
                 fetchSong(id).then(song => {
                     this.song = song;
+                    if (!this.song.clip)
+                        this.song.clip = {src: null}
                 })
                     .catch(
                         //TODO
@@ -311,6 +320,9 @@
 
                 if (this.coverImageFile)
                     data.append('coverImageFile', this.coverImageFile, this.coverImageFile.name);
+
+                if (this.song.clip)
+                    data.append('clip_src', this.song.clip.src);
 
                 data.append('title', this.song.title);
                 data.append('year', String(this.song.year));
@@ -334,7 +346,7 @@
                 axios.post('/media/music/song', data)
                     .then(response => {
                         this.clearForm(true);
-                        this.$router.replace({name:'song-editor'})
+                        this.$router.replace({name: 'song-editor'})
                     })
                     .catch(
                         //TODO
@@ -403,6 +415,7 @@
                     id: null,
                     title: null,
                     lyrics: null,
+                    clip: {src: null},
                     year: null,
                     genres: [],
                     length: null,
@@ -444,7 +457,7 @@
                 return secondsToFormattedMinutes(this.song.playtime_seconds)
             },
         },
-        components:{ImageUploader}
+        components: {ImageUploader}
     }
 </script>
 

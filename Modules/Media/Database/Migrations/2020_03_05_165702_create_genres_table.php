@@ -14,7 +14,6 @@ class CreateGenresTable extends Migration
     public function up()
     {
         Schema::create('genres', function (Blueprint $table) {
-            $table->char('id', 26)->primary();
             $table->char('name', '30');
             $table->char('local_name', '30');
             $table->smallInteger('code');

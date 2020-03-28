@@ -21,6 +21,7 @@ class SongRequest extends BaseFormRequest
             'artistAliases.*' => 'required|exists:artist_aliases,id',
             'genres.*' => 'required|exists:genres,id',
             'lyrics' => 'nullable|string',
+            'clip_src' => 'nullable|url'
         ];
     }
 }

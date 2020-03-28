@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateMusicAlbumsTable extends Migration
+class CreateVideosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,12 @@ class CreateMusicAlbumsTable extends Migration
      */
     public function up()
     {
-        Schema::create('music_albums', function (Blueprint $table) {
-            $table->char('type_id', 26)->index();
-            $table->char('cover_id', 26)->index()->nullable();
+        Schema::create('videos', function (Blueprint $table) {
+            $table->char('type', 15);
+            $table->char('preview_image_id')->index()->nullable();
+            $table->string('src')->index()->unique();
 
-            $table->char('title', 50);
-            $table->char('year', 5);
-
-            $table->unsignedBigInteger('view_count')->default(0);
+            $table->unsignedBigInteger('download_count')->default(0);
             $table->unsignedBigInteger('play_count')->default(0);
 
             $table->commonFields();
@@ -34,6 +32,6 @@ class CreateMusicAlbumsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('music_albums');
+        Schema::dropIfExists('videos');
     }
 }

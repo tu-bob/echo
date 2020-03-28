@@ -14,7 +14,6 @@ class CreateMusicAlbumTypeTable extends Migration
     public function up()
     {
         Schema::create('music_album_types', function (Blueprint $table) {
-            $table->char('id', 26)->primary();
             $table->char('name', 255)->unique();
             $table->char('local_name', 255)->nullable()->unique();
 

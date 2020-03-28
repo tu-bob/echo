@@ -14,7 +14,6 @@ class CreatePostCategoriesTable extends Migration
     public function up()
     {
         Schema::create('post_categories', function (Blueprint $table) {
-            $table->char('id', 26);
             $table->char('name', 255);
             $table->commonFields();
         });

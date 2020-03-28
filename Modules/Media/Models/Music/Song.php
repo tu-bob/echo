@@ -6,6 +6,7 @@ namespace Modules\Media\Models\Music;
 
 use Modules\Media\Models\Artist\ArtistAlias;
 use Modules\Media\Models\Image\ImageFile;
+use Modules\Media\Models\Video\Video;
 use Modules\Shared\Models\BaseModel;
 use Modules\Shared\Models\Pivots\BasePivot;
 
@@ -63,5 +64,10 @@ class Song extends BaseModel
     public function coverImage()
     {
         return $this->belongsTo(ImageFile::class);
+    }
+
+    public function clip()
+    {
+        return $this->belongsTo(Video::class);
     }
 }
