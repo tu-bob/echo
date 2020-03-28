@@ -55,5 +55,36 @@ class StoreMusicAlbumRequestWriter extends RequestWriter
         $songs = isset($this->request['songs']) ? $this->request['songs'] : [];
 
         $this->entity->songs()->sync($songs);
+
+        $this->attachArtistAliases();
+    }
+
+    private function attachArtistAliases()
+    {
+        $this->entity->songs->load('artistAliases');
+
+        $aliases = $this->entity->songs->map(function ($song) {
+            return $song->artistAliases;
+        })->flatten();
+
+        $uniqueAliases = [];
+
+        foreach ($aliases as $alias) {
+            if (isset($uniqueAliases[$alias->id])) {
+                $uniqueAliases[$alias->id]['artist_songs_count'] = $uniqueAliases[$alias->id]['artist_songs_count'] + 1;
+            } else {
+                $uniqueAliases[$alias->id] = ['artist_songs_count' => 1];
+            }
+        }
+
+        $this->entity->artistAliases()->sync($uniqueAliases);
+
+//        if ($this->entity->songs->count() > 0) {
+//
+//
+//            foreach ($this->entity->songs as $song) {
+//                if(isset($aliases[]))
+//            }
+//        }
     }
 }

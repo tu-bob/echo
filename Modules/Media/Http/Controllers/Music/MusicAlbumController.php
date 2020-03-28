@@ -37,7 +37,7 @@ class MusicAlbumController extends BaseController
 
     public function getAlbums()
     {
-        $query =  MusicAlbum::withoutTrashed();
+        $query = MusicAlbum::withoutTrashed();
         return $this->callGetOrPaginate($query);
     }
 
@@ -48,7 +48,7 @@ class MusicAlbumController extends BaseController
 
     public function getCover($album)
     {
-        $cover = MusicAlbum::findOrFail($album)->cover;
+        $cover = MusicAlbum::whereHas('cover')->where('id', $album)->firstOrFail()->cover;
         return Storage::get($cover->path);
     }
 }
