@@ -5,9 +5,13 @@ namespace Modules\Media\Models\Music;
 
 
 use Modules\Media\Models\Artist\ArtistAlias;
+use Modules\Media\Models\Image\ImageFile;
 use Modules\Shared\Models\BaseModel;
 use Modules\Shared\Models\Pivots\BasePivot;
 
+/**
+ * @property ImageFile coverImage
+ */
 class Song extends BaseModel
 {
     protected $casts = [
@@ -54,5 +58,10 @@ class Song extends BaseModel
         return $this->belongsToMany(MusicAlbum::class)
             ->using(BasePivot::class)
             ->withTimestamps();
+    }
+
+    public function coverImage()
+    {
+        return $this->belongsTo(ImageFile::class);
     }
 }

@@ -32,9 +32,9 @@ export async function fetchSongs(filters) {
 export function getAlbumCoverUrl(id) {
     return `/media/music/album/${id}/cover`;
 }
-
-export function getSongIconUrl(id) {
-    return `/media/music/song/${id}/icon`;
+//albumCover -> get album cover if song doesnt have icon
+export function getSongIconUrl(id, albumCover = true) {
+    return `/media/music/song/${id}/icon?album=${albumCover}`;
 }
 
 export function getBlogImage(image) {

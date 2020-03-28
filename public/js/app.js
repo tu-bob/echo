@@ -2168,13 +2168,13 @@ var routes = [{
   },
   path: '/login',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 17).then(__webpack_require__.bind(null, /*! ../components/auth/Login */ "./resources/js/components/auth/Login.vue"));
+    return __webpack_require__.e(/*! import() */ 18).then(__webpack_require__.bind(null, /*! ../components/auth/Login */ "./resources/js/components/auth/Login.vue"));
   }
 }, {
   name: 'register',
   path: '/register',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 18).then(__webpack_require__.bind(null, /*! ../components/auth/Register */ "./resources/js/components/auth/Register.vue"));
+    return __webpack_require__.e(/*! import() */ 19).then(__webpack_require__.bind(null, /*! ../components/auth/Register */ "./resources/js/components/auth/Register.vue"));
   }
 }, {
   name: 'home',
@@ -2183,13 +2183,13 @@ var routes = [{
     name: 'overview'
   },
   component: function component() {
-    return Promise.all(/*! import() */[__webpack_require__.e(19), __webpack_require__.e(14), __webpack_require__.e(24)]).then(__webpack_require__.bind(null, /*! ../components/public/home/HomeViewer */ "./resources/js/components/public/home/HomeViewer.vue"));
+    return Promise.all(/*! import() */[__webpack_require__.e(20), __webpack_require__.e(15), __webpack_require__.e(26)]).then(__webpack_require__.bind(null, /*! ../components/public/home/HomeViewer */ "./resources/js/components/public/home/HomeViewer.vue"));
   },
   children: [{
     name: 'overview',
     path: 'overview',
     component: function component() {
-      return Promise.all(/*! import() */[__webpack_require__.e(19), __webpack_require__.e(1), __webpack_require__.e(3), __webpack_require__.e(21)]).then(__webpack_require__.bind(null, /*! ../components/public/home/overview/Overview */ "./resources/js/components/public/home/overview/Overview.vue"));
+      return Promise.all(/*! import() */[__webpack_require__.e(20), __webpack_require__.e(1), __webpack_require__.e(3), __webpack_require__.e(22)]).then(__webpack_require__.bind(null, /*! ../components/public/home/overview/Overview */ "./resources/js/components/public/home/overview/Overview.vue"));
     }
   }, {
     name: 'news',
@@ -2201,7 +2201,7 @@ var routes = [{
     name: 'new-music',
     path: 'music/new',
     component: function component() {
-      return Promise.all(/*! import() */[__webpack_require__.e(19), __webpack_require__.e(3), __webpack_require__.e(23)]).then(__webpack_require__.bind(null, /*! ../components/public/music/NewMusic */ "./resources/js/components/public/music/NewMusic.vue"));
+      return Promise.all(/*! import() */[__webpack_require__.e(20), __webpack_require__.e(3), __webpack_require__.e(25)]).then(__webpack_require__.bind(null, /*! ../components/public/music/NewMusic */ "./resources/js/components/public/music/NewMusic.vue"));
     }
   }]
 }, {
@@ -2209,12 +2209,12 @@ var routes = [{
   path: '/blog/post/:id',
   props: true,
   component: function component() {
-    return Promise.all(/*! import() */[__webpack_require__.e(19), __webpack_require__.e(15)]).then(__webpack_require__.bind(null, /*! ../components/public/blog/PostReader */ "./resources/js/components/public/blog/PostReader.vue"));
+    return Promise.all(/*! import() */[__webpack_require__.e(20), __webpack_require__.e(24)]).then(__webpack_require__.bind(null, /*! ../components/public/blog/PostReader */ "./resources/js/components/public/blog/PostReader.vue"));
   }
 }, {
   path: '/admin/blog',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 12).then(__webpack_require__.bind(null, /*! ../components/admin/blog/BlogAdminView */ "./resources/js/components/admin/blog/BlogAdminView.vue"));
+    return __webpack_require__.e(/*! import() */ 13).then(__webpack_require__.bind(null, /*! ../components/admin/blog/BlogAdminView */ "./resources/js/components/admin/blog/BlogAdminView.vue"));
   },
   meta: {
     requiresAuth: true
@@ -2229,13 +2229,13 @@ var routes = [{
     name: 'post-editor',
     path: 'post/:id?',
     component: function component() {
-      return Promise.all(/*! import() */[__webpack_require__.e(19), __webpack_require__.e(4), __webpack_require__.e(22)]).then(__webpack_require__.bind(null, /*! ../components/admin/blog/post/PostEditor */ "./resources/js/components/admin/blog/post/PostEditor.vue"));
+      return Promise.all(/*! import() */[__webpack_require__.e(20), __webpack_require__.e(4), __webpack_require__.e(23)]).then(__webpack_require__.bind(null, /*! ../components/admin/blog/post/PostEditor */ "./resources/js/components/admin/blog/post/PostEditor.vue"));
     }
   }]
 }, {
   path: '/admin/media',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 13).then(__webpack_require__.bind(null, /*! ../components/admin/media/MediaAdminView */ "./resources/js/components/admin/media/MediaAdminView.vue"));
+    return __webpack_require__.e(/*! import() */ 14).then(__webpack_require__.bind(null, /*! ../components/admin/media/MediaAdminView */ "./resources/js/components/admin/media/MediaAdminView.vue"));
   },
   meta: {
     requiresAuth: true
@@ -2262,7 +2262,7 @@ var routes = [{
     name: 'artist-editor',
     path: 'artist/:id?',
     component: function component() {
-      return __webpack_require__.e(/*! import() */ 16).then(__webpack_require__.bind(null, /*! ../components/admin/media/artist/ArtistEditor */ "./resources/js/components/admin/media/artist/ArtistEditor.vue"));
+      return __webpack_require__.e(/*! import() */ 17).then(__webpack_require__.bind(null, /*! ../components/admin/media/artist/ArtistEditor */ "./resources/js/components/admin/media/artist/ArtistEditor.vue"));
     }
   }, {
     name: 'albums-table',

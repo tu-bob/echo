@@ -4,6 +4,8 @@
 namespace Modules\Media\Libs\Request\RequestWriter\Music;
 
 
+use Modules\Media\Libs\Request\FileRequest\Saver\ImageFileSaver;
+use Modules\Media\Models\Image\ImageFile;
 use Modules\Media\Models\Music\AudioFile;
 use Modules\Media\Models\Music\Song;
 use Modules\Shared\Http\Requests\RequestWriter;
@@ -13,6 +15,8 @@ class StoreSongRequestWriter extends RequestWriter
     protected Song $song;
 
     protected AudioFile $audioFile;
+
+    protected ImageFile $coverImageFile;
 
     protected array $extractedInfo;
 
@@ -29,6 +33,10 @@ class StoreSongRequestWriter extends RequestWriter
             $this->saveAudioFile();
         }
 
+        if (isset($this->request['coverImageFile'])) {
+            $this->saveCoverImageFile();
+        }
+
         $data = $this->prepareData();
 
         $this->createOrUpdate($data);
@@ -40,6 +48,12 @@ class StoreSongRequestWriter extends RequestWriter
     {
         $getID3 = new \getID3;
         $this->extractedInfo = $getID3->analyze($this->request['mp3File']);
+    }
+
+    public function saveCoverImageFile()
+    {
+        $saver = new ImageFileSaver($this->request['coverImageFile'], 'songCover');
+        $this->coverImageFile = $saver->saveFile();
     }
 
     private function saveAudioFile()
@@ -61,6 +75,9 @@ class StoreSongRequestWriter extends RequestWriter
 
         if (isset($this->audioFile))
             $data['audio_file_id'] = $this->audioFile->id;
+
+        if (isset($this->coverImageFile))
+            $data['cover_image_id'] = $this->coverImageFile->id;
 
         $extracted = [];
         if (isset($this->extractedInfo)) {
