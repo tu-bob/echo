@@ -4,6 +4,10 @@
   width: 18px;
 }
 
+.icon-btn-md {
+  width: 25px;
+}
+
 .btn-text-white {
   color: rgba(255, 255, 255, 0.5) !important;
 }
