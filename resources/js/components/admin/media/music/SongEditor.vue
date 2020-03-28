@@ -183,7 +183,7 @@
 <script>
     import {parseBlob} from 'music-metadata-browser';
     import {validateAudio} from '../../../../util/validators.js'
-    import {fetchArtistAliasesByName, fetchFilteredAlbums, fetchGenres, fetchSong} from '../../../../api/mediaApi.js'
+    import {fetchArtistAliasesByName, fetchAlbums, fetchGenres, fetchSong} from '../../../../api/mediaApi.js'
     import * as ss from 'string-similarity';
     import {invokeErrorResetRequested} from "../../../../events";
     import ImageUploader from "../../../common/inputs/ImageUploader";
@@ -292,7 +292,7 @@
                 })
             },
             fetchAlbum(title) {
-                fetchFilteredAlbums({'title': title})
+                fetchAlbums({'title': title})
                     .then(albums => {
                         if (albums && albums.length > 0)
                             this.onAlbumSelected(albums[0]);

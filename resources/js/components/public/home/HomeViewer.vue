@@ -28,7 +28,10 @@
                 </span>
                     <span>Музыка</span>
                 </b-nav-item>
-                <b-nav-item class="horizontal-nav-menu-item m-item" exact exact-active-class="active">
+                <b-nav-item class="horizontal-nav-menu-item m-item"
+                            :to="{name:'albums'}"
+                            exact
+                            exact-active-class="active">
                     <span class="menu-icon"><img class="icon-btn-md" src="/icons/svg/album.svg"></span>
                     <span>Альбомы</span>
                 </b-nav-item>

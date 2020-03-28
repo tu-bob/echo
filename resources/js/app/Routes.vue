@@ -32,6 +32,11 @@
                         name: 'music',
                         path: 'music',
                         component: () => import('../components/public/music/MusicView')
+                    },
+                    {
+                        name: 'albums',
+                        path: 'albums',
+                        component: () => import('../components/public/album/AlbumsView')
                     }
                 ]
             },
