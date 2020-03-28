@@ -38,6 +38,10 @@
                     </template>
                 </image-uploader>
             </div>
+            <div class="form-group">
+                <label>Ссылка на клип (YouTube)</label>
+                <input class="form-control" v-model="song.clip.src" type="url">
+            </div>
             <div class="row">
                 <div class="form-group col-md-8">
                     <label>Название</label>
@@ -166,11 +170,6 @@
                     rows="5"
                     max-rows="15"
                 ></b-form-textarea>
-            </div>
-
-            <div class="form-group">
-                <label>Ссылка на клип (YouTube)</label>
-                <input class="form-control" v-model="song.clip.src" type="url">
             </div>
         </div>
         <div class="card-footer">
