@@ -14,7 +14,6 @@ class CreateAuthorsTable extends Migration
     public function up()
     {
         Schema::create('authors', function (Blueprint $table) {
-            $table->char('id', 26)->primary();
             $table->char('user_id', 26)->nullable();
             $table->char('name', 255)->unique();
             $table->commonFields();

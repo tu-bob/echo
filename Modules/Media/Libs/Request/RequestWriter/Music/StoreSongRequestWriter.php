@@ -8,12 +8,11 @@ use Modules\Media\Libs\Request\FileRequest\Saver\ImageFileSaver;
 use Modules\Media\Models\Image\ImageFile;
 use Modules\Media\Models\Music\AudioFile;
 use Modules\Media\Models\Music\Song;
+use Modules\Media\Models\Video\Video;
 use Modules\Shared\Http\Requests\RequestWriter;
 
 class StoreSongRequestWriter extends RequestWriter
 {
-    protected Song $song;
-
     protected AudioFile $audioFile;
 
     protected ImageFile $coverImageFile;
@@ -111,6 +110,8 @@ class StoreSongRequestWriter extends RequestWriter
 
     private function manageRelations()
     {
+        $this->attachClip();
+
         $aliases = isset($this->request['artistAliases']) ? $this->request['artistAliases'] : [];
         $genres = isset($this->request['genres']) ? $this->request['genres'] : [];
         $albums = isset($this->request['albums']) ? $this->request['albums'] : [];
@@ -120,6 +121,23 @@ class StoreSongRequestWriter extends RequestWriter
         $this->entity->artistAliases()->sync($aliases);
         $this->entity->genres()->sync($genres);
         $this->entity->albums()->sync($albums);
+    }
+
+    private function attachClip()
+    {
+        if (isset($this->request['clip_src'])) {
+            $video = Video::where('src', $this->request['clip_src'])->firstOrNew();
+            $video->type = 'youtube';
+            if (isset($this->coverImageFile)) {
+                $video->preview_image_id = $this->coverImageFile->id;
+            }
+            $video->src = $this->request['clip_src'];
+            $video->save();
+
+            $this->entity->update(['clip_id' => $video->id]);
+        } else {
+            $this->entity->update(['clip_id' => null]);
+        }
     }
 
 }

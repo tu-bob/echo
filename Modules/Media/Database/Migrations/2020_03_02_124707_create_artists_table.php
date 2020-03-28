@@ -14,8 +14,6 @@ class CreateArtistsTable extends Migration
     public function up()
     {
         Schema::create('artists', function (Blueprint $table) {
-            $table->char('id', 26)->primary();
-
             $table->commonFields();
         });
     }
