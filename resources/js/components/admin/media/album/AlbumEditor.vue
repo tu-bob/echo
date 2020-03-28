@@ -128,7 +128,7 @@
                 data.append('type', String(this.album.type.id));
 
                 for (let i = 0; i < this.album.songs.length; i++) {
-                    data.append('song[]', this.album.songs[i].id);
+                    data.append('songs[]', this.album.songs[i].id);
                 }
 
                 axios.post('/media/music/album', data)
