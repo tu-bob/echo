@@ -29,9 +29,9 @@
                         component: () => import('../components/public/news/News')
                     },
                     {
-                        name: 'new-music',
-                        path: 'music/new',
-                        component: () => import('../components/public/music/NewMusic')
+                        name: 'music',
+                        path: 'music',
+                        component: () => import('../components/public/music/MusicView')
                     }
                 ]
             },
