@@ -23,6 +23,7 @@ class CreatePostsTable extends Migration
             $table->text('article');
             $table->string('reference', 255)->nullable();
             $table->string('ref_name', 255)->nullable();
+            $table->timestamp('publish_at')->nullable();
 
             $table->unsignedBigInteger('view_count')->default(0);
 

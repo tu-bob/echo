@@ -2,18 +2,18 @@
     <div>
 <!--        <songs-carousel></songs-carousel>-->
         <hr>
-        <albums-viewer></albums-viewer>
+        <albums-list></albums-list>
     </div>
 
 </template>
 
 <script>
     import SongsCarousel from "../../../common/music/song/SongsСarousel";
-    import AlbumsViewer from "../../../common/music/album/AlbumsViewer";
+    import AlbumsList from "../../../common/music/album/AlbumsList";
 
     export default {
         name: "Overview",
-        components: {AlbumsViewer, SongsCarousel}
+        components: {AlbumsList, SongsCarousel}
     }
 
 </script>
