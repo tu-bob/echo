@@ -49,7 +49,7 @@ export function movingBorder() {
                 });
             });
         }
-    }
+    };
 
     moveToActive($('.moving-border .m-item .active').parents('.m-item'));
 
