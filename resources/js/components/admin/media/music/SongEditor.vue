@@ -18,7 +18,7 @@
                     ></b-form-file>
                 </div>
                 <div class="row ml-1 col-md-6">
-                    <audio class="mt-md-4 mx-auto" controlsList="nodownload" :src="audioSrc" controls></audio>
+                    <audio ref="songEditorPlayer" class="mt-md-4 mx-auto" controlsList="nodownload" :src="audioSrc" controls></audio>
                 </div>
             </div>
 
@@ -334,7 +334,7 @@
                 axios.post('/media/music/song', data)
                     .then(response => {
                         this.clearForm(true);
-                        this.$router.replace('/media/song')
+                        this.$router.replace({name:'song-editor'})
                     })
                     .catch(
                         //TODO
@@ -423,6 +423,8 @@
                     this.mp3File = null;
                     this.$refs['mp3FileInput'].reset()
                 }
+
+                this.$refs['songEditorPlayer'].src = null;
 
                 invokeErrorResetRequested();
             }
