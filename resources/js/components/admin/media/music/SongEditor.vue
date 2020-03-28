@@ -29,6 +29,14 @@
                 <span v-if="song.encoder">{{song.encoder}} |</span>
                 {{Math.round(song.playtime_seconds / 60 *100) / 100}}</span>
             </div>
+
+            <div>
+                <image-uploader v-model="coverImageFile" :src="coverImageUrl" alt="">
+                    <template #header>
+                        Обложка песни
+                    </template>
+                </image-uploader>
+            </div>
             <div class="row">
                 <div class="form-group col-md-8">
                     <label>Название</label>
@@ -172,6 +180,8 @@
     import {fetchArtistAliasesByName, fetchFilteredAlbums, fetchGenres, fetchSong} from '../../../../api/mediaApi.js'
     import * as ss from 'string-similarity';
     import {invokeErrorResetRequested} from "../../../../events";
+    import ImageUploader from "../../../common/inputs/ImageUploader";
+    import {getSongIconUrl} from "../../../../api/mediaApi";
 
     export default {
         name: "SongEditor",
@@ -191,6 +201,7 @@
         },
         data() {
             return {
+                coverImageFile: null,
                 missedArtists: [],
                 missedAlbums: [],
                 mp3File: this.providedFile,
@@ -293,8 +304,13 @@
                 let data = new FormData();
                 if (this.song.id)
                     data.append('id', this.song.id);
+
                 if (this.mp3File)
                     data.append('mp3File', this.mp3File, this.mp3File.name);
+
+                if (this.coverImageFile)
+                    data.append('coverImageFile', this.coverImageFile, this.coverImageFile.name);
+
                 data.append('title', this.song.title);
                 data.append('year', String(this.song.year));
                 if (this.song.label)
@@ -416,8 +432,13 @@
                     return URL.createObjectURL(this.mp3File);
                 if (this.song.id)
                     return `/media/music/song/${this.song.id}/audio`;
-            }
-        }
+            },
+            coverImageUrl() {
+                if (this.song.id)
+                    return getSongIconUrl(this.song.id, false);
+            },
+        },
+        components:{ImageUploader}
     }
 </script>
 

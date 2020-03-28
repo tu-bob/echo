@@ -3,7 +3,7 @@
         <div class="col-md-10">
             <label>
                 <slot name="header">
-                   Выберите файл
+                    Выберите файл
                 </slot>
             </label>
 
@@ -24,8 +24,9 @@
                    height="100"
                    class="bg-laravel"
                    :src="imageSrc"
-                   :blank="!Boolean(imageSrc)"
+                   :blank="!Boolean(imageSrc) || forceBlank"
                    :alt="alt"
+                   @error="onImageLoadError"
             ></b-img>
         </div>
     </div>
@@ -46,9 +47,17 @@
                 default: 'Картинка echo.tj'
             }
         },
+        data() {
+            return {
+                forceBlank: false
+            }
+        },
         methods: {
             onChange(e) {
                 this.$emit('input', e.target.files[0])
+            },
+            onImageLoadError() {
+                this.forceBlank = true;
             }
         },
         computed: {

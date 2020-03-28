@@ -13,6 +13,7 @@ class SongRequest extends BaseFormRequest
         return [
             'id' => 'nullable|string',
             'mp3File' => 'nullable|file|mimetypes:audio/mpeg',
+            'coverImageFile' => 'nullable|file|mimes:jpg,jpeg,png',
             'title' => 'required|string',
             'year' => 'required|string',
             'label' => 'nullable|string',

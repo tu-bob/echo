@@ -51,15 +51,23 @@ class SongController extends BaseController
 
     public function getIcon($song)
     {
-        $album = MusicAlbum::with('cover')
-            ->whereHas('cover')
-            ->whereHas('songs', function (Builder $query) use ($song) {
-                $query->where('song_id', $song);
-            })
-            ->first();
+        $song = Song::with('coverImage')->findOrFail($song);
 
-        if ($album)
-            return Storage::get($album->cover->path);
-        return null;
+        if ($song->coverImage)
+            return Storage::get($song->coverImage->path);
+
+        if (request()->get('album')) {
+            $album = $song->albums()->with('cover')
+                ->whereHas('cover')
+                ->whereHas('songs', function (Builder $query) use ($song) {
+                    $query->where('song_id', $song);
+                })
+                ->first();
+
+            if ($album)
+                return Storage::get($album->cover->path);
+        }
+
+        return abort(404, 'Обложка песни не найдена');
     }
 }
