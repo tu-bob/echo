@@ -27,7 +27,7 @@
                 {{song.sample_rate}} |
                 <span v-if="song.container">{{song.container}} |</span>
                 <span v-if="song.encoder">{{song.encoder}} |</span>
-                {{Math.round(song.playtime_seconds / 60 *100) / 100}}</span>
+                {{duration}}</span>
             </div>
 
             <div>
@@ -182,6 +182,7 @@
     import {invokeErrorResetRequested} from "../../../../events";
     import ImageUploader from "../../../common/inputs/ImageUploader";
     import {getSongIconUrl} from "../../../../api/mediaApi";
+    import {secondsToFormattedMinutes} from "../../../../util/stringHelper";
 
     export default {
         name: "SongEditor",
@@ -436,6 +437,9 @@
             coverImageUrl() {
                 if (this.song.id)
                     return getSongIconUrl(this.song.id, false);
+            },
+            duration() {
+                return secondsToFormattedMinutes(this.song.playtime_seconds)
             },
         },
         components:{ImageUploader}
