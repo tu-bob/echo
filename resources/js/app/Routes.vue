@@ -37,6 +37,11 @@
                         name: 'albums',
                         path: 'albums',
                         component: () => import('../components/public/album/AlbumsView')
+                    },
+                    {
+                        name: 'clips',
+                        path: 'clips',
+                        component: () => import('../components/public/video/ClipsView')
                     }
                 ]
             },

@@ -25,8 +25,7 @@ class ImageFileDirProvider
         switch ($this->type) {
             case 'blog':
                 return 'images/blog';
-            case 'songCover':
-            case 'albumCover':
+            case 'cover':
                 return 'images/cover';
             default:
                 return 'images/public';

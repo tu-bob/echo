@@ -57,4 +57,7 @@ Route::prefix('media')->group(function () {
         });
     });
 
+    Route::prefix('video')->group(function () {
+        Route::get('/list', 'Video\VideoController@getVideos');
+    });
 });
