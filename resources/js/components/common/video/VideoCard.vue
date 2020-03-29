@@ -1,5 +1,5 @@
 <template>
-    <div class="h-overlay-container cursor-pointer" @click="onClicked" )>
+    <div class="h-overlay-container cursor-pointer" @click="onClicked">
         <div class="video-card">
             <b-img :src="previewImageUrl" class="w-100 object-fit-cover"></b-img>
             <div class="pt-3 text-secondary">
@@ -27,7 +27,7 @@
         },
         methods: {
             onClicked() {
-                this.$emit('play-requested', this.video);
+                this.$emit('play', this.video);
             }
         },
         computed: {

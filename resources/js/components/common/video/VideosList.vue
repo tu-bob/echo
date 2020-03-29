@@ -1,9 +1,35 @@
 <template>
-    <div class="row">
-        <div class="col-md-4" v-for="video in videos" :key="video.id">
-            <video-card :video="video"></video-card>
+    <div>
+        <div class="row">
+            <div class="col-md-4" v-for="video in videos" :key="video.id">
+                <video-card :video="video" @play="showVideoModal"></video-card>
+            </div>
+        </div>
+
+        <div v-if="selectedVideo">
+            <b-modal id="modal-video-player"
+                     class="bg-transparent"
+                     centered
+                     :title="selectedVideo.title"
+                     header-bg-variant="dark"
+                     header-text-variant="light"
+                     body-bg-variant="dark"
+                     body-text-variant="light"
+                     hide-footer
+                     size="xl"
+                     content-class="border-0"
+                     header-class="border-0"
+                     ok-only>
+                <b-embed
+                    type="iframe"
+                    aspect="16by9"
+                    src="https://www.youtube.com/embed/zpOULjyy-n8?rel=0"
+                    allowfullscreen
+                ></b-embed>
+            </b-modal>
         </div>
     </div>
+
 </template>
 
 <script>
@@ -19,7 +45,8 @@
         data() {
             return {
                 paginator: null,
-                videos: []
+                videos: [],
+                selectedVideo: null
             }
         },
         methods: {
@@ -31,7 +58,13 @@
                     })
                     .catch();
             },
+            showVideoModal(video) {
+                this.selectedVideo = video;
+                this.$nextTick(
+                    () => this.$bvModal.show('modal-video-player')
+                )
 
+            }
         }
     }
 </script>
