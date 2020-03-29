@@ -52,7 +52,7 @@ class StoreSongRequestWriter extends RequestWriter
 
     public function saveCoverImageFile()
     {
-        $saver = new ImageFileSaver($this->request['coverImageFile'], 'songCover');
+        $saver = new ImageFileSaver($this->request['coverImageFile'], 'cover');
         $this->coverImageFile = $saver->saveFile();
     }
 
@@ -129,6 +129,7 @@ class StoreSongRequestWriter extends RequestWriter
         if (isset($this->request['clip_src'])) {
             $video = Video::where('src', $this->request['clip_src'])->firstOrNew();
             $video->type = 'youtube';
+
             if (isset($this->coverImageFile)) {
                 $video->preview_image_id = $this->coverImageFile->id;
             }

@@ -1,13 +1,13 @@
 <template>
-    <video-list></video-list>
+    <videos-list></videos-list>
 </template>
 
 <script>
-    import VideoList from "../../common/video/VideoList";
+    import VideosList from "../../common/video/VideosList";
 
     export default {
         name: "ClipsView",
-        components: {VideoList}
+        components: {VideosList}
     }
 </script>
 
