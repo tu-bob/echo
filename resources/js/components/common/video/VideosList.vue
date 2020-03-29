@@ -1,19 +1,18 @@
 <template>
     <div class="row">
-        <div v-for="video in videos" :key="video.id">
-            <b-img :src="getPreviewUrl(video)" class="w-100 object-fit-contain"></b-img>
-            <div>
-                {{video.title}}
-            </div>
+        <div class="col-md-4" v-for="video in videos" :key="video.id">
+            <video-card :video="video"></video-card>
         </div>
     </div>
 </template>
 
 <script>
     import {fetchVideos, getCoverImage} from "../../../api/mediaApi";
+    import VideoCard from "./VideoCard";
 
     export default {
-        name: "VideoList",
+        name: "VideosList",
+        components: {VideoCard},
         mounted() {
             this.fetchVideos();
         },
@@ -32,14 +31,7 @@
                     })
                     .catch();
             },
-            getPreviewUrl(video) {
-                console.log(video)
-                if (video.preview_image_id) {
-                    return getCoverImage(video.preview_image_id);
-                } else {
 
-                }
-            }
         }
     }
 </script>

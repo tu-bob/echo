@@ -8,6 +8,14 @@
   width: 25px;
 }
 
+.icon-btn-lg {
+  width: 2.5rem;
+}
+
+.icon-btn-xl {
+  width: 3rem;
+}
+
 .btn-text-white {
   color: rgba(255, 255, 255, 0.5) !important;
 }
@@ -18,6 +26,10 @@
 
 .bg-laravel {
   background-color: #f8fafc !important;
+}
+
+.bg-violet-gradient {
+  background: linear-gradient(39deg, #91a5f4 0%, #b08cf9 86%);
 }
 
 .object-fit-contain {
@@ -32,6 +44,35 @@
 
 .text-light-grey {
   color: #b8babc;
+}
+
+.h-overlay-container {
+  position: relative;
+}
+
+.h-cursor:hover {
+  cursor: pointer;
+}
+
+.h-text-white:hover {
+  color: #ffffff !important;
+}
+
+.h-overlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  opacity: 0;
+}
+
+.h-overlay-container:hover .h-overlay {
+  opacity: 1;
+}
+
+.cursor-pointer {
+  cursor: pointer;
 }
 
 /*
