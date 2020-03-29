@@ -35,7 +35,10 @@
                     <span class="menu-icon"><img class="icon-btn-md" src="/icons/svg/album.svg"></span>
                     <span>Альбомы</span>
                 </b-nav-item>
-                <b-nav-item class="horizontal-nav-menu-item m-item" exact exact-active-class="active">
+                <b-nav-item class="horizontal-nav-menu-item m-item"
+                            :to="{name:'clips'}"
+                            exact
+                            exact-active-class="active">
                     <span class="menu-icon"><img class="icon-btn-md" src="/icons/svg/video.svg"></span>
                     <span>Клипы</span>
                 </b-nav-item>

@@ -5,6 +5,7 @@ namespace Modules\Media\Libs\Request\RequestWriter\Music;
 
 
 use Modules\Media\Libs\Request\FileRequest\Saver\ImageFileSaver;
+use Modules\Media\Models\Artist\ArtistAlias;
 use Modules\Media\Models\Image\ImageFile;
 use Modules\Media\Models\Music\AudioFile;
 use Modules\Media\Models\Music\Song;
@@ -131,6 +132,9 @@ class StoreSongRequestWriter extends RequestWriter
             if (isset($this->coverImageFile)) {
                 $video->preview_image_id = $this->coverImageFile->id;
             }
+
+            $video->title = $this->entity->artistAliases->implode('name', ', ');
+            $video->title = "{$video->title} - {$this->entity->title}";
             $video->src = $this->request['clip_src'];
             $video->save();
 

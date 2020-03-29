@@ -9,7 +9,6 @@ use Illuminate\Support\Facades\Storage;
 use Modules\Media\Http\Filters\Media\SongFilter;
 use Modules\Media\Http\Requests\Music\SongRequest;
 use Modules\Media\Libs\Request\RequestWriter\Music\StoreSongRequestWriter;
-use Modules\Media\Models\Music\MusicAlbum;
 use Modules\Media\Models\Music\Song;
 use Modules\Shared\Http\Controllers\BaseController;
 

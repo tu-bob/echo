@@ -17,6 +17,8 @@ class CreateVideosTable extends Migration
             $table->char('type', 15);
             $table->char('preview_image_id')->index()->nullable();
             $table->string('src')->index()->unique();
+            $table->string('title');
+            $table->string('author')->nullable();
 
             $table->unsignedBigInteger('download_count')->default(0);
             $table->unsignedBigInteger('play_count')->default(0);

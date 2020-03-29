@@ -5,6 +5,9 @@ namespace Modules\Media\Models\Artist;
 
 use Modules\Shared\Models\BaseModel;
 
+/**
+ * @property string name
+ */
 class ArtistAlias extends BaseModel
 {
     protected $hidden = [
