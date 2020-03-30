@@ -1,6 +1,6 @@
 <template>
     <div>
-        <song-card v-for="song in songs" :song="song" :key="song.id" @play="playSong"></song-card>
+        <song-card class="cursor-pointer" v-for="song in songs" :song="song" :key="song.id" @play="playSong"></song-card>
     </div>
 </template>
 
@@ -13,7 +13,13 @@
         name: "SongsList",
         components: {SongCard},
         created() {
-            this.fetchSongs()
+            if (this.playlist)
+                this.songs = this.playlist;
+            else
+                this.fetchSongs()
+        },
+        props: {
+            playlist: null
         },
         data() {
             return {
