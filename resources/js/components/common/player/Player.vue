@@ -2,14 +2,16 @@
     <div class="player bg-dark container-fluid">
         <div class="row h-100 position-relative">
             <div class="d-none d-sm-flex col-sm-2 col-md-4 player-control">
-                <div class="col-12 col-md-3 col-lg-2">
-                    <b-img class="thumb-sm" rounded src="https://pbs.twimg.com/media/C6zsy6EW0AA_VVt.jpg:large"
-                           alt=""></b-img>
-                </div>
-                <div class="d-none d-md-block col-md-9 col-lg-10">
-                    <h6 class="mb-0">Ман ери туям</h6>
-                    <span class="text-muted">Далер Назаров</span>
-                </div>
+                <template v-if="ACTIVE_SONG">
+                    <div class="col-12 col-md-3 col-xl-2">
+                        <b-img class="thumb-sm" rounded :src="coverUrl" @error="onImageError"
+                               alt=""></b-img>
+                    </div>
+                    <div class="d-none d-md-block col-md-9 col-xl-10">
+                        <h6 class="mb-0 text-white">{{ACTIVE_SONG.title}}</h6>
+                        <span class="text-muted">{{aliases}}</span>
+                    </div>
+                </template>
             </div>
             <div class="col-9 col-sm-8 col-md-4">
                 <div class="row player-control">
@@ -110,8 +112,7 @@
                 currentSeconds: 0,
                 durationSeconds: 0,
                 playing: false,
-                timeDrag: false,
-                song: null
+                timeDrag: false
             }
         },
         methods: {
@@ -133,6 +134,10 @@
                 let percentage = 100 * position / $(this.progressBar).width();
                 this.audio.currentTime = percentage * this.durationSeconds / 100;
                 console.log(this.audio.currentTime)
+            },
+            onImageError(e) {
+                e.target.src = "/icons/svg/music.svg";
+                $(e.target).addClass('p-1');
             }
         },
         watch: {
@@ -149,11 +154,11 @@
                 } else return 0;
             },
             coverUrl() {
-                if (this.song)
-                    return getSongIconUrl(this.song.id)
+                if (this.ACTIVE_SONG)
+                    return getSongIconUrl(this.ACTIVE_SONG.id)
             },
             aliases() {
-                return concatStrings(this.song.artistAliases.map(alias => alias.name), ';');
+                return concatStrings(this.ACTIVE_SONG.artistAliases.map(alias => alias.name), ';');
             },
             audioSrc() {
                 if (this.ACTIVE_SONG) {
