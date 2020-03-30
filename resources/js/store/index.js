@@ -2,6 +2,7 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 import auth from './modules/auth';
 import ui from "./modules/ui";
+import player from "./modules/player";
 
 Vue.use(Vuex);
 
@@ -12,6 +13,7 @@ export const store = new Vuex.Store({
     actions: {},
     modules: {
         auth,
-        ui
+        ui,
+        player
     }
 });
