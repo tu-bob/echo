@@ -2,10 +2,10 @@
     <div class="player bg-dark container-fluid">
         <div class="row h-100 position-relative">
             <div class="col-2 col-md-1 player-control">
-                <button id="mp-play-btn" class="btn btn-dark" @click="play">
+                <button id="mp-play-btn" class="btn btn-dark" v-if="!playing" @click="play">
                     <img class="icon-btn-md" src="/icons/svg/player/play.svg">
                 </button>
-                <button id="mp-pause-btn" class="btn d-none" @click="pause">
+                <button id="mp-pause-btn" class="btn btn-dark" v-else @click="pause">
                     <img class="icon-btn-md" src="/icons/svg/player/pause.svg">
                 </button>
             </div>
@@ -15,7 +15,6 @@
                     <div class="player-seeker" :style="{ width: this.percentCompleted + '%' }"></div>
                 </div>
             </div>
-
 
             <audio controls id="main-player"
                    src="https://rep.tj/upload/iblock/449/449038a9c2a06b4f9b818b274f6bec8e.mp3"></audio>
@@ -32,12 +31,12 @@
             this.progressBar = this.$el.querySelectorAll('.player-progress')[0];
             this.audio.addEventListener('loadeddata', this.onMetaLoaded);
             this.audio.addEventListener('timeupdate', this.onTimeUpdated);
-            // this.audio.addEventListener('pause', () => {
-            //     this.playing = false;
-            // });
-            // this.audio.addEventListener('play', () => {
-            //     this.playing = true;
-            // });
+            this.audio.addEventListener('pause', () => {
+                this.playing = false;
+            });
+            this.audio.addEventListener('play', () => {
+                this.playing = true;
+            });
         },
         props: {
             autoPlay: {
@@ -51,6 +50,7 @@
                 progressBar: null,
                 currentSeconds: 0,
                 durationSeconds: 0,
+                playing: false,
                 timeDrag: false
             }
         },
@@ -63,22 +63,20 @@
             onTimeUpdated(e) {
                 this.currentSeconds = this.audio.currentTime;
             },
-            play(){
-                $('#mp-play-btn').addClass('d-none');
-                $('#mp-pause-btn').removeClass('d-none');
+            play() {
+                this.playing = true;
                 this.audio.play();
             },
-            pause(){
-                $('#mp-pause-btn').addClass('d-none');
-                $('#mp-play-btn').removeClass('d-none');
+            pause() {
+                this.playing = false;
                 this.audio.pause();
             },
-            seekPosition(e){
+            seekPosition(e) {
                 this.timeDrage = true;
                 let position = e.pageX - $(this.progressBar).offset().left;
                 let percentage = 100 * position / $(this.progressBar).width();
                 this.audio.currentTime = percentage * this.durationSeconds / 100;
-                console.log(this.audio.currentTime )
+                console.log(this.audio.currentTime)
             }
         },
         computed: {
