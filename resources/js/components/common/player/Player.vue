@@ -1,63 +1,74 @@
 <template>
-    <div class="player bg-dark container-fluid">
-        <div class="row h-100 position-relative">
-            <div class="d-none d-sm-flex col-sm-2 col-md-4 player-control">
-                <template v-if="ACTIVE_SONG">
-                    <div class="col-12 col-md-3 col-xl-2">
-                        <b-img class="thumb-sm" rounded :src="coverUrl" @error="onImageError"
-                               alt=""></b-img>
-                    </div>
-                    <div class="d-none d-md-block col-md-9 col-xl-10">
-                        <h6 class="mb-0 text-white">{{ACTIVE_SONG.title}}</h6>
-                        <span class="text-muted">{{aliases}}</span>
-                    </div>
-                </template>
-            </div>
-            <div class="col-9 col-sm-8 col-md-4">
-                <div class="row player-control">
-                    <div class="mx-auto">
-                        <div id="mp-shuffle-btn" class="btn btn-dark text-muted">
-                            <font-awesome-icon icon="random" size="lg"></font-awesome-icon>
+    <div >
+        <div class="player bg-dark container-fluid">
+            <div class="row h-100 position-relative">
+                <div class="d-none d-sm-flex col-sm-2 col-md-4 player-control">
+                    <template v-if="ACTIVE_SONG">
+                        <div class="col-12 col-md-3 col-xl-2">
+                            <b-img class="thumb-sm" rounded :src="coverUrl" @error="onImageError"
+                                   alt=""></b-img>
                         </div>
-                        <div id="mp-prev-btn" class="btn btn-dark">
-                            <font-awesome-icon icon="backward" size="lg"></font-awesome-icon>
+                        <div class="d-none d-md-block col-md-9 col-xl-10">
+                            <h6 class="mb-0 text-white">{{ACTIVE_SONG.title}}</h6>
+                            <span class="text-muted">{{aliases}}</span>
                         </div>
-                        <div id="mp-play-pause-btn" class="btn btn-dark" @click="togglePlayPause">
-                            <font-awesome-icon icon="play" size="lg" v-if="!playing"></font-awesome-icon>
-                            <font-awesome-icon icon="pause" size="lg" v-else></font-awesome-icon>
-                        </div>
-                        <div id="mp-next-btn" class="btn btn-dark">
-                            <font-awesome-icon icon="forward" size="lg"></font-awesome-icon>
-                        </div>
-                        <div id="mp-repeat-btn" class="btn btn-dark text-muted">
-                            <font-awesome-icon icon="redo-alt" size="lg"></font-awesome-icon>
+                    </template>
+                </div>
+                <div class="col-9 col-sm-8 col-md-4">
+                    <div class="row player-control">
+                        <div class="mx-auto">
+                            <div id="mp-shuffle-btn" class="btn btn-dark text-muted">
+                                <font-awesome-icon icon="random" size="lg"></font-awesome-icon>
+                            </div>
+                            <div id="mp-prev-btn" class="btn btn-dark">
+                                <font-awesome-icon icon="backward" size="lg"></font-awesome-icon>
+                            </div>
+                            <div id="mp-play-pause-btn" class="btn btn-dark" @click="togglePlayPause">
+                                <font-awesome-icon icon="play" size="lg" v-if="!playing"></font-awesome-icon>
+                                <font-awesome-icon icon="pause" size="lg" v-else></font-awesome-icon>
+                            </div>
+                            <div id="mp-next-btn" class="btn btn-dark">
+                                <font-awesome-icon icon="forward" size="lg"></font-awesome-icon>
+                            </div>
+                            <div id="mp-repeat-btn" class="btn btn-dark text-muted">
+                                <font-awesome-icon icon="redo-alt" size="lg"></font-awesome-icon>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-2 col-md-4">
-                <div class="row player-control">
-                    <div class="d-none d-md-block col-md-8">
-                        00:000:000:0000
-                    </div>
-                    <div class="col-12 col-md-4">
-                        <div id="mp-playlist-btn" class="btn btn-dark">
-                            <font-awesome-icon icon="list" size="lg"></font-awesome-icon>
+                <div class="col-2 col-md-4">
+                    <div class="row player-control">
+                        <div class="d-none d-md-block col-md-8">
+                            00:000:000:0000
+                        </div>
+                        <div class="col-12 col-md-4">
+                            <div id="mp-playlist-btn" class="btn btn-dark" @click="togglePlaylist">
+                                <font-awesome-icon icon="list" size="lg"></font-awesome-icon>
+                            </div>
                         </div>
                     </div>
                 </div>
+
+                <div class="progress-bar-wrapper">
+                    <div class="player-progress" @mousedown="seekPosition" title="Time played : Total time">
+                        <div class="player-seeker" :style="{ width: this.percentCompleted + '%' }"></div>
+                    </div>
+                </div>
+
+                <audio controls class="d-none" id="main-player" :src="audioSrc"></audio>
             </div>
-
-
-            <div class="progress-bar-wrapper">
-                <div class="player-progress" @mousedown="seekPosition" title="Time played : Total time">
-                    <div class="player-seeker" :style="{ width: this.percentCompleted + '%' }"></div>
+        </div>
+        <div class="playlist-wrapper" v-if="showPlaylist">
+            <div class="row">
+                <div class="ml-auto mr-4 mt-2 btn" @click="togglePlaylist">
+                    <font-awesome-icon icon="times" class="text-white" size="2x"></font-awesome-icon>
                 </div>
             </div>
-
-            <audio controls class="d-none" id="main-player"
-                   :src="audioSrc"></audio>
-
+            <div class="row">
+                <div class="container">
+                    <songs-list :playlist="PLAYLIST"></songs-list>
+                </div>
+            </div>
         </div>
     </div>
 </template>
@@ -71,16 +82,19 @@
         faForward,
         faRandom,
         faRedoAlt,
-        faList
+        faList,
+        faTimes
     } from '@fortawesome/free-solid-svg-icons'
     import {fetchAudioFile, getSongIconUrl} from "../../../api/mediaApi";
     import {concatStrings} from "../../../util/stringHelper";
     import {mapGetters} from "vuex";
+    import SongsList from "../music/song/SongsList";
 
-    library.add(faPlay, faPause, faBackward, faForward, faRandom, faRedoAlt, faList);
+    library.add(faPlay, faPause, faBackward, faForward, faRandom, faRedoAlt, faList, faTimes);
 
     export default {
         name: "Player",
+        components: {SongsList},
         mounted() {
             this.audio = this.$el.querySelectorAll('audio')[0];
             this.progressBar = this.$el.querySelectorAll('.player-progress')[0];
@@ -112,7 +126,8 @@
                 currentSeconds: 0,
                 durationSeconds: 0,
                 playing: false,
-                timeDrag: false
+                timeDrag: false,
+                showPlaylist: true
             }
         },
         methods: {
@@ -138,6 +153,9 @@
             onImageError(e) {
                 e.target.src = "/icons/svg/music.svg";
                 $(e.target).addClass('p-1');
+            },
+            togglePlaylist() {
+                this.showPlaylist = !this.showPlaylist
             }
         },
         watch: {
@@ -199,7 +217,7 @@
     }
 
     .player-progress {
-        background-color: #ffef30;
+        background-color: gray;
         cursor: pointer;
         height: 100%;
         min-width: 200px;
@@ -207,10 +225,22 @@
     }
 
     .player-progress .player-seeker {
-        background-color: #ff3f2b;
+        background: linear-gradient(39deg, #15c0e9 0%, #f0536a 80%);
         bottom: 0;
         left: 0;
         position: absolute;
         top: 0;
+    }
+
+    .playlist-wrapper {
+        z-index: 200;
+        width: 100%;
+        position: fixed;
+        bottom: 66px;
+        top: 54px;
+        left: 0;
+        backdrop-filter: blur(6px);
+        opacity: 0.95;
+        background: linear-gradient(135deg, #373737 0%, #24181e 95%);
     }
 </style>
