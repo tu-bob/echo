@@ -2621,19 +2621,21 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Player",
   mounted: function mounted() {
+    var _this = this;
+
     this.audio = this.$el.querySelectorAll('audio')[0];
     this.progressBar = this.$el.querySelectorAll('.player-progress')[0];
     this.audio.addEventListener('loadeddata', this.onMetaLoaded);
-    this.audio.addEventListener('timeupdate', this.onTimeUpdated); // this.audio.addEventListener('pause', () => {
-    //     this.playing = false;
-    // });
-    // this.audio.addEventListener('play', () => {
-    //     this.playing = true;
-    // });
+    this.audio.addEventListener('timeupdate', this.onTimeUpdated);
+    this.audio.addEventListener('pause', function () {
+      _this.playing = false;
+    });
+    this.audio.addEventListener('play', function () {
+      _this.playing = true;
+    });
   },
   props: {
     autoPlay: {
@@ -2647,6 +2649,7 @@ __webpack_require__.r(__webpack_exports__);
       progressBar: null,
       currentSeconds: 0,
       durationSeconds: 0,
+      playing: false,
       timeDrag: false
     };
   },
@@ -2660,13 +2663,11 @@ __webpack_require__.r(__webpack_exports__);
       this.currentSeconds = this.audio.currentTime;
     },
     play: function play() {
-      $('#mp-play-btn').addClass('d-none');
-      $('#mp-pause-btn').removeClass('d-none');
+      this.playing = true;
       this.audio.play();
     },
     pause: function pause() {
-      $('#mp-pause-btn').addClass('d-none');
-      $('#mp-play-btn').removeClass('d-none');
+      this.playing = false;
       this.audio.pause();
     },
     seekPosition: function seekPosition(e) {
@@ -79432,35 +79433,35 @@ var render = function() {
   return _c("div", { staticClass: "player bg-dark container-fluid" }, [
     _c("div", { staticClass: "row h-100 position-relative" }, [
       _c("div", { staticClass: "col-2 col-md-1 player-control" }, [
-        _c(
-          "button",
-          {
-            staticClass: "btn btn-dark",
-            attrs: { id: "mp-play-btn" },
-            on: { click: _vm.play }
-          },
-          [
-            _c("img", {
-              staticClass: "icon-btn-md",
-              attrs: { src: "/icons/svg/player/play.svg" }
-            })
-          ]
-        ),
-        _vm._v(" "),
-        _c(
-          "button",
-          {
-            staticClass: "btn d-none",
-            attrs: { id: "mp-pause-btn" },
-            on: { click: _vm.pause }
-          },
-          [
-            _c("img", {
-              staticClass: "icon-btn-md",
-              attrs: { src: "/icons/svg/player/pause.svg" }
-            })
-          ]
-        )
+        !_vm.playing
+          ? _c(
+              "button",
+              {
+                staticClass: "btn btn-dark",
+                attrs: { id: "mp-play-btn" },
+                on: { click: _vm.play }
+              },
+              [
+                _c("img", {
+                  staticClass: "icon-btn-md",
+                  attrs: { src: "/icons/svg/player/play.svg" }
+                })
+              ]
+            )
+          : _c(
+              "button",
+              {
+                staticClass: "btn btn-dark",
+                attrs: { id: "mp-pause-btn" },
+                on: { click: _vm.pause }
+              },
+              [
+                _c("img", {
+                  staticClass: "icon-btn-md",
+                  attrs: { src: "/icons/svg/player/pause.svg" }
+                })
+              ]
+            )
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "progress-bar-wrapper" }, [
