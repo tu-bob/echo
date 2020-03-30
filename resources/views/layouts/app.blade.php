@@ -20,7 +20,7 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
-<div id="app" class="container-fluid">
+<div id="app" class="container-fluid position-relative">
     <app @auth :user="{{auth()->user()}}" @endauth ></app>
 </div>
 </body>

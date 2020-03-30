@@ -58,14 +58,17 @@
             <!--            </b-alert>-->
             <router-view></router-view>
         </div>
+        <player></player>
     </div>
 </template>
 
 <script>
     import {mapGetters} from "vuex";
+    import Player from "../components/common/player/Player";
 
     export default {
         name: "App",
+        components: {Player},
         created() {
             if (this.user)
                 this.$store.commit('SET_AUTH_USER', this.user);
