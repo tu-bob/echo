@@ -2626,9 +2626,7 @@ __webpack_require__.r(__webpack_exports__);
   name: "Player",
   mounted: function mounted() {
     this.audio = this.$el.querySelectorAll('audio')[0];
-    console.log(this.audio);
     this.progressBar = this.$el.querySelectorAll('.player-progress')[0];
-    console.log(this.progressBar);
     this.audio.addEventListener('loadeddata', this.onMetaLoaded);
     this.audio.addEventListener('timeupdate', this.onTimeUpdated); // this.audio.addEventListener('pause', () => {
     //     this.playing = false;
@@ -2670,6 +2668,13 @@ __webpack_require__.r(__webpack_exports__);
       $('#mp-pause-btn').addClass('d-none');
       $('#mp-play-btn').removeClass('d-none');
       this.audio.pause();
+    },
+    seekPosition: function seekPosition(e) {
+      this.timeDrage = true;
+      var position = e.pageX - $(this.progressBar).offset().left;
+      var percentage = 100 * position / $(this.progressBar).width();
+      this.audio.currentTime = percentage * this.durationSeconds / 100;
+      console.log(this.audio.currentTime);
     }
   },
   computed: {
@@ -79463,7 +79468,8 @@ var render = function() {
           "div",
           {
             staticClass: "player-progress",
-            attrs: { title: "Time played : Total time" }
+            attrs: { title: "Time played : Total time" },
+            on: { mousedown: _vm.seekPosition }
           },
           [
             _c("div", {

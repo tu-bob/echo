@@ -11,7 +11,7 @@
             </div>
 
             <div class="progress-bar-wrapper">
-                <div class="player-progress" title="Time played : Total time">
+                <div class="player-progress" @mousedown="seekPosition" title="Time played : Total time">
                     <div class="player-seeker" :style="{ width: this.percentCompleted + '%' }"></div>
                 </div>
             </div>
@@ -29,9 +29,7 @@
         name: "Player",
         mounted() {
             this.audio = this.$el.querySelectorAll('audio')[0];
-            console.log(this.audio)
             this.progressBar = this.$el.querySelectorAll('.player-progress')[0];
-            console.log(this.progressBar)
             this.audio.addEventListener('loadeddata', this.onMetaLoaded);
             this.audio.addEventListener('timeupdate', this.onTimeUpdated);
             // this.audio.addEventListener('pause', () => {
@@ -74,6 +72,13 @@
                 $('#mp-pause-btn').addClass('d-none');
                 $('#mp-play-btn').removeClass('d-none');
                 this.audio.pause();
+            },
+            seekPosition(e){
+                this.timeDrage = true;
+                let position = e.pageX - $(this.progressBar).offset().left;
+                let percentage = 100 * position / $(this.progressBar).width();
+                this.audio.currentTime = percentage * this.durationSeconds / 100;
+                console.log(this.audio.currentTime )
             }
         },
         computed: {
