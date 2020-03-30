@@ -1,4 +1,4 @@
-html, body{
+html, body {
     height: 100%;
     position: relative;
 }
@@ -37,6 +37,13 @@ html, body{
     background-color: #f8fafc !important;
 }
 
+.bg-lgs {
+    background: linear-gradient(39deg, #15c0e9 0%, #f0536a 80%);
+}
+
+.h-border-violet:hover{
+    border: 1px solid #91a5f4 !important;
+}
 
 .bg-violet-gradient {
     background: linear-gradient(39deg, #91a5f4 0%, #b08cf9 80%);

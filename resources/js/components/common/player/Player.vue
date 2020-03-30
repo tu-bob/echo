@@ -55,7 +55,7 @@
                     </div>
                 </div>
 
-                <audio controls class="d-none" id="main-player" :src="audioSrc"></audio>
+                <audio controls class="d-none" id="main-player" preload="metadata":src="audioSrc"></audio>
             </div>
         </div>
         <div class="playlist-wrapper" v-if="showPlaylist">

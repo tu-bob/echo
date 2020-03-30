@@ -1,5 +1,5 @@
 <template>
-    <div class="container pb-3">
+    <div class="container mb-3 h-border-violet">
         <div class="row w-100 text-white" @click="play">
             <img :src="coverUrl" class="thumb" @error="onImageError">
             <div class="ml-2 mt-2 row col">
