@@ -43,4 +43,10 @@
 </script>
 
 <style scoped>
+    .h-overlay-container:hover .text-secondary{
+        color:white!important;
+        text-align: center;
+        z-index: 20;
+        position: relative;
+    }
 </style>

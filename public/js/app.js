@@ -2213,7 +2213,7 @@ var routes = [{
     name: 'clips',
     path: 'clips',
     component: function component() {
-      return __webpack_require__.e(/*! import() */ 3).then(__webpack_require__.bind(null, /*! ../components/public/video/ClipsView */ "./resources/js/components/public/video/ClipsView.vue"));
+      return Promise.all(/*! import() */[__webpack_require__.e(16), __webpack_require__.e(12)]).then(__webpack_require__.bind(null, /*! ../components/public/video/ClipsView */ "./resources/js/components/public/video/ClipsView.vue"));
     }
   }]
 }, {
