@@ -4,6 +4,7 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 import {store} from './store';
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
 require('./bootstrap');
 
@@ -31,6 +32,7 @@ window.Vue.prototype.$eventHub = new Vue();
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 Vue.component('App', require('./app/App.vue').default);
 Vue.component('SuggestionInput', require('./components/common/inputs/SuggestionInput.vue').default);
+Vue.component('font-awesome-icon', FontAwesomeIcon)
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

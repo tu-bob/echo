@@ -1,14 +1,53 @@
 <template>
     <div class="player bg-dark container-fluid">
         <div class="row h-100 position-relative">
-            <div class="col-2 col-md-1 player-control">
-                <button id="mp-play-btn" class="btn btn-dark" v-if="!playing" @click="play">
-                    <img class="icon-btn-md" src="/icons/svg/player/play.svg">
-                </button>
-                <button id="mp-pause-btn" class="btn btn-dark" v-else @click="pause">
-                    <img class="icon-btn-md" src="/icons/svg/player/pause.svg">
-                </button>
+            <div class="d-none d-sm-flex col-sm-2 col-md-4 player-control">
+                <div class="col-12 col-md-3 col-lg-2">
+                    <b-img class="thumb-sm" rounded src="https://pbs.twimg.com/media/C6zsy6EW0AA_VVt.jpg:large"
+                           alt=""></b-img>
+                </div>
+                <div class="d-none d-md-block col-md-9 col-lg-10">
+                    <h6 class="mb-0">Ман ери туям</h6>
+                    <span class="text-muted">Далер Назаров</span>
+                </div>
             </div>
+            <div class="col-9 col-sm-8 col-md-4">
+                <div class="row player-control">
+                    <div class="mx-auto">
+                        <div id="mp-shuffle-btn" class="btn btn-dark text-muted">
+                            <font-awesome-icon icon="random" size="lg"></font-awesome-icon>
+                        </div>
+                        <div id="mp-prev-btn" class="btn btn-dark">
+                            <font-awesome-icon icon="backward" size="lg"></font-awesome-icon>
+                        </div>
+                        <div id="mp-play-btn" class="btn btn-dark" v-if="!playing" @click="play">
+                            <font-awesome-icon icon="play" size="lg"></font-awesome-icon>
+                        </div>
+                        <div id="mp-pause-btn" class="btn btn-dark" v-else @click="pause">
+                            <font-awesome-icon icon="pause" size="lg"></font-awesome-icon>
+                        </div>
+                        <div id="mp-next-btn" class="btn btn-dark">
+                            <font-awesome-icon icon="forward" size="lg"></font-awesome-icon>
+                        </div>
+                        <div id="mp-repeat-btn" class="btn btn-dark text-muted">
+                            <font-awesome-icon icon="redo-alt" size="lg"></font-awesome-icon>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-2 col-md-4">
+                <div class="row player-control">
+                    <div class="d-none d-md-block col-md-8">
+                        00:000:000:0000
+                    </div>
+                    <div class="col-12 col-md-4">
+                        <div id="mp-playlist-btn" class="btn btn-dark">
+                            <font-awesome-icon icon="list" size="lg"></font-awesome-icon>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
 
             <div class="progress-bar-wrapper">
                 <div class="player-progress" @mousedown="seekPosition" title="Time played : Total time">
@@ -16,7 +55,7 @@
                 </div>
             </div>
 
-            <audio controls id="main-player"
+            <audio controls class="d-none" id="main-player"
                    src="https://rep.tj/upload/iblock/449/449038a9c2a06b4f9b818b274f6bec8e.mp3"></audio>
 
         </div>
@@ -24,6 +63,21 @@
 </template>
 
 <script>
+    import {library} from '@fortawesome/fontawesome-svg-core'
+    import {
+        faPlay,
+        faPause,
+        faBackward,
+        faForward,
+        faRandom,
+        faRedoAlt,
+        faList
+    } from '@fortawesome/free-solid-svg-icons'
+    import {getSongIconUrl} from "../../../api/mediaApi";
+    import {concatStrings} from "../../../util/stringHelper";
+
+    library.add(faPlay, faPause, faBackward, faForward, faRandom, faRedoAlt, faList);
+
     export default {
         name: "Player",
         mounted() {
@@ -51,7 +105,8 @@
                 currentSeconds: 0,
                 durationSeconds: 0,
                 playing: false,
-                timeDrag: false
+                timeDrag: false,
+                song: null
             }
         },
         methods: {
@@ -84,7 +139,14 @@
                 if (this.durationSeconds > 0) {
                     return this.currentSeconds / this.durationSeconds * 100;
                 } else return 0;
-            }
+            },
+            coverUrl() {
+                if (this.song)
+                    return getSongIconUrl(this.song.id)
+            },
+            aliases() {
+                return concatStrings(this.song.artistAliases.map(alias => alias.name), ';');
+            },
         }
     }
 </script>
@@ -101,6 +163,7 @@
     .player-control {
         display: flex;
         align-items: center !important;
+        height: 100%
     }
 
     .progress-bar-wrapper {

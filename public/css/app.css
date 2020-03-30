@@ -21,6 +21,13 @@ body {
   width: 3rem;
 }
 
+.thumb-sm {
+  -o-object-fit: cover;
+     object-fit: cover;
+  width: 40px !important;
+  height: 40px;
+}
+
 .btn-text-white {
   color: rgba(255, 255, 255, 0.5) !important;
 }
