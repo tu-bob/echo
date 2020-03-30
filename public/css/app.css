@@ -24,8 +24,8 @@ body {
 .thumb-sm {
   -o-object-fit: cover;
      object-fit: cover;
-  width: 40px !important;
-  height: 40px;
+  width: 50px !important;
+  height: 50px;
 }
 
 .btn-text-white {
