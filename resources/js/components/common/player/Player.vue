@@ -20,11 +20,9 @@
                         <div id="mp-prev-btn" class="btn btn-dark">
                             <font-awesome-icon icon="backward" size="lg"></font-awesome-icon>
                         </div>
-                        <div id="mp-play-btn" class="btn btn-dark" v-if="!playing" @click="play">
-                            <font-awesome-icon icon="play" size="lg"></font-awesome-icon>
-                        </div>
-                        <div id="mp-pause-btn" class="btn btn-dark" v-else @click="pause">
-                            <font-awesome-icon icon="pause" size="lg"></font-awesome-icon>
+                        <div id="mp-play-pause-btn" class="btn btn-dark" @click="togglePlayPause">
+                            <font-awesome-icon icon="play" size="lg" v-if="!playing"></font-awesome-icon>
+                            <font-awesome-icon icon="pause" size="lg" v-else></font-awesome-icon>
                         </div>
                         <div id="mp-next-btn" class="btn btn-dark">
                             <font-awesome-icon icon="forward" size="lg"></font-awesome-icon>
@@ -56,7 +54,7 @@
             </div>
 
             <audio controls class="d-none" id="main-player"
-                   src="https://rep.tj/upload/iblock/449/449038a9c2a06b4f9b818b274f6bec8e.mp3"></audio>
+                   :src="audioSrc"></audio>
 
         </div>
     </div>
@@ -73,8 +71,9 @@
         faRedoAlt,
         faList
     } from '@fortawesome/free-solid-svg-icons'
-    import {getSongIconUrl} from "../../../api/mediaApi";
+    import {fetchAudioFile, getSongIconUrl} from "../../../api/mediaApi";
     import {concatStrings} from "../../../util/stringHelper";
+    import {mapGetters} from "vuex";
 
     library.add(faPlay, faPause, faBackward, faForward, faRandom, faRedoAlt, faList);
 
@@ -90,6 +89,12 @@
             });
             this.audio.addEventListener('play', () => {
                 this.playing = true;
+            });
+            this.audio.addEventListener('abort', () => {
+                this.playing = false;
+            });
+            this.audio.addEventListener('error', () => {
+                this.playing = false;
             });
         },
         props: {
@@ -113,18 +118,14 @@
             onMetaLoaded(e) {
                 if (this.audio.readyState >= 2) {
                     this.durationSeconds = this.audio.duration
+                    this.playing = true;
                 }
             },
             onTimeUpdated(e) {
                 this.currentSeconds = this.audio.currentTime;
             },
-            play() {
-                this.playing = true;
-                this.audio.play();
-            },
-            pause() {
-                this.playing = false;
-                this.audio.pause();
+            togglePlayPause() {
+                this.playing = !this.playing;
             },
             seekPosition(e) {
                 this.timeDrage = true;
@@ -132,6 +133,13 @@
                 let percentage = 100 * position / $(this.progressBar).width();
                 this.audio.currentTime = percentage * this.durationSeconds / 100;
                 console.log(this.audio.currentTime)
+            }
+        },
+        watch: {
+            playing() {
+                if (this.playing)
+                    this.audio.play();
+                else this.audio.pause();
             }
         },
         computed: {
@@ -147,6 +155,16 @@
             aliases() {
                 return concatStrings(this.song.artistAliases.map(alias => alias.name), ';');
             },
+            audioSrc() {
+                if (this.ACTIVE_SONG) {
+                    this.playing = false;
+                    return fetchAudioFile(this.ACTIVE_SONG.id);
+                }
+            },
+            ...mapGetters([
+                'PLAYLIST',
+                'ACTIVE_SONG'
+            ])
         }
     }
 </script>

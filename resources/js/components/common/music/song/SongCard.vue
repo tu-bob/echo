@@ -1,6 +1,6 @@
 <template>
     <div class="container pb-3">
-        <div class="row w-100 text-white">
+        <div class="row w-100 text-white" @click="play">
             <img :src="coverUrl" class="thumb" @error="onImageError">
             <div class="ml-2 mt-2 row col">
                 <div>
@@ -8,7 +8,7 @@
                     <span class="text-muted">{{aliases}} </span>
                 </div>
                 <div class="ml-auto row">
-                    <span class="pr-4 text-muted">{{song.bitrate / 1000}} кбит/с</span>
+                    <!--                    <span class="pr-4 text-muted">{{song.bitrate / 1000}} кбит/с</span>-->
                     <span>{{duration}}</span>
                 </div>
             </div>
@@ -36,6 +36,9 @@
             onImageError(e) {
                 e.target.src = "/icons/svg/music.svg";
                 $(e.target).addClass('p-1');
+            },
+            play() {
+                this.$emit('play', this.song);
             }
         },
         computed: {
