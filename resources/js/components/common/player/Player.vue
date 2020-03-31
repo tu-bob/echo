@@ -1,5 +1,5 @@
 <template>
-    <div >
+    <div>
         <div class="player bg-dark container-fluid">
             <div class="row h-100 position-relative">
                 <div class="d-none d-sm-flex col-sm-2 col-md-4 player-control">
@@ -17,8 +17,8 @@
                 <div class="col-9 col-sm-8 col-md-4">
                     <div class="row player-control">
                         <div class="mx-auto">
-                            <div id="mp-shuffle-btn" class="btn btn-dark text-muted">
-                                <font-awesome-icon icon="random" size="lg"></font-awesome-icon>
+                            <div id="mp-shuffle-btn" @click="toggleShuffle" class="btn btn-dark text-muted">
+                                <font-awesome-icon :class="{'text-white': shuffled}" icon="random" size="lg"></font-awesome-icon>
                             </div>
                             <div id="mp-prev-btn" class="btn btn-dark">
                                 <font-awesome-icon icon="backward" size="lg"></font-awesome-icon>
@@ -55,7 +55,7 @@
                     </div>
                 </div>
 
-                <audio controls class="d-none" id="main-player" preload="metadata":src="audioSrc"></audio>
+                <audio controls class="d-none" id="main-player" preload="metadata" :src="audioSrc"></audio>
             </div>
         </div>
         <div class="playlist-wrapper" v-if="showPlaylist">
@@ -127,13 +127,14 @@
                 durationSeconds: 0,
                 playing: false,
                 timeDrag: false,
-                showPlaylist: true
+                showPlaylist: false,
+                shuffled: false
             }
         },
         methods: {
             onMetaLoaded(e) {
                 if (this.audio.readyState >= 2) {
-                    this.durationSeconds = this.audio.duration
+                    this.durationSeconds = this.audio.duration;
                     this.playing = true;
                 }
             },
@@ -156,6 +157,13 @@
             },
             togglePlaylist() {
                 this.showPlaylist = !this.showPlaylist
+            },
+            toggleShuffle() {
+                if (!this.shuffled)
+                    this.$store.commit('SHUFFLE');
+                else
+                    this.$store.commit('RESTORE_ORDER');
+                this.shuffled = !this.shuffled;
             }
         },
         watch: {

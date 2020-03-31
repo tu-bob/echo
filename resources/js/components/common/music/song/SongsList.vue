@@ -1,6 +1,7 @@
 <template>
     <div>
-        <song-card class="cursor-pointer" v-for="song in songs" :song="song" :key="song.id" @play="playSong"></song-card>
+        <song-card class="cursor-pointer" v-for="song in songs" :song="song" :key="song.id"
+                   @play="playSong"></song-card>
     </div>
 </template>
 
@@ -41,6 +42,12 @@
                     this.$store.commit('UPDATE_PLAYLIST', this.songs);
                     this.$store.commit('SET_ACTIVE_SONG', song);
                 }
+            }
+        },
+        watch: {
+            playlist() {
+                if (this.playlist)
+                    this.songs = this.playlist;
             }
         }
     }
