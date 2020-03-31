@@ -18,11 +18,11 @@ const getters = {
     }
 };
 const mutations = {
-    SET_ACTIVE_SONG: (state, payload) => {
-        state.activeSong = payload;
+    SET_ACTIVE_SONG: (state, song) => {
+        state.activeSong = song;
     },
-    UPDATE_PLAYLIST: (state, payload) => {
-        state.playlist = payload;
+    UPDATE_PLAYLIST: (state, songs) => {
+        state.playlist = songs;
     },
     SHUFFLE: (state, _) => {
         state.originalPlaylist = state.playlist.slice();
@@ -32,14 +32,14 @@ const mutations = {
         state.playlist = state.originalPlaylist.slice();
         state.originalPlaylist = [];
     },
-    SET_REPEAT_STATE: (state, payload) => {
-        state.repeatState = payload;
+    SET_REPEAT_STATE: (state, repeatState) => {
+        state.repeatState = repeatState;
     },
-    PLAY_NEXT: (state, _) => {
+    PLAY_NEXT: (state, repeatPlaylist = true) => {
         let index = state.playlist.map(song => song.id).indexOf(state.activeSong.id) + 1;
         if (index < state.playlist.length)
             state.activeSong = state.playlist[index];
-        else state.activeSong = state.playlist[0];
+        else if (repeatPlaylist) state.activeSong = state.playlist[0];
     },
     PLAY_PREV: (state, _) => {
         let index = state.playlist.map(song => song.id).indexOf(state.activeSong.id) - 1;
