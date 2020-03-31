@@ -1,5 +1,8 @@
 <template>
-    <videos-list></videos-list>
+    <div class="container">
+        <videos-list></videos-list>
+    </div>
+
 </template>
 
 <script>
