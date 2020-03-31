@@ -63,7 +63,7 @@
                 <audio controls class="d-none" id="main-player" preload="metadata" :src="audioSrc" :loop="REPEAT_STATE === 'single'"></audio>
             </div>
         </div>
-        <div class="playlist-wrapper" v-if="showPlaylist">
+        <div class="playlist-wrapper" v-show="showPlaylist">
             <div class="row">
                 <div class="ml-auto mr-4 mt-2 btn" @click="togglePlaylist">
                     <font-awesome-icon icon="times" class="text-white" size="2x"></font-awesome-icon>
