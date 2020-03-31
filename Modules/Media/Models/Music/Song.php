@@ -12,6 +12,8 @@ use Modules\Shared\Models\Pivots\BasePivot;
 
 /**
  * @property ImageFile coverImage
+ * @property array artistAliases
+ * @property string title
  */
 class Song extends BaseModel
 {
@@ -69,5 +71,11 @@ class Song extends BaseModel
     public function clip()
     {
         return $this->belongsTo(Video::class);
+    }
+
+    public function getFormattedNameAttribute()
+    {
+        $name = $this->artistAliases->implode('name', ', ');
+        return "{$name} - {$this->title}";
     }
 }
