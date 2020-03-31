@@ -51,7 +51,7 @@
                 </songs-table>
             </div>
             <div>
-                <image-uploader v-model="albumCoverFile" :src="coverUrl" :alt="album.name + ' cover'">
+                <image-uploader v-model="albumCoverFile" ref="albumCoverFileInput" :src="coverUrl" :alt="album.name + ' cover'">
                     <template #header>
                         Обложка альбома
                     </template>
