@@ -1,7 +1,7 @@
 <template>
     <div>
-        <div class="row bg-dark">
-            <b-navbar toggleable="sm" class="col-4 col-md-4 pl-4" :type="NAV_TYPE" :variant="NAV_VARIANT">
+        <div class="row bg-dark position-relative" style="z-index:1000">
+            <b-navbar toggleable="sm" class="col-4 pl-4" :type="NAV_TYPE" :variant="NAV_VARIANT">
                 <b-navbar-toggle target="mainNavBar"></b-navbar-toggle>
                 <b-collapse is-nav id="mainNavBar">
                     <b-navbar-nav>
@@ -25,21 +25,21 @@
                     </b-navbar-nav>
                 </b-collapse>
             </b-navbar>
-            <div class="col-1 col-md-4"></div>
-            <div class="col-7 col-md-4 py-2 pr-4 row">
-
+            <div class="col-8 py-2 pr-4 row" >
                 <router-link v-if="!AUTHENTICATED" class="ml-auto" :class="DEFAULT_BUTTON_CLASSES"
                              :to="{name: 'login'}">Вход
                 </router-link>
                 <template v-else>
-                    <b-avatar class="ml-auto mr-3" :variant="AVATAR_VARIANT"></b-avatar>
+                    <b-avatar class="ml-auto mr-0 mr-md-3" :variant="AVATAR_VARIANT"></b-avatar>
+                    <div class="user-name d-none d-md-flex">
+                        {{AUTH_USER.name}}
+                    </div>
                     <div class="dropdown">
-                        <button class="btn dropdown-toggle"
-                                :class="DEFAULT_BUTTON_CLASSES"
-                                type="button"
-                                id="profileMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            {{AUTH_USER.name}}
-                        </button>
+                        <div class="btn btn-text-white"
+                             type="button"
+                             id="profileMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <font-awesome-icon icon="caret-down"></font-awesome-icon>
+                        </div>
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="profileMenu">
                             <a class="dropdown-item" href="#" @click="logout">Выйти</a>
                         </div>
@@ -65,6 +65,12 @@
 <script>
     import {mapGetters} from "vuex";
     import Player from "../components/common/player/Player";
+    import {library} from '@fortawesome/fontawesome-svg-core'
+    import {
+        faCaretDown
+    } from '@fortawesome/free-solid-svg-icons'
+
+    library.add(faCaretDown);
 
     export default {
         name: "App",
@@ -105,5 +111,14 @@
 </script>
 
 <style scoped>
-
+.user-name{
+    display: flex;
+    max-width: 150px;
+    max-height: 54px;
+    overflow: hidden;
+    white-space: nowrap;
+    padding-top: 0.5rem;
+    color: #9a9da0;
+    font-weight: 400;
+}
 </style>
