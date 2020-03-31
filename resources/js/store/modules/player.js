@@ -1,4 +1,7 @@
+import {shuffle} from "../../util/array";
+
 const state = {
+    originalPlaylist: [],
     playlist: [],
     activeSong: null
 };
@@ -16,7 +19,15 @@ const mutations = {
     },
     UPDATE_PLAYLIST: (state, payload) => {
         state.playlist = payload;
-    }
+    },
+    SHUFFLE: (state, _) => {
+        state.originalPlaylist = state.playlist.slice();
+        state.playlist = shuffle(state.playlist.slice());
+    },
+    RESTORE_ORDER: (state, _) => {
+        state.playlist = state.originalPlaylist.slice();
+        state.originalPlaylist = [];
+    },
 };
 const actions = {};
 
