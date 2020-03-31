@@ -34,6 +34,18 @@ const mutations = {
     },
     SET_REPEAT_STATE: (state, payload) => {
         state.repeatState = payload;
+    },
+    PLAY_NEXT: (state, _) => {
+        let index = state.playlist.map(song => song.id).indexOf(state.activeSong.id) + 1;
+        if (index < state.playlist.length)
+            state.activeSong = state.playlist[index];
+        else state.activeSong = state.playlist[0];
+    },
+    PLAY_PREV: (state, _) => {
+        let index = state.playlist.map(song => song.id).indexOf(state.activeSong.id) - 1;
+        if (index >= 0)
+            state.activeSong = state.playlist[index];
+        else state.activeSong = state.playlist[state.playlist.length - 1];
     }
 };
 const actions = {};

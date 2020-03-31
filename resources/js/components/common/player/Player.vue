@@ -21,14 +21,14 @@
                                 <font-awesome-icon :class="{'text-white': shuffled}" icon="random"
                                                    size="lg"></font-awesome-icon>
                             </div>
-                            <div id="mp-prev-btn" class="btn btn-dark">
+                            <div id="mp-prev-btn" class="btn btn-dark" @click="prev">
                                 <font-awesome-icon icon="backward" size="lg"></font-awesome-icon>
                             </div>
                             <div id="mp-play-pause-btn" class="btn btn-dark" @click="togglePlayPause">
                                 <font-awesome-icon icon="play" size="lg" v-if="!playing"></font-awesome-icon>
                                 <font-awesome-icon icon="pause" size="lg" v-else></font-awesome-icon>
                             </div>
-                            <div id="mp-next-btn" class="btn btn-dark">
+                            <div id="mp-next-btn" class="btn btn-dark" @click="next">
                                 <font-awesome-icon icon="forward" size="lg"></font-awesome-icon>
                             </div>
                             <div id="mp-repeat-btn" @click="toggleRepeat"
@@ -182,6 +182,12 @@
                     newState = state[index];
 
                 this.$store.commit('SET_REPEAT_STATE', newState);
+            },
+            next(){
+                this.$store.commit('PLAY_NEXT');
+            },
+            prev(){
+                this.$store.commit('PLAY_PREV');
             }
         },
         watch: {
