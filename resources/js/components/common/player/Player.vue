@@ -60,7 +60,12 @@
                     </div>
                 </div>
 
-                <audio controls class="d-none" id="main-player" preload="metadata" :src="audioSrc" :loop="REPEAT_STATE === 'single'"></audio>
+                <div class="player-disable-overlay" v-show="!ACTIVE_SONG">
+
+                </div>
+
+                <audio controls class="d-none" id="main-player" preload="metadata" :src="audioSrc"
+                       :loop="REPEAT_STATE === 'single'"></audio>
             </div>
         </div>
         <div class="playlist-wrapper" v-show="showPlaylist">
@@ -292,5 +297,16 @@
         backdrop-filter: blur(6px);
         opacity: 0.95;
         background: linear-gradient(135deg, #373737 0%, #24181e 95%);
+    }
+
+    .player-disable-overlay{
+        top: -6px;
+        left: 0;
+        right: 0;
+        position: absolute;
+        height: 66px;
+        background: #000000;
+        filter: blur(2px);
+        opacity: 0.5;
     }
 </style>
