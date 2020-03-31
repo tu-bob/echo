@@ -320,7 +320,7 @@
                 if (this.coverImageFile)
                     data.append('coverImageFile', this.coverImageFile, this.coverImageFile.name);
 
-                if (this.song.clip)
+                if (this.song.clip.src)
                     data.append('clip_src', this.song.clip.src);
 
                 data.append('title', this.song.title);
