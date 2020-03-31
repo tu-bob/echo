@@ -18,7 +18,8 @@
                     <div class="row player-control">
                         <div class="mx-auto">
                             <div id="mp-shuffle-btn" @click="toggleShuffle" class="btn btn-dark text-muted">
-                                <font-awesome-icon :class="{'text-white': shuffled}" icon="random" size="lg"></font-awesome-icon>
+                                <font-awesome-icon :class="{'text-white': shuffled}" icon="random"
+                                                   size="lg"></font-awesome-icon>
                             </div>
                             <div id="mp-prev-btn" class="btn btn-dark">
                                 <font-awesome-icon icon="backward" size="lg"></font-awesome-icon>
@@ -30,8 +31,11 @@
                             <div id="mp-next-btn" class="btn btn-dark">
                                 <font-awesome-icon icon="forward" size="lg"></font-awesome-icon>
                             </div>
-                            <div id="mp-repeat-btn" class="btn btn-dark text-muted">
+                            <div id="mp-repeat-btn" @click="toggleRepeat"
+                                 class="btn btn-dark position-relative"
+                                 :class="{'text-white': REPEAT_STATE !== 'none', 'text-muted': REPEAT_STATE === 'none'}">
                                 <font-awesome-icon icon="redo-alt" size="lg"></font-awesome-icon>
+                                <span v-show="REPEAT_STATE === 'single'" class="position-absolute" style="bottom:0; right:6px">1</span>
                             </div>
                         </div>
                     </div>
@@ -164,6 +168,20 @@
                 else
                     this.$store.commit('RESTORE_ORDER');
                 this.shuffled = !this.shuffled;
+            },
+            toggleRepeat() {
+                let state = [
+                    'none',
+                    'all',
+                    'single'
+                ];
+
+                let index = state.indexOf(this.REPEAT_STATE) + 1;
+                let newState = state[0];
+                if (index < state.length)
+                    newState = state[index];
+
+                this.$store.commit('SET_REPEAT_STATE', newState);
             }
         },
         watch: {
@@ -194,7 +212,8 @@
             },
             ...mapGetters([
                 'PLAYLIST',
-                'ACTIVE_SONG'
+                'ACTIVE_SONG',
+                'REPEAT_STATE'
             ])
         }
     }
