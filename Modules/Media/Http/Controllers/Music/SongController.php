@@ -5,6 +5,7 @@ namespace Modules\Media\Http\Controllers\Music;
 
 
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Storage;
 use Modules\Media\Http\Filters\Media\SongFilter;
 use Modules\Media\Http\Requests\Music\SongRequest;
@@ -34,8 +35,20 @@ class SongController extends BaseController
 
     public function getAudioFile($song)
     {
-        $file = Song::findOrFail($song)->audioFile;
-        return Storage::get($file->path);
+        $song = Song::findOrFail($song)->audioFile;
+        $file = Storage::get($song->path);
+
+        $headers = [
+            'Content-Type' => 'audio/mpeg',
+            'Cache-Control' => " public, must-revalidate, max-age=0",
+            'Pragma' => 'no-cache',
+            'Accept-Ranges' => 'bytes',
+            'Content-Length' => Storage::size($song->path),
+//            '"Content-Range' => 'bytes 0-',
+//            'Content-Disposition' => 'inline; filename=audio',
+            'Expires' => '0',
+        ];
+        return (new Response($file, 200, $headers));
     }
 
     public function findSongsByInfo($info)
