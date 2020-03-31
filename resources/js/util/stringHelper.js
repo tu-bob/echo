@@ -18,10 +18,9 @@ export function concatStrings(array, delimiter) {
     return result;
 }
 
-export function secondsToFormattedMinutes(second) {
-    let sec = second % 60;
-    let result = `${divideAdnRoundToInt(second, 60)}:${sec}`;
+export function secondsToFormattedMinutes(seconds) {
+    let sec = seconds % 60;
     if (sec < 10)
-        result += '0';
-    return result;
+        sec = `0${sec}`;
+    return `${divideAdnRoundToInt(seconds, 60)}:${sec}`;
 }
