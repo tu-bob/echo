@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="player bg-dark container-fluid">
+        <div class="player bg-dark container-fluid text-white">
             <div class="row h-100 position-relative">
                 <div class="d-none d-sm-flex col-sm-2 col-md-4 player-control">
                     <template v-if="ACTIVE_SONG">
@@ -35,7 +35,8 @@
                                  class="btn btn-dark position-relative"
                                  :class="{'text-white': REPEAT_STATE !== 'none', 'text-muted': REPEAT_STATE === 'none'}">
                                 <font-awesome-icon icon="redo-alt" size="lg"></font-awesome-icon>
-                                <span v-show="REPEAT_STATE === 'single'" class="position-absolute" style="bottom:0; right:6px">1</span>
+                                <span v-show="REPEAT_STATE === 'single'" class="position-absolute"
+                                      style="bottom:0; right:6px">1</span>
                             </div>
                         </div>
                     </div>
@@ -43,7 +44,7 @@
                 <div class="col-2 col-md-4">
                     <div class="row player-control">
                         <div class="d-none d-md-block col-md-8">
-                            00:000:000:0000
+                            {{currentTimeFormatted}}
                         </div>
                         <div class="col-12 col-md-4">
                             <div id="mp-playlist-btn" class="btn btn-dark" @click="togglePlaylist">
@@ -54,7 +55,7 @@
                 </div>
 
                 <div class="progress-bar-wrapper">
-                    <div class="player-progress" @mousedown="seekPosition" title="Time played : Total time">
+                    <div class="player-progress" @mousedown="seekPosition">
                         <div class="player-seeker" :style="{ width: this.percentCompleted + '%' }"></div>
                     </div>
                 </div>
@@ -90,7 +91,7 @@
         faTimes
     } from '@fortawesome/free-solid-svg-icons'
     import {fetchAudioFile, getSongIconUrl} from "../../../api/mediaApi";
-    import {concatStrings} from "../../../util/stringHelper";
+    import {concatStrings, secondsToFormattedMinutes} from "../../../util/stringHelper";
     import {mapGetters} from "vuex";
     import SongsList from "../music/song/SongsList";
 
@@ -112,6 +113,10 @@
             });
             this.audio.addEventListener('abort', () => {
                 this.playing = false;
+            });
+            this.audio.addEventListener('ended', () => {
+                this.playing = false;
+
             });
             this.audio.addEventListener('error', () => {
                 this.playing = false;
@@ -153,7 +158,6 @@
                 let position = e.pageX - $(this.progressBar).offset().left;
                 let percentage = 100 * position / $(this.progressBar).width();
                 this.audio.currentTime = percentage * this.durationSeconds / 100;
-                console.log(this.audio.currentTime)
             },
             onImageError(e) {
                 e.target.src = "/icons/svg/music.svg";
@@ -183,10 +187,10 @@
 
                 this.$store.commit('SET_REPEAT_STATE', newState);
             },
-            next(){
+            next() {
                 this.$store.commit('PLAY_NEXT');
             },
-            prev(){
+            prev() {
                 this.$store.commit('PLAY_PREV');
             }
         },
@@ -215,6 +219,12 @@
                     this.playing = false;
                     return fetchAudioFile(this.ACTIVE_SONG.id);
                 }
+            },
+            currentTimeFormatted() {
+                if (this.currentSeconds)
+                    return secondsToFormattedMinutes(Math.round(this.currentSeconds));
+                else
+                    return '0:00'
             },
             ...mapGetters([
                 'PLAYLIST',
