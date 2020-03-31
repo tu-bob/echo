@@ -14,8 +14,8 @@
                         </div>
                     </template>
                 </div>
-                <div class="col-9 col-sm-8 col-md-4">
-                    <div class="row player-control">
+                <div class="col-9 col-sm-7 col-md-4">
+                    <div class="form-row player-control">
                         <div class="mx-auto">
                             <div id="mp-shuffle-btn" @click="toggleShuffle" class="btn btn-dark text-muted">
                                 <font-awesome-icon :class="{'text-white': shuffled}" icon="random"
@@ -41,18 +41,21 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-2 col-md-4">
-                    <div class="row player-control">
-                        <div class="d-none d-md-block col-md-8">
-                            {{currentTimeFormatted}}
-                        </div>
-                        <div class="col-12 col-md-4">
-                            <div id="mp-playlist-btn" class="btn btn-dark" @click="togglePlaylist">
-                                <font-awesome-icon icon="list" size="lg"></font-awesome-icon>
-                            </div>
-                        </div>
+
+                <div class="ml-sm-auto form-row player-control">
+                    <div class="d-none d-md-block pr-3">
+                        {{currentTimeFormatted}}
+                    </div>
+                    <div id="mp-download-btn" v-if="ACTIVE_SONG">
+                        <a :href="`/media/music/song/${ACTIVE_SONG.id}/download`" download  class="btn btn-dark">
+                            <font-awesome-icon icon="download" size="lg"></font-awesome-icon>
+                        </a>
+                    </div>
+                    <div id="mp-playlist-btn" class="btn btn-dark" @click="togglePlaylist">
+                        <font-awesome-icon icon="list" size="lg"></font-awesome-icon>
                     </div>
                 </div>
+
 
                 <div class="progress-bar-wrapper">
                     <div class="player-progress" @mousedown="seekPosition">
@@ -93,14 +96,15 @@
         faRandom,
         faRedoAlt,
         faList,
-        faTimes
+        faTimes,
+        faDownload
     } from '@fortawesome/free-solid-svg-icons'
     import {fetchAudioFile, getSongIconUrl} from "../../../api/mediaApi";
     import {concatStrings, secondsToFormattedMinutes} from "../../../util/stringHelper";
     import {mapGetters} from "vuex";
     import SongsList from "../music/song/SongsList";
 
-    library.add(faPlay, faPause, faBackward, faForward, faRandom, faRedoAlt, faList, faTimes);
+    library.add(faPlay, faPause, faBackward, faForward, faRandom, faRedoAlt, faList, faTimes, faDownload);
 
     export default {
         name: "Player",
@@ -249,7 +253,7 @@
 
 <style scoped>
     .player {
-        z-index:1000;
+        z-index: 1000;
         position: fixed;
         bottom: 0;
         left: 0;
@@ -300,7 +304,7 @@
         background: linear-gradient(135deg, #373737 0%, #24181e 95%);
     }
 
-    .player-disable-overlay{
+    .player-disable-overlay {
         top: -6px;
         left: 0;
         right: 0;
