@@ -55,7 +55,7 @@ class StoreAudioFileRequestWriter extends RequestWriter
             'artist' => $aliases,
 //            'album' => 'In the garden',
             'band' => $aliases[0],
-            'publisher' => $this->request['label'],
+//            'publisher' => $this->request['label'],
             'genre' => Genre::whereIn('id', $this->request['genres'])
                 ->get()
                 ->map(function ($genre) {
@@ -68,6 +68,9 @@ class StoreAudioFileRequestWriter extends RequestWriter
 //            'bpm'          => $request->bpm[$key],
 //            'initial_key'  => $request->initial_key[$key],
         ];
+
+        if(isset($this->request['label']))
+            $this->tags['publisher'] = $this->request['label'];
     }
 
     private function updateTags()
