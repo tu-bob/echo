@@ -15,6 +15,14 @@ use Modules\Shared\Http\Controllers\BaseController;
 
 class SongController extends BaseController
 {
+    private $headers = [
+        'Content-Type' => 'audio/mpeg',
+        'Cache-Control' => "public, must-revalidate, max-age=0",
+        'Pragma' => 'no-cache',
+        'Accept-Ranges' => 'bytes',
+        'Expires' => '0'
+    ];
+
     public function store(SongRequest $request)
     {
         $writer = new StoreSongRequestWriter($request->all());
@@ -35,20 +43,22 @@ class SongController extends BaseController
 
     public function getAudioFile($song)
     {
-        $song = Song::findOrFail($song)->audioFile;
+        $song = Song::with('audioFile')->findOrFail($song)->audioFile;
         $file = Storage::get($song->path);
 
-        $headers = [
-            'Content-Type' => 'audio/mpeg',
-            'Cache-Control' => " public, must-revalidate, max-age=0",
-            'Pragma' => 'no-cache',
-            'Accept-Ranges' => 'bytes',
-            'Content-Length' => Storage::size($song->path),
-//            '"Content-Range' => 'bytes 0-',
-//            'Content-Disposition' => 'inline; filename=audio',
-            'Expires' => '0',
-        ];
+        $headers = array_merge($this->headers, [
+            'Content-Length' => Storage::size($song->path)
+        ]);
+
         return (new Response($file, 200, $headers));
+    }
+
+    public function downloadSong($song)
+    {
+        $song = Song::with('audioFile')->findOrFail($song);
+        $song->download_count += 1;
+        $song->save();
+        return Storage::download($song->audioFile->path, "{$song->formatted_name}.mp3");
     }
 
     public function findSongsByInfo($info)
