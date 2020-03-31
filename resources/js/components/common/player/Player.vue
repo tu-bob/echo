@@ -60,7 +60,7 @@
                     </div>
                 </div>
 
-                <audio controls class="d-none" id="main-player" preload="metadata" :src="audioSrc"></audio>
+                <audio controls class="d-none" id="main-player" preload="metadata" :src="audioSrc" :loop="REPEAT_STATE === 'single'"></audio>
             </div>
         </div>
         <div class="playlist-wrapper" v-if="showPlaylist">
@@ -116,7 +116,14 @@
             });
             this.audio.addEventListener('ended', () => {
                 this.playing = false;
-
+                switch (this.REPEAT_STATE) {
+                    case "none":
+                        this.$store.commit('PLAY_NEXT', false);
+                        break;
+                    case "all":
+                        this.$store.commit('PLAY_NEXT');
+                        break;
+                }
             });
             this.audio.addEventListener('error', () => {
                 this.playing = false;
