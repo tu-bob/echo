@@ -304,7 +304,7 @@
         width: 100%;
         position: fixed;
         bottom: 66px;
-        top: 50px;
+        top: 0;
         left: 0;
         backdrop-filter: blur(6px);
         opacity: 0.95;
