@@ -19,7 +19,8 @@ const getters = {
 };
 const mutations = {
     SET_ACTIVE_SONG: (state, song) => {
-        state.activeSong = song;
+        if (!state.activeSong || song.id !== state.activeSong.id)
+            state.activeSong = song;
     },
     UPDATE_PLAYLIST: (state, songs) => {
         state.playlist = songs;
