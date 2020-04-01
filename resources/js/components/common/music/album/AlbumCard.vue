@@ -16,7 +16,12 @@
 </template>
 
 <script>
-    import {fetchAlbumSongs, getAlbumCoverUrl, increaseMediaPlayCount} from "../../../../api/mediaApi";
+    import {
+        fetchAlbumSongs,
+        getAlbumCoverUrl,
+        increaseMediaCount,
+        increaseMediaPlayCount
+    } from "../../../../api/mediaApi";
     import {concatStrings} from "../../../../util/stringHelper";
 
     export default {
@@ -43,7 +48,7 @@
                 if (this.songs.length > 0) {
                     this.$store.commit('UPDATE_PLAYLIST', this.songs);
                     this.$store.commit('SET_ACTIVE_SONG', this.songs[0]);
-                    increaseMediaPlayCount(this.album.id, 'album');
+                    increaseMediaCount(this.album.id, 'album', 'view');
                 }
             }
         },
