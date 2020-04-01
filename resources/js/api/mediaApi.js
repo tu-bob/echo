@@ -36,6 +36,10 @@ export function getAlbumCoverUrl(id) {
     return `/media/music/album/${id}/cover`;
 }
 
+// export async function increaseAlbumPlayCount(id) {
+//     return axios.put(`/media/music/album/${id}/play`);
+// }
+
 //albumCover -> get album cover if song doesnt have icon
 export function getSongIconUrl(id, albumCover = true) {
     return `/media/music/song/${id}/icon?album=${albumCover}`;
@@ -59,4 +63,16 @@ export function fetchVideos(filters) {
 
 export function fetchAudioFile(id) {
     return `/media/music/song/${id}/audio`;
+}
+
+export function increaseMediaPlayCount(id, type) {
+    return axios.put(`/media/music/${type}/${id}/play`).catch();
+}
+
+export function increaseMediaViewCount(id, type) {
+    let base = '/media/music/';
+    if (type === 'video')
+        base = '/media/';
+    return axios.put(`${base}${type}/${id}/view
+    `).catch();
 }

@@ -15,7 +15,7 @@
 </template>
 
 <script>
-    import {getCoverImage} from "../../../api/mediaApi";
+    import {getCoverImage, increaseMediaViewCount} from "../../../api/mediaApi";
 
     export default {
         name: "VideoCard",
@@ -28,6 +28,7 @@
         methods: {
             onClicked() {
                 this.$emit('play', this.video);
+                increaseMediaViewCount(this.video.id, 'video');
             }
         },
         computed: {
