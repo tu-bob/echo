@@ -60,4 +60,11 @@ class MusicAlbumController extends BaseController
         $album->save();
         return;
     }
+
+//    public function countView(MusicAlbum $album)
+//    {
+//        $album->view_count += 1;
+//        $album->save();
+//        return;
+//    }
 }
