@@ -69,10 +69,10 @@ export function increaseMediaPlayCount(id, type) {
     return axios.put(`/media/music/${type}/${id}/play`).catch();
 }
 
-export function increaseMediaViewCount(id, type) {
+export function increaseMediaCount(id, type, counter) {
     let base = '/media/music/';
     if (type === 'video')
         base = '/media/';
-    return axios.put(`${base}${type}/${id}/view
+    return axios.put(`${base}${type}/${id}/${counter}
     `).catch();
 }
