@@ -8,6 +8,7 @@
             </label>
 
             <b-form-file
+                :ref="id"
                 v-bind:value="value"
                 v-on:change="onChange"
                 :state="Boolean(src) || Boolean(value)"
@@ -33,6 +34,8 @@
 </template>
 
 <script>
+    import {generateId} from "../../../main";
+
     export default {
         name: "ImageUploader",
         props: {
@@ -49,7 +52,8 @@
         },
         data() {
             return {
-                forceBlank: false
+                forceBlank: false,
+                id:generateId()
             }
         },
         methods: {
@@ -58,6 +62,9 @@
             },
             onImageLoadError() {
                 this.forceBlank = true;
+            },
+            reset() {
+                this.$refs[this.id].reset();
             }
         },
         computed: {

@@ -32,7 +32,7 @@
             </div>
 
             <div>
-                <image-uploader v-model="coverImageFile" :src="coverImageUrl" alt="">
+                <image-uploader v-model="coverImageFile" ref="coverImageFile" :src="coverImageUrl" alt="">
                     <template #header>
                         Обложка песни
                     </template>
@@ -324,7 +324,6 @@
                     data.append('clip_src', this.song.clip.src.replace('watch?v=', 'embed/'));
                 }
 
-
                 data.append('title', this.song.title);
                 data.append('year', String(this.song.year));
                 if (this.song.label)
@@ -347,7 +346,8 @@
                 axios.post('/media/music/song', data)
                     .then(response => {
                         this.clearForm(true);
-                        this.$router.replace({name: 'song-editor'})
+                        if (this.$route.params.id)
+                            this.$router.replace({name: 'song-editor'})
                     })
                     .catch(
                         //TODO
@@ -436,6 +436,11 @@
                 if (removeFile) {
                     this.mp3File = null;
                     this.$refs['mp3FileInput'].reset()
+                }
+
+                if (removeFile) {
+                    this.coverImageFile = null;
+                    this.$refs['coverImageFile'].reset()
                 }
 
                 this.$refs['songEditorPlayer'].src = null;
