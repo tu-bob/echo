@@ -84,12 +84,18 @@ class StoreSongRequestWriter extends RequestWriter
             $extracted = [
                 'bitrate' => $this->extractedInfo['audio']['bitrate'],
                 'sample_rate' => $this->extractedInfo['audio']['sample_rate'],
-                'compression_ratio' => $this->extractedInfo['audio']['compression_ratio'],
-                'channels' => $this->extractedInfo['audio']['channels'],
-                'channel_mode' => $this->extractedInfo['audio']['channelmode'],
-                'encoder_options' => $this->extractedInfo['audio']['encoder_options'],
-                'codec' => isset($this->extractedInfo['audio']['codec']) ? $this->extractedInfo['audio']['codec'] : 'none',
-                'encoder' => isset($this->extractedInfo['audio']['encoder']) ? $this->extractedInfo['audio']['encoder'] : 'none',
+                'compression_ratio' => isset($this->extractedInfo['audio']['compression_ratio']) ?
+                    $this->extractedInfo['audio']['compression_ratio'] : null,
+                'channels' => isset($this->extractedInfo['audio']['channels']) ?
+                    $this->extractedInfo['audio']['channels'] : null,
+                'channel_mode' => isset($this->extractedInfo['audio']['channelmode']) ?
+                    $this->extractedInfo['audio']['channelmode'] : null,
+                'encoder_options' => isset($this->extractedInfo['audio']['encoder_options']) ?
+                    $this->extractedInfo['audio']['encoder_options'] : null,
+                'codec' => isset($this->extractedInfo['audio']['codec']) ?
+                    $this->extractedInfo['audio']['codec'] : null,
+                'encoder' => isset($this->extractedInfo['audio']['encoder']) ?
+                    $this->extractedInfo['audio']['encoder'] : null,
                 'lossless' => $this->extractedInfo['audio']['lossless'] ? 1 : 0,
                 'size' => $this->extractedInfo['filesize'],
                 'playtime_seconds' => $this->extractedInfo['playtime_seconds'],
