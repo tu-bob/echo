@@ -46,7 +46,7 @@
                     <div class="d-none d-md-block pr-3">
                         {{currentTimeFormatted}}
                     </div>
-                    <div id="mp-download-btn" v-if="ACTIVE_SONG">
+                    <div id="mp-download-btn mr-1" v-if="ACTIVE_SONG">
                         <a :href="`/media/music/song/${ACTIVE_SONG.id}/download`" download  class="btn btn-dark">
                             <font-awesome-icon icon="download" size="lg"></font-awesome-icon>
                         </a>
