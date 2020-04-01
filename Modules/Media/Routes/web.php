@@ -45,6 +45,7 @@ Route::prefix('media')->group(function () {
             Route::get('/{song}/audio', 'Music\SongController@getAudioFile');
             Route::get('/{song}/icon', 'Music\SongController@getIcon');
             Route::get('/{song}/download', 'Music\SongController@downloadSong');
+            Route::put('/{song}/play', 'Music\SongController@countPlay');
             Route::get('/{song}', 'Music\SongController@getSong');
         });
 

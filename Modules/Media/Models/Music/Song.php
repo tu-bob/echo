@@ -14,6 +14,7 @@ use Modules\Shared\Models\Pivots\BasePivot;
  * @property ImageFile coverImage
  * @property array artistAliases
  * @property string title
+ * @property int play_count
  */
 class Song extends BaseModel
 {

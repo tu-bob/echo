@@ -71,6 +71,13 @@ class SongController extends BaseController
             ->get();
     }
 
+    public function countPlay(Song $song)
+    {
+        $song->play_count += 1;
+        $song->save();
+        return;
+    }
+
     public function getIcon($song)
     {
         $song = Song::with('coverImage')->findOrFail($song);

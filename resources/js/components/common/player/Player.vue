@@ -47,7 +47,7 @@
                         {{currentTimeFormatted}}
                     </div>
                     <div id="mp-download-btn mr-1" v-if="ACTIVE_SONG">
-                        <a :href="`/media/music/song/${ACTIVE_SONG.id}/download`" download  class="btn btn-dark">
+                        <a :href="`/media/music/song/${ACTIVE_SONG.id}/download`" download class="btn btn-dark">
                             <font-awesome-icon icon="download" size="lg"></font-awesome-icon>
                         </a>
                     </div>
@@ -55,7 +55,6 @@
                         <font-awesome-icon icon="list" size="lg"></font-awesome-icon>
                     </div>
                 </div>
-
 
                 <div class="progress-bar-wrapper">
                     <div class="player-progress" @mousedown="seekPosition">
@@ -153,7 +152,8 @@
                 playing: false,
                 timeDrag: false,
                 showPlaylist: false,
-                shuffled: false
+                shuffled: false,
+                playCountUpdated: false
             }
         },
         methods: {
@@ -212,9 +212,16 @@
         },
         watch: {
             playing() {
-                if (this.playing)
+                if (this.playing) {
                     this.audio.play();
-                else this.audio.pause();
+                    if (!this.playCountUpdated) {
+                        axios.put(`/media/music/song/${this.ACTIVE_SONG.id}/play`);
+                        this.playCountUpdated = true
+                    }
+                } else this.audio.pause();
+            },
+            ACTIVE_SONG() {
+                this.playCountUpdated = false;
             }
         },
         computed: {
