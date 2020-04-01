@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Modules\Media\Http\Filters\Video;
+namespace Modules\Media\Http\Filters\Media;
 
 
 use Modules\Shared\Http\Filters\Filter;

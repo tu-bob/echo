@@ -4,7 +4,7 @@
 namespace Modules\Media\Http\Controllers\Video;
 
 
-use Modules\Media\Http\Filters\Video\VideoFilter;
+use Modules\Media\Http\Filters\Media\VideoFilter;
 use Modules\Media\Models\Video\Video;
 use Modules\Shared\Http\Controllers\BaseController;
 

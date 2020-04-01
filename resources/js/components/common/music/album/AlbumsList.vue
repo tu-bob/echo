@@ -23,7 +23,7 @@
         },
         methods: {
             fetchAlbums(page = 1) {
-                fetchAlbums({order: 'latest', page: page, paginate: 15})
+                fetchAlbums({order: 'latest', songs: 1, page: page, paginate: 15})
                     .then(response => {
                         this.paginator = response;
                         this.albums.push(...response.data)
