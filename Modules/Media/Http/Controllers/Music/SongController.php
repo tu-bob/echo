@@ -87,12 +87,9 @@ class SongController extends BaseController
 
         if (request()->get('album')) {
             $album = $song->albums()->with('cover')
-                ->whereHas('cover')
-                ->whereHas('songs', function (Builder $query) use ($song) {
-                    $query->where('song_id', $song);
-                })
+                ->has('cover')
                 ->first();
-
+            
             if ($album)
                 return Storage::get($album->cover->path);
         }
