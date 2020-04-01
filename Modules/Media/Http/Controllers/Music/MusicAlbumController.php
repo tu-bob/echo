@@ -37,13 +37,13 @@ class MusicAlbumController extends BaseController
 
     public function getAlbums()
     {
-        $query = MusicAlbum::withoutTrashed();
+        $query = MusicAlbum::with('artistAliases');
         return $this->callGetOrPaginate($query);
     }
 
     public function getAlbum($album)
     {
-        return MusicAlbum::with(['songs', 'type'])->findOrFail($album);
+        return MusicAlbum::with(['songs', 'type', 'artistAliases'])->findOrFail($album);
     }
 
     public function getCover($album)

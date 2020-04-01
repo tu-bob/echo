@@ -11,12 +11,13 @@
 
 
         <h5 class="mt-3 mb-0">{{album.title}}</h5>
-        <span class="text-muted">Далер Назаров</span>
+        <span class="text-muted">{{artists}}</span>
     </div>
 </template>
 
 <script>
     import {fetchAlbumSongs, getAlbumCoverUrl} from "../../../../api/mediaApi";
+    import {concatStrings} from "../../../../util/stringHelper";
 
     export default {
         name: "AlbumCard",
@@ -49,6 +50,15 @@
         computed: {
             coverUrl() {
                 return getAlbumCoverUrl(this.album.id)
+            },
+            artists() {
+                if (this.album.artistAliases && this.album.artistAliases.length > 0) {
+                    let artists = concatStrings(this.album.artistAliases.map(alias => alias.name).slice(0, 2), ', ');
+                    if (this.album.artistAliases.length > 2)
+                        artists += ' . . .';
+                    return artists;
+                }
+                return "Альбом пустой"
             }
         }
     }
