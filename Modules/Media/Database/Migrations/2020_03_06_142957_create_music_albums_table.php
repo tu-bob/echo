@@ -20,9 +20,7 @@ class CreateMusicAlbumsTable extends Migration
             $table->char('title', 50);
             $table->char('year', 5);
 
-            $table->unsignedBigInteger('view_count')->default(0);
-            $table->unsignedBigInteger('play_count')->default(0);
-            $table->unsignedBigInteger('download_count')->default(0);
+            $table->counters();
 
             $table->commonFields();
         });

@@ -30,6 +30,12 @@ class AppServiceProvider extends ServiceProvider
             $this->char('deleted_by_id', 26)->index()->nullable();
         });
 
+        Blueprint::macro('counters', function () {
+            $this->unsignedBigInteger('view_count')->default(0);
+            $this->unsignedBigInteger('play_count')->default(0);
+            $this->unsignedBigInteger('download_count')->default(0);
+        });
+
         Blueprint::macro('commonFields', function () {
             $this->char('id', 26)->primary();
             $this->timestamps();

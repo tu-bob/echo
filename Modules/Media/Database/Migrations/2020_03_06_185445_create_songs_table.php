@@ -35,9 +35,8 @@ class CreateSongsTable extends Migration
             $table->char('extension', 10);
 
             $table->char('cover_image_id', 26)->index()->nullable();
-            $table->unsignedBigInteger('download_count')->default(0);
-            $table->unsignedBigInteger('play_count')->default(0);
 
+            $table->counters();
 
             $table->commonFields();
         });

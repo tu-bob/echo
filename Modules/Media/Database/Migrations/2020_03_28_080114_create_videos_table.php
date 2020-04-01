@@ -20,8 +20,7 @@ class CreateVideosTable extends Migration
             $table->string('title');
             $table->string('author')->nullable();
 
-            $table->unsignedBigInteger('download_count')->default(0);
-            $table->unsignedBigInteger('play_count')->default(0);
+            $table->counters();
 
             $table->commonFields();
         });
