@@ -3,6 +3,10 @@ html, body {
     position: relative;
 }
 
+html::-webkit-scrollbar {
+    display: none;
+}
+
 .icon-btn-sm {
     width: 18px;
 }

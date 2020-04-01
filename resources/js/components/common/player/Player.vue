@@ -301,6 +301,7 @@
 
     .playlist-wrapper {
         z-index: 200;
+        overflow:scroll;
         width: 100%;
         position: fixed;
         bottom: 66px;
@@ -309,6 +310,10 @@
         backdrop-filter: blur(6px);
         opacity: 0.95;
         background: linear-gradient(135deg, #373737 0%, #24181e 95%);
+    }
+
+    .playlist-wrapper::-webkit-scrollbar {
+        display: none;
     }
 
     .player-disable-overlay {
