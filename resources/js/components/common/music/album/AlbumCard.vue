@@ -48,7 +48,7 @@
                 if (this.songs.length > 0) {
                     this.$store.commit('UPDATE_PLAYLIST', this.songs);
                     this.$store.commit('SET_ACTIVE_SONG', this.songs[0]);
-                    increaseMediaCount(this.album.id, 'album', 'view');
+                    increaseMediaCount(this.album.id, 'album', 'play');
                 }
             }
         },

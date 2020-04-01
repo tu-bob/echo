@@ -11,6 +11,7 @@ use Modules\Shared\Models\Pivots\BasePivot;
 
 /**
  * @property int play_count
+ * @property int view_count
  */
 class MusicAlbum extends BaseModel
 {
