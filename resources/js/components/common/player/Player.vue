@@ -51,7 +51,7 @@
                             <font-awesome-icon icon="download" size="lg"></font-awesome-icon>
                         </a>
                     </div>
-                    <div id="mp-playlist-btn" class="btn btn-dark" @click="togglePlaylist">
+                    <div id="mp-playlist-btn" class="btn btn-dark mr-sm-0 mr-md-4" @click="togglePlaylist">
                         <font-awesome-icon icon="list" size="lg"></font-awesome-icon>
                     </div>
                 </div>
