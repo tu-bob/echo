@@ -5,6 +5,7 @@ namespace Modules\Media\Http\Controllers\Music;
 
 
 use Illuminate\Support\Facades\Storage;
+use Modules\Media\Http\Filters\Media\MusicAlbumFilter;
 use Modules\Media\Http\Requests\Music\MusicAlbumRequest;
 use Modules\Media\Libs\Request\RequestWriter\Music\StoreMusicAlbumRequestWriter;
 use Modules\Media\Models\Music\MusicAlbum;
@@ -38,7 +39,8 @@ class MusicAlbumController extends BaseController
     public function getAlbums()
     {
         $query = MusicAlbum::with('artistAliases');
-        return $this->callGetOrPaginate($query);
+        $filter = new MusicAlbumFilter(request()->all(), $query);
+        return $this->callGetOrPaginate($filter->filter());
     }
 
     public function getAlbum($album)
