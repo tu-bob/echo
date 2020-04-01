@@ -51,4 +51,11 @@ class MusicAlbumController extends BaseController
         $cover = MusicAlbum::whereHas('cover')->where('id', $album)->firstOrFail()->cover;
         return Storage::get($cover->path);
     }
+
+    public function countPlay(MusicAlbum $album)
+    {
+        $album->play_count += 1;
+        $album->save();
+        return;
+    }
 }

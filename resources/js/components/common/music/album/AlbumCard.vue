@@ -42,6 +42,7 @@
                 if (this.songs.length > 0) {
                     this.$store.commit('UPDATE_PLAYLIST', this.songs);
                     this.$store.commit('SET_ACTIVE_SONG', this.songs[0]);
+                    axios.put(`/media/music/album/${this.album.id}/play`);
                 }
             }
         },
