@@ -47,7 +47,7 @@
                 </template>
             </div>
         </div>
-        <div class="mt-5">
+        <div class="pt-5" style="padding-bottom:10rem">
             <!--            <b-alert :show="state.errors"-->
             <!--                     class="mb-5"-->
             <!--                     variant="danger"-->

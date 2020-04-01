@@ -7,8 +7,10 @@
                     <h6 class="mb-0">{{song.title}}</h6>
                     <span class="text-muted">{{aliases}} </span>
                 </div>
-                <div class="ml-auto row">
-                    <!--                    <span class="pr-4 text-muted">{{song.bitrate / 1000}} кбит/с</span>-->
+                <div class="ml-auto d-flex flex-nowrap align-items-baseline">
+                    <a class="btn btn-link" :href="`/media/music/song/${song.id}/download`" download>
+                        <font-awesome-icon class="text-secondary h-text-white" icon="download" size="lg"></font-awesome-icon>
+                    </a>
                     <span>{{duration}}</span>
                 </div>
             </div>
