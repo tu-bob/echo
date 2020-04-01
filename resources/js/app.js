@@ -8,7 +8,7 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
 require('./bootstrap');
 
-let App = require('./app/App.vue').default;
+// let App = require('./app/App.vue').default;
 let router = require('./app/Routes.vue').default;
 
 let BootstrapVue = require('bootstrap-vue').default;
@@ -18,7 +18,7 @@ window.Vue = require('vue');
 window.Vue.use(BootstrapVue);
 window.Vue.use(VueRouter);
 
-window.Vue.prototype.$eventHub = new Vue();
+// window.Vue.prototype.$eventHub = new Vue();
 
 /**
  * The following block of code may be used to automatically register your
