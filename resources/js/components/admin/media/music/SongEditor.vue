@@ -320,8 +320,10 @@
                 if (this.coverImageFile)
                     data.append('coverImageFile', this.coverImageFile, this.coverImageFile.name);
 
-                if (this.song.clip.src)
-                    data.append('clip_src', this.song.clip.src);
+                if (this.song.clip.src) {
+                    data.append('clip_src', this.song.clip.src.replace('watch?v=', 'embed/'));
+                }
+
 
                 data.append('title', this.song.title);
                 data.append('year', String(this.song.year));
