@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="row bg-dark position-relative" style="z-index:1000">
+        <div class="row bg-dark position-relative">
             <b-navbar toggleable="sm" class="col-4 pl-4" :type="NAV_TYPE" :variant="NAV_VARIANT">
                 <b-navbar-toggle target="mainNavBar"></b-navbar-toggle>
                 <b-collapse is-nav id="mainNavBar">
