@@ -8,7 +8,7 @@ export function kvpToQueryParam(kvArray) {
     return query;
 }
 
-export function concatStrings(array, delimiter) {
+export function concatStrings(array, delimiter = ' ') {
     let result = '';
     for (let i = 0; i < array.length; i++) {
         result += array[i];
