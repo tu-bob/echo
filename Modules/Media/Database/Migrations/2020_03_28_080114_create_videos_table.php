@@ -16,7 +16,7 @@ class CreateVideosTable extends Migration
         Schema::create('videos', function (Blueprint $table) {
             $table->char('type', 15);
             $table->char('preview_image_id')->index()->nullable();
-            $table->string('src')->index()->unique();
+            $table->string('src');
             $table->string('title');
             $table->string('author')->nullable();
 

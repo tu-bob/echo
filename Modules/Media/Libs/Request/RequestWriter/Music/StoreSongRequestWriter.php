@@ -117,8 +117,6 @@ class StoreSongRequestWriter extends RequestWriter
 
     private function manageRelations()
     {
-        $this->attachClip();
-
         $aliases = isset($this->request['artistAliases']) ? $this->request['artistAliases'] : [];
         $genres = isset($this->request['genres']) ? $this->request['genres'] : [];
         $albums = isset($this->request['albums']) ? $this->request['albums'] : [];
@@ -128,12 +126,16 @@ class StoreSongRequestWriter extends RequestWriter
         $this->entity->artistAliases()->sync($aliases);
         $this->entity->genres()->sync($genres);
         $this->entity->albums()->sync($albums);
+
+        $this->attachClip();
     }
 
     private function attachClip()
     {
         if (isset($this->request['clip_src'])) {
-            $video = Video::where('src', $this->request['clip_src'])->firstOrNew();
+            $video = Video::where('id', $this->entity->clip_id)
+                ->firstOrNew();
+
             $video->type = 'youtube';
 
             if (isset($this->coverImageFile)) {
