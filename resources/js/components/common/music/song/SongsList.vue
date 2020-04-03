@@ -46,13 +46,17 @@
         },
         methods: {
             fetchSongs(page = 1) {
+                this.isFetchingSongs = true;
                 fetchSongs({order: 'latest', page: page, paginate: 15})
                     .then(response => {
                         this.pagination = response;
                         this.songs.push(...response.data);
                     })
                     .catch()
-                    .then(_ => this.$refs['songs-list-pagination'].loaded())
+                    .then(_ => {
+                        this.isFetchingSongs = false;
+                        this.$refs['songs-list-pagination'].loaded()
+                    })
             },
             playSong(song) {
                 if (song) {
