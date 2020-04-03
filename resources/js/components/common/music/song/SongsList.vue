@@ -44,7 +44,7 @@
         },
         methods: {
             fetchSongs(page = 1) {
-                fetchSongs({order: 'latest', page: page, paginate: 13})
+                fetchSongs({order: 'latest', page: page, paginate: 15})
                     .then(response => {
                         this.pagination = response;
                         this.songs.push(...response.data);
