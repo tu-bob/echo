@@ -3,6 +3,7 @@
         <song-card class="cursor-pointer" v-for="song in songs" :song="song" :key="song.id"
                    @play="playSong"></song-card>
         <pagination v-if="pagination"
+                    ref="songs-list-pagination"
                     flow
                     :pagination="pagination"
                     class="mt-5"
@@ -37,7 +38,8 @@
                     callback: this.paginationVisibilityChanged,
                     intersection: {
                         threshold: 0.3,
-                        rootMargin: '100px'
+                        rootMargin: '150px',
+                        throttle: 100
                     }
                 }
             }
@@ -50,6 +52,7 @@
                         this.songs.push(...response.data);
                     })
                     .catch()
+                    .then(_ => this.$refs['songs-list-pagination'].loaded())
             },
             playSong(song) {
                 if (song) {
@@ -58,8 +61,9 @@
                 }
             },
             paginationVisibilityChanged(isVisible, entry) {
-                if (isVisible && !this.isFetchingSongs)
-                    entry.target.querySelector('button').click()
+                let btn = entry.target.querySelector('button');
+                if (isVisible && !this.isFetchingSongs && btn)
+                    btn.click()
             }
         },
         watch: {
