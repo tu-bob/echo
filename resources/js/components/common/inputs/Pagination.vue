@@ -14,6 +14,7 @@
         </b-overlay>
         <div v-if="!flow">
             <b-pagination
+                last-number
                 v-model="currentPage"
                 :total-rows="pagination.total"
                 :per-page="pagination.per_page"

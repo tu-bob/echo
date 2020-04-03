@@ -3,7 +3,8 @@
         <table-card :items="songs"
                     :fields="fields"
                     :url="url"
-                    :columnsToHide="columnsToHide">
+                    :columnsToHide="columnsToHide"
+                    :paginate="20">
             <template #header>
                 <slot name="header">
                     <span>Список загруженных песен</span>

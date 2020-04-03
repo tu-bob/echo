@@ -9,6 +9,9 @@
             url: {
                 type: String
             },
+            paginate: {
+                type: Number,
+            },
             fields: {
                 required: true
             },
