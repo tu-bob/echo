@@ -3,7 +3,8 @@
         <table-card :items="posts"
                     :fields="fields"
                     :url="url"
-                    :columnsToHide="columnsToHide">
+                    :columnsToHide="columnsToHide"
+                    :paginate="20">
             <template #header>
                 <slot name="header">
                     <span>Посты</span>
