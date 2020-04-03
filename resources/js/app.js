@@ -5,6 +5,7 @@
  */
 import {store} from './store';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import VueObserveVisibility from 'vue-observe-visibility'
 
 require('./bootstrap');
 
@@ -17,6 +18,7 @@ let VueRouter = require('vue-router').default;
 window.Vue = require('vue');
 window.Vue.use(BootstrapVue);
 window.Vue.use(VueRouter);
+window.Vue.use(VueObserveVisibility);
 
 // window.Vue.prototype.$eventHub = new Vue();
 

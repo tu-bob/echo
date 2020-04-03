@@ -2,17 +2,18 @@
     <div>
         <song-card class="cursor-pointer" v-for="song in songs" :song="song" :key="song.id"
                    @play="playSong"></song-card>
+        <pagination v-if="pagination" flow :pagination="pagination" class="mt-5" @pageChanged="fetchSongs"></pagination>
     </div>
 </template>
 
 <script>
     import {fetchSongs} from "../../../../api/mediaApi";
     import SongCard from "./SongCard";
-    import {mapGetters} from "vuex";
+    import Pagination from "../../inputs/Pagination";
 
     export default {
         name: "SongsList",
-        components: {SongCard},
+        components: {Pagination, SongCard},
         created() {
             if (this.playlist)
                 this.songs = this.playlist;
@@ -24,15 +25,15 @@
         },
         data() {
             return {
-                paginator: null,
+                pagination: null,
                 songs: []
             }
         },
         methods: {
             fetchSongs(page = 1) {
-                fetchSongs({order: 'latest', page: page, paginate: 15})
+                fetchSongs({order: 'latest', page: page, paginate: 5})
                     .then(response => {
-                        this.paginator = response;
+                        this.pagination = response;
                         this.songs.push(...response.data);
                     })
                     .catch()
