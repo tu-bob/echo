@@ -55,19 +55,22 @@
             <!--                2-->
             <!--            </template>-->
         </b-table>
-
-        <slot name="footer">
-
-        </slot>
+        <div class="card-footer">
+            <slot name="footer">
+                <pagination v-if="paginate && pagination" :pagination="pagination" @pageChanged="fetch"></pagination>
+            </slot>
+        </div>
     </div>
 </template>
 
 <script>
     import TableCardProps from './TableCardProps.vue'
+    import Pagination from "../inputs/Pagination";
 
     export default {
 
         name: "TableCard",
+        components: {Pagination},
         mixins: [TableCardProps],
         mounted() {
             if (this.columnsToHide)
@@ -78,7 +81,8 @@
         data() {
             return {
                 tableFields: this.fields,
-                tableItems: this.items
+                tableItems: this.items,
+                pagination: null
                 // selected: [],
                 // selectAll: false
             }
@@ -116,11 +120,24 @@
                     )
                 }
             },
-            fetch() {
+            async fetch(page = null) {
                 if (this.url)
-                    axios.get(this.url)
-                        .then(songs => this.tableItems = songs)
+                    await axios.get(this.prepareUrl(page))
+                        .then(response => {
+                            if (this.paginate) {
+                                this.pagination = response;
+                                this.tableItems = response.data;
+                            } else this.tableItems = response
+                        })
                         .catch();
+            },
+            prepareUrl(page) {
+                let url = this.url;
+                if (this.paginate) {
+                    page = page ? page : 1;
+                    url += `?paginate=${this.paginate}&page=${page}`;
+                }
+                return url;
             }
         },
         watch: {
