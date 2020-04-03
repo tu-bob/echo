@@ -2,7 +2,12 @@
     <div>
         <song-card class="cursor-pointer" v-for="song in songs" :song="song" :key="song.id"
                    @play="playSong"></song-card>
-        <pagination v-if="pagination" flow :pagination="pagination" class="mt-5" @pageChanged="fetchSongs"></pagination>
+        <pagination v-if="pagination"
+                    flow
+                    :pagination="pagination"
+                    class="mt-5"
+                    @pageChanged="fetchSongs"
+                    v-observe-visibility="paginationIntersObj"></pagination>
     </div>
 </template>
 
@@ -26,12 +31,20 @@
         data() {
             return {
                 pagination: null,
-                songs: []
+                songs: [],
+                isFetchingSongs: false,
+                paginationIntersObj: {
+                    callback: this.paginationVisibilityChanged,
+                    intersection: {
+                        threshold: 0.3,
+                        rootMargin: '100px'
+                    }
+                }
             }
         },
         methods: {
             fetchSongs(page = 1) {
-                fetchSongs({order: 'latest', page: page, paginate: 5})
+                fetchSongs({order: 'latest', page: page, paginate: 13})
                     .then(response => {
                         this.pagination = response;
                         this.songs.push(...response.data);
@@ -43,6 +56,10 @@
                     this.$store.commit('UPDATE_PLAYLIST', this.songs);
                     this.$store.commit('SET_ACTIVE_SONG', song);
                 }
+            },
+            paginationVisibilityChanged(isVisible, entry) {
+                if (isVisible && !this.isFetchingSongs)
+                    entry.target.querySelector('button').click()
             }
         },
         watch: {
