@@ -1,10 +1,17 @@
 <template>
     <div v-if="this.pagination.last_page > 1">
-        <div v-if="flow && this.pagination.last_page > currentPage" class="text-center">
-            <button @click="currentPage++" class="btn btn-outline-dark">
-                Загрузить еще
-            </button>
-        </div>
+        <b-overlay v-if="flow"
+                   :show="loading"
+                   rounded="md"
+                   spinner-variant="light"
+                   opacity="0"
+                   blur="none">
+            <div v-if="this.pagination.last_page > currentPage && !loading" class="text-center">
+                <button @click="loadMoreBtnClick" class="btn btn-outline-dark">
+                    Загрузить еще
+                </button>
+            </div>
+        </b-overlay>
         <div v-if="!flow">
             <b-pagination
                 v-model="currentPage"
@@ -30,16 +37,20 @@
         },
         data() {
             return {
-                currentPage: this.pagination.current_page
+                currentPage: this.pagination.current_page,
+                loading: false
             }
         },
         methods: {
-            // pageChange(page) {
-            //     if (this.flow)
-            //         page = this.currentPage + 1;
-            //     if (page !== this.pagination.current_page)
-            //         this.onPageChange(page);
-            // }
+            loadMoreBtnClick() {
+                if (!this.loading) {
+                    this.currentPage++;
+                    this.loading = true;
+                }
+            },
+            loaded(){
+                this.loading = false;
+            }
         },
         watch: {
             currentPage() {
