@@ -32,19 +32,23 @@ class SongController extends BaseController
         return Song::with(['artistAliases', 'genres', 'albums', 'clip'])->findOrFail($song);
     }
 
-    public function getAudioFile($song)
+    public function getAudioFile(Song $song)
     {
-        $song = Song::with('audioFile')->findOrFail($song)->audioFile;
+        if (!$song->audioFile)
+            return response()->json([], 404);
 
-        $fileResponse = new FileResponse($song->path, $song->mime_type);
+        $fileResponse = new FileResponse($song->audioFile->path, $song->audioFile->mime_type);
         return $fileResponse->generateResponse();
     }
 
-    public function downloadSong($song)
+    public function downloadSong(Song $song)
     {
-        $song = Song::with('audioFile')->findOrFail($song);
+        if (!$song->audioFile)
+            return response()->json([], 404);
+
         $song->download_count += 1;
         $song->save();
+
         return Storage::download($song->audioFile->path, "{$song->formatted_name}.mp3");
     }
 
@@ -86,6 +90,6 @@ class SongController extends BaseController
             $response = new FileResponse($coverImage->path, $coverImage->mime_type);
             return $response->generateResponse();
         } else
-            return response()->json(['message'  => 'Обложка не найдена' ], 404);
+            return response()->json(['message' => 'Обложка не найдена'], 404);
     }
 }
