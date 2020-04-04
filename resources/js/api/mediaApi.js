@@ -76,3 +76,8 @@ export function increaseMediaCount(id, type, counter) {
     return axios.put(`${base}${type}/${id}/${counter}
     `).catch();
 }
+
+//CHART
+// export async function fetchTopSongs() {
+//     return axios.get('/media/music/chart/songs');
+// }

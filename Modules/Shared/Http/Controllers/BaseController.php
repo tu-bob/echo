@@ -14,14 +14,18 @@ class BaseController extends Controller
 
     /**
      * @param Builder $query
+     * @param int $limit
      * @return LengthAwarePaginator|Builder[]|Collection
      */
     protected function callGetOrPaginate(Builder $query)
     {
         if (request()->get('paginate'))
             return $query->paginate(request()->get('paginate'));
-        else
-            return $query->get();
+        else {
+            $limit = request()->get('limit') ?? 30;
+            return $query->limit($limit)->get();
+        }
+
     }
 
     protected function getPagination()

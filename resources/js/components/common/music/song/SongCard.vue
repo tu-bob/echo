@@ -1,6 +1,6 @@
 <template>
     <div class="container mb-3 h-border-violet" :class="{active: ACTIVE_SONG && ACTIVE_SONG.id === song.id}">
-        <div class="row w-100 text-white" @click="play">
+        <div class="row w-100 text-white text-left" @click="play">
             <img :src="coverUrl" class="thumb" @error="onImageError">
             <div class="ml-2 mt-2 row col">
                 <div>
@@ -20,7 +20,7 @@
 
 <script>
     import {concatStrings, secondsToFormattedMinutes} from '../../../../util/stringHelper'
-    import {getAlbumCoverUrl, getSongIconUrl} from "../../../../api/mediaApi";
+    import {getSongIconUrl} from "../../../../api/mediaApi";
     import {mapGetters} from "vuex";
 
     export default {
