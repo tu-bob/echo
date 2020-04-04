@@ -32,6 +32,6 @@ class ImageController extends BaseController
     public function getImage($image, $type)
     {
         $provider = new ImageFileProvider($type);
-        return $provider->getFile($image);
+        return $provider->getFileResponse($image);
     }
 }

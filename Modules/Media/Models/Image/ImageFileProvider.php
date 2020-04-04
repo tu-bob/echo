@@ -5,6 +5,7 @@ namespace Modules\Media\Models\Image;
 
 
 use Illuminate\Support\Facades\Storage;
+use Modules\Shared\Http\Responses\FileResponse;
 
 class ImageFileProvider
 {
@@ -34,5 +35,12 @@ class ImageFileProvider
     {
         $image = $this->getImage($id);
         return Storage::get($image->path);
+    }
+
+    public function getFileResponse($id)
+    {
+        $image = $this->getImage($id);
+        $response = new FileResponse($image->path, $image->mime_type);
+        return $response->generateResponse();
     }
 }
