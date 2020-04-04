@@ -67,20 +67,25 @@ class SongController extends BaseController
 
     public function getIcon($song)
     {
+//        $filePath = null;
         $song = Song::with('coverImage')->findOrFail($song);
+        $coverImage = $song->coverImage;
+//        if ($coverImage)
+//            $filePath = $song->coverImage->path;
 
-        if ($song->coverImage)
-            return Storage::get($song->coverImage->path);
-
-        if (request()->get('album')) {
+        if (!$coverImage && request()->get('album')) {
             $album = $song->albums()->with('cover')
                 ->has('cover')
                 ->first();
 
             if ($album)
-                return Storage::get($album->cover->path);
+                $coverImage = $album->cover;
         }
 
-        return abort(404, 'Обложка песни не найдена');
+        if ($coverImage) {
+            $response = new FileResponse($coverImage->path, $coverImage->mime_type);
+            return $response->generateResponse();
+        } else
+            return response()->json(['message'  => 'Обложка не найдена' ], 404);
     }
 }
