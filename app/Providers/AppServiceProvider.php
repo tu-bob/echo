@@ -36,6 +36,15 @@ class AppServiceProvider extends ServiceProvider
             $this->unsignedBigInteger('download_count')->default(0);
         });
 
+        Blueprint::macro('fileFields', function (){
+            $this->string('path');
+            $this->char('filename', 50);
+            $this->char('original_filename', 255);
+            $this->string('mime_type');
+            $this->char('extension', 10);
+            $this->string('hash');
+        });
+
         Blueprint::macro('commonFields', function () {
             $this->char('id', 26)->primary();
             $this->timestamps();
