@@ -2,7 +2,7 @@
     <div>
         <song-card class="cursor-pointer" v-for="song in songs" :song="song" :key="song.id"
                    @play="playSong"></song-card>
-        <pagination v-if="pagination"
+        <pagination v-if="pagination && !noFetch"
                     ref="songs-list-pagination"
                     flow
                     :pagination="pagination"
@@ -23,11 +23,14 @@
         created() {
             if (this.playlist)
                 this.songs = this.playlist;
-            else
+            else if (!this.noFetch)
                 this.fetchSongs()
         },
         props: {
-            playlist: null
+            playlist: null,
+            noFetch: {
+                type: Boolean
+            }
         },
         data() {
             return {

@@ -1,10 +1,9 @@
 <?php
 
 
-namespace Modules\Media\Http\Controllers\Music;
+namespace Modules\Media\Http\Controllers\Music\Song;
 
 
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Storage;
 use Modules\Media\Http\Filters\Media\SongFilter;
@@ -89,7 +88,7 @@ class SongController extends BaseController
             $album = $song->albums()->with('cover')
                 ->has('cover')
                 ->first();
-            
+
             if ($album)
                 return Storage::get($album->cover->path);
         }
