@@ -10,6 +10,11 @@ class AudioFile extends FileModel
 {
     public $tags;
 
+    public function song()
+    {
+        return $this->hasOne(Song::class);
+    }
+
     /**
      * Analyze the file to read the tags and store them
      *

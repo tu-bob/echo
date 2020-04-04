@@ -15,6 +15,9 @@ use Modules\Shared\Models\Pivots\BasePivot;
  * @property array artistAliases
  * @property string title
  * @property int play_count
+ * @property mixed audioFile
+ * @property int download_count
+ * @property mixed formatted_name
  */
 class Song extends BaseModel
 {
