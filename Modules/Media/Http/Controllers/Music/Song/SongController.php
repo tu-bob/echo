@@ -4,24 +4,16 @@
 namespace Modules\Media\Http\Controllers\Music\Song;
 
 
-use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Storage;
 use Modules\Media\Http\Filters\Media\SongFilter;
 use Modules\Media\Http\Requests\Music\SongRequest;
 use Modules\Media\Libs\Request\RequestWriter\Music\StoreSongRequestWriter;
 use Modules\Media\Models\Music\Song;
 use Modules\Shared\Http\Controllers\BaseController;
+use Modules\Shared\Http\Responses\FileResponse;
 
 class SongController extends BaseController
 {
-    private $headers = [
-        'Content-Type' => 'audio/mpeg',
-        'Cache-Control' => "public, must-revalidate, max-age=0",
-        'Pragma' => 'no-cache',
-        'Accept-Ranges' => 'bytes',
-        'Expires' => '0'
-    ];
-
     public function store(SongRequest $request)
     {
         $writer = new StoreSongRequestWriter($request->all());
@@ -43,13 +35,9 @@ class SongController extends BaseController
     public function getAudioFile($song)
     {
         $song = Song::with('audioFile')->findOrFail($song)->audioFile;
-        $file = Storage::get($song->path);
 
-        $headers = array_merge($this->headers, [
-            'Content-Length' => Storage::size($song->path)
-        ]);
-
-        return (new Response($file, 200, $headers));
+        $fileResponse = new FileResponse($song->path, $song->mime_type);
+        return $fileResponse->generateResponse();
     }
 
     public function downloadSong($song)

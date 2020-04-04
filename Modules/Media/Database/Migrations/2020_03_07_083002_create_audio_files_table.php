@@ -14,12 +14,7 @@ class CreateAudioFilesTable extends Migration
     public function up()
     {
         Schema::create('audio_files', function (Blueprint $table) {
-            $table->string('path');
-            $table->char('filename', 50);
-            $table->char('original_filename', 255);
-            $table->string('mime_type');
-            $table->char('extension', 10);
-            $table->string('hash');
+            $table->fileFields();
 
             $table->commonFields();
         });

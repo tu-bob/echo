@@ -14,12 +14,7 @@ class CreateImageFilesTable extends Migration
     public function up()
     {
         Schema::create('image_files', function (Blueprint $table) {
-            $table->char('filename', 50);
-            $table->char('original_filename', 255);
-            $table->char('mime_type', 15);
-            $table->char('extension', 5);
-            $table->string('hash');
-            $table->string('path');
+            $table->fileFields();
 
             $table->commonFields();
         });
