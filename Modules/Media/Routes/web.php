@@ -39,14 +39,14 @@ Route::prefix('media')->group(function () {
         });
 
         Route::prefix('song')->group(function () {
-            Route::post('/', 'Music\SongController@store');
-            Route::get('/list', 'Music\SongController@getSongs');
-            Route::get('/find/{info}', 'Music\SongController@findSongsByInfo');
-            Route::get('/{song}/audio', 'Music\SongController@getAudioFile');
-            Route::get('/{song}/icon', 'Music\SongController@getIcon');
-            Route::get('/{song}/download', 'Music\SongController@downloadSong');
-            Route::put('/{song}/play', 'Music\SongController@countPlay');
-            Route::get('/{song}', 'Music\SongController@getSong');
+            Route::post('/', 'Music\Song\SongController@store');
+            Route::get('/list', 'Music\Song\SongController@getSongs');
+            Route::get('/find/{info}', 'Music\Song\SongController@findSongsByInfo');
+            Route::get('/{song}/audio', 'Music\Song\SongController@getAudioFile');
+            Route::get('/{song}/icon', 'Music\Song\SongController@getIcon');
+            Route::get('/{song}/download', 'Music\Song\SongController@downloadSong');
+            Route::put('/{song}/play', 'Music\Song\SongController@countPlay');
+            Route::get('/{song}', 'Music\Song\SongController@getSong');
         });
 
         Route::prefix('album')->group(function () {
