@@ -18,6 +18,7 @@
 <script>
     import AlbumCard from "./AlbumCard";
     import {fetchAlbums} from "../../../../api/mediaApi";
+    import Pagination from "../../inputs/Pagination";
 
     export default {
         name: "AlbumsList",
@@ -59,7 +60,7 @@
                     btn.click()
             }
         },
-        components: {AlbumCard}
+        components: {AlbumCard, Pagination}
     }
 </script>
 
