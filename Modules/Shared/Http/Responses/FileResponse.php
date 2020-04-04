@@ -16,7 +16,7 @@ class FileResponse
 
     private array $headers = [
 //        'Content-Type' => 'audio/mpeg',
-        'Cache-Control' => "public, must-revalidate, max-age=300000",
+        'Cache-Control' => "public, must-revalidate, max-age=1000000",
 //        'Pragma' => 'no-cache',
         'Accept-Ranges' => 'bytes',
         'Expires' => '0'
@@ -32,7 +32,7 @@ class FileResponse
     {
         if (!Storage::exists($this->path))
             return response()->json(['message'  => 'Указанный файл не найден' ], 404);
-        
+
         $headers = array_merge($this->headers, [
             'Content-Length' => Storage::size($this->path),
             'Content-Type' => $this->mimeType,
