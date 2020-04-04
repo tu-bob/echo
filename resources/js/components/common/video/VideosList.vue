@@ -44,10 +44,11 @@
 <script>
     import {fetchVideos} from "../../../api/mediaApi";
     import VideoCard from "./VideoCard";
+    import Pagination from "../inputs/Pagination";
 
     export default {
         name: "VideosList",
-        components: {VideoCard},
+        components: {VideoCard, Pagination},
         mounted() {
             this.fetchVideos();
         },
