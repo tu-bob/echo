@@ -8,10 +8,10 @@
                 props: (route) => ({redirectUrl: route.query.redirectUrl}),
                 path: '/login', component: () => import('../components/auth/Login')
             },
-            {
-                name: 'register',
-                path: '/register', component: () => import('../components/auth/Register')
-            },
+            // {
+            //     name: 'register',
+            //     path: '/register', component: () => import('../components/auth/Register')
+            // },
             {
                 name: 'search',
                 path: '/search', component: () => import('../components/public/search/SearchOverview')
