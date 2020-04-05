@@ -10,6 +10,16 @@ html::-webkit-scrollbar {
   display: none;
 }
 
+.section {
+  margin-bottom: 5rem;
+}
+
+.title {
+  color: #6c757d;
+  font-size: 1.4rem;
+  margin-bottom: 2rem;
+}
+
 .icon-btn-sm {
   width: 18px;
 }
