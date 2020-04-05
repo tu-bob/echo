@@ -5,7 +5,7 @@
                 <b-navbar-toggle target="mainNavBar"></b-navbar-toggle>
                 <b-collapse is-nav id="mainNavBar">
                     <b-navbar-nav>
-                        <b-nav-item :to="{name: 'home'}">Home</b-nav-item>
+                        <b-nav-item :to="{name: 'home'}">Главная</b-nav-item>
 
                         <b-nav-item-dropdown text="Блог" left>
                             <b-dropdown-item :to="{name: 'posts-table'}">Посты</b-dropdown-item>
