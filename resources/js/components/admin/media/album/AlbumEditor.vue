@@ -1,69 +1,72 @@
 <template>
-    <div class="card mb-5">
-        <div class="card-header">
-            Редактор альбомов
-        </div>
-        <div class="card-body">
-            <div class="row">
-                <div class="form-group col-md-5">
-                    <label>Название альбома</label>
-                    <input class="form-control" type="text" v-model="album.title" autocapitalize="words" autofocus>
-                </div>
-                <div class="form-group col-md-5">
-                    <label>Тип</label>
-                    <select class="form-control" v-model="album.type">
-                        <option disabled :value="null">Выберите тип альбома</option>
-                        <option v-for="type in albumTypes" :value="type">{{type.name}}</option>
-                    </select>
-                </div>
-                <div class="form-group col-md-2">
-                    <label>Год</label>
-                    <input class="form-control" type="text" v-model="album.year">
-                </div>
+    <b-overlay :show="submitting" rounded="sm">
+        <div class="card mb-5">
+            <div class="card-header">
+                Редактор альбомов
             </div>
-            <div class="row">
-                <div class="form-group col-12">
-                    <label>Песни</label>
-                    <suggestion-input displayPropertyName="title"
-                                      ref="songSearch"
-                                      @selected="onSongSelected"
-                                      :optionFormatter="optionFormatter"
-                                      action-url="/media/music/song/find/">
-                    </suggestion-input>
+            <div class="card-body">
+                <div class="row">
+                    <div class="form-group col-md-5">
+                        <label>Название альбома</label>
+                        <input class="form-control" type="text" v-model="album.title" autocapitalize="words" autofocus>
+                    </div>
+                    <div class="form-group col-md-5">
+                        <label>Тип</label>
+                        <select class="form-control" v-model="album.type">
+                            <option disabled :value="null">Выберите тип альбома</option>
+                            <option v-for="type in albumTypes" :value="type">{{type.name}}</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-2">
+                        <label>Год</label>
+                        <input class="form-control" type="text" v-model="album.year">
+                    </div>
                 </div>
-            </div>
-            <div class="row mt-2">
-                <songs-table class='col-12'
-                             :provided-songs="album.songs"
-                             :columnsToHide="['edit']"
-                             :url="null"
-                             @song-delete-request="removeSong"
-                             preventFetch>
-                    <template #header>
-                        Песни альбома
-                    </template>
+                <div class="row">
+                    <div class="form-group col-12">
+                        <label>Песни</label>
+                        <suggestion-input displayPropertyName="title"
+                                          ref="songSearch"
+                                          @selected="onSongSelected"
+                                          :optionFormatter="optionFormatter"
+                                          action-url="/media/music/song/find/">
+                        </suggestion-input>
+                    </div>
+                </div>
+                <div class="row mt-2">
+                    <songs-table class='col-12'
+                                 :provided-songs="album.songs"
+                                 :columnsToHide="['edit']"
+                                 :url="null"
+                                 @song-delete-request="removeSong"
+                                 preventFetch>
+                        <template #header>
+                            Песни альбома
+                        </template>
 
-                    <template #delete="{song}">
-                        <a href="#" @click.prevent="removeSong(song)">
-                            <img class="icon-btn-sm" src="/icons/svg/delete.svg">
-                        </a>
-                    </template>
-                </songs-table>
+                        <template #delete="{song}">
+                            <a href="#" @click.prevent="removeSong(song)">
+                                <img class="icon-btn-sm" src="/icons/svg/delete.svg">
+                            </a>
+                        </template>
+                    </songs-table>
+                </div>
+                <div>
+                    <image-uploader v-model="albumCoverFile" ref="albumCoverFileInput" :src="coverUrl"
+                                    :alt="album.name + ' cover'">
+                        <template #header>
+                            Обложка альбома
+                        </template>
+                    </image-uploader>
+                </div>
             </div>
-            <div>
-                <image-uploader v-model="albumCoverFile" ref="albumCoverFileInput" :src="coverUrl" :alt="album.name + ' cover'">
-                    <template #header>
-                        Обложка альбома
-                    </template>
-                </image-uploader>
-            </div>
-        </div>
 
 
-        <div class="card-footer">
-            <button class="mx-auto btn btn-primary" @click="submit">Сохранить</button>
+            <div class="card-footer">
+                <button class="mx-auto btn btn-primary" @click="submit">Сохранить</button>
+            </div>
         </div>
-    </div>
+    </b-overlay>
 </template>
 
 <script>
@@ -81,6 +84,7 @@
         },
         data() {
             return {
+                submitting: false,
                 albumCoverFile: null,
                 albumTypes: [],
                 album: {
@@ -118,6 +122,7 @@
                 return str;
             },
             submit() {
+                this.submitting = true;
                 let data = new FormData();
                 if (this.album.id)
                     data.append('id', this.album.id);
@@ -132,13 +137,14 @@
                 }
 
                 axios.post('/media/music/album', data)
-                    .then(response => {
+                    .then(_ => {
                         this.clearForm();
-                        this.$router.replace('/media/album')
+                        this.$router.replace({name: 'album-editor'})
                     })
                     .catch(
-                        //TODO
-                    );
+                        e => console.log(e)
+                    )
+                    .then(_ => this.submitting = false);
             },
             fetchAlbum(id) {
                 fetchAlbum(id).then(album => {
