@@ -29,10 +29,10 @@
                 <router-link :to="{name:'search'}" class="ml-auto align-self-center mt-1 mr-3">
                     <font-awesome-icon class="text-secondary h-text-white" icon="search" size="lg"></font-awesome-icon>
                 </router-link>
-                <router-link v-if="!AUTHENTICATED" :class="DEFAULT_BUTTON_CLASSES"
-                             :to="{name: 'login'}">Вход
-                </router-link>
-                <template v-else>
+<!--                <router-link v-if="!AUTHENTICATED" :class="DEFAULT_BUTTON_CLASSES"-->
+<!--                             :to="{name: 'login'}">Вход-->
+<!--                </router-link>-->
+                <template v-if="AUTHENTICATED" >
                     <b-avatar class="mr-0 mr-md-3" :variant="AVATAR_VARIANT"></b-avatar>
                     <div class="user-name d-none d-md-flex">
                         {{AUTH_USER.name}}
