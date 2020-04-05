@@ -4,7 +4,7 @@
                     v-for="album in albums" :key="album.id"
                     :album="album"></album-card>
 
-        <pagination v-if="pagination"
+        <pagination v-if="pagination && !noFetch"
                     ref="albums-list-pagination"
                     flow
                     :pagination="pagination"
@@ -23,7 +23,16 @@
     export default {
         name: "AlbumsList",
         mounted() {
-            this.fetchAlbums()
+            if (this.providedAlbums)
+                this.albums = this.providedAlbums;
+            else if (!this.noFetch)
+                this.fetchAlbums()
+        },
+        props: {
+            providedAlbums: null,
+            noFetch: {
+                type: Boolean
+            }
         },
         data() {
             return {
@@ -58,6 +67,11 @@
                 let btn = entry.target.querySelector('button');
                 if (isVisible && !this.isFetchingAlbums && btn)
                     btn.click()
+            }
+        },
+        watch:{
+            providedAlbums(){
+                this.albums = this.providedAlbums;
             }
         },
         components: {AlbumCard, Pagination}

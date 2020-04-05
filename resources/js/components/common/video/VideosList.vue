@@ -50,7 +50,18 @@
         name: "VideosList",
         components: {VideoCard, Pagination},
         mounted() {
-            this.fetchVideos();
+            if (this.providedVideos)
+                this.videos = this.providedVideos;
+            else if (!this.noFetch)
+                this.fetchVideos();
+        },
+        props: {
+            providedVideos: {
+                type: Array
+            },
+            noFetch: {
+                type: Boolean
+            }
         },
         data() {
             return {
@@ -92,6 +103,11 @@
                 let btn = entry.target.querySelector('button');
                 if (isVisible && !this.isFetchingVideos && btn)
                     btn.click()
+            }
+        },
+        watch: {
+            providedVideos() {
+                this.videos = this.providedVideos;
             }
         }
     }

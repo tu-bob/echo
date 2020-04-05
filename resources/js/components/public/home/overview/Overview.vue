@@ -1,8 +1,8 @@
 <template>
     <div>
-        <section class="col-12">
+        <section class="section col-12">
             <div class="row">
-                <h2 class="col-8">Музыка достойная вас</h2>
+                <h2 class="col-8 title">Музыка достойная вас</h2>
                 <div class="col-4 text-right">
                     <router-link :to="{name: 'music'}" class="ml-auto btn-text-white text-decoration-none">
                         <span>больше музыки</span>
@@ -15,9 +15,9 @@
                 <songs-list :playlist="songs.slice(Math.ceil(songs.length/2))" no-fetch class="col-md-6"></songs-list>
             </div>
         </section>
-        <section class="col-12">
+        <section class="section col-12">
             <div class="row">
-                <h2 class="col-8">Эти альбомы ждут вас</h2>
+                <h2 class="col-8 title">Эти альбомы ждут вас</h2>
                 <div class="col-4 text-right">
                     <router-link :to="{name:'albums'}" class="ml-auto btn-text-white text-decoration-none">
                         <span>больше альбомов</span>
@@ -26,9 +26,9 @@
             </div>
             <albums-list></albums-list>
         </section>
-        <section class="col-12">
+        <section class="section col-12">
             <div class="row">
-                <h2 class="col-8">Клипы, которые нельзя пропустить</h2>
+                <h2 class="col-8 title">Клипы, которые нельзя пропустить</h2>
                 <div class="col-4 text-right">
                     <router-link :to="{name:'clips'}" class="ml-auto btn-text-white text-decoration-none">
                         <span>больше клипов</span>
@@ -70,13 +70,4 @@
 </script>
 
 <style scoped>
-    h2 {
-        color: #6c757d;
-        font-size: 1.4rem;
-        margin-bottom: 2rem;
-    }
-
-    section {
-        margin-bottom: 5rem;
-    }
 </style>

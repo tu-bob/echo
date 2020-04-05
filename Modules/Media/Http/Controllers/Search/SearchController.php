@@ -13,7 +13,7 @@ class SearchController extends BaseController
 {
     public function search($needle)
     {
-        $songs = Song::where('title', 'like', "%{$needle}%")
+        $songs = Song::where('title', 'like', "%{$needle}%")->with('artistAliases')
             ->orWhereHas('artistAliases', function ($query) use ($needle) {
                 $query->where('name', 'like', "%{$needle}%");
             })->limit(10)->get();
