@@ -28,7 +28,7 @@
                     </router-link>
                 </div>
             </div>
-            <albums-list></albums-list>
+            <albums-list :provided-albums="albums" no-fetch></albums-list>
         </section>
         <section class="section col-12">
             <div class="row">
@@ -39,7 +39,7 @@
                     </router-link>
                 </div>
             </div>
-            <videos-list></videos-list>
+            <videos-list :provided-videos="videos" no-fetch></videos-list>
         </section>
     </div>
 
@@ -47,25 +47,39 @@
 
 <script>
     import AlbumsList from "../../../common/music/album/AlbumsList";
-    import {fetchSongs} from "../../../../api/mediaApi";
+    import {fetchAlbums, fetchSongs, fetchVideos} from "../../../../api/mediaApi";
     import SongsList from "../../../common/music/song/SongsList";
     import VideosList from "../../../common/video/VideosList";
 
     export default {
         name: "Overview",
         mounted() {
-            this.fetchTopSongs()
+            this.fetchTopSongs();
+            this.fetchTopAlbums();
+            this.fetchTopVideos();
         },
         data() {
             return {
-                songs: []
+                songs: [],
+                albums: [],
+                videos: []
             }
         },
         components: {VideosList, SongsList, AlbumsList},
         methods: {
             fetchTopSongs() {
-                fetchSongs({order: 'latest,play_count,download_count', limit: 8})
+                fetchSongs({order: 'play_count:desc,download_count:desc', limit: 8})
                     .then(songs => this.songs = songs)
+                    .catch()
+            },
+            fetchTopAlbums() {
+                fetchAlbums({order: 'play_count:desc,download_count:desc', limit: 8, songs: 1})
+                    .then(albums => this.albums = albums)
+                    .catch()
+            },
+            fetchTopVideos() {
+                fetchVideos({order: 'play_count:desc,download_count:desc', limit: 8})
+                    .then(videos => this.videos = videos)
                     .catch()
             },
             updatePlaylist() {

@@ -47,11 +47,11 @@ abstract class Filter
             if (in_array($order, $this->complexOrder)) {
                 $this->handleComplexOrder($order);
             } else {
-                $direction = explode(':', $order);
-                if (isset($direction[1]) && $direction[1] === 'desc')
-                    $this->query->orderBy($order);
+                $orderArray = explode(':', $order);
+                if (isset($orderArray[1]) && $orderArray[1] === 'desc')
+                    $this->query->orderByDesc($orderArray[0]);
                 else
-                    $this->query->orderBy($order);
+                    $this->query->orderBy($orderArray[0]);
             }
         }
     }
