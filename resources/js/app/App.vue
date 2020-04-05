@@ -6,22 +6,23 @@
                 <b-collapse is-nav id="mainNavBar">
                     <b-navbar-nav>
                         <b-nav-item :to="{name: 'home'}">Главная</b-nav-item>
+                        <template v-if="AUTHENTICATED">
+                            <b-nav-item-dropdown text="Блог" left>
+                                <b-dropdown-item :to="{name: 'posts-table'}">Посты</b-dropdown-item>
+                                <b-dropdown-item :to="{name: 'post-editor'}">Добавить пост</b-dropdown-item>
+                            </b-nav-item-dropdown>
 
-                        <b-nav-item-dropdown text="Блог" left>
-                            <b-dropdown-item :to="{name: 'posts-table'}">Посты</b-dropdown-item>
-                            <b-dropdown-item :to="{name: 'post-editor'}">Добавить пост</b-dropdown-item>
-                        </b-nav-item-dropdown>
-
-                        <b-nav-item-dropdown text="Медиа" left>
-                            <b-dropdown-item :to="{name: 'artists-table'}">Исполнители</b-dropdown-item>
-                            <b-dropdown-item :to="{name: 'artist-editor'}">Добавить исполнителя</b-dropdown-item>
-                            <b-dropdown-divider></b-dropdown-divider>
-                            <b-dropdown-item :to="{name: 'songs-table'}">Песни</b-dropdown-item>
-                            <b-dropdown-item :to="{name: 'song-editor'}">Добавить песню</b-dropdown-item>
-                            <b-dropdown-divider></b-dropdown-divider>
-                            <b-dropdown-item :to="{name: 'albums-table'}">Альбомы</b-dropdown-item>
-                            <b-dropdown-item :to="{name: 'album-editor'}">Добавить альбом</b-dropdown-item>
-                        </b-nav-item-dropdown>
+                            <b-nav-item-dropdown text="Медиа" left>
+                                <b-dropdown-item :to="{name: 'artists-table'}">Исполнители</b-dropdown-item>
+                                <b-dropdown-item :to="{name: 'artist-editor'}">Добавить исполнителя</b-dropdown-item>
+                                <b-dropdown-divider></b-dropdown-divider>
+                                <b-dropdown-item :to="{name: 'songs-table'}">Песни</b-dropdown-item>
+                                <b-dropdown-item :to="{name: 'song-editor'}">Добавить песню</b-dropdown-item>
+                                <b-dropdown-divider></b-dropdown-divider>
+                                <b-dropdown-item :to="{name: 'albums-table'}">Альбомы</b-dropdown-item>
+                                <b-dropdown-item :to="{name: 'album-editor'}">Добавить альбом</b-dropdown-item>
+                            </b-nav-item-dropdown>
+                        </template>
                     </b-navbar-nav>
                 </b-collapse>
             </b-navbar>
@@ -29,10 +30,10 @@
                 <router-link :to="{name:'search'}" class="ml-auto align-self-center mt-1 mr-3">
                     <font-awesome-icon class="text-secondary h-text-white" icon="search" size="lg"></font-awesome-icon>
                 </router-link>
-<!--                <router-link v-if="!AUTHENTICATED" :class="DEFAULT_BUTTON_CLASSES"-->
-<!--                             :to="{name: 'login'}">Вход-->
-<!--                </router-link>-->
-                <template v-if="AUTHENTICATED" >
+                <!--                <router-link v-if="!AUTHENTICATED" :class="DEFAULT_BUTTON_CLASSES"-->
+                <!--                             :to="{name: 'login'}">Вход-->
+                <!--                </router-link>-->
+                <template v-if="AUTHENTICATED">
                     <b-avatar class="mr-0 mr-md-3" :variant="AVATAR_VARIANT"></b-avatar>
                     <div class="user-name d-none d-md-flex">
                         {{AUTH_USER.name}}
