@@ -14,7 +14,7 @@ class VideoController extends BaseController
     {
         $query = Video::withoutTrashed();
         $filter = new VideoFilter(request()->all(), $query);
-        return $filter->filter()->paginate($this->getPagination());
+        return $this->callGetOrPaginate($filter->filter());
     }
 
     public function incrementViewCount(Video $video){
