@@ -1,26 +1,27 @@
 <template>
-    <div class="card">
-        <div class="card-header">Редактир исполнителей</div>
-        <div class="card-body">
-            <div class="form-group">
-                <label>Имя или псевдонимы</label>
-                <b-form-tags input-id="tags-basic"
-                             v-model="aliases"
-                             class="mb-2"
-                             size="lg"
-                             tag-variant="warning"
-                             placeholder="Добавьте имя или псевдоним"
-                             tag-pills
-                             add-button-text="Добавить"
-                             separator=";"
-                ></b-form-tags>
+    <b-overlay :show="submitting" rounded="sm">
+        <div class="card">
+            <div class="card-header">Редактир исполнителей</div>
+            <div class="card-body">
+                <div class="form-group">
+                    <label>Имя или псевдонимы</label>
+                    <b-form-tags input-id="tags-basic"
+                                 v-model="aliases"
+                                 class="mb-2"
+                                 size="lg"
+                                 tag-variant="warning"
+                                 placeholder="Добавьте имя или псевдоним"
+                                 tag-pills
+                                 add-button-text="Добавить"
+                                 separator=";"
+                    ></b-form-tags>
+                </div>
+            </div>
+            <div class="card-footer">
+                <button class="btn btn-primary" @click="submit">Сохранить</button>
             </div>
         </div>
-        <div class="card-footer">
-            <button class="btn btn-primary" @click="submit">Сохранить</button>
-        </div>
-
-    </div>
+    </b-overlay>
 </template>
 
 <script>
@@ -34,6 +35,7 @@
         },
         data() {
             return {
+                submitting: false,
                 artist: {
                     name: null
                 },
@@ -42,6 +44,7 @@
         },
         methods: {
             submit() {
+                this.submitting = true;
                 let data = {
                     id: this.$route?.params?.id,
                     name: this.artist.name,
@@ -55,9 +58,11 @@
                     url: action.url,
                     data: data
                 })
-                    .then(response => {
+                    .then(_ => {
                         this.$router.go()
-                    });
+                    })
+                    .catch(e => console.log(e))
+                    .then(this.submitting = false);
             },
             fetchData() {
                 axios.get(`/media/artist/${this.$route.params.id}`)
