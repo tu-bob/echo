@@ -65,6 +65,7 @@
                 if (song) {
                     this.$store.commit('UPDATE_PLAYLIST', this.songs);
                     this.$store.commit('SET_ACTIVE_SONG', song);
+                    this.$emit('play', song)
                 }
             },
             paginationVisibilityChanged(isVisible, entry) {
