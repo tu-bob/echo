@@ -81,3 +81,8 @@ export function increaseMediaCount(id, type, counter) {
 // export async function fetchTopSongs() {
 //     return axios.get('/media/music/chart/songs');
 // }
+
+//Search
+export async function search(query) {
+    return axios.get(`/media/search/${query}`);
+}
