@@ -1,7 +1,7 @@
 <template>
     <div class="h-overlay-container cursor-pointer" @click="onClicked">
         <div class="video-card">
-            <b-img :src="previewImageUrl" class="w-100 object-fit-contain"></b-img>
+            <b-img :src="previewImageUrl" class="w-100 object-fit-cover" rounded style="height:218px"></b-img>
             <div class="pt-3 text-secondary">
                 {{video.title}}
             </div>
