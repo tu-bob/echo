@@ -23,5 +23,7 @@ class BaseModel extends Model
 
     protected $casts = ['id' => 'string'];
 
+    protected $keyType = 'string';
+
     protected $guarded = [];
 }
