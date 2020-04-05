@@ -17,4 +17,6 @@ class BasePivot extends Pivot
      * @var bool
      */
     public $incrementing = false;
+
+    protected $keyType = 'string';
 }
