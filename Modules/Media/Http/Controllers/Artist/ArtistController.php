@@ -11,7 +11,12 @@ class ArtistController extends BaseController
 {
     public function __construct()
     {
-        //TODO middleware
+        $admin = [
+            'store',
+            'update'
+        ];
+
+        $this->middleware('auth')->only($admin);
     }
 
     public function store()

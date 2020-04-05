@@ -12,6 +12,15 @@ use Modules\Shared\Http\Controllers\BaseController;
 
 class PostController extends BaseController
 {
+    public function __construct()
+    {
+        $admin = [
+            'store'
+        ];
+
+        $this->middleware('auth')->only($admin);
+    }
+
     public function store(PostRequest $request)
     {
         $writer = new PostRequestWriter($request->all(), Post::class);

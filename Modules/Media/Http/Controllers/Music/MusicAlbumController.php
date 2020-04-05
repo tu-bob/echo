@@ -15,6 +15,15 @@ use Modules\Shared\Http\Responses\FileResponse;
 
 class MusicAlbumController extends BaseController
 {
+    public function __construct()
+    {
+        $admin = [
+            'store'
+        ];
+
+        $this->middleware('auth')->only($admin);
+    }
+
     public function store(MusicAlbumRequest $request)
     {
         $writer = new StoreMusicAlbumRequestWriter($request->all());

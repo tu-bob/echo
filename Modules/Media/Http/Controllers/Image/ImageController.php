@@ -10,6 +10,15 @@ use Modules\Shared\Http\Controllers\BaseController;
 
 class ImageController extends BaseController
 {
+    public function __construct()
+    {
+        $admin = [
+            'storeMany'
+        ];
+
+        $this->middleware('auth')->only($admin);
+    }
+
     public function storeMany()
     {
         $rules = [
