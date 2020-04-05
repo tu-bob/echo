@@ -1,6 +1,6 @@
 <template>
     <div class="pb-5 mb-5">
-        <main class="container pt-5 article">
+        <main class="container pt-5 article" v-if="post">
             <b-img class="preview-image pb-4" rounded :src="previewImageSrc" alt=""></b-img>
             <article class="text-light-grey">
                 <section>
