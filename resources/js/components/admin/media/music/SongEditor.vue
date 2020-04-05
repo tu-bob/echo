@@ -452,7 +452,7 @@
             audioSrc() {
                 if (this.mp3File)
                     return URL.createObjectURL(this.mp3File);
-                if (this.song.id)
+                if (this.song.cover_image_id)
                     return `/media/music/song/${this.song.id}/audio`;
             },
             coverImageUrl() {
