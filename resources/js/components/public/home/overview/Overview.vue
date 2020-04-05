@@ -1,18 +1,40 @@
 <template>
     <div>
-        <section class="mb-5">
-            <h2 class="mb-5">Музыка достойная вас</h2>
+        <section class="col-12">
             <div class="row">
-                <songs-list :playlist="songs.slice(0, Math.ceil(songs.length/2))" no-fetch class="col-md-6"></songs-list>
+                <h2 class="col-8">Музыка достойная вас</h2>
+                <div class="col-4 text-right">
+                    <router-link :to="{name: 'music'}" class="ml-auto btn-text-white text-decoration-none">
+                        <span>больше музыки</span>
+                    </router-link>
+                </div>
+            </div>
+            <div class="row">
+                <songs-list :playlist="songs.slice(0, Math.ceil(songs.length/2))" no-fetch
+                            class="col-md-6"></songs-list>
                 <songs-list :playlist="songs.slice(Math.ceil(songs.length/2))" no-fetch class="col-md-6"></songs-list>
             </div>
         </section>
-        <section class="mb-5">
-            <h2 class="mb-5">Прослушайте эти альбомы</h2>
+        <section class="col-12">
+            <div class="row">
+                <h2 class="col-8">Эти альбомы ждут вас</h2>
+                <div class="col-4 text-right">
+                    <router-link :to="{name:'albums'}" class="ml-auto btn-text-white text-decoration-none">
+                        <span>больше альбомов</span>
+                    </router-link>
+                </div>
+            </div>
             <albums-list></albums-list>
         </section>
-        <section class="mb-5">
-            <h2 class="mb-5">Лучшие клипы</h2>
+        <section class="col-12">
+            <div class="row">
+                <h2 class="col-8">Клипы, которые нельзя пропустить</h2>
+                <div class="col-4 text-right">
+                    <router-link :to="{name:'clips'}" class="ml-auto btn-text-white text-decoration-none">
+                        <span>больше клипов</span>
+                    </router-link>
+                </div>
+            </div>
             <videos-list></videos-list>
         </section>
     </div>
@@ -51,5 +73,10 @@
     h2 {
         color: #6c757d;
         font-size: 1.4rem;
+        margin-bottom: 2rem;
+    }
+
+    section {
+        margin-bottom: 5rem;
     }
 </style>
