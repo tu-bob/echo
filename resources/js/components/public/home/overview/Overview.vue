@@ -10,9 +10,13 @@
                 </div>
             </div>
             <div class="row">
-                <songs-list :playlist="songs.slice(0, Math.ceil(songs.length/2))" no-fetch
+                <songs-list :playlist="songs.slice(0, Math.ceil(songs.length/2))"
+                            no-fetch
+                            class="col-md-6" @play="updatePlaylist"></songs-list>
+                <songs-list :playlist="songs.slice(Math.ceil(songs.length/2))"
+                            no-fetch
+                            @play="updatePlaylist"
                             class="col-md-6"></songs-list>
-                <songs-list :playlist="songs.slice(Math.ceil(songs.length/2))" no-fetch class="col-md-6"></songs-list>
             </div>
         </section>
         <section class="section col-12">
@@ -63,6 +67,9 @@
                 fetchSongs({order: 'latest,play_count,download_count', limit: 8})
                     .then(songs => this.songs = songs)
                     .catch()
+            },
+            updatePlaylist() {
+                this.$store.commit('UPDATE_PLAYLIST', this.songs);
             }
         }
     }
