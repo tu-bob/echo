@@ -33,7 +33,7 @@
                              :to="{name: 'login'}">Вход
                 </router-link>
                 <template v-else>
-                    <b-avatar class="ml-auto mr-0 mr-md-3" :variant="AVATAR_VARIANT"></b-avatar>
+                    <b-avatar class="mr-0 mr-md-3" :variant="AVATAR_VARIANT"></b-avatar>
                     <div class="user-name d-none d-md-flex">
                         {{AUTH_USER.name}}
                     </div>
