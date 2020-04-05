@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <div>
         <videos-list></videos-list>
     </div>
 
