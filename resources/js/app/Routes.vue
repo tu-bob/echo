@@ -13,6 +13,10 @@
                 path: '/register', component: () => import('../components/auth/Register')
             },
             {
+                name: 'search',
+                path: '/search', component: () => import('../components/public/search/SearchOverview')
+            },
+            {
                 name: 'home',
                 path: '/',
                 redirect: {name: 'overview'},

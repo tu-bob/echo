@@ -25,8 +25,11 @@
                     </b-navbar-nav>
                 </b-collapse>
             </b-navbar>
-            <div class="col-8 py-2 pr-4 row" >
-                <router-link v-if="!AUTHENTICATED" class="ml-auto" :class="DEFAULT_BUTTON_CLASSES"
+            <div class="col-8 py-2 pr-4 d-flex">
+                <router-link :to="{name:'search'}" class="ml-auto align-self-center mt-1 mr-3">
+                    <font-awesome-icon class="text-secondary h-text-white" icon="search" size="lg"></font-awesome-icon>
+                </router-link>
+                <router-link v-if="!AUTHENTICATED" :class="DEFAULT_BUTTON_CLASSES"
                              :to="{name: 'login'}">Вход
                 </router-link>
                 <template v-else>
@@ -67,10 +70,10 @@
     import Player from "../components/common/player/Player";
     import {library} from '@fortawesome/fontawesome-svg-core'
     import {
-        faCaretDown
+        faCaretDown, faSearch
     } from '@fortawesome/free-solid-svg-icons'
 
-    library.add(faCaretDown);
+    library.add(faCaretDown, faSearch);
 
     export default {
         name: "App",
@@ -111,14 +114,14 @@
 </script>
 
 <style scoped>
-.user-name{
-    display: flex;
-    max-width: 150px;
-    max-height: 54px;
-    overflow: hidden;
-    white-space: nowrap;
-    padding-top: 0.5rem;
-    color: #9a9da0;
-    font-weight: 400;
-}
+    .user-name {
+        display: flex;
+        max-width: 150px;
+        max-height: 54px;
+        overflow: hidden;
+        white-space: nowrap;
+        padding-top: 0.5rem;
+        color: #9a9da0;
+        font-weight: 400;
+    }
 </style>
