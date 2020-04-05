@@ -8,7 +8,7 @@ function handleUnauthorized() {
 }
 
 function handleServerValidationError(e) {
-    window.Vue.prototype.$eventHub.$emit('validation-failed', e);
+    // window.Vue.prototype.$eventHub.$emit('validation-failed', e);
 }
 
 export function handleHtmlError(e) {
