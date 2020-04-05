@@ -163,7 +163,7 @@
         },
         computed: {
             coverUrl() {
-                if (this.album.id)
+                if (this.album.id && this.album.cover_id)
                     return `/media/music/album/${this.album.id}/cover`;
             }
         }
