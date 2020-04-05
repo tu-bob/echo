@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <b-overlay :show="busy" rounded="sm" variant="dark">
         <b-input-group prepend="Поиск" class="mt-3 mb-5">
             <input @keydown.enter="search"
                    type="text"
@@ -28,7 +28,7 @@
             <h2 class="title">Видео</h2>
             <videos-list :provided-videos="videos" no-fetch></videos-list>
         </section>
-    </div>
+    </b-overlay>
 </template>
 
 <script>
@@ -46,11 +46,13 @@
                 query: '',
                 songs: [],
                 videos: [],
-                albums: []
+                albums: [],
+                busy: false
             }
         },
         methods: {
             search() {
+                this.busy = true;
                 search(this.query)
                     .then(response => {
                         this.songs = response.songs;
@@ -58,6 +60,7 @@
                         this.videos = response.videos;
                     })
                     .catch()
+                    .then(_ => this.busy = false)
             }
         }
     }
