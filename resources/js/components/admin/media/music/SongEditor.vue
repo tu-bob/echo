@@ -97,6 +97,7 @@
                                       ref="genreSearch"
                                       @selected="onGenreSelected"
                                       :providedOptions="genres"
+                                      :optionFormatter="formatGenresOptions"
                                       searchPropertyName="name">
                     </suggestion-input>
                     <ul
@@ -446,6 +447,9 @@
                 }
 
                 this.$refs['songEditorPlayer'].src = null;
+            },
+            formatGenresOptions(genre) {
+                return genre.name + ' - ' + genre.local_name;
             }
         },
         computed: {
