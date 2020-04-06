@@ -51,7 +51,7 @@
             },
             {
                 name: 'post-reader',
-                path: '/blog/post/:id',
+                path: '/blog/post/:slug',
                 props: true,
                 component: () => import('../components/public/blog/PostReader'),
             },

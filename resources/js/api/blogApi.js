@@ -4,8 +4,8 @@ export async function fetchCategories() {
     return axios.get(`/blog/category/list`);
 }
 
-export async function fetchPost(id) {
-    return axios.get(`/blog/post/${id}`)
+export async function fetchPost(idOrSlug) {
+    return axios.get(`/blog/post/${idOrSlug}`)
 }
 
 export async function fetchPosts(filters) {

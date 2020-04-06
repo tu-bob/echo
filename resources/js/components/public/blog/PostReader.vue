@@ -40,14 +40,14 @@
             }
         },
         props: {
-            id: {
+            slug: {
                 required: true,
                 type: String
             }
         },
         methods: {
             fetchPost() {
-                fetchPost(this.id)
+                fetchPost(this.slug)
                     .then(response => this.post = response)
                     .catch()
             }
