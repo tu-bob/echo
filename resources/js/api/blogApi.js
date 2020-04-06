@@ -11,3 +11,7 @@ export async function fetchPost(idOrSlug) {
 export async function fetchPosts(filters) {
     return axios.get('/blog/post/list?' + kvpToQueryParam(filters));
 }
+
+export async function search(query) {
+    return axios.get(`/blog/search/${query}`);
+}
