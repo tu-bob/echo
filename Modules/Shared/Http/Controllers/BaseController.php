@@ -32,4 +32,15 @@ class BaseController extends Controller
     {
         return request()->get('paginate') ? request()->get('paginate') : 10;
     }
+
+    protected function getByteRange()
+    {
+        if (request()->header('Range')) {
+            $range = explode('=', request()->header('Range'))[1];
+            $range = explode('-', $range);
+            $range[0] = (int)$range[0];
+            $range[1] = $range[1] ? (int)$range[1] : null;
+            return $range;
+        } else return null;
+    }
 }
