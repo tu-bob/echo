@@ -1,10 +1,10 @@
 <template>
     <div>
         <div class="row bg-dark position-relative">
-            <b-navbar toggleable="sm" class="col-4 pl-4" :type="NAV_TYPE" :variant="NAV_VARIANT">
+            <b-navbar toggleable="sm" class="col-8 pl-4" :type="NAV_TYPE" :variant="NAV_VARIANT">
                 <b-navbar-toggle target="mainNavBar"></b-navbar-toggle>
-                <b-navbar-brand :to="{name: 'home'}" class="py-0">
-                    <img src="/icons/png/logo-sm.png" alt="echo.tj logo" height="38px">
+                <b-navbar-brand :to="{name: 'home'}" class="py-0" style="width: 128px">
+                    <img src="/icons/png/logo-sm.png" alt="echo.tj logo" class="w-100">
                 </b-navbar-brand>
                 <b-collapse is-nav id="mainNavBar">
                     <b-navbar-nav>
@@ -28,25 +28,12 @@
                     </b-navbar-nav>
                 </b-collapse>
             </b-navbar>
-            <div class="col-8 py-2 pr-4 d-flex">
-                <div class="ml-auto align-self-center mt-1 mr-3">
-                    <router-link v-if="$route.name !== 'search'" :to="{name:'search'}"
-                                 class="ml-auto align-self-center mt-1 mr-3">
-                        <font-awesome-icon class="text-secondary h-text-white" icon="search"
-                                           size="lg"></font-awesome-icon>
-                    </router-link>
-                    <div v-else class="mr-3 cursor-pointer" @click="closeSearch">
-                        <font-awesome-icon class="text-white"
-                                           icon="times"
-                                           size="lg"></font-awesome-icon>
-                    </div>
-                </div>
-
+            <div class="col-4 py-2 pr-4 d-flex">
                 <!--                <router-link v-if="!AUTHENTICATED" :class="DEFAULT_BUTTON_CLASSES"-->
                 <!--                             :to="{name: 'login'}">Вход-->
                 <!--                </router-link>-->
                 <template v-if="AUTHENTICATED">
-                    <b-avatar class="mr-0 mr-md-3" :variant="AVATAR_VARIANT"></b-avatar>
+                    <b-avatar class="ml-auto mr-0 mr-md-3" :variant="AVATAR_VARIANT"></b-avatar>
                     <div class="user-name d-none d-md-flex">
                         {{AUTH_USER.name}}
                     </div>
@@ -63,7 +50,22 @@
                 </template>
             </div>
         </div>
-        <div class="pt-5" style="padding-bottom:10rem">
+        <div style="padding-bottom:10rem">
+            <div class="row my-3">
+                <div class="ml-auto">
+                    <router-link v-if="$route.name !== 'search'" :to="{name:'search'}"
+                                 class="ml-auto align-self-center mt-1 mr-3">
+                        <font-awesome-icon class="text-secondary h-text-white" icon="search"
+                                           size="lg"></font-awesome-icon>
+                    </router-link>
+                    <div v-else class="mr-3 cursor-pointer" @click="closeSearch">
+                        <font-awesome-icon class="text-white"
+                                           icon="times"
+                                           size="lg"></font-awesome-icon>
+                    </div>
+                </div>
+            </div>
+
             <!--            <b-alert :show="state.errors"-->
             <!--                     class="mb-5"-->
             <!--                     variant="danger"-->
