@@ -36,7 +36,7 @@
                                            size="lg"></font-awesome-icon>
                     </router-link>
                     <div v-else class="mr-3 cursor-pointer" @click="closeSearch">
-                        <font-awesome-icon class="text-secondary h-text-white"
+                        <font-awesome-icon class="text-white"
                                            icon="times"
                                            size="lg"></font-awesome-icon>
                     </div>
