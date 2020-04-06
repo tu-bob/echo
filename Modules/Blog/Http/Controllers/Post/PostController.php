@@ -36,6 +36,9 @@ class PostController extends BaseController
 
     public function getPost($post)
     {
-        return Post::with('previewImage', 'author','category')->findOrFail($post);
+        return Post::with('previewImage', 'author', 'category')
+            ->where('id', $post)
+            ->orWhere('slug', $post)
+            ->firstOrFail();
     }
 }

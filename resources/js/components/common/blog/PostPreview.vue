@@ -20,7 +20,7 @@
         },
         methods: {
             navigate() {
-                this.$router.push({name: 'post-reader', params: {id: this.post.id}})
+                this.$router.push({name: 'post-reader', params: {slug: this.post.slug}})
             }
         },
         computed: {
