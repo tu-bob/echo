@@ -137,5 +137,9 @@
                 next();
         }
     );
+
+    router.afterEach((to, from) => {
+        store.commit('PUSH_ROUTE_TO_HISTORY', from);
+    });
     export default router
 </script>

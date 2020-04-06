@@ -27,9 +27,19 @@
                 </b-collapse>
             </b-navbar>
             <div class="col-8 py-2 pr-4 d-flex">
-                <router-link :to="{name:'search'}" class="ml-auto align-self-center mt-1 mr-3">
-                    <font-awesome-icon class="text-secondary h-text-white" icon="search" size="lg"></font-awesome-icon>
-                </router-link>
+                <div class="ml-auto align-self-center mt-1 mr-3">
+                    <router-link v-if="$route.name !== 'search'" :to="{name:'search'}"
+                                 class="ml-auto align-self-center mt-1 mr-3">
+                        <font-awesome-icon class="text-secondary h-text-white" icon="search"
+                                           size="lg"></font-awesome-icon>
+                    </router-link>
+                    <div v-else class="mr-3 cursor-pointer" @click="closeSearch">
+                        <font-awesome-icon class="text-secondary h-text-white"
+                                           icon="times"
+                                           size="lg"></font-awesome-icon>
+                    </div>
+                </div>
+
                 <!--                <router-link v-if="!AUTHENTICATED" :class="DEFAULT_BUTTON_CLASSES"-->
                 <!--                             :to="{name: 'login'}">Вход-->
                 <!--                </router-link>-->
@@ -71,10 +81,12 @@
     import Player from "../components/common/player/Player";
     import {library} from '@fortawesome/fontawesome-svg-core'
     import {
-        faCaretDown, faSearch
+        faCaretDown,
+        faSearch,
+        faTimes
     } from '@fortawesome/free-solid-svg-icons'
 
-    library.add(faCaretDown, faSearch);
+    library.add(faCaretDown, faSearch, faTimes);
 
     export default {
         name: "App",
@@ -100,6 +112,12 @@
                             this.$router.push({name: 'home'})
                     });
             },
+            closeSearch() {
+                if (this.PREV_ROUTE)
+                    this.$router.push(this.PREV_ROUTE);
+                else
+                    this.$router.push({name: 'home'});
+            }
         },
         computed: {
             ...mapGetters([
@@ -108,7 +126,8 @@
                 'AUTH_USER',
                 'NAV_TYPE',
                 'NAV_VARIANT',
-                'DEFAULT_BUTTON_CLASSES'
+                'DEFAULT_BUTTON_CLASSES',
+                'PREV_ROUTE'
             ])
         }
     }
