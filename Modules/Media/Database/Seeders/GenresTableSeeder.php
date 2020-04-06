@@ -18,6 +18,26 @@ class GenresTableSeeder extends Seeder
     {
         $genres = [
             [
+                "192",
+                "Maddo",
+                "Маддо"
+            ],
+            [
+                "193",
+                "Rapo",
+                "Рапо"
+            ],
+            [
+                "194",
+                "Falak",
+                "Фалак"
+            ],
+            [
+                "195",
+                "Dargilik",
+                "Даргилик"
+            ],
+            [
                 "0",
                 "Blues",
                 "Блюз "
@@ -75,7 +95,7 @@ class GenresTableSeeder extends Seeder
             [
                 "11",
                 "Oldies",
-                ""
+                "Старое произведение"
             ],
             [
                 "12",
@@ -130,12 +150,12 @@ class GenresTableSeeder extends Seeder
             [
                 "22",
                 "Death metal",
-                ""
+                "Дэт-метал"
             ],
             [
                 "23",
                 "Pranks",
-                ""
+                "Розыгрыши"
             ],
             [
                 "24",
@@ -150,7 +170,7 @@ class GenresTableSeeder extends Seeder
             [
                 "26",
                 "Ambient",
-                ""
+                "Эмбиент"
             ],
             [
                 "27",
@@ -190,7 +210,7 @@ class GenresTableSeeder extends Seeder
             [
                 "34",
                 "Acid",
-                ""
+                "Кислотная"
             ],
             [
                 "35",
@@ -205,17 +225,17 @@ class GenresTableSeeder extends Seeder
             [
                 "37",
                 "Sound clip",
-                ""
+                "Аудиоклип"
             ],
             [
                 "38",
                 "Gospel",
-                ""
+                "Евангелие"
             ],
             [
                 "39",
                 "Noise",
-                ""
+                "Шум"
             ],
             [
                 "40",
@@ -240,7 +260,7 @@ class GenresTableSeeder extends Seeder
             [
                 "44",
                 "Space",
-                ""
+                "Космическая"
             ],
             [
                 "45",
@@ -270,12 +290,12 @@ class GenresTableSeeder extends Seeder
             [
                 "50",
                 "Darkwave",
-                ""
+                "Дарквэйв"
             ],
             [
                 "51",
                 "Techno-Industrial",
-                ""
+                "Техино-Индустриальная"
             ],
             [
                 "52",
@@ -295,12 +315,12 @@ class GenresTableSeeder extends Seeder
             [
                 "55",
                 "Dream",
-                ""
+                "Мечта"
             ],
             [
                 "56",
                 "Southern Rock",
-                "Южнй Рок"
+                "Южный Рок"
             ],
             [
                 "57",
@@ -310,7 +330,7 @@ class GenresTableSeeder extends Seeder
             [
                 "58",
                 "Cult",
-                ""
+                "Культовая"
             ],
             [
                 "59",
@@ -340,7 +360,7 @@ class GenresTableSeeder extends Seeder
             [
                 "64",
                 "Native US",
-                ""
+                "Американская"
             ],
             [
                 "65",
@@ -360,37 +380,37 @@ class GenresTableSeeder extends Seeder
             [
                 "68",
                 "Rave",
-                ""
+                "Рейв"
             ],
             [
                 "69",
                 "Show tunes",
-                ""
+                "Мелодии шоу"
             ],
             [
                 "70",
                 "Trailer",
-                ""
+                "Трейлер"
             ],
             [
                 "71",
                 "Lo-Fi",
-                ""
+                "Лоу-Фай"
             ],
             [
                 "72",
                 "Tribal",
-                ""
+                "Племенная"
             ],
             [
                 "73",
                 "Acid Punk",
-                ""
+                "Кислотный Панк"
             ],
             [
                 "74",
                 "Acid Jazz",
-                ""
+                "Кислотный Джаз"
             ],
             [
                 "75",
@@ -405,7 +425,7 @@ class GenresTableSeeder extends Seeder
             [
                 "77",
                 "Musical",
-                "Музыкальная"
+                "Мюзикл"
             ],
             [
                 "78",
@@ -435,17 +455,17 @@ class GenresTableSeeder extends Seeder
             [
                 "83",
                 "Swing",
-                ""
+                "Свинг"
             ],
             [
                 "84",
                 "Fast Fusion",
-                ""
+                "Фаст Фюжн"
             ],
             [
                 "85",
                 "Bebop",
-                ""
+                "Бибоп"
             ],
             [
                 "86",
@@ -455,7 +475,7 @@ class GenresTableSeeder extends Seeder
             [
                 "87",
                 "Revival",
-                ""
+                "Возрождение"
             ],
             [
                 "88",
@@ -465,12 +485,12 @@ class GenresTableSeeder extends Seeder
             [
                 "89",
                 "Bluegrass",
-                ""
+                "Блюграсс"
             ],
             [
                 "90",
                 "Avantgarde",
-                ""
+                "Авангард"
             ],
             [
                 "91",
@@ -495,12 +515,12 @@ class GenresTableSeeder extends Seeder
             [
                 "95",
                 "Slow rock",
-                ""
+                "Медленный рок"
             ],
             [
                 "96",
                 "Big Band",
-                ""
+                "Биг-бэнд"
             ],
             [
                 "97",
@@ -510,7 +530,7 @@ class GenresTableSeeder extends Seeder
             [
                 "98",
                 "Easy Listening",
-                ""
+                "Легкая музыка"
             ],
             [
                 "99",
@@ -555,18 +575,18 @@ class GenresTableSeeder extends Seeder
             [
                 "107",
                 "Booty bass",
-                ""
+                "Бути басс"
             ],
             [
                 "108",
                 "Primus",
-                ""
+                "Примус"
             ],
-            [
-                "109",
-                "Porn groove",
-                ""
-            ],
+//            [
+//                "109",
+//                "Porn groove",
+//                "Порн грув"
+//            ],
             [
                 "110",
                 "Satire",
@@ -575,7 +595,7 @@ class GenresTableSeeder extends Seeder
             [
                 "111",
                 "Slow jam",
-                ""
+                "Слоу Джем"
             ],
             [
                 "112",
@@ -605,7 +625,7 @@ class GenresTableSeeder extends Seeder
             [
                 "117",
                 "Power ballad",
-                ""
+                "Сильная баллада"
             ],
             [
                 "118",
@@ -645,7 +665,7 @@ class GenresTableSeeder extends Seeder
             [
                 "125",
                 "Dance Hall",
-                ""
+                "Дэнс Холл"
             ],
             [
                 "126",
@@ -655,23 +675,23 @@ class GenresTableSeeder extends Seeder
             [
                 "127",
                 "Drum & Bass",
-                ""
+                "Драм-н-бэйс"
             ],
             [
                 "128",
                 "Club-House",
-                ""
+                "Клаб-Хаус"
             ],
             [
                 "129",
                 "Hardcore Techno",
-                ""
+                "Хардкор-техно"
             ],
-            [
-                "130",
-                "Terror",
-                ""
-            ],
+//            [
+//                "130",
+//                "Terror",
+//                ""
+//            ],
             [
                 "131",
                 "Indie",
@@ -680,27 +700,27 @@ class GenresTableSeeder extends Seeder
             [
                 "132",
                 "BritPop",
-                ""
+                "БритПоп"
             ],
             [
                 "133",
                 "Negerpunk",
-                ""
+                "Нигерпанк"
             ],
-            [
-                "134",
-                "Polsk Punk",
-                ""
-            ],
+//            [
+//                "134",
+//                "Polsk Punk",
+//                ""
+//            ],
             [
                 "135",
                 "Beat",
-                ""
+                "Бит"
             ],
             [
                 "136",
                 "Christian Gangsta Rap",
-                ""
+                "Христианский Гангста Рэп"
             ],
             [
                 "137",
@@ -715,22 +735,22 @@ class GenresTableSeeder extends Seeder
             [
                 "139",
                 "Crossover",
-                ""
+                "Кроссовер"
             ],
             [
                 "140",
                 "Contemporary Christian",
-                ""
+                "Современная Христианская Музыка"
             ],
             [
                 "141",
                 "Christian rock",
-                ""
+                "Христианский Рок"
             ],
             [
                 "142",
                 "Merengue",
-                ""
+                "Меренга"
             ],
             [
                 "143",
@@ -750,12 +770,12 @@ class GenresTableSeeder extends Seeder
             [
                 "146",
                 "Jpop",
-                ""
+                "Джей-поп"
             ],
             [
                 "147",
                 "Synthpop",
-                ""
+                "Синт-поп"
             ],
             [
                 "148",
@@ -765,67 +785,67 @@ class GenresTableSeeder extends Seeder
             [
                 "149",
                 "Art Rock",
-                ""
+                "Арт-Рок"
             ],
             [
                 "150",
                 "Baroque",
-                ""
+                "Барокко"
             ],
             [
                 "151",
                 "Bhangra",
-                ""
+                "Бхангра"
             ],
             [
                 "152",
                 "Big beat",
-                ""
+                "Биг бит"
             ],
             [
                 "153",
                 "Breakbeat",
-                ""
+                "Брейкбит"
             ],
             [
                 "154",
                 "Chillout",
-                ""
+                "Чиллаут"
             ],
             [
                 "155",
                 "Downtempo",
-                ""
+                "Даунтемпо"
             ],
             [
                 "156",
                 "Dub",
-                ""
+                "Даб"
             ],
             [
                 "157",
                 "EBM",
-                ""
+                "ЕВМ"
             ],
             [
                 "158",
                 "Eclectic",
-                ""
+                "Эклектичная"
             ],
             [
                 "159",
                 "Electro",
-                ""
+                "Электро"
             ],
             [
                 "160",
                 "Electroclash",
-                ""
+                "Электроклаш"
             ],
             [
                 "161",
                 "Emo",
-                ""
+                "Эмо"
             ],
             [
                 "162",
@@ -835,42 +855,42 @@ class GenresTableSeeder extends Seeder
             [
                 "163",
                 "Garage",
-                ""
+                "Гараж"
             ],
             [
                 "164",
                 "Global",
-                ""
+                "Глобальная"
             ],
-            [
-                "165",
-                "IDM",
-                ""
-            ],
-            [
-                "166",
-                "Illbient",
-                ""
-            ],
-            [
-                "167",
-                "Industro-Goth",
-                ""
-            ],
-            [
-                "168",
-                "Jam Band",
-                ""
-            ],
+//            [
+//                "165",
+//                "IDM",
+//                ""
+//            ],
+//            [
+//                "166",
+//                "Illbient",
+//                ""
+//            ],
+//            [
+//                "167",
+//                "Industro-Goth",
+//                ""
+//            ],
+//            [
+//                "168",
+//                "Jam Band",
+//                ""
+//            ],
             [
                 "169",
                 "Krautrock",
-                ""
+                "Краут-рока"
             ],
             [
                 "170",
                 "Leftfield",
-                ""
+                "Неформатная"
             ],
             [
                 "171",
@@ -880,57 +900,57 @@ class GenresTableSeeder extends Seeder
             [
                 "172",
                 "Math Rock",
-                ""
+                "Мэт Рок"
             ],
             [
                 "173",
                 "New Romantic",
-                ""
+                "Нью-Романтик"
             ],
             [
                 "174",
                 "Nu-Breakz",
-                ""
+                "Нью-Брейк"
             ],
             [
                 "175",
                 "Post-Punk",
-                ""
+                "Пост-Панк"
             ],
             [
                 "176",
                 "Post-Rock",
-                ""
+                "Пост-Рок"
             ],
-            [
-                "177",
-                "Psytrance",
-                ""
-            ],
+//            [
+//                "177",
+//                "Psytrance",
+//                ""
+//            ],
             [
                 "178",
                 "Shoegaze",
-                ""
+                "Шугейз"
             ],
             [
                 "179",
                 "Space Rock",
-                ""
+                "Космический Рок"
             ],
             [
                 "180",
                 "Trop Rock",
-                ""
+                "Троп Рок"
             ],
             [
                 "181",
                 "World Music",
-                ""
+                "Мировая Музыка"
             ],
             [
                 "182",
                 "Neoclassical",
-                ""
+                "Неоклассическая"
             ],
             [
                 "183",
@@ -940,12 +960,12 @@ class GenresTableSeeder extends Seeder
             [
                 "184",
                 "Audio theatre",
-                ""
+                "Аудио театр"
             ],
             [
                 "185",
                 "Neue Deutsche Welle",
-                ""
+                "Немецкая новая волна"
             ],
             [
                 "186",
@@ -960,7 +980,7 @@ class GenresTableSeeder extends Seeder
             [
                 "188",
                 "G-Funk",
-                ""
+                "Джи-Фанк"
             ],
             [
                 "189",
@@ -970,12 +990,12 @@ class GenresTableSeeder extends Seeder
             [
                 "190",
                 "Garage Rock",
-                ""
+                "Гараж Рок"
             ],
             [
                 "191",
                 "Psybient",
-                ""
+                "Психологическая"
             ]
         ];
 
