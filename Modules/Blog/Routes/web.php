@@ -27,4 +27,6 @@ Route::prefix('blog')->group(function () {
     Route::prefix('author')->group(function () {
         Route::get('/filter', 'Author\AuthorController@filter');
     });
+
+    Route::get('/search/{needle}', 'Search\SearchController@search');
 });

@@ -33,6 +33,11 @@
             <h2 class="title">Видео</h2>
             <videos-list :provided-videos="videos" no-fetch></videos-list>
         </section>
+
+        <section class="section" v-if="posts.length > 0">
+            <h2 class="title">Статьи</h2>
+            <posts-list :provided-posts="posts" no-fetch></posts-list>
+        </section>
     </b-overlay>
 </template>
 
@@ -41,17 +46,20 @@
     import AlbumsList from "../../common/music/album/AlbumsList";
     import SongsList from "../../common/music/song/SongsList";
     import VideosList from "../../common/video/VideosList";
+    import {search as blogSearch} from "../../../api/blogApi";
+    import PostsList from "../blog/PostsList";
 
 
     export default {
         name: "SearchOverview",
-        components: {VideosList, AlbumsList, SongsList},
+        components: {PostsList, VideosList, AlbumsList, SongsList},
         data() {
             return {
                 query: '',
                 songs: [],
                 videos: [],
                 albums: [],
+                posts: [],
                 busy: false
             }
         },
@@ -66,6 +74,12 @@
                     })
                     .catch()
                     .then(_ => this.busy = false)
+
+                blogSearch(this.query)
+                    .then(response => {
+                        this.posts = response.posts;
+                    })
+                    .catch()
             },
             updatePlaylist() {
                 this.$store.commit('UPDATE_PLAYLIST', this.songs);
