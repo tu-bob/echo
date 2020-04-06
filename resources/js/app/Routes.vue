@@ -28,8 +28,8 @@
                         component: () => import('../components/public/home/overview/Overview')
                     },
                     {
-                        name: 'news',
-                        path: 'news',
+                        name: 'blog',
+                        path: 'blog',
                         component: () => import('../components/public/news/News')
                     },
                     {
