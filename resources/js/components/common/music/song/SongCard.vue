@@ -1,5 +1,5 @@
 <template>
-    <div class="container mb-3 h-border-violet" :class="{active: ACTIVE_SONG && ACTIVE_SONG.id === song.id}">
+    <div class="container-fluid mb-3 h-border-violet" :class="{active: ACTIVE_SONG && ACTIVE_SONG.id === song.id}">
         <div class="row w-100 text-white text-left" @click="play">
             <img :src="coverUrl" class="thumb" @error="onImageError">
             <div class="ml-2 mt-2 row col">
