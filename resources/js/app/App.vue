@@ -3,9 +3,11 @@
         <div class="row bg-dark position-relative">
             <b-navbar toggleable="sm" class="col-4 pl-4" :type="NAV_TYPE" :variant="NAV_VARIANT">
                 <b-navbar-toggle target="mainNavBar"></b-navbar-toggle>
+                <b-navbar-brand :to="{name: 'home'}" class="py-0">
+                    <img src="/icons/png/logo-sm.png" alt="echo.tj logo" height="38px">
+                </b-navbar-brand>
                 <b-collapse is-nav id="mainNavBar">
                     <b-navbar-nav>
-                        <b-nav-item :to="{name: 'home'}">Главная</b-nav-item>
                         <template v-if="AUTHENTICATED">
                             <b-nav-item-dropdown text="Блог" left>
                                 <b-dropdown-item :to="{name: 'posts-table'}">Посты</b-dropdown-item>
