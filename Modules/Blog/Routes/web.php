@@ -17,7 +17,7 @@ Route::prefix('blog')->group(function () {
     Route::prefix('post')->group(function () {
         Route::post('/', 'Post\PostController@store');
         Route::get('/list', 'Post\PostController@getPosts');
-        Route::get('/{post}', 'Post\PostController@getPost');
+        Route::get('/{slugOrId}', 'Post\PostController@getPost');
     });
 
     Route::prefix('category')->group(function () {

@@ -34,11 +34,17 @@ class PostController extends BaseController
         return $this->callGetOrPaginate($filter->filter());
     }
 
-    public function getPost($post)
+    public function getPost($slugOrId)
     {
-        return Post::with('previewImage', 'author', 'category')
-            ->where('id', $post)
-            ->orWhere('slug', $post)
+        $post = Post::with('previewImage', 'author', 'category')
+            ->where('id', $slugOrId)
+            ->orWhere('slug', $slugOrId)
             ->firstOrFail();
+        if ($post->slug === $slugOrId) {
+            $post->view_count += 1;
+            $post->save();
+        }
+
+        return $post;
     }
 }
