@@ -3,7 +3,7 @@
         <b-img class="object-fit-contain w-100 card-img-top pb-4" rounded :src="previewImageSrc" alt=""></b-img>
         <h3>{{post.title}}</h3>
         <p>{{post.annotation}}</p>
-        <p>Oct 6th, 2017 by Jon Snow</p>
+        <p>{{post.created_at |luxon:locale('short')}} <span v-if="post.author">{{post.author.name}}</span></p>
     </div>
 </template>
 
