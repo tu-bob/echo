@@ -14,11 +14,25 @@ let router = require('./app/Routes.vue').default;
 
 let BootstrapVue = require('bootstrap-vue').default;
 let VueRouter = require('vue-router').default;
+let VueLuxon = require('vue-luxon');
+import {DateTime} from 'luxon';
 
 window.Vue = require('vue');
 window.Vue.use(BootstrapVue);
 window.Vue.use(VueRouter);
 window.Vue.use(VueObserveVisibility);
+window.Vue.use(VueLuxon
+    ,{
+    serverZone: 'utc',
+    // serverFormat: 'sql',
+    clientZone: DateTime.local().zoneName,
+    clientFormat: 'locale',
+    localeLang: null,
+    localeFormat: {},
+    diffForHumans: {},
+    i18n: {}
+}
+);
 
 // window.Vue.prototype.$eventHub = new Vue();
 
