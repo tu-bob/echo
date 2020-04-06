@@ -13,4 +13,9 @@ class GenreController extends BaseController
     {
         return Genre::all();
     }
+
+    public function getGenres()
+    {
+        return Genre::has('songs')->get();
+    }
 }

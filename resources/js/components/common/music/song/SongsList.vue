@@ -28,8 +28,10 @@
         },
         props: {
             playlist: null,
-            noFetch: {
-                type: Boolean
+            noFetch: Boolean,
+            filters: {
+                type: Object,
+                default: () => {}
             }
         },
         data() {
@@ -50,7 +52,7 @@
         methods: {
             fetchSongs(page = 1) {
                 this.isFetchingSongs = true;
-                fetchSongs({order: 'latest', page: page, paginate: 15})
+                fetchSongs({...{order: 'latest', page: page, paginate: 15}, ...this.filters})
                     .then(response => {
                         this.pagination = response;
                         this.songs.push(...response.data);

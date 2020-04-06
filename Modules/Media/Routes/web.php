@@ -36,6 +36,7 @@ Route::prefix('media')->group(function () {
 
         Route::prefix('genre')->group(function () {
             Route::get('/', 'Music\GenreController@all');
+            Route::get('/list', 'Music\GenreController@getGenres');
         });
 
         Route::prefix('song')->group(function () {
