@@ -34,8 +34,22 @@
                     },
                     {
                         name: 'music',
-                        path: 'music',
-                        component: () => import('../components/public/music/MusicView')
+                        path: '/music',
+                        redirect: {name: 'music-list'},
+                        component: () => import('../components/public/music/MusicViewer'),
+                        children: [
+                            {
+                                name: 'music-list',
+                                path: '/',
+                                props: (route) => ({genres: route.query.genres}),
+                                component: () => import('../components/public/music/Music')
+                            },
+                            {
+                                name: 'genres',
+                                path: 'genres',
+                                component: () => import('../components/public/music/Genres')
+                            }
+                        ]
                     },
                     {
                         name: 'albums',

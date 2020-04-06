@@ -4,6 +4,10 @@ export async function fetchGenres() {
     return axios.get('/media/music/genre')
 }
 
+export async function fetchGenresList() {
+    return axios.get('/media/music/genre/list')
+}
+
 export async function fetchArtistAliasesByName(name) {
     return axios.get(`/media/artist/alias/filter?name=${name}`);
 }
