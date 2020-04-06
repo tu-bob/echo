@@ -15,7 +15,7 @@
                 <b-nav-item class="horizontal-nav-menu-item m-item" :to="{name:'news'}" exact
                             exact-active-class="active">
                     <span class="menu-icon"><img class="icon-btn-md" src="/icons/svg/newspaper.svg"></span>
-                    <span class="">Новости</span>
+                    <span class="">Статьи</span>
                 </b-nav-item>
                 <b-nav-item class="horizontal-nav-menu-item m-item"
                             :to="{name:'music'}"
