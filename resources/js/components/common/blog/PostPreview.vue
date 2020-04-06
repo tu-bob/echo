@@ -1,5 +1,5 @@
 <template>
-    <div class="card bg-transparent text-light-grey" @click="navigate">
+    <div class="card bg-transparent text-light-grey cursor-pointer" @click="navigate">
         <b-img class="object-fit-contain w-100 card-img-top pb-4" rounded :src="previewImageSrc" alt=""></b-img>
         <h3>{{post.title}}</h3>
         <p>{{post.annotation}}</p>
