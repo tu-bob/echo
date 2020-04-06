@@ -43,6 +43,15 @@
                 </div>
 
                 <div class="ml-sm-auto form-row player-control">
+
+                    <b-form-input class="align-self-center mr-3 d-none d-md-block"
+                                  style="width:80px"
+                                  type="range"
+                                  v-model="volume"
+                                  variant="dark"
+                                  step="0.01"
+                                  min="0"
+                                  max="1"></b-form-input>
                     <div class="d-none d-md-block pr-3">
                         {{currentTimeFormatted}}
                     </div>
@@ -154,7 +163,8 @@
                 timeDrag: false,
                 showPlaylist: false,
                 shuffled: false,
-                playCountUpdated: false
+                playCountUpdated: false,
+                volume: 1
             }
         },
         methods: {
@@ -220,6 +230,9 @@
                         this.playCountUpdated = true
                     }
                 } else this.audio.pause();
+            },
+            volume() {
+                this.audio.volume = this.volume;
             },
             ACTIVE_SONG() {
                 this.playCountUpdated = false;
