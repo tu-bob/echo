@@ -71,11 +71,12 @@
             </div>
         </div>
         <div class="playlist-wrapper" v-show="showPlaylist">
-            <div class="row">
-                <div class="ml-auto mr-4 mt-2 btn" @click="togglePlaylist">
+            <div class="position-sticky d-flex" style="top:0; left:0">
+                <div class="ml-auto btn" @click="togglePlaylist">
                     <font-awesome-icon icon="times" class="text-white" size="2x"></font-awesome-icon>
                 </div>
             </div>
+
             <div class="row">
                 <div class="container">
                     <songs-list :playlist="PLAYLIST"></songs-list>
@@ -301,7 +302,7 @@
 
     .playlist-wrapper {
         z-index: 200;
-        overflow:scroll;
+        overflow: scroll;
         width: 100%;
         position: fixed;
         bottom: 66px;
