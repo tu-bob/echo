@@ -40,11 +40,10 @@
                         ['history', ['undo', 'redo']],
                         'style',
                         ['style', ['bold', 'italic', 'underline', 'clear']],
-                        ['color', ['color']],
                         ['para', ['ul', 'ol', 'paragraph']],
                         'table',
                         ['insert', ['link', 'picture', 'video']],
-                        ['view', ['fullscreen', 'codeview', 'help']]
+                        ['view', ['fullscreen', 'help']]
                     ]
                 }
             }
