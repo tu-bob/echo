@@ -12,7 +12,7 @@ class PostRequest extends BaseFormRequest
     {
         return [
             'id' => 'nullable|string',
-            'previewImage' => 'nullable|file|mimes:jpg,jpeg,png',
+            'previewImage' => 'nullable|file|mimes:jpg,jpeg,png|max:2048',
             'category' => 'required|exists:post_categories,id',
             'title' => 'required|string',
             'author' => 'required|string',

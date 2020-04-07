@@ -12,7 +12,7 @@ class MusicAlbumRequest extends FormRequest
     {
         return [
             'id' => 'nullable|string',
-            'albumCoverFile' => 'nullable|file|mimes:jpeg,jpg,png',
+            'albumCoverFile' => 'nullable|file|mimes:jpeg,jpg,png|max:2048',
             'title' => 'required|string',
             'year' => 'required|string',
             'songs.*' => 'required|exists:songs,id',
