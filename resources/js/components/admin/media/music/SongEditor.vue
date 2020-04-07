@@ -190,9 +190,11 @@
     import ImageUploader from "../../../common/inputs/ImageUploader";
     import {getSongIconUrl} from "../../../../api/mediaApi";
     import {secondsToFormattedMinutes} from "../../../../util/stringHelper";
+    import ResetErrorsMixin from "../../mixins/ResetErrorsMixin";
 
     export default {
         name: "SongEditor",
+        mixins: [ResetErrorsMixin],
         props: {
             providedFile: {
                 type: Object,
@@ -447,6 +449,7 @@
                 }
 
                 this.$refs['songEditorPlayer'].src = null;
+                this.$store.commit('RESET_HTML_ERRORS');
             },
             formatGenresOptions(genre) {
                 return genre.name + ' - ' + genre.local_name;

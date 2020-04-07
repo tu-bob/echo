@@ -26,9 +26,11 @@
 
 <script>
     import {getStoreOrUpdateAction} from '../../../../main.js'
+    import ResetErrorsMixin from "../../mixins/ResetErrorsMixin";
 
     export default {
         name: "ArtistEditor",
+        mixins: [ResetErrorsMixin],
         created() {
             if (this.$route.params.id)
                 this.fetchData();

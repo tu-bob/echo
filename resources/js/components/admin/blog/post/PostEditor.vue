@@ -68,10 +68,12 @@
     import Summernote from "../../../common/summernote/Summernote";
     import ImageUploader from "../../../common/inputs/ImageUploader";
     import {fetchCategories, fetchPost} from "../../../../api/blogApi";
+    import ResetErrorsMixin from "../../mixins/ResetErrorsMixin";
 
     export default {
         name: "PostEditor",
         components: {ImageUploader, Summernote},
+        mixins: [ResetErrorsMixin],
         created() {
             this.fetchCategories();
             if (this.$route.params.id)
@@ -154,6 +156,7 @@
                 this.post.reference = null;
                 this.post.ref_name = null;
                 this.$refs['articleEditor'].innerHtml('');
+                this.$store.commit('RESET_HTML_ERRORS');
             }
         },
         computed: {

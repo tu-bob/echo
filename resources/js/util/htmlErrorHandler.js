@@ -12,6 +12,7 @@ function handleServerValidationError(e) {
 }
 
 export function handleHtmlError(e) {
+    app.$store.commit('ADD_HTML_ERROR', e);
     switch (e.status) {
         case 401:
             handleUnauthorized();

@@ -15,7 +15,8 @@ class MusicAlbumRequest extends FormRequest
             'albumCoverFile' => 'nullable|file|mimes:jpeg,jpg,png',
             'title' => 'required|string',
             'year' => 'required|string',
-            'songs.*' => 'required|exists:songs,id'
+            'songs.*' => 'required|exists:songs,id',
+            'type' => 'required|exists:music_album_types,id'
         ];
     }
 }

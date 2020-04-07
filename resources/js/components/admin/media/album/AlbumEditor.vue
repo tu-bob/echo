@@ -73,10 +73,12 @@
     import {fetchAlbum, fetchAlbumTypes} from "../../../../api/mediaApi";
     import SongsTable from "../music/SongsTable";
     import ImageUploader from "../../../common/inputs/ImageUploader";
+    import ResetErrorsMixin from "../../mixins/ResetErrorsMixin";
 
     export default {
         name: "AlbumEditor",
         components: {ImageUploader, SongsTable},
+        mixins: [ResetErrorsMixin],
         created() {
             this.fetchAlbumTypes();
             if (this.$route.params.id)
@@ -130,7 +132,8 @@
                     data.append('albumCoverFile', this.albumCoverFile, this.albumCoverFile.name);
                 data.append('title', this.album.title);
                 data.append('year', String(this.album.year));
-                data.append('type', String(this.album.type.id));
+                if (this.album.type)
+                    data.append('type', String(this.album.type.id));
 
                 for (let i = 0; i < this.album.songs.length; i++) {
                     data.append('songs[]', this.album.songs[i].id);
@@ -159,6 +162,7 @@
                 this.album.id = null;
                 this.albumCoverFile = null;
                 this.$refs['albumCoverFileInput'].reset();
+                this.$store.commit('RESET_HTML_ERRORS');
             }
         },
         computed: {
