@@ -71,8 +71,11 @@
 </template>
 
 <script>
+    import ResetErrorsMixin from "../admin/mixins/ResetErrorsMixin";
+
     export default {
         name: "Login",
+        mixins:[ResetErrorsMixin],
         props: {
             redirectUrl: {
                 type: String
