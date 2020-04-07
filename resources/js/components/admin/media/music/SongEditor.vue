@@ -98,7 +98,7 @@
                                       @selected="onGenreSelected"
                                       :providedOptions="genres"
                                       :optionFormatter="formatGenresOptions"
-                                      searchPropertyName="name">
+                                      searchPropertyName="searchField">
                     </suggestion-input>
                     <ul
                         class="list-unstyled d-inline-flex flex-wrap mb-0"
@@ -204,7 +204,10 @@
         created() {
             fetchGenres().then(genres => {
                 if (genres)
-                    this.genres = genres;
+                    this.genres = genres.map(genre => {
+                        genre.searchField = genre.local_name + genre.name;
+                        return genre;
+                    });
                 if (this.$route.params.id)
                     this.fetchSong(this.$route.params.id);
             });

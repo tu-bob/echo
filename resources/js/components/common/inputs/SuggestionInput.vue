@@ -172,7 +172,7 @@
                 }, 150);
             },
             fetchData() {
-                if(this.preventFetching > 0){
+                if (this.preventFetching > 0) {
                     this.preventFetching--;
                     return;
                 }
@@ -199,9 +199,10 @@
                 if (this.query) {
                     this.options = this.providedOptions
                         .filter(option => option[this.searchPropertyName]
-                            .replace(/[^a-zA-Z]/g, '')
+                            .replace(/[^a-zA-Zа-яА-ЯЁё]/g, '')
                             .toUpperCase()
-                            .includes(this.query.replace(/[^a-zA-Z]/g, '').toUpperCase()))
+                            .includes(this.query.replace(/[^a-zA-Zа-яА-ЯЁё]/g, '').toUpperCase())
+                        )
                 } else {
                     this.options = this.providedOptions;
                 }
