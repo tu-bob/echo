@@ -33,6 +33,7 @@ class CreateSongsTable extends Migration
             $table->unsignedBigInteger('size');
             $table->unsignedInteger('playtime_seconds');
             $table->char('extension', 10);
+            $table->boolean('allow_download')->default(true);
 
             $table->char('cover_image_id', 26)->index()->nullable();
 
