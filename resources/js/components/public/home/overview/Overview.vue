@@ -2,7 +2,7 @@
     <div>
         <section class="section col-12">
             <div class="row">
-                <h2 class="col-8 title">Музыка достойная вас</h2>
+                <h2 class="col-8 title">Слушайте</h2>
                 <div class="col-4 text-right">
                     <router-link :to="{name: 'music'}" class="ml-auto btn-text-white text-decoration-none">
                         <span>больше музыки</span>
@@ -21,7 +21,7 @@
         </section>
         <section class="section col-12">
             <div class="row">
-                <h2 class="col-8 title">Эти альбомы ждут вас</h2>
+                <h2 class="col-8 title">Исследуйте</h2>
                 <div class="col-4 text-right">
                     <router-link :to="{name:'albums'}" class="ml-auto btn-text-white text-decoration-none">
                         <span>больше альбомов</span>
@@ -32,7 +32,7 @@
         </section>
         <section class="section col-12">
             <div class="row">
-                <h2 class="col-8 title">Клипы, которые нельзя пропустить</h2>
+                <h2 class="col-8 title">Смотрите</h2>
                 <div class="col-4 text-right">
                     <router-link :to="{name:'clips'}" class="ml-auto btn-text-white text-decoration-none">
                         <span>больше клипов</span>
@@ -43,7 +43,7 @@
         </section>
         <section class="section col-12">
             <div class="row">
-                <h2 class="col-8 title">Свежие статьи</h2>
+                <h2 class="col-8 title">Читайте</h2>
                 <div class="col-4 text-right">
                     <router-link :to="{name:'blog'}" class="ml-auto btn-text-white text-decoration-none">
                         <span>больше статей</span>
