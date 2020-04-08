@@ -38,6 +38,16 @@ class GenresTableSeeder extends Seeder
                 "Даргилик"
             ],
             [
+                "196",
+                "Munojot",
+                "Муноджот"
+            ],
+            [
+                "197",
+                "Daf soz",
+                "Даф соз"
+            ],
+            [
                 "0",
                 "Blues",
                 "Блюз "
