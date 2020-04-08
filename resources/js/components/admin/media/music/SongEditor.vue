@@ -470,7 +470,7 @@
                     return getSongIconUrl(this.song.id, false);
             },
             duration() {
-                return secondsToFormattedMinutes(this.song.playtime_seconds)
+                return secondsToFormattedMinutes(Math.round(this.song.playtime_seconds));
             },
         },
         components: {ImageUploader}
