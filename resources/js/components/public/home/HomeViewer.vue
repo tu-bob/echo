@@ -42,6 +42,13 @@
                     <span class="menu-icon"><img class="icon-btn-md" src="/icons/svg/video.svg"></span>
                     <span>Клипы</span>
                 </b-nav-item>
+                <b-nav-item class="horizontal-nav-menu-item m-item"
+                            :to="{name:'about'}"
+                            exact
+                            exact-active-class="active">
+                    <span class="menu-icon"><img class="icon-btn-md" src="/icons/svg/info.svg"></span>
+                    <span>О нас</span>
+                </b-nav-item>
             </ul>
             <hr class="border-hr" style="width: 159.66px; margin-left: 0px;">
         </div>

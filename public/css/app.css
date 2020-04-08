@@ -119,6 +119,21 @@ html::-webkit-scrollbar {
 }
 
 /*
+ * Article Styles
+ */
+
+.article h2 {
+  color: white;
+  margin-bottom: 2rem;
+}
+
+.article-body p {
+  font-size: 1.1rem;
+  text-align: justify;
+  margin-bottom: 1.5rem;
+}
+
+/*
  * Container style
  */
 

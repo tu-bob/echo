@@ -60,7 +60,12 @@
                         name: 'clips',
                         path: 'clips',
                         component: () => import('../components/public/video/ClipsView')
-                    }
+                    },
+                    {
+                        name: 'about',
+                        path: 'about',
+                        component: () => import('../components/public/home/AboutUs')
+                    },
                 ]
             },
             {
