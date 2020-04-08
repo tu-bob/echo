@@ -16,9 +16,9 @@ class MediaDatabaseSeeder extends Seeder
     {
         Model::unguard();
 
-        $this->call(ArtistsTableSeeder::class);
+//        $this->call(ArtistsTableSeeder::class);
         $this->call(GenresTableSeeder::class);
         $this->call(MusicAlbumTypeTableSeeder::class);
-        $this->call(MusicAlbumsTableSeeder::class);
+//        $this->call(MusicAlbumsTableSeeder::class);
     }
 }
