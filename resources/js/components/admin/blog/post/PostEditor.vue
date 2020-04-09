@@ -120,9 +120,9 @@
 
                 axios.post('/blog/post', data).then(
                     _ => {
-                        this.clearForm()
-                        if (this.$route.params.id)
-                            this.$router.replace({name: 'post-editor'})
+                        // this.clearForm()
+                        // if (this.$route.params.id)
+                        //     this.$router.replace({name: 'post-editor'})
                     }
                 )
                     .catch(e => console.log(e))
