@@ -35,38 +35,7 @@ class PostRequestWriter extends RequestWriter
         $config = \HTMLPurifier_Config::createDefault();
         $config->set('HTML.SafeIframe', true);
         $config->set('URI.SafeIframeRegexp', '%^(https?:)?//(www\.youtube(?:-nocookie)?\.com/embed/|player\.vimeo\.com/video/)%'); //allow YouTube and Vimeo
-        $config->set('HTML.AllowedElements',
-            ['iframe',
-                'a',
-                'p',
-                'table',
-                'tbody',
-                'tr',
-                'td',
-                'img',
-                'h1',
-                'h2',
-                'h3',
-                'h4',
-                'h5',
-                'h6',
-                'ul',
-                'ol',
-                'li',
-                'span',
-                'b',
-                'i',
-                'u',
-                'pre',
-                'blockquote']);
-        $config->set('HTML.AllowedAttributes',
-            'iframe@src,iframe@allowfullscreen,img@src,width,height,alt');
-
-        $config->set('HTML.ForbiddenAttributes',
-            'iframe@width,iframe@height');
-
-        $def = $config->getHTMLDefinition(true);
-        $def->addAttribute('iframe', 'allowfullscreen', 'Bool');
+        $config->set('HTML.Allowed', 'iframe[src],a[href],img[src],p,table,tbody,tr,td,h1,h2,h3,h4,h5,h6,ul,ol,li,span,b,i,u,pre,blockquote');
 
         $purifier = new \HTMLPurifier($config);
 
@@ -112,6 +81,12 @@ class PostRequestWriter extends RequestWriter
             $frame->setAttribute('src', $iframe->getAttribute('src'));
             $wrapper->appendChild($frame);
             $iframe->parentNode->replaceChild($wrapper, $iframe);
+        }
+        $images = $document->getElementsByTagName('img');
+
+        foreach ($images as $image) {
+            $image->setAttribute('width', '100%');
+            $image->setAttribute('class', 'my-5');
         }
 
         return mb_convert_encoding($document->saveHTML(), 'UTF-8', 'HTML-ENTITIES');
