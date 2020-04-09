@@ -1,5 +1,7 @@
 <template>
-    <textarea :id="id"></textarea>
+    <b-overlay :show="busy" rounded="sm">
+        <textarea :id="id"></textarea>
+    </b-overlay>
 </template>
 
 <script>
@@ -31,6 +33,7 @@
         data() {
             return {
                 id: generateId(),
+                busy: false,
                 options: {
                     lang: this.lang,
                     height: this.height,
@@ -52,16 +55,17 @@
             let vue = this;
             this.options.callbacks = {
                 onImageUpload: function (files) {
-                    console.log(vue.imageUploadUrl)
                     if (!vue.imageUploadUrl)
                         return;
+                    vue.busy = true;
                     uploadFiles(files, vue.imageUploadUrl, 'images')
                         .then(response => {
                             for (let i = 0; i < response.length; i++) {
                                 $('#' + vue.id).summernote('insertImage', `/media/image/${response[i].id}/blog`);
                             }
                         })
-                        .catch(e => console.log(e));
+                        .catch(e => console.log(e))
+                        .then(_ => vue.busy = false);
                 },
                 onChange: function (article) {
                     vue.$emit('input', article)

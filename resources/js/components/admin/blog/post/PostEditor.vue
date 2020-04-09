@@ -126,7 +126,7 @@
                     }
                 )
                     .catch(e => console.log(e))
-                    .then(this.submitting = false);
+                    .then(_ => this.submitting = false);
             },
             fetchPost(id) {
                 fetchPost(id).then(post => {
