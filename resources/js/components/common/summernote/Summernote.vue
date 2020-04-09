@@ -47,7 +47,17 @@
                         'table',
                         ['insert', ['link', 'picture', 'video']],
                         ['view', ['fullscreen', 'help']]
-                    ]
+                    ],
+                    popover: {
+                        image: [
+                            ['image', ['resizeFull']],
+                            ['remove', ['removeMedia']]
+                        ],
+                        table: [
+                            ['add', ['addRowDown', 'addRowUp', 'addColLeft', 'addColRight']],
+                            ['delete', ['deleteRow', 'deleteCol', 'deleteTable']],
+                        ]
+                    }
                 }
             }
         },
