@@ -40,7 +40,7 @@
                         ['history', ['undo', 'redo']],
                         'style',
                         ['style', ['bold', 'italic', 'underline', 'clear']],
-                        ['para', ['ul', 'ol', 'paragraph']],
+                        ['para', ['ul', 'ol']],
                         'table',
                         ['insert', ['link', 'picture', 'video']],
                         ['view', ['fullscreen', 'help']]

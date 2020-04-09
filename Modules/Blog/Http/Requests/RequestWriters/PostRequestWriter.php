@@ -4,12 +4,12 @@
 namespace Modules\Blog\Http\Requests\RequestWriters;
 
 
+use HTMLPurifier_Config;
 use Illuminate\Support\Str;
 use Modules\Blog\Models\Author\Author;
 use Modules\Media\Libs\Request\FileRequest\Saver\ImageFileSaver;
 use Modules\Media\Models\Image\ImageFile;
 use Modules\Shared\Http\Requests\RequestWriter;
-use Modules\Shared\Libs\HtmlPurifier\HtmlPurifier;
 
 class PostRequestWriter extends RequestWriter
 {
@@ -31,7 +31,43 @@ class PostRequestWriter extends RequestWriter
     //TODO check article
     private function prepareData()
     {
-        $purifier = new HtmlPurifier();
+        $config = \HTMLPurifier_Config::createDefault();
+        $config->set('HTML.SafeIframe', true);
+        $config->set('URI.SafeIframeRegexp', '%^(https?:)?//(www\.youtube(?:-nocookie)?\.com/embed/|player\.vimeo\.com/video/)%'); //allow YouTube and Vimeo
+        $config->set('HTML.AllowedElements',
+            ['iframe',
+                'a',
+                'p',
+                'table',
+                'tbody',
+                'tr',
+                'td',
+                'img',
+                'h1',
+                'h2',
+                'h3',
+                'h4',
+                'h5',
+                'h6',
+                'ul',
+                'ol',
+                'li',
+                'span',
+                'b',
+                'i',
+                'u',
+                'pre',
+                'blockquote']);
+        $config->set('HTML.AllowedAttributes',
+            'iframe@src,iframe@allowfullscreen,img@src,width,height,alt');
+
+        $config->set('HTML.ForbiddenAttributes',
+            'iframe@width,iframe@height');
+
+        $def = $config->getHTMLDefinition(true);
+        $def->addAttribute('iframe', 'allowfullscreen', 'Bool');
+
+        $purifier = new \HTMLPurifier($config);
 
         $data = [
             'title' => $this->request['title'],
@@ -39,8 +75,8 @@ class PostRequestWriter extends RequestWriter
             'author_id' => Author::firstOrCreate(['name' => $this->request['author']])->id,
             'annotation' => $this->request['annotation'],
             'post_category_id' => $this->request['category'],
-//            'article' => $purifier->cleanHtml($this->request['article']),
-            'article' => $this->request['article'],
+            'article' => $purifier->purify($this->request['article']),
+//            'article' => $this->request['article'],
             'reference' => isset($this->request['reference']) ? $this->request['reference'] : null,
             'ref_name' => isset($this->request['ref_name']) ? $this->request['ref_name'] : null
         ];
