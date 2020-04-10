@@ -1,7 +1,7 @@
 <template>
     <b-overlay :show="submitting" rounded="sm">
         <div class="card">
-            <div class="card-header">Редактир исполнителей</div>
+            <div class="card-header">Редактировать исполнителя</div>
             <div class="card-body">
                 <div class="form-group">
                     <label>Имя или псевдонимы</label>
@@ -53,18 +53,19 @@
                     aliases: this.aliases
                 };
 
-                let action = getStoreOrUpdateAction(this.$route?.params?.id, '/media/artist/');
-
+                let action = getStoreOrUpdateAction(this.$route?.params?.id, '/media/artist');
+                console.log(action);
                 axios({
                     method: action.method,
                     url: action.url,
                     data: data
                 })
                     .then(_ => {
-                        this.$router.go()
+                        // this.$router.go()
+                        console.log('added');
                     })
                     .catch(e => console.log(e))
-                    .then(this.submitting = false);
+                    .then(_ => this.submitting = false);
             },
             fetchData() {
                 axios.get(`/media/artist/${this.$route.params.id}`)

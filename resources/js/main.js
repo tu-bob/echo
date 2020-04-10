@@ -5,7 +5,7 @@ export function getStoreOrUpdateAction(id, url) {
     };
 
     if (id) {
-        action.url += id;
+        action.url += '/' + id;
         action.method = 'put';
     }
 
