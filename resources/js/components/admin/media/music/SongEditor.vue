@@ -381,6 +381,7 @@
                 this.song.numberOfChannels = meta.format.numberOfChannels;
                 this.song.playtime_seconds = meta.format.duration;
                 this.song.lossless = meta.format.lossless;
+                this.song.lyrics = this.getSongLyrics(meta);
 
                 if (meta.common.artists)
                     for (let i = 0; i < meta.common.artists.length; i++) {
@@ -418,6 +419,10 @@
                             this.song.genres.push(bestMatch.genre);
                     }
                 }
+            },
+            getSongLyrics(meta) {
+                if (meta.native['ID3v2.3'])
+                    return meta.native['ID3v2.3'], meta.native['ID3v2.3'].find(tag => tag.id === 'USLT')?.value?.text
             },
             clearForm(removeFile = false) {
                 this.song = {
