@@ -47,7 +47,7 @@ class StoreSongRequestWriter extends RequestWriter
     private function extractFileInfo()
     {
         $getID3 = new \getID3;
-        $this->extractedInfo = $getID3->analyze($this->request['mp3File']);
+        $this->extractedInfo = $getID3->analyze($this->request['mp3File'], null, 'file.mp3');
     }
 
     public function saveCoverImageFile()
@@ -80,7 +80,7 @@ class StoreSongRequestWriter extends RequestWriter
             $data['cover_image_id'] = $this->coverImageFile->id;
 
         $extracted = [];
-        if (isset($this->extractedInfo)) {
+        if (isset($this->extractedInfo['audio'])) {
             $extracted = [
                 'bitrate' => $this->extractedInfo['audio']['bitrate'],
                 'sample_rate' => $this->extractedInfo['audio']['sample_rate'],

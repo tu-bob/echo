@@ -24,7 +24,7 @@ class AudioFile extends FileModel
     public function fetchTags()
     {
         $getID3 = new \getID3;
-        $fileInfo = $getID3->analyze($this->path);
+        $fileInfo = $getID3->analyze($this->path, null, 'random.mp3');
 
         // Get all the common tags
         if (isset($fileInfo['tags_html'])) {
