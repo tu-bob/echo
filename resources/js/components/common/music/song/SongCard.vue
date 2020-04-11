@@ -1,17 +1,17 @@
 <template>
     <div class="container-fluid mb-3 h-border-violet" :class="{active: ACTIVE_SONG && ACTIVE_SONG.id === song.id}">
-        <div class="row w-100 text-white text-left" @click="play">
+        <div class="form-row w-100 text-white text-left" @click="play">
             <img :src="coverUrl" class="thumb" @error="onImageError">
-            <div class="ml-2 mt-2 row col">
+            <div class="ml-0 ml-md-2 mt-2 row col position-relative">
                 <div>
-                    <h6 class="mb-0">{{song.title}}</h6>
+                    <h6 class="mb-0 text-no-wrap">{{song.title}}</h6>
                     <span class="text-muted">{{aliases}} </span>
                 </div>
-                <div class="ml-auto d-flex flex-nowrap align-items-baseline">
+                <div class="ml-auto d-flex flex-nowrap align-items-baseline h-100" style="position: absolute; right:0;background:black">
                     <a class="btn btn-link" :href="`/media/music/song/${song.id}/download`" download>
                         <font-awesome-icon class="text-secondary h-text-white" icon="download" size="lg"></font-awesome-icon>
                     </a>
-                    <span>{{duration}}</span>
+                    <span class="d-none d-sm-block">{{duration}}</span>
                 </div>
             </div>
         </div>

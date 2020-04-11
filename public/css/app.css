@@ -20,6 +20,10 @@ html::-webkit-scrollbar {
   margin-bottom: 2rem;
 }
 
+.text-no-wrap {
+  white-space: nowrap;
+}
+
 .icon-btn-sm {
   width: 18px;
 }
