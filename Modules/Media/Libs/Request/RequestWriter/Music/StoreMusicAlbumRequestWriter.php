@@ -61,23 +61,25 @@ class StoreMusicAlbumRequestWriter extends RequestWriter
 
     private function attachArtistAliases()
     {
-        $this->entity->songs->load('artistAliases');
+//        $this->entity->songs->load('artistAliases');
+//
+//        $aliases = $this->entity->songs->map(function ($song) {
+//            return $song->artistAliases;
+//        })->flatten();
+//
+//        $uniqueAliases = [];
+//
+//        foreach ($aliases as $alias) {
+//            if (isset($uniqueAliases[$alias->id])) {
+//                $uniqueAliases[$alias->id]['artist_songs_count'] = $uniqueAliases[$alias->id]['artist_songs_count'] + 1;
+//            } else {
+//                $uniqueAliases[$alias->id] = ['artist_songs_count' => 1];
+//            }
+//        }
+//
+//        $this->entity->artistAliases()->sync($uniqueAliases);
 
-        $aliases = $this->entity->songs->map(function ($song) {
-            return $song->artistAliases;
-        })->flatten();
-
-        $uniqueAliases = [];
-
-        foreach ($aliases as $alias) {
-            if (isset($uniqueAliases[$alias->id])) {
-                $uniqueAliases[$alias->id]['artist_songs_count'] = $uniqueAliases[$alias->id]['artist_songs_count'] + 1;
-            } else {
-                $uniqueAliases[$alias->id] = ['artist_songs_count' => 1];
-            }
-        }
-
-        $this->entity->artistAliases()->sync($uniqueAliases);
+        $this->entity->updateArtistAliases();
 
 //        if ($this->entity->songs->count() > 0) {
 //

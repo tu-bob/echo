@@ -12,6 +12,7 @@ use Modules\Shared\Models\Pivots\BasePivot;
 /**
  * @property int play_count
  * @property int view_count
+ * @property mixed songs
  */
 class MusicAlbum extends BaseModel
 {
@@ -38,5 +39,25 @@ class MusicAlbum extends BaseModel
             ->using(BasePivot::class)
             ->withPivot('artist_songs_count')
             ->withTimestamps();
+    }
+
+    public function updateArtistAliases(){
+        $this->songs->load('artistAliases');
+
+        $aliases = $this->songs->map(function ($song) {
+            return $song->artistAliases;
+        })->flatten();
+
+        $uniqueAliases = [];
+
+        foreach ($aliases as $alias) {
+            if (isset($uniqueAliases[$alias->id])) {
+                $uniqueAliases[$alias->id]['artist_songs_count'] = $uniqueAliases[$alias->id]['artist_songs_count'] + 1;
+            } else {
+                $uniqueAliases[$alias->id] = ['artist_songs_count' => 1];
+            }
+        }
+
+        $this->artistAliases()->sync($uniqueAliases);
     }
 }
