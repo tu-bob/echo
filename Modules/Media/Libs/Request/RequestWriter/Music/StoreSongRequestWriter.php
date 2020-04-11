@@ -8,6 +8,7 @@ use Modules\Media\Libs\Request\FileRequest\Saver\ImageFileSaver;
 use Modules\Media\Models\Artist\ArtistAlias;
 use Modules\Media\Models\Image\ImageFile;
 use Modules\Media\Models\Music\AudioFile;
+use Modules\Media\Models\Music\MusicAlbum;
 use Modules\Media\Models\Music\Song;
 use Modules\Media\Models\Video\Video;
 use Modules\Shared\Http\Requests\RequestWriter;
@@ -126,6 +127,9 @@ class StoreSongRequestWriter extends RequestWriter
         $this->entity->artistAliases()->sync($aliases);
         $this->entity->genres()->sync($genres);
         $this->entity->albums()->sync($albums);
+        $this->entity->albums->each(function (MusicAlbum $album){
+            $album->updateArtistAliases();
+        });
 
         $this->attachClip();
     }

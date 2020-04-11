@@ -16,6 +16,10 @@ export async function fetchAlbums(filters) {
     return axios.get('/media/music/album/list?' + kvpToQueryParam(filters));
 }
 
+export async function findAlbums(queries) {
+    return axios.get('/media/music/album/filter?' + kvpToQueryParam(queries));
+}
+
 export async function fetchAlbum(id) {
     return axios.get(`/media/music/album/${id}`);
 }
