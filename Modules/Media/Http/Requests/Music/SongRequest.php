@@ -12,7 +12,7 @@ class SongRequest extends BaseFormRequest
     {
         return [
             'id' => 'nullable|string',
-            'mp3File' => 'nullable|file|mimetypes:audio/mpeg',
+            'mp3File' => 'nullable|file',
             'coverImageFile' => 'nullable|file|mimes:jpg,jpeg,png|max:2048',
             'title' => 'required|string',
             'year' => 'required|string',
@@ -23,5 +23,15 @@ class SongRequest extends BaseFormRequest
             'lyrics' => 'nullable|string',
             'clip_src' => 'nullable|url'
         ];
+    }
+
+    public function withValidator($validator)
+    {
+        $validator->after(function ($validator) {
+            $extensions = ['mp3', 'mpga'];
+            $extension = request()->file('mp3File')->guessExtension() ?? request()->file('mp3File')->guessClientExtension();
+            if (!in_array($extension, $extensions))
+                $validator->errors()->add('mp4File', 'Only mp3 files are allowed');
+        });
     }
 }
