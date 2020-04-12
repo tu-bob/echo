@@ -21,6 +21,7 @@
 
 <script>
     import {getCoverImage, increaseMediaCount} from "../../../api/mediaApi";
+    import {getYoutubeEmbedPreview} from "../../../util/stringHelper";
 
     export default {
         name: "VideoCard",
@@ -39,10 +40,13 @@
             onClicked() {
                 this.$emit('play', this.video);
                 increaseMediaCount(this.video.id, 'video', 'view');
-            }
+            },
         },
         computed: {
             previewImageUrl() {
+                let youtubePreviewUrl = getYoutubeEmbedPreview(this.video.src);
+                if (youtubePreviewUrl)
+                    return youtubePreviewUrl;
                 if (this.video.preview_image_id) {
                     return getCoverImage(this.video.preview_image_id);
                 } else {

@@ -100,7 +100,7 @@
                 this.$store.commit('SET_AUTH_USER', this.user);
         },
         beforeDestroy() {
-            this.$eventHub.$off('error-reset-requested');
+            // this.$eventHub.$off('error-reset-requested');
         },
         props: {
             user: {

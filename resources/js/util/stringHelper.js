@@ -24,3 +24,14 @@ export function secondsToFormattedMinutes(seconds) {
         sec = `0${sec}`;
     return `${divideAdnRoundToInt(seconds, 60)}:${sec}`;
 }
+
+export function getYoutubeVideoId(url) {
+    let reg = /(?:https?:\/\/)?(?:www\.)?(?:youtu\.be\/|youtube\.com(?:\/embed\/|\/v\/|\/watch\?v=))([\w-]{10,12})/g;
+    let res = reg.exec(url);
+    return res?.length > 1 ? res[1] : null;
+}
+
+export function getYoutubeEmbedPreview(url) {
+    let id = getYoutubeVideoId(url);
+    return id ? `http://img.youtube.com/vi/${id}/0.jpg` : null;
+}
