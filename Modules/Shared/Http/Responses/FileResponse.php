@@ -59,11 +59,14 @@ class FileResponse
     {
         $from = $this->byteRange[0];
         $to = $this->byteRange[1] ?? $this->fileSize - 1;
+        if ($to >= $this->fileSize)
+            $to = $this->fileSize - 1;
         $length = $to - $from + 1;
 
-        $stream = fopen('../storage/app/' . $this->path, "r");
+        $stream = fopen('../storage/app/' . $this->path, "rb");
         $headers['Content-Range'] = sprintf('bytes %d-%d/%d', $from, $to, $this->fileSize);
-        $headers['Content-Length'] = sprintf($from - $to);
+//        $headers['Content-Length'] = sprintf($to - $from);
+        unset($headers['Content-Length']);
 
         return response()->stream(function () use ($stream, $from, $length) {
             fseek($stream, $from, SEEK_SET);

@@ -47,6 +47,7 @@ class SongController extends BaseController
             return response()->json([], 404);
 
         $range = $this->getByteRange();
+        $range[1] = $range[0] + 300000;
         $fileResponse = new FileResponse($song->audioFile->path, $song->audioFile->mime_type, $range);
         return $fileResponse->generateResponse();
     }

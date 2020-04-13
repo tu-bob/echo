@@ -11,7 +11,7 @@
                 {{video.title}}
             </div>
         </div>
-        <div class="bg-violet-gradient h-overlay d-flex align-items-center">
+        <div class="h-overlay d-flex align-items-center">
             <div class="btn btn-light mx-auto">
                 <img class="icon-btn-xl" src="/icons/svg/play-btn-light.svg">
             </div>

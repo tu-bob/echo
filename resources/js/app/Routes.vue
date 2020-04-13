@@ -12,10 +12,6 @@
             //     name: 'register',
             //     path: '/register', component: () => import('../components/auth/Register')
             // },
-        {
-            path: '/player',
-            component: () => import('../components/common/player/AudioPlayer')
-        },
             {
                 name: 'search',
                 path: '/search', component: () => import('../components/public/search/SearchOverview')
