@@ -95,7 +95,7 @@
                 <template v-slot:overlay>
                     <div class="d-flex align-items-center">
                         <b-spinner class="ml-auto"></b-spinner>
-                        <span>&nbsp;Скоро начнет играть {{ACTIVE_SONG.title}}</span>
+                        <span>&nbsp;Загружаем...</span>
                     </div>
                 </template>
             </b-overlay>
