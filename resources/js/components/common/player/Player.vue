@@ -1,11 +1,12 @@
 <template>
     <div>
-        <div class="player bg-dark container-fluid text-white">
+        <div class="player bg-dark container-fluid text-white" variant="dark">
             <div class="row h-100 position-relative">
                 <div class="d-none d-sm-flex col-sm-2 col-md-4 player-control">
                     <template v-if="ACTIVE_SONG">
                         <div class="col-12 col-md-3 col-xl-2">
-                            <safe-image :src="coverUrl" fallbackSrc="/icons/svg/music.svg" class="thumb-sm" rounded></safe-image>
+                            <safe-image :src="coverUrl" fallbackSrc="/icons/svg/music.svg" class="thumb-sm"
+                                        rounded></safe-image>
                         </div>
                         <div class="d-none d-md-block col-md-9 col-xl-10">
                             <h6 class="mb-0 text-white">{{ACTIVE_SONG.title}}</h6>
@@ -86,9 +87,18 @@
                        @error="playing = false"
                        @play="playing = true"
                        @ended="onEnded"
+                       @canplay="isFetchingSong = false"
                        :loop="REPEAT_STATE === 'single'">
                 </audio>
             </div>
+            <b-overlay :show="isFetchingSong" variant="dark" no-wrap>
+                <template v-slot:overlay>
+                    <div class="d-flex align-items-center">
+                        <b-spinner class="ml-auto"></b-spinner>
+                        <span>&nbsp;Скоро начнет играть {{ACTIVE_SONG.title}}</span>
+                    </div>
+                </template>
+            </b-overlay>
         </div>
         <div class="playlist-wrapper" v-show="showPlaylist">
             <b-container fluid="md">
@@ -152,7 +162,8 @@
                 showPlaylist: false,
                 shuffled: false,
                 playCountUpdated: false,
-                volume: 1
+                volume: 1,
+                isFetchingSong: false
             }
         },
         methods: {
@@ -238,6 +249,7 @@
                 this.audio.volume = this.volume;
             },
             ACTIVE_SONG() {
+                this.isFetchingSong = true;
                 this.bufferedSeconds = 0;
                 this.playCountUpdated = false;
             }
