@@ -1,8 +1,9 @@
 <template>
     <div class="text-white">
         <div class="h-overlay-container cursor-pointer" @click="play">
-            <b-img class="album-cover" @error="onCoverLoadError" blankColor="#a892f8cf" :blank="coverLoadFailed" rounded
-                   :src="coverUrl" alt=""></b-img>
+<!--            <b-img class="album-cover" @error="onCoverLoadError" blankColor="#a892f8cf" :blank="coverLoadFailed" rounded-->
+<!--                   :src="coverUrl" alt=""></b-img>-->
+            <safe-image :src="coverUrl" class="album-cover" fallback-blank rounded></safe-image>
             <div class="bg-violet-gradient h-overlay d-flex align-items-center">
                 <div class="btn btn-light mx-auto">
                     <img class="icon-btn-xl" src="/icons/svg/play-btn-light.svg">
@@ -23,9 +24,11 @@
         increaseMediaCount
     } from "../../../../api/mediaApi";
     import {concatStrings} from "../../../../util/stringHelper";
+    import SafeImage from "../../image/SafeImage";
 
     export default {
         name: "AlbumCard",
+        components: {SafeImage},
         props: {
             album: {
                 type: Object,
