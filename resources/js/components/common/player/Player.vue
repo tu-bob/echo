@@ -75,22 +75,22 @@
 
                 </div>
 
-                <audio controls class="d-none" id="main-player" preload="metadata" :src="audioSrc"
+                <audio controls class="d-none" id="main-player" preload="auto" :src="audioSrc"
                        :loop="REPEAT_STATE === 'single'"></audio>
             </div>
         </div>
         <div class="playlist-wrapper" v-show="showPlaylist">
-            <div class="position-sticky d-flex" style="top:0; left:0">
-                <div class="ml-auto btn" @click="togglePlaylist">
-                    <font-awesome-icon icon="times" class="text-white" size="2x"></font-awesome-icon>
+            <b-container fluid="md">
+                <div class="position-sticky d-flex" style="top:0; left:0">
+                    <div class="ml-auto btn" @click="togglePlaylist">
+                        <font-awesome-icon icon="times" class="text-white" size="2x"></font-awesome-icon>
+                    </div>
                 </div>
-            </div>
 
-            <div class="row">
-                <div class="container">
-                    <songs-list :playlist="PLAYLIST"></songs-list>
+                <div class="row">
+                    <songs-list class="w-100" :playlist="PLAYLIST"></songs-list>
                 </div>
-            </div>
+            </b-container>
         </div>
     </div>
 </template>

@@ -1,5 +1,5 @@
 <template>
-    <div class="container-fluid">
+    <b-container fluid="md">
         <div id="horizontal-nav" class="horizontal-nav-wrapper scroll-x ps">
             <ul class="horizontal-scroll-list m-0 p-0 moving-border">
                 <b-nav-item class="horizontal-nav-menu-item m-item" :to="{name:'overview'}" exact
@@ -56,7 +56,7 @@
         <div class="py-5">
             <router-view></router-view>
         </div>
-    </div>
+    </b-container>
 </template>
 
 <script>

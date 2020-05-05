@@ -1,17 +1,19 @@
 <template>
-    <div class="container-fluid mb-3 h-border-violet" :class="{active: ACTIVE_SONG && ACTIVE_SONG.id === song.id}">
-        <div class="form-row w-100 text-white text-left" @click="play">
+    <div class="mb-3 px-0 h-border-violet" :class="{active: ACTIVE_SONG && ACTIVE_SONG.id === song.id}">
+        <div class="d-flex text-white text-left" @click="play">
             <img :src="coverUrl" class="thumb" @error="onImageError">
-            <div class="ml-0 ml-md-2 mt-2 row col position-relative">
-                <div>
+            <div class="song-details">
+                <div class="song-title">
                     <h6 class="mb-0 text-no-wrap">{{song.title}}</h6>
-                    <span class="text-muted">{{aliases}} </span>
+                    <span class="text-muted text-no-wrap">{{aliases}} </span>
                 </div>
-                <div class="ml-auto d-flex flex-nowrap align-items-baseline h-100" style="position: absolute; right:0;background:black">
+                <div class="song-buttons">
                     <a class="btn btn-link" :href="`/media/music/song/${song.id}/download`" download>
-                        <font-awesome-icon class="text-secondary h-text-white" icon="download" size="lg"></font-awesome-icon>
+                        <font-awesome-icon class="text-secondary h-text-white"
+                                           icon="download"
+                                           size="lg"></font-awesome-icon>
                     </a>
-                    <span class="d-none d-sm-block">{{duration}}</span>
+                    <span class="">{{duration}}</span>
                 </div>
             </div>
         </div>
@@ -62,9 +64,28 @@
 
 </script>
 <style scoped>
+    .song-details {
+        width: calc(100% - 60px);
+        display: flex;
+        margin-left: 0.5rem;
+        margin-top: 0.5rem;
+    }
+
     .thumb {
         object-fit: cover;
         width: 50px !important;
         height: 50px;
+    }
+
+    .song-title {
+        flex: 1 1 auto;
+        overflow: hidden;
+    }
+
+    .song-buttons{
+        width: 74px;
+        display: flex;
+        align-items:baseline;
+        height: 100%;
     }
 </style>
