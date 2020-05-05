@@ -1,5 +1,6 @@
 const state = {
-    htmlErrors: []
+    htmlErrors: [],
+    inaccessibleResources: []
 };
 const getters = {
         HTML_ERRORS: state => code => {
@@ -7,6 +8,9 @@ const getters = {
                 return state.htmlErrors.filter(error => error.status === code);
             else
                 return state.htmlErrors
+        },
+        IS_RESOURCE_INACCESSIBLE: state => resource => {
+            return Boolean(state.inaccessibleResources.find(r => r === resource));
         }
     }
 ;
@@ -14,7 +18,10 @@ const mutations = {
     ADD_HTML_ERROR: (state, error) => {
         state.htmlErrors.unshift(error);
     },
-    RESET_HTML_ERRORS:(state) =>{
+    ADD_INACCESSIBLE_RESOURCE: (state, resource) => {
+        state.inaccessibleResources.push(resource)
+    },
+    RESET_HTML_ERRORS: (state) => {
         state.htmlErrors = [];
     }
 };

@@ -1,7 +1,7 @@
 <template>
     <div class="mb-3 px-0 h-border-violet" :class="{active: ACTIVE_SONG && ACTIVE_SONG.id === song.id}">
         <div class="d-flex text-white text-left" @click="play">
-            <img :src="coverUrl" class="thumb" @error="onImageError">
+            <safe-image :src="coverUrl" fallbackSrc="/icons/svg/music.svg" class="thumb"></safe-image>
             <div class="song-details">
                 <div class="song-title">
                     <h6 class="mb-0 text-no-wrap">{{song.title}}</h6>
@@ -24,24 +24,21 @@
     import {concatStrings, secondsToFormattedMinutes} from '../../../../util/stringHelper'
     import {getSongIconUrl} from "../../../../api/mediaApi";
     import {mapGetters} from "vuex";
+    import SafeImage from "../../image/SafeImage";
 
     export default {
         name: "SongCard",
+        components: {SafeImage},
         props: {
             song: {
                 type: Object,
                 required: true
             },
             thumbnail: {
-                type: String,
-                default: 'https://picsum.photos/1024/400/?image=41'
+                type: String
             }
         },
         methods: {
-            onImageError(e) {
-                e.target.src = "/icons/svg/music.svg";
-                $(e.target).addClass('p-1');
-            },
             play() {
                 this.$emit('play', this.song);
             }
@@ -82,10 +79,10 @@
         overflow: hidden;
     }
 
-    .song-buttons{
+    .song-buttons {
         width: 74px;
         display: flex;
-        align-items:baseline;
+        align-items: baseline;
         height: 100%;
     }
 </style>
