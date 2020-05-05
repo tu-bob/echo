@@ -177,10 +177,20 @@ html::-webkit-scrollbar {
   position: absolute;
 }
 
-.ps--active-x > .ps__rail-x,
-.ps--active-y > .ps__rail-y {
-  display: block;
-  background-color: transparent;
+@media (max-width: 800px) {
+  .ps--active-x > .ps__rail-x,
+  .ps--active-y > .ps__rail-y {
+    display: none;
+    background-color: transparent;
+  }
+}
+
+@media (min-width: 800px) {
+  .ps--active-x > .ps__rail-x,
+  .ps--active-y > .ps__rail-y {
+    display: block;
+    background-color: transparent;
+  }
 }
 
 .ps:hover > .ps__rail-x,
