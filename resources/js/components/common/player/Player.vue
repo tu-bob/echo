@@ -67,6 +67,7 @@
 
                 <div class="progress-bar-wrapper">
                     <div class="player-progress" @mousedown="seekPosition">
+                        <div class="player-loading-progress" :style="{ width: this.percentLoaded + '%' }"></div>
                         <div class="player-seeker" :style="{ width: this.percentCompleted + '%' }"></div>
                     </div>
                 </div>
@@ -75,7 +76,18 @@
 
                 </div>
 
-                <audio controls class="d-none" id="main-player" preload="auto" :src="audioSrc"
+                <audio  id="main-player"
+                        class="d-none"
+                        preload="auto"
+                        :src="audioSrc"
+                        @progress="onProgress"
+                        @loadeddata="onMetaLoaded"
+                        @timeupdate="onTimeUpdated"
+                        @pause="playing = false"
+                        @abort="playing = false"
+                        @error="playing = false"
+                        @play="playing = true"
+                        @ended="onEnded"
                        :loop="REPEAT_STATE === 'single'"></audio>
             </div>
         </div>
@@ -121,31 +133,6 @@
         mounted() {
             this.audio = this.$el.querySelectorAll('audio')[0];
             this.progressBar = this.$el.querySelectorAll('.player-progress')[0];
-            this.audio.addEventListener('loadeddata', this.onMetaLoaded);
-            this.audio.addEventListener('timeupdate', this.onTimeUpdated);
-            this.audio.addEventListener('pause', () => {
-                this.playing = false;
-            });
-            this.audio.addEventListener('play', () => {
-                this.playing = true;
-            });
-            this.audio.addEventListener('abort', () => {
-                this.playing = false;
-            });
-            this.audio.addEventListener('ended', () => {
-                this.playing = false;
-                switch (this.REPEAT_STATE) {
-                    case "none":
-                        this.$store.commit('PLAY_NEXT', false);
-                        break;
-                    case "all":
-                        this.$store.commit('PLAY_NEXT');
-                        break;
-                }
-            });
-            this.audio.addEventListener('error', () => {
-                this.playing = false;
-            });
         },
         props: {
             autoPlay: {
@@ -159,6 +146,7 @@
                 progressBar: null,
                 currentSeconds: 0,
                 durationSeconds: 0,
+                bufferedSeconds: 0,
                 playing: false,
                 timeDrag: false,
                 showPlaylist: false,
@@ -168,6 +156,10 @@
             }
         },
         methods: {
+            onProgress(e) {
+                if (e.target.buffered.length > 0)
+                    this.bufferedSeconds = e.target.buffered.end(e.target.buffered.length - 1)
+            },
             onMetaLoaded(e) {
                 if (this.audio.readyState >= 2) {
                     this.durationSeconds = this.audio.duration;
@@ -176,6 +168,17 @@
             },
             onTimeUpdated(e) {
                 this.currentSeconds = this.audio.currentTime;
+            },
+            onEnded(){
+                this.playing = false;
+                switch (this.REPEAT_STATE) {
+                    case "none":
+                        this.$store.commit('PLAY_NEXT', false);
+                        break;
+                    case "all":
+                        this.$store.commit('PLAY_NEXT');
+                        break;
+                }
             },
             togglePlayPause() {
                 this.playing = !this.playing;
@@ -240,9 +243,10 @@
         },
         computed: {
             percentCompleted() {
-                if (this.durationSeconds > 0) {
-                    return this.currentSeconds / this.durationSeconds * 100;
-                } else return 0;
+                return this.durationSeconds > 0 ? this.currentSeconds / this.durationSeconds * 100 : 0;
+            },
+            percentLoaded() {
+                return this.durationSeconds > 0 ? this.bufferedSeconds / this.durationSeconds * 100 : 0;
             },
             coverUrl() {
                 if (this.ACTIVE_SONG)
@@ -311,6 +315,14 @@
         left: 0;
         position: absolute;
         top: 0;
+    }
+
+    .player-progress .player-loading-progress {
+        background: #ffffff;
+        bottom: 0;
+        left: 0;
+        top: 0;
+        position: absolute;
     }
 
     .playlist-wrapper {
