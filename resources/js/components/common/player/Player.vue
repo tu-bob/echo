@@ -5,8 +5,7 @@
                 <div class="d-none d-sm-flex col-sm-2 col-md-4 player-control">
                     <template v-if="ACTIVE_SONG">
                         <div class="col-12 col-md-3 col-xl-2">
-                            <b-img class="thumb-sm" rounded :src="coverUrl" @error="onImageError"
-                                   alt=""></b-img>
+                            <safe-image :src="coverUrl" fallbackSrc="/icons/svg/music.svg" class="thumb-sm" rounded></safe-image>
                         </div>
                         <div class="d-none d-md-block col-md-9 col-xl-10">
                             <h6 class="mb-0 text-white">{{ACTIVE_SONG.title}}</h6>
@@ -43,7 +42,6 @@
                 </div>
 
                 <div class="ml-sm-auto form-row player-control">
-
                     <b-form-input class="align-self-center mr-3 d-none d-md-block"
                                   style="width:80px"
                                   type="range"
@@ -76,19 +74,20 @@
 
                 </div>
 
-                <audio  id="main-player"
-                        class="d-none"
-                        preload="auto"
-                        :src="audioSrc"
-                        @progress="onProgress"
-                        @loadeddata="onMetaLoaded"
-                        @timeupdate="onTimeUpdated"
-                        @pause="playing = false"
-                        @abort="playing = false"
-                        @error="playing = false"
-                        @play="playing = true"
-                        @ended="onEnded"
-                       :loop="REPEAT_STATE === 'single'"></audio>
+                <audio id="main-player"
+                       class="d-none"
+                       preload="auto"
+                       :src="audioSrc"
+                       @progress="onProgress"
+                       @loadeddata="onMetaLoaded"
+                       @timeupdate="onTimeUpdated"
+                       @pause="playing = false"
+                       @abort="playing = false"
+                       @error="playing = false"
+                       @play="playing = true"
+                       @ended="onEnded"
+                       :loop="REPEAT_STATE === 'single'">
+                </audio>
             </div>
         </div>
         <div class="playlist-wrapper" v-show="showPlaylist">
@@ -124,12 +123,13 @@
     import {concatStrings, secondsToFormattedMinutes} from "../../../util/stringHelper";
     import {mapGetters} from "vuex";
     import SongsList from "../music/song/SongsList";
+    import SafeImage from "../image/SafeImage";
 
     library.add(faPlay, faPause, faBackward, faForward, faRandom, faRedoAlt, faList, faTimes, faDownload);
 
     export default {
         name: "Player",
-        components: {SongsList},
+        components: {SafeImage, SongsList},
         mounted() {
             this.audio = this.$el.querySelectorAll('audio')[0];
             this.progressBar = this.$el.querySelectorAll('.player-progress')[0];
@@ -169,7 +169,7 @@
             onTimeUpdated(e) {
                 this.currentSeconds = this.audio.currentTime;
             },
-            onEnded(){
+            onEnded() {
                 this.playing = false;
                 switch (this.REPEAT_STATE) {
                     case "none":
@@ -189,10 +189,10 @@
                 let percentage = 100 * position / $(this.progressBar).width();
                 this.audio.currentTime = percentage * this.durationSeconds / 100;
             },
-            onImageError(e) {
-                e.target.src = "/icons/svg/music.svg";
-                $(e.target).addClass('p-1');
-            },
+            // onImageError(e) {
+            //     e.target.src = "/icons/svg/music.svg";
+            //     $(e.target).addClass('p-1');
+            // },
             togglePlaylist() {
                 this.showPlaylist = !this.showPlaylist
             },
@@ -238,6 +238,7 @@
                 this.audio.volume = this.volume;
             },
             ACTIVE_SONG() {
+                this.bufferedSeconds = 0;
                 this.playCountUpdated = false;
             }
         },
