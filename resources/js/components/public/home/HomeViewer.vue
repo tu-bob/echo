@@ -1,5 +1,5 @@
 <template>
-    <b-container fluid="md">
+    <b-container fluid>
         <div id="horizontal-nav" class="horizontal-nav-wrapper">
             <ul class="horizontal-scroll-list m-0 p-0 moving-border">
                 <b-nav-item class="horizontal-nav-menu-item m-item" :to="{name:'overview'}" exact
