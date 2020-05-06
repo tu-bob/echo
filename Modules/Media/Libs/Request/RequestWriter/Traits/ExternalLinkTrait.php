@@ -14,7 +14,7 @@ trait ExternalLinkTrait
 
         $newResources = array_keys($newLinks);
 
-        $deleted = $this->entity->externalLinks->each(function ($l) use ($newResources) {
+        $this->entity->externalLinks->each(function ($l) use ($newResources) {
             if(!in_array($l->resource, $newResources))
                 $l->delete();
         });
