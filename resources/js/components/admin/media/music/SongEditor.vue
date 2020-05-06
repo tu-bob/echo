@@ -19,13 +19,17 @@
                         ></b-form-file>
                     </div>
                     <div class="row ml-1 col-md-6">
-                        <audio ref="songEditorPlayer" class="mt-md-4 mx-auto" controlsList="nodownload" :src="audioSrc"
+                        <audio ref="songEditorPlayer"
+                               class="mt-md-4 mx-auto"
+                               controlsList="nodownload"
+                               preload="none"
+                               :src="audioSrc"
                                controls></audio>
                     </div>
                 </div>
 
                 <div class="alert alert-info" v-if="song.bitrate">
-            <span>{{song.bitrate / 1000}} kbs |
+                <span>{{song.bitrate / 1000}} kbs |
                 {{song.sample_rate}} |
                 <span v-if="song.container">{{song.container}} |</span>
                 <span v-if="song.encoder">{{song.encoder}} |</span>
@@ -39,10 +43,37 @@
                         </template>
                     </image-uploader>
                 </div>
+
+                <b-input-group>
+                    <b-input-group-prepend is-text>
+                        <b-form-checkbox switch class="mr-n2" v-model="song.allow_download">
+                            <span class="sr-only">Allow download</span>
+                        </b-form-checkbox>
+                    </b-input-group-prepend>
+                    <b-form-input placeholder="Разрешить скачивание"
+                                  disabled></b-form-input>
+                </b-input-group>
+
+                <hr>
+                <span>Ссылки</span>
                 <div class="form-group">
-                    <label>Ссылка на клип (YouTube)</label>
-                    <input class="form-control" v-model="song.clip.src" type="url">
+                    <b-input-group class="mb-2" prepend="YouTube">
+                        <input class="form-control" v-model="song.clip.src" type="url">
+                    </b-input-group>
+                    <b-input-group class="mb-2" prepend="iTunes">
+                        <input class="form-control" v-model="song.links.iTunes" type="url">
+                    </b-input-group>
+                    <b-input-group class="mb-2" prepend="Yandex Music">
+                        <input class="form-control" v-model="song.links.yandexMusic" type="url">
+                    </b-input-group>
+                    <b-input-group class="mb-2" prepend="Google Music">
+                        <input class="form-control" v-model="song.links.googleMusic" type="url">
+                    </b-input-group>
+                    <b-input-group class="mb-2" prepend="Spotify">
+                        <input class="form-control" v-model="song.links.spotify" type="url">
+                    </b-input-group>
                 </div>
+                <hr>
                 <div class="row">
                     <div class="form-group col-md-8">
                         <label>Название</label>
@@ -53,6 +84,12 @@
                         <input type="text" class="form-control" v-model="song.year">
                     </div>
                 </div>
+
+                <div class="form-group">
+                    <label>Название на английском</label>
+                    <input type="text" class="form-control" v-model="song.english_title" autofocus>
+                </div>
+
                 <div class="form-group">
                     <label>Исполнители</label>
                     <suggestion-input displayPropertyName="name"
@@ -223,7 +260,14 @@
                 song: {
                     id: null,
                     title: null,
+                    english_title: null,
                     clip: {src: null},
+                    links: {
+                        iTunes: null,
+                        yandexMusic: null,
+                        googleMusic: null,
+                        spotify: null
+                    },
                     lyrics: null,
                     year: null,
                     genres: [],
@@ -236,7 +280,8 @@
                     container: null,
                     numberOfChannels: null,
                     lossless: null,
-                    playtime_seconds: null
+                    playtime_seconds: null,
+                    allow_download: true
                 }
             }
         },
@@ -307,14 +352,22 @@
                     })
             },
             fetchSong(id) {
+                this.busy = true;
                 fetchSong(id).then(song => {
+                    let links = {};
+                    for (let i in song.externalLinks) {
+                        links[song.externalLinks[i].resource] = song.externalLinks[i].link;
+                    }
+                    song.links = links;
                     this.song = song;
                     if (!this.song.clip)
                         this.song.clip = {src: null}
                 })
-                    .catch(
+                    .catch(e => {
                         //TODO
-                    );
+                        }
+                    )
+                .then(_ => this.busy = false);
             },
             submit() {
                 this.busy = true;
@@ -334,7 +387,12 @@
                 }
 
                 data.append('title', this.song.title);
+                data.append('allow_download', this.song.allow_download ? 1 : 0);
                 data.append('year', String(this.song.year));
+
+                if (this.song.english_title)
+                    data.append('english_title', this.song.english_title);
+
                 if (this.song.label)
                     data.append('label', this.song.label);
                 if (this.song.lyrics)
@@ -351,6 +409,11 @@
                 for (let k = 0; k < this.song.albums.length; k++) {
                     data.append('albums[]', this.song.albums[k].id);
                 }
+
+                for (let [resource, link] of Object.entries(this.song.links)) {
+                    data.append('links[' + resource + ']', link)
+                }
+
 
                 axios.post('/media/music/song', data)
                     .then(_ => {
@@ -428,6 +491,7 @@
                 this.song = {
                     id: null,
                     title: null,
+                    english_title: null,
                     lyrics: null,
                     clip: {src: null},
                     year: null,
@@ -441,7 +505,13 @@
                     container: null,
                     numberOfChannels: null,
                     lossless: null,
-                    playtime_seconds: null
+                    playtime_seconds: null,
+                    links: {
+                        iTunes: null,
+                        yandexMusic: null,
+                        googleMusic: null,
+                        spotify: null
+                    }
                 };
                 this.missedAlbums = [];
                 this.missedArtists = [];

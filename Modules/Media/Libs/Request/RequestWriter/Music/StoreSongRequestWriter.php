@@ -6,6 +6,7 @@ namespace Modules\Media\Libs\Request\RequestWriter\Music;
 
 use Modules\Media\Libs\Request\FileRequest\Saver\ImageFileSaver;
 use Modules\Media\Models\Artist\ArtistAlias;
+use Modules\Media\Models\ExternalLink\ExternalLink;
 use Modules\Media\Models\Image\ImageFile;
 use Modules\Media\Models\Music\AudioFile;
 use Modules\Media\Models\Music\MusicAlbum;
@@ -68,8 +69,12 @@ class StoreSongRequestWriter extends RequestWriter
         $data = [
             'title' => $this->request['title'],
             'year' => $this->request['year'],
-            'label' => isset($this->request['label']) ? $this->request['label'] : ''
+            'label' => isset($this->request['label']) ? $this->request['label'] : '',
+            'allow_download' => $this->request['allow_download']
         ];
+
+        if (isset($this->request['english_title']))
+            $data['english_title'] = $this->request['english_title'];
 
         if (isset($this->request['lyrics']))
             $data['lyrics'] = $this->request['lyrics'];
@@ -127,11 +132,13 @@ class StoreSongRequestWriter extends RequestWriter
         $this->entity->artistAliases()->sync($aliases);
         $this->entity->genres()->sync($genres);
         $this->entity->albums()->sync($albums);
-        $this->entity->albums->each(function (MusicAlbum $album){
+        $this->entity->albums->each(function (MusicAlbum $album) {
             $album->updateArtistAliases();
         });
 
         $this->attachClip();
+
+        $this->attachLinks();
     }
 
     private function attachClip()
@@ -157,4 +164,23 @@ class StoreSongRequestWriter extends RequestWriter
         }
     }
 
+    private function attachLinks()
+    {
+        $newLinks = isset($this->request['links']) ? $this->request['links'] : [];
+
+        foreach ($newLinks as $resource => $link) {
+            $existing = $this->entity->externalLinks->firstWhere('resource', $resource);
+            if ($existing) {
+                $existing->update([
+                    'link' => $link
+                ]);
+            } else {
+                ExternalLink::create([
+                    'resource' => $resource,
+                    'link' => $link,
+                    'song_id' => $this->entity->id
+                ]);
+            }
+        }
+    }
 }

@@ -17,9 +17,10 @@ class CreateSongsTable extends Migration
             $table->char('audio_file_id', 26)->index();
             $table->char('clip_id', 26)->index()->nullable();
 
-            $table->char('title', 40);
+            $table->string('title', 100);
+            $table->string('english_title', 100)->nullable();
             $table->char('year', 5);
-            $table->char('label', 50)->nullable();
+            $table->char('label', 100)->nullable();
             $table->text('lyrics')->nullable();
             $table->unsignedInteger('bitrate');
             $table->unsignedInteger('sample_rate');
@@ -34,6 +35,7 @@ class CreateSongsTable extends Migration
             $table->unsignedInteger('playtime_seconds');
             $table->char('extension', 10);
             $table->boolean('allow_download')->default(true);
+            $table->json('chords')->nullable();
 
             $table->char('cover_image_id', 26)->index()->nullable();
 

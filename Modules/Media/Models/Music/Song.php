@@ -5,6 +5,7 @@ namespace Modules\Media\Models\Music;
 
 
 use Modules\Media\Models\Artist\ArtistAlias;
+use Modules\Media\Models\ExternalLink\ExternalLink;
 use Modules\Media\Models\Image\ImageFile;
 use Modules\Media\Models\Video\Video;
 use Modules\Shared\Models\BaseModel;
@@ -22,7 +23,8 @@ use Modules\Shared\Models\Pivots\BasePivot;
 class Song extends BaseModel
 {
     protected $casts = [
-        'lyrics' => 'string'
+        'lyrics' => 'string',
+        'allow_download' => 'boolean'
     ];
 
     protected $hidden = [
@@ -75,6 +77,11 @@ class Song extends BaseModel
     public function clip()
     {
         return $this->belongsTo(Video::class);
+    }
+
+    public function externalLinks()
+    {
+        return $this->hasMany(ExternalLink::class);
     }
 
     public function getFormattedNameAttribute()
