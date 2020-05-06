@@ -45,10 +45,12 @@
     import {fetchVideos} from "../../../api/mediaApi";
     import VideoCard from "./VideoCard";
     import Pagination from "../inputs/Pagination";
+    import AxiosCancellationMixin from "../../admin/mixins/AxiosCancellationMixin";
 
     export default {
         name: "VideosList",
         components: {VideoCard, Pagination},
+        mixins: [AxiosCancellationMixin],
         mounted() {
             if (this.providedVideos)
                 this.videos = this.providedVideos;
@@ -82,7 +84,9 @@
         methods: {
             fetchVideos(page = 1) {
                 this.isFetchingVideos = true;
-                fetchVideos({order: 'latest', page: page, paginate: 15})
+                fetchVideos({order: 'latest', page: page, paginate: 15},
+                    {cancelToken: this.getCancellationToken()}
+                )
                     .then(response => {
                         this.pagination = response;
                         this.videos.push(...response.data);
