@@ -59,6 +59,24 @@
                         </template>
                     </image-uploader>
                 </div>
+                <span>Ссылки</span>
+                <div class="form-group">
+                    <b-input-group class="mb-2" prepend="YouTube">
+                        <input class="form-control" v-model="album.links.youtube" type="url">
+                    </b-input-group>
+                    <b-input-group class="mb-2" prepend="iTunes">
+                        <input class="form-control" v-model="album.links.iTunes" type="url">
+                    </b-input-group>
+                    <b-input-group class="mb-2" prepend="Yandex Music">
+                        <input class="form-control" v-model="album.links.yandexMusic" type="url">
+                    </b-input-group>
+                    <b-input-group class="mb-2" prepend="Google Music">
+                        <input class="form-control" v-model="album.links.googleMusic" type="url">
+                    </b-input-group>
+                    <b-input-group class="mb-2" prepend="Spotify">
+                        <input class="form-control" v-model="album.links.spotify" type="url">
+                    </b-input-group>
+                </div>
             </div>
 
 
@@ -93,8 +111,15 @@
                     title: null,
                     type: null,
                     year: null,
-                    songs: []
-                }
+                    songs: [],
+                    links: {
+                        youtube: null,
+                        iTunes: null,
+                        yandexMusic: null,
+                        googleMusic: null,
+                        spotify: null
+                    }
+                },
             }
         },
         methods: {
@@ -139,10 +164,16 @@
                     data.append('songs[]', this.album.songs[i].id);
                 }
 
+                for (let [resource, link] of Object.entries(this.album.links)) {
+                    if (link)
+                        data.append('links[' + resource + ']', link)
+                }
+
                 axios.post('/media/music/album', data)
                     .then(_ => {
                         this.clearForm();
-                        this.$router.replace({name: 'album-editor'})
+                        if (this.$route.params.id)
+                            this.$router.replace({name: 'album-editor'})
                     })
                     .catch(
                         e => console.log(e)
@@ -151,6 +182,11 @@
             },
             fetchAlbum(id) {
                 fetchAlbum(id).then(album => {
+                    let links = {};
+                    for (let i in album.externalLinks) {
+                        links[album.externalLinks[i].resource] = album.externalLinks[i].link;
+                    }
+                    album.links = links;
                     this.album = album;
                 }).catch();
             },
@@ -161,6 +197,13 @@
                 this.album.songs = [];
                 this.album.id = null;
                 this.albumCoverFile = null;
+                this.album.links = {
+                    youtube: null,
+                    iTunes: null,
+                    yandexMusic: null,
+                    googleMusic: null,
+                    spotify: null
+                };
                 this.$refs['albumCoverFileInput'].reset();
                 this.$store.commit('RESET_HTML_ERRORS');
             }

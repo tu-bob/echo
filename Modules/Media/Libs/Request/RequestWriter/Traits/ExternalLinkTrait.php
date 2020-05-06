@@ -12,6 +12,13 @@ trait ExternalLinkTrait
     {
         $newLinks = isset($this->request['links']) ? $this->request['links'] : [];
 
+        $newResources = array_keys($newLinks);
+
+        $deleted = $this->entity->externalLinks->each(function ($l) use ($newResources) {
+            if(!in_array($l->resource, $newResources))
+                $l->delete();
+        });
+
         foreach ($newLinks as $resource => $link) {
             $existing = $this->entity->externalLinks->firstWhere('resource', $resource);
             if ($existing) {

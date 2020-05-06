@@ -45,7 +45,7 @@ class MusicAlbumController extends BaseController
 
     public function getAlbum($album)
     {
-        return MusicAlbum::with(['songs', 'type', 'artistAliases'])->findOrFail($album);
+        return MusicAlbum::with(['songs', 'type', 'artistAliases', 'externalLinks'])->findOrFail($album);
     }
 
     public function getCover($album)

@@ -5,12 +5,15 @@ namespace Modules\Media\Libs\Request\RequestWriter\Music;
 
 
 use Modules\Media\Libs\Request\FileRequest\Saver\ImageFileSaver;
+use Modules\Media\Libs\Request\RequestWriter\Traits\ExternalLinkTrait;
 use Modules\Media\Models\Image\ImageFile;
 use Modules\Media\Models\Music\MusicAlbum;
 use Modules\Shared\Http\Requests\RequestWriter;
 
 class StoreMusicAlbumRequestWriter extends RequestWriter
 {
+    use ExternalLinkTrait;
+
     private ImageFile $imageFile;
 
     public function __construct($request = null, $entity = null)
@@ -57,36 +60,12 @@ class StoreMusicAlbumRequestWriter extends RequestWriter
         $this->entity->songs()->sync($songs);
 
         $this->attachArtistAliases();
+
+        $this->attachLinks();
     }
 
     private function attachArtistAliases()
     {
-//        $this->entity->songs->load('artistAliases');
-//
-//        $aliases = $this->entity->songs->map(function ($song) {
-//            return $song->artistAliases;
-//        })->flatten();
-//
-//        $uniqueAliases = [];
-//
-//        foreach ($aliases as $alias) {
-//            if (isset($uniqueAliases[$alias->id])) {
-//                $uniqueAliases[$alias->id]['artist_songs_count'] = $uniqueAliases[$alias->id]['artist_songs_count'] + 1;
-//            } else {
-//                $uniqueAliases[$alias->id] = ['artist_songs_count' => 1];
-//            }
-//        }
-//
-//        $this->entity->artistAliases()->sync($uniqueAliases);
-
         $this->entity->updateArtistAliases();
-
-//        if ($this->entity->songs->count() > 0) {
-//
-//
-//            foreach ($this->entity->songs as $song) {
-//                if(isset($aliases[]))
-//            }
-//        }
     }
 }

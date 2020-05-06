@@ -5,6 +5,7 @@ namespace Modules\Media\Models\Music;
 
 
 use Modules\Media\Models\Artist\ArtistAlias;
+use Modules\Media\Models\ExternalLink\ExternalLink;
 use Modules\Media\Models\Image\ImageFile;
 use Modules\Shared\Models\BaseModel;
 use Modules\Shared\Models\Pivots\BasePivot;
@@ -41,7 +42,13 @@ class MusicAlbum extends BaseModel
             ->withTimestamps();
     }
 
-    public function updateArtistAliases(){
+    public function externalLinks()
+    {
+        return $this->morphMany(ExternalLink::class, 'linkable');
+    }
+
+    public function updateArtistAliases()
+    {
         $this->songs->load('artistAliases');
 
         $aliases = $this->songs->map(function ($song) {
