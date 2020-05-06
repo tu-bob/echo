@@ -19,9 +19,11 @@
     import AlbumCard from "./AlbumCard";
     import {fetchAlbums} from "../../../../api/mediaApi";
     import Pagination from "../../inputs/Pagination";
+    import AxiosCancellationMixin from "../../../admin/mixins/AxiosCancellationMixin";
 
     export default {
         name: "AlbumsList",
+        mixins: [AxiosCancellationMixin],
         mounted() {
             if (this.providedAlbums)
                 this.albums = this.providedAlbums;
@@ -52,7 +54,9 @@
         methods: {
             fetchAlbums(page = 1) {
                 this.isFetchingAlbums = true;
-                fetchAlbums({order: 'latest', songs: 1, page: page, paginate: 15})
+                fetchAlbums({order: 'latest', songs: 1, page: page, paginate: 15},
+                    {cancelToken: this.getCancellationToken()}
+                )
                     .then(response => {
                         this.pagination = response;
                         this.albums.push(...response.data)
@@ -69,8 +73,8 @@
                     btn.click()
             }
         },
-        watch:{
-            providedAlbums(){
+        watch: {
+            providedAlbums() {
                 this.albums = this.providedAlbums;
             }
         },

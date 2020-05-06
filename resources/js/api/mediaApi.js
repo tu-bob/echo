@@ -12,8 +12,8 @@ export async function fetchArtistAliasesByName(name) {
     return axios.get(`/media/artist/alias/filter?name=${name}`);
 }
 
-export async function fetchAlbums(filters) {
-    return axios.get('/media/music/album/list?' + kvpToQueryParam(filters));
+export async function fetchAlbums(filters, options) {
+    return axios.get('/media/music/album/list?' + kvpToQueryParam(filters), options);
 }
 
 export async function findAlbums(queries) {
