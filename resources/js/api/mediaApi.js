@@ -36,8 +36,8 @@ export async function fetchSong(id) {
     return axios.get(`/media/music/song/${id}`);
 }
 
-export async function fetchSongs(filters) {
-    return axios.get('/media/music/song/list?' + kvpToQueryParam(filters));
+export async function fetchSongs(filters, options) {
+    return axios.get('/media/music/song/list?' + kvpToQueryParam(filters), options);
 }
 
 export function getAlbumCoverUrl(id) {

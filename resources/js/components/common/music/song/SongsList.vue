@@ -16,10 +16,12 @@
     import {fetchSongs} from "../../../../api/mediaApi";
     import SongCard from "./SongCard";
     import Pagination from "../../inputs/Pagination";
+    import AxiosCancellationMixin from "../../../admin/mixins/AxiosCancellationMixin";
 
     export default {
         name: "SongsList",
         components: {Pagination, SongCard},
+        mixins: [AxiosCancellationMixin],
         mounted() {
             if (this.playlist)
                 this.songs = this.playlist;
@@ -31,7 +33,8 @@
             noFetch: Boolean,
             filters: {
                 type: Object,
-                default: () => {}
+                default: () => {
+                }
             }
         },
         data() {
@@ -52,7 +55,9 @@
         methods: {
             fetchSongs(page = 1) {
                 this.isFetchingSongs = true;
-                fetchSongs({...{order: 'latest', page: page, paginate: 15}, ...this.filters})
+                fetchSongs({...{order: 'latest', page: page, paginate: 15}, ...this.filters},
+                    {cancelToken: this.getCancellationToken()}
+                )
                     .then(response => {
                         this.pagination = response;
                         this.songs.push(...response.data);
