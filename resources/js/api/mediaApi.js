@@ -65,8 +65,8 @@ export function getImageUrl(image, type) {
     return `/media/image/${image}/${type}`;
 }
 
-export function fetchVideos(filters) {
-    return axios.get('/media/video/list?' + kvpToQueryParam(filters));
+export function fetchVideos(filters, options) {
+    return axios.get('/media/video/list?' + kvpToQueryParam(filters), options);
 }
 
 export function fetchAudioFile(id) {

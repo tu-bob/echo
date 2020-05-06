@@ -12,7 +12,8 @@
             <div class="row">
                 <songs-list :playlist="songs.slice(0, Math.ceil(songs.length/2))"
                             no-fetch
-                            :class="{'col-md-6':songs.length > 1, 'col-12':songs.length < 2}" @play="updatePlaylist"></songs-list>
+                            :class="{'col-md-6':songs.length > 1, 'col-12':songs.length < 2}"
+                            @play="updatePlaylist"></songs-list>
                 <songs-list :playlist="songs.slice(Math.ceil(songs.length/2))"
                             no-fetch
                             @play="updatePlaylist"
@@ -63,9 +64,11 @@
     import VideosList from "../../../common/video/VideosList";
     import PostsList from "../../blog/PostsList";
     import {fetchPosts} from "../../../../api/blogApi";
+    import AxiosCancellationMixin from "../../../admin/mixins/AxiosCancellationMixin";
 
     export default {
         name: "Overview",
+        mixins: [AxiosCancellationMixin],
         mounted() {
             this.fetchTopSongs();
             this.fetchTopAlbums();
@@ -83,22 +86,30 @@
         components: {PostsList, VideosList, SongsList, AlbumsList},
         methods: {
             fetchTopSongs() {
-                fetchSongs({order: 'play_count:desc,download_count:desc', limit: 8})
+                fetchSongs({order: 'play_count:desc,download_count:desc', limit: 8},
+                    {cancelToken: this.getCancellationToken()}
+                )
                     .then(songs => this.songs = songs)
                     .catch()
             },
             fetchTopAlbums() {
-                fetchAlbums({order: 'play_count:desc,download_count:desc', limit: 8, songs: 1})
+                fetchAlbums({order: 'play_count:desc,download_count:desc', limit: 8, songs: 1},
+                    {cancelToken: this.getCancellationToken()}
+                )
                     .then(albums => this.albums = albums)
                     .catch()
             },
             fetchTopVideos() {
-                fetchVideos({order: 'play_count:desc,download_count:desc', limit: 8})
+                fetchVideos({order: 'play_count:desc,download_count:desc', limit: 8},
+                    {cancelToken: this.getCancellationToken()}
+                )
                     .then(videos => this.videos = videos)
                     .catch()
             },
             fetchTopPosts() {
-                fetchPosts({order: 'view_count:desc', limit: 4})
+                fetchPosts({order: 'view_count:desc', limit: 4},
+                    {cancelToken: this.getCancellationToken()}
+                )
                     .then(posts => this.posts = posts)
                     .catch()
             },
