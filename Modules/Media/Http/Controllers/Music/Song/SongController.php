@@ -55,7 +55,10 @@ class SongController extends BaseController
     public function downloadSong(Song $song)
     {
         if (!$song->audioFile)
-            return response()->json([], 404);
+            return response()->json(['message' => 'Файл не найден'], 404);
+
+        if(!$song->allow_download)
+            return response()->json(['message' => 'Доступ запрещен'], 403);
 
         $song->download_count += 1;
         $song->save();
