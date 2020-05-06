@@ -81,7 +81,7 @@ class Song extends BaseModel
 
     public function externalLinks()
     {
-        return $this->hasMany(ExternalLink::class);
+        return $this->morphMany(ExternalLink::class, 'linkable');
     }
 
     public function getFormattedNameAttribute()

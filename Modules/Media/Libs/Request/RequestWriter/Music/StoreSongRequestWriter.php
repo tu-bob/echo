@@ -171,15 +171,17 @@ class StoreSongRequestWriter extends RequestWriter
         foreach ($newLinks as $resource => $link) {
             $existing = $this->entity->externalLinks->firstWhere('resource', $resource);
             if ($existing) {
-                $existing->update([
-                    'link' => $link
-                ]);
+                if ($link)
+                    $existing->update([
+                        'link' => $link
+                    ]);
+                else $existing->delete();
             } else {
-                ExternalLink::create([
+                $externalLink = new ExternalLink([
                     'resource' => $resource,
                     'link' => $link,
-                    'song_id' => $this->entity->id
                 ]);
+                $this->entity->externalLinks()->save($externalLink);
             }
         }
     }

@@ -16,7 +16,8 @@ class CreateExternalLinksTable extends Migration
         Schema::create('external_links', function (Blueprint $table) {
             $table->char('resource', 50);
             $table->string('link');
-            $table->char('song_id', 26)->index();
+            $table->char('linkable_id', 26)->index();
+            $table->string('linkable_type', 26);
 
             $table->commonFields();
         });
