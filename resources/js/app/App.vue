@@ -1,6 +1,6 @@
 <template>
     <div>
-        <b-overlay variant="dark" no-wrap :show="isMainOverlayVisible">
+        <b-overlay variant="dark" no-wrap :show="isMainOverlayVisible" spinner-variant="light">
 
         </b-overlay>
         <div class="row bg-dark position-relative">
