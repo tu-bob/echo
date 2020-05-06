@@ -25,7 +25,8 @@
                                 <font-awesome-icon icon="backward" :size="playerBtnSize"></font-awesome-icon>
                             </div>
                             <div id="mp-play-pause-btn" class="btn btn-dark" @click="togglePlayPause">
-                                <font-awesome-icon icon="play" :size="playerBtnSize" v-if="!playing"></font-awesome-icon>
+                                <font-awesome-icon icon="play" :size="playerBtnSize"
+                                                   v-if="!playing"></font-awesome-icon>
                                 <font-awesome-icon icon="pause" :size="playerBtnSize" v-else></font-awesome-icon>
                             </div>
                             <div id="mp-next-btn" class="btn btn-dark" @click="next">
@@ -54,7 +55,10 @@
                         {{currentTimeFormatted}}
                     </div>
                     <div id="mp-download-btn mr-1" v-if="ACTIVE_SONG">
-                        <a :href="`/media/music/song/${ACTIVE_SONG.id}/download`" download class="btn btn-dark">
+                        <a :href="`/media/music/song/${ACTIVE_SONG.id}/download`"
+                           download
+                           class="btn btn-dark"
+                           :class="{'disabled': !ACTIVE_SONG.allow_download}">
                             <font-awesome-icon icon="download" :size="playerBtnSize"></font-awesome-icon>
                         </a>
                     </div>

@@ -8,12 +8,16 @@
                     <span class="text-muted text-no-wrap">{{aliases}} </span>
                 </div>
                 <div class="song-buttons">
-                    <a class="btn btn-link" :href="`/media/music/song/${song.id}/download`" download>
-                        <font-awesome-icon class="text-secondary h-text-white"
-                                           icon="download"
-                                           size="lg"></font-awesome-icon>
+                    <a class="btn btn-link"
+                       :class="{'disabled': !song.allow_download}"
+                       :href="`/media/music/song/${song.id}/download`" download>
+                        <font-awesome-icon
+                            :class="{'text-secondary h-text-white': song.allow_download, 'text-dark': !song.allow_download}"
+                            icon="download"
+                            size="lg">
+                        </font-awesome-icon>
                     </a>
-                    <span class="">{{duration}}</span>
+                    <span>{{duration}}</span>
                 </div>
             </div>
         </div>
