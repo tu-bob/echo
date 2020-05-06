@@ -1,5 +1,8 @@
 <template>
     <div>
+        <b-overlay variant="dark" no-wrap :show="isMainOverlayVisible">
+
+        </b-overlay>
         <div class="row bg-dark position-relative">
             <b-navbar toggleable="sm" class="col-8 pl-4" :type="NAV_TYPE" :variant="NAV_VARIANT">
                 <b-navbar-toggle target="mainNavBar" v-if="AUTHENTICATED"></b-navbar-toggle>
@@ -65,15 +68,6 @@
                     </div>
                 </div>
             </div>
-
-            <!--            <b-alert :show="state.errors"-->
-            <!--                     class="mb-5"-->
-            <!--                     variant="danger"-->
-            <!--                     dismissible>-->
-            <!--                <ul>-->
-            <!--                    <li v-for="error in state.errors">{{error[0]}}</li>-->
-            <!--                </ul>-->
-            <!--            </b-alert>-->
             <router-view></router-view>
         </div>
         <player></player>
@@ -124,6 +118,9 @@
             }
         },
         computed: {
+            isMainOverlayVisible() {
+                return this.$store.state.ui.showMainOverlay;
+            },
             ...mapGetters([
                 'AUTHENTICATED',
                 'AVATAR_VARIANT',

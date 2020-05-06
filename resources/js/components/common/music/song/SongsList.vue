@@ -20,7 +20,7 @@
     export default {
         name: "SongsList",
         components: {Pagination, SongCard},
-        created() {
+        mounted() {
             if (this.playlist)
                 this.songs = this.playlist;
             else if (!this.noFetch)

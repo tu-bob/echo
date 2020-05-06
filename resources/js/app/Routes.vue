@@ -141,6 +141,7 @@
     });
 
     router.beforeEach(async (to, from, next) => {
+            store.commit('SHOW_MAIN_OVERLAY');
             if (to.matched.some(record => record.meta.requiresAuth)) {
                 if (store.getters.AUTHENTICATED) {
                     next();
@@ -159,6 +160,7 @@
 
     router.afterEach((to, from) => {
         store.commit('PUSH_ROUTE_TO_HISTORY', from);
+        store.commit('HIDE_MAIN_OVERLAY');
     });
     export default router
 </script>

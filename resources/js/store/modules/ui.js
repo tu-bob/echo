@@ -1,7 +1,8 @@
 import {fetchUser} from "../../api/authApi";
 
 const state = {
-    mode: 'dark'
+    mode: 'dark',
+    showMainOverlay: false
 };
 const getters = {
     NAV_TYPE: state => {
@@ -24,7 +25,14 @@ const getters = {
         }
     }
 };
-const mutations = {};
+const mutations = {
+    SHOW_MAIN_OVERLAY: (state) =>{
+        state.showMainOverlay = true;
+    },
+    HIDE_MAIN_OVERLAY: (state) =>{
+        state.showMainOverlay = false;
+    }
+};
 const actions = {};
 
 export default {
