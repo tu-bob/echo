@@ -9,8 +9,8 @@
                                         rounded></safe-image>
                         </div>
                         <div class="d-none d-md-block col-md-9 col-xl-10">
-                            <h6 class="mb-0 text-white">{{ACTIVE_SONG.title}}</h6>
-                            <span class="text-muted">{{aliases}}</span>
+                            <h6 class="mb-0 text-white text-no-wrap">{{ACTIVE_SONG.title}}</h6>
+                            <span class="text-muted text-no-wrap">{{aliases}}</span>
                         </div>
                     </template>
                 </div>
@@ -19,29 +19,28 @@
                         <div class="mx-auto">
                             <div id="mp-shuffle-btn" @click="toggleShuffle" class="btn btn-dark text-muted">
                                 <font-awesome-icon :class="{'text-white': shuffled}" icon="random"
-                                                   size="lg"></font-awesome-icon>
+                                                   :size="playerBtnSize"></font-awesome-icon>
                             </div>
                             <div id="mp-prev-btn" class="btn btn-dark" @click="prev">
-                                <font-awesome-icon icon="backward" size="lg"></font-awesome-icon>
+                                <font-awesome-icon icon="backward" :size="playerBtnSize"></font-awesome-icon>
                             </div>
                             <div id="mp-play-pause-btn" class="btn btn-dark" @click="togglePlayPause">
-                                <font-awesome-icon icon="play" size="lg" v-if="!playing"></font-awesome-icon>
-                                <font-awesome-icon icon="pause" size="lg" v-else></font-awesome-icon>
+                                <font-awesome-icon icon="play" :size="playerBtnSize" v-if="!playing"></font-awesome-icon>
+                                <font-awesome-icon icon="pause" :size="playerBtnSize" v-else></font-awesome-icon>
                             </div>
                             <div id="mp-next-btn" class="btn btn-dark" @click="next">
-                                <font-awesome-icon icon="forward" size="lg"></font-awesome-icon>
+                                <font-awesome-icon icon="forward" :size="playerBtnSize"></font-awesome-icon>
                             </div>
                             <div id="mp-repeat-btn" @click="toggleRepeat"
                                  class="btn btn-dark position-relative"
                                  :class="{'text-white': REPEAT_STATE !== 'none', 'text-muted': REPEAT_STATE === 'none'}">
-                                <font-awesome-icon icon="redo-alt" size="lg"></font-awesome-icon>
+                                <font-awesome-icon icon="redo-alt" :size="playerBtnSize"></font-awesome-icon>
                                 <span v-show="REPEAT_STATE === 'single'" class="position-absolute"
                                       style="bottom:0; right:6px">1</span>
                             </div>
                         </div>
                     </div>
                 </div>
-
                 <div class="ml-sm-auto form-row player-control">
                     <b-form-input class="align-self-center mr-3 d-none d-md-block"
                                   style="width:80px"
@@ -56,41 +55,38 @@
                     </div>
                     <div id="mp-download-btn mr-1" v-if="ACTIVE_SONG">
                         <a :href="`/media/music/song/${ACTIVE_SONG.id}/download`" download class="btn btn-dark">
-                            <font-awesome-icon icon="download" size="lg"></font-awesome-icon>
+                            <font-awesome-icon icon="download" :size="playerBtnSize"></font-awesome-icon>
                         </a>
                     </div>
                     <div id="mp-playlist-btn" class="btn btn-dark mr-sm-0 mr-md-4" @click="togglePlaylist">
-                        <font-awesome-icon icon="list" size="lg"></font-awesome-icon>
+                        <font-awesome-icon icon="list" :size="playerBtnSize"></font-awesome-icon>
                     </div>
                 </div>
-
                 <div class="progress-bar-wrapper">
                     <div class="player-progress" @mousedown="seekPosition">
                         <div class="player-loading-progress" :style="{ width: this.percentLoaded + '%' }"></div>
                         <div class="player-seeker" :style="{ width: this.percentCompleted + '%' }"></div>
                     </div>
                 </div>
-
-                <div class="player-disable-overlay" v-show="!ACTIVE_SONG">
-
-                </div>
-
-                <audio id="main-player"
-                       class="d-none"
-                       preload="auto"
-                       :src="audioSrc"
-                       @progress="onProgress"
-                       @loadeddata="onMetaLoaded"
-                       @timeupdate="onTimeUpdated"
-                       @pause="playing = false"
-                       @abort="playing = false"
-                       @error="playing = false"
-                       @play="playing = true"
-                       @ended="onEnded"
-                       @canplay="isFetchingSong = false"
-                       :loop="REPEAT_STATE === 'single'">
-                </audio>
+                <div class="player-disable-overlay" v-show="!ACTIVE_SONG"></div>
             </div>
+
+            <audio id="main-player"
+                   class="d-none"
+                   preload="auto"
+                   :src="audioSrc"
+                   @progress="onProgress"
+                   @loadeddata="onMetaLoaded"
+                   @timeupdate="onTimeUpdated"
+                   @pause="playing = false"
+                   @abort="playing = false"
+                   @error="playing = false"
+                   @play="playing = true"
+                   @ended="onEnded"
+                   @canplay="isFetchingSong = false"
+                   :loop="REPEAT_STATE === 'single'">
+            </audio>
+
             <b-overlay :show="isFetchingSong" variant="dark" no-wrap>
                 <template v-slot:overlay>
                     <div class="d-flex align-items-center">
@@ -134,12 +130,14 @@
     import {mapGetters} from "vuex";
     import SongsList from "../music/song/SongsList";
     import SafeImage from "../image/SafeImage";
+    import ViewportSize from "../mixins/ViewportSize";
 
     library.add(faPlay, faPause, faBackward, faForward, faRandom, faRedoAlt, faList, faTimes, faDownload);
 
     export default {
         name: "Player",
         components: {SafeImage, SongsList},
+        mixins: [ViewportSize],
         mounted() {
             this.audio = this.$el.querySelectorAll('audio')[0];
             this.progressBar = this.$el.querySelectorAll('.player-progress')[0];
@@ -279,6 +277,9 @@
                     return secondsToFormattedMinutes(Math.round(this.currentSeconds));
                 else
                     return '0:00'
+            },
+            playerBtnSize() {
+                return this.windowWidth < 800 ? '1x' : 'lg'
             },
             ...mapGetters([
                 'PLAYLIST',
