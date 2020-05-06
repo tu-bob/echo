@@ -8,8 +8,8 @@ export async function fetchPost(idOrSlug) {
     return axios.get(`/blog/post/${idOrSlug}`)
 }
 
-export async function fetchPosts(filters) {
-    return axios.get('/blog/post/list?' + kvpToQueryParam(filters));
+export async function fetchPosts(filters, options) {
+    return axios.get('/blog/post/list?' + kvpToQueryParam(filters), options);
 }
 
 export async function search(query) {

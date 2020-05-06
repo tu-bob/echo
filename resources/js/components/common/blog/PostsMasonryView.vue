@@ -7,9 +7,11 @@
 <script>
     import PostPreview from "../../common/blog/PostPreview";
     import {fetchPosts} from "../../../api/blogApi";
+    import AxiosCancellationMixin from "../../admin/mixins/AxiosCancellationMixin";
 
     export default {
         name: "PostsMasonryView",
+        mixins:[AxiosCancellationMixin],
         mounted() {
             this.fetchPosts()
         },
@@ -21,7 +23,9 @@
         },
         methods: {
             fetchPosts(page = 1) {
-                fetchPosts({order: 'latest', page: page, paginate: 15})
+                fetchPosts({order: 'latest', page: page, paginate: 15},
+                    {cancelToken: this.getCancellationToken()}
+                )
                     .then(response => {
                         this.paginator = response;
                         this.posts.push(...response.data)
