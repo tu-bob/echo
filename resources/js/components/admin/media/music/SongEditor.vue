@@ -364,10 +364,10 @@
                         this.song.clip = {src: null}
                 })
                     .catch(e => {
-                        //TODO
+                            //TODO
                         }
                     )
-                .then(_ => this.busy = false);
+                    .then(_ => this.busy = false);
             },
             submit() {
                 this.busy = true;
@@ -411,7 +411,8 @@
                 }
 
                 for (let [resource, link] of Object.entries(this.song.links)) {
-                    data.append('links[' + resource + ']', link)
+                    if (link)
+                        data.append('links[' + resource + ']', link)
                 }
 
 

@@ -5,8 +5,7 @@ namespace Modules\Media\Libs\Request\RequestWriter\Music;
 
 
 use Modules\Media\Libs\Request\FileRequest\Saver\ImageFileSaver;
-use Modules\Media\Models\Artist\ArtistAlias;
-use Modules\Media\Models\ExternalLink\ExternalLink;
+use Modules\Media\Libs\Request\RequestWriter\Traits\ExternalLinkTrait;
 use Modules\Media\Models\Image\ImageFile;
 use Modules\Media\Models\Music\AudioFile;
 use Modules\Media\Models\Music\MusicAlbum;
@@ -16,6 +15,8 @@ use Modules\Shared\Http\Requests\RequestWriter;
 
 class StoreSongRequestWriter extends RequestWriter
 {
+    use ExternalLinkTrait;
+
     protected AudioFile $audioFile;
 
     protected ImageFile $coverImageFile;
@@ -164,25 +165,25 @@ class StoreSongRequestWriter extends RequestWriter
         }
     }
 
-    private function attachLinks()
-    {
-        $newLinks = isset($this->request['links']) ? $this->request['links'] : [];
-
-        foreach ($newLinks as $resource => $link) {
-            $existing = $this->entity->externalLinks->firstWhere('resource', $resource);
-            if ($existing) {
-                if ($link)
-                    $existing->update([
-                        'link' => $link
-                    ]);
-                else $existing->delete();
-            } else {
-                $externalLink = new ExternalLink([
-                    'resource' => $resource,
-                    'link' => $link,
-                ]);
-                $this->entity->externalLinks()->save($externalLink);
-            }
-        }
-    }
+//    private function attachLinks()
+//    {
+//        $newLinks = isset($this->request['links']) ? $this->request['links'] : [];
+//
+//        foreach ($newLinks as $resource => $link) {
+//            $existing = $this->entity->externalLinks->firstWhere('resource', $resource);
+//            if ($existing) {
+//                if ($link)
+//                    $existing->update([
+//                        'link' => $link
+//                    ]);
+//                else $existing->delete();
+//            } else {
+//                $externalLink = new ExternalLink([
+//                    'resource' => $resource,
+//                    'link' => $link,
+//                ]);
+//                $this->entity->externalLinks()->save($externalLink);
+//            }
+//        }
+//    }
 }
