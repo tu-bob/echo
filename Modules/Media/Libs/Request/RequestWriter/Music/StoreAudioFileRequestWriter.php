@@ -52,7 +52,7 @@ class StoreAudioFileRequestWriter extends RequestWriter
 
         $this->tags = [
             'title' => $this->request['title'],
-            'artist' => implode('/',$aliases),
+            'artist' => implode('/', $aliases),
 //            'album' => 'In the garden',
             'band' => $aliases[0],
 //            'publisher' => $this->request['label'],
@@ -69,7 +69,11 @@ class StoreAudioFileRequestWriter extends RequestWriter
 //            'initial_key'  => $request->initial_key[$key],
         ];
 
-        if(isset($this->request['label']))
+        if (isset($this->request['coverImageFile'])) {
+            $this->tags['picture_path'] = $this->request['coverImageFile']->path();
+        }
+
+        if (isset($this->request['label']))
             $this->tags['publisher'] = $this->request['label'];
     }
 

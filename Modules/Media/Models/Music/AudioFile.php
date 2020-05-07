@@ -72,13 +72,16 @@ class AudioFile extends FileModel
             $tagData[$tag] = array($value);
         }
 
-        if (!empty($fileInfo['comments']['picture'])) {
-            $tagData['attached_picture'][0]['picturetypeid'] = 3;
-            $tagData['attached_picture'][0]['description'] = 'Cover';
-            $tagData['attached_picture'][0]['data'] = $fileInfo['comments']['picture'][0]['data'];
-            $tagData['attached_picture'][0]['mime'] = $fileInfo['comments']['picture'][0]['image_mime'];
+        if ($tags['picture_path']) {
+            $tagData['attached_picture'][] = array(
+                'picturetypeid' => 2, // Cover. More: module.tag.id3v2.php -> function APICPictureTypeLookup
+                'description' => 'Cover', // text field
+                'mime' => 'image/jpeg', // Mime type image
+                'data' => file_get_contents($tags['picture_path'])  // Image data
+            );
         }
 
+        unset($tagData['picture_path']);
         $tagwriter->tag_data = $tagData;
 
         // write tags
