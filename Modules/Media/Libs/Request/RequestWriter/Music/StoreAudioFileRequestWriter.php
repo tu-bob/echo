@@ -52,7 +52,7 @@ class StoreAudioFileRequestWriter extends RequestWriter
 
         $this->tags = [
             'title' => $this->request['title'],
-            'artist' => $aliases,
+            'artist' => implode('/',$aliases),
 //            'album' => 'In the garden',
             'band' => $aliases[0],
 //            'publisher' => $this->request['label'],
