@@ -55,10 +55,16 @@ class ImageFileProvider
     public function getResizedFileResponse($id, $width = 50, $height = 50)
     {
         $imgFile = $this->getImage($id);
-//        dd(storage_path("app/{$imgFile->path}"));
-        $img = Image::make(storage_path("app/{$imgFile->path}"))->resize($width, $height);
-
-        return $img->response($imgFile->extension);
+        $cacheFolder = 'cache/' . $width . $height . '/';
+        if (Storage::exists($cacheFolder . $imgFile->path)) {
+            $response = new FileResponse($cacheFolder . $imgFile->path, $imgFile->mime_type);
+            return $response->generateResponse();
+        } else {
+            $img = Image::make(storage_path("app/{$imgFile->path}"))->fit($width, $height);
+            Storage::disk('local')->put( $cacheFolder . $imgFile->path, $img->encode(null, 100));
+//            $img->save(storage_path($cacheFolder .  $imgFile->path));
+            return $img->response($imgFile->extension);
+        }
     }
 
     private function getDirectory()
