@@ -1,3 +1,8 @@
+LimitRequestBody 33554432
+php_value upload_max_filesize 32M
+php_value post_max_size 32M
+php_value memory_limit 84M
+
 <IfModule mod_rewrite.c>
     <IfModule mod_negotiation.c>
         Options -MultiViews -Indexes

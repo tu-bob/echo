@@ -41,6 +41,9 @@ class ImageController extends BaseController
     public function getImage($image, $type)
     {
         $provider = new ImageFileProvider($type);
-        return $provider->getFileResponse($image);
+
+        return request()->query('width') && request()->query('height') ?
+            $provider->getResizedFileResponse($image, request()->query('width'), request()->query('height'))
+            : $provider->getFileResponse($image);
     }
 }

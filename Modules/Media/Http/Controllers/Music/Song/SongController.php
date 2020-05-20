@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Storage;
 use Modules\Media\Http\Filters\Media\SongFilter;
 use Modules\Media\Http\Requests\Music\SongRequest;
 use Modules\Media\Libs\Request\RequestWriter\Music\StoreSongRequestWriter;
+use Modules\Media\Models\Image\ImageFileProvider;
 use Modules\Media\Models\Music\Song;
 use Modules\Shared\Http\Controllers\BaseController;
 use Modules\Shared\Http\Responses\FileResponse;
@@ -57,7 +58,7 @@ class SongController extends BaseController
         if (!$song->audioFile)
             return response()->json(['message' => 'Файл не найден'], 404);
 
-        if(!$song->allow_download)
+        if (!$song->allow_download)
             return response()->json(['message' => 'Доступ запрещен'], 403);
 
         $song->download_count += 1;
@@ -86,23 +87,24 @@ class SongController extends BaseController
     public function getIcon($song)
     {
 //        $filePath = null;
-        $song = Song::with('coverImage')->findOrFail($song);
-        $coverImage = $song->coverImage;
+        $song = Song::findOrFail($song);
+        $coverImage = $song->cover_image_id;
 //        if ($coverImage)
 //            $filePath = $song->coverImage->path;
 
         if (!$coverImage && request()->get('album')) {
-            $album = $song->albums()->with('cover')
+            $album = $song->albums()
                 ->has('cover')
                 ->first();
 
             if ($album)
-                $coverImage = $album->cover;
+                $coverImage = $album->cover_id;
         }
 
         if ($coverImage) {
-            $response = new FileResponse($coverImage->path, $coverImage->mime_type);
-            return $response->generateResponse();
+            $imageProvider = new ImageFileProvider('cover');
+            return $imageProvider->getResizedFileResponse($coverImage);
+//            return $response->generateResponse();
         } else
             return response()->json(['message' => 'Обложка не найдена'], 404);
     }
