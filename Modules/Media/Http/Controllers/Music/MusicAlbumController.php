@@ -9,6 +9,7 @@ use Modules\Media\Http\Filters\Media\MusicAlbumFilter;
 use Modules\Media\Http\Requests\Music\MusicAlbumRequest;
 use Modules\Media\Libs\Request\RequestWriter\Music\StoreMusicAlbumRequestWriter;
 use Modules\Media\Libs\StringComparator\DiceBestMatchFinder;
+use Modules\Media\Models\Image\ImageFileProvider;
 use Modules\Media\Models\Music\MusicAlbum;
 use Modules\Media\Models\Music\MusicAlbumType;
 use Modules\Shared\Http\Controllers\BaseController;
@@ -48,11 +49,16 @@ class MusicAlbumController extends BaseController
         return MusicAlbum::with(['songs', 'type', 'artistAliases', 'externalLinks'])->findOrFail($album);
     }
 
-    public function getCover($album)
-    {
-        $cover = MusicAlbum::whereHas('cover')->where('id', $album)->firstOrFail()->cover;
-        $fileResponse = new FileResponse($cover->path, $cover->mime_type);
-        return $fileResponse->generateResponse();
+    public function getCover(MusicAlbum $album)
+    {;
+        $imageProvider = new ImageFileProvider('cover');
+        return $imageProvider->getResizedFileResponse(
+            $album->cover_id,
+            request()->get('width', 500),
+            request()->get('height', 500)
+        );
+//        $fileResponse = new FileResponse($cover->path, $cover->mime_type);
+//        return $fileResponse->generateResponse();
     }
 
     public function countPlay(MusicAlbum $album)
@@ -62,7 +68,7 @@ class MusicAlbumController extends BaseController
         return;
     }
 
-        public function filter()
+    public function filter()
     {
         $aliases = MusicAlbum::all();
         $finder = new DiceBestMatchFinder(request()->get('title'), $aliases->all(), 'title');

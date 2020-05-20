@@ -49,7 +49,7 @@ class StoreMusicAlbumRequestWriter extends RequestWriter
 
     public function saveFile()
     {
-        $saver = new ImageFileSaver($this->request['albumCoverFile'], 'albumCover');
+        $saver = new ImageFileSaver($this->request['albumCoverFile'], 'cover');
         $this->imageFile = $saver->saveFile();
     }
 
