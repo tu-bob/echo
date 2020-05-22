@@ -225,7 +225,7 @@
     import {fetchArtistAliasesByName, fetchAlbums, fetchGenres, fetchSong} from '../../../../api/mediaApi.js'
     import * as ss from 'string-similarity';
     import ImageUploader from "../../../common/inputs/ImageUploader";
-    import {getSongIconUrl} from "../../../../api/mediaApi";
+    import {findAlbums, getSongIconUrl} from "../../../../api/mediaApi";
     import {secondsToFormattedMinutes} from "../../../../util/stringHelper";
     import ResetErrorsMixin from "../../mixins/ResetErrorsMixin";
 
@@ -343,7 +343,7 @@
                 })
             },
             fetchAlbum(title) {
-                fetchAlbums({'title': title})
+                findAlbums({'title': title})
                     .then(albums => {
                         if (albums && albums.length > 0)
                             this.onAlbumSelected(albums[0]);
