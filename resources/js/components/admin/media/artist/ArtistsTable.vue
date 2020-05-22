@@ -44,7 +44,7 @@
             },
             url: {
                 type: String,
-                default: '/media/artist/list'
+                default: '/media/artist/list?order=latest&'
             }
         },
         data() {

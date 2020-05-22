@@ -135,7 +135,7 @@
                 let url = this.url;
                 if (this.paginate) {
                     page = page ? page : 1;
-                    url += `?paginate=${this.paginate}&page=${page}`;
+                    url += `paginate=${this.paginate}&page=${page}`;
                 }
                 return url;
             }

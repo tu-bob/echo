@@ -48,7 +48,7 @@
             },
             url: {
                 type: String,
-                default: '/media/music/song/list'
+                default: '/media/music/song/list?order=latest&'
             }
         },
         data() {
