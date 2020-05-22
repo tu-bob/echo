@@ -236,9 +236,10 @@
             prev() {
                 this.$store.commit('PLAY_PREV');
             },
-            setDocumentTitle() {
+            updateDocumentMeta() {
                 document.title = this.ACTIVE_SONG.title + ' - '
                     + concatStrings(this.ACTIVE_SONG.artistAliases.map(alias => alias.name), ';');
+                $("link[rel*='icon']").attr("href", getSongIconUrl(this.ACTIVE_SONG.id));
             }
         },
         watch: {
@@ -258,7 +259,7 @@
                 this.isFetchingSong = true;
                 this.bufferedSeconds = 0;
                 this.playCountUpdated = false;
-                this.setDocumentTitle()
+                this.updateDocumentMeta()
             }
         },
         computed: {
