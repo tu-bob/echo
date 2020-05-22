@@ -51,8 +51,11 @@
 </template>
 
 <script>
+    import TitleMixin from "../../admin/mixins/TitleMixin";
+
     export default {
-        name: "AboutUs"
+        name: "AboutUs",
+        mixins: [TitleMixin]
     }
 </script>
 

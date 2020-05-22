@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>Echo.tj - музыкальное наследие Таджикистана</title>
+    <title>Echo.tj - Музыкальное наследие Таджикистана</title>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>

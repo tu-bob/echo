@@ -10,6 +10,7 @@
 <script>
 
     import SongsList from "../../common/music/song/SongsList";
+    import TitleMixin from "../../admin/mixins/TitleMixin";
 
     export default {
         name: "Music",
@@ -17,6 +18,12 @@
         props: {
             genres: String
         },
+        data() {
+            return {
+                title: 'Echo.tj - Музыка Таджикистана'
+            }
+        },
+        mixins: [TitleMixin],
         computed: {
             filters() {
                 return this.genres ? {genres: this.genres} : {};
