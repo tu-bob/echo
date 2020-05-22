@@ -79,9 +79,9 @@ class AudioFile extends FileModel
                 'mime' => 'image/jpeg', // Mime type image
                 'data' => file_get_contents($tags['picture_path'])  // Image data
             );
+            unset($tagData['picture_path']);
         }
 
-        unset($tagData['picture_path']);
         $tagwriter->tag_data = $tagData;
 
         // write tags
