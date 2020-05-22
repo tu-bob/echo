@@ -17,7 +17,7 @@ class CreateMusicAlbumSongTable extends Migration
             $table->char('id', 26)->primary();
             $table->char('music_album_id', 26)->index();
             $table->char('song_id', 26)->index();
-            $table->integer('song_number', 26)->default(0);
+            $table->integer('song_number')->default(0);
 
             $table->timestamps();
         });
