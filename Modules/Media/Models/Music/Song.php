@@ -53,7 +53,8 @@ class Song extends BaseModel
     {
         return $this->belongsToMany(ArtistAlias::class)
             ->using(BasePivot::class)
-            ->withTimestamps();
+            ->withTimestamps()
+            ->latest();
     }
 
     public function genres()
