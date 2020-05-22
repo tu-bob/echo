@@ -60,8 +60,8 @@
                     <b-input-group class="mb-2" prepend="YouTube">
                         <input class="form-control" v-model="song.clip.src" type="url">
                     </b-input-group>
-                    <b-input-group class="mb-2" prepend="iTunes">
-                        <input class="form-control" v-model="song.links.iTunes" type="url">
+                    <b-input-group class="mb-2" prepend="Apple Music">
+                        <input class="form-control" v-model="song.links.appleMusic" type="url">
                     </b-input-group>
                     <b-input-group class="mb-2" prepend="Yandex Music">
                         <input class="form-control" v-model="song.links.yandexMusic" type="url">
@@ -263,7 +263,7 @@
                     english_title: null,
                     clip: {src: null},
                     links: {
-                        iTunes: null,
+                        appleMusic: null,
                         yandexMusic: null,
                         googleMusic: null,
                         spotify: null
@@ -508,7 +508,7 @@
                     lossless: null,
                     playtime_seconds: null,
                     links: {
-                        iTunes: null,
+                        appleMusic: null,
                         yandexMusic: null,
                         googleMusic: null,
                         spotify: null
