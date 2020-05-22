@@ -15,7 +15,7 @@ class SongRequest extends BaseFormRequest
             'mp3File' => 'nullable|file',
             'coverImageFile' => 'nullable|file|mimes:jpg,jpeg,png|max:2048|dimensions:max_width=500,max_height=500',
             'title' => 'required|string',
-            'year' => 'required|string',
+            'year' => 'required|string|numeric',
             'label' => 'nullable|string',
             'artistAliases' => 'required|array',
             'artistAliases.*' => 'required|exists:artist_aliases,id',
