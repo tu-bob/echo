@@ -72,7 +72,7 @@ class AudioFile extends FileModel
             $tagData[$tag] = array($value);
         }
 
-        if ($tags['picture_path']) {
+        if (isset($tags['picture_path'])) {
             $tagData['attached_picture'][] = array(
                 'picturetypeid' => 2, // Cover. More: module.tag.id3v2.php -> function APICPictureTypeLookup
                 'description' => 'Cover', // text field
