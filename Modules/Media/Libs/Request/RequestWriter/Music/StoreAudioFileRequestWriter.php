@@ -61,7 +61,7 @@ class StoreAudioFileRequestWriter extends RequestWriter
                 ->map(function ($genre) {
                     return $genre->name;
                 })
-                ->all(),
+                ->implode('/'),
             'year' => $this->request['year'],
             'url_artist' => 'echo.tj'
 //            'track_number' => $request->track_number[$key],
