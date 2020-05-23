@@ -8,7 +8,7 @@ use Modules\Shared\Models\FileModel;
 
 class AudioFile extends FileModel
 {
-    public $tags;
+    public $tags = [];
 
     public function song()
     {
@@ -25,7 +25,7 @@ class AudioFile extends FileModel
     {
         $getID3 = new \getID3;
         $fileInfo = $getID3->analyze($this->path, null, 'random.mp3');
-  
+
         // Get all the common tags
         if (isset($fileInfo['tags_html'])) {
             if (isset($fileInfo['tags_html']['id3v2']))
@@ -61,7 +61,7 @@ class AudioFile extends FileModel
         $tagwriter->tag_encoding = $textEncoding;
         $tagwriter->remove_other_tags = true;
 
-        $fileInfo = $getID3->analyze($this->path);
+//        $fileInfo = $getID3->analyze($this->path);
 
         //XXX This will remove all tags
         // \getid3_lib::CopyTagsToComments($fileInfo);

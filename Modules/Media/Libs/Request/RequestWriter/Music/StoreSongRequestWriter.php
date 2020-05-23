@@ -89,7 +89,7 @@ class StoreSongRequestWriter extends RequestWriter
         $extracted = [];
         if (isset($this->extractedInfo['audio'])) {
             $extracted = [
-                'bitrate' => $this->extractedInfo['audio']['bitrate'],
+                'bitrate' => isset($this->extractedInfo['audio']['bitrate']) ? $this->extractedInfo['audio']['bitrate'] : 0,
                 'sample_rate' => $this->extractedInfo['audio']['sample_rate'],
                 'compression_ratio' => isset($this->extractedInfo['audio']['compression_ratio']) ?
                     $this->extractedInfo['audio']['compression_ratio'] : null,

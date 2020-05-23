@@ -55,7 +55,8 @@ class StoreAudioFileRequestWriter extends RequestWriter
             'artist' => implode('/', $aliases),
 //            'album' => 'In the garden',
             'band' => $aliases[0],
-//            'publisher' => $this->request['label'],
+            'publisher' => isset($this->request['label']) ? $this->request['label'] : 'echo.tj',
+            'comment' => 'Downloaded from echo.tj - Musical Echo of Tajikistan',
             'genre' => Genre::whereIn('id', $this->request['genres'])
                 ->get()
                 ->map(function ($genre) {
@@ -63,7 +64,9 @@ class StoreAudioFileRequestWriter extends RequestWriter
                 })
                 ->implode('/'),
             'year' => $this->request['year'],
-            'url_artist' => 'echo.tj'
+            'url_artist' => 'echo.tj',
+            'url_user' => 'echo.tj',
+            'unsynchronised_lyric' => isset($this->request['lyrics']) ? $this->request['lyrics'] : 'Find lyrics at echo.tj'
 //            'track_number' => $request->track_number[$key],
 //            'bpm'          => $request->bpm[$key],
 //            'initial_key'  => $request->initial_key[$key],
