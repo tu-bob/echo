@@ -25,10 +25,13 @@ class AudioFile extends FileModel
     {
         $getID3 = new \getID3;
         $fileInfo = $getID3->analyze($this->path, null, 'random.mp3');
-
+  
         // Get all the common tags
         if (isset($fileInfo['tags_html'])) {
-            $this->tags = $fileInfo['tags_html']['id3v2'];
+            if (isset($fileInfo['tags_html']['id3v2']))
+                $this->tags = $fileInfo['tags_html']['id3v2'];
+            elseif (isset($fileInfo['tags_html']['id3v1']))
+                $this->tags = $fileInfo['tags_html']['id3v1'];
         }
         // Adding the cover art if it is available
         if (isset($fileInfo['comments']['picture'])) {
