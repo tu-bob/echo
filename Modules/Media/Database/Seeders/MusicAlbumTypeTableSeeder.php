@@ -28,6 +28,7 @@ class MusicAlbumTypeTableSeeder extends Seeder
             ['Remix album'],
             ['Sampler album'],
             ['Soundtrack album'],
+            ['Single album'],
             ['Split album'],
             ['Spoken word album'],
             ['Studio album'],
