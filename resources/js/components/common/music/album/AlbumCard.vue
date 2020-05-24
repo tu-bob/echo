@@ -12,7 +12,7 @@
         </div>
 
 
-        <h5 class="mt-3 mb-0">{{album.title}}</h5>
+        <h5 class="mt-3 mb-0">{{album.title}} <span v-if="album.type && album.type.name === 'Single album'">- Сингл</span></h5>
         <span class="text-muted">{{artists}}</span>
     </div>
 </template>

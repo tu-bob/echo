@@ -38,7 +38,7 @@ class MusicAlbumController extends BaseController
 
     public function getAlbums()
     {
-        $query = MusicAlbum::with('artistAliases');
+        $query = MusicAlbum::with('artistAliases', 'type');
         $filter = new MusicAlbumFilter(request()->all(), $query);
         return $this->callGetOrPaginate($filter->filter());
     }
