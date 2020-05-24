@@ -22,19 +22,19 @@
         </b-row>
 
             <div class="d-flex w-100 flex-wrap justify-content-end align-items-baseline mt-5">
-                <a v-if="getLink('googleMusic')" :href="getLink('googleMusic')">
+                <a v-if="getLink('googleMusic')" target="blank" :href="getLink('googleMusic')">
                     <img width="220px" class="mr-3 mb-3" src="/icons/png/google-play-logo.png">
                 </a>
-                <a v-if="getLink('yandexMusic')" :href="getLink('yandexMusic')">
+                <a v-if="getLink('yandexMusic')" target="blank" :href="getLink('yandexMusic')">
                     <img width="260px" class="mr-3 mb-3 link-border" src="/icons/svg/yandex-music-logo.svg">
                 </a>
-                <a v-if="getLink('appleMusic')" :href="getLink('appleMusic')">
+                <a v-if="getLink('appleMusic')" target="blank" :href="getLink('appleMusic')">
                     <img width="280px" class="mr-3 mb-3" src="/icons/svg/apple-music-logo.svg">
                 </a>
-                <a v-if="getLink('spotify')" :href="getLink('spotify')">
+                <a v-if="getLink('spotify')" target="blank" :href="getLink('spotify')">
                     <img width="220px" class="mr-3 mb-3" src="/icons/png/spotify-logo.png">
                 </a>
-                <a v-if="getLink('youtube')" :href="getLink('youtube')">
+                <a v-if="getLink('youtube')" target="blank" :href="getLink('youtube')">
                     <img width="220px" class="mr-3 mb-3" src="/icons/png/youtube-logo.png">
                 </a>
 
