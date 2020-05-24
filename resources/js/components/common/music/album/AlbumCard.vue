@@ -1,19 +1,21 @@
 <template>
     <div class="text-white">
-        <div class="h-overlay-container cursor-pointer" @click="play">
-<!--            <b-img class="album-cover" @error="onCoverLoadError" blankColor="#a892f8cf" :blank="coverLoadFailed" rounded-->
-<!--                   :src="coverUrl" alt=""></b-img>-->
+        <div class="h-overlay-container cursor-pointer" @click="play" title="Послушать альбом">
+            <!--            <b-img class="album-cover" @error="onCoverLoadError" blankColor="#a892f8cf" :blank="coverLoadFailed" rounded-->
+            <!--                   :src="coverUrl" alt=""></b-img>-->
             <safe-image :src="coverUrl" class="album-cover" fallback-blank rounded></safe-image>
-            <div class="bg-violet-gradient h-overlay d-flex align-items-center">
+            <div class="h-overlay d-flex align-items-center">
                 <div class="btn btn-light mx-auto">
                     <img class="icon-btn-xl" src="/icons/svg/play-btn-light.svg">
                 </div>
             </div>
         </div>
 
-
-        <h5 class="mt-3 mb-0">{{album.title}} <span v-if="album.type && album.type.name === 'Single album'">- Сингл</span></h5>
-        <span class="text-muted">{{artists}}</span>
+        <router-link class="text-decoration-none text-white" :to="{name: 'album-view', params:{id: album.id}}">
+            <h5 class="mt-3 mb-0 cursor-pointer" title="Перейти к альбому">{{album.title}} <span
+                v-if="album.type && album.type.name === 'Single album'">- Сингл</span></h5>
+            <span class="text-muted">{{artists}}</span>
+        </router-link>
     </div>
 </template>
 
