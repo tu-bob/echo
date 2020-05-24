@@ -29,7 +29,10 @@
                             </font-awesome-icon>
                         </template>
                         <b-dropdown-item :to="{name:'song-view', params:{id:song.id}}">
-                           Подробности ...
+                            Перейти к песне
+                        </b-dropdown-item>
+                        <b-dropdown-item :to="{name:'artist-view', params:{id:song.artistAliases[0].id}}">
+                            Перейти к исполнителю
                         </b-dropdown-item>
                     </b-dropdown>
                     <span>{{duration}}</span>
