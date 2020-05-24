@@ -2,7 +2,7 @@
     <b-container fluid="md" v-if="artist">
         <div class="d-flex flex-wrap mb-5">
             <b-avatar size="200px"
-                      class="mr-5"
+                      class="mr-5 mb-4"
                       src="https://is5-ssl.mzstatic.com/image/thumb/Music/0e/98/0e/mzi.izbblfhm.tif/190x190cc.jpg"></b-avatar>
 
             <div>
@@ -10,27 +10,33 @@
                 <h2 class="typography-title text-secondary">{{aliases}}</h2>
             </div>
         </div>
-        <div>
+        <div v-if="artist.albums && artist.albums.length > 0">
             <h2 class="typography-title text-secondary mt-5 mb-4">Альбомы</h2>
             <div class="d-flex flex-wrap justify-content-start">
                 <album-card class="mb-4 mr-4"
-                            style="width: 350px"
+                            style="width: 300px"
                             v-for="album in artist.albums"
                             :key="album.id"
                             :album="album">
                 </album-card>
             </div>
         </div>
-        <div>
+        <div v-if="artist.songs && artist.songs.length > 0">
             <h2 class="typography-title text-secondary mt-5 mb-4">Песни</h2>
             <div class="row">
                 <songs-list :playlist="artist.songs.slice(0, Math.ceil(artist.songs.length/2))"
                             no-fetch
                             :class="{'col-md-6':artist.songs.length > 1, 'col-12':artist.songs.length < 2}"
-                            ></songs-list>
+                ></songs-list>
                 <songs-list :playlist="artist.songs.slice(Math.ceil(artist.songs.length/2))"
                             no-fetch
                             class="col-md-6"></songs-list>
+            </div>
+        </div>
+        <div v-if="artist.clips && artist.clips.length > 0">
+            <h2 class="typography-title text-secondary mt-5 mb-4">Видео</h2>
+            <div class="d-flex flex-wrap">
+                <video-card v-for="clip in artist.clips" :video="clip" :key="clip.id" style="width: 300px"></video-card>
             </div>
         </div>
     </b-container>
@@ -40,13 +46,15 @@
     import {concatStrings} from "../../../util/stringHelper";
     import AlbumCard from "../../common/music/album/AlbumCard";
     import SongsList from "../../common/music/song/SongsList";
+    import VideosList from "../../common/video/VideosList";
+    import VideoCard from "../../common/video/VideoCard";
 
     export default {
         name: "ArtistView",
         props: {
             id: null
         },
-        components: {SongsList, AlbumCard},
+        components: {VideoCard, VideosList, SongsList, AlbumCard},
         data() {
             return {
                 artist: null

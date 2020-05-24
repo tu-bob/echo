@@ -4,9 +4,11 @@ namespace Modules\Media\Models\Artist;
 
 
 use Modules\Shared\Models\BaseModel;
+use function foo\func;
 
 /**
  * @property mixed aliases
+ * @property mixed songs
  */
 class Artist extends BaseModel
 {
@@ -39,5 +41,12 @@ class Artist extends BaseModel
         return $this->aliases->flatMap(function ($alias) {
             return $alias->albums;
         })->unique('id')->values();
+    }
+
+    public function getClipsAttribute()
+    {
+        return $this->songs->map(function ($song) {
+            return $song->clip;
+        })->whereNotNull()->unique('id')->values();
     }
 }

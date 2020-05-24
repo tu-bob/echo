@@ -24,6 +24,38 @@ html::-webkit-scrollbar {
   white-space: nowrap;
 }
 
+.thumb-sm {
+  -o-object-fit: cover;
+     object-fit: cover;
+  width: 50px !important;
+  height: 50px;
+}
+
+.btn-text-white {
+  color: #9a9da0 !important;
+}
+
+.btn-text-white:hover {
+  color: rgba(255, 255, 255, 0.75) !important;
+}
+
+.transparent-btn {
+  background: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+  border: none !important;
+}
+
+.transparent-btn:hover,
+.transparent-btn:focus,
+.transparent-btn:active,
+.transparent-btn:active:focus {
+  background: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+  border: none !important;
+}
+
 .icon-btn-sm {
   width: 18px;
 }
@@ -38,21 +70,6 @@ html::-webkit-scrollbar {
 
 .icon-btn-xl {
   width: 3rem;
-}
-
-.thumb-sm {
-  -o-object-fit: cover;
-     object-fit: cover;
-  width: 50px !important;
-  height: 50px;
-}
-
-.btn-text-white {
-  color: #9a9da0 !important;
-}
-
-.btn-text-white:hover {
-  color: rgba(255, 255, 255, 0.75) !important;
 }
 
 .bg-laravel {
@@ -107,6 +124,13 @@ html::-webkit-scrollbar {
 
 .h-text-white:hover {
   color: #ffffff !important;
+}
+
+.typography-header-emphasized {
+  font-size: 34px;
+  line-height: 1.17649;
+  font-weight: 700;
+  letter-spacing: 0.005em;
 }
 
 .typography-title-emphasized {

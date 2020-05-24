@@ -11,7 +11,7 @@ class AliasArtistController
     public function show(Artist $artist)
     {
         $artist->load('aliases');
-        $artist->setAppends(['albums', 'songs']);
+        $artist->setAppends(['albums', 'songs', 'clips']);
         return $artist;
     }
 }
