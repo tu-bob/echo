@@ -46,7 +46,7 @@ class MusicAlbum extends BaseModel
     {
         return $this->songs->flatMap(function ($song) {
             return $song->genres;
-        })->unique('id');
+        })->unique('id')->values();
     }
 
     public function externalLinks()
