@@ -6,7 +6,7 @@
             </div>
 
             <pagination v-if="pagination"
-                        ref="albums-list-pagination"
+                        ref="videos-list-pagination"
                         flow
                         :pagination="pagination"
                         class="mt-5"
@@ -91,8 +91,8 @@
                         this.pagination = response;
                         this.videos.push(...response.data);
                     })
-                    .catch()
-                    .then(_ => {
+                    .finally(_ => {
+                        this.$refs['videos-list-pagination'].loaded();
                         this.isFetchingVideos = false
                     })
             },

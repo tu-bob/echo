@@ -61,8 +61,7 @@
                         this.pagination = response;
                         this.albums.push(...response.data)
                     })
-                    .catch()
-                    .then(_ => {
+                    .finally(_ => {
                         this.$refs['albums-list-pagination'].loaded();
                         this.isFetchingAlbums = false;
                     })
