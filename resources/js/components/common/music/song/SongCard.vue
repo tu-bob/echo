@@ -1,7 +1,11 @@
 <template>
-    <div class="mb-3 px-0 h-border-violet" :class="{active: ACTIVE_SONG && ACTIVE_SONG.id === song.id}">
+    <div class="mb-3 px-0 h-border-violet h-cursor"
+         :class="{active: ACTIVE_SONG && ACTIVE_SONG.id === song.id}">
         <div class="d-flex text-white text-left" @click="play">
-            <safe-image :src="coverUrl" fallbackSrc="/icons/svg/music.svg" class="thumb"></safe-image>
+            <safe-image :src="coverUrl"
+                        fallbackSrc="/icons/svg/music.svg"
+                        class="thumb"
+                        :alt="`Обложка песни ${song.title} - ${aliases}`"></safe-image>
             <div class="song-details">
                 <div class="song-title">
                     <h6 class="mb-0 text-no-wrap">{{song.title}}</h6>

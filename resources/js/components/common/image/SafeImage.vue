@@ -1,5 +1,11 @@
 <template>
-    <b-img :src="safeSrc" @error="onImageError" :blankColor="blankColor" :blank="blank" :rounded="rounded"></b-img>
+    <b-img :src="safeSrc"
+           :blankColor="blankColor"
+           :blank="blank"
+           :rounded="rounded"
+           :alt="alt"
+           @error="onImageError">
+    </b-img>
 </template>
 
 <script>
@@ -17,6 +23,7 @@
             },
             fallbackBlank: Boolean,
             rounded: Boolean,
+            alt: ''
         },
         data() {
             return {

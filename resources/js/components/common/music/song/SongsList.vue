@@ -1,6 +1,6 @@
 <template>
     <div>
-        <song-card class="cursor-pointer" v-for="song in songs" :song="song" :key="song.id"
+        <song-card v-for="song in songs" :song="song" :key="song.id"
                    @play="playSong"></song-card>
         <pagination v-if="pagination && !noFetch"
                     ref="songs-list-pagination"
