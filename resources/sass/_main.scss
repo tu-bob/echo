@@ -1,3 +1,5 @@
+@import "mixins";
+
 html, body {
     height: 100%;
     position: relative;
@@ -21,6 +23,25 @@ html::-webkit-scrollbar {
     white-space: nowrap
 }
 
+.thumb-sm {
+    object-fit: cover;
+    width: 50px !important;
+    height: 50px;
+}
+
+//buttons
+.btn-text-white {
+    color: #9a9da0 !important;
+
+    &:hover {
+        color: rgb(255, 255, 255, 0.75) !important;
+    }
+}
+
+.transparent-btn {
+    @include transparent-btn;
+}
+
 .icon-btn-sm {
     width: 18px;
 }
@@ -37,19 +58,7 @@ html::-webkit-scrollbar {
     width: 3rem;
 }
 
-.thumb-sm {
-    object-fit: cover;
-    width: 50px !important;
-    height: 50px;
-}
-
-.btn-text-white {
-    color: #9a9da0 !important;
-
-    &:hover {
-        color: rgb(255, 255, 255, 0.75) !important;
-    }
-}
+//end buttons
 
 .bg-laravel {
     background-color: #f8fafc !important;

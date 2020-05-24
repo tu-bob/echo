@@ -12,7 +12,8 @@
                     <span class="text-muted text-no-wrap">{{aliases}} </span>
                 </div>
                 <div class="song-buttons">
-                    <a class="btn btn-link"
+                    <a class="btn transparent-btn"
+                       @click.stop
                        :class="{'disabled': !song.allow_download}"
                        :href="`/media/music/song/${song.id}/download`" download>
                         <font-awesome-icon

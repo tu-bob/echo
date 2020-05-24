@@ -1,0 +1,14 @@
+@mixin transparent {
+    background: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+    border: none !important;
+}
+
+@mixin transparent-btn{
+    @include transparent;
+
+    &:hover, &:focus,&:active,  &:active:focus  {
+        @include transparent;
+    }
+}
