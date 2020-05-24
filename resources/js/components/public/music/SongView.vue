@@ -21,19 +21,22 @@
                     <font-awesome-icon icon="play" size="sm" class="mr-1"></font-awesome-icon>
                     Слушать
                 </b-button>
-                <pre v-if="song.lyrics" class="song-lyrics" style="max-height: 100px">{{song.lyrics}}
+
+                <template v-if="song.lyrics" >
+                <pre class="song-lyrics" style="max-height: 100px">{{song.lyrics}}
                 </pre>
-                <a href="#" @click="showLyrics = !showLyrics">
-                    <span v-if="!showLyrics">Показать текст</span>
-                    <span v-else>Скрыть текст</span>
-                </a>
+                    <a href="#" @click="showLyrics = !showLyrics">
+                        <span v-if="!showLyrics">Показать текст</span>
+                        <span v-else>Скрыть текст</span>
+                    </a>
+                </template>
             </b-col>
         </b-row>
 
         <div class="mt-5" v-if="song.albums && song.albums.length > 0">
             <h3 class="typography-title text-white mb-4">Песня в альбомах</h3>
-            <div class="d-flex justify-content-start">
-                <album-card v-for="album in song.albums" :key="album.id" :album="album"></album-card>
+            <div class="d-flex flex-wrap justify-content-start">
+                <album-card class="mb-4 mr-4" style="width: 350px" v-for="album in song.albums" :key="album.id" :album="album"></album-card>
             </div>
         </div>
 

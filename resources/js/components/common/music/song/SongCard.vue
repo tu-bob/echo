@@ -9,19 +9,29 @@
             <div class="song-details">
                 <div class="song-title">
                     <h6 class="mb-0 text-no-wrap">{{song.title}}</h6>
-                    <span class="text-muted text-no-wrap">{{aliases}} </span>
+                    <span class="text-muted text-no-wrap">{{aliases}}</span>
                 </div>
                 <div class="song-buttons">
-                    <a class="btn transparent-btn"
+                    <a class="btn transparent-btn pr-0"
                        @click.stop
                        :class="{'disabled': !song.allow_download}"
                        :href="`/media/music/song/${song.id}/download`" download>
                         <font-awesome-icon
-                            :class="{'text-secondary h-text-white': song.allow_download, 'text-dark': !song.allow_download}"
+                            :class="{'text-secondary': song.allow_download, 'text-dark': !song.allow_download}"
                             icon="download"
                             size="lg">
                         </font-awesome-icon>
                     </a>
+                    <b-dropdown @click.stop toggle-class="transparent-btn" right no-caret>
+                        <template v-slot:button-content>
+                            <font-awesome-icon icon="ellipsis-h"
+                                               class="text-secondary h-text-white">
+                            </font-awesome-icon>
+                        </template>
+                        <b-dropdown-item :to="{name:'song-view', params:{id:song.id}}">
+                           Подробности ...
+                        </b-dropdown-item>
+                    </b-dropdown>
                     <span>{{duration}}</span>
                 </div>
             </div>
@@ -34,6 +44,10 @@
     import {getSongIconUrl} from "../../../../api/mediaApi";
     import {mapGetters} from "vuex";
     import SafeImage from "../../image/SafeImage";
+    import {library} from '@fortawesome/fontawesome-svg-core'
+    import {faDownload, faEllipsisH, faInfoCircle} from '@fortawesome/free-solid-svg-icons'
+
+    library.add(faDownload, faEllipsisH, faInfoCircle);
 
     export default {
         name: "SongCard",
@@ -54,7 +68,7 @@
         },
         computed: {
             aliases() {
-                return concatStrings(this.song.artistAliases.map(alias => alias.name), ';');
+                return concatStrings(this.song.artistAliases.map(alias => alias.name), ' ·');
             },
             duration() {
                 return secondsToFormattedMinutes(this.song.playtime_seconds)
@@ -89,7 +103,7 @@
     }
 
     .song-buttons {
-        width: 74px;
+        width: 114px;
         display: flex;
         align-items: baseline;
         height: 100%;
