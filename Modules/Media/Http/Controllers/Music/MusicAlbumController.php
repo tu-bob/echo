@@ -4,7 +4,6 @@
 namespace Modules\Media\Http\Controllers\Music;
 
 
-use Illuminate\Support\Facades\Storage;
 use Modules\Media\Http\Filters\Media\MusicAlbumFilter;
 use Modules\Media\Http\Requests\Music\MusicAlbumRequest;
 use Modules\Media\Libs\Request\RequestWriter\Music\StoreMusicAlbumRequestWriter;
@@ -46,16 +45,19 @@ class MusicAlbumController extends BaseController
 
     public function getAlbum($album)
     {
-        return MusicAlbum::with(['songs', 'type', 'artistAliases', 'externalLinks'])->findOrFail($album);
+        return MusicAlbum::with(['songs.artistAliases', 'songs.genres', 'type', 'artistAliases', 'externalLinks'])
+            ->findOrFail($album)
+            ->append('genres');
     }
 
     public function getCover(MusicAlbum $album)
-    {;
+    {
+        ;
         $imageProvider = new ImageFileProvider('cover');
         return $imageProvider->getResizedFileResponse(
             $album->cover_id,
-            request()->get('width', 500),
-            request()->get('height', 500)
+            request()->get('width', 400),
+            request()->get('height', 400)
         );
 //        $fileResponse = new FileResponse($cover->path, $cover->mime_type);
 //        return $fileResponse->generateResponse();

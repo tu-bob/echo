@@ -70,6 +70,12 @@
                 ]
             },
             {
+                name: 'album-view',
+                path: '/albums/:id',
+                props: true,
+                component: () => import('../components/public/album/AlbumView')
+            },
+            {
                 name: 'post-reader',
                 path: '/blog/post/:slug',
                 props: true,

@@ -42,6 +42,13 @@ class MusicAlbum extends BaseModel
             ->withTimestamps();
     }
 
+    public function getGenresAttribute()
+    {
+        return $this->songs->flatMap(function ($song) {
+            return $song->genres;
+        })->unique('id');
+    }
+
     public function externalLinks()
     {
         return $this->morphMany(ExternalLink::class, 'linkable');
