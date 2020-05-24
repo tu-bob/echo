@@ -12,12 +12,12 @@
             <div class="row">
                 <songs-list :playlist="songs.slice(0, Math.ceil(songs.length/2))"
                             no-fetch
-                            :class="{'col-md-6':songs.length > 1, 'col-12':songs.length < 2}"
-                            @play="updatePlaylist"></songs-list>
+                            :class="{'col-md-6':songs.length > 1, 'col-12':songs.length < 2}">
+                </songs-list>
                 <songs-list :playlist="songs.slice(Math.ceil(songs.length/2))"
                             no-fetch
-                            @play="updatePlaylist"
-                            class="col-md-6"></songs-list>
+                            class="col-md-6">
+                </songs-list>
             </div>
         </section>
         <section class="section col-12">
@@ -114,9 +114,9 @@
                     .then(posts => this.posts = posts)
                     .catch()
             },
-            updatePlaylist() {
-                this.$store.commit('UPDATE_PLAYLIST', this.songs);
-            }
+            // updatePlaylist() {
+            //     this.$store.commit('UPDATE_PLAYLIST', this.songs);
+            // }
         }
     }
 

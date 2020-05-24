@@ -32,7 +32,7 @@ class ArtistController extends BaseController
     public function update(Artist $artist)
     {
         $data = request()->validate($this->rules());
-        $aliases = array();
+//        $aliases = array();
 
         $deletedAliases = $artist->aliases->filter(function ($alias) use ($data) {
             return !in_array($alias->name, $data['aliases']);
@@ -40,7 +40,10 @@ class ArtistController extends BaseController
 
         foreach ($deletedAliases as $alias) {
             //TODO check if there are songs that using this alias
-            $alias->delete();
+            if ($alias->songs->count() < 1)
+                $alias->delete();
+            else
+                abort(422, 'Псевдоним использован в песнях');
         }
         $newAliases = [];
         foreach ($data['aliases'] as $alias) {

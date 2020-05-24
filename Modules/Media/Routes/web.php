@@ -27,6 +27,10 @@ Route::prefix('media')->group(function () {
         Route::get('/{artist}', 'Artist\ArtistController@getArtist');
     });
 
+    Route::prefix('alias-artist')->group(function () {
+        Route::get('/{aliasArtist}', 'Artist\AliasArtistController@show');
+    });
+
     Route::prefix('image')->group(function () {
         Route::post('/many', 'Image\ImageController@storeMany');
         Route::get('/{image}/{type}', 'Image\ImageController@getImage');

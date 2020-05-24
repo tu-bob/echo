@@ -82,6 +82,12 @@
                 component: () => import('../components/public/music/SongView')
             },
             {
+                name: 'artist-view',
+                path: '/artists/:id',
+                props: true,
+                component: () => import('../components/public/artist/ArtistView')
+            },
+            {
                 name: 'post-reader',
                 path: '/blog/post/:slug',
                 props: true,

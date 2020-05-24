@@ -4,6 +4,7 @@ namespace Modules\Media\Providers;
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
+use Modules\Media\Models\Artist\Artist;
 
 class RouteServiceProvider extends ServiceProvider
 {
@@ -24,6 +25,12 @@ class RouteServiceProvider extends ServiceProvider
     public function boot()
     {
         parent::boot();
+
+        Route::bind('aliasArtist', function ($value) {
+            return Artist::whereHas('aliases', function ($query) use ($value) {
+                return $query->where('id', $value);
+            })->firstOrFail();
+        });
     }
 
     /**
