@@ -76,6 +76,12 @@
                 component: () => import('../components/public/album/AlbumView')
             },
             {
+                name: 'song-view',
+                path: '/songs/:id',
+                props: true,
+                component: () => import('../components/public/music/SongView')
+            },
+            {
                 name: 'post-reader',
                 path: '/blog/post/:slug',
                 props: true,

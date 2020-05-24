@@ -39,7 +39,8 @@ class SongController extends BaseController
 
     public function getSong($song)
     {
-        return Song::with(['artistAliases', 'genres', 'albums', 'clip', 'externalLinks'])->findOrFail($song);
+        return Song::with(['artistAliases', 'genres', 'albums.cover', 'albums.artistAliases', 'clip', 'externalLinks'])
+            ->findOrFail($song);
     }
 
     public function getAudioFile(Song $song)
@@ -103,7 +104,11 @@ class SongController extends BaseController
 
         if ($coverImage) {
             $imageProvider = new ImageFileProvider('cover');
-            return $imageProvider->getResizedFileResponse($coverImage);
+            return $imageProvider->getResizedFileResponse(
+                $coverImage,
+                request()->get('width',50),
+                request()->get('height', 50));
+
 //            return $response->generateResponse();
         } else
             return response()->json(['message' => 'Обложка не найдена'], 404);

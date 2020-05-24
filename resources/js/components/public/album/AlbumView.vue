@@ -68,7 +68,9 @@
                 store.commit('SHOW_MAIN_OVERLAY');
                 fetchAlbum(this.id)
                     .then(album => this.album = album)
-                    .finally(_ => store.commit('HIDE_MAIN_OVERLAY'))
+                    .finally(_ => {
+                        store.commit('HIDE_MAIN_OVERLAY');
+                    })
             },
             getLink(resource) {
                 return this.album.externalLinks.find(a => a.resource === resource)?.link;
@@ -89,29 +91,5 @@
 </script>
 
 <style scoped>
-    .typography-title-emphasized {
-        font-size: 24px;
-        line-height: 1.16667;
-        font-weight: 600;
-        letter-spacing: .007em;
-    }
 
-    .typography-title {
-        font-size: 24px;
-        line-height: 1.16667;
-        font-weight: 400;
-        letter-spacing: .007em;
-    }
-
-    .typography-footnote-emphasized {
-        font-size: 12px;
-        line-height: 1.18182;
-        font-weight: 500;
-        letter-spacing: .006em;
-    }
-
-    .link-border {
-        border: 1px solid white;
-        border-radius: 14px;
-    }
 </style>

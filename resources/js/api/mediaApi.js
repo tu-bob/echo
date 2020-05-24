@@ -49,8 +49,8 @@ export function getAlbumCoverUrl(id) {
 // }
 
 //albumCover -> get album cover if song doesnt have icon
-export function getSongIconUrl(id, albumCover = true) {
-    return `/media/music/song/${id}/icon?album=${albumCover}`;
+export function getSongIconUrl(id, params, albumCover = true) {
+    return `/media/music/song/${id}/icon?album=${albumCover}&` + kvpToQueryParam(params);
 }
 
 export function getBlogImage(image) {
