@@ -21,7 +21,7 @@
             </b-col>
         </b-row>
 
-            <div class="d-flex w-100 flex-wrap justify-content-end mt-5">
+            <div class="d-flex w-100 flex-wrap justify-content-end align-items-baseline mt-5">
                 <a v-if="getLink('googleMusic')" :href="getLink('googleMusic')">
                     <img width="220px" class="mr-3 mb-3" src="/icons/png/google-play-logo.png">
                 </a>
