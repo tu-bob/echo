@@ -16,12 +16,15 @@ class ArtistService
      */
     public function store(array $data): Artist
     {
-        $artist = Artist::create();
+        $artist = Artist::create([
+            'type' => isset($data['type']) ? $data['type'] : null
+        ]);
 
         $aliasService = new ArtistAliasService($artist);
         $aliasService->createAliases(collect($data['aliases']));
 
-        $this->saveAvatar($artist, $data['avatarFile']);
+        if (isset($data['avatarFile']))
+            $this->saveAvatar($artist, $data['avatarFile']);
 
         return $artist;
     }
@@ -35,6 +38,10 @@ class ArtistService
     {
         $aliasService = new ArtistAliasService($artist);
         $aliasService->updateAliases($data);
+
+        $artist->update([
+            'type' => isset($data['type']) ? $data['type'] : null
+        ]);
 
         if (isset($data['avatarFile']))
             $this->saveAvatar($artist, $data['avatarFile']);

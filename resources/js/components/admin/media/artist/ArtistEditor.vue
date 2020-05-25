@@ -19,6 +19,16 @@
                 <div>
                     <image-uploader v-model="avatarFile" :src="coverUrl"></image-uploader>
                 </div>
+                <div class="form-group">
+                    <label>Тип</label>
+                    <select class="form-control" v-model="artist.type">
+                        <option value="singer">Исполнитель</option>
+                        <option value="band">Группа</option>
+                        <option value="composer">Композитор</option>
+                        <option value="chorus">Хор</option>
+                        <option value="orchestra">Оркестр</option>
+                    </select>
+                </div>
             </div>
             <div class="card-footer">
                 <button class="btn btn-primary" @click="submit">Сохранить</button>
@@ -45,7 +55,8 @@
             return {
                 submitting: false,
                 artist: {
-                    name: null
+                    name: null,
+                    type: null
                 },
                 avatarFile: null,
                 aliases: []
@@ -69,18 +80,19 @@
                 if (this.avatarFile)
                     data.append('avatarFile', this.avatarFile, this.avatarFile.name);
 
-                let action = getStoreOrUpdateAction(this.$route?.params?.id, '/media/artist');
+                if (this.artist.type)
+                    data.append('type', this.artist.type);
 
-                axios({
-                    method: action.method,
-                    url: action.url,
-                    data: data
-                })
+                let action = getStoreOrUpdateAction(this.id, '/media/artist');
+
+                axios.post(action.url, data)
                     .then(_ => {
-                        // this.$router.push({name: 'artists-table'})
+                        this.$router.push({name: 'artists-table'})
                     })
                     .catch(e => console.log(e))
-                    .finally(_ => this.submitting = false);
+                    .finally(_ => {
+                        this.submitting = false
+                    });
             },
             fetchData() {
                 axios.get(`/media/artist/${this.$route.params.id}`)

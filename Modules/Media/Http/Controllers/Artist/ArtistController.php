@@ -49,6 +49,7 @@ class ArtistController extends BaseController
     {
         return [
             'id' => 'nullable|string',
+            'type' => 'nullable|string',
             'aliases' => 'required|array',
             'aliases.*' => [
                 'required',
