@@ -106,7 +106,7 @@
     }
 
     .song-buttons {
-        width: 114px;
+        /*width: 114px;*/
         display: flex;
         align-items: baseline;
         height: 100%;
