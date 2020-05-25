@@ -28,10 +28,10 @@
                                                class="text-secondary h-text-white">
                             </font-awesome-icon>
                         </template>
-                        <b-dropdown-item :to="{name:'song-view', params:{id:song.id}}">
+                        <b-dropdown-item @click.stop :to="{name:'song-view', params:{id:song.id}}">
                             Перейти к песне
                         </b-dropdown-item>
-                        <b-dropdown-item :to="{name:'artist-view', params:{id:song.artistAliases[0].id}}">
+                        <b-dropdown-item @click.stop :to="{name:'artist-view', params:{id:song.artistAliases[0].id}}">
                             Перейти к исполнителю
                         </b-dropdown-item>
                     </b-dropdown>
