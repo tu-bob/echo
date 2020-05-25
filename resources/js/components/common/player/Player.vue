@@ -71,9 +71,22 @@
                             <font-awesome-icon icon="ellipsis-h"></font-awesome-icon>
                         </template>
                         <b-dropdown-item>
-                            Перейти к песне
+                            <div v-if="ACTIVE_SONG">
+                                <a :href="`/media/music/song/${ACTIVE_SONG.id}/download`"
+                                   download
+                                   class="transparent-btn text-decoration-none text-dark"
+                                   :class="{'disabled': !ACTIVE_SONG.allow_download}">
+                                    <font-awesome-icon icon="download" class="mr-3"></font-awesome-icon>
+                                    Скачать песню
+                                </a>
+                            </div>
                         </b-dropdown-item>
-                        <b-dropdown-item>
+                        <b-dropdown-item @click="openPlayerOverlay('lyrics')">
+                            <font-awesome-icon icon="align-left" class="mr-3"></font-awesome-icon>
+                            Открыть текст песни
+                        </b-dropdown-item>
+                        <b-dropdown-item :to="{name:'artist-view', params:{id:ACTIVE_SONG.artistAliases[0].id}}">
+                            <font-awesome-icon icon="user" class="mr-3"></font-awesome-icon>
                             Перейти к исполнителю
                         </b-dropdown-item>
                     </b-dropdown>
@@ -149,7 +162,8 @@
         faTimes,
         faDownload,
         faAlignLeft,
-        faEllipsisH
+        faEllipsisH,
+        faUser
     } from '@fortawesome/free-solid-svg-icons'
     import {fetchAudioFile, getSongIconUrl} from "../../../api/mediaApi";
     import {concatStrings, secondsToFormattedMinutes} from "../../../util/stringHelper";
@@ -158,7 +172,18 @@
     import SafeImage from "../image/SafeImage";
     import ViewportSize from "../mixins/ViewportSize";
 
-    library.add(faPlay, faPause, faBackward, faForward, faRandom, faRedoAlt, faList, faTimes, faDownload, faAlignLeft, faEllipsisH);
+    library.add(faPlay,
+        faPause,
+        faBackward,
+        faForward,
+        faRandom,
+        faRedoAlt,
+        faList,
+        faTimes,
+        faDownload,
+        faAlignLeft,
+        faEllipsisH,
+        faUser);
 
     export default {
         name: "Player",
