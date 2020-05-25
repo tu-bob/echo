@@ -12,14 +12,13 @@
         </div>
         <div v-if="artist.albums && artist.albums.length > 0">
             <h2 class="typography-title text-secondary mt-5 mb-4">Альбомы</h2>
-            <div class="d-flex flex-wrap justify-content-start">
-                <album-card class="mb-4 mr-4"
-                            style="width: 300px"
+            <b-row>
+                <album-card class="col-sm-6 col-md-4 col-lg-3 mb-4"
                             v-for="album in artist.albums"
                             :key="album.id"
                             :album="album">
                 </album-card>
-            </div>
+            </b-row>
         </div>
         <div v-if="artist.songs && artist.songs.length > 0">
             <h2 class="typography-title text-secondary mt-5 mb-4">Песни</h2>
@@ -35,9 +34,9 @@
         </div>
         <div v-if="artist.clips && artist.clips.length > 0">
             <h2 class="typography-title text-secondary mt-5 mb-4">Видео</h2>
-            <div class="d-flex flex-wrap">
-                <video-card v-for="clip in artist.clips" :video="clip" :key="clip.id" style="width: 300px"></video-card>
-            </div>
+            <b-row>
+                <video-card v-for="clip in artist.clips" :video="clip" :key="clip.id" class="col-sm-6 col-md-4 col-lg-3 mb-4"></video-card>
+            </b-row>
         </div>
     </b-container>
 </template>
