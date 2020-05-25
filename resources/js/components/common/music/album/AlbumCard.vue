@@ -3,7 +3,9 @@
         <div class="h-overlay-container cursor-pointer" @click="play" title="Послушать альбом">
             <!--            <b-img class="album-cover" @error="onCoverLoadError" blankColor="#a892f8cf" :blank="coverLoadFailed" rounded-->
             <!--                   :src="coverUrl" alt=""></b-img>-->
-            <safe-image :src="coverUrl" class="album-cover" fallback-blank rounded></safe-image>
+            <b-aspect aspect="1">
+                <safe-image :src="coverUrl" class="album-cover" fallback-blank rounded></safe-image>
+            </b-aspect>
             <div class="h-overlay d-flex align-items-center">
                 <div class="btn btn-light mx-auto">
                     <img class="icon-btn-xl" src="/icons/svg/play-btn-light.svg">
@@ -82,6 +84,6 @@
     .album-cover {
         object-fit: cover;
         width: 100% !important;
-        height: 218px;
+        height: 100% !important;
     }
 </style>
