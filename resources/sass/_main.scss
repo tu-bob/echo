@@ -9,6 +9,10 @@ html::-webkit-scrollbar {
     display: none;
 }
 
+pre {
+    white-space: pre-wrap;
+}
+
 .section {
     margin-bottom: 5rem;
 }
