@@ -17,7 +17,8 @@ class ArtistService
     public function store(array $data): Artist
     {
         $artist = Artist::create([
-            'type' => isset($data['type']) ? $data['type'] : null
+            'type' => isset($data['type']) ? $data['type'] : null,
+            'info' => isset($data['info']) ? $data['info'] : null
         ]);
 
         $aliasService = new ArtistAliasService($artist);
@@ -40,7 +41,8 @@ class ArtistService
         $aliasService->updateAliases($data);
 
         $artist->update([
-            'type' => isset($data['type']) ? $data['type'] : null
+            'type' => isset($data['type']) ? $data['type'] : null,
+            'info' => isset($data['info']) ? $data['info'] : null
         ]);
 
         if (isset($data['avatarFile']))

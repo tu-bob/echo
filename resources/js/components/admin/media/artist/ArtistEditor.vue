@@ -29,6 +29,10 @@
                         <option value="orchestra">Оркестр</option>
                     </select>
                 </div>
+                <div class="form-group">
+                    <label>Информация</label>
+                    <textarea class="form-control" v-model="artist.info"></textarea>
+                </div>
             </div>
             <div class="card-footer">
                 <button class="btn btn-primary" @click="submit">Сохранить</button>
@@ -56,7 +60,8 @@
                 submitting: false,
                 artist: {
                     name: null,
-                    type: null
+                    type: null,
+                    info: null
                 },
                 avatarFile: null,
                 aliases: []
@@ -82,6 +87,9 @@
 
                 if (this.artist.type)
                     data.append('type', this.artist.type);
+
+                if (this.artist.info)
+                    data.append('info', this.artist.info);
 
                 let action = getStoreOrUpdateAction(this.id, '/media/artist');
 
