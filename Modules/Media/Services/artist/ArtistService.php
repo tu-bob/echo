@@ -4,9 +4,7 @@
 namespace Modules\Media\Services\artist;
 
 
-use Illuminate\Support\Collection;
 use Modules\Media\Models\Artist\Artist;
-use Modules\Media\Models\Artist\ArtistAlias;
 
 class ArtistService
 {
