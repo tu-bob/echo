@@ -56,7 +56,7 @@ class ArtistController extends BaseController
                 'required',
                 'string'
             ],
-            'avatarFile' => 'nullable|file|mimes:jpeg,jpg,png|max:1024',
+            'avatarFile' => 'nullable|file|mimes:jpeg,jpg,png|max:1024|dimensions:max_width=500,max_height=500',
         ];
     }
 }
