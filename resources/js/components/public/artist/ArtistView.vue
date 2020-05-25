@@ -9,8 +9,8 @@
             <div>
                 <h1 class="typography-header-emphasized text-white">{{artist.aliases[0].name}}</h1>
                 <h2 class="typography-title text-secondary" v-if="aliases && aliases.length > 0">{{aliases}}</h2>
-<!--                <h2 class="typography-title text-secondary" v-if="translateType(artist.type)">-->
-<!--                    {{translateType(artist.type)}}</h2>-->
+                <!--                <h2 class="typography-title text-secondary" v-if="translateType(artist.type)">-->
+                <!--                    {{translateType(artist.type)}}</h2>-->
                 <div v-if="artist.info">
                     <pre ref="artistInfo" class="artist-info">{{artist.info}}</pre>
                 </div>
@@ -78,18 +78,21 @@
     import VideosList from "../../common/video/VideosList";
     import VideoCard from "../../common/video/VideoCard";
     import {getAvatarImage} from "../../../api/mediaApi";
+    import TitleMixin from "../../admin/mixins/TitleMixin";
 
     export default {
         name: "ArtistView",
         props: {
             id: null
         },
+        mixins: [TitleMixin],
         components: {VideoCard, VideosList, SongsList, AlbumCard},
         data() {
             return {
                 artist: null,
                 selectedVideo: null,
-                showArtistInfo: false
+                showArtistInfo: false,
+                title: "Песни, альбомы, тексты, клипы и аккорды таджикских артистов"
             }
         },
         mounted() {
@@ -125,6 +128,12 @@
             avatarUrl() {
                 if (this.artist.avatar_id)
                     return getAvatarImage(this.artist.avatar_id);
+            }
+        },
+        watch:{
+            artist() {
+                this.title = concatStrings(this.artist.aliases.map(alias => alias.name), ' ·') + '- песни, альбомы, текста песен.';
+                this.updateTitle();
             }
         }
     }

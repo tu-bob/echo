@@ -8,12 +8,15 @@
     export default {
         name: "TitleMixin",
         created() {
-            if (!this.ACTIVE_SONG) {
-                const title = this.getTitle(this);
-                document.title = title ? title : 'Echo.tj - Музыкальное наследие Таджикистана'
-            }
+            this.updateTitle();
         },
         methods: {
+            updateTitle() {
+                if (!this.ACTIVE_SONG) {
+                    const title = this.getTitle(this);
+                    document.title = title ? title : 'Echo.tj - Музыкальное наследие Таджикистана'
+                }
+            },
             getTitle() {
                 if (this.title) {
                     return typeof this.title === 'function'
