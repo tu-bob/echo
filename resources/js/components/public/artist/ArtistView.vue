@@ -38,9 +38,32 @@
         <div v-if="artist.clips && artist.clips.length > 0">
             <h2 class="typography-title text-secondary mt-5 mb-4">Видео</h2>
             <b-row>
-                <video-card v-for="clip in artist.clips" :video="clip" :key="clip.id"
+                <video-card v-for="clip in artist.clips" @play="showVideoModal" :video="clip" :key="clip.id"
                             class="col-sm-6 col-md-4 col-lg-3 mb-4"></video-card>
             </b-row>
+        </div>
+
+        <div v-if="selectedVideo">
+            <b-modal id="modal-video-player"
+                     class="bg-transparent"
+                     centered
+                     :title="selectedVideo.title"
+                     header-bg-variant="dark"
+                     header-text-variant="light"
+                     body-bg-variant="dark"
+                     body-text-variant="light"
+                     hide-footer
+                     size="xl"
+                     content-class="border-0"
+                     header-class="border-0"
+                     ok-only>
+                <b-embed
+                    type="iframe"
+                    aspect="16by9"
+                    :src="selectedVideo.src"
+                    allowfullscreen
+                ></b-embed>
+            </b-modal>
         </div>
     </b-container>
 </template>
@@ -61,7 +84,8 @@
         components: {VideoCard, VideosList, SongsList, AlbumCard},
         data() {
             return {
-                artist: null
+                artist: null,
+                selectedVideo: null
             }
         },
         mounted() {
@@ -82,7 +106,13 @@
                 };
 
                 return types[type];
-            }
+            },
+            showVideoModal(video) {
+                this.selectedVideo = video;
+                this.$nextTick(
+                    () => this.$bvModal.show('modal-video-player')
+                )
+            },
         },
         computed: {
             aliases() {
