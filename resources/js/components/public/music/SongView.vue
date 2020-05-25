@@ -14,7 +14,15 @@
             </b-col>
             <b-col md="8" lg="9" class="pl-md-5 pt-5">
                 <h1 class="typography-title-emphasized text-white">{{song.title}}</h1>
-                <h2 class="" v-html="aliases"></h2>
+                <h2>
+                    <router-link class="typography-title text-violet text-decoration-none"
+                                 :to="{name:'artist-view', params:{id:alias.id}}"
+                                 v-for="(alias,index) in song.artistAliases" :key="alias.id">
+                        {{alias.name}}
+
+                        <span v-if="index < song.artistAliases.length - 1"> · </span>
+                    </router-link>
+                </h2>
                 <h3 class="typography-footnote-emphasized text-uppercase text-secondary">
                     {{genres}} · {{song.year}}</h3>
                 <b-button variant="outline-secondary" pill class="mt-3" @click="playSongs([song])">
@@ -109,15 +117,9 @@
             genres() {
                 return concatStrings(this.song.genres.map(alias => alias.local_name), ' ·');
             },
-            aliases() {
-                return concatStrings(this.song.artistAliases.map(alias =>
-                    '<a class="typography-title text-violet text-decoration-none" href="/app/artists/' + alias.id + '">' + alias.name + '</a>'
-                ), ' ·');
-            },
         },
         watch: {
             showLyrics() {
-                console.log('toogle')
                 $('pre').css('max-height', this.showLyrics ? '' : '100px');
             }
         }
