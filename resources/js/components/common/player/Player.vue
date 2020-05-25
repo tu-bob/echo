@@ -66,11 +66,11 @@
                          @click="openPlayerOverlay('lyrics')">
                         <font-awesome-icon icon="align-left" :size="playerBtnSize"></font-awesome-icon>
                     </div>
-                    <b-dropdown class="d-md-none" toggle-class="transparent-btn" right no-caret>
+                    <b-dropdown @click.stop class="d-md-none" toggle-class="transparent-btn" right no-caret>
                         <template v-slot:button-content>
                             <font-awesome-icon icon="ellipsis-h"></font-awesome-icon>
                         </template>
-                        <b-dropdown-item>
+                        <b-dropdown-item  @click.stop>
                             <div v-if="ACTIVE_SONG">
                                 <a :href="`/media/music/song/${ACTIVE_SONG.id}/download`"
                                    download
@@ -81,11 +81,11 @@
                                 </a>
                             </div>
                         </b-dropdown-item>
-                        <b-dropdown-item @click="openPlayerOverlay('lyrics')">
+                        <b-dropdown-item  @click.stop @click="openPlayerOverlay('lyrics')">
                             <font-awesome-icon icon="align-left" class="mr-3"></font-awesome-icon>
                             Открыть текст песни
                         </b-dropdown-item>
-                        <b-dropdown-item :to="{name:'artist-view', params:{id:ACTIVE_SONG.artistAliases[0].id}}">
+                        <b-dropdown-item v-if="ACTIVE_SONG"  @click.stop :to="{name:'artist-view', params:{id:ACTIVE_SONG.artistAliases[0].id}}">
                             <font-awesome-icon icon="user" class="mr-3"></font-awesome-icon>
                             Перейти к исполнителю
                         </b-dropdown-item>

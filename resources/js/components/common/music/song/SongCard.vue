@@ -29,9 +29,11 @@
                             </font-awesome-icon>
                         </template>
                         <b-dropdown-item @click.stop :to="{name:'song-view', params:{id:song.id}}">
+                            <font-awesome-icon icon="music" class="mr-3"></font-awesome-icon>
                             Перейти к песне
                         </b-dropdown-item>
                         <b-dropdown-item @click.stop :to="{name:'artist-view', params:{id:song.artistAliases[0].id}}">
+                            <font-awesome-icon icon="user" class="mr-3"></font-awesome-icon>
                             Перейти к исполнителю
                         </b-dropdown-item>
                     </b-dropdown>
@@ -48,9 +50,9 @@
     import {mapGetters} from "vuex";
     import SafeImage from "../../image/SafeImage";
     import {library} from '@fortawesome/fontawesome-svg-core'
-    import {faDownload, faEllipsisH, faInfoCircle} from '@fortawesome/free-solid-svg-icons'
+    import {faDownload, faEllipsisH, faInfoCircle, faUser, faMusic} from '@fortawesome/free-solid-svg-icons'
 
-    library.add(faDownload, faEllipsisH, faInfoCircle);
+    library.add(faDownload, faEllipsisH, faInfoCircle, faUser, faMusic);
 
     export default {
         name: "SongCard",
