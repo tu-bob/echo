@@ -43,7 +43,7 @@
                     </div>
                 </div>
                 <div class="ml-sm-auto form-row player-control">
-                    <b-form-input class="align-self-center mr-3 d-none d-md-block"
+                    <b-form-input class="align-self-center mr-3 d-none d-lg-block"
                                   style="width:80px"
                                   type="range"
                                   v-model="volume"
@@ -54,7 +54,7 @@
                     <div class="d-none d-md-block pr-3">
                         {{currentTimeFormatted}}
                     </div>
-                    <div id="mp-download-btn mr-1" v-if="ACTIVE_SONG">
+                    <div id="mp-download-btn" class="d-none d-md-block" v-if="ACTIVE_SONG">
                         <a :href="`/media/music/song/${ACTIVE_SONG.id}/download`"
                            download
                            class="btn btn-dark"
@@ -62,7 +62,23 @@
                             <font-awesome-icon icon="download" :size="playerBtnSize"></font-awesome-icon>
                         </a>
                     </div>
-                    <div id="mp-playlist-btn" class="btn btn-dark mr-sm-0 mr-md-4" @click="togglePlayerOverlay">
+                    <div id="mp-lyrics-btn" class="btn btn-dark d-none d-md-block"
+                         @click="openPlayerOverlay('lyrics')">
+                        <font-awesome-icon icon="align-left" :size="playerBtnSize"></font-awesome-icon>
+                    </div>
+                    <b-dropdown class="d-md-none" toggle-class="transparent-btn" right no-caret>
+                        <template v-slot:button-content>
+                            <font-awesome-icon icon="ellipsis-h"></font-awesome-icon>
+                        </template>
+                        <b-dropdown-item>
+                            Перейти к песне
+                        </b-dropdown-item>
+                        <b-dropdown-item>
+                            Перейти к исполнителю
+                        </b-dropdown-item>
+                    </b-dropdown>
+                    <div id="mp-playlist-btn" class="btn btn-dark mr-0 mr-sm-4 mr-md-3"
+                         @click="openPlayerOverlay('playlist')">
                         <font-awesome-icon icon="list" :size="playerBtnSize"></font-awesome-icon>
                     </div>
                 </div>
@@ -107,14 +123,13 @@
                 </div>
             </div>
             <b-container class="player-overlay-content" fluid="md">
-                <!--                <div class="position-sticky d-flex" style="top:0; left:0">-->
-                <!--                    <div class="ml-auto btn" @click="togglePlayerOverlay">-->
-                <!--                        <font-awesome-icon icon="times" class="text-white" size="2x"></font-awesome-icon>-->
-                <!--                    </div>-->
-                <!--                </div>-->
-
-                <div>
-                    <songs-list class="w-100" :playlist="PLAYLIST"></songs-list>
+                <songs-list v-if="overlayContent === 'playlist'" class="w-100" :playlist="PLAYLIST"></songs-list>
+                <div v-if="overlayContent === 'lyrics'" class="text-white">
+                    <pre
+                        v-if="ACTIVE_SONG.lyrics" class="song-lyrics">{{ACTIVE_SONG.lyrics}}</pre>
+                    <div v-else>
+                        Текст песни еще не добавлен
+                    </div>
                 </div>
             </b-container>
         </div>
@@ -132,7 +147,9 @@
         faRedoAlt,
         faList,
         faTimes,
-        faDownload
+        faDownload,
+        faAlignLeft,
+        faEllipsisH
     } from '@fortawesome/free-solid-svg-icons'
     import {fetchAudioFile, getSongIconUrl} from "../../../api/mediaApi";
     import {concatStrings, secondsToFormattedMinutes} from "../../../util/stringHelper";
@@ -141,7 +158,7 @@
     import SafeImage from "../image/SafeImage";
     import ViewportSize from "../mixins/ViewportSize";
 
-    library.add(faPlay, faPause, faBackward, faForward, faRandom, faRedoAlt, faList, faTimes, faDownload);
+    library.add(faPlay, faPause, faBackward, faForward, faRandom, faRedoAlt, faList, faTimes, faDownload, faAlignLeft, faEllipsisH);
 
     export default {
         name: "Player",
@@ -167,6 +184,7 @@
                 playing: false,
                 timeDrag: false,
                 showPlayerOverlay: false,
+                overlayContent: 'playlist',
                 shuffled: false,
                 playCountUpdated: false,
                 volume: 1,
@@ -211,8 +229,13 @@
             //     e.target.src = "/icons/svg/music.svg";
             //     $(e.target).addClass('p-1');
             // },
-            togglePlayerOverlay() {
+            togglePlayerOverlay(content) {
+                this.overlayContent = content;
                 this.showPlayerOverlay = !this.showPlayerOverlay
+            },
+            openPlayerOverlay(content) {
+                this.overlayContent = content;
+                this.showPlayerOverlay = true;
             },
             toggleShuffle() {
                 if (!this.shuffled)
@@ -297,7 +320,7 @@
                     return '0:00'
             },
             playerBtnSize() {
-                return this.windowWidth < 800 ? '1x' : 'lg'
+                return this.windowWidth < 900 ? '1x' : 'lg'
             },
             ...mapGetters([
                 'PLAYLIST',
@@ -396,5 +419,11 @@
 
     .player-overlay-content::-webkit-scrollbar {
         display: none;
+    }
+
+    .song-lyrics {
+        color: #ffffff;
+        font-size: 18px;
+        text-align: center;
     }
 </style>
