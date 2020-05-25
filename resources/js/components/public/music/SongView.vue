@@ -76,6 +76,7 @@
     import PlaySongsMixin from "../../admin/mixins/PlaySongsMixin";
     import {library} from '@fortawesome/fontawesome-svg-core'
     import {faPlay} from '@fortawesome/free-solid-svg-icons'
+    import TitleMixin from "../../admin/mixins/TitleMixin";
 
     library.add(faPlay);
 
@@ -85,14 +86,15 @@
             this.fetchSong();
         },
         components: {AlbumCard, AlbumsList, SafeImage},
-        mixins: [PlaySongsMixin],
+        mixins: [PlaySongsMixin,TitleMixin],
         props: {
             id: null
         },
         data() {
             return {
                 song: null,
-                showLyrics: false
+                showLyrics: false,
+                title: 'Echo.tj - Слушайте и скачивайте песни таджикских исполнителей'
             }
         },
         methods: {
@@ -121,6 +123,10 @@
         watch: {
             showLyrics() {
                 $('pre').css('max-height', this.showLyrics ? '' : '100px');
+            },
+            song() {
+                this.title = 'Echo.tj - Слушать, скачать песню ' + this.song.title + ' - ' + concatStrings(this.song.artistAliases.map(alias => alias.name), ' ·');
+                this.updateTitle();
             }
         }
     }

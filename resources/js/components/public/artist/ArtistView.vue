@@ -132,7 +132,7 @@
         },
         watch:{
             artist() {
-                this.title = concatStrings(this.artist.aliases.map(alias => alias.name), ' ·') + '- песни, альбомы, текста песен.';
+                this.title = 'Echo.tj - ' + concatStrings(this.artist.aliases.map(alias => alias.name), ' ·') + '- песни, альбомы, текста песен.';
                 this.updateTitle();
             }
         }
