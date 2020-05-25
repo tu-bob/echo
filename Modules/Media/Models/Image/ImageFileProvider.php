@@ -52,7 +52,7 @@ class ImageFileProvider
         return $response->generateResponse();
     }
 
-    public function getResizedFileResponse($id, $width = 50, $height = 50)
+    public function getResizedFileResponse($id, $width = 50, $height = 50, $quality = 90)
     {
         $imgFile = $this->getImage($id);
         $cacheFolder = 'cache/' . $width . $height . '/';
@@ -61,7 +61,7 @@ class ImageFileProvider
             return $response->generateResponse();
         } else {
             $img = Image::make(storage_path("app/{$imgFile->path}"))->fit($width, $height);
-            Storage::disk('local')->put( $cacheFolder . $imgFile->path, $img->encode(null, 100));
+            Storage::disk('local')->put($cacheFolder . $imgFile->path, $img->encode(null, $quality));
 //            $img->save(storage_path($cacheFolder .  $imgFile->path));
             return $img->response($imgFile->extension);
         }
