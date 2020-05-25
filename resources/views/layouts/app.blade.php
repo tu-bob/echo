@@ -7,6 +7,14 @@
     <meta name="theme-color" content="#a297f7">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
+    <meta name="description" content="Echo.tj - Музыкальное наследие Таджикистана. Песни, альбомы, видео, новости,
+     статьи и многое другое в удобном приложении. Слушайте музыку онлайн, скачивайте на устройства. ">
+
+    <meta name="keywords" content="таджикская музыка, этническая музыка, фолк, Далер Назаров, музыка онлайн, радио,
+    новости, альбомы, Парем, Олег Фезов">
+
+    <meta name="author" content="Sultonazar Mamadazizov">
+
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
