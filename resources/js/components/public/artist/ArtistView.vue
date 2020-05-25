@@ -3,11 +3,14 @@
         <div class="d-flex flex-wrap mb-5">
             <b-avatar size="200px"
                       class="mr-5 mb-4"
-                      src="https://is5-ssl.mzstatic.com/image/thumb/Music/0e/98/0e/mzi.izbblfhm.tif/190x190cc.jpg"></b-avatar>
+                      :src="avatarUrl">
+            </b-avatar>
 
             <div>
                 <h1 class="typography-header-emphasized text-white">{{artist.aliases[0].name}}</h1>
-                <h2 class="typography-title text-secondary">{{aliases}}</h2>
+                <h2 class="typography-title text-secondary mt-3" v-if="aliases && aliases.length > 0">{{aliases}}</h2>
+                <h2 class="typography-title text-secondary" v-if="translateType(artist.type)">
+                    {{translateType(artist.type)}}</h2>
             </div>
         </div>
         <div v-if="artist.albums && artist.albums.length > 0">
@@ -35,7 +38,8 @@
         <div v-if="artist.clips && artist.clips.length > 0">
             <h2 class="typography-title text-secondary mt-5 mb-4">Видео</h2>
             <b-row>
-                <video-card v-for="clip in artist.clips" :video="clip" :key="clip.id" class="col-sm-6 col-md-4 col-lg-3 mb-4"></video-card>
+                <video-card v-for="clip in artist.clips" :video="clip" :key="clip.id"
+                            class="col-sm-6 col-md-4 col-lg-3 mb-4"></video-card>
             </b-row>
         </div>
     </b-container>
@@ -47,6 +51,7 @@
     import SongsList from "../../common/music/song/SongsList";
     import VideosList from "../../common/video/VideosList";
     import VideoCard from "../../common/video/VideoCard";
+    import {getAvatarImage} from "../../../api/mediaApi";
 
     export default {
         name: "ArtistView",
@@ -66,11 +71,26 @@
             fetchArtist() {
                 axios.get('/media/alias-artist/' + this.id)
                     .then(artist => this.artist = artist)
+            },
+            translateType(type) {
+                let types = {
+                    singer: 'Исполнитель',
+                    band: 'Группа',
+                    composer: 'Композитор',
+                    chorus: 'Хор',
+                    orchestra: 'Оркестр',
+                };
+
+                return types[type];
             }
         },
         computed: {
             aliases() {
                 return concatStrings(this.artist.aliases.slice(1, this.artist.aliases.length).map(alias => alias.name), ' ·');
+            },
+            avatarUrl() {
+                if (this.artist.avatar_id)
+                    return getAvatarImage(this.artist.avatar_id);
             }
         }
     }
