@@ -3,8 +3,8 @@
 namespace Modules\Media\Models\Artist;
 
 
+use Modules\Media\Models\Image\ImageFile;
 use Modules\Shared\Models\BaseModel;
-use function foo\func;
 
 /**
  * @property mixed aliases
@@ -27,6 +27,11 @@ class Artist extends BaseModel
     public function aliases()
     {
         return $this->hasMany(ArtistAlias::class);
+    }
+
+    public function avatar()
+    {
+        return $this->belongsTo(ImageFile::class, 'avatar_id');
     }
 
     public function getSongsAttribute()

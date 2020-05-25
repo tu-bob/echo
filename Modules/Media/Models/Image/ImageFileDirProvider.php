@@ -27,6 +27,8 @@ class ImageFileDirProvider
                 return 'images/blog';
             case 'cover':
                 return 'images/cover';
+            case 'avatar':
+                return 'image/avatar';
             default:
                 return 'images/public';
         }
