@@ -62,7 +62,7 @@
                             <font-awesome-icon icon="download" :size="playerBtnSize"></font-awesome-icon>
                         </a>
                     </div>
-                    <div id="mp-playlist-btn" class="btn btn-dark mr-sm-0 mr-md-4" @click="togglePlaylist">
+                    <div id="mp-playlist-btn" class="btn btn-dark mr-sm-0 mr-md-4" @click="togglePlayerOverlay">
                         <font-awesome-icon icon="list" :size="playerBtnSize"></font-awesome-icon>
                     </div>
                 </div>
@@ -100,13 +100,18 @@
                 </template>
             </b-overlay>
         </div>
-        <div class="playlist-wrapper" v-show="showPlaylist">
-            <b-container fluid="md">
-                <div class="position-sticky d-flex" style="top:0; left:0">
-                    <div class="ml-auto btn" @click="togglePlaylist">
-                        <font-awesome-icon icon="times" class="text-white" size="2x"></font-awesome-icon>
-                    </div>
+        <div class="player-overlay" v-show="showPlayerOverlay">
+            <div class="position-sticky d-flex" style="top:0; left:0">
+                <div class="ml-auto btn" @click="togglePlayerOverlay">
+                    <font-awesome-icon icon="times" class="text-white" size="2x"></font-awesome-icon>
                 </div>
+            </div>
+            <b-container class="player-overlay-content" fluid="md">
+                <!--                <div class="position-sticky d-flex" style="top:0; left:0">-->
+                <!--                    <div class="ml-auto btn" @click="togglePlayerOverlay">-->
+                <!--                        <font-awesome-icon icon="times" class="text-white" size="2x"></font-awesome-icon>-->
+                <!--                    </div>-->
+                <!--                </div>-->
 
                 <div class="row">
                     <songs-list class="w-100" :playlist="PLAYLIST"></songs-list>
@@ -161,7 +166,7 @@
                 bufferedSeconds: 0,
                 playing: false,
                 timeDrag: false,
-                showPlaylist: false,
+                showPlayerOverlay: false,
                 shuffled: false,
                 playCountUpdated: false,
                 volume: 1,
@@ -206,8 +211,8 @@
             //     e.target.src = "/icons/svg/music.svg";
             //     $(e.target).addClass('p-1');
             // },
-            togglePlaylist() {
-                this.showPlaylist = !this.showPlaylist
+            togglePlayerOverlay() {
+                this.showPlayerOverlay = !this.showPlayerOverlay
             },
             toggleShuffle() {
                 if (!this.shuffled)
@@ -260,6 +265,9 @@
                 this.bufferedSeconds = 0;
                 this.playCountUpdated = false;
                 this.updateDocumentMeta()
+            },
+            showPlayerOverlay() {
+                return this.showPlayerOverlay ? $('body').addClass('overflow-hidden') : $('body').removeClass('overflow-hidden');
             }
         },
         computed: {
@@ -349,7 +357,7 @@
         position: absolute;
     }
 
-    .playlist-wrapper {
+    .player-overlay {
         z-index: 200;
         overflow: scroll;
         width: 100%;
@@ -362,7 +370,7 @@
         background: linear-gradient(135deg, #373737 0%, #24181e 95%);
     }
 
-    .playlist-wrapper::-webkit-scrollbar {
+    .player-overlay::-webkit-scrollbar {
         display: none;
     }
 
@@ -375,5 +383,18 @@
         background: #000000;
         filter: blur(2px);
         opacity: 0.5;
+    }
+
+    .player-overlay-content {
+        position: fixed;
+        top: 50px;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        overflow: scroll
+    }
+
+    .player-overlay-content::-webkit-scrollbar {
+        display: none;
     }
 </style>
