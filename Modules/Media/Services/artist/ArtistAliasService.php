@@ -21,7 +21,7 @@ class ArtistAliasService
      * @param $data
      * @return mixed
      */
-    function updateAliases($data) : EloquentCollection
+    function updateAliases($data) : Collection
     {
         $this->artist->aliases->filter(function ($alias) use ($data) {
             return !in_array($alias->name, $data['aliases']) && $alias->songs->count() === 0;

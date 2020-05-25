@@ -4,6 +4,7 @@
 namespace Modules\Media\Services\artist;
 
 
+use Illuminate\Http\UploadedFile;
 use Modules\Media\Models\Artist\Artist;
 use Modules\Media\Services\image\AvatarService;
 
@@ -20,9 +21,8 @@ class ArtistService
         $aliasService = new ArtistAliasService($artist);
         $aliasService->createAliases(collect($data['aliases']));
 
-        $avatarService = new AvatarService();
-        $artist->avatar_id = $avatarService->store($data['avatarFile'])->id;
-        $artist->save();
+        $this->saveAvatar($artist, $data['avatarFile']);
+
         return $artist;
     }
 
@@ -33,12 +33,20 @@ class ArtistService
      */
     public function update(Artist $artist, array $data): Artist
     {
-
         $aliasService = new ArtistAliasService($artist);
-        $artist->aliases = $aliasService->updateAliases($data);
+        $aliasService->updateAliases($data);
+
+        if (isset($data['avatarFile']))
+            $this->saveAvatar($artist, $data['avatarFile']);
 
         return $artist;
     }
 
+    private function saveAvatar(Artist $artist, UploadedFile $avatar)
+    {
+        $avatarService = new AvatarService();
+        $artist->avatar_id = $avatarService->store($avatar)->id;
+        $artist->save();
+    }
 
 }

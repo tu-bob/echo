@@ -41,6 +41,7 @@ export default [
                 {
                     name: 'artist-editor',
                     path: 'artist/:id?',
+                    props: true,
                     component: () => import('../../components/admin/media/artist/ArtistEditor')
                 },
                 {

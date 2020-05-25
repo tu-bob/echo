@@ -9,6 +9,7 @@ use Modules\Shared\Models\BaseModel;
 /**
  * @property mixed aliases
  * @property mixed songs
+ * @property string avatar_id
  */
 class Artist extends BaseModel
 {

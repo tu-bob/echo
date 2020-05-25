@@ -28,7 +28,7 @@ class ImageFileDirProvider
             case 'cover':
                 return 'images/cover';
             case 'avatar':
-                return 'image/avatar';
+                return 'images/avatar';
             default:
                 return 'images/public';
         }
