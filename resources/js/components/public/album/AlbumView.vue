@@ -14,7 +14,7 @@
             </b-col>
             <b-col md="8" lg="9" class="pl-md-5 pt-5">
                 <h1 class="typography-title-emphasized text-white">{{album.title}}</h1>
-                <h2 class="typography-title text-violet">{{aliases}}</h2>
+                <h2 v-html="aliases"></h2>
                 <h3 class="typography-footnote-emphasized text-uppercase text-secondary">
                     {{genres}} · {{album.year}}</h3>
                 <songs-list :playlist="album.songs" class="pt-4"></songs-list>
@@ -78,7 +78,9 @@
         },
         computed: {
             aliases() {
-                return concatStrings(this.album.artistAliases.map(alias => alias.name), ' ·');
+                return concatStrings(this.album.artistAliases.map(alias =>
+                    '<a class="typography-title text-violet text-decoration-none" href="/app/artists/' + alias.id + '">' + alias.name + '</a>'
+                ), ' ·');
             },
             genres() {
                 return concatStrings(this.album.genres.map(alias => alias.local_name), ' ·');

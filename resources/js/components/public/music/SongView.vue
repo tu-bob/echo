@@ -14,7 +14,7 @@
             </b-col>
             <b-col md="8" lg="9" class="pl-md-5 pt-5">
                 <h1 class="typography-title-emphasized text-white">{{song.title}}</h1>
-                <h2 class="typography-title text-violet">{{aliases}}</h2>
+                <h2 class="" v-html="aliases"></h2>
                 <h3 class="typography-footnote-emphasized text-uppercase text-secondary">
                     {{genres}} · {{song.year}}</h3>
                 <b-button variant="outline-secondary" pill class="mt-3" @click="playSongs([song])">
@@ -22,7 +22,7 @@
                     Слушать
                 </b-button>
 
-                <template v-if="song.lyrics" >
+                <template v-if="song.lyrics">
                 <pre class="song-lyrics" style="max-height: 100px">{{song.lyrics}}
                 </pre>
                     <a href="#" @click="showLyrics = !showLyrics">
@@ -36,7 +36,8 @@
         <div class="mt-5" v-if="song.albums && song.albums.length > 0">
             <h3 class="typography-title text-white mb-4">Песня в альбомах</h3>
             <div class="d-flex flex-wrap justify-content-start">
-                <album-card class="mb-4 mr-4" style="width: 350px" v-for="album in song.albums" :key="album.id" :album="album"></album-card>
+                <album-card class="mb-4 mr-4" style="width: 350px" v-for="album in song.albums" :key="album.id"
+                            :album="album"></album-card>
             </div>
         </div>
 
@@ -109,7 +110,9 @@
                 return concatStrings(this.song.genres.map(alias => alias.local_name), ' ·');
             },
             aliases() {
-                return concatStrings(this.song.artistAliases.map(alias => alias.name), ' ·');
+                return concatStrings(this.song.artistAliases.map(alias =>
+                    '<a class="typography-title text-violet text-decoration-none" href="/app/artists/' + alias.id + '">' + alias.name + '</a>'
+                ), ' ·');
             },
         },
         watch: {
