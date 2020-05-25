@@ -39,7 +39,7 @@ class Artist extends BaseModel
     public function getAlbumsAttribute()
     {
         return $this->aliases->flatMap(function ($alias) {
-            return $alias->albums;
+            return $alias->albums()->with('artistAliases')->get();
         })->unique('id')->values();
     }
 
