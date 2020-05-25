@@ -61,6 +61,10 @@ export function getCoverImage(image) {
     return getImageUrl(image, 'cover')
 }
 
+export function getAvatarImage(image) {
+    return getImageUrl(image, 'avatar')
+}
+
 export function getImageUrl(image, type) {
     return `/media/image/${image}/${type}`;
 }

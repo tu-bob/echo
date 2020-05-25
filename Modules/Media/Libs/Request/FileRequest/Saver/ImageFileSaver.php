@@ -22,7 +22,7 @@ class ImageFileSaver
     /**
      * @return ImageFile
      */
-    public function saveFile()
+    public function saveFile(): ImageFile
     {
         $dirProvider = new ImageFileDirProvider($this->type);
         $dirPath = $dirProvider->getDirectory();

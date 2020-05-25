@@ -53,7 +53,8 @@ class ArtistController extends BaseController
             'aliases.*' => [
                 'required',
                 'string'
-            ]
+            ],
+            'avatarFile' => 'nullable|file|mimes:jpeg,jpg,png|max:1024',
         ];
     }
 }

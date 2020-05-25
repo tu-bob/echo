@@ -16,6 +16,9 @@
                                  separator=";"
                     ></b-form-tags>
                 </div>
+                <div>
+                    <image-uploader v-model="avatarFile" :src="coverUrl"></image-uploader>
+                </div>
             </div>
             <div class="card-footer">
                 <button class="btn btn-primary" @click="submit">Сохранить</button>
@@ -27,9 +30,12 @@
 <script>
     import {getStoreOrUpdateAction} from '../../../../main.js'
     import ResetErrorsMixin from "../../mixins/ResetErrorsMixin";
+    import ImageUploader from "../../../common/inputs/ImageUploader";
+    import {getAvatarImage} from "../../../../api/mediaApi";
 
     export default {
         name: "ArtistEditor",
+        components: {ImageUploader},
         mixins: [ResetErrorsMixin],
         created() {
             if (this.$route.params.id)
@@ -41,31 +47,40 @@
                 artist: {
                     name: null
                 },
+                avatarFile: null,
                 aliases: []
             }
+        },
+        props: {
+            id: null
         },
         methods: {
             submit() {
                 this.submitting = true;
-                let data = {
-                    id: this.$route?.params?.id,
-                    name: this.artist.name,
-                    aliases: this.aliases
-                };
+
+                let data = new FormData();
+                if (this.id)
+                    data.append('id', this.id);
+
+                for (let i = 0; i < this.aliases.length; i++) {
+                    data.append('aliases[]', this.aliases[i]);
+                }
+                // data.append('name',)
+                if (this.avatarFile)
+                    data.append('avatarFile', this.avatarFile, this.avatarFile.name);
 
                 let action = getStoreOrUpdateAction(this.$route?.params?.id, '/media/artist');
-                console.log(action);
+
                 axios({
                     method: action.method,
                     url: action.url,
                     data: data
                 })
                     .then(_ => {
-                        // this.$router.go()
-                        console.log('added');
+                        // this.$router.push({name: 'artists-table'})
                     })
                     .catch(e => console.log(e))
-                    .then(_ => this.submitting = false);
+                    .finally(_ => this.submitting = false);
             },
             fetchData() {
                 axios.get(`/media/artist/${this.$route.params.id}`)
@@ -76,6 +91,12 @@
                 this.aliases = data.aliases.map(function (alias) {
                     return alias.name;
                 })
+            }
+        },
+        computed: {
+            coverUrl() {
+                if (this.artist.avatar_id)
+                    return getAvatarImage(this.artist.avatar_id);
             }
         }
     }
