@@ -14,8 +14,9 @@ class UpdateArtistsTable extends Migration
     public function up()
     {
         Schema::table('artists', function (Blueprint $table) {
-            $table->text('info');
-            $table->char('type', 40);
+            $table->text('info')->nullable();
+            $table->char('type', 40)->nullable();
+            $table->char('avatar_id', 26)->index()->nullable();
             $table->counters();
         });
     }
@@ -29,6 +30,7 @@ class UpdateArtistsTable extends Migration
     {
         Schema::table('artists', function (Blueprint $table) {
             $table->dropColumn('info');
+            $table->dropColumn('avatar_id');
             $table->dropColumn('type');
             $table->dropColumn('view_count');
             $table->dropColumn('play_count');
