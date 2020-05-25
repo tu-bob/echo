@@ -52,7 +52,7 @@ class ImageFileProvider
         return $response->generateResponse();
     }
 
-    public function getResizedFileResponse($id, $width = 50, $height = 50, $quality = 90)
+    public function getResizedFileResponse($id, $width = 50, $height = 50, $quality = 100)
     {
         $imgFile = $this->getImage($id);
         $cacheFolder = 'cache/' . $width . $height . '/';
