@@ -33,8 +33,8 @@
     <link rel="icon" href="{{ URL::asset('icons/png/favicon.png') }}" type="image/x-icon"/>
 </head>
 <body>
-<div id="app" class="container-fluid position-relative h-100">
+<main id="app" class="container-fluid position-relative h-100 overflow-auto">
     <app @auth :user="{{auth()->user()}}" @endauth ></app>
-</div>
+</main>
 </body>
 </html>

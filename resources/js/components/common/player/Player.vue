@@ -113,7 +113,7 @@
                 <!--                    </div>-->
                 <!--                </div>-->
 
-                <div class="row">
+                <div>
                     <songs-list class="w-100" :playlist="PLAYLIST"></songs-list>
                 </div>
             </b-container>
