@@ -33,5 +33,5 @@ export function getYoutubeVideoId(url) {
 
 export function getYoutubeEmbedPreview(url) {
     let id = getYoutubeVideoId(url);
-    return id ? `http://img.youtube.com/vi/${id}/0.jpg` : null;
+    return id ? `https://img.youtube.com/vi/${id}/0.jpg` : null;
 }
