@@ -8,9 +8,9 @@
 
             <div>
                 <h1 class="typography-header-emphasized text-white">{{artist.aliases[0].name}}</h1>
-                <h2 class="typography-title text-secondary mt-3" v-if="aliases && aliases.length > 0">{{aliases}}</h2>
-                <h2 class="typography-title text-secondary" v-if="translateType(artist.type)">
-                    {{translateType(artist.type)}}</h2>
+                <h2 class="typography-title text-secondary" v-if="aliases && aliases.length > 0">{{aliases}}</h2>
+<!--                <h2 class="typography-title text-secondary" v-if="translateType(artist.type)">-->
+<!--                    {{translateType(artist.type)}}</h2>-->
                 <div v-if="artist.info">
                     <pre ref="artistInfo" class="artist-info">{{artist.info}}</pre>
                 </div>
