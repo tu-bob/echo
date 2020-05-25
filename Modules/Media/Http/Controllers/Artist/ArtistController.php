@@ -5,11 +5,14 @@ namespace Modules\Media\Http\Controllers\Artist;
 
 use Illuminate\Validation\Rule;
 use Modules\Media\Models\Artist\Artist;
+use Modules\Media\Services\artist\ArtistService;
 use Modules\Shared\Http\Controllers\BaseController;
 
 class ArtistController extends BaseController
 {
-    public function __construct()
+    private ArtistService $service;
+
+    public function __construct(ArtistService $service)
     {
         $admin = [
             'store',
@@ -17,56 +20,18 @@ class ArtistController extends BaseController
         ];
 
         $this->middleware('auth')->only($admin);
+
+        $this->service = $service;
     }
 
     public function store()
     {
-        $data = request()->validate($this->rules());
-        $artist = Artist::create();
-
-        $this->createAliases($artist, $data['aliases']);
-
-        return $artist;
+        return $this->service->store(request()->validate($this->rules()));
     }
 
     public function update(Artist $artist)
     {
-        $data = request()->validate($this->rules());
-//        $aliases = array();
-
-        $deletedAliases = $artist->aliases->filter(function ($alias) use ($data) {
-            return !in_array($alias->name, $data['aliases']);
-        });
-
-        foreach ($deletedAliases as $alias) {
-            //TODO check if there are songs that using this alias
-            if ($alias->songs->count() < 1)
-                $alias->delete();
-            else
-                abort(422, 'Псевдоним использован в песнях');
-        }
-        $newAliases = [];
-        foreach ($data['aliases'] as $alias) {
-            $exists = $artist->aliases->first(function ($item) use ($alias) {
-                return $item->name === $alias;
-            });
-
-            if (!$exists) $newAliases[] = $alias;
-        }
-
-        $this->createAliases($artist, $newAliases);
-
-        return $artist;
-    }
-
-    private function createAliases($artist, $aliases)
-    {
-        $createdAliases = [];
-        foreach ($aliases as $alias) {
-            $createdAliases[] = $artist->aliases()->create(['name' => $alias]);
-        }
-
-        return $createdAliases;
+        return $this->service->update($artist, request()->validate($this->rules()));
     }
 
     public function getArtist(Artist $artist)
@@ -87,10 +52,7 @@ class ArtistController extends BaseController
             'aliases' => 'required|array',
             'aliases.*' => [
                 'required',
-                'string',
-                Rule::unique('artist_aliases', 'name')->where(function ($query) {
-                    return $query->where('artist_id', '!=', request()->get('id'));
-                })
+                'string'
             ]
         ];
     }
