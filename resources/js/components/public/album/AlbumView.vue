@@ -97,7 +97,7 @@
         },
         watch:{
             album() {
-                this.title = 'Echo.tj - Слушать, скачать альбом ' + this.album.title + ' - ' + concatStrings(this.album.artistAliases.slice(0,2).map(alias => alias.name), ' ·');
+                this.title = 'Слушать, скачать альбом "' + this.album.title + '" - ' + concatStrings(this.album.artistAliases.slice(0,2).map(alias => alias.name), ' ·');
                 this.updateTitle();
             }
         }

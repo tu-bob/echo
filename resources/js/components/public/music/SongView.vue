@@ -125,7 +125,7 @@
                 $('pre').css('max-height', this.showLyrics ? '' : '100px');
             },
             song() {
-                this.title = 'Echo.tj - Слушать, скачать песню ' + this.song.title + ' - ' + concatStrings(this.song.artistAliases.map(alias => alias.name), ' ·');
+                this.title = 'Слушать, скачать песню "' + this.song.title + '" - ' + concatStrings(this.song.artistAliases.map(alias => alias.name), ' ·');
                 this.updateTitle();
             }
         }
