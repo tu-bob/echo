@@ -4,50 +4,58 @@
             <ul class="horizontal-scroll-list m-0 p-0 moving-border">
                 <b-nav-item class="horizontal-nav-menu-item m-item" :to="{name:'overview'}" exact
                             exact-active-class="active">
-                <span class="menu-icon">
+                <span class="menu-icon pr-md-3">
                     <svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 15"><defs></defs><g><g
                         id="overviews_icon" class="cls-1"><g
                         id="overviews_icon-2">
                         <path class="cls-2"
-                              d="M16,1.4A1.43,1.43,0,0,0,14.55,0l-8,.7a1.43,1.43,0,0,0-1.45,1.4v7h0v2.78h0a2,2,0,0,1,0,.38,2.14,2.14,0,0,1-2.19,2.09,2.1,2.1,0,1,1,0-4.19,2.25,2.25,0,0,1,.72.13v-.13h0a.34.34,0,0,0,0-.69h0a.33.33,0,0,0-.18.06,2.75,2.75,0,0,0-.54-.06A2.85,2.85,0,0,0,0,12.22,2.85,2.85,0,0,0,2.91,15a2.85,2.85,0,0,0,2.91-2.78s0,0,0-.06h0V2.09a.71.71,0,0,1,.73-.7l8-.7a.71.71,0,0,1,.73.7v7h0v2.78h0a2,2,0,0,1,0,.36,2.19,2.19,0,1,1-2.19-2.08,2.27,2.27,0,0,1,.72.12V9.44h0a.36.36,0,0,0,.36-.36h0a.36.36,0,0,0-.36-.36h0a.35.35,0,0,0-.18.06,2.72,2.72,0,0,0-.52-.06A2.8,2.8,0,1,0,16,11.52h0Z"></path></g></g></g></svg></span>
-                    <span class="">Обзор</span>
+                              d="M16,1.4A1.43,1.43,0,0,0,14.55,0l-8,.7a1.43,1.43,0,0,0-1.45,1.4v7h0v2.78h0a2,2,0,0,1,0,.38,2.14,2.14,0,0,1-2.19,2.09,2.1,2.1,0,1,1,0-4.19,2.25,2.25,0,0,1,.72.13v-.13h0a.34.34,0,0,0,0-.69h0a.33.33,0,0,0-.18.06,2.75,2.75,0,0,0-.54-.06A2.85,2.85,0,0,0,0,12.22,2.85,2.85,0,0,0,2.91,15a2.85,2.85,0,0,0,2.91-2.78s0,0,0-.06h0V2.09a.71.71,0,0,1,.73-.7l8-.7a.71.71,0,0,1,.73.7v7h0v2.78h0a2,2,0,0,1,0,.36,2.19,2.19,0,1,1-2.19-2.08,2.27,2.27,0,0,1,.72.12V9.44h0a.36.36,0,0,0,.36-.36h0a.36.36,0,0,0-.36-.36h0a.35.35,0,0,0-.18.06,2.72,2.72,0,0,0-.52-.06A2.8,2.8,0,1,0,16,11.52h0Z"></path></g></g></g></svg>
+                </span>
+                    <span class="d-none d-md-inline-block">Обзор</span>
                 </b-nav-item>
                 <b-nav-item class="horizontal-nav-menu-item m-item" :to="{name:'blog'}" exact
                             exact-active-class="active">
-                    <span class="menu-icon"><img class="icon-btn-md" src="/icons/svg/newspaper.svg"></span>
-                    <span class="">Статьи</span>
+                    <span class="menu-icon pr-md-3"><img class="icon-btn-md" src="/icons/svg/newspaper.svg"></span>
+                    <span class="d-none d-md-inline-block">Статьи</span>
                 </b-nav-item>
                 <b-nav-item class="horizontal-nav-menu-item m-item"
                             :to="{name:'music'}"
                             exact
                             exact-active-class="active">
-                <span class="menu-icon">
+                <span class="menu-icon pr-md-3">
                     <svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 12.29 16.21"><defs></defs><g><g
                         id="new_music_icon"><g><path
                         d="M6.37,16.21l.12,0H6.37ZM6.58.08h0L6.37,0V0h0a.4.4,0,0,0-.4.4V10.5a3.4,3.4,0,1,0,.81,2.91.39.39,0,0,0,.07-.21V1.12a7.6,7.6,0,0,1,3.26,2.74.39.39,0,0,0-.17,0,.4.4,0,1,0,.55.15l0,0,.63-.31A8.51,8.51,0,0,0,6.58.08ZM3.37,15.36a2.56,2.56,0,1,1,2.56-2.56A2.56,2.56,0,0,1,3.37,15.36ZM11.31,4.14V7c0,.23.08.46.09.7h.89A8.41,8.41,0,0,0,11.31,4.14Z"></path></g></g></g></svg>
                 </span>
-                    <span>Музыка</span>
+                    <span class="d-none d-md-inline-block">Музыка</span>
                 </b-nav-item>
                 <b-nav-item class="horizontal-nav-menu-item m-item"
                             :to="{name:'albums'}"
                             exact
                             exact-active-class="active">
-                    <span class="menu-icon"><img class="icon-btn-md" src="/icons/svg/album.svg"></span>
-                    <span>Альбомы</span>
+                    <span class="menu-icon pr-md-3"><img class="icon-btn-md" src="/icons/svg/album.svg"></span>
+                    <span class="d-none d-md-inline-block">Альбомы</span>
+                </b-nav-item>
+                <b-nav-item class="horizontal-nav-menu-item m-item"
+                            :to="{name:'artists'}"
+                            exact
+                            exact-active-class="active">
+                    <span class="menu-icon pr-md-3"><img class="icon-btn-md" src="/icons/svg/users.svg"></span>
+                    <span class="d-none d-md-inline-block">Артисты</span>
                 </b-nav-item>
                 <b-nav-item class="horizontal-nav-menu-item m-item"
                             :to="{name:'clips'}"
                             exact
                             exact-active-class="active">
-                    <span class="menu-icon"><img class="icon-btn-md" src="/icons/svg/video.svg"></span>
-                    <span>Клипы</span>
+                    <span class="menu-icon pr-md-3"><img class="icon-btn-md" src="/icons/svg/video.svg"></span>
+                    <span class="d-none d-md-inline-block">Клипы</span>
                 </b-nav-item>
                 <b-nav-item class="horizontal-nav-menu-item m-item"
                             :to="{name:'about'}"
                             exact
                             exact-active-class="active">
-                    <span class="menu-icon"><img class="icon-btn-md" src="/icons/svg/info.svg"></span>
-                    <span>О нас</span>
+                    <span class="menu-icon pr-md-3"><img class="icon-btn-md" src="/icons/svg/info.svg"></span>
+                    <span class="d-none d-md-inline-block">О нас</span>
                 </b-nav-item>
             </ul>
             <hr class="border-hr" style="width: 159.66px; margin-left: 0px;">
@@ -165,7 +173,7 @@
         display: inline-block;
         vertical-align: middle;
         height: auto;
-        padding-right: 1rem !important;
+        /*padding-right: 1rem !important;*/
     }
 
     .menu-icon svg {
