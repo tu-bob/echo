@@ -24,7 +24,7 @@
                     </router-link>
                 </h2>
                 <h3 class="typography-footnote-emphasized text-uppercase text-secondary">
-                    {{genres}} · {{song.year}}</h3>
+                    {{genres}} <span v-if="song.year">· {{song.year}}</span></h3>
                 <b-button variant="outline-secondary" pill class="mt-3" @click="playSongs([song])">
                     <font-awesome-icon icon="play" size="sm" class="mr-1"></font-awesome-icon>
                     Слушать

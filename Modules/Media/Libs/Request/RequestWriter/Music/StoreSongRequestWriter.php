@@ -69,7 +69,7 @@ class StoreSongRequestWriter extends RequestWriter
     {
         $data = [
             'title' => $this->request['title'],
-            'year' => $this->request['year'],
+            'year' => isset($this->request['year']) && $this->request['year'] ? $this->request['year'] : '',
             'label' => isset($this->request['label']) ? $this->request['label'] : '',
             'allow_download' => $this->request['allow_download']
         ];
