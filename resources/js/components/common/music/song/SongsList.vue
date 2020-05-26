@@ -63,7 +63,7 @@
                         this.songs.push(...response.data);
                     })
                     .catch()
-                    .then(_ => {
+                    .finally(_ => {
                         this.isFetchingSongs = false;
                         this.$refs['songs-list-pagination'].loaded()
                     })

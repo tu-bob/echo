@@ -40,6 +40,10 @@ export async function fetchSongs(filters, options) {
     return axios.get('/media/music/song/list?' + kvpToQueryParam(filters), options);
 }
 
+export function fetchArtists(filters, options) {
+    return axios.get('/media/artist/list?' + kvpToQueryParam(filters), options);
+}
+
 export function getAlbumCoverUrl(id) {
     return `/media/music/album/${id}/cover`;
 }

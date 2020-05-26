@@ -67,6 +67,11 @@
                         path: 'about',
                         component: () => import('../components/public/home/AboutUs')
                     },
+                    {
+                        name: 'artists',
+                        path: 'artists',
+                        component: () => import('../components/public/artist/ArtistsList')
+                    }
                 ]
             },
             {

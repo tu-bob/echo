@@ -41,7 +41,7 @@ class ArtistController extends BaseController
 
     public function getArtists()
     {
-        $query = Artist::latest();
+        $query = Artist::whereHas('aliases')->latest();
         return $this->callGetOrPaginate($query);
     }
 
