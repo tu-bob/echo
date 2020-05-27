@@ -26,7 +26,7 @@
                 <h3 class="typography-footnote-emphasized text-uppercase text-secondary">
                     {{genres}} <span v-if="song.year">· {{song.year}}</span></h3>
                 <h3 class="typography-footnote-emphasized text-uppercase text-secondary" v-if="song.label">
-                   Лейбл {{song.label}}
+                    Лейбл {{song.label}}
                 </h3>
                 <b-button variant="outline-secondary" pill class="mt-3" @click="playSongs([song])">
                     <font-awesome-icon icon="play" size="sm" class="mr-1"></font-awesome-icon>
@@ -89,7 +89,7 @@
             this.fetchSong();
         },
         components: {AlbumCard, AlbumsList, SafeImage},
-        mixins: [PlaySongsMixin,TitleMixin],
+        mixins: [PlaySongsMixin, TitleMixin],
         props: {
             id: null
         },
@@ -128,7 +128,10 @@
                 $('pre').css('max-height', this.showLyrics ? '' : '100px');
             },
             song() {
-                this.title = 'Слушать, скачать песню "' + this.song.title + '" - ' + concatStrings(this.song.artistAliases.map(alias => alias.name), ' ·');
+                let english = this.song.english_title ? ' | ' + this.song.english_title : '';
+                this.title = 'Слушать, скачать песню ' +
+                    this.song.title + english + ' - ' +
+                    concatStrings(this.song.artistAliases.map(alias => alias.name), ' ·');
                 this.updateTitle();
             }
         }
