@@ -78,21 +78,22 @@
     import VideosList from "../../common/video/VideosList";
     import VideoCard from "../../common/video/VideoCard";
     import {getAvatarImage} from "../../../api/mediaApi";
-    import TitleMixin from "../../admin/mixins/TitleMixin";
+    import MetaTagsMixin from "../../admin/mixins/MetaTagsMixin";
 
     export default {
         name: "ArtistView",
         props: {
             id: null
         },
-        mixins: [TitleMixin],
+        mixins: [MetaTagsMixin],
         components: {VideoCard, VideosList, SongsList, AlbumCard},
         data() {
             return {
                 artist: null,
                 selectedVideo: null,
                 showArtistInfo: false,
-                title: "Песни, альбомы, тексты, клипы и аккорды таджикских артистов"
+                title: "Песни, альбомы, тексты, клипы и аккорды таджикских артистов",
+                description: 'Полная информация о творчестве таджикских исполнителей'
             }
         },
         mounted() {
@@ -130,10 +131,13 @@
                     return getAvatarImage(this.artist.avatar_id);
             }
         },
-        watch:{
+        watch: {
             artist() {
                 this.title = concatStrings(this.artist.aliases.map(alias => alias.name), ' ·') + ' - песни, альбомы, аккорды, тексты песен.';
+                this.description = 'Профиль ' + concatStrings(this.artist.aliases.map(alias => alias.name), ' ·') + ' на Echo.tj.' +
+                    ' Слушайте и скачивайте песни и альбомы. Смотрите видео, изучайте тексты и аккорды в профиле артистов.';
                 this.updateTitle();
+                this.updateDescription();
             }
         }
     }

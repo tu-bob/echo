@@ -51,11 +51,11 @@
 </template>
 
 <script>
-    import TitleMixin from "../../admin/mixins/TitleMixin";
+    import MetaTagsMixin from "../../admin/mixins/MetaTagsMixin";
 
     export default {
         name: "AboutUs",
-        mixins: [TitleMixin]
+        mixins: [MetaTagsMixin]
     }
 </script>
 

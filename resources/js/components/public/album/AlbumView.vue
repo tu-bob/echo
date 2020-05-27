@@ -56,7 +56,7 @@
     import {store} from "../../../store";
     import {concatStrings} from "../../../util/stringHelper";
     import SongsList from "../../common/music/song/SongsList";
-    import TitleMixin from "../../admin/mixins/TitleMixin";
+    import MetaTagsMixin from "../../admin/mixins/MetaTagsMixin";
 
     export default {
         name: "AlbumView",
@@ -64,11 +64,12 @@
             this.fetchAlbum();
         },
         components: {SongsList, SafeImage},
-        mixins: [TitleMixin],
+        mixins: [MetaTagsMixin],
         data() {
             return {
                 album: null,
-                title: 'Echo.tj - Слушайте и скачивайте музыкальные альбомы таджикских исполнителей'
+                title: 'Echo.tj - Слушайте и скачивайте музыкальные альбомы таджикских исполнителей',
+                description: 'Слушайте и скачивайте альбомы таджикских исполнителей.'
             }
         },
         props: {
@@ -95,10 +96,14 @@
                 return getAlbumCoverUrl(this.album.id)
             }
         },
-        watch:{
+        watch: {
             album() {
-                this.title = 'Слушать, скачать альбом "' + this.album.title + '" - ' + concatStrings(this.album.artistAliases.slice(0,2).map(alias => alias.name), ' ·');
+                let album = this.album.title + '" - ' + concatStrings(this.album.artistAliases.slice(0, 2).map(alias => alias.name), ' ·');
+                this.title = 'Слушать, скачать альбом "' + album;
+                this.description = 'Слушайте песни, читайте тексты, смотрите клипы музыкального альбома ' + album +
+                    ' на Echo.tj';
                 this.updateTitle();
+                this.updateDescription();
             }
         }
     }

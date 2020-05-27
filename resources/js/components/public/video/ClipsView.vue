@@ -7,16 +7,17 @@
 
 <script>
     import VideosList from "../../common/video/VideosList";
-    import TitleMixin from "../../admin/mixins/TitleMixin";
+    import MetaTagsMixin from "../../admin/mixins/MetaTagsMixin";
 
     export default {
         name: "ClipsView",
         data() {
             return {
-                title: 'Echo.tj - Главные клипы Таджикистана'
+                title: 'Echo.tj - Главные клипы Таджикистана',
+                description: 'Смотрите видео клипы ведущих артистов Таджикистана на Echo.tj'
             }
         },
-        mixins: [TitleMixin],
+        mixins: [MetaTagsMixin],
         components: {VideosList}
     }
 </script>

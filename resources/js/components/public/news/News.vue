@@ -7,16 +7,18 @@
 
 <script>
     import PostsMasonryView from "../../common/blog/PostsMasonryView";
-    import TitleMixin from "../../admin/mixins/TitleMixin";
+    import MetaTagsMixin from "../../admin/mixins/MetaTagsMixin";
 
     export default {
         name: "News",
         data() {
             return {
-                title: 'Echo.tj - Музыкальные новости Таджикистана'
+                title: 'Echo.tj - Музыкальные новости Таджикистана',
+                description: 'Новости, статьи, обзоры о таджикской музыке. Узнавайте первыми о релизах альбомов и песен. ' +
+                    'Информация о концертах и много другом на Echo.tj'
             }
         },
-        mixins: [TitleMixin],
+        mixins: [MetaTagsMixin],
         components: {PostsMasonryView}
     }
 </script>

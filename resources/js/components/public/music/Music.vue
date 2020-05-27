@@ -10,7 +10,7 @@
 <script>
 
     import SongsList from "../../common/music/song/SongsList";
-    import TitleMixin from "../../admin/mixins/TitleMixin";
+    import MetaTagsMixin from "../../admin/mixins/MetaTagsMixin";
 
     export default {
         name: "Music",
@@ -20,10 +20,13 @@
         },
         data() {
             return {
-                title: 'Echo.tj - Музыка Таджикистана'
+                title: 'Echo.tj - Музыка Таджикистана',
+                description: 'Слушайте музыку онлайн или скачивайте в хорошем качестве с заполнеными метатегами.' +
+                    'Находите тексты песен и аккорды. Любимые таджикские исполнители, песни и альбомы на портале' +
+                    'Echo.tj'
             }
         },
-        mixins: [TitleMixin],
+        mixins: [MetaTagsMixin],
         computed: {
             filters() {
                 return this.genres ? {genres: this.genres} : {};

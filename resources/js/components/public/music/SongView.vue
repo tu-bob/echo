@@ -79,7 +79,7 @@
     import PlaySongsMixin from "../../admin/mixins/PlaySongsMixin";
     import {library} from '@fortawesome/fontawesome-svg-core'
     import {faPlay} from '@fortawesome/free-solid-svg-icons'
-    import TitleMixin from "../../admin/mixins/TitleMixin";
+    import MetaTagsMixin from "../../admin/mixins/MetaTagsMixin";
 
     library.add(faPlay);
 
@@ -89,7 +89,7 @@
             this.fetchSong();
         },
         components: {AlbumCard, AlbumsList, SafeImage},
-        mixins: [PlaySongsMixin, TitleMixin],
+        mixins: [PlaySongsMixin, MetaTagsMixin],
         props: {
             id: null
         },
@@ -129,10 +129,12 @@
             },
             song() {
                 let english = this.song.english_title ? ' | ' + this.song.english_title : '';
-                this.title = 'Слушать, скачать песню ' +
-                    this.song.title + english + ' - ' +
+                let song = this.song.title + english + ' - ' +
                     concatStrings(this.song.artistAliases.map(alias => alias.name), ' ·');
+                this.title = 'Слушать, скачать песню ' + song;
+                this.description = 'Текст песни, аккорды, клип ' + song + ' на Echo.tj';
                 this.updateTitle();
+                this.updateDescription();
             }
         }
     }

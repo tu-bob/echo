@@ -65,11 +65,11 @@
     import PostsList from "../../blog/PostsList";
     import {fetchPosts} from "../../../../api/blogApi";
     import AxiosCancellationMixin from "../../../admin/mixins/AxiosCancellationMixin";
-    import TitleMixin from "../../../admin/mixins/TitleMixin";
+    import MetaTagsMixin from "../../../admin/mixins/MetaTagsMixin";
 
     export default {
         name: "Overview",
-        mixins: [AxiosCancellationMixin, TitleMixin],
+        mixins: [AxiosCancellationMixin, MetaTagsMixin],
         mounted() {
             this.fetchTopSongs();
             this.fetchTopAlbums();

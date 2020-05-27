@@ -6,16 +6,18 @@
 
 <script>
     import AlbumsList from "../../common/music/album/AlbumsList";
-    import TitleMixin from "../../admin/mixins/TitleMixin";
+    import MetaTagsMixin from "../../admin/mixins/MetaTagsMixin";
 
     export default {
         name: "AlbumsView",
         data() {
             return {
-                title: 'Echo.tj - Главные музыкальные альбомы Таджикистана'
+                title: 'Echo.tj - Главные музыкальные альбомы Таджикистана',
+                description: 'Музыкальные альбомы таджикских групп и артистов в высоком качестве на Echo.tj. ' +
+                    'На сайте доступны альбомы Далера Назарова, гр. Парем и многих других известных артистов.'
             }
         },
-        mixins: [TitleMixin],
+        mixins: [MetaTagsMixin],
         components: {
             AlbumsList
         }
