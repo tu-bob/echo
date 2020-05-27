@@ -49,6 +49,8 @@ class SongController extends BaseController
             return response()->json([], 404);
 
         $range = $this->getByteRange();
+        if (!$range)
+            return redirect('app/songs/' . $song->id);
         $range[1] = $range[0] + 200000;
         $fileResponse = new FileResponse($song->audioFile->path, $song->audioFile->mime_type, $range);
         return $fileResponse->generateResponse();
@@ -106,7 +108,7 @@ class SongController extends BaseController
             $imageProvider = new ImageFileProvider('cover');
             return $imageProvider->getResizedFileResponse(
                 $coverImage,
-                request()->get('width',50),
+                request()->get('width', 50),
                 request()->get('height', 50));
 
 //            return $response->generateResponse();
