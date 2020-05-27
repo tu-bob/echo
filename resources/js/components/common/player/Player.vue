@@ -313,7 +313,6 @@
                 this.isFetchingSong = true;
                 this.bufferedSeconds = 0;
                 this.playCountUpdated = false;
-                this.updateDocumentMeta()
             },
             showPlayerOverlay() {
                 return this.showPlayerOverlay ? $('body').addClass('overflow-hidden') : $('body').removeClass('overflow-hidden');
@@ -336,6 +335,7 @@
             audioSrc() {
                 if (this.ACTIVE_SONG) {
                     this.playing = false;
+                    this.updateDocumentMeta();
                     return getAudioFileUrl(this.ACTIVE_SONG.id);
                 }
             },
