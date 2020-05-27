@@ -77,8 +77,8 @@ export function fetchVideos(filters, options) {
     return axios.get('/media/video/list?' + kvpToQueryParam(filters), options);
 }
 
-export function fetchAudioFile(id) {
-    return `/media/music/song/${id}/audio`;
+export function getAudioFileUrl(id) {
+    return `/media/music/audio/${id}`;
 }
 
 export function increaseMediaPlayCount(id, type) {

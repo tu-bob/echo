@@ -47,12 +47,14 @@ Route::prefix('media')->group(function () {
             Route::post('/', 'Music\Song\SongController@store');
             Route::get('/list', 'Music\Song\SongController@getSongs');
             Route::get('/find/{info}', 'Music\Song\SongController@findSongsByInfo');
-            Route::get('/{song}/audio', 'Music\Song\SongController@getAudioFile');
+//            Route::get('/{song}/audio', 'Music\Song\SongController@getAudioFile');
             Route::get('/{song}/icon', 'Music\Song\SongController@getIcon');
             Route::get('/{song}/download', 'Music\Song\SongController@downloadSong');
             Route::put('/{song}/play', 'Music\Song\SongController@countPlay');
             Route::get('/{song}', 'Music\Song\SongController@getSong');
         });
+
+        Route::resource('audio', 'Music\Song\SongAudioFileController')->parameters(['audio' => 'song']);
 
         Route::prefix('album')->group(function () {
             Route::post('/', 'Music\MusicAlbumController@store');

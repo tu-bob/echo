@@ -43,18 +43,22 @@ class SongController extends BaseController
             ->findOrFail($song);
     }
 
-    public function getAudioFile(Song $song)
-    {
-        if (!$song->audioFile)
-            return response()->json([], 404);
-
-        $range = $this->getByteRange();
-        if (!$range)
-            return redirect('app/songs/' . $song->id);
-        $range[1] = $range[0] + 200000;
-        $fileResponse = new FileResponse($song->audioFile->path, $song->audioFile->mime_type, $range);
-        return $fileResponse->generateResponse();
-    }
+//    public function getAudioFile(Song $song)
+//    {
+//        if (!request()->headers->get('referer')
+//            || parse_url(request()->headers->get('referer'), PHP_URL_HOST) !== 'echo.tj')
+//            abort(403);
+//
+//        if (!$song->audioFile)
+//            return response()->json([], 404);
+//
+//        $range = $this->getByteRange();
+//        if (!$range)
+//            return redirect('app/songs/' . $song->id);
+//        $range[1] = $range[0] + 200000;
+//        $fileResponse = new FileResponse($song->audioFile->path, $song->audioFile->mime_type, $range);
+//        return $fileResponse->generateResponse();
+//    }
 
     public function downloadSong(Song $song)
     {

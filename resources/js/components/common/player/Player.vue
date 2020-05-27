@@ -166,7 +166,7 @@
         faEllipsisH,
         faUser
     } from '@fortawesome/free-solid-svg-icons'
-    import {fetchAudioFile, getSongIconUrl} from "../../../api/mediaApi";
+    import {getAudioFileUrl, getSongIconUrl} from "../../../api/mediaApi";
     import {concatStrings, secondsToFormattedMinutes} from "../../../util/stringHelper";
     import {mapGetters} from "vuex";
     import SongsList from "../music/song/SongsList";
@@ -336,7 +336,7 @@
             audioSrc() {
                 if (this.ACTIVE_SONG) {
                     this.playing = false;
-                    return fetchAudioFile(this.ACTIVE_SONG.id);
+                    return getAudioFileUrl(this.ACTIVE_SONG.id);
                 }
             },
             currentTimeFormatted() {
