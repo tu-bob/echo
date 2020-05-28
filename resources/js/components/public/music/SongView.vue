@@ -13,6 +13,7 @@
                         :title="title"
                         :description="description"
                         quote="Echo.tj - Музыкальное наследие Таджикистана"
+                        :media="fullCoverUrl"
                         :hash-tags="hashTags">
                     </network-share>
                     <!--                    <h3 class="mt-3 typography-footnote-emphasized text-uppercase text-secondary">-->
@@ -80,7 +81,7 @@
     import SafeImage from "../../common/image/SafeImage";
     import {fetchSong, getSongIconUrl} from "../../../api/mediaApi";
     import {store} from "../../../store";
-    import {concatStrings} from "../../../util/stringHelper";
+    import {concatStrings, getBaseUri} from "../../../util/stringHelper";
     import AlbumsList from "../../common/music/album/AlbumsList";
     import AlbumCard from "../../common/music/album/AlbumCard";
     import PlaySongsMixin from "../../admin/mixins/PlaySongsMixin";
@@ -127,6 +128,9 @@
         computed: {
             coverUrl() {
                 return getSongIconUrl(this.song.id, {width: 350, height: 350});
+            },
+            fullCoverUrl() {
+                return getBaseUri() + '/' + this.coverUrl;
             },
             genres() {
                 return concatStrings(this.song.genres.map(alias => alias.local_name), ' ·');

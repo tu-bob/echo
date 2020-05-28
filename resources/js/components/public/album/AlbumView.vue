@@ -15,6 +15,7 @@
                         :url="pageUrl"
                         :title="title"
                         :description="description"
+                        :media="fullCoverUrl"
                         quote="Echo.tj - Музыкальное наследие Таджикистана"
                         :hash-tags="hashTags">
                     </network-share>
@@ -62,7 +63,7 @@
     import SafeImage from "../../common/image/SafeImage";
     import {fetchAlbum, getAlbumCoverUrl} from "../../../api/mediaApi";
     import {store} from "../../../store";
-    import {concatStrings} from "../../../util/stringHelper";
+    import {concatStrings, getBaseUri} from "../../../util/stringHelper";
     import SongsList from "../../common/music/song/SongsList";
     import MetaTagsMixin from "../../admin/mixins/MetaTagsMixin";
     import NetworkShare from "../../common/inputs/NetworkShare";
@@ -103,6 +104,9 @@
             },
             coverUrl() {
                 return getAlbumCoverUrl(this.album.id)
+            },
+            fullCoverUrl() {
+                return getBaseUri() + '/' + getAlbumCoverUrl(this.album.id)
             },
             pageUrl() {
                 return window.location.href;

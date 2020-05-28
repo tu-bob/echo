@@ -12,6 +12,7 @@
                         :title="title"
                         :description="description"
                         quote="Echo.tj - Музыкальное наследие Таджикистана"
+                        :media="fullAvatarUrl"
                         :hash-tags="hashTags">
                     </network-share>
                 </div>
@@ -83,7 +84,7 @@
 </template>
 
 <script>
-    import {concatStrings} from "../../../util/stringHelper";
+    import {concatStrings, getBaseUri} from "../../../util/stringHelper";
     import AlbumCard from "../../common/music/album/AlbumCard";
     import SongsList from "../../common/music/song/SongsList";
     import VideosList from "../../common/video/VideosList";
@@ -145,6 +146,9 @@
             avatarUrl() {
                 if (this.artist.avatar_id)
                     return getAvatarImage(this.artist.avatar_id);
+            },
+            fullAvatarUrl() {
+                return getBaseUri() + '/' + this.avatarUrl
             },
             pageUrl() {
                 return window.location.href;

@@ -35,3 +35,9 @@ export function getYoutubeEmbedPreview(url) {
     let id = getYoutubeVideoId(url);
     return id ? `https://img.youtube.com/vi/${id}/0.jpg` : null;
 }
+
+export function getBaseUri() {
+    let protocol = location.protocol;
+    let slashes = protocol.concat("//");
+    return slashes.concat(window.location.hostname);
+}
