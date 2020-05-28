@@ -1,10 +1,21 @@
 <template>
     <b-container fluid="md" v-if="artist">
         <div class="d-flex flex-wrap mb-5">
-            <b-avatar size="200px"
-                      class="mr-5 mb-4"
-                      :src="avatarUrl">
-            </b-avatar>
+            <div style="width:200px"
+                 class="mr-5 mb-4">
+                <b-avatar size="200px"
+                          :src="avatarUrl">
+                </b-avatar>
+                <div class="d-flex justify-content-center mt-2">
+                    <network-share
+                        url="https://echo.tj"
+                        :title="title"
+                        :description="description"
+                        quote="Echo.tj - Музыкальное наследие Таджикистана"
+                        :hash-tags="hasTags">
+                    </network-share>
+                </div>
+            </div>
 
             <div>
                 <h1 class="typography-header-emphasized text-white">{{artist.aliases[0].name}}</h1>
@@ -79,6 +90,7 @@
     import VideoCard from "../../common/video/VideoCard";
     import {getAvatarImage} from "../../../api/mediaApi";
     import MetaTagsMixin from "../../admin/mixins/MetaTagsMixin";
+    import NetworkShare from "../../common/inputs/NetworkShare";
 
     export default {
         name: "ArtistView",
@@ -86,7 +98,7 @@
             id: null
         },
         mixins: [MetaTagsMixin],
-        components: {VideoCard, VideosList, SongsList, AlbumCard},
+        components: {NetworkShare, VideoCard, VideosList, SongsList, AlbumCard},
         data() {
             return {
                 artist: null,
@@ -125,6 +137,10 @@
         computed: {
             aliases() {
                 return concatStrings(this.artist.aliases.slice(1, this.artist.aliases.length).map(alias => alias.name), ' ·');
+            },
+            hasTags() {
+                let tags = concatStrings(this.artist.aliases.slice(1, this.artist.aliases.length).map(alias => alias.name), ',');
+                return tags.replace(/\s/g, '');
             },
             avatarUrl() {
                 if (this.artist.avatar_id)

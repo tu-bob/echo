@@ -6,6 +6,7 @@
 import {store} from './store';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import VueObserveVisibility from 'vue-observe-visibility'
+import VueSocialSharing from 'vue-social-sharing'
 
 require('./bootstrap');
 
@@ -21,6 +22,7 @@ window.Vue = require('vue');
 window.Vue.use(BootstrapVue);
 window.Vue.use(VueRouter);
 window.Vue.use(VueObserveVisibility);
+Vue.use(VueSocialSharing);
 window.Vue.use(VueLuxon
     ,{
     serverZone: 'utc',
