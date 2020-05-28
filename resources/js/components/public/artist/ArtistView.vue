@@ -8,11 +8,11 @@
                 </b-avatar>
                 <div class="d-flex justify-content-center mt-2">
                     <network-share
-                        url="https://echo.tj"
+                        :url="pageUrl"
                         :title="title"
                         :description="description"
                         quote="Echo.tj - Музыкальное наследие Таджикистана"
-                        :hash-tags="hasTags">
+                        :hash-tags="hashTags">
                     </network-share>
                 </div>
             </div>
@@ -138,13 +138,16 @@
             aliases() {
                 return concatStrings(this.artist.aliases.slice(1, this.artist.aliases.length).map(alias => alias.name), ' ·');
             },
-            hasTags() {
-                let tags = concatStrings(this.artist.aliases.slice(1, this.artist.aliases.length).map(alias => alias.name), ',');
+            hashTags() {
+                let tags = concatStrings(this.artist.aliases.map(alias => alias.name), ',');
                 return tags.replace(/\s/g, '');
             },
             avatarUrl() {
                 if (this.artist.avatar_id)
                     return getAvatarImage(this.artist.avatar_id);
+            },
+            pageUrl() {
+                return window.location.href;
             }
         },
         watch: {

@@ -9,7 +9,15 @@
                         :src="coverUrl">
                     </safe-image>
                     <h3 class="mt-3 typography-footnote-emphasized text-uppercase text-secondary">
-                        {{album.type.name}}</h3>
+                        {{album.type.name}}
+                    </h3>
+                    <network-share
+                        :url="pageUrl"
+                        :title="title"
+                        :description="description"
+                        quote="Echo.tj - Музыкальное наследие Таджикистана"
+                        :hash-tags="hashTags">
+                    </network-share>
                 </div>
             </b-col>
             <b-col md="8" lg="9" class="pl-md-5 pt-5">
@@ -57,13 +65,14 @@
     import {concatStrings} from "../../../util/stringHelper";
     import SongsList from "../../common/music/song/SongsList";
     import MetaTagsMixin from "../../admin/mixins/MetaTagsMixin";
+    import NetworkShare from "../../common/inputs/NetworkShare";
 
     export default {
         name: "AlbumView",
         mounted() {
             this.fetchAlbum();
         },
-        components: {SongsList, SafeImage},
+        components: {NetworkShare, SongsList, SafeImage},
         mixins: [MetaTagsMixin],
         data() {
             return {
@@ -94,7 +103,15 @@
             },
             coverUrl() {
                 return getAlbumCoverUrl(this.album.id)
-            }
+            },
+            pageUrl() {
+                return window.location.href;
+            },
+            hashTags() {
+                let tags = concatStrings(this.album.artistAliases.map(alias => alias.name), ',') +
+                    ',' + this.album.title;
+                return tags.replace(/\s/g, '');
+            },
         },
         watch: {
             album() {

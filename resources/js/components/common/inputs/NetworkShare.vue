@@ -1,5 +1,5 @@
 <template>
-    <b-dropdown id="dropdown-1" variant="outline-dark" no-caret class="m-md-2">
+    <b-dropdown id="dropdown-1" variant="outline-dark" no-caret>
         <template v-slot:button-content>
             <font-awesome-icon icon="share" class="mr-1"></font-awesome-icon>
             Поделиться

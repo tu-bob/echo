@@ -8,6 +8,13 @@
                         style="max-width: 350px"
                         :src="coverUrl">
                     </safe-image>
+                    <network-share
+                        :url="pageUrl"
+                        :title="title"
+                        :description="description"
+                        quote="Echo.tj - Музыкальное наследие Таджикистана"
+                        :hash-tags="hashTags">
+                    </network-share>
                     <!--                    <h3 class="mt-3 typography-footnote-emphasized text-uppercase text-secondary">-->
                     <!--                        {{song.type.name}}</h3>-->
                 </div>
@@ -80,6 +87,7 @@
     import {library} from '@fortawesome/fontawesome-svg-core'
     import {faPlay} from '@fortawesome/free-solid-svg-icons'
     import MetaTagsMixin from "../../admin/mixins/MetaTagsMixin";
+    import NetworkShare from "../../common/inputs/NetworkShare";
 
     library.add(faPlay);
 
@@ -88,7 +96,7 @@
         mounted() {
             this.fetchSong();
         },
-        components: {AlbumCard, AlbumsList, SafeImage},
+        components: {NetworkShare, AlbumCard, AlbumsList, SafeImage},
         mixins: [PlaySongsMixin, MetaTagsMixin],
         props: {
             id: null
@@ -97,7 +105,8 @@
             return {
                 song: null,
                 showLyrics: false,
-                title: 'Echo.tj - Слушайте и скачивайте песни таджикских исполнителей'
+                title: 'Echo.tj - Слушайте и скачивайте песни таджикских исполнителей',
+                description: 'Страница песни содержит тексты, аккорды, видео и альбомы в которых находится композиция'
             }
         },
         methods: {
@@ -122,6 +131,16 @@
             genres() {
                 return concatStrings(this.song.genres.map(alias => alias.local_name), ' ·');
             },
+            hashTags() {
+                let tags = concatStrings(this.song.artistAliases.map(alias => alias.name), ',') +
+                    ',' + this.song.title;
+                if (this.song.english_title)
+                    tags += ',' + this.song.english_title;
+                return tags.replace(/\s/g, '');
+            },
+            pageUrl() {
+                return window.location.href;
+            }
         },
         watch: {
             showLyrics() {
