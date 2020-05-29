@@ -31,10 +31,21 @@
                     </b-navbar-nav>
                 </b-collapse>
             </b-navbar>
-            <div class="col-4 py-2 pr-4 d-flex">
-                <!--                <router-link v-if="!AUTHENTICATED" :class="DEFAULT_BUTTON_CLASSES"-->
-                <!--                             :to="{name: 'login'}">Вход-->
-                <!--                </router-link>-->
+            <div class="col-4 py-2 pr-4 d-flex align-items-baseline justify-content-end">
+                <div class="d-flex align-items-center h-100">
+                    <a class="mr-2" target="_blank" title="Шифруйтесь с нами в телеграме"
+                       href="https://t.me/echotj">
+                        <img class="icon-btn-md" src="/icons/svg/telegram.svg">
+                    </a>
+                    <a class="mr-2" target="_blank" title="Подписывайтесь на нас в инстаграме"
+                       href="https://www.instagram.com/echo.tj/">
+                        <img class="icon-btn-md" src="/icons/svg/instagram.svg">
+                    </a>
+                    <a target="_blank" title="Следите за нами на фейсбуке"
+                       href="https://www.facebook.com/Echotj-107437064197171">
+                        <img class="icon-btn-md" src="/icons/svg/facebook.svg">
+                    </a>
+                </div>
                 <template v-if="AUTHENTICATED">
                     <b-avatar class="ml-auto mr-0 mr-md-3" :variant="AVATAR_VARIANT"></b-avatar>
                     <div class="user-name d-none d-md-flex">
