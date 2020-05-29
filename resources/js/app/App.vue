@@ -33,6 +33,10 @@
             </b-navbar>
             <div class="col-4 py-2 pr-4 d-flex align-items-baseline justify-content-end">
                 <div class="d-flex align-items-center h-100">
+                    <a class="mr-2" target="_blank" title="Смотрите видео талантищ на нашем ютюб канале"
+                       href="https://www.youtube.com/channel/UC6KsexkiEFS7hmb17sxh_vQ">
+                        <img class="icon-btn-md" src="/icons/svg/youtube.svg">
+                    </a>
                     <a class="mr-2" target="_blank" title="Шифруйтесь с нами в телеграме"
                        href="https://t.me/echotj">
                         <img class="icon-btn-md" src="/icons/svg/telegram.svg">
