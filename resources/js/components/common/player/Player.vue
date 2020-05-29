@@ -62,7 +62,7 @@
                             <font-awesome-icon icon="download" :size="playerBtnSize"></font-awesome-icon>
                         </a>
                     </div>
-                    <div id="mp-lyrics-btn" class="btn btn-dark d-none d-md-block"
+                    <div id="mp-lyrics-btn" title="Открыть текст песни" class="btn btn-dark d-none d-md-block"
                          @click="openPlayerOverlay('lyrics')">
                         <font-awesome-icon icon="align-left" :size="playerBtnSize"></font-awesome-icon>
                     </div>
@@ -91,7 +91,7 @@
                             Перейти к исполнителю
                         </b-dropdown-item>
                     </b-dropdown>
-                    <div id="mp-playlist-btn" class="btn btn-dark mr-0 mr-sm-4 mr-md-3"
+                    <div id="mp-playlist-btn" title="Открыть плейлист" class="btn btn-dark mr-0 mr-sm-4 mr-md-3"
                          @click="openPlayerOverlay('playlist')">
                         <font-awesome-icon icon="list" :size="playerBtnSize"></font-awesome-icon>
                     </div>
