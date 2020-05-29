@@ -6,7 +6,7 @@
                 <b-avatar size="200px"
                           :src="avatarUrl">
                 </b-avatar>
-                <div class="d-flex justify-content-center mt-2">
+                <div class="d-flex justify-content-center mt-3">
                     <network-share
                         :url="pageUrl"
                         :title="title"
