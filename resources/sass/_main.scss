@@ -144,10 +144,17 @@ pre {
     letter-spacing: .006em;
 }
 
+//border
 .link-border {
     border: 1px solid white;
     border-radius: 14px;
 }
+
+.rounded-20{
+    border-radius: 20px !important;
+}
+//end border
+
 
 .h-overlay {
     position: absolute;

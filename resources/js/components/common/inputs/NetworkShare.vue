@@ -1,5 +1,5 @@
 <template>
-    <b-dropdown id="dropdown-1" variant="outline-dark" no-caret>
+    <b-dropdown id="dropdown-1" variant="outline-secondary" no-caret toggle-class="rounded-20">
         <template v-slot:button-content>
             <font-awesome-icon icon="share" class="mr-1"></font-awesome-icon>
             Поделиться
@@ -109,5 +109,7 @@
 </script>
 
 <style scoped>
-
+    .border-radius-20 {
+        border-radius: 20px !important;
+    }
 </style>

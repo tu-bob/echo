@@ -8,14 +8,6 @@
                         style="max-width: 350px"
                         :src="coverUrl">
                     </safe-image>
-                    <network-share
-                        :url="pageUrl"
-                        :title="title"
-                        :description="description"
-                        quote="Echo.tj - Музыкальное наследие Таджикистана"
-                        :media="fullCoverUrl"
-                        :hash-tags="hashTags">
-                    </network-share>
                     <!--                    <h3 class="mt-3 typography-footnote-emphasized text-uppercase text-secondary">-->
                     <!--                        {{song.type.name}}</h3>-->
                 </div>
@@ -36,10 +28,20 @@
                 <h3 class="typography-footnote-emphasized text-uppercase text-secondary" v-if="song.label">
                     Лейбл {{song.label}}
                 </h3>
-                <b-button variant="outline-secondary" pill class="mt-3" @click="playSongs([song])">
-                    <font-awesome-icon icon="play" size="sm" class="mr-1"></font-awesome-icon>
-                    Слушать
-                </b-button>
+                <div class="d-flex mt-3">
+                    <b-button variant="outline-secondary" pill @click="playSongs([song])" class="mr-3">
+                        <font-awesome-icon icon="play" size="sm" class="mr-1"></font-awesome-icon>
+                        Слушать
+                    </b-button>
+                    <network-share
+                        :url="pageUrl"
+                        :title="title"
+                        :description="description"
+                        quote="Echo.tj - Музыкальное наследие Таджикистана"
+                        :media="fullCoverUrl"
+                        :hash-tags="hashTags">
+                    </network-share>
+                </div>
 
                 <template v-if="song.lyrics">
                 <pre class="song-lyrics" style="max-height: 100px">{{song.lyrics}}
