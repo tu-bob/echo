@@ -11,14 +11,6 @@
                     <h3 class="mt-3 typography-footnote-emphasized text-uppercase text-secondary">
                         {{album.type.name}}
                     </h3>
-                    <network-share
-                        :url="pageUrl"
-                        :title="title"
-                        :description="description"
-                        :media="fullCoverUrl"
-                        quote="Echo.tj - Музыкальное наследие Таджикистана"
-                        :hash-tags="hashTags">
-                    </network-share>
                 </div>
             </b-col>
             <b-col md="8" lg="9" class="pl-md-5 pt-5">
@@ -34,6 +26,20 @@
                 </h2>
                 <h3 class="typography-footnote-emphasized text-uppercase text-secondary">
                     {{genres}} · {{album.year}}</h3>
+                <div class="d-flex mt-3">
+                    <b-button variant="outline-secondary" pill @click="playSongs(album.songs)" class="mr-3">
+                        <font-awesome-icon icon="play" size="sm" class="mr-1"></font-awesome-icon>
+                        Слушать
+                    </b-button>
+                    <network-share
+                        :url="pageUrl"
+                        :title="title"
+                        :description="description"
+                        quote="Echo.tj - Музыкальное наследие Таджикистана"
+                        :media="fullCoverUrl"
+                        :hash-tags="hashTags">
+                    </network-share>
+                </div>
                 <songs-list :playlist="album.songs" class="pt-4"></songs-list>
             </b-col>
         </b-row>
@@ -67,6 +73,7 @@
     import SongsList from "../../common/music/song/SongsList";
     import MetaTagsMixin from "../../admin/mixins/MetaTagsMixin";
     import NetworkShare from "../../common/inputs/NetworkShare";
+    import PlaySongsMixin from "../../admin/mixins/PlaySongsMixin";
 
     export default {
         name: "AlbumView",
@@ -74,7 +81,7 @@
             this.fetchAlbum();
         },
         components: {NetworkShare, SongsList, SafeImage},
-        mixins: [MetaTagsMixin],
+        mixins: [MetaTagsMixin, PlaySongsMixin],
         data() {
             return {
                 album: null,
