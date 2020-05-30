@@ -12,9 +12,9 @@ class SongAudioFileController extends BaseController
 {
     public function show(Song $song)
     {
-        if (!request()->headers->get('referer')
-            || parse_url(request()->headers->get('referer'), PHP_URL_HOST) !== 'echo.tj')
-            return redirect('app/songs/' . $song->id);
+//        if (!request()->headers->get('referer')
+//            || parse_url(request()->headers->get('referer'), PHP_URL_HOST) !== 'echo.tj')
+//            return redirect('app/songs/' . $song->id);
 
         if (!$song->audioFile)
             return response()->json([], 404);

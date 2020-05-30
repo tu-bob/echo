@@ -9,6 +9,7 @@ import VueObserveVisibility from 'vue-observe-visibility'
 import VueSocialSharing from 'vue-social-sharing'
 
 require('./bootstrap');
+require('./yandex-audio');
 
 // let App = require('./app/App.vue').default;
 let router = require('./app/Routes.vue').default;

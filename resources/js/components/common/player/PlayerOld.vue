@@ -62,8 +62,7 @@
                             <font-awesome-icon icon="download" :size="playerBtnSize"></font-awesome-icon>
                         </a>
                     </div>
-                    <div id="mp-lyrics-btn" title="Откройте текст песни и не стесняйтесь подпевать"
-                         class="btn btn-dark d-none d-md-block"
+                    <div id="mp-lyrics-btn" title="Откройте текст песни и не стесняйтесь подпевать" class="btn btn-dark d-none d-md-block"
                          @click="openPlayerOverlay('lyrics')">
                         <font-awesome-icon icon="align-left" :size="playerBtnSize"></font-awesome-icon>
                     </div>
@@ -92,37 +91,35 @@
                             Перейти к исполнителю
                         </b-dropdown-item>
                     </b-dropdown>
-                    <div id="mp-playlist-btn" title="Откройте плейлист и найдите песню для души"
-                         class="btn btn-dark mr-0 mr-sm-4 mr-md-3"
+                    <div id="mp-playlist-btn" title="Откройте плейлист и найдите песню для души" class="btn btn-dark mr-0 mr-sm-4 mr-md-3"
                          @click="openPlayerOverlay('playlist')">
                         <font-awesome-icon icon="list" :size="playerBtnSize"></font-awesome-icon>
                     </div>
                 </div>
                 <div class="progress-bar-wrapper">
                     <div class="player-progress" @mousedown="seekPosition">
-                        <div class="player-loading-progress" :style="{ width: this.loadedPercentage + '%' }"></div>
-                        <div class="player-seeker" :style="{ width: this.playedPercentage + '%' }"></div>
+                        <div class="player-loading-progress" :style="{ width: this.percentLoaded + '%' }"></div>
+                        <div class="player-seeker" :style="{ width: this.percentCompleted + '%' }"></div>
                     </div>
                 </div>
                 <div class="player-disable-overlay" v-show="!ACTIVE_SONG"></div>
             </div>
 
-            <y-audio-player id="main-player"
-                            ref="main-player"
-                            class="d-none"
-                            preload="auto"
-                            :src="audioSrc"
-                            @pause="playing = false"
-                            @abort="playing = false"
-                            @error="playing = false"
-                            @play="onPlayBegin"
-                            @ended="onEnded"
-                            @canplay="isFetchingSong = false"
-                            @timeupdate="onTimeUpdated"
-                            @playedpercentage="onPlayedPercentageUpdate"
-                            @loadedpercentage="onLoadedPercentageUpdate"
-                            :loop="REPEAT_STATE === 'single'">
-            </y-audio-player>
+            <audio id="main-player"
+                   class="d-none"
+                   preload="auto"
+                   :src="audioSrc"
+                   @progress="onProgress"
+                   @loadeddata="onMetaLoaded"
+                   @timeupdate="onTimeUpdated"
+                   @pause="playing = false"
+                   @abort="playing = false"
+                   @error="playing = false"
+                   @play="playing = true"
+                   @ended="onEnded"
+                   @canplay="isFetchingSong = false"
+                   :loop="REPEAT_STATE === 'single'">
+            </audio>
 
             <b-overlay :show="isFetchingSong" variant="dark" no-wrap>
                 <template v-slot:overlay>
@@ -175,7 +172,6 @@
     import SongsList from "../music/song/SongsList";
     import SafeImage from "../image/SafeImage";
     import ViewportSize from "../mixins/ViewportSize";
-    import YAudioPlayer from "./YAudioPlayer";
 
     library.add(faPlay,
         faPause,
@@ -192,10 +188,10 @@
 
     export default {
         name: "Player",
-        components: {YAudioPlayer, SafeImage, SongsList},
+        components: {SafeImage, SongsList},
         mixins: [ViewportSize],
         mounted() {
-            // this.$refs['main-player'] = this.$refs['main-player'];
+            this.audio = this.$el.querySelectorAll('audio')[0];
             this.progressBar = this.$el.querySelectorAll('.player-progress')[0];
         },
         props: {
@@ -218,9 +214,7 @@
                 shuffled: false,
                 playCountUpdated: false,
                 volume: 1,
-                isFetchingSong: false,
-                playedPercentage: 0,
-                loadedPercentage: 0
+                isFetchingSong: false
             }
         },
         methods: {
@@ -228,24 +222,14 @@
                 if (e.target.buffered.length > 0)
                     this.bufferedSeconds = e.target.buffered.end(e.target.buffered.length - 1)
             },
-            // onMetaLoaded(e) {console.log(e)
-            //     if (this.$refs['main-player'].readyState >= 2) {
-            //         this.durationSeconds = this.$refs['main-player'].duration;
-            //         this.playing = true;
-            //     }
-            // },
-            onTimeUpdated(currentTime) {
-                this.currentSeconds = currentTime;
+            onMetaLoaded(e) {
+                if (this.audio.readyState >= 2) {
+                    this.durationSeconds = this.audio.duration;
+                    this.playing = true;
+                }
             },
-            onPlayedPercentageUpdate(percentage) {
-                this.playedPercentage = percentage;
-            },
-            onLoadedPercentageUpdate(percentage) {
-                this.loadedPercentage = percentage;
-            },
-            onPlayBegin() {
-                this.durationSeconds = this.$refs['main-player'].getDuration;
-                this.playing = true;
+            onTimeUpdated(e) {
+                this.currentSeconds = this.audio.currentTime;
             },
             onEnded() {
                 this.playing = false;
@@ -265,7 +249,7 @@
                 this.timeDrage = true;
                 let position = e.pageX - $(this.progressBar).offset().left;
                 let percentage = 100 * position / $(this.progressBar).width();
-                this.$refs['main-player'].setCurrentTime(percentage * this.$refs['main-player'].getDuration() / 100);
+                this.audio.currentTime = percentage * this.durationSeconds / 100;
             },
             // onImageError(e) {
             //     e.target.src = "/icons/svg/music.svg";
@@ -315,15 +299,15 @@
         watch: {
             playing() {
                 if (this.playing) {
-                    this.$refs['main-player'].play();
+                    this.audio.play();
                     if (!this.playCountUpdated) {
                         axios.put(`/media/music/song/${this.ACTIVE_SONG.id}/play`);
                         this.playCountUpdated = true
                     }
-                } else this.$refs['main-player'].pause();
+                } else this.audio.pause();
             },
             volume() {
-                this.$refs['main-player'].setVolume(this.volume);
+                this.audio.volume = this.volume;
             },
             ACTIVE_SONG() {
                 this.isFetchingSong = true;
@@ -335,12 +319,12 @@
             }
         },
         computed: {
-            // percentCompleted() {
-            //     return this.durationSeconds > 0 ? this.currentSeconds / this.durationSeconds * 100 : 0;
-            // },
-            // percentLoaded() {
-            //     return this.durationSeconds > 0 ? this.bufferedSeconds / this.durationSeconds * 100 : 0;
-            // },
+            percentCompleted() {
+                return this.durationSeconds > 0 ? this.currentSeconds / this.durationSeconds * 100 : 0;
+            },
+            percentLoaded() {
+                return this.durationSeconds > 0 ? this.bufferedSeconds / this.durationSeconds * 100 : 0;
+            },
             coverUrl() {
                 if (this.ACTIVE_SONG)
                     return getSongIconUrl(this.ACTIVE_SONG.id)
@@ -350,7 +334,7 @@
             },
             audioSrc() {
                 if (this.ACTIVE_SONG) {
-                    this.playing = true;
+                    this.playing = false;
                     this.updateDocumentMeta();
                     return getAudioFileUrl(this.ACTIVE_SONG.id);
                 }
