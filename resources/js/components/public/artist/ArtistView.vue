@@ -4,6 +4,7 @@
             <div style="width:200px"
                  class="mr-5 mb-4">
                 <b-avatar size="200px"
+                          variant="dark"
                           :src="avatarUrl">
                 </b-avatar>
                 <div class="d-flex justify-content-center mt-3">
