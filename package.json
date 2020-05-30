@@ -28,7 +28,6 @@
         "@fortawesome/free-solid-svg-icons": "^5.13.0",
         "@fortawesome/vue-fontawesome": "^0.1.9",
         "bootstrap-vue": "^2.15.0",
-        "howler": "^2.2.0",
         "laravel-vue-pagination": "^2.3.1",
         "music-metadata-browser": "^2.0.5",
         "perfect-scrollbar": "^1.5.0",

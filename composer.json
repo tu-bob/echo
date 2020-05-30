@@ -21,7 +21,8 @@
         "laravel/telescope": "^3.5",
         "laravel/tinker": "^2.0",
         "laravel/ui": "~2.0",
-        "nwidart/laravel-modules": "^6.2"
+        "nwidart/laravel-modules": "^6.2",
+        "wolfcast/browser-detection": "^2.9"
     },
     "require-dev": {
         "facade/ignition": "^2.0",
