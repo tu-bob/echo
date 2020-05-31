@@ -1,5 +1,6 @@
 <template>
-    <b-overlay :show="busy" rounded="sm" variant="dark">
+    <b-container fluid>
+        <b-overlay :show="busy" rounded="sm" variant="dark" no-wrap></b-overlay>
         <b-input-group prepend="Поиск" class="mt-3 mb-5">
             <input @keydown.enter="search"
                    type="text"
@@ -38,7 +39,7 @@
             <h2 class="title">Статьи</h2>
             <posts-list :provided-posts="posts" no-fetch></posts-list>
         </section>
-    </b-overlay>
+    </b-container>
 </template>
 
 <script>
