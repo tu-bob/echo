@@ -4,7 +4,8 @@
                     :fields="fields"
                     :url="url"
                     :columnsToHide="columnsToHide"
-                    :paginate="20">
+                    :paginate="20"
+                    striped>
             <template #header>
                 <slot name="header">
                     <span>Список альбомов</span>
