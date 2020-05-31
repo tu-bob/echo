@@ -76,6 +76,15 @@
                 <img width="220px" class="mr-3 mb-3" src="/icons/png/spotify-logo.png">
             </a>
         </div>
+        <h3 class="typography-title text-secondary mt-5">Клип</h3>
+        <div v-if="song.clip" class="mt-3">
+            <b-embed
+                type="iframe"
+                aspect="16by9"
+                :src="song.clip.src"
+                allowfullscreen
+            ></b-embed>
+        </div>
     </b-container>
 </template>
 
