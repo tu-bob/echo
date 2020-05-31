@@ -67,7 +67,7 @@
                 </template>
             </div>
         </div>
-        <div class="row" style="padding-bottom:10rem">
+        <div class="row">
             <div class="ml-auto my-3">
                 <router-link v-if="$route.name !== 'search'" :to="{name:'search'}"
                              class="ml-auto align-self-center mt-1 mr-3">
@@ -80,6 +80,8 @@
                                        size="lg"></font-awesome-icon>
                 </div>
             </div>
+        </div>
+        <div class="row">
             <router-view></router-view>
         </div>
         <player></player>
