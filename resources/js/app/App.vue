@@ -1,7 +1,6 @@
 <template>
-    <div>
+    <div class="h-100 container-fluid">
         <b-overlay variant="dark" no-wrap :show="isMainOverlayVisible" spinner-variant="light">
-
         </b-overlay>
         <div class="row bg-dark position-relative">
             <b-navbar toggleable="sm" class="col-8 pl-4" :type="NAV_TYPE" :variant="NAV_VARIANT">
@@ -68,19 +67,17 @@
                 </template>
             </div>
         </div>
-        <div style="padding-bottom:10rem">
-            <div class="row my-3">
-                <div class="ml-auto">
-                    <router-link v-if="$route.name !== 'search'" :to="{name:'search'}"
-                                 class="ml-auto align-self-center mt-1 mr-3">
-                        <font-awesome-icon class="text-secondary h-text-white" icon="search"
-                                           size="lg"></font-awesome-icon>
-                    </router-link>
-                    <div v-else class="mr-3 cursor-pointer" @click="closeSearch">
-                        <font-awesome-icon class="text-white"
-                                           icon="times"
-                                           size="lg"></font-awesome-icon>
-                    </div>
+        <div class="row" style="padding-bottom:10rem">
+            <div class="ml-auto my-3">
+                <router-link v-if="$route.name !== 'search'" :to="{name:'search'}"
+                             class="ml-auto align-self-center mt-1 mr-3">
+                    <font-awesome-icon class="text-secondary h-text-white" icon="search"
+                                       size="lg"></font-awesome-icon>
+                </router-link>
+                <div v-else class="mr-3 cursor-pointer" @click="closeSearch">
+                    <font-awesome-icon class="text-white"
+                                       icon="times"
+                                       size="lg"></font-awesome-icon>
                 </div>
             </div>
             <router-view></router-view>

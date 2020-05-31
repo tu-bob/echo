@@ -32,7 +32,7 @@
     <link rel="icon" href="{{ URL::asset('icons/png/favicon.png') }}" type="image/x-icon"/>
 </head>
 <body>
-<main id="app" class="container-fluid position-relative h-100 overflow-auto">
+<main id="app" class="position-relative h-100 overflow-auto">
     <app @auth :user="{{auth()->user()}}" @endauth ></app>
 </main>
 </body>
