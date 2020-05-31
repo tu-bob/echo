@@ -44,10 +44,14 @@
             <div class="row">
                 <songs-list :playlist="artist.songs.slice(0, Math.ceil(artist.songs.length/2))"
                             no-fetch
+                            prevent-play
+                            @play="playSong"
                             :class="{'col-md-6':artist.songs.length > 1, 'col-12':artist.songs.length < 2}"
                 ></songs-list>
                 <songs-list :playlist="artist.songs.slice(Math.ceil(artist.songs.length/2))"
                             no-fetch
+                            prevent-play
+                            @play="playSong"
                             class="col-md-6"></songs-list>
             </div>
         </div>
@@ -135,6 +139,10 @@
                     () => this.$bvModal.show('modal-video-player')
                 )
             },
+            playSong(song) {
+                this.$store.commit('UPDATE_PLAYLIST', this.artist.songs);
+                this.$store.commit('SET_ACTIVE_SONG', song);
+            }
         },
         computed: {
             aliases() {
