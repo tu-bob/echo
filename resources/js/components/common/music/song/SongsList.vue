@@ -31,6 +31,7 @@
         props: {
             playlist: null,
             noFetch: Boolean,
+            preventPlay: Boolean,
             filters: {
                 type: Object,
                 default: () => {
@@ -69,10 +70,11 @@
                     })
             },
             playSong(song) {
+                if (this.preventPlay)
+                    return this.$emit('play', song);
                 if (song) {
                     this.$store.commit('UPDATE_PLAYLIST', this.songs);
                     this.$store.commit('SET_ACTIVE_SONG', song);
-                    this.$emit('play', song)
                 }
             },
             paginationVisibilityChanged(isVisible, entry) {

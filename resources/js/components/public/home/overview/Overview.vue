@@ -12,10 +12,14 @@
             <div class="row">
                 <songs-list :playlist="songs.slice(0, Math.ceil(songs.length/2))"
                             no-fetch
+                            prevent-play
+                            @play="playSong"
                             :class="{'col-md-6':songs.length > 1, 'col-12':songs.length < 2}">
                 </songs-list>
                 <songs-list :playlist="songs.slice(Math.ceil(songs.length/2))"
                             no-fetch
+                            prevent-play
+                            @play="playSong"
                             class="col-md-6">
                 </songs-list>
             </div>
@@ -114,6 +118,10 @@
                     .then(posts => this.posts = posts)
                     .catch()
             },
+            playSong(song){
+                this.$store.commit('UPDATE_PLAYLIST', this.songs);
+                this.$store.commit('SET_ACTIVE_SONG', song);
+            }
             // updatePlaylist() {
             //     this.$store.commit('UPDATE_PLAYLIST', this.songs);
             // }
