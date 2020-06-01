@@ -13,6 +13,12 @@ const getters = {
     ACTIVE_SONG: state => {
         return state.activeSong;
     },
+    NEXT_SONG: state => {
+        let nextIndex = state.playlist.map(s => s.id).indexOf(state.activeSong.id) + 1;
+        if (nextIndex >= state.playlist.length)
+            nextIndex = 0;
+        return state.playlist[nextIndex];
+    },
     REPEAT_STATE: state => {
         return state.repeatState;
     }

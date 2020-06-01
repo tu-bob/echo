@@ -112,6 +112,7 @@
                             class="d-none"
                             preload="auto"
                             :src="audioSrc"
+                            :nextSrc="nextAudioSrc"
                             @pause="playing = false"
                             @abort="playing = false"
                             @error="playing = false"
@@ -220,7 +221,8 @@
                 volume: 1,
                 isFetchingSong: false,
                 playedPercentage: 0,
-                loadedPercentage: 0
+                loadedPercentage: 0,
+                nextAudioSrc: null
             }
         },
         methods: {
@@ -351,6 +353,8 @@
             audioSrc() {
                 if (this.ACTIVE_SONG) {
                     this.playing = true;
+                    this.nextAudioSrc = getAudioFileUrl(this.NEXT_SONG.id);
+                    // console.log(this.NEXT_SONG)
                     this.updateDocumentMeta();
                     return getAudioFileUrl(this.ACTIVE_SONG.id);
                 }
@@ -367,7 +371,8 @@
             ...mapGetters([
                 'PLAYLIST',
                 'ACTIVE_SONG',
-                'REPEAT_STATE'
+                'REPEAT_STATE',
+                'NEXT_SONG'
             ])
         }
     }

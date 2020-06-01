@@ -22,7 +22,8 @@
             preferredPlayerType: 'html5',
             flashOverlayElement: 'null',
             src: null,
-            loop: false
+            loop: false,
+            nextSrc: null
         },
         methods: {
             initPlayer() {
@@ -63,6 +64,13 @@
                     };
                 };
 
+                let handleLoaded = function (vm) {
+                    console.log('loaded');
+                    return function (payload) {
+                        vm.onLoaded(payload);
+                    }
+                };
+
                 // let handleEnded = function (vm) {
                 //     return function (payload) {
                 //         vm.onEnded(payload);
@@ -80,6 +88,7 @@
 
                 this.yaPlayer.on(ya.music.Audio.EVENT_LOADING, emitEvent("loading", this));
                 this.yaPlayer.on(ya.music.Audio.EVENT_LOADED, emitEvent("loaded", this));
+                this.yaPlayer.on(ya.music.Audio.EVENT_LOADED, handleLoaded(this));
 
                 this.yaPlayer.on(ya.music.Audio.EVENT_VOLUME, emitEvent("volume", this));
 
@@ -97,7 +106,7 @@
             },
             playTrack() {
                 if (this.yaPlayer.isPreloaded(this.src)) {
-                    console.log(this.src)
+                    console.log(this.src, 'preloaded')
                     this.yaPlayer.playPreloaded(this.src);
                 } else {
                     console.log(this.src, 'not preloaded')
@@ -121,6 +130,11 @@
                 this.playedPercentage(e.position);
                 this.loadedPercentage(e.loaded);
             },
+            onLoaded(e) {
+                if (this.nextSrc && this.nextSrc !== this.yaPlayer.getSrc(1)) {
+                    this.yaPlayer.preload(this.nextSrc)
+                }
+            },
             timeUpdate(time) {
                 this.$emit('timeupdate', time);
             },
@@ -133,7 +147,7 @@
             setCurrentTime(time) {
                 this.yaPlayer.setPosition(time)
             },
-            setVolume(volume){
+            setVolume(volume) {
                 this.yaPlayer.setVolume(volume);
             },
             // onEnded() {
