@@ -115,7 +115,7 @@
                             :nextSrc="nextAudioSrc"
                             @pause="playing = false"
                             @abort="playing = false"
-                            @error="playing = false"
+                            @error="onError"
                             @play="onPlayBegin"
                             @ended="onEnded"
                             @canplay="isFetchingSong = false"
@@ -259,6 +259,10 @@
                         this.$store.commit('PLAY_NEXT');
                         break;
                 }
+            },
+            onError(){
+              this.playing = false;
+              this.isFetchingSong = false;
             },
             togglePlayPause() {
                 this.playing = !this.playing;
