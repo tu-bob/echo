@@ -260,9 +260,10 @@
                         break;
                 }
             },
-            onError(){
-              this.playing = false;
-              this.isFetchingSong = false;
+            onError() {
+                this.playing = false;
+                this.isFetchingSong = false;
+                this.onEnded();
             },
             togglePlayPause() {
                 this.playing = !this.playing;
