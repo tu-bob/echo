@@ -8,6 +8,12 @@
                 <b-navbar-brand :to="{name: 'home'}" class="py-0" style="width: 128px">
                     <img src="/icons/png/logo-sm.png" alt="echo.tj logo" class="w-100">
                 </b-navbar-brand>
+                <router-link :to="{name:'home'}" class="mr-auto" title="Перейти на главную">
+                    <font-awesome-icon class="text-secondary h-text-white"
+                                       icon="home"
+                                       size="lg">
+                    </font-awesome-icon>
+                </router-link>
                 <b-collapse is-nav id="mainNavBar">
                     <b-navbar-nav>
                         <template v-if="AUTHENTICATED">
@@ -95,10 +101,11 @@
     import {
         faCaretDown,
         faSearch,
-        faTimes
+        faTimes,
+        faHome
     } from '@fortawesome/free-solid-svg-icons'
 
-    library.add(faCaretDown, faSearch, faTimes);
+    library.add(faCaretDown, faSearch, faTimes, faHome);
 
     export default {
         name: "App",
