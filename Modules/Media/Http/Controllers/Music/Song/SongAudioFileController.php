@@ -23,7 +23,8 @@ class SongAudioFileController extends BaseController
             return response()->json([], 404);
 
         $range = $this->getByteRange();
-        if ($browser->getName() !== BrowserDetection::BROWSER_SAFARI) {
+        if ($browser->getName() !== BrowserDetection::BROWSER_SAFARI
+            && $browser->getPlatform() !== BrowserDetection::PLATFORM_IOS) {
             if (!$range)
                 return redirect('app/songs/' . $song->id);
             $range[1] = $range[0] + 300000;
