@@ -328,6 +328,7 @@
             getMetaData() {
                 parseBlob(this.mp3File)
                     .then(metadata => {
+                        console.log(metadata);
                         this.fillData(metadata)
                     })
                     .catch(
