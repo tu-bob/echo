@@ -33,6 +33,13 @@
                     <label>Информация</label>
                     <textarea class="form-control" v-model="artist.info"></textarea>
                 </div>
+                <h4 class="mt-5">Превью аватарки</h4>
+                <div class="row">
+
+                    <b-avatar class="mx-auto" size="200px" :src="avatartUrl">
+
+                    </b-avatar>
+                </div>
             </div>
             <div class="card-footer">
                 <button class="btn btn-primary" @click="submit">Сохранить</button>
@@ -117,6 +124,12 @@
             coverUrl() {
                 if (this.artist.avatar_id)
                     return getAvatarImage(this.artist.avatar_id);
+            },
+            avatartUrl(){
+                if (this.avatarFile) {
+                    return URL.createObjectURL(this.avatarFile);
+                } else if (this.coverUrl)
+                    return this.coverUrl;
             }
         }
     }
