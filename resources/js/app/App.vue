@@ -87,7 +87,7 @@
                 </div>
             </div>
         </div>
-        <div class="row">
+        <div class="row" style="padding-bottom:10rem">
             <router-view></router-view>
         </div>
         <player></player>
