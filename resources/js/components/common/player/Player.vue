@@ -291,11 +291,11 @@
                 if ('mediaSession' in navigator) {
                     var vm = this;
                     navigator.mediaSession.setActionHandler('previoustrack', function () {
-                        vm.next();
+                        vm.prev();
                     });
 
                     navigator.mediaSession.setActionHandler('nexttrack', function () {
-                        vm.prev()
+                        vm.next()
                     });
 
                     if ('setPositionState' in navigator.mediaSession) {
