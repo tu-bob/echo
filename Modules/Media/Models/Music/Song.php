@@ -28,6 +28,8 @@ class Song extends BaseModel
         'allow_download' => 'boolean'
     ];
 
+    protected $appends = ['albumsTitles'];
+
     protected $hidden = [
         'channel_mode',
         'channels',
@@ -90,5 +92,10 @@ class Song extends BaseModel
     {
         $name = $this->artistAliases->implode('name', ', ');
         return "{$name} - {$this->title}";
+    }
+
+    public function getAlbumsTitlesAttribute()
+    {
+        return $this->albums()->get(['title'])->implode('title', ', ');
     }
 }

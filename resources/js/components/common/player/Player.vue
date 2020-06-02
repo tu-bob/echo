@@ -276,7 +276,7 @@
                     navigator.mediaSession.metadata = new MediaMetadata({
                         title: this.ACTIVE_SONG.title,
                         artist: concatStrings(this.ACTIVE_SONG.artistAliases.map(alias => alias.name), ' ·'),
-                        album: '',
+                        album: this.ACTIVE_SONG.albumsTitles ? this.ACTIVE_SONG.albumsTitles : '',
                         artwork: [
                             {
                                 src: getSongIconUrl(this.ACTIVE_SONG.id, {width: 512, height: 512}),
