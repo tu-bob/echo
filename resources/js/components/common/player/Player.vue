@@ -118,7 +118,7 @@
                             @error="onError"
                             @play="onPlayBegin"
                             @ended="onEnded"
-                            @canplay="isFetchingSong = false"
+                            @canplay="onCanPlay"
                             @timeupdate="onTimeUpdated"
                             @playedpercentage="onPlayedPercentageUpdate"
                             @loadedpercentage="onLoadedPercentageUpdate"
@@ -198,6 +198,7 @@
         mounted() {
             // this.$refs['main-player'] = this.$refs['main-player'];
             this.progressBar = this.$el.querySelectorAll('.player-progress')[0];
+            this.initChromeMediaControls()
         },
         props: {
             autoPlay: {
@@ -260,10 +261,53 @@
                         break;
                 }
             },
-            onError() {
+            onCanPlay() {
+                this.isFetchingSong = false;
+                this.updateChromeMeta()
+            },
+            onError(e) {
+                console.log(e);
                 this.playing = false;
                 this.isFetchingSong = false;
                 this.onEnded();
+            },
+            updateChromeMeta() {
+                if ('mediaSession' in navigator) {
+                    navigator.mediaSession.metadata = new MediaMetadata({
+                        title: this.ACTIVE_SONG.title,
+                        artist: concatStrings(this.ACTIVE_SONG.artistAliases.map(alias => alias.name), ' ·'),
+                        album: '',
+                        artwork: [
+                            {
+                                src: getSongIconUrl(this.ACTIVE_SONG.id, {width: 512, height: 512}),
+                                sizes: '512x512',
+                                type: 'image/png'
+                            },
+                        ]
+                    })
+                }
+            },
+            initChromeMediaControls() {
+                if ('mediaSession' in navigator) {
+                    var vm = this;
+                    navigator.mediaSession.setActionHandler('previoustrack', function () {
+                        vm.next();
+                    });
+
+                    navigator.mediaSession.setActionHandler('nexttrack', function () {
+                        vm.prev()
+                    });
+
+                    if ('setPositionState' in navigator.mediaSession) {
+                        navigator.mediaSession.setPositionState({
+                            duration: this.$refs['main-player'].getDuration(),
+                            playbackRate: 1,
+                            position: this.currentSeconds
+                        })
+                        ;
+                    }
+                }
+
             },
             togglePlayPause() {
                 this.playing = !this.playing;
