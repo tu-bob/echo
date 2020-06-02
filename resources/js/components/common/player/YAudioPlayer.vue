@@ -15,7 +15,8 @@
         data() {
             return {
                 yaPlayer: null,
-                resume: false
+                resume: false,
+                lastSrc: null
             }
         },
         props: {
@@ -98,13 +99,14 @@
                 this.yaPlayer.on(ya.music.Audio.EVENT_SWAP, emitEvent("swap", this));
             },
             play() {
-                if (this.resume)
+                if (this.resume || this.src === this.lastSrc)
                     this.yaPlayer.resume();
                 else {
                     this.playTrack();
                 }
             },
             playTrack() {
+                this.lastSrc = this.src;
                 if (this.yaPlayer.isPreloaded(this.src)) {
                     console.log(this.src, 'preloaded')
                     this.yaPlayer.playPreloaded(this.src);
