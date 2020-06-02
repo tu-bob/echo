@@ -1,5 +1,5 @@
 <template>
-    <div style="padding-bottom:10rem">
+    <div>
         <div class="row">
             <div class="col-sm-6 col-md-4 col-lg-3 col-xl-2 mb-5" v-for="video in videos" :key="video.id">
                 <video-card :video="video" @play="showVideoModal"></video-card>

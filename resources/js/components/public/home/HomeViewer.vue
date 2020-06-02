@@ -61,7 +61,7 @@
             <hr class="border-hr" style="width: 159.66px; margin-left: 0px;">
         </div>
 
-        <div class="py-5">
+        <div class="py-5" style="padding-bottom:80px">
             <router-view></router-view>
         </div>
     </b-container>
