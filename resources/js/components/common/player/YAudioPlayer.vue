@@ -94,7 +94,7 @@
                 this.yaPlayer.on(ya.music.Audio.EVENT_VOLUME, emitEvent("volume", this));
 
                 this.yaPlayer.on(ya.music.Audio.EVENT_ERROR, emitEvent("error", this));
-                this.yaPlayer.on(ya.music.Audio.EVENT_CRASHED, emitEvent("crashed", this));
+                this.yaPlayer.on(ya.music.Audio.EVENT_CRASHED, emitEvent("abort", this));
 
                 this.yaPlayer.on(ya.music.Audio.EVENT_SWAP, emitEvent("swap", this));
             },

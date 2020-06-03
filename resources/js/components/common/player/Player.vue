@@ -114,6 +114,7 @@
                             :src="audioSrc"
                             :nextSrc="nextAudioSrc"
                             @pause="playing = false"
+                            @stop="playing = false"
                             @abort="playing = false"
                             @error="onError"
                             @play="onPlayBegin"
