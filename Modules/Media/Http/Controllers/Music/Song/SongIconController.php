@@ -31,8 +31,8 @@ class SongIconController extends BaseController
             $imageProvider = new ImageFileProvider('cover');
             return $imageProvider->getResizedFileResponse(
                 $coverImage,
-                request()->get('width', 60),
-                request()->get('height', 60));
+                request()->get('width', 92),
+                request()->get('height', 92));
 
 //            return $response->generateResponse();
         } else
