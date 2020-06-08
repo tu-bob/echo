@@ -11,6 +11,13 @@
             </b-input-group-append>
         </b-input-group>
 
+        <section class="section" v-if="artists.length > 0">
+            <h2 class="title">Исполнители</h2>
+            <div>
+                <artists-view :providedArtists="artists" no-fetch></artists-view>
+            </div>
+        </section>
+
         <section class="section" v-if="songs.length > 0">
             <h2 class="title">Песни</h2>
             <div class="row">
@@ -49,17 +56,19 @@
     import VideosList from "../../common/video/VideosList";
     import {search as blogSearch} from "../../../api/blogApi";
     import PostsList from "../blog/PostsList";
+    import ArtistsView from "../artist/ArtistsList";
 
 
     export default {
         name: "SearchOverview",
-        components: {PostsList, VideosList, AlbumsList, SongsList},
+        components: {ArtistsView, PostsList, VideosList, AlbumsList, SongsList},
         data() {
             return {
                 query: '',
                 songs: [],
                 videos: [],
                 albums: [],
+                artists: [],
                 posts: [],
                 busy: false
             }
@@ -67,14 +76,16 @@
         methods: {
             search() {
                 this.busy = true;
+                this.clearForm()
                 search(this.query)
                     .then(response => {
                         this.songs = response.songs;
                         this.albums = response.albums;
                         this.videos = response.videos;
+                        this.artists = response.artists;
                     })
                     .catch()
-                    .then(_ => this.busy = false)
+                    .finally(_ => this.busy = false);
 
                 blogSearch(this.query)
                     .then(response => {
@@ -84,6 +95,13 @@
             },
             updatePlaylist() {
                 this.$store.commit('UPDATE_PLAYLIST', this.songs);
+            },
+            clearForm() {
+                this.songs = [];
+                this.videos = [];
+                this.albums = [];
+                this.artists = [];
+                this.posts = [];
             }
         }
     }

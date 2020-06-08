@@ -26,7 +26,10 @@
         mixins: [AxiosCancellationMixin],
         components: {ArtistCard, Pagination},
         mounted() {
-            this.fetchArtists();
+            if (this.providedArtists)
+                this.artists = this.providedArtists;
+            if (!this.noFetch)
+                this.fetchArtists();
         },
         props: {
             providedArtists: null,
