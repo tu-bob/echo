@@ -5,7 +5,7 @@
         <div class="row bg-dark position-relative">
             <b-navbar toggleable="sm" class="col-8 pl-4" :type="NAV_TYPE" :variant="NAV_VARIANT">
                 <b-navbar-toggle target="mainNavBar" v-if="AUTHENTICATED"></b-navbar-toggle>
-                <b-navbar-brand :to="{name: 'home'}" class="py-0" style="width: 128px">
+                <b-navbar-brand title="Перейти на главную" :to="{name: 'home'}" class="py-0" style="width: 128px">
                     <img src="/icons/png/logo-sm.png" alt="echo.tj logo" class="w-100">
                 </b-navbar-brand>
                 <router-link :to="{name:'home'}" class="mr-auto" title="Перейти на главную">
