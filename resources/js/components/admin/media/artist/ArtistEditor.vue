@@ -140,9 +140,14 @@
                 axios.get(`/media/artist/${this.$route.params.id}`)
                     .then(response => this.setData(response))
             },
-            setData(data) {
-                this.artist = data;
-                this.aliases = data.aliases.map(function (alias) {
+            setData(artist) {
+                let links = {};
+                for (let i in artist.externalLinks) {
+                    links[artist.externalLinks[i].resource] = artist.externalLinks[i].link;
+                }
+                artist.links = links;
+                this.artist = artist;
+                this.aliases = artist.aliases.map(function (alias) {
                     return alias.name;
                 })
             }

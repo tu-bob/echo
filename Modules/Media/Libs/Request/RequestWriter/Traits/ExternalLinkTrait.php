@@ -8,9 +8,12 @@ use Modules\Media\Models\ExternalLink\ExternalLink;
 
 trait ExternalLinkTrait
 {
-    private function attachLinks()
+    private function attachLinks($entity = null)
     {
-        $newLinks = isset($this->request['links']) ? $this->request['links'] : [];
+        if(!isset($this->entity))
+            $this->entity = $entity;
+
+        $newLinks = isset($this->request['links']) ? $this->request['links'] : request()->get('links',[]);
 
         $newResources = array_keys($newLinks);
 

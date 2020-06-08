@@ -36,6 +36,7 @@ class ArtistController extends BaseController
 
     public function getArtist(Artist $artist)
     {
+        $artist->load('externalLinks');
         return $artist;
     }
 

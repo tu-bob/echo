@@ -5,11 +5,14 @@ namespace Modules\Media\Services\artist;
 
 
 use Illuminate\Http\UploadedFile;
+use Modules\Media\Libs\Request\RequestWriter\Traits\ExternalLinkTrait;
 use Modules\Media\Models\Artist\Artist;
 use Modules\Media\Services\image\AvatarService;
 
 class ArtistService
 {
+    use ExternalLinkTrait;
+
     /**
      * @param array $data
      * @return Artist
@@ -26,6 +29,8 @@ class ArtistService
 
         if (isset($data['avatarFile']))
             $this->saveAvatar($artist, $data['avatarFile']);
+
+        $this->attachLinks($artist);
 
         return $artist;
     }
@@ -47,6 +52,8 @@ class ArtistService
 
         if (isset($data['avatarFile']))
             $this->saveAvatar($artist, $data['avatarFile']);
+
+        $this->attachLinks($artist);
 
         return $artist;
     }

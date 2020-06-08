@@ -3,6 +3,7 @@
 namespace Modules\Media\Models\Artist;
 
 
+use Modules\Media\Models\ExternalLink\ExternalLink;
 use Modules\Media\Models\Image\ImageFile;
 use Modules\Shared\Models\BaseModel;
 
@@ -54,5 +55,10 @@ class Artist extends BaseModel
         return $this->songs->map(function ($song) {
             return $song->clip;
         })->whereNotNull()->unique('id')->values();
+    }
+
+    public function externalLinks()
+    {
+        return $this->morphMany(ExternalLink::class, 'linkable');
     }
 }

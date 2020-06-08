@@ -16,7 +16,8 @@ class ExternalLink extends BaseModel
 
         Relation::morphMap([
             'songs' => 'Modules\Media\Models\Music\Song',
-            'music_albums' => 'Modules\Media\Models\Music\MusicAlbum'
+            'music_albums' => 'Modules\Media\Models\Music\MusicAlbum',
+            'artists' => 'Modules\Media\Models\Artist\Artist'
         ]);
     }
 
