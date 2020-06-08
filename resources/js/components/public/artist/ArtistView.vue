@@ -24,6 +24,23 @@
                 <h2 class="typography-title text-secondary" v-if="aliases && aliases.length > 0">{{aliases}}</h2>
                 <!--                <h2 class="typography-title text-secondary" v-if="translateType(artist.type)">-->
                 <!--                    {{translateType(artist.type)}}</h2>-->
+                <div class="d-flex">
+                    <a href="#" v-if="getLink('instagram')"><img class="icon-btn-md"
+                                                          title="Следите за новостями исполнителя в инстаграме"
+                                                          src="/icons/svg/instagram.svg"></a>
+                    <a href="#" v-if="getLink('facebook')"><img class="icon-btn-md ml-2"
+                                                          title="Следите за новостями исполнителя в фейсбуке"
+                                                          src="/icons/svg/facebook.svg"></a>
+                    <a href="#" v-if="getLink('telegram')"><img class="icon-btn-md ml-2"
+                                                          title="Следите за новостями исполнителя в телеграме"
+                                                          src="/icons/svg/telegram.svg"></a>
+                    <a href="#" v-if="getLink('vk')"><img class="icon-btn-md ml-2"
+                                                          title="Следите за новостями исполнителя в вконтакте"
+                                                          src="/icons/svg/vk.svg"></a>
+                    <a href="#" v-if="getLink('youtube')"><img class="icon-btn-md ml-2"
+                                                          title="Следите за новостями исполнителя на ютюбе"
+                                                          src="/icons/svg/youtube.svg"></a>
+                </div>
                 <div v-if="artist.info">
                     <pre ref="artistInfo" class="artist-info">{{artist.info}}</pre>
                 </div>
@@ -142,6 +159,9 @@
             playSong(song) {
                 this.$store.commit('UPDATE_PLAYLIST', this.artist.songs);
                 this.$store.commit('SET_ACTIVE_SONG', song);
+            },
+            getLink(resource) {
+                return this.artist.externalLinks.find(a => a.resource === resource)?.link;
             }
         },
         computed: {

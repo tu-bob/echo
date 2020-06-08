@@ -10,7 +10,7 @@ class AliasArtistController
 {
     public function show(Artist $artist)
     {
-        $artist->load('aliases');
+        $artist->load('aliases','externalLinks');
         $artist->setAppends(['albums', 'songs', 'clips']);
         return $artist;
     }
