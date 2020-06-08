@@ -18,7 +18,7 @@ class SearchController extends BaseController
                 $query->where('name', 'like', "%{$needle}%");
             })->limit(10)->get();
 //        $artist = ArtistAlias::where('name', 'like', "%{$query}%")->limit(10)->get();
-        $albums = MusicAlbum::where('title', 'like', "%{$needle}%")
+        $albums = MusicAlbum::with('artistAliases')->where('title', 'like', "%{$needle}%")
             ->orWhereHas('artistAliases', function ($query) use ($needle) {
                 $query->where('name', 'like', "%{$needle}%");
             })->limit(10)->get();
