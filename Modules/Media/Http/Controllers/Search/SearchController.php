@@ -4,6 +4,7 @@
 namespace Modules\Media\Http\Controllers\Search;
 
 
+use Modules\Media\Models\Artist\Artist;
 use Modules\Media\Models\Music\MusicAlbum;
 use Modules\Media\Models\Music\Song;
 use Modules\Media\Models\Video\Video;
@@ -13,6 +14,10 @@ class SearchController extends BaseController
 {
     public function search($needle)
     {
+        $artists = Artist::with('aliases')->whereHas('aliases', function ($query) use ($needle) {
+            $query->where('name', 'like', "%{$needle}%");
+        })->limit(10)->get();
+
         $songs = Song::where('title', 'like', "%{$needle}%")->with('artistAliases')
             ->orWhereHas('artistAliases', function ($query) use ($needle) {
                 $query->where('name', 'like', "%{$needle}%");
@@ -26,6 +31,7 @@ class SearchController extends BaseController
         $videos = Video::where('title', 'like', "%{$needle}%")->limit(10)->get();
 
         return response()->json([
+            'artists' => $artists,
             'songs' => $songs,
             'albums' => $albums,
             'videos' => $videos
