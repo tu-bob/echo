@@ -56,8 +56,8 @@ class MusicAlbumController extends BaseController
         $imageProvider = new ImageFileProvider('cover');
         return $imageProvider->getResizedFileResponse(
             $album->cover_id,
-            request()->get('width', 512),
-            request()->get('height', 512)
+            request()->get('width', 400),
+            request()->get('height', 400)
         );
 //        $fileResponse = new FileResponse($cover->path, $cover->mime_type);
 //        return $fileResponse->generateResponse();

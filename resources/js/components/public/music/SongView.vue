@@ -138,7 +138,7 @@
         },
         computed: {
             coverUrl() {
-                return getSongIconUrl(this.song.id, {width: 350, height: 350});
+                return getSongIconUrl(this.song.id, {width: 400, height: 400});
             },
             fullCoverUrl() {
                 return getBaseUri() + '/' + this.coverUrl;
