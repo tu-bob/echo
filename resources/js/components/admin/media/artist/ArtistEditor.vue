@@ -40,6 +40,22 @@
 
                     </b-avatar>
                 </div>
+
+                <span>Ссылки</span>
+                <div class="form-group">
+                    <b-input-group class="mb-2" prepend="Instagram">
+                        <input class="form-control" v-model="artist.links.instagram" type="url">
+                    </b-input-group>
+                    <b-input-group class="mb-2" prepend="Facebook">
+                        <input class="form-control" v-model="artist.links.facebook" type="url">
+                    </b-input-group>
+                    <b-input-group class="mb-2" prepend="Vk">
+                        <input class="form-control" v-model="artist.links.vk" type="url">
+                    </b-input-group>
+                    <b-input-group class="mb-2" prepend="YouTube">
+                        <input class="form-control" v-model="artist.links.youtube" type="url">
+                    </b-input-group>
+                </div>
             </div>
             <div class="card-footer">
                 <button class="btn btn-primary" @click="submit">Сохранить</button>
@@ -68,7 +84,13 @@
                 artist: {
                     name: null,
                     type: null,
-                    info: null
+                    info: null,
+                    links: {
+                        instagram: null,
+                        vk: null,
+                        youtube: null,
+                        facebook: null
+                    }
                 },
                 avatarFile: null,
                 aliases: []
@@ -98,6 +120,11 @@
                 if (this.artist.info)
                     data.append('info', this.artist.info);
 
+                for (let [resource, link] of Object.entries(this.artist.links)) {
+                    if (link)
+                        data.append('links[' + resource + ']', link)
+                }
+
                 let action = getStoreOrUpdateAction(this.id, '/media/artist');
 
                 axios.post(action.url, data)
@@ -125,7 +152,7 @@
                 if (this.artist.avatar_id)
                     return getAvatarImage(this.artist.avatar_id);
             },
-            avatartUrl(){
+            avatartUrl() {
                 if (this.avatarFile) {
                     return URL.createObjectURL(this.avatarFile);
                 } else if (this.coverUrl)
