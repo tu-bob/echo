@@ -45,7 +45,7 @@
             },
             url: {
                 type: String,
-                default: '/blog/post/list'
+                default: '/blog/post/list?'
             }
         },
         data() {
