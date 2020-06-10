@@ -15,6 +15,10 @@
                     Назарова для понимания
                     мотивов, целей и задач проекта.
                 </p>
+                <p>
+                    <a href="#contacts" class="text-violet text-decoration-none">Хотите связаться с нами?</a>
+                </p>
+
             </div>
         </section>
         <section class="article">
@@ -23,7 +27,7 @@
             </h2>
             <div class="article-body">
                 <p>
-                    Дорогое человечество,
+                    Дорогое человечество!
                 </p>
                 <p>
                     Мы с группой друзей решили создать этот портал, посвящённый музыке Таджикистана.
@@ -53,6 +57,11 @@
                     Далер Назаров
                 </p>
             </div>
+        </section>
+        <section id="contacts" class="article-body mt-5">
+            <h4 class="text-white">Контакты</h4>
+            <p>По воспросам сотрудничества пишите нам в соц. сетях (в шапке сайта)<br>
+            Каверы и другие видеоматериалы отправляйте в Whatsapp и Telegram +(992) 887733092<p/>
         </section>
     </div>
 </template>
