@@ -25,19 +25,19 @@
                 <!--                <h2 class="typography-title text-secondary" v-if="translateType(artist.type)">-->
                 <!--                    {{translateType(artist.type)}}</h2>-->
                 <div class="d-flex">
-                    <a href="#" v-if="getLink('instagram')"><img class="icon-btn-md"
+                    <a :href="getLink('instagram')" v-if="getLink('instagram')"><img class="icon-btn-md"
                                                           title="Следите за новостями исполнителя в инстаграме"
                                                           src="/icons/svg/instagram.svg"></a>
-                    <a href="#" v-if="getLink('facebook')"><img class="icon-btn-md ml-2"
+                    <a :href="getLink('facebook')" v-if="getLink('facebook')"><img class="icon-btn-md ml-2"
                                                           title="Следите за новостями исполнителя в фейсбуке"
                                                           src="/icons/svg/facebook.svg"></a>
-                    <a href="#" v-if="getLink('telegram')"><img class="icon-btn-md ml-2"
+                    <a :href="getLink('telegram')" v-if="getLink('telegram')"><img class="icon-btn-md ml-2"
                                                           title="Следите за новостями исполнителя в телеграме"
                                                           src="/icons/svg/telegram.svg"></a>
-                    <a href="#" v-if="getLink('vk')"><img class="icon-btn-md ml-2"
+                    <a :href="getLink('vk')" v-if="getLink('vk')"><img class="icon-btn-md ml-2"
                                                           title="Следите за новостями исполнителя в вконтакте"
                                                           src="/icons/svg/vk.svg"></a>
-                    <a href="#" v-if="getLink('youtube')"><img class="icon-btn-md ml-2"
+                    <a :href="getLink('youtube')" v-if="getLink('youtube')"><img class="icon-btn-md ml-2"
                                                           title="Следите за новостями исполнителя на ютюбе"
                                                           src="/icons/svg/youtube.svg"></a>
                 </div>
