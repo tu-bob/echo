@@ -1,7 +1,8 @@
 <template>
     <div class="h-100 container-fluid">
-        <b-overlay variant="dark" no-wrap :show="isMainOverlayVisible" spinner-variant="light">
-        </b-overlay>
+        <!--        <b-overlay variant="dark" no-wrap :show="isMainOverlayVisible" spinner-variant="light">-->
+        <!--        </b-overlay>-->
+        <div id="tMainSpinner" :class="{'d-none':!isMainOverlayVisible}"><div class="spinner"></div></div>
         <div class="row bg-dark position-relative">
             <b-navbar toggleable="sm" class="col-8 pl-4" :type="NAV_TYPE" :variant="NAV_VARIANT">
                 <b-navbar-toggle target="mainNavBar" v-if="AUTHENTICATED"></b-navbar-toggle>
