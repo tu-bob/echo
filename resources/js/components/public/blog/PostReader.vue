@@ -1,7 +1,11 @@
 <template>
-    <div class="pb-5 mb-5">
-        <main class="container pt-5 article" v-if="post">
-            <b-img class="preview-image pb-4" rounded :src="previewImageSrc" alt=""></b-img>
+    <div class="pb-5 mb-5 w-100">
+        <main class="container-fluid pt-5 article" v-if="post">
+
+            <b-row>
+                <img class="preview-image" :src="previewImageSrc" alt="">
+            </b-row>
+
             <article class="text-light-grey">
                 <section>
                     <div class="mb-4">
@@ -68,7 +72,7 @@
 
     .preview-image {
         width: 100% !important;
-        max-height: 68vh;
+        height:400px !important;
         object-fit: contain;
         vertical-align: middle;
     }
