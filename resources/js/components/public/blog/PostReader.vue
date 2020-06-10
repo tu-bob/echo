@@ -9,7 +9,8 @@
                     <article class="text-light-grey">
                         <section>
                             <div class="mb-4">
-                                <h1 class="typography-title-emphasized text-white mb-3" style="font-size:38px">{{post.title}}</h1>
+                                <h1 class="typography-title-emphasized text-white mb-3" style="font-size:38px">
+                                    {{post.title}}</h1>
                                 <div class="mb-3">
                                     <span class="typography-title text-violet">Автор: {{post.author.name}}</span>
                                 </div>
@@ -34,15 +35,19 @@
 <script>
     import {fetchPost} from "../../../api/blogApi";
     import {getBlogImage} from "../../../api/mediaApi";
+    import MetaTagsMixin from "../../admin/mixins/MetaTagsMixin";
 
     export default {
         name: "PostReader",
         mounted() {
             this.fetchPost();
         },
+        mixins: [MetaTagsMixin],
         data() {
             return {
-                post: null
+                post: null,
+                title: 'Статьи о таджикской музыке, про музыку и около музыки',
+                description: 'Новости, статьи, заметки и просто мысли о таджикской музыке и культуре. Личный блог Далера Назарова на "Эхо Таджикистана"'
             }
         },
         props: {
@@ -62,6 +67,14 @@
             previewImageSrc() {
                 if (this.post)
                     return getBlogImage(this.post.previewImage.id)
+            }
+        },
+        watch: {
+            post() {
+                this.title = this.post.title + ' - автор ' + this.post.author.name;
+                this.description = this.post.annotation;
+                this.updateTitle();
+                this.updateDescription();
             }
         }
     }
