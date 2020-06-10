@@ -1,11 +1,13 @@
 <template>
-    <b-dropdown id="dropdown-1" variant="outline-secondary" no-caret toggle-class="rounded-20">
-        <template v-slot:button-content>
+    <div class="dropdown">
+        <button class="btn btn-outline-secondary rounded-20 dropdown-toggle dropdown-toggle-no-caret"
+                type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <font-awesome-icon icon="share" class="mr-1"></font-awesome-icon>
             Поделиться
-        </template>
-        <b-dropdown-item>
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
             <ShareNetwork
+                class="dropdown-item h-cursor"
                 network="facebook"
                 :url="url"
                 :title="title"
@@ -18,9 +20,8 @@
                     Facebook
                 </div>
             </ShareNetwork>
-        </b-dropdown-item>
-        <b-dropdown-item>
             <ShareNetwork
+                class="dropdown-item h-cursor"
                 network="vk"
                 :url="url"
                 :title="title"
@@ -32,9 +33,8 @@
                     VK
                 </div>
             </ShareNetwork>
-        </b-dropdown-item>
-        <b-dropdown-item>
             <ShareNetwork
+                class="dropdown-item h-cursor"
                 network="telegram"
                 :url="url"
                 :title="title"
@@ -45,9 +45,8 @@
                     Telegram
                 </div>
             </ShareNetwork>
-        </b-dropdown-item>
-        <b-dropdown-item>
             <ShareNetwork
+                class="dropdown-item h-cursor"
                 network="whatsapp"
                 :url="url"
                 :title="title"
@@ -58,9 +57,8 @@
                     Whatsapp
                 </div>
             </ShareNetwork>
-        </b-dropdown-item>
-        <b-dropdown-item>
             <ShareNetwork
+                class="dropdown-item h-cursor"
                 network="odnoklassniki"
                 :url="url"
                 :title="title"
@@ -70,9 +68,8 @@
                     Одноклассники
                 </div>
             </ShareNetwork>
-        </b-dropdown-item>
-        <b-dropdown-item>
             <ShareNetwork
+                class="dropdown-item h-cursor"
                 network="viber"
                 :url="url"
                 :title="title"
@@ -83,8 +80,8 @@
                     Viber
                 </div>
             </ShareNetwork>
-        </b-dropdown-item>
-    </b-dropdown>
+        </div>
+    </div>
 </template>
 
 <script>
