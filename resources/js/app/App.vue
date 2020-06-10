@@ -6,7 +6,7 @@
         <div class="row bg-dark position-relative">
             <b-navbar toggleable="sm" class="col-8 pl-4" :type="NAV_TYPE" :variant="NAV_VARIANT">
                 <b-navbar-toggle target="mainNavBar" v-if="AUTHENTICATED"></b-navbar-toggle>
-                <b-navbar-brand title="Перейти на главную" :to="{name: 'home'}" class="py-0" style="width: 128px">
+                <b-navbar-brand title="Перейти на главную" :to="{name: 'home'}" class="py-0 d-none d-md-block" style="width: 128px">
                     <img src="/icons/png/logo-sm.png" alt="echo.tj logo" class="w-100">
                 </b-navbar-brand>
                 <router-link :to="{name:'home'}" class="mr-auto" title="Перейти на главную">
@@ -42,6 +42,10 @@
                     <a class="mr-2" target="_blank" title="Смотрите каверы, интервью и прочее на нашем ютюб канале"
                        href="https://www.youtube.com/channel/UCmhQHgvauoO6KcCu73l5XDQ">
                         <img class="icon-btn-md" src="/icons/svg/youtube.svg">
+                    </a>
+                    <a class="mr-2" target="_blank" title="Оставайтесь с нами Вконтакте"
+                       href="https://vk.com/echotj">
+                        <img class="icon-btn-md" src="/icons/svg/vk.svg">
                     </a>
                     <a class="mr-2" target="_blank" title="Шифруйтесь с нами в телеграме"
                        href="https://t.me/echotj">
