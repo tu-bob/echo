@@ -15,6 +15,14 @@
                                     <span class="typography-title text-violet">Автор: {{post.author.name}}</span>
                                 </div>
                                 <h2 class="text-muted text-justify">{{post.annotation}}</h2>
+                                <network-share
+                                    :url="pageUrl"
+                                    :title="title"
+                                    :description="description"
+                                    quote="Echo.tj - Музыкальное наследие Таджикистана"
+                                    :media="previewImageSrc"
+                                    :hash-tags="hashTags">
+                                </network-share>
                             </div>
 
                             <div class="text-justify article-body" v-html="post.article"></div>
@@ -36,6 +44,7 @@
     import {fetchPost} from "../../../api/blogApi";
     import {getBlogImage} from "../../../api/mediaApi";
     import MetaTagsMixin from "../../admin/mixins/MetaTagsMixin";
+    import NetworkShare from "../../common/inputs/NetworkShare";
 
     export default {
         name: "PostReader",
@@ -43,6 +52,7 @@
             this.fetchPost();
         },
         mixins: [MetaTagsMixin],
+        components: {NetworkShare},
         data() {
             return {
                 post: null,
@@ -67,6 +77,12 @@
             previewImageSrc() {
                 if (this.post)
                     return getBlogImage(this.post.previewImage.id)
+            },
+            pageUrl() {
+                return window.location.href;
+            },
+            hashTags() {
+                return this.post.author?.name.replace(' ', '');
             }
         },
         watch: {
