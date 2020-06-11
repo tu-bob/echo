@@ -6,80 +6,92 @@
             Поделиться
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <ShareNetwork
-                class="dropdown-item h-cursor"
-                network="facebook"
-                :url="url"
-                :title="title"
-                :description="description"
-                :quote="quote"
-                :hashtags="hashTags"
-            >
-                <div class="d-flex aling-items-baseline">
-                    <img class="icon-btn-sm mr-2" src="/icons/svg/facebook.svg">
-                    Facebook
-                </div>
-            </ShareNetwork>
-            <ShareNetwork
-                class="dropdown-item h-cursor"
-                network="vk"
-                :url="url"
-                :title="title"
-                :description="description"
-                :media="media"
-            >
-                <div class="d-flex aling-items-baseline">
-                    <img class="icon-btn-sm mr-2" src="/icons/svg/vk.svg">
-                    VK
-                </div>
-            </ShareNetwork>
-            <ShareNetwork
-                class="dropdown-item h-cursor"
-                network="telegram"
-                :url="url"
-                :title="title"
-                :description="description"
-            >
-                <div class="d-flex aling-items-baseline">
-                    <img class="icon-btn-sm mr-2" src="/icons/svg/telegram.svg">
-                    Telegram
-                </div>
-            </ShareNetwork>
-            <ShareNetwork
-                class="dropdown-item h-cursor"
-                network="whatsapp"
-                :url="url"
-                :title="title"
-                :description="description"
-            >
-                <div class="d-flex aling-items-baseline">
-                    <img class="icon-btn-sm mr-2" src="/icons/svg/whatsapp.svg">
-                    Whatsapp
-                </div>
-            </ShareNetwork>
-            <ShareNetwork
-                class="dropdown-item h-cursor"
-                network="odnoklassniki"
-                :url="url"
-                :title="title"
-            >
-                <div class="d-flex aling-items-baseline">
-                    <img class="icon-btn-sm mr-2" src="/icons/svg/odnoklassniki.svg">
-                    Одноклассники
-                </div>
-            </ShareNetwork>
-            <ShareNetwork
-                class="dropdown-item h-cursor"
-                network="viber"
-                :url="url"
-                :title="title"
-                :description="description"
-            >
-                <div class="d-flex aling-items-baseline">
-                    <img class="icon-btn-sm mr-2" src="/icons/svg/viber.svg">
-                    Viber
-                </div>
-            </ShareNetwork>
+            <div class="dropdown-item">
+                <ShareNetwork
+                    class="h-cursor"
+                    network="facebook"
+                    :url="url"
+                    :title="title"
+                    :description="description"
+                    :quote="quote"
+                    :hashtags="hashTags"
+                >
+                    <div class="d-flex aling-items-baseline">
+                        <img class="icon-btn-sm mr-2" src="/icons/svg/facebook.svg">
+                        Facebook
+                    </div>
+                </ShareNetwork>
+            </div>
+            <div class="dropdown-item">
+                <ShareNetwork
+                    class="h-cursor"
+                    network="vk"
+                    :url="url"
+                    :title="title"
+                    :description="description"
+                    :media="media"
+                >
+                    <div class="d-flex aling-items-baseline">
+                        <img class="icon-btn-sm mr-2" src="/icons/svg/vk.svg">
+                        VK
+                    </div>
+                </ShareNetwork>
+            </div>
+            <div class="dropdown-item">
+                <ShareNetwork
+                    class="h-cursor"
+                    network="telegram"
+                    :url="url"
+                    :title="title"
+                    :description="description"
+                >
+                    <div class="d-flex aling-items-baseline">
+                        <img class="icon-btn-sm mr-2" src="/icons/svg/telegram.svg">
+                        Telegram
+                    </div>
+                </ShareNetwork>
+            </div>
+            <div class="dropdown-item">
+                <ShareNetwork
+                    class="h-cursor"
+                    network="whatsapp"
+                    :url="url"
+                    :title="title"
+                    :description="description"
+                >
+                    <div class="d-flex aling-items-baseline">
+                        <img class="icon-btn-sm mr-2" src="/icons/svg/whatsapp.svg">
+                        Whatsapp
+                    </div>
+                </ShareNetwork>
+            </div>
+            <div class="dropdown-item">
+                <ShareNetwork
+                    class="h-cursor"
+                    network="odnoklassniki"
+                    :url="url"
+                    :title="title"
+                >
+                    <div class="d-flex aling-items-baseline">
+                        <img class="icon-btn-sm mr-2" src="/icons/svg/odnoklassniki.svg">
+                        Одноклассники
+                    </div>
+                </ShareNetwork>
+            </div>
+            <div class="dropdown-item">
+                <ShareNetwork
+                    class="h-cursor"
+                    network="viber"
+                    :url="url"
+                    :title="title"
+                    :description="description"
+                >
+                    <div class="d-flex aling-items-baseline">
+                        <img class="icon-btn-sm mr-2" src="/icons/svg/viber.svg">
+                        Viber
+                    </div>
+                </ShareNetwork>
+            </div>
         </div>
     </div>
 </template>
