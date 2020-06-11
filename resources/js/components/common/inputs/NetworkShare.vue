@@ -6,7 +6,7 @@
             Поделиться
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <div class="dropdown-item">
+            <div class="dropdown-item size">
                 <ShareNetwork
                     class="h-cursor"
                     network="facebook"
@@ -16,13 +16,13 @@
                     :quote="quote"
                     :hashtags="hashTags"
                 >
-                    <div class="d-flex aling-items-baseline">
+                    <div class="d-flex align-items-center">
                         <img class="icon-btn-sm mr-2" src="/icons/svg/facebook.svg">
-                        Facebook
+                        <span>Facebook</span>
                     </div>
                 </ShareNetwork>
             </div>
-            <div class="dropdown-item">
+            <div class="dropdown-item size">
                 <ShareNetwork
                     class="h-cursor"
                     network="vk"
@@ -31,13 +31,13 @@
                     :description="description"
                     :media="media"
                 >
-                    <div class="d-flex aling-items-baseline">
+                    <div class="d-flex align-items-center">
                         <img class="icon-btn-sm mr-2" src="/icons/svg/vk.svg">
-                        VK
+                       <span>VK</span>
                     </div>
                 </ShareNetwork>
             </div>
-            <div class="dropdown-item">
+            <div class="dropdown-item size">
                 <ShareNetwork
                     class="h-cursor"
                     network="telegram"
@@ -45,13 +45,13 @@
                     :title="title"
                     :description="description"
                 >
-                    <div class="d-flex aling-items-baseline">
+                    <div class="d-flex align-items-center">
                         <img class="icon-btn-sm mr-2" src="/icons/svg/telegram.svg">
-                        Telegram
+                        <span>Telegram</span>
                     </div>
                 </ShareNetwork>
             </div>
-            <div class="dropdown-item">
+            <div class="dropdown-item size">
                 <ShareNetwork
                     class="h-cursor"
                     network="whatsapp"
@@ -59,26 +59,26 @@
                     :title="title"
                     :description="description"
                 >
-                    <div class="d-flex aling-items-baseline">
+                    <div class="d-flex align-items-center">
                         <img class="icon-btn-sm mr-2" src="/icons/svg/whatsapp.svg">
-                        Whatsapp
+                        <span>Whatsapp</span>
                     </div>
                 </ShareNetwork>
             </div>
-            <div class="dropdown-item">
+            <div class="dropdown-item size">
                 <ShareNetwork
                     class="h-cursor"
                     network="odnoklassniki"
                     :url="url"
                     :title="title"
                 >
-                    <div class="d-flex aling-items-baseline">
+                    <div class="d-flex align-items-center">
                         <img class="icon-btn-sm mr-2" src="/icons/svg/odnoklassniki.svg">
-                        Одноклассники
+                        <span>Одноклассники</span>
                     </div>
                 </ShareNetwork>
             </div>
-            <div class="dropdown-item">
+            <div class="dropdown-item size">
                 <ShareNetwork
                     class="h-cursor"
                     network="viber"
@@ -86,9 +86,9 @@
                     :title="title"
                     :description="description"
                 >
-                    <div class="d-flex aling-items-baseline">
+                    <div class="d-flex align-items-center">
                         <img class="icon-btn-sm mr-2" src="/icons/svg/viber.svg">
-                        Viber
+                        <span>Viber</span>
                     </div>
                 </ShareNetwork>
             </div>
@@ -120,5 +120,10 @@
 <style scoped>
     .border-radius-20 {
         border-radius: 20px !important;
+    }
+
+    .size{
+        width: 178px !important;
+        height: 31px !important;
     }
 </style>
