@@ -6,8 +6,8 @@
         <div class="row bg-dark position-relative">
             <b-navbar toggleable="sm" class="col-8 pl-4" :type="NAV_TYPE" :variant="NAV_VARIANT">
                 <b-navbar-toggle target="mainNavBar" v-if="AUTHENTICATED"></b-navbar-toggle>
-                <b-navbar-brand title="Перейти на главную" :to="{name: 'home'}" class="py-0 d-none d-md-block" style="width: 128px">
-                    <img src="/icons/png/logo-sm.png" alt="echo.tj logo" class="w-100">
+                <b-navbar-brand title="Перейти на главную" :to="{name: 'home'}" class="py-0 d-none d-md-block">
+                    <img src="/icons/png/logo-sm.png" alt="echo.tj logo" style="height: 30px">
                 </b-navbar-brand>
                 <router-link :to="{name:'home'}" class="mr-auto" title="Перейти на главную">
                     <font-awesome-icon class="text-secondary h-text-white"
