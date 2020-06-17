@@ -6,8 +6,8 @@ body {
   position: relative;
 }
 
-html::-webkit-scrollbar {
-  display: none;
+pre {
+  white-space: pre-wrap;
 }
 
 .section {
@@ -78,6 +78,10 @@ html::-webkit-scrollbar {
 
 .bg-lgs {
   background: linear-gradient(39deg, #15c0e9 0%, #f0536a 80%);
+}
+
+.h-border-violet {
+  border: 1px solid transparent !important;
 }
 
 .h-border-violet:hover {
@@ -157,6 +161,14 @@ html::-webkit-scrollbar {
 .link-border {
   border: 1px solid white;
   border-radius: 14px;
+}
+
+.rounded-20 {
+  border-radius: 20px !important;
+}
+
+.badge-dark {
+  background-color: #000000 !important;
 }
 
 .h-overlay {
@@ -321,6 +333,83 @@ html::-webkit-scrollbar {
     overflow: auto !important;
   }
 }
+
+/*СПИННЕР (ГЛАВНЫЙ)==========================*/
+
+#tMainSpinner {
+  position: fixed;
+  display: flex;
+  margin-left: -15px;
+  width: 100vw;
+  height: 100vh;
+  align-items: center;
+  justify-content: center;
+  z-index: 99999;
+  transition: 0.3s;
+  background: rgba(89, 109, 212, 0.2);
+  box-sizing: content-box;
+}
+
+#tMainSpinner .spinner {
+  width: 100px;
+  height: 100px;
+  border: 2px solid #9b9df5;
+  border-radius: 50%;
+  -webkit-animation: spin 0.75s infinite linear;
+          animation: spin 0.75s infinite linear;
+  display: inline-block;
+  border-color: transparent;
+  border-top-color: #0cf;
+  -webkit-animation-duration: 1.2s;
+          animation-duration: 1.2s;
+}
+
+#tMainSpinner .spinner:before,
+#tMainSpinner .spinner:after {
+  left: -2px;
+  top: -2px;
+  position: absolute;
+  content: "";
+  width: inherit;
+  height: inherit;
+  border: inherit;
+  border-radius: inherit;
+  display: inline-block;
+  border-color: transparent;
+  border-top-color: #0cf;
+  -webkit-animation-duration: 1.2s;
+          animation-duration: 1.2s;
+}
+
+#tMainSpinner .spinner:before {
+  transform: rotate(120deg);
+}
+
+#tMainSpinner .spinner:after {
+  transform: rotate(240deg);
+}
+
+@-webkit-keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/*==========================================*/
 
 /*!
  * Bootstrap v4.5.0 (https://getbootstrap.com/)
