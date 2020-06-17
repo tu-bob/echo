@@ -42,7 +42,7 @@ class ImageController extends BaseController
     {
         $provider = new ImageFileProvider($type);
 
-        return request()->query('width') && request()->query('height') ?
+        return request()->query('width') || request()->query('height') ?
             $provider->getResizedFileResponse($image, request()->query('width'), request()->query('height'))
             : $provider->getFileResponse($image);
     }

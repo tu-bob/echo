@@ -25,7 +25,7 @@
         },
         computed: {
             previewImageSrc() {
-                return getBlogImage(this.post.previewImage.id)
+                return getBlogImage(this.post.previewImage.id, {width: 350})
             }
         }
     }

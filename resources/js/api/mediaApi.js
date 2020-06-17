@@ -57,8 +57,8 @@ export function getSongIconUrl(id, params, albumCover = true) {
     return `/media/music/song/${id}/icon?album=${albumCover}&` + kvpToQueryParam(params);
 }
 
-export function getBlogImage(image) {
-    return getImageUrl(image, 'blog')
+export function getBlogImage(image, params = null) {
+    return getImageUrl(image, 'blog', params)
 }
 
 export function getCoverImage(image) {
@@ -69,8 +69,8 @@ export function getAvatarImage(image) {
     return getImageUrl(image, 'avatar')
 }
 
-export function getImageUrl(image, type) {
-    return `/media/image/${image}/${type}`;
+export function getImageUrl(image, type, params = null) {
+    return `/media/image/${image}/${type}?` + kvpToQueryParam(params);
 }
 
 export function fetchVideos(filters, options) {
