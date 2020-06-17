@@ -30,23 +30,23 @@
             initPlayer() {
                 let handleState = function (vm) {
                     return function (state) {
-                        switch (state) {
-                            case ya.music.Audio.STATE_INIT:
-                                console.log("Инициализация плеера");
-                                break;
-                            case ya.music.Audio.STATE_IDLE:
-                                console.log("Плеер готов и ожидает");
-                                break;
-                            case ya.music.Audio.STATE_PLAYING:
-                                console.log("Плеер проигрывает музыку");
-                                break;
-                            case ya.music.Audio.STATE_PAUSED:
-                                console.log("Плеер поставлен на паузу");
-                                break;
-                            case ya.music.Audio.STATE_CRASHED:
-                                console.log("Не удалось инициализировать плеер");
-                                break;
-                        }
+                        // switch (state) {
+                        //     case ya.music.Audio.STATE_INIT:
+                        //         console.log("Инициализация плеера");
+                        //         break;
+                        //     case ya.music.Audio.STATE_IDLE:
+                        //         console.log("Плеер готов и ожидает");
+                        //         break;
+                        //     case ya.music.Audio.STATE_PLAYING:
+                        //         console.log("Плеер проигрывает музыку");
+                        //         break;
+                        //     case ya.music.Audio.STATE_PAUSED:
+                        //         console.log("Плеер поставлен на паузу");
+                        //         break;
+                        //     case ya.music.Audio.STATE_CRASHED:
+                        //         console.log("Не удалось инициализировать плеер");
+                        //         break;
+                        // }
                     }
                 };
 
@@ -66,7 +66,6 @@
                 };
 
                 let handleLoaded = function (vm) {
-                    console.log('loaded');
                     return function (payload) {
                         vm.onLoaded(payload);
                     }
@@ -99,22 +98,34 @@
                 this.yaPlayer.on(ya.music.Audio.EVENT_SWAP, emitEvent("swap", this));
             },
             play() {
-                if (this.resume || this.src === this.lastSrc)
+                if (this.resume || this.src === this.lastSrc) {
                     this.yaPlayer.resume();
-                else {
+
+                    setTimeout(
+                        _ => {
+                            if (this.yaPlayer.getState() === ya.music.Audio.STATE_PAUSED)
+                                this.forceResume();
+                        }
+                        , 100
+                    )
+
+                } else {
                     this.playTrack();
                 }
             },
             playTrack() {
                 this.lastSrc = this.src;
                 if (this.yaPlayer.isPreloaded(this.src)) {
-                    console.log(this.src, 'preloaded')
                     this.yaPlayer.playPreloaded(this.src);
                 } else {
-                    console.log(this.src, 'not preloaded')
                     this.yaPlayer.play(this.src);
                 }
                 this.resume = true;
+            },
+            forceResume() {
+                let position = this.yaPlayer.getPosition();
+                this.yaPlayer.play(this.src)
+                    .then(_ => this.yaPlayer.setPosition(position));
             },
             pause() {
                 this.yaPlayer.pause();
