@@ -15,7 +15,8 @@
             // },
             {
                 name: 'search',
-                path: '/search', component: () => import('../components/public/search/SearchOverview')
+                path: '/search/:query?', component: () => import('../components/public/search/SearchOverview'),
+                props:true
             },
             {
                 name: 'home',

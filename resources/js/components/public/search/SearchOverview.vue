@@ -5,7 +5,7 @@
             <input @keydown.enter="search"
                    type="text"
                    class="form-control bg-dark text-white border-secondary"
-                   v-model="query">
+                   v-model="searchQuery">
             <b-input-group-append>
                 <b-button variant="secondary" @click="search">Найти</b-button>
             </b-input-group-append>
@@ -62,9 +62,15 @@
     export default {
         name: "SearchOverview",
         components: {ArtistsView, PostsList, VideosList, AlbumsList, SongsList},
+        mounted() {
+            if(this.query){
+                this.searchQuery = this.query;
+                this.search();
+            }
+        },
         data() {
             return {
-                query: '',
+                searchQuery: '',
                 songs: [],
                 videos: [],
                 albums: [],
@@ -73,11 +79,14 @@
                 busy: false
             }
         },
+        props: {
+            query: null
+        },
         methods: {
             search() {
                 this.busy = true;
                 this.clearForm()
-                search(this.query)
+                search(this.searchQuery)
                     .then(response => {
                         this.songs = response.songs;
                         this.albums = response.albums;
@@ -87,7 +96,7 @@
                     .catch()
                     .finally(_ => this.busy = false);
 
-                blogSearch(this.query)
+                blogSearch(this.searchQuery)
                     .then(response => {
                         this.posts = response.posts;
                     })

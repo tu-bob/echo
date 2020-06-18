@@ -2,7 +2,9 @@
     <div class="h-100 container-fluid">
         <!--        <b-overlay variant="dark" no-wrap :show="isMainOverlayVisible" spinner-variant="light">-->
         <!--        </b-overlay>-->
-        <div id="tMainSpinner" :class="{'d-none':!isMainOverlayVisible}"><div class="spinner"></div></div>
+        <div id="tMainSpinner" :class="{'d-none':!isMainOverlayVisible}">
+            <div class="spinner"></div>
+        </div>
         <div class="row bg-dark position-relative">
             <b-navbar toggleable="sm" class="col-8 pl-4" :type="NAV_TYPE" :variant="NAV_VARIANT">
                 <b-navbar-toggle target="mainNavBar" v-if="AUTHENTICATED"></b-navbar-toggle>
@@ -80,11 +82,19 @@
         </div>
         <div class="row">
             <div class="ml-auto my-3">
-                <router-link v-if="$route.name !== 'search'" :to="{name:'search'}"
-                             class="ml-auto align-self-center mt-1 mr-3">
+                <div id="search-input" v-if="$route.name !== 'search'">
+                    <input class="form-control-sm" v-model="searchQuery" type="text" @keydown.enter="navToSearch">
                     <font-awesome-icon class="text-secondary h-text-white" icon="search"
-                                       size="lg"></font-awesome-icon>
-                </router-link>
+                                       @click="navToSearch">
+                    </font-awesome-icon>
+                </div>
+
+
+                <!--                <router-link v-if="$route.name !== 'search'" :to="{name:'search'}"-->
+                <!--                             class="ml-auto align-self-center mt-1 mr-3">-->
+                <!--                    <font-awesome-icon class="text-secondary h-text-white" icon="search"-->
+                <!--                                       size="lg"></font-awesome-icon>-->
+                <!--                </router-link>-->
                 <div v-else class="mr-3 cursor-pointer" @click="closeSearch">
                     <font-awesome-icon class="text-white"
                                        icon="times"
@@ -128,6 +138,11 @@
                 default: null
             }
         },
+        data() {
+            return {
+                searchQuery: null
+            }
+        },
         methods: {
             logout() {
                 this.$store.dispatch('LOG_OUT')
@@ -137,10 +152,14 @@
                     });
             },
             closeSearch() {
+                this.searchQuery = null;
                 if (this.PREV_ROUTE)
                     this.$router.push(this.PREV_ROUTE);
                 else
                     this.$router.push({name: 'home'});
+            },
+            navToSearch() {
+                this.$router.push({name: 'search', params: {query: this.searchQuery}})
             }
         },
         computed: {
@@ -170,5 +189,30 @@
         padding-top: 0.5rem;
         color: #9a9da0;
         font-weight: 400;
+    }
+
+    #search-input {
+        position: relative
+    }
+
+    #search-input input {
+        background: #1a1d20;
+        border: 0;
+        border-radius: 2em;
+        color: #fff;
+        padding: 0 40px 0 15px;
+        font-size: 14px;
+        margin-right: 12px;
+    }
+
+    #search-input input:focus {
+        outline: none
+    }
+
+    #search-input svg {
+        position: absolute;
+        right: 24px;
+        top: 7px;
+        size: 17px
     }
 </style>
