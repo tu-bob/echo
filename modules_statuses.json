@@ -3,5 +3,6 @@
     "Media": true,
     "Migration": true,
     "CreateGenresTable": true,
-    "Shared": true
+    "Shared": true,
+    "Counters": true
 }

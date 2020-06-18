@@ -1,0 +1,13 @@
+{
+    "name": "Counters",
+    "alias": "counters",
+    "description": "",
+    "keywords": [],
+    "order": 0,
+    "providers": [
+        "Modules\\Counters\\Providers\\CountersServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}

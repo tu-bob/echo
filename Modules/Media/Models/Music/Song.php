@@ -4,6 +4,10 @@
 namespace Modules\Media\Models\Music;
 
 
+use Modules\Counters\Interfaces\Playable;
+use Modules\Counters\Interfaces\Viewable;
+use Modules\Counters\Models\Playback;
+use Modules\Counters\Models\View;
 use Modules\Media\Models\Artist\ArtistAlias;
 use Modules\Media\Models\ExternalLink\ExternalLink;
 use Modules\Media\Models\Image\ImageFile;
@@ -21,7 +25,7 @@ use Modules\Shared\Models\Pivots\BasePivot;
  * @property mixed formatted_name
  * @property mixed allow_download
  */
-class Song extends BaseModel
+class Song extends BaseModel implements Playable, Viewable
 {
     protected $casts = [
         'lyrics' => 'string',
@@ -97,5 +101,14 @@ class Song extends BaseModel
     public function getAlbumsTitlesAttribute()
     {
         return $this->albums()->get(['title'])->implode('title', ', ');
+    }
+
+    public function playbacks()
+    {
+        return $this->morphMany(Playback::class, 'playable');
+    }
+
+    public function views(){
+        return $this->morphMany(View::class, 'viewable');
     }
 }
