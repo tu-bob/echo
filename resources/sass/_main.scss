@@ -1,8 +1,10 @@
 @import "mixins";
+@import "variables";
 
 html, body {
     height: 100%;
     position: relative;
+    background-color: $dark !important;
 }
 
 //html::-webkit-scrollbar {
@@ -156,6 +158,11 @@ pre {
 
 .rounded-20 {
     border-radius: 20px !important;
+}
+
+.divider-bottom {
+    border-color: hsla(0, 0%, 100%, .05);
+    border-bottom: 1px solid;
 }
 
 //end border
@@ -392,3 +399,50 @@ pre {
 
 /*==========================================*/
 
+.social-icons {
+    list-style-type: none;
+    padding-left: 0;
+    margin: 0;
+
+    li {
+        padding-left: 0;
+        display: inline-block;
+    }
+
+    a {
+        background: #ffffff;
+        padding: 10px;
+        -webkit-transition: none;
+        transition: none;
+        border-radius: 30px;
+        display: inline-block;
+
+        &:hover {
+            color: #1ED760;
+            text-decoration: none;
+            outline: 0;
+        }
+
+        &:hover, &:focus {
+            color: #1ED760;
+            text-decoration: none;
+
+            .social-icon {
+                filter: invert(22%) sepia(97%) saturate(2119%) hue-rotate(123deg) brightness(96%) contrast(96%);
+            }
+        }
+    }
+
+    .social-icon {
+        width: 16px;
+        height: 16px;
+        -webkit-transition: fill 0.2s;
+        transition: fill 0.2s;
+        display: block;
+        fill: #222326;
+
+        &:hover {
+            filter: invert(22%) sepia(97%) saturate(2119%) hue-rotate(123deg) brightness(96%) contrast(96%);
+        }
+    }
+}

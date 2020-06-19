@@ -12,16 +12,16 @@
                     <span class="text-muted text-no-wrap">{{aliases}}</span>
                 </div>
                 <div class="song-buttons">
-                    <a class="btn transparent-btn pr-0"
-                       @click.stop
-                       :class="{'disabled': !song.allow_download}"
-                       :href="`/media/music/song/${song.id}/download`" download>
-                        <font-awesome-icon
-                            :class="{'text-secondary': song.allow_download, 'text-dark': !song.allow_download}"
-                            icon="download"
-                            size="lg">
-                        </font-awesome-icon>
-                    </a>
+<!--                    <a class="btn transparent-btn pr-0"-->
+<!--                       @click.stop-->
+<!--                       :class="{'disabled': !song.allow_download}"-->
+<!--                       :href="`/media/music/song/${song.id}/download`" download>-->
+<!--                        <font-awesome-icon-->
+<!--                            :class="{'text-secondary': song.allow_download, 'text-dark': !song.allow_download}"-->
+<!--                            icon="download"-->
+<!--                            size="lg">-->
+<!--                        </font-awesome-icon>-->
+<!--                    </a>-->
                     <b-dropdown @click.stop toggle-class="transparent-btn" right no-caret>
                         <template v-slot:button-content>
                             <font-awesome-icon icon="ellipsis-h"
@@ -35,6 +35,17 @@
                         <b-dropdown-item @click.stop :to="{name:'artist-view', params:{id:song.artistAliases[0].id}}">
                             <font-awesome-icon icon="user" class="mr-3"></font-awesome-icon>
                             Перейти к исполнителю
+                        </b-dropdown-item>
+                        <b-dropdown-item
+                           @click.stop
+                           :class="{'disabled': !song.allow_download}"
+                           :href="`/media/music/song/${song.id}/download`" download>
+                            <font-awesome-icon
+                                :class="{'text-dark': !song.allow_download}"
+                                icon="download"
+                                class="mr-3">
+                            </font-awesome-icon>
+                            Скачать
                         </b-dropdown-item>
                     </b-dropdown>
                     <span>{{duration}}</span>
