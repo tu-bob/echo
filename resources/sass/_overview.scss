@@ -1,0 +1,25 @@
+section {
+    margin-bottom: 3rem;
+
+    .section-header {
+        display: flex;
+        width: 100%;
+        align-items: baseline;
+        margin-bottom: 1.2rem;
+        padding-right: 15px;
+        padding-left: 15px;
+
+        .section-title {
+            font-variant: all-petite-caps;
+            color: #ffffff;
+            font-weight: 700;
+        }
+
+        .more-btn {
+            margin-left: auto;
+            text-decoration: none;
+            color: #ffffff;
+        }
+    }
+}
+

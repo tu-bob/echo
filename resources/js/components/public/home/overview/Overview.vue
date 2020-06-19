@@ -1,61 +1,78 @@
 <template>
-    <div>
-        <section class="section col-12">
-            <div class="row">
-                <h2 class="col-8 title">Слушайте</h2>
-                <div class="col-4 text-right">
-                    <router-link :to="{name: 'music'}" class="ml-auto btn-text-white text-decoration-none">
-                        <span>больше музыки</span>
-                    </router-link>
-                </div>
+    <div class="container">
+        <div class="row page-header">
+            <h1 class="typography-header-emphasized col-12">ГЛАВНОЕ</h1>
+        </div>
+
+        <!-- top music -->
+        <section class="row">
+            <div class="section-header">
+                <h2 class="section-title">Слушайте</h2>
+                <router-link :to="{name: 'music'}" class="more-btn">
+                    <span>больше музыки</span>
+                </router-link>
             </div>
-            <div class="row">
-                <songs-list :playlist="songs.slice(0, Math.ceil(songs.length/2))"
-                            no-fetch
-                            prevent-play
-                            @play="playSong"
-                            :class="{'col-md-6':songs.length > 1, 'col-12':songs.length < 2}">
-                </songs-list>
-                <songs-list :playlist="songs.slice(Math.ceil(songs.length/2))"
-                            no-fetch
-                            prevent-play
-                            @play="playSong"
-                            class="col-md-6">
-                </songs-list>
+            <div class="container-fluid">
+                <div class="row">
+                    <songs-list :playlist="songs.slice(0, Math.ceil(songs.length/2))"
+                                no-fetch
+                                prevent-play
+                                @play="playSong"
+                                :class="{'col-md-6':songs.length > 1, 'col-12':songs.length < 2}">
+                    </songs-list>
+                    <songs-list :playlist="songs.slice(Math.ceil(songs.length/2))"
+                                no-fetch
+                                prevent-play
+                                @play="playSong"
+                                class="col-md-6">
+                    </songs-list>
+                </div>
             </div>
         </section>
-        <section class="section col-12">
-            <div class="row">
-                <h2 class="col-8 title">Исследуйте</h2>
-                <div class="col-4 text-right">
-                    <router-link :to="{name:'albums'}" class="ml-auto btn-text-white text-decoration-none">
-                        <span>больше альбомов</span>
-                    </router-link>
+
+        <!-- top albums -->
+        <section class="row">
+            <div class="section-header">
+                <h2 class="section-title">Исследуйте</h2>
+                <router-link :to="{name:'albums'}" class="more-btn">
+                    <span>больше альбомов</span>
+                </router-link>
+            </div>
+            <div class="container-fluid">
+                <div class="row">
+                    <albums-list class="col-12" :provided-albums="albums" no-fetch></albums-list>
                 </div>
             </div>
-            <albums-list :provided-albums="albums" no-fetch></albums-list>
         </section>
-        <section class="section col-12">
-            <div class="row">
-                <h2 class="col-8 title">Смотрите</h2>
-                <div class="col-4 text-right">
-                    <router-link :to="{name:'clips'}" class="ml-auto btn-text-white text-decoration-none">
-                        <span>больше клипов</span>
-                    </router-link>
+
+        <!-- top videos -->
+        <section class="row">
+            <div class="section-header">
+                <h2 class="section-title">Смотрите</h2>
+                <router-link :to="{name:'clips'}" class="more-btn">
+                    <span>больше клипов</span>
+                </router-link>
+            </div>
+            <div class="container-fluid">
+                <div class="row">
+                    <videos-list class="col-12" :provided-videos="videos" no-fetch></videos-list>
                 </div>
             </div>
-            <videos-list :provided-videos="videos" no-fetch></videos-list>
         </section>
-        <section class="section col-12">
-            <div class="row">
-                <h2 class="col-8 title">Читайте</h2>
-                <div class="col-4 text-right">
-                    <router-link :to="{name:'blog'}" class="ml-auto btn-text-white text-decoration-none">
-                        <span>больше статей</span>
-                    </router-link>
+
+        <!-- top albums -->
+        <section class="row">
+            <div class="section-header">
+                <h2 class="section-title">Читайте</h2>
+                <router-link :to="{name:'blog'}" class="more-btn">
+                    <span>больше статей</span>
+                </router-link>
+            </div>
+            <div class="container-fluid">
+                <div class="row">
+                    <posts-list class="col-12" :provided-posts="posts" no-fetch></posts-list>
                 </div>
             </div>
-            <posts-list :provided-posts="posts" no-fetch></posts-list>
         </section>
     </div>
 
@@ -118,7 +135,7 @@
                     .then(posts => this.posts = posts)
                     .catch()
             },
-            playSong(song){
+            playSong(song) {
                 this.$store.commit('UPDATE_PLAYLIST', this.songs);
                 this.$store.commit('SET_ACTIVE_SONG', song);
             }

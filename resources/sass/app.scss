@@ -5,8 +5,11 @@
 @import 'variables';
 
 @import 'main';
-
 @import 'custom_bootstrap';
+
+//Pages
+@import 'layout';
+@import 'overview';
 
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';

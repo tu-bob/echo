@@ -430,7 +430,7 @@
 
 <style scoped>
     .player {
-        z-index: 1000;
+        z-index: 2000;
         position: fixed;
         bottom: 0;
         left: 0;
