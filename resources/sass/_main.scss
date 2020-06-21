@@ -1,5 +1,6 @@
 @import "mixins";
 @import "variables";
+@import url('https://fonts.googleapis.com/css2?family=Russo+one');
 
 html, body {
     height: 100%;
@@ -124,7 +125,13 @@ pre {
 
 .page-header {
     margin: 3rem 0 2rem 0;
-    color:#ffffff;
+    color: #ffffff;
+    font-family: 'Russo one';
+
+    h1 {
+        @extend .typography-header-emphasized;
+        font-size: 40px !important;
+    }
 }
 
 //Titles

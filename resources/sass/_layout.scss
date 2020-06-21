@@ -10,6 +10,7 @@ $hamburger-layer-color: #ffffff;
 @import "~hamburgers/_sass/hamburgers/hamburgers";
 
 $app-padding-top: 77px;
+$app-padding-bottom: 77px;
 
 .hamburger{
     padding-top: 8px;
@@ -35,7 +36,8 @@ $app-padding-top: 77px;
 }
 
 #side-menu {
-    padding-top: $app-padding-top + 24px;
+    padding-top: $app-padding-top + 14px;
+    padding-bottom: $app-padding-bottom;
     background-color: #222222 !important;
     //backdrop-filter: blur(5px) !important;
     //opacity: 0.8 !important;

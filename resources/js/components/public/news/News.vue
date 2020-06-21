@@ -1,6 +1,13 @@
 <template>
-    <div>
-        <posts-masonry-view></posts-masonry-view>
+    <div class="container">
+        <div class="row page-header">
+            <h1 class="col-12">Блог</h1>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <posts-masonry-view></posts-masonry-view>
+            </div>
+        </div>
     </div>
 
 </template>

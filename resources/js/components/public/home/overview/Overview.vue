@@ -1,7 +1,7 @@
 <template>
     <div class="container">
         <div class="row page-header">
-            <h1 class="typography-header-emphasized col-12">ГЛАВНОЕ</h1>
+            <h1 class="col-12">Главное</h1>
         </div>
 
         <!-- top music -->

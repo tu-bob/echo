@@ -1,0 +1,35 @@
+@import 'variables';
+
+.post-preview {
+    background-color: transparent !important;
+    border: none !important;
+
+    img {
+        width: 100%;
+        object-fit: contain;
+        border-radius: 0.3rem;
+    }
+
+    &:hover {
+        cursor: pointer;
+        transform: scale(1.02);
+        transition: all 0.2s ease-in-out;
+    }
+
+    .post-title {
+        font-size: 1.3rem;
+        line-height: 0.9rem;
+        color: $fc-primary;
+    }
+
+    .post-annotation {
+        text-align: justify;
+        color: $fc-secondary;
+        margin-bottom: 0.4rem;
+    }
+
+    .post-details {
+        color: $fc-secondary;
+        font-size:12px;
+    }
+}
