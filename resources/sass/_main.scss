@@ -80,14 +80,17 @@ pre {
 }
 
 .h-border-violet {
-    border: 1px solid transparent !important;
+    //border: 2px solid transparent !important;
 
     &:hover {
-        border: 1px solid #91a5f4 !important;
+        //border: 2px solid #91a5f4 !important;
+        box-shadow: 0 0 6px 3px rgb(3, 244, 244);
+        transform: scale(1.03);
     }
 
     &.active {
-        border: 1px solid #15c0e9 !important;
+        box-shadow: 0 0 6px 3px #e91581;
+        //border: 2px solid #15c0e9 !important;
     }
 }
 

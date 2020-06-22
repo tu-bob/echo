@@ -1,7 +1,7 @@
 <template>
     <router-link class="text-decoration-none" :to="{name:'artist-view', params:{id:artist.aliases[0].id}}">
         <b-aspect aspect="1">
-            <b-avatar  style="box-shadow: 7px 9px 13px 2px rgb(4, 4, 4);" :src="avatarUrl" variant="dark" class="w-100 h-100"></b-avatar>
+            <b-avatar :src="avatarUrl" variant="dark" class="w-100 h-100"></b-avatar>
         </b-aspect>
         <div class="text-center mt-3">
             <h4 class="typography-title text-secondary" v-if="artist.aliases && artist.aliases.length > 0">
