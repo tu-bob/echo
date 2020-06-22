@@ -1,18 +1,10 @@
 <template>
-    <div class="container-fluid">
+    <div class="container">
+        <div class="row page-header">
+            <h1>Исполнители</h1>
+        </div>
         <div class="row">
-            <artist-card class="col-12  col-sm-4 col-md-3 col-lg-3 col-xl-2 mb-5"
-                         v-for="artist in artists" :key="artist.id"
-                         :artist="artist"></artist-card>
-
-            <pagination v-if="pagination && !noFetch"
-                        ref="artists-list-pagination"
-                        flow
-                        :pagination="pagination"
-                        class="mt-5"
-                        @pageChanged="fetchArtists"
-                        v-observe-visibility="paginationIntersObj">
-            </pagination>
+            <artists-list></artists-list>
         </div>
     </div>
 </template>
@@ -22,11 +14,12 @@
     import AxiosCancellationMixin from "../../admin/mixins/AxiosCancellationMixin";
     import Pagination from "../../common/inputs/Pagination";
     import {fetchArtists} from "../../../api/mediaApi";
+    import ArtistsList from "./ArtistsList";
 
     export default {
-        name: "ArtistsList",
+        name: "ArtistsView",
         mixins: [AxiosCancellationMixin],
-        components: {ArtistCard, Pagination},
+        components: {ArtistsList, ArtistCard, Pagination},
         mounted() {
             if (this.providedArtists)
                 this.artists = this.providedArtists;
@@ -80,3 +73,7 @@
         },
     }
 </script>
+
+<style scoped>
+
+</style>
