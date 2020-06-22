@@ -36,6 +36,10 @@ pre {
     height: 50px;
 }
 
+.text-secondary{
+    color:$fc-secondary!important;
+}
+
 //buttons
 .btn-text-white {
     color: #9a9da0 !important;
@@ -516,7 +520,7 @@ a {
         }
 
         .playable-info {
-            
+
         }
     }
 }

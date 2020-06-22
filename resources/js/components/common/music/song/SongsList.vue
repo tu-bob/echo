@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="container-fluid">
         <song-card v-for="song in songs" :song="song" :key="song.id"
                    @play="playSong"></song-card>
         <pagination v-if="pagination && !noFetch"

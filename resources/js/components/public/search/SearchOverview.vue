@@ -1,5 +1,8 @@
 <template>
-    <b-container fluid>
+    <b-container>
+        <b-row class="page-header">
+            <h1>Результаты поиска</h1>
+        </b-row>
         <b-overlay :show="busy" rounded="sm" variant="dark" no-wrap></b-overlay>
         <b-input-group prepend="Поиск" class="mt-3 mb-5">
             <input @keydown.enter="search"
@@ -12,14 +15,14 @@
         </b-input-group>
 
         <section class="section" v-if="artists.length > 0">
-            <h2 class="title">Исполнители</h2>
+            <h2 class="section-title">Исполнители</h2>
             <div>
                 <artists-view :providedArtists="artists" no-fetch></artists-view>
             </div>
         </section>
 
         <section class="section" v-if="songs.length > 0">
-            <h2 class="title">Песни</h2>
+            <h2 class="section-title">Песни</h2>
             <div class="row">
                 <songs-list :playlist="songs.slice(0, Math.ceil(songs.length/2))"
                             @play="updatePlaylist"
@@ -33,17 +36,18 @@
         </section>
 
         <section class="section" v-if="albums.length > 0">
-            <h2 class="title">Альбомы</h2>
+            <h2 class="section-title">Альбомы</h2>
             <albums-list :provided-albums="albums" no-fetch></albums-list>
         </section>
 
         <section class="section" v-if="videos.length > 0">
-            <h2 class="title">Видео</h2>
-            <videos-list :provided-videos="videos" no-fetch></videos-list>
+            <h2 class="section-title">Видео</h2>
+            <videos-list style="margin-left: -15px; margin-right: 15px" :provided-videos="videos"
+                         no-fetch></videos-list>
         </section>
 
         <section class="section" v-if="posts.length > 0">
-            <h2 class="title">Статьи</h2>
+            <h2 class="section-title">Статьи</h2>
             <posts-list :provided-posts="posts" no-fetch></posts-list>
         </section>
     </b-container>
@@ -63,7 +67,7 @@
         name: "SearchOverview",
         components: {ArtistsView, PostsList, VideosList, AlbumsList, SongsList},
         mounted() {
-            if(this.query){
+            if (this.query) {
                 this.searchQuery = this.query;
                 this.search();
             }
@@ -117,5 +121,7 @@
 </script>
 
 <style scoped>
-
+    .section-title {
+        color: #ffffff;
+    }
 </style>
