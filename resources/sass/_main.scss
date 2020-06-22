@@ -472,3 +472,51 @@ a {
         }
     }
 }
+
+
+//Playable for album and song cards. Show play btn on hover
+.playable-card {
+    color: #ffffff;
+
+    .playable-cover-wrapper {
+
+        position: relative;
+
+        .playable-cover {
+            object-fit: cover;
+            width: 100% !important;
+            height: 100% !important;
+            border-radius: 0.25rem;
+        }
+
+        &:hover {
+            cursor: pointer;
+
+            &::before {
+                position: absolute;
+                content: '';
+                background-color: rgba(70, 68, 68, 0.6);
+                top: 0;
+                right: 0;
+                width: 100%;
+                height: 100%;
+                border-radius: 0.25rem;
+            }
+
+            &::after {
+                position: absolute;
+                content: '';
+                background: url("/icons/svg/play-btn-light.svg") no-repeat center;
+                background-size: contain;
+                top: calc(50% - 35px);
+                bottom: calc(50% - 35px);
+                right: calc(50% - 35px);
+                left: calc(50% - 35px);
+            }
+        }
+
+        .playable-info {
+            
+        }
+    }
+}

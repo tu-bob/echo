@@ -1,20 +1,13 @@
 <template>
-    <div class="text-white">
-        <div class="h-overlay-container cursor-pointer" @click="play" title="Послушать альбом">
-            <!--            <b-img class="album-cover" @error="onCoverLoadError" blankColor="#a892f8cf" :blank="coverLoadFailed" rounded-->
-            <!--                   :src="coverUrl" alt=""></b-img>-->
+    <div class="playable-card">
+        <div class="playable-cover-wrapper" @click="play" title="Послушать альбом">
             <b-aspect aspect="1">
-                <safe-image :src="coverUrl" class="album-cover" fallback-blank rounded></safe-image>
+                <safe-image :src="coverUrl" class="playable-cover" fallback-blank></safe-image>
             </b-aspect>
-            <div class="h-overlay d-flex align-items-center">
-                <div class="btn btn-light mx-auto">
-                    <img class="icon-btn-xl" src="/icons/svg/play-btn-light.svg">
-                </div>
-            </div>
         </div>
 
-        <router-link class="text-decoration-none text-white" :to="{name: 'album-view', params:{id: album.id}}">
-            <h5 class="mt-3 mb-0 cursor-pointer" title="Перейти к альбому">{{album.title}} <span
+        <router-link class="playable-info" :to="{name: 'album-view', params:{id: album.id}}">
+            <h5 class="mt-3 mb-0" title="Перейти к альбому">{{album.title}} <span
                 v-if="album.type && album.type.name === 'Single album'">- Сингл</span></h5>
             <span class="text-muted">{{artists}}</span>
         </router-link>
@@ -79,11 +72,3 @@
         }
     }
 </script>
-
-<style scoped>
-    .album-cover {
-        object-fit: cover;
-        width: 100% !important;
-        height: 100% !important;
-    }
-</style>
