@@ -4,8 +4,8 @@
             <b-avatar :src="avatarUrl" variant="dark" class="w-100 h-100"></b-avatar>
         </b-aspect>
         <div class="text-center mt-3">
-            <h4 class="typography-title text-secondary" v-if="aliases && aliases.length > 0">
-                {{aliases}}</h4>
+            <h4 class="typography-title text-secondary" v-if="artist.aliases && artist.aliases.length > 0">
+                {{artist.aliases[0].name}}</h4>
         </div>
     </router-link>
 </template>
@@ -20,9 +20,9 @@
             artist: null
         },
         computed: {
-            aliases() {
-                return concatStrings(this.artist.aliases.map(alias => alias.name), ' ·');
-            },
+            // aliases() {
+            //     return concatStrings(this.artist.aliases, ' ·');
+            // },
             avatarUrl() {
                 if (this.artist.avatar_id)
                     return getAvatarImage(this.artist.avatar_id);

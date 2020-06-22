@@ -71,7 +71,7 @@
                     {
                         name: 'artists',
                         path: 'artists',
-                        component: () => import('../components/public/artist/ArtistsList')
+                        component: () => import('../components/public/artist/ArtistsView')
                     }
                 ]
             },
