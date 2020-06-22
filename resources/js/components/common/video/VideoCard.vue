@@ -1,19 +1,15 @@
 <template>
-    <div class="h-overlay-container cursor-pointer" @click="onClicked">
-        <div class="video-card">
+    <div class="playable-card" @click="onClicked">
+        <div class="playable-cover-wrapper">
             <b-img :src="previewImageUrl"
-                   class="w-100 object-fit-cover"
-                   rounded
+                   class="playable-cover"
                    :blank="showBlank"
                    blankColor="#a892f8cf"
                    style="height:218px"></b-img>
+        </div>
+        <div class="playable-info">
             <div class="pt-3 text-secondary">
                 {{video.title}}
-            </div>
-        </div>
-        <div class="h-overlay d-flex align-items-center">
-            <div class="btn btn-light mx-auto">
-                <img class="icon-btn-xl" src="/icons/svg/play-btn-light.svg">
             </div>
         </div>
     </div>
@@ -56,12 +52,3 @@
         }
     }
 </script>
-
-<style scoped>
-    .h-overlay-container:hover .text-secondary {
-        color: white !important;
-        text-align: center;
-        z-index: 20;
-        position: relative;
-    }
-</style>
