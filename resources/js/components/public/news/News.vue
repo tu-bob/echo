@@ -1,7 +1,7 @@
 <template>
     <div class="container">
         <div class="row page-header">
-            <h1 class="col-12">Блог</h1>
+            <h1>Блог</h1>
         </div>
         <div class="row">
             <div class="col-12">
