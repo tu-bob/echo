@@ -68,149 +68,139 @@
 </template>
 
 <script>
-    import PerfectScrollbar from 'perfect-scrollbar';
-    import {movingBorder} from "../../../main";
+    // import PerfectScrollbar from 'perfect-scrollbar';
+    // import {movingBorder} from "../../../main";
 
     export default {
         name: "Home",
         mounted() {
-            const container = document.querySelector('#horizontal-nav');
-            const ps = new PerfectScrollbar(container, {useBothWheelAxes: true});
-            movingBorder();
+            // const container = document.querySelector('#horizontal-nav');
+            // const ps = new PerfectScrollbar(container, {useBothWheelAxes: true});
+            // movingBorder();
         }
     }
 </script>
 
 <style scoped>
-    .horizontal-nav-wrapper {
-        width: 100%;
-        border-radius: 5px;
-        background-color: transparent !important;
-        position: relative;
-    }
+    /*.horizontal-nav-wrapper {*/
+    /*    width: 100%;*/
+    /*    border-radius: 5px;*/
+    /*    background-color: transparent !important;*/
+    /*    position: relative;*/
+    /*}*/
 
-    .horizontal-scroll-list {
-        display: flex;
-        justify-content: space-between;
-        flex-wrap: nowrap;
-        list-style: none;
-    }
+    /*.horizontal-scroll-list {*/
+    /*    display: flex;*/
+    /*    justify-content: space-between;*/
+    /*    flex-wrap: nowrap;*/
+    /*    list-style: none;*/
+    /*}*/
 
-    .horizontal-nav-menu-item {
-        margin: 0;
-        position: static;
-        flex-basis: 0;
-        flex-grow: 1;
-        flex-wrap: nowrap;
-        max-width: 100%;
-        text-align: center;
-        background: #343a40 !important;
-        border-right: 1px solid #000;
-        white-space: nowrap;
-        font-size: 1.125rem;
-        line-height: 1.6;
-        color: #b8babc;
-    }
+    /*.horizontal-nav-menu-item {*/
+    /*    margin: 0;*/
+    /*    position: static;*/
+    /*    flex-basis: 0;*/
+    /*    flex-grow: 1;*/
+    /*    flex-wrap: nowrap;*/
+    /*    max-width: 100%;*/
+    /*    text-align: center;*/
+    /*    background: #343a40 !important;*/
+    /*    border-right: 1px solid #000;*/
+    /*    white-space: nowrap;*/
+    /*    font-size: 1.125rem;*/
+    /*    line-height: 1.6;*/
+    /*    color: #b8babc;*/
+    /*}*/
 
-    /*.horizontal-nav-menu-item:after {*/
+    /*.horizontal-nav-menu-item a {*/
+    /*    padding: 1rem 2rem;*/
+    /*    position: relative;*/
+    /*    color: #b8babc;*/
+    /*    transition: color 0.2s ease;*/
+    /*    background-color: transparent;*/
+    /*    text-align: center;*/
+    /*    white-space: nowrap;*/
+    /*    font-size: 1.125rem;*/
+    /*}*/
+
+    /*.horizontal-nav-menu-item .active span {*/
+    /*    z-index: 2;*/
+    /*    color: #ffffff;*/
+    /*    position: relative;*/
+    /*    line-height: 0;*/
+    /*    display: inline-block;*/
+    /*    height: auto;*/
+    /*}*/
+
+    /*.horizontal-nav-menu-item .active:before {*/
+    /*    height: 100%;*/
+    /*    opacity: 1;*/
+    /*}*/
+
+    /*.horizontal-nav-menu-item .active :focus {*/
+    /*    outline: none;*/
+    /*}*/
+
+    /*.horizontal-nav-menu-item a::before {*/
     /*    content: '';*/
-    /*    height: 50%;*/
-    /*    width: 1px;*/
+    /*    width: 100%;*/
+    /*    position: absolute;*/
+    /*    left: 0;*/
+    /*    top: 0;*/
+    /*    display: block;*/
+    /*    height: 0;*/
+    /*    opacity: 0;*/
+    /*    background: #91a5f4;*/
+    /*    background: linear-gradient(135deg, #91a5f4 0%, #b08cf9 86%);*/
+    /*    transition: all 0.4s ease-in-out;*/
     /*}*/
 
-    /*.horizontal-nav-menu-item .nav-link {*/
-    /*    color: #b8babc !important*/
+    /*.menu-icon {*/
+    /*    color: #fff;*/
+    /*    position: relative;*/
+    /*    z-index: 2;*/
+    /*    line-height: 0;*/
+    /*    display: inline-block;*/
+    /*    vertical-align: middle;*/
+    /*    height: auto;*/
+    /*    !*padding-right: 1rem !important;*!*/
     /*}*/
 
-    .horizontal-nav-menu-item a {
-        padding: 1rem 2rem;
-        position: relative;
-        color: #b8babc;
-        transition: color 0.2s ease;
-        background-color: transparent;
-        text-align: center;
-        white-space: nowrap;
-        font-size: 1.125rem;
-    }
+    /*.menu-icon svg {*/
+    /*    width: 20px;*/
+    /*    max-height: 22px;*/
+    /*    fill: currentColor;*/
+    /*    height: auto;*/
+    /*    overflow: hidden;*/
+    /*    color: #fff;*/
+    /*}*/
 
-    .horizontal-nav-menu-item .active span {
-        z-index: 2;
-        color: #ffffff;
-        position: relative;
-        line-height: 0;
-        display: inline-block;
-        height: auto;
-    }
+    /*.moving-border {*/
+    /*    position: relative;*/
+    /*}*/
 
-    .horizontal-nav-menu-item .active:before {
-        height: 100%;
-        opacity: 1;
-    }
+    /*.moving-border .m-item {*/
+    /*    position: relative;*/
+    /*}*/
 
-    .horizontal-nav-menu-item .active :focus {
-        outline: none;
-    }
-
-    .horizontal-nav-menu-item a::before {
-        content: '';
-        width: 100%;
-        position: absolute;
-        left: 0;
-        top: 0;
-        display: block;
-        height: 0;
-        opacity: 0;
-        background: #91a5f4;
-        background: linear-gradient(135deg, #91a5f4 0%, #b08cf9 86%);
-        transition: all 0.4s ease-in-out;
-    }
-
-    .menu-icon {
-        color: #fff;
-        position: relative;
-        z-index: 2;
-        line-height: 0;
-        display: inline-block;
-        vertical-align: middle;
-        height: auto;
-        /*padding-right: 1rem !important;*/
-    }
-
-    .menu-icon svg {
-        width: 20px;
-        max-height: 22px;
-        fill: currentColor;
-        height: auto;
-        overflow: hidden;
-        color: #fff;
-    }
-
-    .moving-border {
-        position: relative;
-    }
-
-    .moving-border .m-item {
-        position: relative;
-    }
-
-    hr.border-hr {
-        margin: 0;
-        height: 3px;
-        bottom: 0;
-        border: 0;
-        width: 0;
-        position: absolute;
-        transition: 0.3s ease-in-out;
-        /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#91a5f4+0,b08cf9+86 */
-        background: #91a5f4;
-        /* Old browsers */
-        background: -moz-linear-gradient(-45deg, #91a5f4 0%, #b08cf9 86%);
-        /* FF3.6-15 */
-        background: -webkit-linear-gradient(-45deg, #91a5f4 0%, #b08cf9 86%);
-        /* Chrome10-25,Safari5.1-6 */
-        background: linear-gradient(135deg, #91a5f4 0%, #b08cf9 86%);
-        /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#91a5f4', endColorstr='#b08cf9', GradientType=1);
-        /* IE6-9 fallback on horizontal gradient */
-    }
+    /*hr.border-hr {*/
+    /*    margin: 0;*/
+    /*    height: 3px;*/
+    /*    bottom: 0;*/
+    /*    border: 0;*/
+    /*    width: 0;*/
+    /*    position: absolute;*/
+    /*    transition: 0.3s ease-in-out;*/
+    /*    !* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#91a5f4+0,b08cf9+86 *!*/
+    /*    background: #91a5f4;*/
+    /*    !* Old browsers *!*/
+    /*    background: -moz-linear-gradient(-45deg, #91a5f4 0%, #b08cf9 86%);*/
+    /*    !* FF3.6-15 *!*/
+    /*    background: -webkit-linear-gradient(-45deg, #91a5f4 0%, #b08cf9 86%);*/
+    /*    !* Chrome10-25,Safari5.1-6 *!*/
+    /*    background: linear-gradient(135deg, #91a5f4 0%, #b08cf9 86%);*/
+    /*    !* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ *!*/
+    /*    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#91a5f4', endColorstr='#b08cf9', GradientType=1);*/
+    /*    !* IE6-9 fallback on horizontal gradient *!*/
+    /*}*/
 </style>
