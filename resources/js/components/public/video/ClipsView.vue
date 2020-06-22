@@ -1,8 +1,12 @@
 <template>
-    <div>
-        <videos-list></videos-list>
+    <div class="container">
+        <div class="row page-header">
+            <h1>Видео</h1>
+        </div>
+        <div class="row">
+            <videos-list></videos-list>
+        </div>
     </div>
-
 </template>
 
 <script>
