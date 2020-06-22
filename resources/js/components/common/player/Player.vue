@@ -142,7 +142,9 @@
                 </div>
             </div>
             <b-container class="player-overlay-content" fluid="md">
-                <songs-list v-if="overlayContent === 'playlist'" class="w-100" :playlist="PLAYLIST"></songs-list>
+                <div class="row">
+                    <songs-list v-if="overlayContent === 'playlist'" :playlist="PLAYLIST"></songs-list>
+                </div>
                 <div v-if="overlayContent === 'lyrics'" class="text-white">
                     <pre
                         v-if="ACTIVE_SONG.lyrics" class="song-lyrics">{{ACTIVE_SONG.lyrics}}</pre>
@@ -429,98 +431,98 @@
 </script>
 
 <style scoped>
-    .player {
-        z-index: 2000;
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        height: 60px;
-        width: 100%;
-    }
+    /*.player {*/
+    /*    z-index: 2000;*/
+    /*    position: fixed;*/
+    /*    bottom: 0;*/
+    /*    left: 0;*/
+    /*    height: 60px;*/
+    /*    width: 100%;*/
+    /*}*/
 
-    .player-control {
-        display: flex;
-        align-items: center !important;
-        height: 100%
-    }
+    /*.player-control {*/
+    /*    display: flex;*/
+    /*    align-items: center !important;*/
+    /*    height: 100%*/
+    /*}*/
 
-    .progress-bar-wrapper {
-        margin: 0 !important;
-        position: absolute;
-        top: -6px;
-        left: 0;
-        height: 6px;
-        width: 100% !important;
-    }
+    /*.progress-bar-wrapper {*/
+    /*    margin: 0 !important;*/
+    /*    position: absolute;*/
+    /*    top: -6px;*/
+    /*    left: 0;*/
+    /*    height: 6px;*/
+    /*    width: 100% !important;*/
+    /*}*/
 
-    .player-progress {
-        background-color: gray;
-        cursor: pointer;
-        height: 100%;
-        min-width: 200px;
-        position: relative;
-    }
+    /*.player-progress {*/
+    /*    background-color: gray;*/
+    /*    cursor: pointer;*/
+    /*    height: 100%;*/
+    /*    min-width: 200px;*/
+    /*    position: relative;*/
+    /*}*/
 
-    .player-progress .player-seeker {
-        background: linear-gradient(39deg, #15c0e9 0%, #f0536a 80%);
-        bottom: 0;
-        left: 0;
-        position: absolute;
-        top: 0;
-    }
+    /*.player-progress .player-seeker {*/
+    /*    background: linear-gradient(39deg, #15c0e9 0%, #f0536a 80%);*/
+    /*    bottom: 0;*/
+    /*    left: 0;*/
+    /*    position: absolute;*/
+    /*    top: 0;*/
+    /*}*/
 
-    .player-progress .player-loading-progress {
-        background: #ffffff;
-        bottom: 0;
-        left: 0;
-        top: 0;
-        position: absolute;
-    }
+    /*.player-progress .player-loading-progress {*/
+    /*    background: #ffffff;*/
+    /*    bottom: 0;*/
+    /*    left: 0;*/
+    /*    top: 0;*/
+    /*    position: absolute;*/
+    /*}*/
 
-    .player-overlay {
-        z-index: 200;
-        overflow: scroll;
-        width: 100%;
-        position: fixed;
-        bottom: 66px;
-        top: 0;
-        left: 0;
-        backdrop-filter: blur(6px);
-        opacity: 0.95;
-        background: linear-gradient(135deg, #373737 0%, #24181e 95%);
-    }
+    /*.player-overlay {*/
+    /*    z-index: 200;*/
+    /*    overflow: scroll;*/
+    /*    width: 100%;*/
+    /*    position: fixed;*/
+    /*    bottom: 66px;*/
+    /*    top: 0;*/
+    /*    left: 0;*/
+    /*    backdrop-filter: blur(6px);*/
+    /*    opacity: 0.95;*/
+    /*    background: linear-gradient(135deg, #373737 0%, #24181e 95%);*/
+    /*}*/
 
-    .player-overlay::-webkit-scrollbar {
-        display: none;
-    }
+    /*.player-overlay::-webkit-scrollbar {*/
+    /*    display: none;*/
+    /*}*/
 
-    .player-disable-overlay {
-        top: -6px;
-        left: 0;
-        right: 0;
-        position: absolute;
-        height: 66px;
-        background: #000000;
-        filter: blur(2px);
-        opacity: 0.5;
-    }
+    /*.player-disable-overlay {*/
+    /*    top: -6px;*/
+    /*    left: 0;*/
+    /*    right: 0;*/
+    /*    position: absolute;*/
+    /*    height: 66px;*/
+    /*    background: #000000;*/
+    /*    filter: blur(2px);*/
+    /*    opacity: 0.5;*/
+    /*}*/
 
-    .player-overlay-content {
-        position: fixed;
-        top: 50px;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        overflow: scroll
-    }
+    /*.player-overlay-content {*/
+    /*    position: fixed;*/
+    /*    top: 50px;*/
+    /*    left: 0;*/
+    /*    right: 0;*/
+    /*    bottom: 0;*/
+    /*    overflow: scroll*/
+    /*}*/
 
-    .player-overlay-content::-webkit-scrollbar {
-        display: none;
-    }
+    /*.player-overlay-content::-webkit-scrollbar {*/
+    /*    display: none;*/
+    /*}*/
 
-    .song-lyrics {
-        color: #ffffff;
-        font-size: 18px;
-        text-align: center;
-    }
+    /*.song-lyrics {*/
+    /*    color: #ffffff;*/
+    /*    font-size: 18px;*/
+    /*    text-align: center;*/
+    /*}*/
 </style>
