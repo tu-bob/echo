@@ -53,7 +53,8 @@
     width: 100%;
     position: fixed;
     bottom: 66px;
-    top: 77px;
+    padding-top: 77px;
+    top:0;
     left: 0;
     backdrop-filter: blur(6px);
     opacity: 0.95;
@@ -70,7 +71,7 @@
         right: 0;
         bottom: 0;
         overflow: scroll;
-        padding-top: 25px;
+        padding-top: 88px;
 
         &::-webkit-scrollbar {
             display: none;
