@@ -1,6 +1,6 @@
 <template>
     <div class="card post-preview" @click="navigate">
-        <b-img class="object-fit-contain w-100 card-img-top mb-3" rounded :src="previewImageSrc" :alt="'Обложка' + post.title"></b-img>
+        <b-img class="object-fit-contain w-100 card-img-top mb-2" rounded :src="previewImageSrc" :alt="'Обложка' + post.title"></b-img>
         <h3 class="post-title">{{post.title}}</h3>
         <p class="post-annotation">{{post.annotation}}</p>
         <p class="post-details">{{post.created_at |luxon:format('dd.MM.yyyy')}} <span v-if="post.author">{{post.author.name}}</span></p>

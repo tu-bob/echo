@@ -126,7 +126,7 @@ pre {
 .page-header {
     margin: 3rem 0 2rem 0;
     color: #ffffff;
-    font-family: 'Russo one';
+    //font-family: 'Russo one';
 
     h1 {
         @extend .typography-header-emphasized;
@@ -200,6 +200,19 @@ pre {
 .cursor-pointer {
     cursor: pointer;
 }
+
+//links
+a {
+    text-decoration: none;
+    color: #ffffff;
+    font-size: 1rem;
+
+    &:hover {
+        color: $accent;
+        text-decoration: none;
+    }
+}
+
 
 /*
  * Article Styles

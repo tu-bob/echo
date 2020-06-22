@@ -1,9 +1,16 @@
 <template>
-    <div>
-        <div class="d-flex">
-            <router-link class="ml-auto mb-3 mr-2" :to="{name:'genres'}">Посмотреть жанры</router-link>
+    <div class="container">
+        <div class="row">
+            <div class="page-header">
+                <h1 class="col-12">Песни</h1>
+                <router-link class="col-12 ml-auto mb-3 mr-2" :to="{name:'genres'}">выбрать жанр</router-link>
+            </div>
         </div>
-        <songs-list :filters="filters"></songs-list>
+        <div class="row">
+            <div class="col-12">
+                <songs-list :filters="filters"></songs-list>
+            </div>
+        </div>
     </div>
 </template>
 

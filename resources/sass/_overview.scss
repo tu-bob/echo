@@ -19,6 +19,11 @@ section {
             margin-left: auto;
             text-decoration: none;
             color: #ffffff;
+
+            &:hover {
+                color: $accent;
+                text-decoration: none;
+            }
         }
     }
 }

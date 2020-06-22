@@ -4,6 +4,10 @@
 // Variables
 @import 'variables';
 
+// Bootstrap
+@import '~bootstrap/scss/bootstrap';
+@import '~bootstrap-vue/src/index';
+
 @import 'main';
 @import 'custom_bootstrap';
 
@@ -11,7 +15,6 @@
 @import 'layout';
 @import 'overview';
 @import 'blog';
+@import 'genres';
 
-// Bootstrap
-@import '~bootstrap/scss/bootstrap';
-@import '~bootstrap-vue/src/index';
+

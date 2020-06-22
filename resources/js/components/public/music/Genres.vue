@@ -1,14 +1,17 @@
 <template>
-    <div>
-        <div class="d-flex">
-            <router-link class="ml-auto mb-5 mr-2" :to="{name:'music-list'}">Вернуться к песням</router-link>
+    <div class="container">
+        <div class="row">
+            <div class="page-header">
+                <h1 class="col-12">Жанры</h1>
+                <router-link class="col-12" :to="{name:'music-list'}">перейти к песням</router-link>
+            </div>
         </div>
         <div class="row">
             <router-link :to="{name:'music-list'}"
-                         class="col-md-4 col-lg-3 col-xl-2 mb-3 btn-text-white cursor-pointer">
+                         class="genre-pill">
                 <h5>Любые жанры</h5></router-link>
             <router-link :to="{name:'music-list', query:{genres: genre.id}}"
-                         class="col-md-4 col-lg-3 col-xl-2 mb-3 btn-text-white cursor-pointer"
+                         class="genre-pill"
                          v-for="genre in genres" :key="genre.id">
                 <h5>{{genre.local_name}}</h5>
             </router-link>
