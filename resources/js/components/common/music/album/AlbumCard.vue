@@ -69,7 +69,7 @@
             },
             artists() {
                 if (this.album.artistAliases && this.album.artistAliases.length > 0) {
-                    let artists = concatStrings(this.album.artistAliases.map(alias => alias.name).slice(0, 2), ', ');
+                    let artists = concatStrings(this.album.artistAliases.map(alias => alias.name).slice(0, 2), ' · ');
                     if (this.album.artistAliases.length > 2)
                         artists += ' . . .';
                     return artists;

@@ -1,6 +1,13 @@
 <template>
-    <div>
-        <albums-list></albums-list>
+    <div class="container">
+        <div class="row page-header">
+            <h1>Альбомы</h1>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <albums-list></albums-list>
+            </div>
+        </div>
     </div>
 </template>
 
