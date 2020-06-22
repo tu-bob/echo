@@ -219,7 +219,7 @@
                 playing: false,
                 timeDrag: false,
                 showPlayerOverlay: false,
-                overlayContent: 'playlist',
+                overlayContent: null,
                 shuffled: false,
                 playCountUpdated: false,
                 volume: 1,
@@ -330,6 +330,11 @@
                 this.showPlayerOverlay = !this.showPlayerOverlay
             },
             openPlayerOverlay(content) {
+                if (content === this.overlayContent) {
+                    this.overlayContent = null;
+                    this.showPlayerOverlay = false;
+                    return;
+                }
                 this.overlayContent = content;
                 this.showPlayerOverlay = true;
             },
