@@ -18,13 +18,14 @@
                                 no-fetch
                                 prevent-play
                                 @play="playSong"
+                                class="px-3"
                                 :class="{'col-md-6':songs.length > 1, 'col-12':songs.length < 2}">
                     </songs-list>
                     <songs-list :playlist="songs.slice(Math.ceil(songs.length/2))"
                                 no-fetch
                                 prevent-play
                                 @play="playSong"
-                                class="col-md-6">
+                                class="col-md-6 px-3">
                     </songs-list>
                 </div>
             </div>
