@@ -75,13 +75,14 @@
                             no-fetch
                             prevent-play
                             @play="playSong"
+                            class="px-3"
                             :class="{'col-md-6':artist.songs.length > 1, 'col-12':artist.songs.length < 2}"
                 ></songs-list>
                 <songs-list :playlist="artist.songs.slice(Math.ceil(artist.songs.length/2))"
                             no-fetch
                             prevent-play
                             @play="playSong"
-                            class="col-md-6"></songs-list>
+                            class="col-md-6 px-3"></songs-list>
             </div>
         </div>
         <div v-if="artist.clips && artist.clips.length > 0">
