@@ -24,23 +24,35 @@
                 <h2 class="typography-title text-secondary" v-if="aliases && aliases.length > 0">{{aliases}}</h2>
                 <!--                <h2 class="typography-title text-secondary" v-if="translateType(artist.type)">-->
                 <!--                    {{translateType(artist.type)}}</h2>-->
-                <div class="d-flex">
-                    <a :href="getLink('instagram')" v-if="getLink('instagram')"><img class="icon-btn-md"
-                                                          title="Следите за новостями исполнителя в инстаграме"
-                                                          src="/icons/svg/instagram.svg"></a>
-                    <a :href="getLink('facebook')" v-if="getLink('facebook')"><img class="icon-btn-md ml-2"
-                                                          title="Следите за новостями исполнителя в фейсбуке"
-                                                          src="/icons/svg/facebook.svg"></a>
-                    <a :href="getLink('telegram')" v-if="getLink('telegram')"><img class="icon-btn-md ml-2"
-                                                          title="Следите за новостями исполнителя в телеграме"
-                                                          src="/icons/svg/telegram.svg"></a>
-                    <a :href="getLink('vk')" v-if="getLink('vk')"><img class="icon-btn-md ml-2"
-                                                          title="Следите за новостями исполнителя в вконтакте"
-                                                          src="/icons/svg/vk.svg"></a>
-                    <a :href="getLink('youtube')" v-if="getLink('youtube')"><img class="icon-btn-md ml-2"
-                                                          title="Следите за новостями исполнителя на ютюбе"
-                                                          src="/icons/svg/youtube.svg"></a>
-                </div>
+                <ul class="social-icons">
+                    <li class="mr-1">
+                        <instagram v-if="getLink('instagram')"
+                                   :url="getLink('instagram')"
+                                   title="Следите за новостями исполнителя в инстаграме">
+                        </instagram>
+                    </li>
+                    <li class="mr-1">
+                        <facebook v-if="getLink('facebook')"
+                                  :url="getLink('facebook')"
+                                  title="Следите за новостями исполнителя на фейсбуке">
+                        </facebook>
+                    </li>
+                    <li class="mr-1">
+                        <youtube v-if="getLink('youtube')"
+                                 :url="getLink('youtube')"
+                                 title="Клипы, влоги и выступления смотрите только на официальном ютуб канале">
+                        </youtube>
+                    </li>
+                    <li>
+                        <vkontakte v-if="getLink('vk')"
+                                   :url="getLink('vk')"
+                                   title="Будьте с исполнителем Вконтакте">
+                        </vkontakte>
+                    </li>
+                    <!--                    <a :href="getLink('vk')" v-if="getLink('vk')"><img class="icon-btn-md ml-2"-->
+                    <!--                                                          title="Следите за новостями исполнителя в вконтакте"-->
+                    <!--                                                          src="/icons/svg/vk.svg"></a>-->
+                </ul>
                 <div v-if="artist.info">
                     <pre ref="artistInfo" class="artist-info">{{artist.info}}</pre>
                 </div>
@@ -114,6 +126,10 @@
     import {getAvatarImage} from "../../../api/mediaApi";
     import MetaTagsMixin from "../../admin/mixins/MetaTagsMixin";
     import NetworkShare from "../../common/inputs/NetworkShare";
+    import Instagram from "../../common/external-icons/instagram";
+    import Facebook from "../../common/external-icons/facebook";
+    import Youtube from "../../common/external-icons/youtube";
+    import Vkontakte from "../../common/external-icons/vkontakte";
 
     export default {
         name: "ArtistView",
@@ -121,7 +137,17 @@
             id: null
         },
         mixins: [MetaTagsMixin],
-        components: {NetworkShare, VideoCard, VideosList, SongsList, AlbumCard},
+        components: {
+            Vkontakte,
+            Youtube,
+            Facebook,
+            Instagram,
+            NetworkShare,
+            VideoCard,
+            VideosList,
+            SongsList,
+            AlbumCard
+        },
         data() {
             return {
                 artist: null,
