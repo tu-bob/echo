@@ -4,7 +4,6 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#6cb2eb">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
     <meta name="description"
           content="Музыкально-информационный портал Echo.tj. Песни, альбомы, видео, новости, статьи и многое другое в удобном приложении. Слушайте музыку онлайн, скачивайте на устройства, находите тексты песен и аккорды таджикских артистов">
@@ -44,7 +43,7 @@
 
     <meta name="apple-mobile-web-app-title" content="Echo.tj">
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="#6cb2eb">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
 
 </head>
 <body>
