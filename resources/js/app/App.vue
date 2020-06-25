@@ -15,7 +15,7 @@
                 </button>
 
                 <b-navbar-brand title="Перейти на главную" :to="{name: 'home'}" class="py-0 d-none d-md-block">
-                    <img src="/icons/png/logo-sm.png" alt="echo.tj logo" style="height: 60px">
+                    <img src="/icons/png/logo-nav.png" alt="echo.tj logo" style="height: 60px">
                 </b-navbar-brand>
 
                 <div id="search-input" v-if="$route.name !== 'search'">

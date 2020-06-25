@@ -3,7 +3,7 @@
          :class="{active: ACTIVE_SONG && ACTIVE_SONG.id === song.id}">
         <div class="d-flex text-white text-left" @click="play">
             <safe-image :src="coverUrl"
-                        fallbackSrc="/icons/svg/music.svg"
+                        fallbackSrc="/icons/svg/music-white.svg"
                         class="thumb"
                         :alt="`Обложка песни ${song.title} - ${aliases}`"></safe-image>
             <div class="song-details">
