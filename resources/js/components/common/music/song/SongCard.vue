@@ -115,4 +115,8 @@
         align-items: baseline;
         height: 100%;
     }
+
+    .disabled svg {
+        filter: invert(47%) sepia(6%) saturate(663%) hue-rotate(167deg) brightness(93%) contrast(87%);
+    }
 </style>
