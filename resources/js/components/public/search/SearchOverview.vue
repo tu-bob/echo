@@ -27,11 +27,12 @@
                 <songs-list :playlist="songs.slice(0, Math.ceil(songs.length/2))"
                             @play="updatePlaylist"
                             no-fetch
+                            class="px-3"
                             :class="{'col-md-6':songs.length > 1, 'col-12':songs.length < 2}"></songs-list>
                 <songs-list :playlist="songs.slice(Math.ceil(songs.length/2))"
                             @play="updatePlaylist"
                             no-fetch
-                            class="col-md-6"></songs-list>
+                            class="col-md-6 px-3"></songs-list>
             </div>
         </section>
 
