@@ -136,7 +136,7 @@
             </b-overlay>
         </div>
         <div class="player-overlay" v-show="showPlayerOverlay">
-            <div class="position-sticky d-flex" style="top:0; left:0">
+            <div class="position-sticky d-flex" style="top:0; left:0;z-index: 100">
                 <div class="ml-auto btn" @click="togglePlayerOverlay">
                     <font-awesome-icon icon="times" class="text-white" size="2x"></font-awesome-icon>
                 </div>
