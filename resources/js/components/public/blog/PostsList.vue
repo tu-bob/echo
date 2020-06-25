@@ -1,6 +1,6 @@
 <template>
     <div class="row">
-        <post-preview class="col-sm-6 col-md-4 col-lg-3 col-xl-2" v-for="post in posts" :post="post" :key="post.id"></post-preview>
+        <post-preview class="col-sm-6 col-md-4 col-lg-3" v-for="post in posts" :post="post" :key="post.id"></post-preview>
     </div>
 </template>
 
