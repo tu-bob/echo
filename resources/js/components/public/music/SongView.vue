@@ -1,5 +1,5 @@
 <template>
-    <b-container fluid="md" v-if="song">
+    <b-container class="mt-5" v-if="song">
         <b-row>
             <b-col md="4" lg="3">
                 <div class="w-100 pt-5">

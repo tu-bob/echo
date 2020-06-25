@@ -1,5 +1,5 @@
 <template>
-    <b-container fluid="md" class="mt-4" v-if="album">
+    <b-container class="mt-5" v-if="album">
         <b-row>
             <b-col md="4" lg="3">
                 <div class="w-100 sticky-top pt-5" style="z-index: 0">

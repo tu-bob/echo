@@ -1,5 +1,5 @@
 <template>
-    <b-container fluid="md" v-if="artist">
+    <b-container fluid="md mt-5" v-if="artist">
         <div class="d-flex flex-wrap mb-5">
             <div style="width:200px"
                  class="mr-5 mb-4">
