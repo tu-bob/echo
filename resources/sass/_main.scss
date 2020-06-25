@@ -450,17 +450,17 @@ a {
         display: inline-block;
 
         &:hover {
-            color: #1ED760;
+            color: $accent;
             text-decoration: none;
             outline: 0;
         }
 
         &:hover, &:focus {
-            color: #1ED760;
+            color: $accent;
             text-decoration: none;
 
             .social-icon {
-                filter: invert(22%) sepia(97%) saturate(2119%) hue-rotate(123deg) brightness(96%) contrast(96%);
+                filter: invert(79%) sepia(59%) saturate(3457%) hue-rotate(179deg) brightness(100%) contrast(85%);
             }
         }
     }
@@ -474,7 +474,7 @@ a {
         fill: #222326;
 
         &:hover {
-            filter: invert(22%) sepia(97%) saturate(2119%) hue-rotate(123deg) brightness(96%) contrast(96%);
+            filter: invert(79%) sepia(59%) saturate(3457%) hue-rotate(179deg) brightness(100%) contrast(85%)
         }
     }
 }
