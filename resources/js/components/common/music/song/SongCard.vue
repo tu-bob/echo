@@ -12,16 +12,6 @@
                     <span class="text-muted text-no-wrap">{{aliases}}</span>
                 </div>
                 <div class="song-buttons">
-<!--                    <a class="btn transparent-btn pr-0"-->
-<!--                       @click.stop-->
-<!--                       :class="{'disabled': !song.allow_download}"-->
-<!--                       :href="`/media/music/song/${song.id}/download`" download>-->
-<!--                        <font-awesome-icon-->
-<!--                            :class="{'text-secondary': song.allow_download, 'text-dark': !song.allow_download}"-->
-<!--                            icon="download"-->
-<!--                            size="lg">-->
-<!--                        </font-awesome-icon>-->
-<!--                    </a>-->
                     <b-dropdown @click.stop toggle-class="transparent-btn" right no-caret>
                         <template v-slot:button-content>
                             <font-awesome-icon icon="ellipsis-h"
@@ -37,15 +27,15 @@
                             Перейти к исполнителю
                         </b-dropdown-item>
                         <b-dropdown-item
-                           @click.stop
-                           :class="{'disabled': !song.allow_download}"
-                           :href="`/media/music/song/${song.id}/download`" download>
+                            @click.stop
+                            :disabled='!song.allow_download'
+                            :href="`/media/music/song/${song.id}/download`" download>
                             <font-awesome-icon
                                 :class="{'text-dark': !song.allow_download}"
                                 icon="download"
                                 class="mr-3">
                             </font-awesome-icon>
-                            Скачать
+                            <span>Скачать</span>
                         </b-dropdown-item>
                     </b-dropdown>
                     <span>{{duration}}</span>
@@ -78,8 +68,9 @@
             }
         },
         methods: {
-            play() {
-                this.$emit('play', this.song);
+            play(e) {
+                if ($(e.target).text().trim() !== 'Скачать')
+                    this.$emit('play', this.song);
             }
         },
         computed: {
