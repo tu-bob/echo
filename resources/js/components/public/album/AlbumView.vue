@@ -2,7 +2,7 @@
     <b-container class="mt-5" v-if="album">
         <b-row>
             <b-col md="4" lg="3">
-                <div class="w-100 sticky-top pt-5" style="z-index: 0">
+                <div class="w-100 sticky-top" style="z-index: 0; padding-top:100px">
                     <safe-image
                         class="w-100 mx-auto"
                         style="max-width: 350px"
@@ -13,7 +13,7 @@
                     </h3>
                 </div>
             </b-col>
-            <b-col md="8" lg="9" class="pl-md-5 pt-5">
+            <b-col md="8" lg="9" class="pl-md-5" style="padding-top:100px">
                 <h1 class="typography-title-emphasized text-white">{{album.title}}</h1>
                 <h2>
                     <router-link class="typography-title text-violet text-decoration-none"
