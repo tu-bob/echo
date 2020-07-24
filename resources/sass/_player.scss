@@ -60,6 +60,10 @@
     opacity: 0.95;
     background: linear-gradient(135deg, #373737 0%, #24181e 95%);
 
+    @media (max-width: 768px) {
+        padding-top: 47px;
+    }
+
     &::-webkit-scrollbar {
         display: none;
     }
@@ -72,6 +76,10 @@
         bottom: 0;
         overflow: scroll;
         margin-top: 88px;
+
+        @media (max-width: 768px) {
+            top: 20px;
+        }
 
         &::-webkit-scrollbar {
             display: none;
