@@ -142,7 +142,7 @@
                 </div>
             </div>
             <b-container class="player-overlay-content" fluid="md">
-                <div class="row">
+                <div class="playlist">
                     <songs-list v-if="overlayContent === 'playlist'" :playlist="PLAYLIST"></songs-list>
                 </div>
                 <div v-if="overlayContent === 'lyrics'" class="text-white">
