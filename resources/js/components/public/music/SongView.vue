@@ -15,7 +15,7 @@
             <b-col md="8" lg="9" class="pl-md-5 pt-5">
                 <h1 class="typography-title-emphasized text-white">{{song.title}}</h1>
                 <h2>
-                    <router-link class="typography-title text-violet text-decoration-none"
+                    <router-link class="typography-title text-accent text-decoration-none"
                                  :to="{name:'artist-view', params:{id:alias.id}}"
                                  v-for="(alias,index) in song.artistAliases" :key="alias.id">
                         {{alias.name}}
