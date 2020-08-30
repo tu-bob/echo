@@ -50,19 +50,17 @@ class MusicAlbumController extends BaseController
             ->append('genres');
     }
 
-    public function getCover(MusicAlbum $album)
-    {
-        ;
-        $imageProvider = new ImageFileProvider('cover');
-        return $imageProvider->getResizedFileResponse(
-            $album->cover_id,
-            request()->get('width', 400),
-            request()->get('height', 400),
-            90
-        );
-//        $fileResponse = new FileResponse($cover->path, $cover->mime_type);
-//        return $fileResponse->generateResponse();
-    }
+//    public function getCover(MusicAlbum $album)
+//    {
+//        ;
+//        $imageProvider = new ImageFileProvider('cover');
+//        return $imageProvider->getResizedFileResponse(
+//            $album->cover_id,
+//            request()->get('width', 400),
+//            request()->get('height', 400),
+//            90
+//        );
+//    }
 
     public function countPlay(MusicAlbum $album)
     {
@@ -81,11 +79,4 @@ class MusicAlbumController extends BaseController
             return $match->entity;
         }, $matches);
     }
-
-//    public function countView(MusicAlbum $album)
-//    {
-//        $album->view_count += 1;
-//        $album->save();
-//        return;
-//    }
 }

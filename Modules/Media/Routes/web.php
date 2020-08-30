@@ -61,7 +61,7 @@ Route::prefix('media')->group(function () {
             Route::get('/list', 'Music\MusicAlbumController@getAlbums');
             Route::get('/filter', 'Music\MusicAlbumController@filter');
             Route::get('/types', 'Music\MusicAlbumController@getAlbumTypes');
-            Route::get('/{album}/cover', 'Music\MusicAlbumController@getCover');
+            Route::get('/{album}/cover', 'Music\Album\MusicAlbumCoverController@show');
             Route::get('/{album}/songs', 'Music\MusicAlbumSongController@getSongs');
             Route::put('/{album}/play', 'Music\MusicAlbumController@countPlay');
             Route::put('/{album}/view', 'Music\MusicAlbumController@countView');
