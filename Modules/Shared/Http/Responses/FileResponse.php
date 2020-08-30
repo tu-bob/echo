@@ -6,7 +6,7 @@ namespace Modules\Shared\Http\Responses;
 
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Storage;
-
+/**@deprecated */
 class FileResponse
 {
 

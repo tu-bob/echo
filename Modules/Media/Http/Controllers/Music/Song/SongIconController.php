@@ -4,12 +4,20 @@
 namespace Modules\Media\Http\Controllers\Music\Song;
 
 
+use Modules\ImageGallery\Services\ImageService;
 use Modules\Media\Models\Image\ImageFileProvider;
 use Modules\Media\Models\Music\Song;
 use Modules\Shared\Http\Controllers\BaseController;
 
 class SongIconController extends BaseController
 {
+    private ImageService $service;
+
+    public function __construct(ImageService $service)
+    {
+        $this->service = $service;
+    }
+
     public function show($song)
     {
 //        $filePath = null;
@@ -28,13 +36,14 @@ class SongIconController extends BaseController
         }
 
         if ($coverImage) {
-            $imageProvider = new ImageFileProvider('cover');
-            return $imageProvider->getResizedFileResponse(
-                $coverImage,
-                request()->get('width', 52),
-                request()->get('height', 52));
-
-//            return $response->generateResponse();
+            return $this->service->show($coverImage, collect([
+                    'fit' => [
+                        'width' => request()->get('width', 52),
+                        'height' => request()->get('height', 52)
+                    ]
+                ])
+            );
+            
         } else
             return response()->json(['message' => 'Обложка не найдена'], 404);
     }

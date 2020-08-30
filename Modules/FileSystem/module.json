@@ -1,0 +1,13 @@
+{
+    "name": "FileSystem",
+    "alias": "filesystem",
+    "description": "",
+    "keywords": [],
+    "order": 0,
+    "providers": [
+        "Modules\\FileSystem\\Providers\\FileSystemServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}

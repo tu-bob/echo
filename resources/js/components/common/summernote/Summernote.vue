@@ -68,7 +68,7 @@
                     if (!vue.imageUploadUrl)
                         return;
                     vue.busy = true;
-                    uploadFiles(files, vue.imageUploadUrl, 'images')
+                    uploadFiles(files, vue.imageUploadUrl, 'blog', 'images')
                         .then(response => {
                             for (let i = 0; i < response.length; i++) {
                                 $('#' + vue.id).summernote('insertImage', `/media/image/${response[i].id}/blog`);

@@ -16,8 +16,9 @@ export function generateId() {
     return Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
 }
 
-export function uploadFiles(files, uploadUrl, name = 'files') {
+export function uploadFiles(files, uploadUrl, type, name = 'files') {
     let data = new FormData();
+    data.append('type', type);
     for (let i = 0; i < files.length; i++) {
         data.append(`${name}[]`, files[i], files[i].name)
     }

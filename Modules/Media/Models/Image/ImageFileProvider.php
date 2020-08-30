@@ -11,6 +11,7 @@ use Intervention\Image\Facades\Image;
 use Modules\Shared\Http\Responses\FileResponse;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 
+/**@deprecated */
 class ImageFileProvider
 {
     private string $type;

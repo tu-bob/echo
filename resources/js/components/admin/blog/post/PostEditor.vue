@@ -42,7 +42,7 @@
                 <div class="col-12 my-4">
                     <label>Статья</label>
                     <summernote ref="articleEditor" v-model="post.article"
-                                imageUploadUrl="/media/image/many"></summernote>
+                                imageUploadUrl="/api/image-gallery/files"></summernote>
                 </div>
 
                 <div class="row mx-3">

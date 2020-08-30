@@ -3,7 +3,7 @@
 
 namespace Modules\Media\Models\Image;
 
-
+/**@deprecated */
 class ImageFileDirProvider
 {
     private string $type;

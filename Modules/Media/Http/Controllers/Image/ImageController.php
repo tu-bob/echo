@@ -7,7 +7,9 @@ namespace Modules\Media\Http\Controllers\Image;
 use Modules\Media\Libs\Request\FileRequest\Saver\ImageFileSaver;
 use Modules\Media\Models\Image\ImageFileProvider;
 use Modules\Shared\Http\Controllers\BaseController;
-
+/**
+ * @deprecated
+ */
 class ImageController extends BaseController
 {
     public function __construct()

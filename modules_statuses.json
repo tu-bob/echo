@@ -1,8 +1,8 @@
 {
     "Blog": true,
+    "Counters": true,
+    "FileSystem": true,
+    "ImageGallery": true,
     "Media": true,
-    "Migration": true,
-    "CreateGenresTable": true,
-    "Shared": true,
-    "Counters": true
+    "Shared": true
 }
