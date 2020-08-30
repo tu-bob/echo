@@ -70,7 +70,7 @@ export function getAvatarImage(image) {
 }
 
 export function getImageUrl(image, type, params = null) {
-    return `/api/image-gallery/files/${image}/${type}?` + kvpToQueryParam(params);
+    return `/api/image-gallery/files/${image}?` + kvpToQueryParam(params);
 }
 
 export function fetchVideos(filters, options) {
