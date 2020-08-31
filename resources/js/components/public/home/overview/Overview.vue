@@ -109,28 +109,28 @@
         components: {PostsList, VideosList, SongsList, AlbumsList},
         methods: {
             fetchTopSongs() {
-                fetchSongs({order: 'play_count:desc,download_count:desc', limit: 12},
+                fetchSongs({order: 'random', limit: 12},
                     {cancelToken: this.getCancellationToken()}
                 )
                     .then(songs => this.songs = songs)
                     .catch()
             },
             fetchTopAlbums() {
-                fetchAlbums({order: 'play_count:desc,download_count:desc', limit: 12, songs: 1},
+                fetchAlbums({order: 'random', limit: 12, songs: 1},
                     {cancelToken: this.getCancellationToken()}
                 )
                     .then(albums => this.albums = albums)
                     .catch()
             },
             fetchTopVideos() {
-                fetchVideos({order: 'play_count:desc,download_count:desc', limit: 12},
+                fetchVideos({order: 'random', limit: 12},
                     {cancelToken: this.getCancellationToken()}
                 )
                     .then(videos => this.videos = videos)
                     .catch()
             },
             fetchTopPosts() {
-                fetchPosts({order: 'view_count:desc', limit: 12},
+                fetchPosts({order: 'random', limit: 12},
                     {cancelToken: this.getCancellationToken()}
                 )
                     .then(posts => this.posts = posts)

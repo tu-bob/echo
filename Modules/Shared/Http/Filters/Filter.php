@@ -12,7 +12,7 @@ abstract class Filter
 
     protected Builder $query;
 
-    protected array $complexOrder = ['latest'];
+    protected array $complexOrder = ['latest', 'random'];
 
     public function __construct(array $filters, Builder $query)
     {
@@ -60,6 +60,8 @@ abstract class Filter
     {
         if ($order === 'latest')
             $this->query->latest();
+        if ($order === 'random')
+            $this->query->inRandomOrder();
     }
 
     protected function applyLimit()
