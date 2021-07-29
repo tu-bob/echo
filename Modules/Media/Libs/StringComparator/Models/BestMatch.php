@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Modules\Media\Libs\StringComparators\Models;
+namespace Modules\Media\Libs\StringComparator\Models;
 
 
 class BestMatch

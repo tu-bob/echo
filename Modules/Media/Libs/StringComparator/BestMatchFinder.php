@@ -4,7 +4,8 @@
 namespace Modules\Media\Libs\StringComparator;
 
 
-use Modules\Media\Libs\StringComparators\Models\BestMatch;
+
+use Modules\Media\Libs\StringComparator\Models\BestMatch;
 
 abstract class BestMatchFinder
 {

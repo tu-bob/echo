@@ -26,14 +26,14 @@ class CreateSongsTable extends Migration
             $table->unsignedInteger('sample_rate');
             $table->unsignedDouble('compression_ratio')->nullable();
             $table->tinyInteger('channels')->nullable();
-            $table->char('channel_mode', 20)->nullable();
-            $table->char('encoder_options', 20)->nullable();
-            $table->char('codec', 20)->nullable();
-            $table->char('encoder', 20)->nullable();
+            $table->string('channel_mode')->nullable();
+            $table->string('encoder_options')->nullable();
+            $table->string('codec')->nullable();
+            $table->string('encoder')->nullable();
             $table->boolean('lossless')->nullable();
             $table->unsignedBigInteger('size');
             $table->unsignedInteger('playtime_seconds');
-            $table->char('extension', 10);
+            $table->string('extension', 30);
             $table->boolean('allow_download')->default(true);
 
             $table->char('cover_image_id', 26)->index()->nullable();
