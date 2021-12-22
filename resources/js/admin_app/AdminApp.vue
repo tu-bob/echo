@@ -154,28 +154,6 @@
             </template>
         </b-sidebar>
 
-        <!--        <div class="row">-->
-        <!--            <div class="ml-auto my-3">-->
-        <!--                <div id="search-input" v-if="$route.name !== 'search'">-->
-        <!--                    <input class="form-control-sm" v-model="searchQuery" type="text" @keydown.enter="navToSearch">-->
-        <!--                    <font-awesome-icon class="text-secondary h-text-white" icon="search"-->
-        <!--                                       @click="navToSearch">-->
-        <!--                    </font-awesome-icon>-->
-        <!--                </div>-->
-
-
-        <!--                <router-link v-if="$route.name !== 'search'" :to="{name:'search'}"-->
-        <!--                             class="ml-auto align-self-center mt-1 mr-3">-->
-        <!--                    <font-awesome-icon class="text-secondary h-text-white" icon="search"-->
-        <!--                                       size="lg"></font-awesome-icon>-->
-        <!--                </router-link>-->
-        <!--                <div v-if="$route.name === 'search'" class="mr-3 cursor-pointer" @click="closeSearch">-->
-        <!--                    <font-awesome-icon class="text-white"-->
-        <!--                                       icon="times"-->
-        <!--                                       size="lg"></font-awesome-icon>-->
-        <!--                </div>-->
-        <!--            </div>-->
-        <!--        </div>-->
         <div class="row" style="padding-bottom:10rem">
             <router-view></router-view>
         </div>

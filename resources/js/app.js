@@ -49,7 +49,7 @@ window.Vue.use(VueLuxon
 
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
-Vue.component('App', require('./app/App.vue').default);
+Vue.component('EntryPoint', require('./app/EntryPoint.vue').default);
 Vue.component('SuggestionInput', require('./components/common/inputs/SuggestionInput.vue').default);
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 

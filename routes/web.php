@@ -15,16 +15,13 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('layouts/app');
+    return redirect('/app/overview');
 });
 
 Route::get('/app', function () {
-    return view('layouts/app');
+    return redirect('/app/overview');
 });
-//
-//Auth::routes();
-//
-//Route::get('/home', 'HomeController@index')->name('home');
+
 
 Route::prefix('auth')->group(function () {
     Route::post('login', 'Auth\LoginController@login');
