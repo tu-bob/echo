@@ -88,7 +88,7 @@
 
         <!--Sidebar menu-->
         <b-sidebar id="side-menu" title="Sidebar" shadow width="240px" no-header>
-            <ul class="main-nav">
+            <ul class="main-nav app-offset">
                 <li class="nav-item">
                     <router-link :to="{name:'overview'}" class="nav-link">
                         <div class="nav-link-content">
@@ -207,7 +207,7 @@
         faCompactDisc, faUser, faFilm);
 
     export default {
-        name: "App",
+        name: "PublicApp",
         components: {Youtube, Facebook, Player, Instagram},
         mounted() {
             this.$root.$on('bv::collapse::state', (collapseId, isJustShown) => {

@@ -48,7 +48,7 @@
 </head>
 <body>
 <main id="app" class="position-relative h-100 overflow-auto">
-    <app @auth :user="{{auth()->user()}}" @endauth ></app>
+    <entry-point @auth :user="{{auth()->user()}}" @endauth ></entry-point>
 </main>
 </body>
 </html>
