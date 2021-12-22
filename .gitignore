@@ -14,4 +14,7 @@ yarn-error.log
 /Modules/Blog/node_modules/
 /public/images/
 /resources/js/img/
-/public/
+/public/scripts/
+/public/vendor/
+/public/js/
+/public/css/
