@@ -88,7 +88,7 @@
 
         <!--Sidebar menu-->
         <b-sidebar id="side-menu" title="Sidebar" shadow width="240px" no-header>
-            <ul class="main-nav">
+            <ul class="main-nav app-offset">
                 <li class="nav-item">
                     <router-link :to="{name:'overview'}" class="nav-link">
                         <div class="nav-link-content">

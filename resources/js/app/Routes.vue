@@ -1,7 +1,7 @@
 <script>
 import VueRouter from 'vue-router'
 import {store} from '../store';
-import adminRoutes from './routes/admin-routes'
+import adminRoutes from '../admin_app/routes/admin-routes'
 
 const routes = [
         {

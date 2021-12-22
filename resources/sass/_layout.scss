@@ -35,8 +35,11 @@ $app-padding-bottom: 77px;
     z-index: 2000;
 }
 
-#side-menu {
+.app-offset {
     padding-top: $app-padding-top + 14px;
+}
+
+#side-menu {
     padding-bottom: $app-padding-bottom;
     background-color: #222222 !important;
     //backdrop-filter: blur(5px) !important;
