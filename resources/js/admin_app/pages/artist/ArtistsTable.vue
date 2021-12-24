@@ -30,7 +30,7 @@
 </template>
 
 <script>
-    import TableCard from "../../../common/tables/TableCard";
+    import TableCard from "../../../components/common/tables/TableCard";
 
     export default {
         name: "ArtistsTable",

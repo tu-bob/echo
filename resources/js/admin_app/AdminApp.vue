@@ -1,68 +1,82 @@
 <template>
-    <div class="bg-white" style="height: 100vh">
+    <div class="bg-white" style="font-family:Roboto, sans-serif; min-height: 100vh">
 
         <div id="tMainSpinner" :class="{'d-none':!isMainOverlayVisible}">
             <div class="spinner"></div>
         </div>
 
-        <div class="d-flex h-100">
-            <!--Sidebar menu-->
-            <div id="side-menu" style="width: 240px; height: 100%" :v-model="showSideBar" title="Sidebar" >
-                <ul class="main-nav">
-                    <li class="nav-item">
-                        <router-link :to="{name:'a.home'}" class="nav-link">
-                            <div class="nav-link-content">
-                                <font-awesome-icon icon="home" class="nav-icon"></font-awesome-icon>
-                                <span class="nav-link-text">Главная</span>
-                            </div>
-                        </router-link>
-                    </li>
-                    <li class="nav-item">
-                        <router-link :to="{name:'a.blog'}" class="nav-link">
-                            <div class="nav-link-content">
-                                <font-awesome-icon icon="newspaper" class="nav-icon"></font-awesome-icon>
-                                <span class="nav-link-text">Блог</span>
-                            </div>
-                        </router-link>
-                    </li>
-                    <li class="nav-item">
-                        <router-link :to="{name:'a.song'}" class="nav-link">
-                            <div class="nav-link-content">
-                                <font-awesome-icon icon="music" class="nav-icon"></font-awesome-icon>
-                                <span class="nav-link-text">Песни</span>
-                            </div>
-                        </router-link>
-                    </li>
-                    <li class="nav-item">
-                        <router-link :to="{name:'a.album'}" class="nav-link">
-                            <div class="nav-link-content">
-                                <font-awesome-icon icon="compact-disc" class="nav-icon"></font-awesome-icon>
-                                <span class="nav-link-text">Альбомы</span>
-                            </div>
-                        </router-link>
-                    </li>
-                    <li class="nav-item">
-                        <router-link :to="{name:'a.artist'}" class="nav-link">
-                            <div class="nav-link-content">
-                                <font-awesome-icon icon="user" class="nav-icon"></font-awesome-icon>
-                                <span class="nav-link-text">Исполнители</span>
-                            </div>
-                        </router-link>
-                    </li>
-                    <li class="nav-item">
-                        <router-link :to="{name:'a.video'}" class="nav-link">
-                            <div class="nav-link-content">
-                                <font-awesome-icon icon="film" class="nav-icon"></font-awesome-icon>
-                                <span class="nav-link-text">Видео</span>
-                            </div>
-                        </router-link>
-                    </li>
-                </ul>
-
-            </div>
-
-            <router-view></router-view>
+        <div class="hamburger-wrapper">
+            <button class="hamburger hamburger--spin js-hamburger d-md-none"
+                    @click="menuCollapsed = !menuCollapsed"
+                    :class="{'is-active': !menuCollapsed}"
+                    type="button">
+                      <span class="hamburger-box">
+                        <span class="hamburger-inner"></span>
+                      </span>
+            </button>
         </div>
+
+
+        <!--Sidebar menu-->
+        <div id="side-menu" v-if="!menuCollapsed || windowWidth > 768" style="width: 240px; min-height: 100vh"
+             :v-model="showSideBar"
+             title="Sidebar">
+            <b-img center class="w-50 my-4" src="/icons/png/logo_echo_full_color.png"></b-img>
+            <ul class="main-nav">
+                <li class="nav-item">
+                    <router-link :to="{name:'a.home'}" class="nav-link">
+                        <div class="nav-link-content">
+                            <font-awesome-icon icon="home" class="nav-icon"></font-awesome-icon>
+                            <span class="nav-link-text">Главная</span>
+                        </div>
+                    </router-link>
+                </li>
+                <li class="nav-item">
+                    <router-link :to="{name:'a.blog.management'}" class="nav-link">
+                        <div class="nav-link-content">
+                            <font-awesome-icon icon="newspaper" class="nav-icon"></font-awesome-icon>
+                            <span class="nav-link-text">Блог</span>
+                        </div>
+                    </router-link>
+                </li>
+                <li class="nav-item">
+                    <router-link :to="{name:'a.song.management'}" class="nav-link">
+                        <div class="nav-link-content">
+                            <font-awesome-icon icon="music" class="nav-icon"></font-awesome-icon>
+                            <span class="nav-link-text">Песни</span>
+                        </div>
+                    </router-link>
+                </li>
+                <li class="nav-item">
+                    <router-link :to="{name:'a.album.management'}" class="nav-link">
+                        <div class="nav-link-content">
+                            <font-awesome-icon icon="compact-disc" class="nav-icon"></font-awesome-icon>
+                            <span class="nav-link-text">Альбомы</span>
+                        </div>
+                    </router-link>
+                </li>
+                <li class="nav-item">
+                    <router-link :to="{name:'a.artists.management'}" class="nav-link">
+                        <div class="nav-link-content">
+                            <font-awesome-icon icon="user" class="nav-icon"></font-awesome-icon>
+                            <span class="nav-link-text">Исполнители</span>
+                        </div>
+                    </router-link>
+                </li>
+                <li class="nav-item">
+                    <router-link :to="{name:'a.video'}" class="nav-link">
+                        <div class="nav-link-content">
+                            <font-awesome-icon icon="film" class="nav-icon"></font-awesome-icon>
+                            <span class="nav-link-text">Видео</span>
+                        </div>
+                    </router-link>
+                </li>
+            </ul>
+
+        </div>
+
+        <router-view class="main-view"></router-view>
+
 
     </div>
 </template>
@@ -86,6 +100,7 @@ import {
 import Facebook from "../components/common/external-icons/facebook";
 import Instagram from "../components/common/external-icons/instagram";
 import Youtube from "../components/common/external-icons/youtube";
+import WindowsDimensionsMixin from "../components/admin/mixins/WindowsDimensionsMixin";
 
 library.add(faCaretDown, faSearch, faTimes, faHome, faBars, faNewspaper, faMusic,
     faCompactDisc, faUser, faFilm);
@@ -96,6 +111,7 @@ export default {
         if (this.user)
             this.$store.commit('SET_AUTH_USER', this.user);
     },
+    mixins: [WindowsDimensionsMixin],
     beforeDestroy() {
         // this.$eventHub.$off('error-reset-requested');
     },
@@ -108,7 +124,8 @@ export default {
     data() {
         return {
             searchQuery: null,
-            showSideBar: true
+            showSideBar: true,
+            menuCollapsed: false
         }
     },
     methods: {
@@ -142,9 +159,40 @@ export default {
     padding-right: 0 !important;
 }
 
-.router-link-active .nav-link-content{
+.router-link-active .nav-link-content {
     background: white;
     border-radius: 20px 0 0 20px;
-    color:#000000;
+    color: #000000;
+}
+
+.hamburger-wrapper {
+    font-size: 20px;
+    background-color: #222222;
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 5px 18px;
+    z-index: 11;
+    margin-left: 16px;
+    border-radius: 0 0 7px 7px;
+}
+
+#side-menu {
+    position: absolute;
+    left: 0;
+    right: 0;
+    z-index: 10;
+}
+
+.main-view {
+    width: calc(100% - 240px);
+    margin-left: 240px;
+}
+
+@media only screen and (max-width: 767px) {
+    .main-view {
+        width: 100%;
+        margin-left: 0;
+    }
 }
 </style>

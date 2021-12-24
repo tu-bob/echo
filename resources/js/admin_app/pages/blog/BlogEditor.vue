@@ -65,10 +65,10 @@
 </template>
 
 <script>
-    import Summernote from "../../../common/summernote/Summernote";
-    import ImageUploader from "../../../common/inputs/ImageUploader";
-    import {fetchCategories, fetchPost} from "../../../../api/blogApi";
-    import ResetErrorsMixin from "../../mixins/ResetErrorsMixin";
+    import Summernote from "../../../components/common/summernote/Summernote";
+    import ImageUploader from "../../../components/common/inputs/ImageUploader";
+    import {fetchCategories, fetchPost} from "../../../api/blogApi";
+    import ResetErrorsMixin from "../../../components/admin/mixins/ResetErrorsMixin";
 
     export default {
         name: "PostEditor",

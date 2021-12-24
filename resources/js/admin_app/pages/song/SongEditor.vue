@@ -221,13 +221,13 @@
 
 <script>
     import {parseBlob} from 'music-metadata-browser';
-    import {validateAudio} from '../../../../util/validators.js'
-    import {fetchArtistAliasesByName, fetchAlbums, fetchGenres, fetchSong} from '../../../../api/mediaApi.js'
+    import {validateAudio} from '../../../util/validators.js'
+    import {fetchArtistAliasesByName, fetchAlbums, fetchGenres, fetchSong} from '../../../api/mediaApi.js'
     import * as ss from 'string-similarity';
-    import ImageUploader from "../../../common/inputs/ImageUploader";
-    import {findAlbums, getSongIconUrl} from "../../../../api/mediaApi";
-    import {secondsToFormattedMinutes} from "../../../../util/stringHelper";
-    import ResetErrorsMixin from "../../mixins/ResetErrorsMixin";
+    import ImageUploader from "../../../components/common/inputs/ImageUploader";
+    import {findAlbums, getSongIconUrl} from "../../../api/mediaApi";
+    import {secondsToFormattedMinutes} from "../../../util/stringHelper";
+    import ResetErrorsMixin from "../../../components/admin/mixins/ResetErrorsMixin";
 
     export default {
         name: "SongEditor",

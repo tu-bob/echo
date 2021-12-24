@@ -2,7 +2,7 @@
 
         <div class="mx-auto col-md-8">
             <div class="card">
-                <div class="card-header">{{$t('label.sign_in')}}</div>
+                <div class="card-header">Вход</div>
 
                 <div class="card-body">
 

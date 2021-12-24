@@ -1,33 +1,85 @@
 export default [
     {
-        name:'admin',
+        name: 'admin',
         path: '/admin',
-        component:()=>import('../AdminApp'),
+        component: () => import('../AdminApp'),
         children: [
             {
-                name:'a.home',
+                name: 'a.home',
                 path: 'home',
                 component: () => import('../pages/HomePage')
             },
             {
                 name: 'a.blog',
-                path: 'blog',
-                component: () => import('../pages/blog/BlogManagementPage')
+                path: 'blogs',
+                component: () => import('../pages/blog/BlogTabLayout'),
+                children: [
+                    {
+                        name: 'a.blog.management',
+                        path: 'manage',
+                        props: true,
+                        component: () => import('../pages/blog/BlogManagementPage')
+                    },
+                    {
+                        name: 'a.blog.editor',
+                        path: 'editor/:id?',
+                        props: true,
+                        component: () => import('../pages/blog/BlogEditor')
+                    },
+                ]
+            },
+            {
+                name: 'a.artist',
+                path: 'artists',
+                component: () => import('../pages/artist/ArtistsTabLayout'),
+                children: [
+                    {
+                        name: 'a.artists.management',
+                        path: 'manage',
+                        props: true,
+                        component: () => import('../pages/artist/ArtistManagementPage')
+                    },
+                    {
+                        name: 'a.artist.editor',
+                        path: 'editor/:id?',
+                        props: true,
+                        component: () => import('../pages/artist/ArtistEditor')
+                    },
+                ]
             },
             {
                 name: 'a.song',
-                path: 'song',
-                component: () => import('../pages/song/SongManagementPage')
+                path: 'songs',
+                component: () => import('../pages/song/SongTabLayout'),
+                children: [
+                    {
+                        name: 'a.song.management',
+                        path: 'manage',
+                        component: () => import('../pages/song/SongManagementPage')
+                    },
+                    {
+                        name: 'a.song.editor',
+                        path: 'editor/:id?',
+                        component: () => import('../pages/song/SongEditor')
+                    },
+                ]
             },
             {
                 name: 'a.album',
                 path: 'album',
-                component: () => import('../pages/album/AlbumManagementPage')
-            },
-            {
-                name: 'a.artist',
-                path: 'artist',
-                component: () => import('../pages/artist/ArtistManagementPage')
+                component: () => import('../pages/album/AlbumsTabLayout'),
+                children: [
+                    {
+                        name: 'a.album.management',
+                        path: 'manage',
+                        component: () => import('../pages/album/AlbumManagementPage')
+                    },
+                    {
+                        name: 'a.album.editor',
+                        path: 'editor/:id?',
+                        component: () => import('../pages/album/AlbumEditor')
+                    },
+                ]
             },
             {
                 name: 'a.video',

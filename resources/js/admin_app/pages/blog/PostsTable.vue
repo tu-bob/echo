@@ -1,6 +1,6 @@
 <template>
     <div>
-        <table-card :items="albums"
+        <table-card :items="posts"
                     :fields="fields"
                     :url="url"
                     :columnsToHide="columnsToHide"
@@ -8,12 +8,12 @@
                     striped>
             <template #header>
                 <slot name="header">
-                    <span>Список альбомов</span>
+                    <span>Посты</span>
                 </slot>
             </template>
 
             <template v-slot:edit="{item}">
-                <a href="#" @click.prevent="$router.push({ name: 'album-editor', params: { id: item.id }})">
+                <a href="#" @click.prevent="$router.push({ name: 'post-editor', params: { id: item.id }})">
                     <img class="icon-btn-sm" src="/icons/svg/edit.svg">
                 </a>
             </template>
@@ -28,10 +28,10 @@
 </template>
 
 <script>
-    import TableCard from "../../../common/tables/TableCard";
+    import TableCard from "../../../components/common/tables/TableCard";
 
     export default {
-        name: "AlbumsTable",
+        name: "PostsTable",
         created() {
         },
         props: {
@@ -45,20 +45,16 @@
             },
             url: {
                 type: String,
-                default: '/media/music/album/list?order=latest&'
+                default: '/blog/post/list?'
             }
         },
         data() {
             return {
-                albums: this.data,
+                posts: this.data,
                 fields: [
                     {
                         key: "title",
-                        label: "Название"
-                    },
-                    {
-                        key: "year",
-                        label: "Год"
+                        label: "Заголовок"
                     },
                     {
                         key: "edit",
@@ -73,7 +69,7 @@
         },
         watch: {
             data() {
-                this.albums = this.data;
+                this.posts = this.data;
             }
         },
         components: {

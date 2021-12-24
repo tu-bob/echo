@@ -1,6 +1,6 @@
 <template>
     <div>
-        <table-card :items="posts"
+        <table-card :items="songs"
                     :fields="fields"
                     :url="url"
                     :columnsToHide="columnsToHide"
@@ -8,12 +8,16 @@
                     striped>
             <template #header>
                 <slot name="header">
-                    <span>Посты</span>
+                    <span>Список загруженных песен</span>
                 </slot>
             </template>
 
+            <template v-slot:artistAliases="{item}">
+                <span v-for="alias in item.artistAliases">{{alias.name}};</span>
+            </template>
+
             <template v-slot:edit="{item}">
-                <a href="#" @click.prevent="$router.push({ name: 'post-editor', params: { id: item.id }})">
+                <a href="#" @click.prevent="$router.push({ name: 'song-editor', params: { id: item.id }})">
                     <img class="icon-btn-sm" src="/icons/svg/edit.svg">
                 </a>
             </template>
@@ -28,10 +32,10 @@
 </template>
 
 <script>
-    import TableCard from "../../../common/tables/TableCard";
+    import TableCard from "../../../components/common/tables/TableCard";
 
     export default {
-        name: "PostsTable",
+        name: "SongsTable",
         created() {
         },
         props: {
@@ -39,22 +43,34 @@
                 type: Array,
                 default: () => ['delete']
             },
-            data: {
+            providedSongs: {
                 type: Array,
                 default: () => []
             },
             url: {
                 type: String,
-                default: '/blog/post/list?'
+                default: '/media/music/song/list?order=latest&'
             }
         },
         data() {
             return {
-                posts: this.data,
+                songs: this.providedSongs,
                 fields: [
                     {
                         key: "title",
-                        label: "Заголовок"
+                        label: "Название"
+                    },
+                    {
+                        key: "year",
+                        label: "Год"
+                    },
+                    {
+                        key: "label",
+                        label: "Лейбл"
+                    },
+                    {
+                        key: "artistAliases",
+                        label: "Исполнители"
                     },
                     {
                         key: "edit",
@@ -68,13 +84,13 @@
             }
         },
         watch: {
-            data() {
-                this.posts = this.data;
+            providedSongs() {
+                this.songs = this.providedSongs;
             }
         },
         components: {
             TableCard
-        }
+        },
     }
 </script>
 

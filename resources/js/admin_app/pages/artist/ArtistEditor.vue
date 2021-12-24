@@ -65,10 +65,10 @@
 </template>
 
 <script>
-    import {getStoreOrUpdateAction} from '../../../../main.js'
-    import ResetErrorsMixin from "../../mixins/ResetErrorsMixin";
-    import ImageUploader from "../../../common/inputs/ImageUploader";
-    import {getAvatarImage} from "../../../../api/mediaApi";
+    import {getStoreOrUpdateAction} from '../../../main.js'
+    import ResetErrorsMixin from "../../../components/admin/mixins/ResetErrorsMixin";
+    import ImageUploader from "../../../components/common/inputs/ImageUploader";
+    import {getAvatarImage} from "../../../api/mediaApi";
 
     export default {
         name: "ArtistEditor",

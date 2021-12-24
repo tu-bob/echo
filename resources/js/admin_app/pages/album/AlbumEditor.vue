@@ -88,10 +88,10 @@
 </template>
 
 <script>
-    import {fetchAlbum, fetchAlbumTypes} from "../../../../api/mediaApi";
-    import SongsTable from "../music/SongsTable";
-    import ImageUploader from "../../../common/inputs/ImageUploader";
-    import ResetErrorsMixin from "../../mixins/ResetErrorsMixin";
+    import {fetchAlbum, fetchAlbumTypes} from "../../../api/mediaApi";
+    import SongsTable from "../song/SongsTable";
+    import ImageUploader from "../../../components/common/inputs/ImageUploader";
+    import ResetErrorsMixin from "../../../components/admin/mixins/ResetErrorsMixin";
 
     export default {
         name: "AlbumEditor",
