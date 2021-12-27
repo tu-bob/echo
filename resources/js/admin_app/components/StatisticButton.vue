@@ -5,7 +5,7 @@
                    <h5>
                        <slot></slot>
                    </h5>
-                   <h1>234</h1>
+                   <h1>{{ count }}</h1>
                </div>
     </div>
 </template>
@@ -14,7 +14,8 @@
 export default {
     name: "StatisticButton",
     props:{
-        icon:String
+        icon:String,
+        count:0
     }
 }
 </script>

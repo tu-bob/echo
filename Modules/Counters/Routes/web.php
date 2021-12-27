@@ -11,6 +11,8 @@
 |
 */
 
-Route::prefix('counters')->group(function() {
-    Route::get('/', 'CountersController@index');
+use Illuminate\Support\Facades\Route;
+
+Route::prefix('statistics')->name('statistics')->group(function() {
+    Route::get('/overall', 'StatisticsController@overall')->name('overall');
 });
