@@ -8,6 +8,7 @@ export default [
                 name: 'a.home',
                 path: 'home',
                 component: () => import('../pages/home/HomeTabLayout'),
+                redirect: { name: 'a.home.management' },
                 children: [
                     {
                         name: 'a.home.management',
