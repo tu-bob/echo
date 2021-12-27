@@ -24,7 +24,7 @@
             <b-img center class="w-50 my-4" src="/icons/png/logo_echo_full_color.png"></b-img>
             <ul class="main-nav">
                 <li class="nav-item">
-                    <router-link :to="{name:'a.home'}" class="nav-link">
+                    <router-link :to="{name:'a.home.management'}" class="nav-link">
                         <div class="nav-link-content">
                             <font-awesome-icon icon="home" class="nav-icon"></font-awesome-icon>
                             <span class="nav-link-text">Главная</span>

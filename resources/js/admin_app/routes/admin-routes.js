@@ -7,7 +7,15 @@ export default [
             {
                 name: 'a.home',
                 path: 'home',
-                component: () => import('../pages/HomePage')
+                component: () => import('../pages/home/HomeTabLayout'),
+                children: [
+                    {
+                        name: 'a.home.management',
+                        path: 'manage',
+                        props: true,
+                        component: () => import('../pages/home/HomeManagementPage')
+                    },
+                ]
             },
             {
                 name: 'a.blog',
