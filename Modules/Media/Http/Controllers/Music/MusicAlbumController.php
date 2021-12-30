@@ -5,6 +5,7 @@ namespace Modules\Media\Http\Controllers\Music;
 
 
 use Modules\Media\Http\Filters\Media\MusicAlbumFilter;
+use Modules\Media\Http\Filters\MusicAlbumQuery;
 use Modules\Media\Http\Requests\Music\MusicAlbumRequest;
 use Modules\Media\Libs\Request\RequestWriter\Music\StoreMusicAlbumRequestWriter;
 use Modules\Media\Libs\StringComparator\DiceBestMatchFinder;
@@ -39,8 +40,8 @@ class MusicAlbumController extends BaseController
     public function getAlbums()
     {
         $query = MusicAlbum::with('artistAliases', 'type');
-        $filter = new MusicAlbumFilter(request()->all(), $query);
-        return $this->callGetOrPaginate($filter->filter());
+        $filtered = new MusicAlbumQuery($query);
+        return $this->callGetOrPaginate($filtered);
     }
 
     public function getAlbum($album)
