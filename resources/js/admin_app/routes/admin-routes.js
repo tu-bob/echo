@@ -30,7 +30,7 @@ export default [
                         component: () => import('../pages/blog/BlogManagementPage')
                     },
                     {
-                        name: 'a.blog.editor',
+                        name: 'a.post.editor',
                         path: 'editor/:id?',
                         props: true,
                         component: () => import('../pages/blog/BlogEditor')
