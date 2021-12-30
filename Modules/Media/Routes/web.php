@@ -73,6 +73,8 @@ Route::prefix('media')->group(function () {
         Route::get('/list', 'Video\VideoController@getVideos');
         Route::put('/{video}/view', 'Video\VideoController@incrementViewCount');
         Route::put('/{video}/play', 'Video\VideoController@incrementPlayCount');
+        Route::post('/', 'Video\VideoController@store');
+        Route::put('/{video}', 'Video\VideoController@update');
     });
 
     Route::get('/search/{needle}', 'Search\SearchController@search');
