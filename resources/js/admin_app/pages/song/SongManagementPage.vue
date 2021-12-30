@@ -3,7 +3,7 @@
         <b-container fluid>
             <b-row>
                 <b-col sm="12" md="5" lg="4" xl="3" style="z-index: 1">
-                    <link-with-icon-large icon="/icons/svg/add-album.svg" :to="{name:'a.song.editor'}">Добавить песню
+                    <link-with-icon-large icon="/icons/svg/add-music.svg" :to="{name:'a.song.editor'}">Добавить песню
                     </link-with-icon-large>
                 </b-col>
 

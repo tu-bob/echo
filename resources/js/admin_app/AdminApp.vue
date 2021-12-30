@@ -64,7 +64,7 @@
                     </router-link>
                 </li>
                 <li class="nav-item">
-                    <router-link :to="{name:'a.video'}" class="nav-link">
+                    <router-link :to="{name:'a.video.management'}" class="nav-link">
                         <div class="nav-link-content">
                             <font-awesome-icon icon="film" class="nav-icon"></font-awesome-icon>
                             <span class="nav-link-text">Видео</span>

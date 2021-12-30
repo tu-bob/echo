@@ -93,7 +93,19 @@ export default [
             {
                 name: 'a.video',
                 path: 'video',
-                component: () => import('../pages/video/VideoManagementPage')
+                component: () => import('../pages/video/VideoTabLayout'),
+                children: [
+                    {
+                        name: 'a.video.management',
+                        path: 'manage',
+                        component: () => import('../pages/video/VideoManagementPage')
+                    },
+                    {
+                        name: 'a.video.editor',
+                        path: 'editor/:id?',
+                        component: () => import('../pages/video/VideoEditor')
+                    },
+                ]
             }
             // {
             //     path: 'blog',

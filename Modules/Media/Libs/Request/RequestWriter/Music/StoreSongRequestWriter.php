@@ -148,7 +148,7 @@ class StoreSongRequestWriter extends RequestWriter
             $video = Video::where('id', $this->entity->clip_id)
                 ->firstOrNew();
 
-            $video->type = 'youtube';
+            $video->type = 'clip';
 
             if (isset($this->coverImageFile)) {
                 $video->preview_image_id = $this->coverImageFile->id;
