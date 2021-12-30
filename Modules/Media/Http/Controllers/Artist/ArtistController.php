@@ -4,6 +4,7 @@
 namespace Modules\Media\Http\Controllers\Artist;
 
 use Illuminate\Validation\Rule;
+use Modules\Media\Http\Filters\ArtistQuery;
 use Modules\Media\Models\Artist\Artist;
 use Modules\Media\Services\artist\ArtistService;
 use Modules\Shared\Http\Controllers\BaseController;
@@ -42,7 +43,7 @@ class ArtistController extends BaseController
 
     public function getArtists()
     {
-        $query = Artist::whereHas('aliases')->latest();
+        $query = new ArtistQuery(Artist::whereHas('aliases')->latest());
         return $this->callGetOrPaginate($query);
     }
 

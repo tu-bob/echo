@@ -9,9 +9,9 @@
                 </b-col>
 
                 <b-col sm="12" md="7" lg="8" xl="9" class="filters-form-wrapper">
-                    <filters-form header-text="Поиск исполнителя">
+                    <filters-form header-text="Поиск исполнителя" @submit="changeUrl">
                         <b-col sm="12" class="my-3 my-lg-0">
-                            <input class="filter-input w-100" type="text" placeholder="Имя исполнителя">
+                            <input v-model="artist" class="filter-input w-100" type="text" placeholder="Имя исполнителя">
                         </b-col>
                     </filters-form>
                 </b-col>
@@ -19,7 +19,7 @@
         </b-container>
 
         <div class="mt-5">
-            <artists-table class="px-3"></artists-table>
+            <artists-table :url="url" class="px-3"></artists-table>
         </div>
     </div>
 </template>
@@ -31,7 +31,21 @@ import ArtistsTable from "./ArtistsTable";
 import AlbumsTable from "../album/AlbumsTable";
 export default {
     name: "ArtistManagementPage",
-    components: {AlbumsTable, ArtistsTable, FiltersForm, LinkWithIconLarge}
+    components: {AlbumsTable, ArtistsTable, FiltersForm, LinkWithIconLarge},
+    data () {
+        return {
+            artist: '',
+            url: `/media/artist/list?`
+        }
+    },
+    methods: {
+        changeUrl() {
+            let url = `/media/artist/list?`
+            if(this.artist)
+                url +=`filter[aliases.name]=${this.artist}&`
+            this.url = url
+        }
+    }
 }
 </script>
 
