@@ -16,7 +16,7 @@ class Traffic
             'ip'=> $request->ip(),
             'agent' => $request->userAgent(),
             'method' => $request->method(),
-            'request' => implode(' | ',$request->toArray()),
+            'request' =>  collect($request->all())->flatten()->implode(' | '),
             'url' => $request->url(),
             'user_id' => auth()->id()
         ]);

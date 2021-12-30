@@ -14,6 +14,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/users', 'UserController@index');
+
 Route::get('/', function () {
     return redirect('/app/overview');
 });
@@ -21,6 +23,7 @@ Route::get('/', function () {
 Route::get('/app', function () {
     return redirect('/app/overview');
 });
+
 
 
 Route::prefix('auth')->group(function () {

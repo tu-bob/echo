@@ -6,6 +6,7 @@ namespace Modules\Media\Http\Controllers\Music\Song;
 
 use Illuminate\Support\Facades\Storage;
 use Modules\Media\Http\Filters\Media\SongFilter;
+use Modules\Media\Http\Filters\SongQuery;
 use Modules\Media\Http\Requests\Music\SongRequest;
 use Modules\Media\Libs\Request\RequestWriter\Music\StoreSongRequestWriter;
 use Modules\Media\Models\Music\Song;
@@ -31,8 +32,8 @@ class SongController extends BaseController
     public function getSongs()
     {
         $query = Song::with('artistAliases');
-        $filter = new SongFilter(request()->all(), $query);
-        return $this->callGetOrPaginate($filter->filter());
+        $filter = new SongQuery($query);
+        return $this->callGetOrPaginate($filter);
     }
 
     public function getSong($song)

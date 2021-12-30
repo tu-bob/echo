@@ -156,6 +156,11 @@
             },
             columnsToHide() {
                 this.hideColumns();
+            },
+            url(){
+                console.log('url changed')
+                this.pagination = null
+                this.fetch()
             }
         },
     }

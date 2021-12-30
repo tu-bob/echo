@@ -8,12 +8,12 @@
                 </b-col>
 
                 <b-col sm="12" md="7" lg="8" xl="9" class="filters-form-wrapper">
-                    <filters-form header-text="Поиск песни">
+                    <filters-form header-text="Поиск песни" @submit="changeUrl">
                         <b-col sm="12" lg="6" class="my-3 my-lg-0">
-                            <input class="filter-input w-100" type="text" placeholder="Имя песни">
+                            <input v-model="title" class="filter-input w-100" type="text" placeholder="Имя песни">
                         </b-col>
                         <b-col sm="12" lg="6">
-                            <input class="filter-input w-100" type="text" placeholder="Автор песни">
+                            <input v-model="artist" class="filter-input w-100" type="text" placeholder="Автор песни">
                         </b-col>
                     </filters-form>
                 </b-col>
@@ -21,7 +21,7 @@
         </b-container>
 
         <div class="mt-5">
-            <songs-table class="px-3"></songs-table>
+            <songs-table :url="url" class="px-3"></songs-table>
         </div>
     </div>
 </template>
@@ -33,7 +33,24 @@ import FiltersForm from "../../components/FiltersForm";
 
 export default {
     name: "SongManagementPage",
-    components: {FiltersForm, LinkWithIconLarge, SongsTable}
+    components: {FiltersForm, LinkWithIconLarge, SongsTable},
+    data () {
+        return {
+            title: '',
+            artist: '',
+            url: `/media/music/song/list?`
+        }
+    },
+    methods: {
+        changeUrl() {
+            let url = `/media/music/song/list?`
+            if(this.title)
+                url+=`filter[title]=${this.title}&`
+            if(this.artist)
+                url +=`filter[artistAliases.name]=${this.artist}&`
+            this.url = url
+        }
+    }
 }
 </script>
 

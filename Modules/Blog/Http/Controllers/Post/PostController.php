@@ -4,6 +4,7 @@
 namespace Modules\Blog\Http\Controllers\Post;
 
 
+use Modules\Blog\Filters\PostQuery;
 use Modules\Blog\Http\Filters\PostFilter;
 use Modules\Blog\Http\Requests\RequestWriters\PostRequestWriter;
 use Modules\Blog\Http\Requests\PostRequest;
@@ -29,9 +30,8 @@ class PostController extends BaseController
 
     public function getPosts()
     {
-        $query = Post::with('previewImage', 'author');
-        $filter = new PostFilter(request()->all(), $query);
-        return $this->callGetOrPaginate($filter->filter());
+        $query = new PostQuery(Post::with('previewImage', 'author'));
+        return $this->callGetOrPaginate($query);
     }
 
     public function getPost($slugOrId)

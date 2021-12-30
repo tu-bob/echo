@@ -57,6 +57,10 @@
                         label: "Заголовок"
                     },
                     {
+                        key: "author.name",
+                        label: "Автор"
+                    },
+                    {
                         key: "edit",
                         label: ""
                     },

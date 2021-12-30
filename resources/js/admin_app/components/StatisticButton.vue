@@ -39,6 +39,6 @@ export default {
     color: white;
 }
 .statistic-text h5{
-    font-size: 23px;
+    font-size: 19px;
 }
 </style>

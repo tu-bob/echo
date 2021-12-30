@@ -13,11 +13,10 @@ class BaseController extends Controller
     protected float $stringMatchMinRate = 0.20;
 
     /**
-     * @param Builder $query
      * @param int $limit
      * @return LengthAwarePaginator|Builder[]|Collection
      */
-    protected function callGetOrPaginate(Builder $query)
+    protected function callGetOrPaginate($query)
     {
         if (request()->get('paginate'))
             return $query->paginate(request()->get('paginate'));

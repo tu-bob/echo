@@ -6,6 +6,9 @@ namespace Modules\Shared\Http\Filters;
 
 use Illuminate\Database\Eloquent\Builder;
 
+/**
+ * @deprecated use spatie query builder
+*/
 abstract class Filter
 {
     protected array $filters;

@@ -8,12 +8,12 @@
                 </b-col>
 
                 <b-col sm="12" md="7" lg="8" xl="9" class="filters-form-wrapper">
-                    <filters-form header-text="Поиск статьи">
+                    <filters-form header-text="Поиск статьи" @submit="changeUrl">
                         <b-col sm="12" lg="6" class="my-3 my-lg-0">
-                            <input class="filter-input w-100" type="text" placeholder="Имя статьи">
+                            <input v-model="title" class="filter-input w-100" type="text" placeholder="Имя статьи">
                         </b-col>
                         <b-col sm="12" lg="6">
-                            <input class="filter-input w-100" type="text" placeholder="Автор статьи">
+                            <input v-model="author" class="filter-input w-100" type="text" placeholder="Автор статьи">
                         </b-col>
                     </filters-form>
                 </b-col>
@@ -21,7 +21,7 @@
         </b-container>
 
         <div class="mt-5">
-            <posts-table class="px-3"></posts-table>
+            <posts-table :url="url" class="px-3"></posts-table>
         </div>
     </div>
 
@@ -35,7 +35,24 @@ import FiltersForm from "../../components/FiltersForm";
 import PostsTable from "./PostsTable";
 export default {
     name: "BlogManagementPage",
-    components: {PostsTable, FiltersForm, LinkWithIconLarge, SectionHeader}
+    components: {PostsTable, FiltersForm, LinkWithIconLarge, SectionHeader},
+    data () {
+        return {
+            title: '',
+            author: '',
+            url: `/blog/post/list?`
+        }
+    },
+    methods: {
+        changeUrl() {
+            let url = `/blog/post/list?`
+            if(this.title)
+                url+=`filter[title]=${this.title}&`
+            if(this.author)
+                url +=`filter[author.name]=${this.author}&`
+            this.url = url
+        }
+    }
 }
 </script>
 
