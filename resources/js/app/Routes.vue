@@ -5,7 +5,7 @@ import adminRoutes from '../admin_app/routes/admin-routes'
 
 const routes = [
         {
-            name: 'public',
+            // name: 'public',
             path: '/app',
             component: () => import('./PublicApp'),
             children: [

@@ -15592,8 +15592,11 @@ a:hover {
   z-index: 2000;
 }
 
-#side-menu {
+.app-offset {
   padding-top: 91px;
+}
+
+#side-menu {
   padding-bottom: 77px;
   background-color: #222222 !important;
 }

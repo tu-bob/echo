@@ -21,7 +21,9 @@
         <div id="side-menu" v-if="!menuCollapsed || windowWidth > 768" style="width: 240px; min-height: 100vh"
              :v-model="showSideBar"
              title="Sidebar">
-            <b-img center class="w-50 my-4" src="/icons/png/logo_echo_full_color.png"></b-img>
+            <router-link :to="{name:'home'}">
+                <b-img center class="w-50 my-4" src="/icons/png/logo_echo_full_color.png"></b-img>
+            </router-link>
             <ul class="main-nav">
                 <li class="nav-item">
                     <router-link :to="{name:'a.home.management'}" class="nav-link">

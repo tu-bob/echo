@@ -19,7 +19,7 @@
         </b-container>
 
         <div class="mt-5">
-<!--            <artists-table :url="url" class="px-3"></artists-table>-->
+            <video-table :url="url" class="px-3"></video-table>
         </div>
     </div>
 </template>
@@ -27,9 +27,10 @@
 <script>
 import LinkWithIconLarge from "../../components/LinkWithIconLarge";
 import FiltersForm from "../../components/FiltersForm";
+import VideoTable from "./VideoTable";
 export default {
     name: "VideoManagementPage",
-    components: {FiltersForm, LinkWithIconLarge},
+    components: {VideoTable, FiltersForm, LinkWithIconLarge},
     data () {
         return {
             title: '',
