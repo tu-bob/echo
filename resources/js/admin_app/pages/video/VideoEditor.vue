@@ -51,11 +51,12 @@ export default {
     methods: {
         submit() {
             this.submitting = true;
-            console.log(this.id)
+
             let action = getStoreOrUpdateAction(this.id, '/media/video');
             this.video._method = action.method
             axios.post(action.url, this.video)
                 .then(_ => {
+                    this.id = null;
                     this.video = {
                         title: null,
                         type: null,

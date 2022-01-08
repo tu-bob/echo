@@ -75,7 +75,7 @@
         components: {ImageUploader},
         mixins: [ResetErrorsMixin],
         created() {
-            if (this.$route.params.id)
+            if (this.id)
                 this.fetchData();
         },
         data() {
@@ -129,7 +129,20 @@
 
                 axios.post(action.url, data)
                     .then(_ => {
-                        this.$router.push({name: 'artists-table'})
+                        this.id = null;
+                        this.artist = {
+                            name: null,
+                                type: null,
+                                info: null,
+                                links: {
+                                instagram: null,
+                                    vk: null,
+                                    youtube: null,
+                                    facebook: null
+                            }
+                        };
+                        this.avatarFile = null;
+                        this.aliases = [];
                     })
                     .catch(e => console.log(e))
                     .finally(_ => {
@@ -137,7 +150,7 @@
                     });
             },
             fetchData() {
-                axios.get(`/media/artist/${this.$route.params.id}`)
+                axios.get(`/media/artist/${this.id}`)
                     .then(response => this.setData(response))
             },
             setData(artist) {
