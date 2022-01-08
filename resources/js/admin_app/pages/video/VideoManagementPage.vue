@@ -11,7 +11,7 @@
                 <b-col sm="12" md="7" lg="8" xl="9" class="filters-form-wrapper">
                     <filters-form header-text="Поиск видео" @submit="changeUrl">
                         <b-col sm="12" class="my-3 my-lg-0">
-                            <input v-model="artist" class="filter-input w-100" type="text" placeholder="Название">
+                            <input v-model="title" class="filter-input w-100" type="text" placeholder="Название">
                         </b-col>
                     </filters-form>
                 </b-col>
@@ -27,21 +27,24 @@
 <script>
 import LinkWithIconLarge from "../../components/LinkWithIconLarge";
 import FiltersForm from "../../components/FiltersForm";
-import VideoTable from "./VideoTable";
+import VideoTable from "./VideosTable";
 export default {
     name: "VideoManagementPage",
     components: {VideoTable, FiltersForm, LinkWithIconLarge},
     data () {
         return {
             title: '',
-            url: `/blog/post/list?`
+            type:'',
+            url: `/media/video?`
         }
     },
     methods: {
         changeUrl() {
-            let url = `/blog/post/list?`
+            let url = `/media/video?`
             if(this.title)
                 url+=`filter[title]=${this.title}&`
+            if(this.type)
+                url+=`filter[type]=${this.type}&`
             this.url = url
         }
     }

@@ -103,7 +103,8 @@ export default [
                     {
                         name: 'a.video.editor',
                         path: 'editor/:id?',
-                        component: () => import('../pages/video/VideoEditor')
+                        component: () => import('../pages/video/VideoEditor'),
+                        props:true
                     },
                 ]
             }

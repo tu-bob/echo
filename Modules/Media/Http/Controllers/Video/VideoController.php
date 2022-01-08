@@ -5,16 +5,30 @@ namespace Modules\Media\Http\Controllers\Video;
 
 
 use Modules\Media\Http\Filters\Media\VideoFilter;
+use Modules\Media\Http\Filters\VideoQuery;
 use Modules\Media\Models\Video\Video;
 use Modules\Shared\Http\Controllers\BaseController;
 
 class VideoController extends BaseController
 {
+    /**
+     * @deprecated
+     * TODO remove
+     * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator|\Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection
+     */
     public function getVideos()
     {
         $query = Video::withoutTrashed();
-//        $filter = new VideoFilter(request()->all(), $query);
         return $this->callGetOrPaginate($query);
+    }
+    public function index(){
+        $query = Video::latest();
+        $filter = new VideoQuery($query);
+        return $this->callGetOrPaginate($filter);
+    }
+
+    public function show(Video $video){
+        return $video;
     }
 
     public function store(){
@@ -22,7 +36,7 @@ class VideoController extends BaseController
     }
 
     public function update(Video $video){
-        return $video::update($this->getValidatedData());
+        return $video->update($this->getValidatedData());
     }
 
     private function getValidatedData(){
@@ -31,6 +45,11 @@ class VideoController extends BaseController
             'src' => 'required | string',
             'type' => 'required | string',
         ]);
+    }
+
+    public function destroy(Video $video){
+        $video->delete();
+        return;
     }
 
     public function incrementViewCount(Video $video){

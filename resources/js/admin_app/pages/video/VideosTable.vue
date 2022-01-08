@@ -1,9 +1,10 @@
 <template>
-    <table-card :items="artists"
+    <table-card :items="videos"
                 :fields="fields"
                 :url="url"
                 :columnsToHide="columnsToHide"
                 :paginate="20"
+                @dataUpdated="onDataUpdated"
                 striped>
         <template #header>
             <slot name="header">
@@ -11,33 +12,29 @@
             </slot>
         </template>
 
-        <template v-slot:aliases="{item}">
-            <span v-for="alias in item.aliases">{{alias.name}}; </span>
-        </template>
-
         <template v-slot:edit="{item}">
-            <a href="#" @click.prevent="$router.push({ name: 'a.artist.editor', params: { id: item.id }})">
+            <a href="#" @click.prevent="$router.push({ name: 'a.video.editor', params: { id: item.id }})">
                 <img class="icon-btn-sm" src="/icons/svg/edit.svg">
             </a>
         </template>
 
         <template v-slot:delete="{item}">
-            <slot name="delete" v-bind:song="item">
-                --
-            </slot>
+            <delete-entity-icon :url="`/media/video/${item.id}`"
+                                @deleted="removeItemFromData(item)"></delete-entity-icon>
         </template>
     </table-card>
 </template>
 
 <script>
 import TableCard from "../../../components/common/tables/TableCard";
+import DeleteEntityIcon from "../../components/DeleteEntityIcon";
 
 export default {
-    name: "VideoTable",
+    name: "VideosTable",
     props: {
         columnsToHide: {
             type: Array,
-            default: () => ['delete']
+            default: () => []
         },
         data: {
             type: Array,
@@ -45,16 +42,20 @@ export default {
         },
         url: {
             type: String,
-            default: '/media/artist/list?order=latest&'
+            default: '/video'
         }
     },
     data() {
         return {
-            artists: this.data,
+            videos: this.data,
             fields: [
                 {
-                    key: "aliases",
-                    label: "Имена"
+                    key: "title",
+                    label: "Название"
+                },
+                {
+                    key: "type",
+                    label: "Type"
                 },
                 {
                     key: "edit",
@@ -67,12 +68,16 @@ export default {
             ]
         }
     },
-    watch: {
-        data() {
-            this.artists = this.data;
+    methods: {
+        removeItemFromData(item) {
+            this.videos = this.videos.filter( v => v.id !== item.id)
+        },
+        onDataUpdated(data){
+            this.videos = data;
         }
     },
     components: {
+        DeleteEntityIcon,
         TableCard
     }
 }

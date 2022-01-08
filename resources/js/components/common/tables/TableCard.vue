@@ -127,6 +127,7 @@
                             if (this.paginate) {
                                 this.pagination = response;
                                 this.tableItems = response.data;
+                                this.$emit('dataUpdated',this.tableItems)
                             } else this.tableItems = response
                         })
                         .catch();

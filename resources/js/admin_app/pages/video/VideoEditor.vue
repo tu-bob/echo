@@ -51,10 +51,16 @@ export default {
     methods: {
         submit() {
             this.submitting = true;
+            console.log(this.id)
             let action = getStoreOrUpdateAction(this.id, '/media/video');
-
+            this.video._method = action.method
             axios.post(action.url, this.video)
                 .then(_ => {
+                    this.video = {
+                        title: null,
+                        type: null,
+                        src: null,
+                    }
                     // this.$router.push({name: 'videos-table'})
                 })
                 .catch(e => console.log(e))
@@ -67,15 +73,7 @@ export default {
                 .then(response => this.setData(response))
         },
         setData(video) {
-            let links = {};
-            for (let i in video.externalLinks) {
-                links[video.externalLinks[i].resource] = video.externalLinks[i].link;
-            }
-            video.links = links;
             this.video = video;
-            this.aliases = video.aliases.map(function (alias) {
-                return alias.name;
-            })
         }
     },
 }
