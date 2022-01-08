@@ -1,28 +1,31 @@
 <template>
-    <table-card :items="videos"
-                :fields="fields"
-                :url="url"
-                :columnsToHide="columnsToHide"
-                :paginate="20"
-                @dataUpdated="onDataUpdated"
-                striped>
-        <template #header>
-            <slot name="header">
-                <span>Список видео</span>
-            </slot>
-        </template>
+    <div>
+        <table-card :items="videos"
+                    :fields="fields"
+                    :url="url"
+                    :columnsToHide="columnsToHide"
+                    :paginate="20"
+                    @dataUpdated="onDataUpdated"
+                    striped>
+            <template #header>
+                <slot name="header">
+                    <span>Список видео</span>
+                </slot>
+            </template>
 
-        <template v-slot:edit="{item}">
-            <a href="#" @click.prevent="$router.push({ name: 'a.video.editor', params: { id: item.id }})">
-                <img class="icon-btn-sm" src="/icons/svg/edit.svg">
-            </a>
-        </template>
+            <template v-slot:edit="{item}">
+                <a href="#" @click.prevent="$router.push({ name: 'a.video.editor', params: { id: item.id }})">
+                    <img class="icon-btn-sm" src="/icons/svg/edit.svg">
+                </a>
+            </template>
 
-        <template v-slot:delete="{item}">
-            <delete-entity-icon :url="`/media/video/${item.id}`"
-                                @deleted="removeItemFromData(item)"></delete-entity-icon>
-        </template>
-    </table-card>
+            <template v-slot:delete="{item}">
+                <delete-entity-icon :url="`/media/video/${item.id}`"
+                                    @deleted="removeItemFromData(item)"></delete-entity-icon>
+            </template>
+        </table-card>
+    </div>
+
 </template>
 
 <script>

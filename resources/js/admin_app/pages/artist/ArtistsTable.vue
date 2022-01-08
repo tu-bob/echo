@@ -1,32 +1,35 @@
 <template>
-    <table-card :items="artists"
-                :fields="fields"
-                :url="url"
-                :columnsToHide="columnsToHide"
-                :paginate="20"
-                striped>
-        <template #header>
-            <slot name="header">
-                <span>Список исполнителей</span>
-            </slot>
-        </template>
+    <div>
+        <table-card :items="artists"
+                    :fields="fields"
+                    :url="url"
+                    :columnsToHide="columnsToHide"
+                    :paginate="20"
+                    striped>
+            <template #header>
+                <slot name="header">
+                    <span>Список исполнителей</span>
+                </slot>
+            </template>
 
-        <template v-slot:aliases="{item}">
-            <span v-for="alias in item.aliases">{{alias.name}}; </span>
-        </template>
+            <template v-slot:aliases="{item}">
+                <span v-for="alias in item.aliases">{{alias.name}}; </span>
+            </template>
 
-        <template v-slot:edit="{item}">
-            <a href="#" @click.prevent="$router.push({ name: 'a.artist.editor', params: { id: item.id }})">
-                <img class="icon-btn-sm" src="/icons/svg/edit.svg">
-            </a>
-        </template>
+            <template v-slot:edit="{item}">
+                <a href="#" @click.prevent="$router.push({ name: 'a.artist.editor', params: { id: item.id }})">
+                    <img class="icon-btn-sm" src="/icons/svg/edit.svg">
+                </a>
+            </template>
 
-        <template v-slot:delete="{item}">
-            <slot name="delete" v-bind:song="item">
-                --
-            </slot>
-        </template>
-    </table-card>
+            <template v-slot:delete="{item}">
+                <slot name="delete" v-bind:song="item">
+                    --
+                </slot>
+            </template>
+        </table-card>
+    </div>
+
 </template>
 
 <script>
