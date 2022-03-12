@@ -49,9 +49,9 @@
     import {concatStrings, secondsToFormattedMinutes} from '../../../../util/stringHelper'
     import {getSongIconUrl} from "../../../../api/mediaApi";
     import {mapGetters} from "vuex";
-    import SafeImage from "../../image/SafeImage";
     import {library} from '@fortawesome/fontawesome-svg-core'
     import {faDownload, faEllipsisH, faInfoCircle, faUser, faMusic} from '@fortawesome/free-solid-svg-icons'
+    import SafeImage from "../../image/SafeImage";
 
     library.add(faDownload, faEllipsisH, faInfoCircle, faUser, faMusic);
 
@@ -90,6 +90,7 @@
     }
 
 </script>
+
 <style scoped>
     .song-details {
         width: calc(100% - 60px);

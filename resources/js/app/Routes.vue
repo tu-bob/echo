@@ -20,7 +20,7 @@ const routes = [
                 // },
                 {
                     name: 'search',
-                    path: '/search/:query?', component: () => import('../components/public/search/SearchOverview'),
+                    path: 'search/:query?', component: () => import('../components/public/search/SearchOverview'),
                     props: true
                 },
                 {
@@ -41,13 +41,13 @@ const routes = [
                         },
                         {
                             name: 'music',
-                            path: '/music',
+                            path: 'music',
                             redirect: {name: 'music-list'},
                             component: () => import('../components/public/music/MusicViewer'),
                             children: [
                                 {
                                     name: 'music-list',
-                                    path: '/',
+                                    path: '',
                                     props: (route) => ({genres: route.query.genres}),
                                     component: () => import('../components/public/music/Music')
                                 },
@@ -82,25 +82,25 @@ const routes = [
                 },
                 {
                     name: 'album-view',
-                    path: '/albums/:id',
+                    path: 'albums/:id',
                     props: true,
                     component: () => import('../components/public/album/AlbumView')
                 },
                 {
                     name: 'song-view',
-                    path: '/songs/:id',
+                    path: 'songs/:id',
                     props: true,
                     component: () => import('../components/public/music/SongView')
                 },
                 {
                     name: 'artist-view',
-                    path: '/artists/:id',
+                    path: 'artists/:id',
                     props: true,
                     component: () => import('../components/public/artist/ArtistView')
                 },
                 {
                     name: 'post-reader',
-                    path: '/blog/post/:slug',
+                    path: 'blog/post/:slug',
                     props: true,
                     component: () => import('../components/public/blog/PostReader'),
                 }

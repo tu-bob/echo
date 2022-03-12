@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="player bg-dark container-fluid text-white" variant="dark">
+        <div class="player bg-dark container-fluid text-white">
             <div class="row h-100 position-relative">
                 <div class="d-none d-sm-flex col-sm-2 col-md-4 player-control">
                     <template v-if="ACTIVE_SONG">
@@ -434,100 +434,3 @@
         }
     }
 </script>
-
-<style scoped>
-    /*.player {*/
-    /*    z-index: 2000;*/
-    /*    position: fixed;*/
-    /*    bottom: 0;*/
-    /*    left: 0;*/
-    /*    height: 60px;*/
-    /*    width: 100%;*/
-    /*}*/
-
-    /*.player-control {*/
-    /*    display: flex;*/
-    /*    align-items: center !important;*/
-    /*    height: 100%*/
-    /*}*/
-
-    /*.progress-bar-wrapper {*/
-    /*    margin: 0 !important;*/
-    /*    position: absolute;*/
-    /*    top: -6px;*/
-    /*    left: 0;*/
-    /*    height: 6px;*/
-    /*    width: 100% !important;*/
-    /*}*/
-
-    /*.player-progress {*/
-    /*    background-color: gray;*/
-    /*    cursor: pointer;*/
-    /*    height: 100%;*/
-    /*    min-width: 200px;*/
-    /*    position: relative;*/
-    /*}*/
-
-    /*.player-progress .player-seeker {*/
-    /*    background: linear-gradient(39deg, #15c0e9 0%, #f0536a 80%);*/
-    /*    bottom: 0;*/
-    /*    left: 0;*/
-    /*    position: absolute;*/
-    /*    top: 0;*/
-    /*}*/
-
-    /*.player-progress .player-loading-progress {*/
-    /*    background: #ffffff;*/
-    /*    bottom: 0;*/
-    /*    left: 0;*/
-    /*    top: 0;*/
-    /*    position: absolute;*/
-    /*}*/
-
-    /*.player-overlay {*/
-    /*    z-index: 200;*/
-    /*    overflow: scroll;*/
-    /*    width: 100%;*/
-    /*    position: fixed;*/
-    /*    bottom: 66px;*/
-    /*    top: 0;*/
-    /*    left: 0;*/
-    /*    backdrop-filter: blur(6px);*/
-    /*    opacity: 0.95;*/
-    /*    background: linear-gradient(135deg, #373737 0%, #24181e 95%);*/
-    /*}*/
-
-    /*.player-overlay::-webkit-scrollbar {*/
-    /*    display: none;*/
-    /*}*/
-
-    /*.player-disable-overlay {*/
-    /*    top: -6px;*/
-    /*    left: 0;*/
-    /*    right: 0;*/
-    /*    position: absolute;*/
-    /*    height: 66px;*/
-    /*    background: #000000;*/
-    /*    filter: blur(2px);*/
-    /*    opacity: 0.5;*/
-    /*}*/
-
-    /*.player-overlay-content {*/
-    /*    position: fixed;*/
-    /*    top: 50px;*/
-    /*    left: 0;*/
-    /*    right: 0;*/
-    /*    bottom: 0;*/
-    /*    overflow: scroll*/
-    /*}*/
-
-    /*.player-overlay-content::-webkit-scrollbar {*/
-    /*    display: none;*/
-    /*}*/
-
-    /*.song-lyrics {*/
-    /*    color: #ffffff;*/
-    /*    font-size: 18px;*/
-    /*    text-align: center;*/
-    /*}*/
-</style>

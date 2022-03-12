@@ -14,9 +14,9 @@
 
 <script>
     import {fetchSongs} from "../../../../api/mediaApi";
+    import AxiosCancellationMixin from "../../../admin/mixins/AxiosCancellationMixin";
     import SongCard from "./SongCard";
     import Pagination from "../../inputs/Pagination";
-    import AxiosCancellationMixin from "../../../admin/mixins/AxiosCancellationMixin";
 
     export default {
         name: "SongsList",

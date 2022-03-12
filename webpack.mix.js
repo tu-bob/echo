@@ -1,4 +1,5 @@
 const mix = require('laravel-mix');
+const path = require("path");
 
 /*
  |--------------------------------------------------------------------------
@@ -18,4 +19,5 @@ mix.config.webpackConfig.output = {
 
 mix.js('resources/js/app.js', 'public/js')
     .sass('resources/sass/app.scss', 'public/css')
+    .sourceMaps()
     .version();
