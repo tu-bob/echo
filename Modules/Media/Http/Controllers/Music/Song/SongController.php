@@ -5,7 +5,6 @@ namespace Modules\Media\Http\Controllers\Music\Song;
 
 
 use Illuminate\Support\Facades\Storage;
-use Modules\Media\Http\Filters\Media\SongFilter;
 use Modules\Media\Http\Filters\SongQuery;
 use Modules\Media\Http\Requests\Music\SongRequest;
 use Modules\Media\Libs\Request\RequestWriter\Music\StoreSongRequestWriter;
@@ -20,7 +19,7 @@ class SongController extends BaseController
             'store'
         ];
 
-        $this->middleware('auth')->only($admin);
+        $this->middleware(['auth', 'roles.allow:admin'])->only($admin);
     }
 
     public function store(SongRequest $request)
