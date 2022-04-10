@@ -4,16 +4,14 @@
 namespace Modules\Media\Http\Controllers\Music;
 
 
-use Modules\Media\Http\Filters\Media\MusicAlbumFilter;
+
 use Modules\Media\Http\Filters\MusicAlbumQuery;
 use Modules\Media\Http\Requests\Music\MusicAlbumRequest;
 use Modules\Media\Libs\Request\RequestWriter\Music\StoreMusicAlbumRequestWriter;
 use Modules\Media\Libs\StringComparator\DiceBestMatchFinder;
-use Modules\Media\Models\Image\ImageFileProvider;
 use Modules\Media\Models\Music\MusicAlbum;
 use Modules\Media\Models\Music\MusicAlbumType;
 use Modules\Shared\Http\Controllers\BaseController;
-use Modules\Shared\Http\Responses\FileResponse;
 
 class MusicAlbumController extends BaseController
 {
@@ -23,7 +21,7 @@ class MusicAlbumController extends BaseController
             'store'
         ];
 
-        $this->middleware('auth')->only($admin);
+        $this->middleware(['auth', 'roles.allow:admin'])->only($admin);
     }
 
     public function store(MusicAlbumRequest $request)
