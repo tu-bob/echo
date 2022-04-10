@@ -67,6 +67,9 @@
                             </div>
                         </div>
                     </template>
+                    <router-link v-else :to="{name:'login'}">
+                        Войти
+                    </router-link>
                 </b-navbar-nav>
 
                 <ul class="social-icons d-none d-md-block ml-auto">
