@@ -25,7 +25,7 @@
                      body-bg-variant="dark"
                      body-text-variant="light"
                      hide-footer
-                     size="xl"
+                     size="lg"
                      content-class="border-0"
                      header-class="border-0"
                      ok-only>
