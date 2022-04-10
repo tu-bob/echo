@@ -31,7 +31,7 @@ Route::prefix('auth')->group(function () {
     Route::middleware('auth')->post('logout', 'Auth\LoginController@logout');
     Route::post('register', 'Auth\RegisterController@register');
     Route::get('user', function (){
-        return \auth()->user();
+        return \auth()->user()?->load('roles');
     });
 });
 
