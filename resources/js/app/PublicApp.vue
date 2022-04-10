@@ -144,7 +144,7 @@
                         </div>
                     </router-link>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item" v-if="IS_ADMIN">
                     <router-link :to="{name:'a.home'}" class="nav-link">
                         <div class="nav-link-content">
                             <font-awesome-icon icon="crown" class="nav-icon"></font-awesome-icon>
@@ -279,7 +279,8 @@
                 'NAV_TYPE',
                 'NAV_VARIANT',
                 'DEFAULT_BUTTON_CLASSES',
-                'PREV_ROUTE'
+                'PREV_ROUTE',
+                'IS_ADMIN'
             ])
         }
     }

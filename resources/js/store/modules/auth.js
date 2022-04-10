@@ -1,8 +1,10 @@
 import {fetchUser} from "../../api/authApi";
+import {commit} from "lodash/seq";
 
 const state = {
     auth: {
-        user: null
+        user: null,
+        isAdmin: false
     }
 };
 const getters = {
@@ -11,11 +13,18 @@ const getters = {
     },
     AUTH_USER: state => {
         return state.auth.user
+    },
+    IS_ADMIN: state => {
+        return state.auth.isAdmin;
     }
 };
 const mutations = {
     SET_AUTH_USER: (state, payload) => {
         state.auth.user = payload;
+        state.auth.isAdmin = state.auth.user?.roles?.find(r => r.name === 'admin')
+    },
+    SET_IS_ADMIN: (state, payload) => {
+        state.auth.isAdmin = payload
     }
 };
 const actions = {
@@ -24,7 +33,7 @@ const actions = {
             'email': payload.email,
             'password': payload.password
         })
-            .then(response => { 
+            .then(response => {
                 context.commit('SET_AUTH_USER', response)
             });
     },
@@ -33,6 +42,7 @@ const actions = {
             .catch(e => Promise.reject(e))
             .then(_ => {
                 context.commit('SET_AUTH_USER', null)
+                context.commit('SET_IS_ADMIN', false)
             });
     },
     FETCH_USER: async (context, payload) => {
@@ -42,7 +52,7 @@ const actions = {
                 context.commit('SET_AUTH_USER', null);
                 return Promise.reject(e);
             })
-    }
+    },
 };
 
 export default {
