@@ -20,7 +20,7 @@ class SongQuery extends QueryBuilder
 
         parent::__construct($subject, $request);
 
-        $this->allowedFilters('title', 'artistAliases.name');
+        $this->allowedFilters('title', 'artistAliases.name', 'genres.id');
 
         $this->allowedSorts(
             AllowedSort::custom('random', new RandomSort()),

@@ -36,7 +36,7 @@
         mixins: [MetaTagsMixin],
         computed: {
             filters() {
-                return this.genres ? {genres: this.genres} : {};
+                return this.genres ? {'filter[genres.id]': this.genres} : {};
             }
         }
     }
