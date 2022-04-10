@@ -7,10 +7,9 @@ export default {
     name: "EntryPoint",
     props:{
         user: Object
+    },
+    mounted() {
+        this.$store.dispatch('FETCH_USER')
     }
 }
 </script>
-
-<style scoped>
-
-</style>

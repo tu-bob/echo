@@ -30,7 +30,7 @@ Route::prefix('auth')->group(function () {
     Route::post('login', 'Auth\LoginController@login');
     Route::middleware('auth')->post('logout', 'Auth\LoginController@logout');
     Route::post('register', 'Auth\RegisterController@register');
-    Route::middleware('auth')->get('user', function (){
+    Route::get('user', function (){
         return \auth()->user();
     });
 });
