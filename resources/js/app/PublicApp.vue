@@ -144,6 +144,14 @@
                         </div>
                     </router-link>
                 </li>
+                <li class="nav-item">
+                    <router-link :to="{name:'a.home'}" class="nav-link">
+                        <div class="nav-link-content">
+                            <font-awesome-icon icon="crown" class="nav-icon"></font-awesome-icon>
+                            <span class="nav-link-text">Админ</span>
+                        </div>
+                    </router-link>
+                </li>
             </ul>
 
             <template v-slot:footer>
@@ -204,14 +212,15 @@
         faMusic,
         faCompactDisc,
         faUser,
-        faFilm
+        faFilm,
+        faCrown
     } from '@fortawesome/free-solid-svg-icons'
     import Facebook from "../components/common/external-icons/facebook";
     import Instagram from "../components/common/external-icons/instagram";
     import Youtube from "../components/common/external-icons/youtube";
 
     library.add(faCaretDown, faSearch, faTimes, faHome, faBars, faNewspaper, faMusic,
-        faCompactDisc, faUser, faFilm);
+        faCompactDisc, faUser, faFilm, faCrown);
 
     export default {
         name: "PublicApp",
