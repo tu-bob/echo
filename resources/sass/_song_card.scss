@@ -1,0 +1,31 @@
+.song-card{
+
+    .song-details {
+        width: calc(100% - 60px);
+        display: flex;
+        margin-left: 0.5rem;
+        margin-top: 0.5rem;
+    }
+
+    .thumb {
+        object-fit: cover;
+        width: 50px !important;
+        height: 50px;
+    }
+
+    .song-title {
+        flex: 1 1 auto;
+        overflow: hidden;
+    }
+
+    .song-buttons {
+        /*width: 114px;*/
+        display: flex;
+        align-items: baseline;
+        height: 100%;
+    }
+
+    .disabled svg {
+        filter: invert(47%) sepia(6%) saturate(663%) hue-rotate(167deg) brightness(93%) contrast(87%);
+    }
+}

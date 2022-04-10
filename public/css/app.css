@@ -16124,4 +16124,70 @@ section .section-header .more-btn:hover {
   text-align: center;
 }
 
+.song-card .song-details {
+  width: calc(100% - 60px);
+  display: flex;
+  margin-left: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.song-card .thumb {
+  -o-object-fit: cover;
+     object-fit: cover;
+  width: 50px !important;
+  height: 50px;
+}
+
+.song-card .song-title {
+  flex: 1 1 auto;
+  overflow: hidden;
+}
+
+.song-card .song-buttons {
+  /*width: 114px;*/
+  display: flex;
+  align-items: baseline;
+  height: 100%;
+}
+
+.song-card .disabled svg {
+  filter: invert(47%) sepia(6%) saturate(663%) hue-rotate(167deg) brightness(93%) contrast(87%);
+}
+
+.public-app .user-name {
+  display: flex;
+  max-width: 150px;
+  max-height: 54px;
+  overflow: hidden;
+  white-space: nowrap;
+  padding-top: 0.5rem;
+  color: #9a9da0;
+  font-weight: 400;
+}
+
+.public-app #search-input {
+  position: relative;
+}
+
+.public-app #search-input input {
+  background: #1a1d20;
+  border: 0;
+  border-radius: 2em;
+  color: #fff;
+  padding: 0 40px 0 15px;
+  font-size: 14px;
+  margin-right: 12px;
+}
+
+.public-app #search-input input:focus {
+  outline: none;
+}
+
+.public-app #search-input svg {
+  position: absolute;
+  right: 24px;
+  top: 7px;
+  size: 17px;
+}
+
 /* (ignored) *//* (ignored) */

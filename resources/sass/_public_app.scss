@@ -1,0 +1,37 @@
+.public-app{
+    .user-name {
+        display: flex;
+        max-width: 150px;
+        max-height: 54px;
+        overflow: hidden;
+        white-space: nowrap;
+        padding-top: 0.5rem;
+        color: #9a9da0;
+        font-weight: 400;
+    }
+
+    #search-input {
+        position: relative
+    }
+
+    #search-input input {
+        background: #1a1d20;
+        border: 0;
+        border-radius: 2em;
+        color: #fff;
+        padding: 0 40px 0 15px;
+        font-size: 14px;
+        margin-right: 12px;
+    }
+
+    #search-input input:focus {
+        outline: none
+    }
+
+    #search-input svg {
+        position: absolute;
+        right: 24px;
+        top: 7px;
+        size: 17px
+    }
+}

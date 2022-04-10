@@ -1,5 +1,5 @@
 <template>
-    <div class="mb-3 px-0 h-border-violet h-cursor"
+    <div class="mb-3 px-0 h-border-violet h-cursor song-card"
          :class="{active: ACTIVE_SONG && ACTIVE_SONG.id === song.id}">
         <div class="d-flex text-white text-left" @click="play">
             <safe-image :src="coverUrl"
@@ -91,33 +91,33 @@
 
 </script>
 
-<style scoped>
-    .song-details {
-        width: calc(100% - 60px);
-        display: flex;
-        margin-left: 0.5rem;
-        margin-top: 0.5rem;
-    }
+<!--<style scoped>-->
+<!--    .song-details {-->
+<!--        width: calc(100% - 60px);-->
+<!--        display: flex;-->
+<!--        margin-left: 0.5rem;-->
+<!--        margin-top: 0.5rem;-->
+<!--    }-->
 
-    .thumb {
-        object-fit: cover;
-        width: 50px !important;
-        height: 50px;
-    }
+<!--    .thumb {-->
+<!--        object-fit: cover;-->
+<!--        width: 50px !important;-->
+<!--        height: 50px;-->
+<!--    }-->
 
-    .song-title {
-        flex: 1 1 auto;
-        overflow: hidden;
-    }
+<!--    .song-title {-->
+<!--        flex: 1 1 auto;-->
+<!--        overflow: hidden;-->
+<!--    }-->
 
-    .song-buttons {
-        /*width: 114px;*/
-        display: flex;
-        align-items: baseline;
-        height: 100%;
-    }
+<!--    .song-buttons {-->
+<!--        /*width: 114px;*/-->
+<!--        display: flex;-->
+<!--        align-items: baseline;-->
+<!--        height: 100%;-->
+<!--    }-->
 
-    .disabled svg {
-        filter: invert(47%) sepia(6%) saturate(663%) hue-rotate(167deg) brightness(93%) contrast(87%);
-    }
-</style>
+<!--    .disabled svg {-->
+<!--        filter: invert(47%) sepia(6%) saturate(663%) hue-rotate(167deg) brightness(93%) contrast(87%);-->
+<!--    }-->
+<!--</style>-->
