@@ -30,23 +30,42 @@
                     </font-awesome-icon>
                 </div>
 
-                <b-navbar-nav>
-                    <template v-if="AUTHENTICATED">
-                        <b-nav-item-dropdown text="Блог" left>
-                            <b-dropdown-item :to="{name: 'posts-table'}">Посты</b-dropdown-item>
-                            <b-dropdown-item :to="{name: 'post-editor'}">Добавить пост</b-dropdown-item>
-                        </b-nav-item-dropdown>
+<!--                <b-navbar-nav>-->
+<!--                    <template v-if="AUTHENTICATED">-->
+<!--                        <b-nav-item-dropdown text="Блог" left>-->
+<!--                            <b-dropdown-item :to="{name: 'posts-table'}">Посты</b-dropdown-item>-->
+<!--                            <b-dropdown-item :to="{name: 'post-editor'}">Добавить пост</b-dropdown-item>-->
+<!--                        </b-nav-item-dropdown>-->
 
-                        <b-nav-item-dropdown text="Медиа" left>
-                            <b-dropdown-item :to="{name: 'artists-table'}">Исполнители</b-dropdown-item>
-                            <b-dropdown-item :to="{name: 'artist-editor'}">Добавить исполнителя</b-dropdown-item>
-                            <b-dropdown-divider></b-dropdown-divider>
-                            <b-dropdown-item :to="{name: 'songs-table'}">Песни</b-dropdown-item>
-                            <b-dropdown-item :to="{name: 'song-editor'}">Добавить песню</b-dropdown-item>
-                            <b-dropdown-divider></b-dropdown-divider>
-                            <b-dropdown-item :to="{name: 'albums-table'}">Альбомы</b-dropdown-item>
-                            <b-dropdown-item :to="{name: 'album-editor'}">Добавить альбом</b-dropdown-item>
-                        </b-nav-item-dropdown>
+<!--                        <b-nav-item-dropdown text="Медиа" left>-->
+<!--                            <b-dropdown-item :to="{name: 'artists-table'}">Исполнители</b-dropdown-item>-->
+<!--                            <b-dropdown-item :to="{name: 'artist-editor'}">Добавить исполнителя</b-dropdown-item>-->
+<!--                            <b-dropdown-divider></b-dropdown-divider>-->
+<!--                            <b-dropdown-item :to="{name: 'songs-table'}">Песни</b-dropdown-item>-->
+<!--                            <b-dropdown-item :to="{name: 'song-editor'}">Добавить песню</b-dropdown-item>-->
+<!--                            <b-dropdown-divider></b-dropdown-divider>-->
+<!--                            <b-dropdown-item :to="{name: 'albums-table'}">Альбомы</b-dropdown-item>-->
+<!--                            <b-dropdown-item :to="{name: 'album-editor'}">Добавить альбом</b-dropdown-item>-->
+<!--                        </b-nav-item-dropdown>-->
+<!--                    </template>-->
+<!--                </b-navbar-nav>-->
+
+                <b-navbar-nav class="ml-auto">
+                    <template v-if="AUTHENTICATED">
+                        <b-avatar class="ml-auto mr-0 mr-md-3" :variant="AVATAR_VARIANT"></b-avatar>
+                        <div class="user-name d-none d-md-flex">
+                            {{AUTH_USER.name}}
+                        </div>
+                        <div class="dropdown">
+                            <div class="btn btn-text-white"
+                                 type="button"
+                                 id="profileMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <font-awesome-icon icon="caret-down"></font-awesome-icon>
+                            </div>
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="profileMenu">
+                                <a class="dropdown-item" href="#" @click="logout">Выйти</a>
+                            </div>
+                        </div>
                     </template>
                 </b-navbar-nav>
 
@@ -62,24 +81,9 @@
                     </li>
                 </ul>
             </b-navbar>
-            <div class="col-4 pr-4 d-flex align-items-center justify-content-end">
-                <template v-if="AUTHENTICATED">
-                    <b-avatar class="ml-auto mr-0 mr-md-3" :variant="AVATAR_VARIANT"></b-avatar>
-                    <div class="user-name d-none d-md-flex">
-                        {{AUTH_USER.name}}
-                    </div>
-                    <div class="dropdown">
-                        <div class="btn btn-text-white"
-                             type="button"
-                             id="profileMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <font-awesome-icon icon="caret-down"></font-awesome-icon>
-                        </div>
-                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="profileMenu">
-                            <a class="dropdown-item" href="#" @click="logout">Выйти</a>
-                        </div>
-                    </div>
-                </template>
-            </div>
+<!--            <div class="col-4 pr-4 d-flex align-items-center justify-content-end">-->
+
+<!--            </div>-->
         </div>
 
         <div id="tMainSpinner" :class="{'d-none':!isMainOverlayVisible}">
