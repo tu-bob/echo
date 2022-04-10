@@ -56,7 +56,7 @@
         methods: {
             fetchSongs(page = 1) {
                 this.isFetchingSongs = true;
-                fetchSongs({...{order: 'latest', page: page, paginate: 15}, ...this.filters},
+                fetchSongs({...{sort: 'latest', page: page, paginate: 15}, ...this.filters},
                     {cancelToken: this.getCancellationToken()}
                 )
                     .then(response => {

@@ -56,7 +56,7 @@
         methods: {
             fetchArtists(page = 1) {
                 this.isFetchingArtists = true;
-                fetchArtists({order: 'latest', page: page, paginate: 15},
+                fetchArtists({sort: 'latest', page: page, paginate: 15},
                     {cancelToken: this.getCancellationToken()})
                     .then(response => {
                         this.pagination = response;

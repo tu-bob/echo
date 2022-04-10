@@ -84,7 +84,7 @@
         methods: {
             fetchVideos(page = 1) {
                 this.isFetchingVideos = true;
-                fetchVideos({order: 'latest', page: page, paginate: 15},
+                fetchVideos({sort: 'latest', page: page, paginate: 15},
                     {cancelToken: this.getCancellationToken()}
                 )
                     .then(response => {

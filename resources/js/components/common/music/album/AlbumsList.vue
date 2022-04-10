@@ -55,7 +55,7 @@
         methods: {
             fetchAlbums(page = 1) {
                 this.isFetchingAlbums = true;
-                fetchAlbums({order: 'latest', songs: 1, page: page, paginate: 15},
+                fetchAlbums({sort: 'latest', songs: 1, page: page, paginate: 15},
                     {cancelToken: this.getCancellationToken()}
                 )
                     .then(response => {
