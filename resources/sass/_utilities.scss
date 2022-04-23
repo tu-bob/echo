@@ -1,0 +1,11 @@
+.hover-text-white:hover {
+    color: white
+}
+
+.hover-scale:hover {
+    transform: scale(1.05);
+}
+
+.hover-scale {
+    transition: 0.25s;
+}

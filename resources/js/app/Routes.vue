@@ -103,6 +103,12 @@ const routes = [
                     path: 'blog/post/:slug',
                     props: true,
                     component: () => import('../components/public/blog/PostReader'),
+                },
+                {
+                    name:'music-charts',
+                    path:'charts/music/:tab',
+                    props:true,
+                    component: () => import('../components/public/charts/MusicalChartsPage')
                 }
             ]
         },

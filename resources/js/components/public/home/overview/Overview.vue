@@ -1,10 +1,18 @@
 <template>
     <div class="container">
+
         <div class="row page-header">
             <h1 class="">Главная</h1>
         </div>
 
-        <!-- top music -->
+        <!--charts button-->
+        <section class="row">
+            <div class="container-fluid">
+                <top-chart-link></top-chart-link>
+            </div>
+        </section>
+
+        <!-- random music -->
         <section class="row">
             <div class="section-header">
                 <h2 class="section-title">Слушайте</h2>
@@ -31,7 +39,7 @@
             </div>
         </section>
 
-        <!-- top albums -->
+        <!-- random albums -->
         <section class="row">
             <div class="section-header">
                 <h2 class="section-title">Исследуйте</h2>
@@ -46,7 +54,7 @@
             </div>
         </section>
 
-        <!-- top videos -->
+        <!-- random videos -->
         <section class="row">
             <div class="section-header">
                 <h2 class="section-title">Смотрите</h2>
@@ -61,7 +69,7 @@
             </div>
         </section>
 
-        <!-- top albums -->
+        <!-- random albums -->
         <section class="row">
             <div class="section-header">
                 <h2 class="section-title">Читайте</h2>
@@ -88,6 +96,7 @@
     import {fetchPosts} from "../../../../api/blogApi";
     import AxiosCancellationMixin from "../../../admin/mixins/AxiosCancellationMixin";
     import MetaTagsMixin from "../../../admin/mixins/MetaTagsMixin";
+    import TopChartLink from "../../../common/buttons/MusicTopChartLink";
 
     export default {
         name: "Overview",
@@ -106,7 +115,7 @@
                 posts: []
             }
         },
-        components: {PostsList, VideosList, SongsList, AlbumsList},
+        components: {TopChartLink, PostsList, VideosList, SongsList, AlbumsList},
         methods: {
             fetchTopSongs() {
                 fetchSongs({sort: 'random', limit: 12},
