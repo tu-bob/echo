@@ -18,12 +18,11 @@
                     <img src="/icons/png/logo-nav.png" alt="echo.tj logo" style="height: 60px">
                 </b-navbar-brand>
 
-                <div id="search-input" v-if="$route.name !== 'search'">
+                <div id="search-input" v-if="$route.name !== 'search'" @keydown.enter.prevent.capture="navToSearch">
                     <input class="form-control-sm"
                            v-model="searchQuery"
                            placeholder="Трек, альбом, артист"
-                           type="text"
-                           @keydown.enter="navToSearch">
+                           type="text">
                     <font-awesome-icon class="text-secondary h-text-white"
                                        icon="search"
                                        @click="navToSearch">

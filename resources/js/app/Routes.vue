@@ -20,7 +20,8 @@ const routes = [
                 // },
                 {
                     name: 'search',
-                    path: 'search/:query?', component: () => import('../components/public/search/SearchOverview'),
+                    path: 'search/:query?',
+                    component: () => import('../components/public/search/SearchOverview'),
                     props: true
                 },
                 {
