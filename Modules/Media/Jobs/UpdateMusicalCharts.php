@@ -7,12 +7,18 @@
 namespace Modules\Media\Jobs;
 
 use Carbon\Carbon;
+use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Foundation\Bus\Dispatchable;
+use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Queue\SerializesModels;
 use Modules\Media\Enum\PlaylistType;
 use Modules\Media\Models\Playlist;
 
 class UpdateMusicalCharts implements ShouldQueue
 {
+    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
+
     public function handle()
     {
         Playlist::createTopSongsPlaylist(Carbon::now()->subMonth(), PlaylistType::MusicMonthlyChart,"Топ месяца");
