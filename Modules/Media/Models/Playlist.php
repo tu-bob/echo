@@ -39,10 +39,10 @@ class Playlist extends BaseModel
             ->pipe(function ($songsIds) {
                 return Song::whereIn('id', $songsIds)->get();
             })
-            ->pipe(function ($songs) use ($type) {
+            ->pipe(function ($songs) use ($type, $name) {
                 $playlist = Playlist::create([
                     'type' => $type->value,
-                    'name' => "Топ месяца"
+                    'name' => $name
                 ]);
                 $playlist->songs()->attach($songs);
             });

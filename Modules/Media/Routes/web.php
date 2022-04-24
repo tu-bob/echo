@@ -12,6 +12,7 @@
 */
 
 use Illuminate\Support\Facades\Route;
+use Modules\Media\Http\Controllers\Chart\MusicalChartController;
 
 Route::prefix('media')->group(function () {
 
@@ -78,6 +79,15 @@ Route::prefix('media')->group(function () {
         Route::get('/{video}', 'Video\VideoController@show');
         Route::get('/', 'Video\VideoController@index');
         Route::delete('/{video}', 'Video\VideoController@destroy');
+    });
+
+    //Chart Routes
+    Route::prefix('chart')->group(function (){
+        Route::prefix('music')->group(function (){
+            Route::get('monthly', [MusicalChartController::class, 'getMonthlyTop']);
+            Route::get('weekly', [MusicalChartController::class, 'getWeeklyTop']);
+            Route::get('daily', [MusicalChartController::class, 'getDailyTop']);
+        });
     });
 
     Route::get('/search/{needle}', 'Search\SearchController@search');

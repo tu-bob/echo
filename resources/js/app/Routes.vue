@@ -106,7 +106,7 @@ const routes = [
                 },
                 {
                     name:'music-charts',
-                    path:'charts/music/:tab',
+                    path:'charts/music',
                     props:true,
                     component: () => import('../components/public/charts/MusicalChartsPage')
                 }

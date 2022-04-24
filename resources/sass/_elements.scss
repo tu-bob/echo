@@ -1,0 +1,22 @@
+//Gradient Buttons
+.c-btn {
+    display: inline-block;
+    font-weight: 700;
+    padding: 0.5rem 3rem;
+    border-radius: 0.3rem;
+    cursor: pointer;
+    border:none;
+    color: white;
+}
+
+.c-btn-gradient-secondary {
+    @extend .c-btn;
+    background: rgb(55,55,55);
+    background: linear-gradient(45deg, rgba(55,55,55,1) 0%, rgba(83,79,79,1) 50%, rgba(119,119,119,1) 100%);
+}
+
+.c-btn-gradient-yellow-red {
+    @extend .c-btn;
+    background: linear-gradient(90deg, rgba(131, 58, 180, 1) 0%, rgba(253, 29, 29, 1) 50%, rgba(252, 176, 69, 1) 100%);
+}
+

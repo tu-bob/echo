@@ -8,7 +8,9 @@
         <!--charts button-->
         <section class="row">
             <div class="container-fluid">
-                <top-chart-link></top-chart-link>
+                <div class="row">
+                    <top-chart-link></top-chart-link>
+                </div>
             </div>
         </section>
 
