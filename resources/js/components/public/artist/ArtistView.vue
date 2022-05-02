@@ -20,8 +20,8 @@
             </div>
 
             <div>
-                <h1 class="typography-header-emphasized text-white">{{artist.aliases[0].name}}</h1>
-                <h2 class="typography-title text-secondary" v-if="aliases && aliases.length > 0">{{aliases}}</h2>
+                <h1 class="typography-header-emphasized text-white">{{ artist.aliases[0].name }}</h1>
+                <h2 class="typography-title text-secondary" v-if="aliases && aliases.length > 0">{{ aliases }}</h2>
                 <!--                <h2 class="typography-title text-secondary" v-if="translateType(artist.type)">-->
                 <!--                    {{translateType(artist.type)}}</h2>-->
                 <ul class="social-icons">
@@ -54,7 +54,11 @@
                     <!--                                                          src="/icons/svg/vk.svg"></a>-->
                 </ul>
                 <div v-if="artist.info">
-                    <pre ref="artistInfo" class="artist-info">{{artist.info}}</pre>
+                    <pre ref="artistInfo" style="color: #6c757d;
+                                                margin-top: 1rem;
+                                                margin-bottom: 0.25rem;
+                                                font-size: 16px;">
+                        {{ artist.info }}</pre>
                 </div>
             </div>
         </div>
@@ -119,114 +123,105 @@
 </template>
 
 <script>
-    import {concatStrings, getBaseUri} from "../../../util/stringHelper";
-    import AlbumCard from "../../common/music/album/AlbumCard";
-    import SongsList from "../../common/music/song/SongsList";
-    import VideosList from "../../common/video/VideosList";
-    import VideoCard from "../../common/video/VideoCard";
-    import {getAvatarImage} from "../../../api/mediaApi";
-    import MetaTagsMixin from "../../admin/mixins/MetaTagsMixin";
-    import NetworkShare from "../../common/inputs/NetworkShare";
-    import Instagram from "../../common/external-icons/instagram";
-    import Facebook from "../../common/external-icons/facebook";
-    import Youtube from "../../common/external-icons/youtube";
-    import Vkontakte from "../../common/external-icons/vkontakte";
+import {concatStrings, getBaseUri} from "../../../util/stringHelper";
+import AlbumCard from "../../common/music/album/AlbumCard";
+import SongsList from "../../common/music/song/SongsList";
+import VideosList from "../../common/video/VideosList";
+import VideoCard from "../../common/video/VideoCard";
+import {getAvatarImage} from "../../../api/mediaApi";
+import MetaTagsMixin from "../../admin/mixins/MetaTagsMixin";
+import NetworkShare from "../../common/inputs/NetworkShare";
+import Instagram from "../../common/external-icons/instagram";
+import Facebook from "../../common/external-icons/facebook";
+import Youtube from "../../common/external-icons/youtube";
+import Vkontakte from "../../common/external-icons/vkontakte";
 
-    export default {
-        name: "ArtistView",
-        props: {
-            id: null
+export default {
+    name: "ArtistView",
+    props: {
+        id: null
+    },
+    mixins: [MetaTagsMixin],
+    components: {
+        Vkontakte,
+        Youtube,
+        Facebook,
+        Instagram,
+        NetworkShare,
+        VideoCard,
+        VideosList,
+        SongsList,
+        AlbumCard
+    },
+    data() {
+        return {
+            artist: null,
+            selectedVideo: null,
+            showArtistInfo: false,
+            title: "Песни, альбомы, тексты, клипы и аккорды таджикских артистов",
+            description: 'Полная информация о творчестве таджикских исполнителей'
+        }
+    },
+    mounted() {
+        this.fetchArtist();
+    },
+    methods: {
+        fetchArtist() {
+            axios.get('/media/alias-artist/' + this.id)
+                .then(artist => this.artist = artist)
         },
-        mixins: [MetaTagsMixin],
-        components: {
-            Vkontakte,
-            Youtube,
-            Facebook,
-            Instagram,
-            NetworkShare,
-            VideoCard,
-            VideosList,
-            SongsList,
-            AlbumCard
-        },
-        data() {
-            return {
-                artist: null,
-                selectedVideo: null,
-                showArtistInfo: false,
-                title: "Песни, альбомы, тексты, клипы и аккорды таджикских артистов",
-                description: 'Полная информация о творчестве таджикских исполнителей'
-            }
-        },
-        mounted() {
-            this.fetchArtist();
-        },
-        methods: {
-            fetchArtist() {
-                axios.get('/media/alias-artist/' + this.id)
-                    .then(artist => this.artist = artist)
-            },
-            translateType(type) {
-                let types = {
-                    singer: 'Исполнитель',
-                    band: 'Группа',
-                    composer: 'Композитор',
-                    chorus: 'Хор',
-                    orchestra: 'Оркестр',
-                };
+        translateType(type) {
+            let types = {
+                singer: 'Исполнитель',
+                band: 'Группа',
+                composer: 'Композитор',
+                chorus: 'Хор',
+                orchestra: 'Оркестр',
+            };
 
-                return types[type];
-            },
-            showVideoModal(video) {
-                this.selectedVideo = video;
-                this.$nextTick(
-                    () => this.$bvModal.show('modal-video-player')
-                )
-            },
-            playSong(song) {
-                this.$store.commit('UPDATE_PLAYLIST', this.artist.songs);
-                this.$store.commit('SET_ACTIVE_SONG', song);
-            },
-            getLink(resource) {
-                return this.artist.externalLinks.find(a => a.resource === resource)?.link;
-            }
+            return types[type];
         },
-        computed: {
-            aliases() {
-                return concatStrings(this.artist.aliases.slice(1, this.artist.aliases.length).map(alias => alias.name), ' ·');
-            },
-            hashTags() {
-                let tags = concatStrings(this.artist.aliases.map(alias => alias.name), ',');
-                return tags.replace(/\s/g, '');
-            },
-            avatarUrl() {
-                if (this.artist.avatar_id)
-                    return getAvatarImage(this.artist.avatar_id);
-            },
-            fullAvatarUrl() {
-                return getBaseUri() + '/' + this.avatarUrl
-            },
-            pageUrl() {
-                return window.location.href;
-            }
+        showVideoModal(video) {
+            this.selectedVideo = video;
+            this.$nextTick(
+                () => this.$bvModal.show('modal-video-player')
+            )
         },
-        watch: {
-            artist() {
-                this.title = concatStrings(this.artist.aliases.map(alias => alias.name), ' ·') + ' - песни, альбомы, аккорды, тексты песен.';
-                this.description = 'Профиль ' + concatStrings(this.artist.aliases.map(alias => alias.name), ' ·') + ' на Echo.tj.' +
-                    ' Слушайте и скачивайте песни и альбомы. Смотрите видео, изучайте тексты и аккорды в профиле артистов.';
-                this.updateTitle();
-                this.updateDescription();
-            }
+        playSong(song) {
+            this.$store.commit('UPDATE_PLAYLIST', this.artist.songs);
+            this.$store.commit('SET_ACTIVE_SONG', song);
+        },
+        getLink(resource) {
+            return this.artist.externalLinks.find(a => a.resource === resource)?.link;
+        }
+    },
+    computed: {
+        aliases() {
+            return concatStrings(this.artist.aliases.slice(1, this.artist.aliases.length).map(alias => alias.name), ' ·');
+        },
+        hashTags() {
+            let tags = concatStrings(this.artist.aliases.map(alias => alias.name), ',');
+            return tags.replace(/\s/g, '');
+        },
+        avatarUrl() {
+            if (this.artist.avatar_id)
+                return getAvatarImage(this.artist.avatar_id);
+        },
+        fullAvatarUrl() {
+            return getBaseUri() + '/' + this.avatarUrl
+        },
+        pageUrl() {
+            return window.location.href;
+        }
+    },
+    watch: {
+        artist() {
+            this.title = concatStrings(this.artist.aliases.map(alias => alias.name), ' ·') + ' - песни, альбомы, аккорды, тексты песен.';
+            this.description = 'Профиль ' + concatStrings(this.artist.aliases.map(alias => alias.name), ' ·') + ' на Echo.tj.' +
+                ' Слушайте и скачивайте песни и альбомы. Смотрите видео, изучайте тексты и аккорды в профиле артистов.';
+            this.updateTitle();
+            this.updateDescription();
         }
     }
+}
 </script>
-
-<style scoped>
-    .artist-info {
-        color: #6c757d;
-        margin-top: 1rem;
-        margin-bottom: 0.25rem;
-        font-size: 16px;
-    }
-</style>

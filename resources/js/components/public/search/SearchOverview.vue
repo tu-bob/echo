@@ -120,9 +120,3 @@
         }
     }
 </script>
-
-<style scoped>
-    .section-title {
-        color: #ffffff;
-    }
-</style>

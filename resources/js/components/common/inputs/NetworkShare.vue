@@ -6,7 +6,8 @@
             Поделиться
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <div class="dropdown-item size">
+            <div class="dropdown-item" style="        width: 178px !important;
+        height: 31px !important;">
                 <ShareNetwork
                     class="h-cursor"
                     network="facebook"
@@ -22,7 +23,8 @@
                     </div>
                 </ShareNetwork>
             </div>
-            <div class="dropdown-item size">
+            <div class="dropdown-item" style="        width: 178px !important;
+        height: 31px !important;">
                 <ShareNetwork
                     class="h-cursor"
                     network="vk"
@@ -37,7 +39,8 @@
                     </div>
                 </ShareNetwork>
             </div>
-            <div class="dropdown-item size">
+            <div class="dropdown-item" style="        width: 178px !important;
+        height: 31px !important;">
                 <ShareNetwork
                     class="h-cursor"
                     network="telegram"
@@ -51,7 +54,8 @@
                     </div>
                 </ShareNetwork>
             </div>
-            <div class="dropdown-item size">
+            <div class="dropdown-item" style="        width: 178px !important;
+        height: 31px !important;">
                 <ShareNetwork
                     class="h-cursor"
                     network="whatsapp"
@@ -65,7 +69,8 @@
                     </div>
                 </ShareNetwork>
             </div>
-            <div class="dropdown-item size">
+            <div class="dropdown-item" style="        width: 178px !important;
+        height: 31px !important;">
                 <ShareNetwork
                     class="h-cursor"
                     network="odnoklassniki"
@@ -78,7 +83,8 @@
                     </div>
                 </ShareNetwork>
             </div>
-            <div class="dropdown-item size">
+            <div class="dropdown-item" style="        width: 178px !important;
+        height: 31px !important;">
                 <ShareNetwork
                     class="h-cursor"
                     network="viber"
@@ -116,14 +122,3 @@
         }
     }
 </script>
-
-<style scoped>
-    .border-radius-20 {
-        border-radius: 20px !important;
-    }
-
-    .size{
-        width: 178px !important;
-        height: 31px !important;
-    }
-</style>
