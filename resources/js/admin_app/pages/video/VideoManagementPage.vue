@@ -1,6 +1,5 @@
 <template>
     <div>
-
         <b-container fluid>
             <b-row>
                 <b-col sm="12" md="5" lg="4" xl="3" style="z-index: 1">
@@ -51,17 +50,3 @@ export default {
 
 }
 </script>
-
-<style scoped>
-.filters-form{
-    padding-left: 10px;
-    margin-left: -40px;
-}
-
-@media only screen and (max-width: 767px) {
-    .filters-form {
-        padding-left: 0;
-        margin-left: 0;
-    }
-}
-</style>
