@@ -29,11 +29,11 @@
                 </div>
 
                 <div class="alert alert-info" v-if="song.bitrate">
-                <span>{{song.bitrate / 1000}} kbs |
-                {{song.sample_rate}} |
-                <span v-if="song.container">{{song.container}} |</span>
-                <span v-if="song.encoder">{{song.encoder}} |</span>
-                {{duration}}</span>
+                <span>{{ song.bitrate / 1000 }} kbs |
+                {{ song.sample_rate }} |
+                <span v-if="song.container">{{ song.container }} |</span>
+                <span v-if="song.encoder">{{ song.encoder }} |</span>
+                {{ duration }}</span>
                 </div>
 
                 <div>
@@ -124,7 +124,7 @@
                     </ul>
 
                     <span v-if="missedArtists.length > 0" class="small">Исполнители не найдены:
-                <b v-for="artist in missedArtists">{{artist}}</b>
+                <b v-for="artist in missedArtists">{{ artist }}</b>
             </span>
                 </div>
 
@@ -220,338 +220,339 @@
 </template>
 
 <script>
-    import {parseBlob} from 'music-metadata-browser';
-    import {validateAudio} from '../../../util/validators.js'
-    import {fetchArtistAliasesByName, fetchAlbums, fetchGenres, fetchSong} from '../../../api/mediaApi.js'
-    import * as ss from 'string-similarity';
-    import ImageUploader from "../../../components/common/inputs/ImageUploader";
-    import {findAlbums, getSongIconUrl} from "../../../api/mediaApi";
-    import {secondsToFormattedMinutes} from "../../../util/stringHelper";
-    import ResetErrorsMixin from "../../../components/admin/mixins/ResetErrorsMixin";
+import {parseBlob} from 'music-metadata-browser';
+import {validateAudio} from '../../../util/validators.js'
+import {fetchArtistAliasesByName, fetchAlbums, fetchGenres, fetchSong} from '../../../api/mediaApi.js'
+import * as ss from 'string-similarity';
+import ImageUploader from "../../../components/common/inputs/ImageUploader";
+import {findAlbums, getSongIconUrl} from "../../../api/mediaApi";
+import {secondsToFormattedMinutes} from "../../../util/stringHelper";
+import ResetErrorsMixin from "../../../components/admin/mixins/ResetErrorsMixin";
 
-    export default {
-        name: "SongEditor",
-        mixins: [ResetErrorsMixin],
-        props: {
-            providedFile: {
-                type: Object,
-                default: null
-            }
-        },
-        created() {
-            fetchGenres().then(genres => {
-                if (genres)
-                    this.genres = genres.map(genre => {
-                        genre.searchField = genre.local_name + genre.name;
-                        return genre;
-                    });
-                if (this.$route.params.id)
-                    this.fetchSong(this.$route.params.id);
-            });
-        },
-        data() {
-            return {
-                coverImageFile: null,
-                missedArtists: [],
-                missedAlbums: [],
-                mp3File: this.providedFile,
+export default {
+    name: "SongEditor",
+    mixins: [ResetErrorsMixin],
+    props: {
+        providedFile: {
+            type: Object,
+            default: null
+        }
+    },
+    created() {
+        fetchGenres().then(genres => {
+            if (genres)
+                this.genres = genres.map(genre => {
+                    genre.searchField = genre.local_name + genre.name;
+                    return genre;
+                });
+            if (this.$route.params.id)
+                this.fetchSong(this.$route.params.id);
+        });
+    },
+    data() {
+        return {
+            coverImageFile: null,
+            missedArtists: [],
+            missedAlbums: [],
+            mp3File: this.providedFile,
+            genres: [],
+            busy: false,
+            song: {
+                id: null,
+                title: null,
+                english_title: null,
+                clip: {src: null},
+                links: {
+                    appleMusic: null,
+                    yandexMusic: null,
+                    googleMusic: null,
+                    spotify: null
+                },
+                lyrics: null,
+                year: null,
                 genres: [],
-                busy: false,
-                song: {
-                    id: null,
-                    title: null,
-                    english_title: null,
-                    clip: {src: null},
-                    links: {
-                        appleMusic: null,
-                        yandexMusic: null,
-                        googleMusic: null,
-                        spotify: null
-                    },
-                    lyrics: null,
-                    year: null,
-                    genres: [],
-                    length: null,
-                    artistAliases: [],
-                    albums: [],
-                    label: null,
-                    bitrate: null,
-                    sample_rate: null,
-                    container: null,
-                    numberOfChannels: null,
-                    lossless: null,
-                    playtime_seconds: null,
-                    allow_download: true
+                length: null,
+                artistAliases: [],
+                albums: [],
+                label: null,
+                bitrate: null,
+                sample_rate: null,
+                container: null,
+                numberOfChannels: null,
+                lossless: null,
+                playtime_seconds: null,
+                allow_download: true
+            }
+        }
+    },
+    watch: {
+        mp3File() {
+            // this.clearForm();
+            if (this.mp3File && validateAudio(this.mp3File))
+                this.getMetaData();
+            else this.mp3File = null;
+        }
+    },
+    methods: {
+        onArtistSelected(artist) {
+            if (artist) {
+                let exists = this.song.artistAliases.find((alias) => alias.id === artist.id);
+                if (!exists) {
+                    this.song.artistAliases.push(artist);
                 }
             }
+
+            this.$refs['artistSearch'].query = '';
+            this.$refs['artistSearch'].options = [];
         },
-        watch: {
-            mp3File() {
-                // this.clearForm();
-                if (this.mp3File && validateAudio(this.mp3File))
-                    this.getMetaData();
-                else this.mp3File = null;
+        onAlbumSelected(album) {
+            if (album) {
+                let exists = this.song.albums.find((item) => item.id === album.id);
+                if (!exists)
+                    this.song.albums.push(album);
             }
+
+            this.$refs['albumSearch'].query = '';
+            this.$refs['albumSearch'].options = [];
         },
-        methods: {
-            onArtistSelected(artist) {
-                if (artist) {
-                    let exists = this.song.artistAliases.find((alias) => alias.id === artist.id);
-                    if (!exists) {
-                        this.song.artistAliases.push(artist);
-                    }
+        onGenreSelected(genre) {
+            if (genre) {
+                let exists = this.song.genres.find((item) => item.id === genre.id);
+                if (!exists) {
+                    this.song.genres.push(genre);
                 }
+            }
 
-                this.$refs['artistSearch'].query = '';
-                this.$refs['artistSearch'].options = [];
-            },
-            onAlbumSelected(album) {
-                if (album) {
-                    let exists = this.song.albums.find((item) => item.id === album.id);
-                    if (!exists)
-                        this.song.albums.push(album);
-                }
-
-                this.$refs['albumSearch'].query = '';
-                this.$refs['albumSearch'].options = [];
-            },
-            onGenreSelected(genre) {
-                if (genre) {
-                    let exists = this.song.genres.find((item) => item.id === genre.id);
-                    if (!exists) {
-                        this.song.genres.push(genre);
-                    }
-                }
-
-                this.$refs['genreSearch'].query = '';
-            },
-            getMetaData() {
-                parseBlob(this.mp3File)
-                    .then(metadata => {
-                        console.log(metadata);
-                        this.fillData(metadata)
-                    })
-                    .catch(
-                        //TODO
-                    );
-            },
-            fetchArtist(name) {
-                fetchArtistAliasesByName(name).then(aliases => {
-                    if (aliases && aliases.length > 0)
-                        this.onArtistSelected(aliases[0]);
+            this.$refs['genreSearch'].query = '';
+        },
+        getMetaData() {
+            parseBlob(this.mp3File)
+                .then(metadata => {
+                    console.log(metadata);
+                    this.fillData(metadata)
+                })
+                .catch(
+                    //TODO
+                );
+        },
+        fetchArtist(name) {
+            fetchArtistAliasesByName(name).then(aliases => {
+                if (aliases && aliases.length > 0)
+                    this.onArtistSelected(aliases[0]);
+                else
+                    this.missedArtists.push(name);
+            })
+        },
+        fetchAlbum(title) {
+            findAlbums({'title': title})
+                .then(albums => {
+                    if (albums && albums.length > 0)
+                        this.onAlbumSelected(albums[0]);
                     else
-                        this.missedArtists.push(name);
+                        this.missedAlbum = title;
                 })
-            },
-            fetchAlbum(title) {
-                findAlbums({'title': title})
-                    .then(albums => {
-                        if (albums && albums.length > 0)
-                            this.onAlbumSelected(albums[0]);
-                        else
-                            this.missedAlbum = title;
-                    })
-            },
-            fetchSong(id) {
-                this.busy = true;
-                fetchSong(id).then(song => {
-                    let links = {};
-                    for (let i in song.externalLinks) {
-                        links[song.externalLinks[i].resource] = song.externalLinks[i].link;
-                    }
-                    song.links = links;
-                    this.song = song;
-                    if (!this.song.clip)
-                        this.song.clip = {src: null}
-                })
-                    .catch(e => {
-                            //TODO
-                        }
-                    )
-                    .then(_ => this.busy = false);
-            },
-            submit() {
-                this.busy = true;
-
-                let data = new FormData();
-                if (this.song.id)
-                    data.append('id', this.song.id);
-
-                if (this.mp3File)
-                    data.append('mp3File', this.mp3File, this.mp3File.name);
-
-                if (this.coverImageFile)
-                    data.append('coverImageFile', this.coverImageFile, this.coverImageFile.name);
-
-                if (this.song.clip.src) {
-                    data.append('clip_src', this.song.clip.src.replace('watch?v=', 'embed/'));
+        },
+        fetchSong(id) {
+            this.busy = true;
+            fetchSong(id).then(song => {
+                let links = {};
+                for (let i in song.externalLinks) {
+                    links[song.externalLinks[i].resource] = song.externalLinks[i].link;
                 }
+                song.links = links;
+                this.song = song;
+                if (!this.song.clip)
+                    this.song.clip = {src: null}
+            })
+                .catch(e => {
+                        //TODO
+                    }
+                )
+                .then(_ => this.busy = false);
+        },
+        submit() {
+            this.busy = true;
 
-                data.append('title', this.song.title);
-                data.append('allow_download', this.song.allow_download ? 1 : 0);
+            let data = new FormData();
+            if (this.song.id)
+                data.append('id', this.song.id);
+
+            if (this.mp3File)
+                data.append('mp3File', this.mp3File, this.mp3File.name);
+
+            if (this.coverImageFile)
+                data.append('coverImageFile', this.coverImageFile, this.coverImageFile.name);
+
+            if (this.song.clip.src) {
+                data.append('clip_src', this.song.clip.src.replace('watch?v=', 'embed/'));
+            }
+
+            data.append('title', this.song.title);
+            data.append('allow_download', this.song.allow_download ? 1 : 0);
+            if (this.song.year)
                 data.append('year', String(this.song.year));
 
-                if (this.song.english_title)
-                    data.append('english_title', this.song.english_title);
+            if (this.song.english_title)
+                data.append('english_title', this.song.english_title);
 
-                if (this.song.label)
-                    data.append('label', this.song.label);
-                if (this.song.lyrics)
-                    data.append('lyrics', this.song.lyrics);
+            if (this.song.label)
+                data.append('label', this.song.label);
+            if (this.song.lyrics)
+                data.append('lyrics', this.song.lyrics);
 
-                for (let i = 0; i < this.song.artistAliases.length; i++) {
-                    data.append('artistAliases[]', this.song.artistAliases[i].id);
+            for (let i = 0; i < this.song.artistAliases.length; i++) {
+                data.append('artistAliases[]', this.song.artistAliases[i].id);
+            }
+
+            for (let j = 0; j < this.song.genres.length; j++) {
+                data.append('genres[]', this.song.genres[j].id);
+            }
+
+            for (let k = 0; k < this.song.albums.length; k++) {
+                data.append('albums[]', this.song.albums[k].id);
+            }
+
+            for (let [resource, link] of Object.entries(this.song.links)) {
+                if (link)
+                    data.append('links[' + resource + ']', link)
+            }
+
+
+            axios.post('/media/music/song', data)
+                .then(_ => {
+                    this.clearForm(true);
+                    if (this.$route.params.id)
+                        this.$router.replace({name: 'song-editor'})
+                })
+                .catch(e => console.log(e))
+                .then(_ => this.busy = false);
+        },
+        removeArtistAlias(id) {
+            this.song.artistAliases = this.song.artistAliases.filter(alias => alias.id !== id);
+        },
+        removeAlbum(id) {
+            this.song.albums = this.song.albums.filter(album => album.id !== id);
+        },
+        removeGenre(id) {
+            this.song.genres = this.song.genres.filter(genre => genre.id !== id);
+        },
+        fillData(meta) {
+            this.song.title = meta.common.title;
+            this.song.year = meta.common.year;
+            if (meta.common.label && meta.common.label.length > 0)
+                this.song.label = meta.common.label[0];
+            this.song.bitrate = meta.format.bitrate;
+            this.song.sample_rate = meta.format.sampleRate;
+            this.song.container = meta.format.container;
+            this.song.numberOfChannels = meta.format.numberOfChannels;
+            this.song.playtime_seconds = meta.format.duration;
+            this.song.lossless = meta.format.lossless;
+            this.song.lyrics = this.getSongLyrics(meta);
+
+            if (meta.common.artists)
+                for (let i = 0; i < meta.common.artists.length; i++) {
+                    this.fetchArtist(meta.common.artists[i]);
                 }
 
-                for (let j = 0; j < this.song.genres.length; j++) {
-                    data.append('genres[]', this.song.genres[j].id);
-                }
+            if (meta.common.album)
+                this.fetchAlbum(meta.common.album);
 
-                for (let k = 0; k < this.song.albums.length; k++) {
-                    data.append('albums[]', this.song.albums[k].id);
-                }
+            if (meta.common.genre) {
+                for (let j = 0; j < meta.common.genre.length; j++) {
+                    let genreName = meta.common.genre[j].replace(/[^a-zA-Z]/g, '').toUpperCase();
+                    let bestMatch = {score: 0, genre: null};
 
-                for (let [resource, link] of Object.entries(this.song.links)) {
-                    if (link)
-                        data.append('links[' + resource + ']', link)
-                }
+                    for (let k = 0; k < this.genres.length; k = k + 1) {
+                        let enScore = ss.compareTwoStrings(
+                            genreName,
+                            this.genres[k].name.replace(/[^a-zA-Z]/g, '').toUpperCase()
+                        );
 
+                        let ruScore = ss.compareTwoStrings(
+                            genreName,
+                            this.genres[k].local_name.replace(/[^\u0410-\u042F\u0430-\u044F]/g, '').toUpperCase()
+                        );
 
-                axios.post('/media/music/song', data)
-                    .then(_ => {
-                        this.clearForm(true);
-                        if (this.$route.params.id)
-                            this.$router.replace({name: 'song-editor'})
-                    })
-                    .catch(e => console.log(e))
-                    .then(_ => this.busy = false);
-            },
-            removeArtistAlias(id) {
-                this.song.artistAliases = this.song.artistAliases.filter(alias => alias.id !== id);
-            },
-            removeAlbum(id) {
-                this.song.albums = this.song.albums.filter(album => album.id !== id);
-            },
-            removeGenre(id) {
-                this.song.genres = this.song.genres.filter(genre => genre.id !== id);
-            },
-            fillData(meta) {
-                this.song.title = meta.common.title;
-                this.song.year = meta.common.year;
-                if (meta.common.label && meta.common.label.length > 0)
-                    this.song.label = meta.common.label[0];
-                this.song.bitrate = meta.format.bitrate;
-                this.song.sample_rate = meta.format.sampleRate;
-                this.song.container = meta.format.container;
-                this.song.numberOfChannels = meta.format.numberOfChannels;
-                this.song.playtime_seconds = meta.format.duration;
-                this.song.lossless = meta.format.lossless;
-                this.song.lyrics = this.getSongLyrics(meta);
+                        let score = enScore > ruScore ? enScore : ruScore;
 
-                if (meta.common.artists)
-                    for (let i = 0; i < meta.common.artists.length; i++) {
-                        this.fetchArtist(meta.common.artists[i]);
-                    }
-
-                if (meta.common.album)
-                    this.fetchAlbum(meta.common.album);
-
-                if (meta.common.genre) {
-                    for (let j = 0; j < meta.common.genre.length; j++) {
-                        let genreName = meta.common.genre[j].replace(/[^a-zA-Z]/g, '').toUpperCase();
-                        let bestMatch = {score: 0, genre: null};
-
-                        for (let k = 0; k < this.genres.length; k = k + 1) {
-                            let enScore = ss.compareTwoStrings(
-                                genreName,
-                                this.genres[k].name.replace(/[^a-zA-Z]/g, '').toUpperCase()
-                            );
-
-                            let ruScore = ss.compareTwoStrings(
-                                genreName,
-                                this.genres[k].local_name.replace(/[^\u0410-\u042F\u0430-\u044F]/g, '').toUpperCase()
-                            );
-
-                            let score = enScore > ruScore ? enScore : ruScore;
-
-                            if (score > bestMatch.score) {
-                                bestMatch.score = score;
-                                bestMatch.genre = this.genres[k];
-                            }
+                        if (score > bestMatch.score) {
+                            bestMatch.score = score;
+                            bestMatch.genre = this.genres[k];
                         }
-                        let existing = this.song.genres.find(genre => bestMatch.genre.id === genre.id);
-                        if (!existing)
-                            this.song.genres.push(bestMatch.genre);
                     }
+                    let existing = this.song.genres.find(genre => bestMatch.genre.id === genre.id);
+                    if (!existing)
+                        this.song.genres.push(bestMatch.genre);
                 }
-            },
-            getSongLyrics(meta) {
-                if (meta.native['ID3v2.3'])
-                    return meta.native['ID3v2.3'], meta.native['ID3v2.3'].find(tag => tag.id === 'USLT')?.value?.text
-            },
-            clearForm(removeFile = false) {
-                this.song = {
-                    id: null,
-                    title: null,
-                    english_title: null,
-                    lyrics: null,
-                    clip: {src: null},
-                    year: null,
-                    genres: [],
-                    length: null,
-                    artistAliases: [],
-                    albums: [],
-                    label: null,
-                    bitrate: null,
-                    sample_rate: null,
-                    container: null,
-                    numberOfChannels: null,
-                    lossless: null,
-                    playtime_seconds: null,
-                    links: {
-                        appleMusic: null,
-                        yandexMusic: null,
-                        googleMusic: null,
-                        spotify: null
-                    }
-                };
-                this.missedAlbums = [];
-                this.missedArtists = [];
-
-                if (removeFile) {
-                    this.mp3File = null;
-                    this.$refs['mp3FileInput'].reset()
-                }
-
-                if (removeFile) {
-                    this.coverImageFile = null;
-                    this.$refs['coverImageFile'].reset()
-                }
-
-                this.$refs['songEditorPlayer'].src = null;
-                this.$store.commit('RESET_HTML_ERRORS');
-            },
-            formatGenresOptions(genre) {
-                return genre.name + ' - ' + genre.local_name;
             }
         },
-        computed: {
-            audioSrc() {
-                if (this.mp3File)
-                    return URL.createObjectURL(this.mp3File);
-                if (this.song.cover_image_id)
-                    return `/media/music/song/${this.song.id}/audio`;
-            },
-            coverImageUrl() {
-                if (this.song.id)
-                    return getSongIconUrl(this.song.id, false);
-            },
-            duration() {
-                return secondsToFormattedMinutes(Math.round(this.song.playtime_seconds));
-            },
+        getSongLyrics(meta) {
+            if (meta.native['ID3v2.3'])
+                return meta.native['ID3v2.3'], meta.native['ID3v2.3'].find(tag => tag.id === 'USLT')?.value?.text
         },
-        components: {ImageUploader}
-    }
+        clearForm(removeFile = false) {
+            this.song = {
+                id: null,
+                title: null,
+                english_title: null,
+                lyrics: null,
+                clip: {src: null},
+                year: null,
+                genres: [],
+                length: null,
+                artistAliases: [],
+                albums: [],
+                label: null,
+                bitrate: null,
+                sample_rate: null,
+                container: null,
+                numberOfChannels: null,
+                lossless: null,
+                playtime_seconds: null,
+                links: {
+                    appleMusic: null,
+                    yandexMusic: null,
+                    googleMusic: null,
+                    spotify: null
+                }
+            };
+            this.missedAlbums = [];
+            this.missedArtists = [];
+
+            if (removeFile) {
+                this.mp3File = null;
+                this.$refs['mp3FileInput'].reset()
+            }
+
+            if (removeFile) {
+                this.coverImageFile = null;
+                this.$refs['coverImageFile'].reset()
+            }
+
+            this.$refs['songEditorPlayer'].src = null;
+            this.$store.commit('RESET_HTML_ERRORS');
+        },
+        formatGenresOptions(genre) {
+            return genre.name + ' - ' + genre.local_name;
+        }
+    },
+    computed: {
+        audioSrc() {
+            if (this.mp3File)
+                return URL.createObjectURL(this.mp3File);
+            if (this.song.cover_image_id)
+                return `/media/music/song/${this.song.id}/audio`;
+        },
+        coverImageUrl() {
+            if (this.song.id)
+                return getSongIconUrl(this.song.id, false);
+        },
+        duration() {
+            return secondsToFormattedMinutes(Math.round(this.song.playtime_seconds));
+        },
+    },
+    components: {ImageUploader}
+}
 </script>
 
 <style scoped>

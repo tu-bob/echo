@@ -27,15 +27,15 @@ class SongRequest extends BaseFormRequest
         ];
     }
 
-    public function withValidator($validator)
-    {
-        $validator->after(function ($validator) {
-            if (request()->file('mp3File')) {
-                $extensions = ['mp3', 'mpga'];
-                $extension = request()->file('mp3File')->guessClientExtension() ?? request()->file('mp3File')->guessExtension();
-                if (!in_array($extension, $extensions))
-                    $validator->errors()->add('mp3File', 'Only mp3 files are allowed. Provided ' . $extension);
-            }
-        });
-    }
+//    public function withValidator($validator)
+//    {
+//        $validator->after(function ($validator) {
+//            if (request()->file('mp3File')) {
+//                $extensions = ['mp3', 'mpga'];
+//                $extension = request()->file('mp3File')->guessClientExtension() ?? request()->file('mp3File')->guessExtension();
+//                if (!in_array($extension, $extensions))
+//                    $validator->errors()->add('mp3File', 'Only mp3 files are allowed. Provided ' . $extension);
+//            }
+//        });
+//    }
 }
