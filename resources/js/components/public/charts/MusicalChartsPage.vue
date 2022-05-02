@@ -49,7 +49,7 @@ export default {
         },
         getTabClass(tab) {
             if (tab === this.chatTab) {
-                return "c-btn-gradient-yellow-red"
+                return "c-btn-gradient-echo"
             } else return "c-btn-gradient-secondary"
         }
     },

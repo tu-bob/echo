@@ -110,6 +110,12 @@ const routes = [
                     path:'charts/music',
                     props:true,
                     component: () => import('../components/public/charts/MusicalChartsPage')
+                },
+                {
+                    name:'s.khalil',
+                    path:'ssh/skhalil_production',
+                    props:true,
+                    component: () => import('../components/public/partners/SKhalil')
                 }
             ]
         },

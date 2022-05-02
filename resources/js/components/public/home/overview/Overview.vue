@@ -9,7 +9,8 @@
         <section class="row">
             <div class="container-fluid">
                 <div class="row">
-                    <top-chart-link></top-chart-link>
+                    <top-chart-link class="mr-md-5"></top-chart-link>
+                    <router-link class="c-btn-skhalil text-uppercase hover-scale hover-text-white" :to="{name: 's.khalil' }">S. Khalil Production</router-link>
                 </div>
             </div>
         </section>
