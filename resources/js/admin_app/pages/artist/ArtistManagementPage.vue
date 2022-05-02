@@ -1,17 +1,18 @@
 <template>
     <div>
-
         <b-container fluid>
             <b-row>
                 <b-col sm="12" md="5" lg="4" xl="3" style="z-index: 1">
-                    <link-with-icon-large icon="/icons/svg/add-user.svg" :to="{name:'a.artist.editor'}">Добавить исполнителя
+                    <link-with-icon-large icon="/icons/svg/add-user.svg" :to="{name:'a.artist.editor'}">Добавить
+                        исполнителя
                     </link-with-icon-large>
                 </b-col>
 
                 <b-col sm="12" md="7" lg="8" xl="9" class="filters-form-wrapper">
-                    <filters-form header-text="Поиск исполнителя" @submit="changeUrl">
+                    <filters-form class="filters-form-left-intersection" header-text="Поиск исполнителя" @submit="changeUrl">
                         <b-col sm="12" class="my-3 my-lg-0">
-                            <input v-model="artist" class="filter-input w-100" type="text" placeholder="Имя исполнителя">
+                            <input v-model="artist" class="filter-input w-100" type="text"
+                                   placeholder="Имя исполнителя">
                         </b-col>
                     </filters-form>
                 </b-col>
@@ -29,10 +30,11 @@ import LinkWithIconLarge from "../../components/LinkWithIconLarge";
 import FiltersForm from "../../components/FiltersForm";
 import ArtistsTable from "./ArtistsTable";
 import AlbumsTable from "../album/AlbumsTable";
+
 export default {
     name: "ArtistManagementPage",
     components: {AlbumsTable, ArtistsTable, FiltersForm, LinkWithIconLarge},
-    data () {
+    data() {
         return {
             artist: '',
             url: `/media/artist/list?`
@@ -41,24 +43,10 @@ export default {
     methods: {
         changeUrl() {
             let url = `/media/artist/list?`
-            if(this.artist)
-                url +=`filter[aliases.name]=${this.artist}&`
+            if (this.artist)
+                url += `filter[aliases.name]=${this.artist}&`
             this.url = url
         }
     }
 }
 </script>
-
-<style scoped>
-.filters-form{
-    padding-left: 10px;
-    margin-left: -40px;
-}
-
-@media only screen and (max-width: 767px) {
-    .filters-form {
-        padding-left: 0;
-        margin-left: 0;
-    }
-}
-</style>

@@ -1,6 +1,6 @@
 <template>
     <b-container>
-        <b-row>
+        <b-form-row>
             <b-col sm="12" md="6" lg="4" class="mb-3 mb-lg-0">
                 <statistic-button icon="/icons/svg/user-line.svg" :count="stat.users">Пользователи</statistic-button>
             </b-col>
@@ -10,13 +10,11 @@
             <b-col sm="12" md="6" lg="4" class="mb-3 mb-lg-0">
                 <statistic-button icon="/icons/svg/music.svg" :count="stat.songs">Песни</statistic-button>
             </b-col>
-        </b-row>
+        </b-form-row>
            <div class="mt-3">
                <users-table></users-table>
            </div>
-
     </b-container>
-
 </template>
 
 <script>
@@ -47,7 +45,3 @@ export default {
     }
 }
 </script>
-
-<style scoped>
-
-</style>

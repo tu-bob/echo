@@ -12,7 +12,3 @@ export default {
     components: {SectionHeader}
 }
 </script>
-
-<style scoped>
-
-</style>
