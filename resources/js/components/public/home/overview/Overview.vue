@@ -6,13 +6,13 @@
         </div>
 
         <!--charts button-->
-        <section class="row">
-            <div class="container-fluid">
-                <div class="row">
-                    <top-chart-link class="mr-md-5"></top-chart-link>
-                    <router-link class="c-btn-skhalil text-uppercase hover-scale hover-text-white" :to="{name: 's.khalil' }">S. Khalil Production</router-link>
-                </div>
-            </div>
+        <section >
+<!--            <div class="container-fluid">-->
+<!--                <div class="row">-->
+                    <top-chart-link class="mr-0 mb-4 mb-md-0 mr-md-4"></top-chart-link>
+                    <router-link class=" c-btn-skhalil text-uppercase hover-scale hover-text-white" :to="{name: 's.khalil' }">S. Khalil Production</router-link>
+<!--                </div>-->
+<!--            </div>-->
         </section>
 
         <!-- random music -->
