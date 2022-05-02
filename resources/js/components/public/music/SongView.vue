@@ -44,7 +44,11 @@
                 </div>
 
                 <template v-if="song.lyrics">
-                <pre class="song-lyrics" style="max-height: 100px">{{song.lyrics}}
+                <pre class="song-lyrics" style="max-height: 100px;         color: #6c757d;
+        margin-top: 1rem;
+        margin-bottom: 0.25rem;
+        overflow: hidden;
+        font-size: 16px;">{{song.lyrics}}
                 </pre>
                     <a href="#" @click="showLyrics = !showLyrics">
                         <span v-if="!showLyrics">Показать текст</span>
@@ -174,12 +178,3 @@
     }
 </script>
 
-<style scoped>
-    .song-lyrics {
-        color: #6c757d;
-        margin-top: 1rem;
-        margin-bottom: 0.25rem;
-        overflow: hidden;
-        font-size: 16px;
-    }
-</style>
