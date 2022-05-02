@@ -17,8 +17,8 @@
 
 .c-btn-gradient-echo {
     @extend .c-btn;
-    background: rgb(94,221,230);
-    background: linear-gradient(90deg, rgba(94,221,230,1) 0%, rgba(146,134,253,1) 100%);
+    background: rgb(94, 221, 230);
+    background: linear-gradient(90deg, rgba(94, 221, 230, 1) 0%, rgba(146, 134, 253, 1) 100%);
 }
 
 .c-btn-gradient-instagram {
@@ -28,8 +28,8 @@
 
 .c-btn-skhalil {
     @extend .c-btn;
-    background: rgb(146,134,253);
-    background: linear-gradient(90deg, rgba(146,134,253,1) 0%, rgba(254,178,41,1) 100%);
+    background: rgb(146, 134, 253);
+    background: linear-gradient(90deg, rgba(146, 134, 253, 1) 0%, rgba(254, 178, 41, 1) 100%);
 }
 
 //double sided cards
@@ -54,7 +54,7 @@
     .card-side.back {
         transform: rotateY(-180deg);
         background-color: #4158D0;
-        background-image: linear-gradient(43deg, #4158D0 0%,#C850C0 46%, #FFCC70 100%);
+        background-image: linear-gradient(43deg, #4158D0 0%, #C850C0 46%, #FFCC70 100%);
     }
 
     .card-side.front {
@@ -68,6 +68,28 @@
 
     &:hover .card-side.back {
         transform: rotateY(0deg);
+    }
+}
+
+
+//LINK WITH ICON
+
+.link-with-icon-brown {
+    background-color: #4A4745;
+    height: 150px;
+    width: 100%;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 3px 5px 5px 2px rgba(34, 60, 80, 0.2);
+
+
+    img {
+        width: 110px;
+    }
+
+    &:hover {
+        transform: scale(1.020);
+        transition: 0.5s;
     }
 }
 
