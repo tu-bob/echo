@@ -32,13 +32,13 @@ class Playlist extends BaseModel
     public static function createTopSongsPlaylist(Carbon $date, PlaylistType $type, string $name)
     {
         Playback::getTopSongsByDate($date)
-            ->groupBy('playable_id')
-            ->sortByDesc(function ($playbacks) {
-                return count($playbacks);
-            })->keys()
-            ->pipe(function ($songsIds) {
-                return Song::whereIn('id', $songsIds)->get();
-            })
+//            ->groupBy('playable_id')
+//            ->sortByDesc(function ($playbacks) {
+//                return count($playbacks);
+//            })->keys()
+//            ->pipe(function ($songsIds) {
+//                return Song::whereIn('id', $songsIds)->get();
+//            })
             ->pipe(function ($songs) use ($type, $name) {
                 $playlist = Playlist::create([
                     'type' => $type->value,

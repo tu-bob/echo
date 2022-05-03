@@ -10,6 +10,7 @@ namespace Modules\Counters\Models;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Modules\Media\Enum\PlaybackType;
+use Modules\Media\Models\Music\Song;
 use Modules\Shared\Models\BaseModel;
 
 class Playback extends BaseModel
@@ -29,7 +30,14 @@ class Playback extends BaseModel
     {
         return Playback::where('playable_type', PlaybackType::Song->value)
             ->where('created_at', '>', $date)
-            ->limit(50)
-            ->get();
+//            ->limit(50)
+            ->get()
+            ->groupBy('playable_id')
+            ->sortByDesc(function ($playbacks) {
+                return count($playbacks);
+            })->keys()
+            ->pipe(function ($songsIds) {
+                return Song::whereIn('id', $songsIds)->get();
+            });
     }
 }
