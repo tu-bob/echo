@@ -1,9 +1,18 @@
 ## Echo.tj
 
-Run your own music streaming service with Echo.tj. This is a  starter project for anyone who wants to build a music streaming service.
+Run your own music streaming service with Echo.tj. 
+This is a  starter project for anyone who wants to build a music streaming service.
+
+#music-engine #music-streaming #music-player #music-library
 
 ## Installation
 
+### Prerequisites
+- PHP >= 8.2
+- Composer
+- Node.js
+
+### Steps
 - Clone the repository
 - Install the dependencies
 
