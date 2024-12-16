@@ -1,6 +1,6 @@
-# **Echo.tj**
+# **Echo**
 
-Run your own music streaming service with **Echo.tj**!  
+Run your own music streaming service with **Echo**!  
 This is a starter project designed for anyone interested in building a music streaming platform from scratch.
 
 ## **Features**
@@ -27,7 +27,7 @@ Ensure you have the following installed:
 ### **Setup**
 
 1. **Clone the Repository**  
-   Clone the Echo.tj repository to your local machine:
+   Clone the Echo repository to your local machine:
    ```bash
    git clone https://github.com/tu-bob/echo.git
    cd echo
