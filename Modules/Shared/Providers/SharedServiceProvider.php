@@ -3,7 +3,7 @@
 namespace Modules\Shared\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use Illuminate\Database\Eloquent\Factory;
+//use Illuminate\Database\Eloquent\Factory;
 
 class SharedServiceProvider extends ServiceProvider
 {
@@ -89,9 +89,9 @@ class SharedServiceProvider extends ServiceProvider
      */
     public function registerFactories()
     {
-        if (! app()->environment('production') && $this->app->runningInConsole()) {
-            app(Factory::class)->load(module_path('Shared', 'Database/factories'));
-        }
+//        if (! app()->environment('production') && $this->app->runningInConsole()) {
+//            app(Factory::class)->load(module_path('Shared', 'Database/factories'));
+//        }
     }
 
     /**

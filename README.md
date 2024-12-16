@@ -1,6 +1,6 @@
 ## Echo.tj
 
-Run your own music streaming service with Echo.tj.
+Run your own music streaming service with Echo.tj. This is a  starter project for anyone who wants to build a music streaming service.
 
 ## Installation
 
