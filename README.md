@@ -80,3 +80,5 @@ Your local Echo instance is now live! 🎉 Visit http://localhost:8000 to start 
 - Contributions are welcome! Submit a pull request to share your ideas.
 
 # **Get Started and Stream On!**
+
+![Echo.tj Logo](https://echo.tj/icons/png/logo-nav.png)
